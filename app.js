@@ -67592,13 +67592,13 @@ Ext.define('Ext.picker.Picker', {
         var record = Ext.getStore('LocalStore').getAt(0);
         if (record.get('dealImageURL').toString().charAt(0) === 'h') {
             this.down('#dealimage').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;"/>');
+            this.down('#dealimage').element.addListener('tap', function() {
+                var view = Ext.Viewport.add({
+                        xtype: 'DealImage'
+                    });
+                view.showBy(Ext.getCmp('dealimage'));
+            });
         }
-        component.element.addListener('tap', function() {
-            var view = Ext.Viewport.add({
-                    xtype: 'DealImage'
-                });
-            view.showBy(Ext.getCmp('dealimage'));
-        });
     }
 }, 0, [
     "dealPicture"
@@ -68462,8 +68462,8 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var form = this.up('UpdateDealForm');
-                            var itemName = form.getAt(7).getValue();
-                            var endDate = form.getAt(6).getValue();
+                            var itemName = form.getAt(8).getValue();
+                            var endDate = form.getAt(7).getValue();
                             var date = new Date();
                             if (endDate >= date) {
                                 if (document.getElementById('chkbx').checked) {
@@ -69233,9 +69233,11 @@ Ext.define('Ext.picker.Picker', {
         height: '60%',
         id: 'DealImage',
         itemId: 'DealImage',
+        left: '10%',
         margin: '0 10 0 0',
         style: 'background;#fff;border:3px groove #1985d0',
         styleHtmlContent: true,
+        top: '25%',
         width: '80%',
         hideOnMaskTap: true,
         modal: true,
