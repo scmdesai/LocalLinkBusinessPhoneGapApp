@@ -67521,11 +67521,9 @@ Ext.define('Ext.picker.Picker', {
         fullscreen: true,
         id: 'dealPicture',
         itemId: 'dealPicture',
-        style: 'overflow: hidden;background:#fff',
-        styleHtmlContent: true,
+        style: 'background:#fff',
         width: '100%',
         autoDestroy: false,
-        scrollable: true,
         tpl: [
             '<tpl if="dealImageURL">',
             '\t<div><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:250px;width:100%;border:none;"/></div>',
@@ -67604,13 +67602,16 @@ Ext.define('Ext.picker.Picker', {
                 width: '65%'
             },
             {
-                xtype: 'container',
+                xtype: 'component',
                 cls: 'contact-name',
-                docked: 'top',
+                disabled: true,
                 height: '250px',
                 id: 'dealimage',
                 itemId: 'dealimage',
-                style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:none',
+                left: '2%',
+                padding: '10 10 10 10',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0',
+                top: '1%',
                 width: '95%',
                 listeners: [
                     {
