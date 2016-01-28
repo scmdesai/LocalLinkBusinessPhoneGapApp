@@ -61843,6 +61843,95 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /**
+ * Hidden fields allow you to easily inject additional data into a {@link Ext.form.Panel form} without displaying
+ * additional fields on the screen. This is often useful for sending dynamic or previously collected data back to the
+ * server in the same request as the normal form submission. For example, here is how we might set up a form to send
+ * back a hidden userId field:
+ *
+ *     @example
+ *     var form = Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'fieldset',
+ *                 title: 'Enter your name',
+ *                 items: [
+ *                     {
+ *                         xtype: 'hiddenfield',
+ *                         name: 'userId',
+ *                         value: 123
+ *                     },
+ *                     {
+ *                         xtype: 'checkboxfield',
+ *                         label: 'Enable notifications',
+ *                         name: 'notifications'
+ *                     }
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *
+ * In the form above we created two fields - a hidden field and a {@link Ext.field.Checkbox check box field}. Only the
+ * check box will be visible, but both fields will be submitted. Hidden fields cannot be tabbed to - they are removed
+ * from the tab index so when your user taps the next/previous field buttons the hidden field is skipped over.
+ *
+ * It's easy to read and update the value of a hidden field within a form. Using the example above, we can get a
+ * reference to the hidden field and then set it to a new value in 2 lines of code:
+ *
+ *     var userId = form.down('hiddenfield')[0];
+ *     userId.setValue(1234);
+ *
+ * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
+ */
+(Ext.cmd.derive('Ext.field.Hidden', Ext.field.Text, {
+    alternateClassName: 'Ext.form.Hidden',
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        component: {
+            xtype: 'input',
+            type: 'hidden'
+        },
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        ui: 'hidden',
+        /**
+         * @cfg hidden
+         * @hide
+         */
+        hidden: true,
+        /**
+         * @cfg {Number} tabIndex
+         * @hide
+         */
+        tabIndex: -1
+    }
+}, 0, [
+    "hiddenfield"
+], [
+    "component",
+    "field",
+    "textfield",
+    "hiddenfield"
+], {
+    "component": true,
+    "field": true,
+    "textfield": true,
+    "hiddenfield": true
+}, [
+    "widget.hiddenfield"
+], 0, [
+    Ext.field,
+    'Hidden',
+    Ext.form,
+    'Hidden'
+], 0));
+
+/**
  * The Form panel presents a set of form fields and provides convenient ways to load and save data. Usually a form
  * panel just contains the set of fields you want to display, ordered inside the items configuration like this:
  *
@@ -66589,7 +66678,7 @@ Ext.define('Ext.picker.Picker', {
         itemTpl: [
             '',
             '',
-            '<div style="font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}<button type="button" class="delete_button" style="float:right">#</div>',
+            '<div style="font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}<button type="button" id="delete" class="delete_button" style="float:right">#<button type="button" id="edit" class="delete_button" style="float:right">p</div>',
             '<tpl if="dealEndDate &lt; todayplusthreedays ">',
             '<div class= expiringDate >Valid {dealStartDate} to {dealEndDate}</div>',
             '<tpl else>\t',
@@ -67050,28 +67139,38 @@ Ext.define('Ext.picker.Picker', {
         var itemNames = [];
         var i = 0;
         if (e.target.type === 'button') {
-            var store = Ext.getStore('MyDealsStore');
-            var record = store.getAt(index);
-            var dealName = record.get('dealName');
-            Ext.Msg.confirm('Delete ' + dealName + '?', null, function(btnText) {
-                if (btnText === 'yes') {
-                    var itemName = record.get('itemName');
-                    var req = Ext.Ajax.request({
-                            method: 'POST',
-                            url: 'http://services.appsonmobile.com/deals/' + itemName,
-                            success: function(form, action) {
-                                Ext.Msg.alert('Success', action.msg);
-                                //console.log(action.msg);
-                                var dealsStore = Ext.getStore('MyDealsStore');
-                                dealsStore.load();
-                            },
-                            failure: function(form, action) {
-                                Ext.Msg.alert('Failure', action.msg);
-                            }
-                        });
-                }
-            }, //console.log(action.msg);
-            this);
+            if (e.target.id === 'delete') {
+                var store = Ext.getStore('MyDealsStore');
+                var record = store.getAt(index);
+                var dealName = record.get('dealName');
+                Ext.Msg.confirm('Delete ' + dealName + '?', null, function(btnText) {
+                    if (btnText === 'yes') {
+                        var itemName = record.get('itemName');
+                        var req = Ext.Ajax.request({
+                                method: 'POST',
+                                url: 'http://services.appsonmobile.com/deals/' + itemName,
+                                success: function(form, action) {
+                                    Ext.Msg.alert('Success', action.msg);
+                                    //console.log(action.msg);
+                                    var dealsStore = Ext.getStore('MyDealsStore');
+                                    dealsStore.load();
+                                },
+                                failure: function(form, action) {
+                                    Ext.Msg.alert('Failure', action.msg);
+                                }
+                            });
+                    }
+                }, //console.log(action.msg);
+                this);
+            } else {
+                var store = Ext.getStore('MyDealsStore');
+                var record = store.getAt(index);
+                var view = Ext.Viewport.add({
+                        xtype: 'UpdateDealForm'
+                    });
+                view.setRecord(record);
+                Ext.Viewport.setActiveItem(view);
+            }
         } else {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
@@ -68259,6 +68358,338 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /*
+ * File: app/view/UpdateDealForm.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.UpdateDealForm', Ext.form.Panel, {
+    config: {
+        height: '100%',
+        html: '',
+        minHeight: '',
+        style: 'background:white',
+        enctype: 'multipart/form-data',
+        multipartDetection: false,
+        url: '',
+        items: [
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                margin: '5 5 5 5 ',
+                padding: '',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Name',
+                labelWidth: '35%',
+                name: 'DealName'
+            },
+            {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                itemId: 'dealStatus',
+                margin: '5 5 5 5 ',
+                maxHeight: '',
+                style: '',
+                styleHtmlContent: true,
+                label: 'Status',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStatus',
+                value: 'Active',
+                placeHolder: 'Active',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Active',
+                        value: 'Active'
+                    },
+                    {
+                        text: 'Expired',
+                        value: 'Expired'
+                    }
+                ]
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                margin: '5 5 5 5 ',
+                padding: '',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealStartDate1',
+                itemId: 'DealStartDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'Start Date',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStartDate',
+                value: {
+                    day: new Date().getDate(),
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                autoSelect: false,
+                options: {
+                    minDate: new Date()
+                },
+                usePicker: true,
+                dateFormat: 'm/d/Y',
+                picker: {
+                    itemId: 'mydatepicker3',
+                    style: '',
+                    scrollable: false,
+                    stretchX: false,
+                    stretchY: false,
+                    yearFrom: 2016
+                }
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                itemId: 'DealEndDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'End Date',
+                labelWidth: '35%',
+                name: 'DealEndDate',
+                value: {
+                    day: new Date().getDate() + 1,
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                usePicker: true,
+                picker: {
+                    styleHtmlContent: true,
+                    yearFrom: 2016
+                }
+            },
+            {
+                xtype: 'spacer',
+                maxHeight: ''
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'customerId'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'hiddenfield',
+                name: 'itemName'
+            },
+            {
+                xtype: 'hiddenfield',
+                name: 'DealPictureURL'
+            },
+            {
+                xtype: 'container',
+                left: '',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 10',
+                        padding: '5 30 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        Ext.Viewport.add({
+                                            xtype: 'Terms'
+                                        }).show();
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                height: 140,
+                margin: '10 10 10 10 10',
+                styleHtmlContent: true,
+                layout: 'fit',
+                scrollable: false,
+                items: [
+                    {
+                        xtype: 'spacer',
+                        maxWidth: '',
+                        minWidth: ''
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getActiveItem().destroy();
+                        },
+                        height: '20%',
+                        style: 'font-size:5vw!important',
+                        styleHtmlContent: true,
+                        ui: 'decline',
+                        width: '40%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var uForm = this.up('UpdateDealForm');
+                            var file = uForm.getAt(5).getValue();
+                            var dealName = uForm.getAt(0).getValue();
+                            var itemName = uForm.getAt(7).getValue();
+                            //var dealStartDate = uForm.getAt(2).getValue().toDateString();
+                            //var dealEndDate = uForm.getAt(3).getValue();
+                            //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
+                            //Ext.Date.format(uForm.getAt(3).getValue(),'n/j/Y');
+                            /*var startDate = uForm.getAt(2).getValue();
+
+							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
+							console.log(date);
+
+							uForm.getAt(2).setValue(date);
+
+
+							var startDate = uForm.getAt(3).getValue();
+
+							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
+							console.log(date);
+
+
+							uForm.getAt(3).setValue(date);
+
+
+							console.log(date);*/
+                            /*var startDate = dealStartDate.getDate();
+							var startMonth = dealStartDate.getMonth()+1;
+							var startYear = dealStartDate.getFullYear();
+
+							var dealStart = startDate + "/" + startMonth + "/" + startYear ;
+
+							console.log(dealStart);
+
+							uForm.getAt(2).setValue(dealStart);
+
+							var endDate = dealEndDate.getDate();
+							var endMonth = dealEndDate.getMonth()+1;
+							var endYear = dealEndDate.getFullYear();
+
+							var dealEnd = endDate + "/" + endMonth + "/" + endYear ;
+
+							uForm.getAt(3).setValue(dealEnd);
+							console.log(dealEnd);*/
+                            if (dealName) {
+                                if (document.getElementById('chkbx').checked) {
+                                    uForm.submit({
+                                        url: 'http://services.appsonmobile.com/deals/editDeal' + itemName,
+                                        waitMsg: 'Please Wait...',
+                                        cache: false,
+                                        scope: this,
+                                        success: function(form, action) {
+                                            Ext.getStore('MyDealsStore').load();
+                                            Ext.Msg.alert('Success', action.msg);
+                                            //console.log("Action Msg is : " +action.success);
+                                            //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
+                                            uForm.destroy();
+                                        },
+                                        failure: function(form, action) {
+                                            Ext.getStore('MyDealsStore').load();
+                                            Ext.Msg.alert('Failure', action.msg);
+                                            console.log("Action Msg is : " + action.msg);
+                                            //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
+                                            uForm.destroy();
+                                        }
+                                    });
+                                } else {
+                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                }
+                            } else {
+                                Ext.Msg.alert(null, 'Deal Name Field is Empty', null, null);
+                            }
+                        },
+                        docked: 'right',
+                        height: '20%',
+                        itemId: 'submit',
+                        style: 'font:size:4vw',
+                        styleHtmlContent: true,
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Submit'
+                    }
+                ]
+            }
+        ]
+    }
+}, 0, [
+    "UpdateDealForm"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "UpdateDealForm"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "UpdateDealForm": true
+}, [
+    "widget.UpdateDealForm"
+], 0, [
+    Contact.view,
+    'UpdateDealForm'
+], 0));
+
+/*
  * File: app.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
@@ -68296,7 +68727,8 @@ Ext.application({
         'ChangeContactPicForm',
         'contactinfo',
         'panel',
-        'Terms'
+        'Terms',
+        'UpdateDealForm'
     ],
     controllers: [
         'Contacts'
