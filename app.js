@@ -66380,7 +66380,6 @@ Ext.define('Ext.picker.Picker', {
                             itemId: 'panel',
                             fullscreen: true,
                             tabBarPosition: 'bottom',
-                            cls: 'toolbar',
                             items: [
                                 {
                                     xtype: 'contactinfo',
@@ -66483,7 +66482,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                style: 'font-size:1.4em;color:#1985d0',
+                style: 'font-size:1.2em;color:#1985d0',
                 ui: 'plain',
                 width: '20%',
                 iconCls: 'add'
@@ -66839,7 +66838,6 @@ Ext.define('Ext.picker.Picker', {
                                             fullscreen: true,
                                             tabBarPosition: 'bottom',
                                             itemId: 'panel',
-                                            cls: 'toolbar',
                                             items: [
                                                 {
                                                     xtype: 'contactinfo',
@@ -66897,19 +66895,22 @@ Ext.define('Ext.picker.Picker', {
                 html: '',
                 id: 'businessName',
                 itemId: 'businessName',
-                label: 'Business Name',
+                label: '',
                 labelAlign: 'top',
+                labelWidth: '',
                 labelWrap: true,
                 name: 'businessName',
                 required: true
             },
             {
                 xtype: 'textfield',
-                cls: 'customfield',
+                cls: [
+                    'customfield',
+                    'icon-phone'
+                ],
                 height: '20%',
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
-                label: 'Phone Number',
                 labelAlign: 'top',
                 labelWrap: true,
                 name: 'phoneNumber',
@@ -66917,11 +66918,13 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textareafield',
-                cls: 'customfield',
+                cls: [
+                    'customfield',
+                    'icon-location'
+                ],
                 height: '15%',
                 id: 'address',
                 itemId: 'address',
-                label: 'Address',
                 labelAlign: 'top',
                 name: 'address',
                 required: true
@@ -67618,7 +67621,6 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         minHeight: '',
         enctype: 'multipart/form-data',
-        standardSubmit: true,
         url: 'http://services.appsonmobile.com/uploadS3',
         items: [
             {
