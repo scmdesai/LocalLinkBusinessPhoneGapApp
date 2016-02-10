@@ -66026,14 +66026,14 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 convert: function(v, rec) {
-                    return Ext.Date.format(new Date(v), 'n-j-Y');
+                    return Ext.Date.format(new Date(v), 'n/j/Y');
                 },
                 name: 'dealStartDate',
                 type: 'date'
             },
             {
                 convert: function(v, rec) {
-                    return Ext.Date.format(new Date(v), 'n-j-Y');
+                    return Ext.Date.format(new Date(v), 'n/j/Y');
                 },
                 name: 'dealEndDate',
                 type: 'date'
@@ -66375,6 +66375,7 @@ Ext.define('Ext.picker.Picker', {
     config: {
         html: '<h3><b>Welcome to Local Link!</b></h3> <p>With this app you can stay in touch with your customers.In order to use Local Link, you must sign in with your Facebook account.</p>',
         maxHeight: '',
+        style: '',
         styleHtmlContent: true,
         layout: {
             type: 'card',
@@ -66384,14 +66385,18 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 centered: true,
+                cls: 'login',
+                height: '',
                 id: 'Login',
                 itemId: 'Login',
-                maxHeight: '10%',
-                style: '',
+                maxHeight: '',
+                minHeight: '10%',
+                style: 'background-color:#e32636;',
                 styleHtmlCls: '',
-                ui: 'action-round',
+                ui: 'plain',
                 width: 100,
-                icon: 'resources/images/login.png'
+                icon: '',
+                text: 'Login'
             }
         ],
         listeners: [
@@ -66465,6 +66470,7 @@ Ext.define('Ext.picker.Picker', {
                             itemId: 'panel',
                             fullscreen: true,
                             tabBarPosition: 'bottom',
+                            cls: 'toolbar',
                             items: [
                                 {
                                     xtype: 'contactinfo',
@@ -66524,12 +66530,13 @@ Ext.define('Ext.picker.Picker', {
         overflow: 'hidden',
         height: '100%',
         itemId: 'contactpic',
+        margin: '5 5 5 5',
         minHeight: '100%',
         padding: '',
-        style: 'overflow: hidden',
+        style: 'overflow: hidden;',
         styleHtmlContent: true,
         ui: '',
-        width: '100%',
+        width: '95%',
         scrollable: false,
         tpl: [
             '',
@@ -66566,8 +66573,9 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
+                style: 'border:none;background-color:rgba(0,0,0,0);',
                 ui: 'plain',
-                width: '10%',
+                width: '20%',
                 iconCls: 'add'
             }
         ]
@@ -66605,23 +66613,27 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.contactinfo', Ext.form.Panel, {
     config: {
+        baseCls: 'x-panel-body',
         border: 5,
         height: '100%',
         itemId: 'info',
         minHeight: '100%',
+        styleHtmlContent: true,
         modal: true,
         items: [
             {
                 xtype: 'toolbar',
                 docked: 'top',
-                style: 'font-size:6vw',
+                style: '',
+                styleHtmlContent: true,
                 items: [
                     {
                         xtype: 'button',
                         docked: 'right',
+                        height: 48,
                         itemId: 'editButton',
-                        margin: '15 0 0 0',
-                        style: '',
+                        margin: '15 5 5 5',
+                        width: '20%',
                         iconCls: 'compose'
                     },
                     {
@@ -66631,6 +66643,7 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         xtype: 'component',
+                        baseCls: 'x-item',
                         cls: 'contact-name',
                         disabled: true,
                         html: '<b>First Name</b>',
@@ -66648,7 +66661,6 @@ Ext.define('Ext.picker.Picker', {
                 maxHeight: '',
                 minWidth: '',
                 padding: '5 5 5 5',
-                style: 'border:1px inset',
                 styleHtmlContent: true,
                 width: '100%',
                 layout: {
@@ -66657,7 +66669,8 @@ Ext.define('Ext.picker.Picker', {
                 },
                 items: [
                     {
-                        xtype: 'contactpic'
+                        xtype: 'contactpic',
+                        baseCls: 'x-panel-body'
                     }
                 ]
             },
@@ -66673,31 +66686,25 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'textfield',
-                        cls: [
-                            'icon-phone',
-                            'customfield'
-                        ],
+                        baseCls: '',
+                        cls: 'icon-phone',
                         disabled: false,
                         height: '',
                         html: '',
                         itemId: 'phoneNumber',
                         maxHeight: '30%',
-                        maxWidth: '100%',
                         minHeight: '',
                         minWidth: '100%',
                         styleHtmlCls: '',
                         width: '100%',
                         clearIcon: false,
-                        inputCls: 'customfield',
+                        inputCls: '',
                         name: 'phoneNumber',
                         readOnly: true
                     },
                     {
                         xtype: 'textareafield',
-                        cls: [
-                            'icon-location',
-                            'customfield'
-                        ],
+                        cls: 'icon-location',
                         disabled: false,
                         height: '100%',
                         html: '',
@@ -66706,10 +66713,8 @@ Ext.define('Ext.picker.Picker', {
                         maxWidth: '100%',
                         minHeight: '100%',
                         minWidth: '100%',
-                        style: 'border:1 px inset',
                         width: '100%',
                         clearIcon: false,
-                        inputCls: 'customfield',
                         name: 'address',
                         readOnly: true,
                         maxRows: 3
@@ -66819,7 +66824,6 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
-        style: 'font-size: 10px',
         autoDestroy: false,
         deselectOnContainerClick: false,
         mode: 'MULTI',
@@ -66835,10 +66839,10 @@ Ext.define('Ext.picker.Picker', {
         useSimpleItems: false,
         itemTpl: [
             '',
-            '<div style="font-size:20px" >{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
+            '<div style="font-size:20px;color:black">{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
             '',
             '',
-            '<div style="color:#0000FF;font-size:12px;font-style:italics">{dealStartDate} - {dealEndDate}</div>'
+            '<div style="color:#e32636;font-size:12px;font-style:italics">Valid {dealStartDate} to {dealEndDate}</div>'
         ]
     }
 }, 0, [
@@ -66878,6 +66882,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.contactform', Ext.form.Panel, {
     config: {
+        baseCls: 'x-panel-body',
         html: '',
         id: 'formpanel',
         itemId: 'formpanel',
@@ -66889,16 +66894,15 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'toolbar',
-                cls: 'x-toolbar-dark',
                 docked: 'top',
-                ui: 'light',
+                styleHtmlContent: true,
                 autoDestroy: false,
                 items: [
                     {
                         xtype: 'button',
                         itemId: 'cancelButton',
-                        styleHtmlContent: true,
-                        ui: 'decline',
+                        style: '',
+                        width: '30%',
                         text: 'Cancel'
                     },
                     {
@@ -66932,6 +66936,7 @@ Ext.define('Ext.picker.Picker', {
                                             fullscreen: true,
                                             tabBarPosition: 'bottom',
                                             itemId: 'panel',
+                                            cls: 'toolbar',
                                             items: [
                                                 {
                                                     xtype: 'contactinfo',
@@ -66966,15 +66971,17 @@ Ext.define('Ext.picker.Picker', {
 
 
 							Ext.Viewport.setActiveItem(view);*/
+                        cls: 'button',
                         itemId: 'saveContactButton',
-                        styleHtmlContent: true,
-                        ui: 'confirm',
+                        width: '30%',
+                        iconCls: '',
                         text: 'Save'
                     }
                 ]
             },
             {
                 xtype: 'contactpic',
+                cls: 'x-panel-body',
                 height: 160
             },
             {
@@ -66983,8 +66990,10 @@ Ext.define('Ext.picker.Picker', {
                 html: '',
                 id: 'businessName',
                 itemId: 'businessName',
+                inputCls: '',
                 label: 'BusinessName',
                 labelAlign: 'top',
+                labelCls: '',
                 labelWidth: '10%',
                 labelWrap: true,
                 name: 'businessName',
@@ -67003,7 +67012,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textareafield',
-                height: '',
+                height: '15%',
                 id: 'address',
                 itemId: 'address',
                 label: 'Address',
@@ -67475,11 +67484,12 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealPicture', Ext.Panel, {
     config: {
+        baseCls: 'x-panel-body',
         fullscreen: true,
         height: '100%',
         itemId: 'dealPicture',
         left: 'dealPicture',
-        style: 'overflow: hidden;background:#fff',
+        style: 'overflow: hidden',
         styleHtmlContent: true,
         width: '100%',
         autoDestroy: false,
@@ -67495,11 +67505,13 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'toolbar',
                 docked: 'top',
+                styleHtmlContent: true,
                 items: [
                     {
                         xtype: 'button',
                         itemId: 'dealBackBtn',
-                        ui: 'back',
+                        ui: 'plain',
+                        width: '30%',
                         text: 'Back'
                     },
                     {
@@ -67507,6 +67519,9 @@ Ext.define('Ext.picker.Picker', {
                         docked: 'right',
                         itemId: 'share',
                         margin: '15 5 5 5',
+                        minHeight: '100%',
+                        style: 'border:none',
+                        ui: 'plain',
                         width: '20%',
                         iconAlign: 'center',
                         iconCls: 'action',
@@ -67551,10 +67566,23 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.Main', Ext.tab.Panel, {
     config: {
+        baseCls: '',
         items: [
             {
                 xtype: 'container',
                 title: 'Home',
+                baseCls: 'x-list',
+                items: [
+                    {
+                        xtype: 'contactlist',
+                        height: 403
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                title: 'Home',
+                baseCls: 'x-list',
                 items: [
                     {
                         xtype: 'contactlist',
@@ -67562,7 +67590,10 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ]
+        ],
+        tabBar: {
+            docked: 'top'
+        }
     }
 }, 0, 0, [
     "component",
@@ -67593,6 +67624,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealsPanel', Ext.form.Panel, {
     config: {
+        baseCls: 'x-list',
         id: 'dealsPanel',
         itemId: 'dealsPanel',
         minHeight: '80%',
@@ -67606,15 +67638,14 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'top',
                 height: '90%',
                 itemId: 'listofdeals',
-                styleHtmlContent: true,
-                width: '100%',
-                itemCls: 'listofdealsScss'
+                width: '100%'
             },
             {
                 xtype: 'container',
-                docked: 'bottom',
-                maxHeight: '20%',
-                maxWidth: '100%',
+                cls: 'button',
+                margin: '',
+                maxWidth: '',
+                width: '100%',
                 layout: 'hbox',
                 items: [
                     {
@@ -67623,18 +67654,17 @@ Ext.define('Ext.picker.Picker', {
                         id: 'UploadDeal',
                         itemId: 'UploadDeal',
                         margin: '5 5 5 5',
-                        styleHtmlContent: true,
-                        ui: 'untitled-ui-4',
+                        width: '50%',
                         text: 'Upload New Deal'
                     },
                     {
                         xtype: 'button',
                         flex: 1,
+                        height: '',
                         id: 'DeleteDeal',
                         itemId: 'DeleteDeal',
                         margin: '5 5 5 5',
-                        styleHtmlContent: true,
-                        ui: 'plain',
+                        width: '50%',
                         text: 'Delete'
                     }
                 ]
@@ -67678,6 +67708,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.UploadDealForm', Ext.form.Panel, {
     config: {
+        baseCls: 'x-panel-body',
         height: '100%',
         minHeight: '',
         enctype: 'multipart/form-data',
@@ -67686,8 +67717,9 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 margin: '5 5 5 5 ',
+                inputCls: '',
                 label: 'Deal Name',
-                labelWidth: '50%',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'DealName'
             },
@@ -67697,7 +67729,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '5 5 5 5 ',
                 maxHeight: '',
                 label: 'Deal Status',
-                labelWidth: '50%',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'DealStatus',
                 options: [
@@ -67716,8 +67748,8 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealStartDate',
                 margin: '5 5 5 5 ',
                 styleHtmlContent: true,
+                width: '100%',
                 label: 'Deal Start',
-                labelWidth: '50%',
                 labelWrap: true,
                 name: 'DealStartDate',
                 value: {
@@ -67735,8 +67767,8 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'datepickerfield',
                 margin: '5 5 5 5 ',
                 styleHtmlContent: true,
+                width: '100%',
                 label: 'Deal End',
-                labelWidth: '50%',
                 labelWrap: true,
                 name: 'DealEndDate',
                 value: {
@@ -67755,7 +67787,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'myfilefield',
                 margin: '5 5 5 5 ',
                 label: 'Deal Image',
-                labelWidth: '50%',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'fileUpload',
                 capture: 'camera'
@@ -67774,6 +67806,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
+                cls: 'button',
                 margin: '10 10 10 10 10',
                 layout: 'hbox',
                 items: [
@@ -67789,7 +67822,7 @@ Ext.define('Ext.picker.Picker', {
                         },
                         flex: 10,
                         styleHtmlContent: true,
-                        ui: 'decline-round',
+                        ui: 'plain',
                         text: 'Cancel'
                     },
                     {
@@ -67825,7 +67858,7 @@ Ext.define('Ext.picker.Picker', {
                         flex: 10,
                         itemId: 'submit',
                         styleHtmlContent: true,
-                        ui: 'confirm-round',
+                        ui: 'plain',
                         text: 'Submit'
                     }
                 ]
@@ -67869,9 +67902,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ChangeContactPicForm', Ext.form.Panel, {
     config: {
-        baseCls: 'x-panel-body',
         centered: true,
-        cls: 'x-panel-body',
         height: '25%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
@@ -67881,14 +67912,16 @@ Ext.define('Ext.picker.Picker', {
         modal: true,
         scrollable: false,
         layout: {
-            type: 'hbox',
-            pack: 'center'
+            type: 'vbox',
+            align: 'stretchmax',
+            pack: 'end'
         },
         items: [
             {
                 xtype: 'filefield',
-                docked: 'top',
                 height: '20%',
+                itemId: 'myfilefield1',
+                clearIcon: false,
                 label: '',
                 labelWrap: true,
                 name: 'fileUpload',
@@ -67929,13 +67962,16 @@ Ext.define('Ext.picker.Picker', {
                         }
                     });
                 },
-                height: '25%',
-                left: '30%',
+                bottom: 30,
+                centered: false,
+                height: '30%',
+                left: '20%',
                 margin: '5 0 0 0',
-                style: '',
                 styleHtmlContent: true,
-                ui: 'round',
-                width: '50%',
+                ui: 'plain',
+                width: '45%',
+                iconAlign: 'center',
+                iconCls: '',
                 text: 'Submit'
             },
             {
