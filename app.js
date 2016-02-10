@@ -66668,7 +66668,8 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'contactpic',
-                        baseCls: 'x-panel-body'
+                        baseCls: 'x-panel-body',
+                        style: 'overflow: hidden;background-color:#fff'
                     }
                 ]
             },
@@ -67651,7 +67652,6 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                height: 42,
                 margin: '',
                 maxWidth: '',
                 width: '100%',
@@ -67729,18 +67729,16 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
-                margin: '5 5 5 5 ',
+                clearIcon: false,
                 inputCls: '',
                 label: 'Deal Name',
                 labelWidth: '35%',
-                labelWrap: true,
                 name: 'DealName'
             },
             {
                 xtype: 'selectfield',
                 cls: 'customfield',
                 itemId: 'dealStatus',
-                margin: '5 5 5 5 ',
                 maxHeight: '',
                 label: 'Deal Status',
                 labelWidth: '35%',
@@ -67760,14 +67758,11 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'datepickerfield',
                 cls: 'customfield',
-                itemId: 'DealStartDate',
-                margin: '5 5 5 5 ',
-                styleHtmlContent: true,
-                width: '100%',
+                width: '97%',
                 label: 'Deal Start',
                 labelWidth: '35%',
                 labelWrap: true,
-                name: 'DealStartDate',
+                name: 'DealEndDate',
                 value: {
                     day: new Date().getDate(),
                     month: (new Date().getMonth() + 1),
@@ -67782,9 +67777,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'datepickerfield',
                 cls: 'customfield',
-                margin: '5 5 5 5 ',
-                styleHtmlContent: true,
-                width: '100%',
+                width: '97%',
                 label: 'Deal End',
                 labelWidth: '35%',
                 labelWrap: true,
@@ -67827,8 +67820,14 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 cls: 'button',
+                height: 58,
                 margin: '10 10 10 10 10',
-                layout: 'hbox',
+                scrollable: false,
+                layout: {
+                    type: 'hbox',
+                    align: 'start',
+                    pack: 'center'
+                },
                 items: [
                     {
                         xtype: 'button',
@@ -67836,6 +67835,7 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.getActiveItem().destroy();
                         },
                         flex: 10,
+                        minHeight: '10%',
                         style: 'border:none',
                         styleHtmlContent: true,
                         ui: 'decline',
