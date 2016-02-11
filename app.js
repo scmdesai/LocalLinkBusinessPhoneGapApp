@@ -67582,13 +67582,16 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onListOfDealsShow',
-                event: 'show'
+                fn: 'onListOfDealsAdd',
+                event: 'add'
             }
         ]
     },
-    onListOfDealsShow: function(component, eOpts) {
+    onListOfDealsAdd: function(container, item, index, eOpts) {
         Ext.get('chkbx').setSize(50, 50);
+        console.log(item);
+        console.log(index);
+        console.log(cntainer.getItemId);
     }
 }, 0, [
     "DealsPanel"
