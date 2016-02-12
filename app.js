@@ -66913,8 +66913,8 @@ Ext.define('Ext.picker.Picker', {
                     numberOfHits[i] = parseInt(tmp[2], 10);
                     data.addRow([
                         [
-                            zipcode[i],
-                            numberOfHits[i]
+                            "60504",
+                            2
                         ]
                     ]);
                 }
