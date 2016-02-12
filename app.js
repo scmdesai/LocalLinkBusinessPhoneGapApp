@@ -66914,7 +66914,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '20%',
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
-                style: 'font-size:4vw',
+                style: 'font-size:4vw;',
                 labelWrap: true,
                 name: 'phoneNumber',
                 required: true
@@ -66928,7 +66928,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '15%',
                 id: 'address',
                 itemId: 'address',
-                style: 'font-size:4vw',
+                style: 'font-size:4vw;vertical-align:middle;',
                 name: 'address',
                 required: true
             },
@@ -67895,7 +67895,7 @@ Ext.define('Ext.picker.Picker', {
                 bottom: 30,
                 centered: false,
                 cls: 'button',
-                height: '35%',
+                height: '30%',
                 left: '25%',
                 margin: '',
                 style: 'border:none',
