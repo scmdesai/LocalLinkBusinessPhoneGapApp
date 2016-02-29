@@ -66871,12 +66871,19 @@ Ext.define('Ext.picker.Picker', {
                             var customerId = form.getRecord().get('customerId');
                             form.getComponent('CustomerId').setValue(customerId);
                             form.getComponent('Category').setValue(form.getRecord().get('category'));
-                            form.getComponent('businessName').setValue(form.getRecord().get('businessName'));
+                            //form.getComponent('businessName').setValue(form.getRecord().get('businessName'));
                             form.getComponent('email').setValue(form.getRecord().get('emailAddress'));
                             form.getComponent('city').setValue(form.getRecord().get('city'));
                             form.getComponent('state').setValue(form.getRecord().get('state'));
                             form.getComponent('zipcode').setValue(form.getRecord().get('zipcode'));
                             form.getComponent('pictureURL').setValue(form.getRecord().get('picture'));
+                            console.log(record.get('category'));
+                            console.log(record.get('customerId'));
+                            console.log(record.get('emailAddress'));
+                            console.log(record.get('city'));
+                            console.log(record.get('state'));
+                            console.log(record.get('zipcode'));
+                            console.log(record.get('picture'));
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
