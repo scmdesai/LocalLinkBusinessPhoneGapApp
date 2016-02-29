@@ -66605,6 +66605,7 @@ Ext.define('Ext.picker.Picker', {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         console.log('Info page set record');
         var store = Ext.getStore('MyJsonPStore');
+        store.load();
         var customerId = record.get('customerId');
         var record = store.findRecord('customerId', customerId, 0, true, false, false);
         if (record) {
