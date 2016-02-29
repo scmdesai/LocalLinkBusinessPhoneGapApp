@@ -65900,6 +65900,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.model.Contact', Ext.data.Model, {
     config: {
+        useCache: false,
         fields: [
             {
                 name: 'businessName',
@@ -66096,6 +66097,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.store.MyJsonPStore', Ext.data.Store, {
     config: {
         autoLoad: true,
+        autoSync: true,
         groupField: 'category',
         model: 'Contact.model.Contact',
         storeId: 'MyJsonPStore',
@@ -66210,6 +66212,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.store.MyJsonPStore1', Ext.data.Store, {
     config: {
         autoLoad: true,
+        autoSync: true,
         groupField: 'category',
         model: 'Contact.model.Contact',
         storeId: 'MyJsonPStore1',
@@ -66546,7 +66549,6 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                docked: 'bottom',
                 height: '',
                 width: '100%',
                 layout: {
