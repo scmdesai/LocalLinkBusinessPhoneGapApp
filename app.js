@@ -66845,6 +66845,7 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         modal: true,
         multipartDetection: false,
+        standardSubmit: true,
         items: [
             {
                 xtype: 'toolbar',
@@ -67846,6 +67847,7 @@ Ext.define('Ext.picker.Picker', {
         styleHtmlContent: true,
         width: '80%',
         layout: 'card',
+        standardSubmit: true,
         items: [
             {
                 xtype: 'filefield',
