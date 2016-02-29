@@ -66870,9 +66870,10 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('contactform');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
+                            form.getComponent('businessName').setValue(form.getRecord().get('businessName'));
                             /*form.getComponent('customerId').setValue(customerId);
 							form.getComponent('category').setValue(form.getRecord().get('category'));
-							//form.getComponent('businessName').setValue(form.getRecord().get('businessName'));
+
 							form.getComponent('emailAddress').setValue(form.getRecord().get('emailAddress'));
 							form.getComponent('city').setValue(form.getRecord().get('city'));
 							form.getComponent('state').setValue(form.getRecord().get('state'));
