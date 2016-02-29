@@ -66377,6 +66377,7 @@ Ext.define('Ext.picker.Picker', {
                     var view = Ext.create("Ext.tab.Panel", {
                             fullscreen: true,
                             tabBarPosition: 'bottom',
+                            alias: 'tabPanel',
                             items: [
                                 {
                                     xtype: 'contactinfo',
@@ -66598,16 +66599,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onInfoPainted',
-                event: 'painted'
-            }
         ]
-    },
-    onInfoPainted: function(element, eOpts) {
-        element.repaint();
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -67783,12 +67775,18 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Success', action.msg);
                                     console.log("Action Msg is : " + action.success);
+                                    Ext.Viewport.setActiveItem({
+                                        xtype: 'tabPanel'
+                                    });
                                     uForm.destroy();
                                 },
                                 failure: function(form, action) {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Failed', action.msg);
                                     console.log("Action Msg is : " + action.success);
+                                    Ext.Viewport.setActiveItem({
+                                        xtype: 'tabPanel'
+                                    });
                                     uForm.destroy();
                                 }
                             });
@@ -67865,6 +67863,8 @@ Ext.define('Ext.picker.Picker', {
                         xhr2: true,
                         success: function(form, action) {
                             store.load();
+                            var currentForm = Ext.Viewport.getActiveItem();
+                            currentForm.setRecord(record);
                             Ext.Msg.alert('Success', action.msg);
                             form.destroy();
                         },
