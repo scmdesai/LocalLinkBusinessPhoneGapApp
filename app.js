@@ -65935,7 +65935,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 defaultValue: 'resources/img/defaultContactPic.png',
-                name: 'picture'
+                name: 'pictureURL'
             },
             {
                 name: 'customerId'
