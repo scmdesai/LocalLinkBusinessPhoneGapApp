@@ -66097,7 +66097,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.store.MyJsonPStore', Ext.data.Store, {
     config: {
         autoLoad: true,
-        autoSync: true,
         groupField: 'category',
         model: 'Contact.model.Contact',
         storeId: 'MyJsonPStore',
@@ -66212,7 +66211,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.store.MyJsonPStore1', Ext.data.Store, {
     config: {
         autoLoad: true,
-        autoSync: true,
         groupField: 'category',
         model: 'Contact.model.Contact',
         storeId: 'MyJsonPStore1',
@@ -67787,7 +67785,7 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     console.log("Action Msg is : " + action.success);
                                     Ext.Viewport.setActiveItem({
-                                        xtype: 'tabPanel'
+                                        xtype: 'DealsPanel'
                                     });
                                     uForm.destroy();
                                 },
@@ -67796,7 +67794,7 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Failed', action.msg);
                                     console.log("Action Msg is : " + action.success);
                                     Ext.Viewport.setActiveItem({
-                                        xtype: 'tabPanel'
+                                        xtype: 'DealsPanel'
                                     });
                                     uForm.destroy();
                                 }
