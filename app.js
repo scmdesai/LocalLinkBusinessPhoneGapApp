@@ -66875,6 +66875,11 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     store.load();
+                                    var view = Ext.Viewport.add({
+                                            xtype: 'contactinfo'
+                                        });
+                                    var record = store.findRecord('customerId', customerId, 0, true, false, false);
+                                    view.setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
@@ -67347,6 +67352,7 @@ Ext.define('Ext.picker.Picker', {
         form.referrer = referrer;
         Ext.Viewport.setActiveItem(form);
         form.setRecord(info);
+        referrer.destroy();
     },
     onSaveContactButtonTap: function(button, e, eOpts) {},
     /*var form = this.getContactform();
