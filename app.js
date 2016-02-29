@@ -67036,7 +67036,7 @@ Ext.define('Ext.picker.Picker', {
                 labelAlign: 'top',
                 labelWidth: '10%',
                 labelWrap: true,
-                name: 'businessName',
+                name: 'BusinessName',
                 required: true
             },
             {
@@ -67063,18 +67063,18 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 hidden: true,
-                name: 'customerId'
+                name: 'CustomerId'
             },
             {
                 xtype: 'textfield',
                 hidden: true,
                 itemId: '',
-                name: 'category'
+                name: 'Category'
             },
             {
                 xtype: 'textfield',
                 hidden: true,
-                name: 'emailAddress'
+                name: 'email'
             },
             {
                 xtype: 'textfield',
@@ -67886,17 +67886,17 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 hidden: true,
-                name: 'customerId'
+                name: 'CustomerId'
             },
             {
                 xtype: 'textfield',
                 hidden: true,
-                name: 'businessName'
+                name: 'BusinessName'
             },
             {
                 xtype: 'textfield',
                 hidden: true,
-                name: 'category'
+                name: 'Category'
             },
             {
                 xtype: 'textfield',
@@ -67911,7 +67911,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 hidden: true,
-                name: 'emailAddress'
+                name: 'email'
             },
             {
                 xtype: 'textfield',
