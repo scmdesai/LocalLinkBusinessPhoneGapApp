@@ -66607,7 +66607,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onInfoPainted: function(element, eOpts) {
-        Ext.getStore('MyJsonPStore').load();
+        element.repaint();
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -67604,7 +67604,16 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onDealsPanelPainted',
+                event: 'painted'
+            }
         ]
+    },
+    onDealsPanelPainted: function(element, eOpts) {
+        element.repaint();
     }
 }, 0, [
     "DealsPanel"
@@ -67774,11 +67783,13 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Success', action.msg);
                                     console.log("Action Msg is : " + action.success);
+                                    uForm.destroy();
                                 },
                                 failure: function(form, action) {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Failed', action.msg);
                                     console.log("Action Msg is : " + action.success);
+                                    uForm.destroy();
                                 }
                             });
                         },
