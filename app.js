@@ -66871,12 +66871,14 @@ Ext.define('Ext.picker.Picker', {
                             var customerId = form.getRecord().get('customerId');
                             form.getComponent('CustomerId').setValue(customerId);
                             form.getComponent('Category').setValue(form.getRecord().get('category'));
-                            //form.getComponent('businessName').setValue(form.getRecord().get('businessName'));
+                            form.getComponent('businessName').setValue(form.getRecord().get('businessName'));
                             form.getComponent('email').setValue(form.getRecord().get('emailAddress'));
                             form.getComponent('city').setValue(form.getRecord().get('city'));
                             form.getComponent('state').setValue(form.getRecord().get('state'));
                             form.getComponent('zipcode').setValue(form.getRecord().get('zipcode'));
                             form.getComponent('pictureURL').setValue(form.getRecord().get('picture'));
+                            form.getComponent('businessName').setValue(form.getRecord().get('phoneNumber'));
+                            form.getComponent('businessName').setValue(form.getRecord().get('address'));
                             console.log(record.get('category'));
                             console.log(record.get('customerId'));
                             console.log(record.get('emailAddress'));
