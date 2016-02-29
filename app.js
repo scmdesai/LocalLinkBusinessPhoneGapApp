@@ -66511,17 +66511,19 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'panel',
+                xtype: 'container',
                 border: '',
-                maxHeight: '100%',
-                minHeight: '100%',
+                docked: 'top',
+                height: '50%',
+                maxHeight: '',
                 minWidth: '',
                 padding: '5 5 5 5',
                 style: 'border:1px inset',
                 styleHtmlContent: true,
+                width: '100%',
                 layout: {
                     type: 'vbox',
-                    align: 'end'
+                    align: 'start'
                 },
                 items: [
                     {
@@ -66543,11 +66545,15 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'panel',
+                xtype: 'container',
+                docked: 'bottom',
                 height: '',
-                maxHeight: '100%',
-                minHeight: '100%',
                 width: '100%',
+                layout: {
+                    type: 'vbox',
+                    align: 'end',
+                    pack: 'end'
+                },
                 items: [
                     {
                         xtype: 'textfield',
@@ -66569,10 +66575,6 @@ Ext.define('Ext.picker.Picker', {
                         inputCls: 'customfield',
                         name: 'phoneNumber',
                         readOnly: true
-                    },
-                    {
-                        xtype: 'spacer',
-                        height: '10px'
                     },
                     {
                         xtype: 'textareafield',
