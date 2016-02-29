@@ -66604,13 +66604,9 @@ Ext.define('Ext.picker.Picker', {
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         console.log('Info page set record');
-        var store = Ext.getStore('MyJsonPStore');
-        store.load();
-        var customerId = record.get('customerId');
-        var record = store.findRecord('customerId', customerId, 0, true, false, false);
         if (record) {
             var name = record.get('businessName');
-            //var customerId = record.get('customerId');
+            var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
         }
@@ -66878,13 +66874,14 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    store.sync();
-                                    store.load();
                                     var view = Ext.Viewport.add({
                                             xtype: 'contactinfo'
                                         });
-                                    var record = store.findRecord('customerId', customerId, 0, true, false, false);
-                                    view.setRecord(record);
+                                    store.on('load', function() {
+                                        var record = store.findRecord('customerId', customerId, 0, true, false, false);
+                                        view.setRecord(record);
+                                    });
+                                    store.load();
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
@@ -67874,8 +67871,6 @@ Ext.define('Ext.picker.Picker', {
                         xhr2: true,
                         success: function(form, action) {
                             store.load();
-                            var currentForm = Ext.Viewport.getActiveItem();
-                            currentForm.setRecord(record);
                             Ext.Msg.alert('Success', action.msg);
                             form.destroy();
                         },
