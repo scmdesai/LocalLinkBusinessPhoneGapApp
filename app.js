@@ -66513,7 +66513,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'panel',
                 border: '',
-                height: 130,
                 maxHeight: '100%',
                 minHeight: '100%',
                 minWidth: '',
@@ -66875,7 +66874,7 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     var view = Ext.Viewport.add({
-                                            xtype: 'tabPanel'
+                                            xtype: 'contactinfo'
                                         });
                                     store.on('load', function() {
                                         var record = store.findRecord('customerId', customerId, 0, true, false, false);
