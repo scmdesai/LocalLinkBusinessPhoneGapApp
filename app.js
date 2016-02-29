@@ -66874,6 +66874,7 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
+                                    store.sync();
                                     store.load();
                                     var view = Ext.Viewport.add({
                                             xtype: 'contactinfo'
