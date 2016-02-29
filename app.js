@@ -66433,7 +66433,7 @@ Ext.define('Ext.picker.Picker', {
         styleHtmlContent: true,
         ui: '',
         tpl: [
-            '<img src="{picture}"/>',
+            '<img src="{pictureURL}"/>',
             ''
         ],
         layout: {
