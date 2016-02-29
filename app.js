@@ -66622,9 +66622,9 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        console.log('Info page set record');
         var form = this.up('contactinfo');
         if (form) {
+            console.log('Info page updated set record');
             form.updateRecord(record);
         }
         if (record) {
