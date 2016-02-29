@@ -67356,7 +67356,6 @@ Ext.define('Ext.picker.Picker', {
         form.referrer = referrer;
         Ext.Viewport.setActiveItem(form);
         form.setRecord(info);
-        referrer.destroy();
     },
     onSaveContactButtonTap: function(button, e, eOpts) {},
     /*var form = this.getContactform();
