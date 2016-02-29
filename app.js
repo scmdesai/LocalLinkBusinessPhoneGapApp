@@ -66128,8 +66128,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        console.log(modifiedFieldNames);
-        console.log(modifiedValues);
+        console.log(record.get('businessName'));
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
