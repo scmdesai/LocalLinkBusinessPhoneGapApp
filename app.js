@@ -66119,7 +66119,16 @@ Ext.define('Ext.picker.Picker', {
                 type: 'json',
                 encode: true
             }
-        }
+        },
+        listeners: [
+            {
+                fn: 'onJsonpstoreUpdaterecord',
+                event: 'updaterecord'
+            }
+        ]
+    },
+    onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
+        console.log('Record Updated');
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
@@ -66875,11 +66884,17 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    store.load();
-                                    Ext.Msg.alert('Success', action.msg);
+                                    store.sync();
+                                    store.load({
+                                        success: function() {
+                                            console.log('Store loaded');
+                                        }
+                                    });
                                     var view = Ext.Viewport.add({
                                             xtype: 'contactinfo'
                                         });
+                                    Ext.Msg.alert('Success', action.msg);
+                                    var record = store.findRecord('customerId', customerId, 0, true, false, false);
                                     view.setRecord(record);
                                     form.destroy();
                                 },
@@ -66892,11 +66907,11 @@ Ext.define('Ext.picker.Picker', {
                         },
                         /*var record = form.getRecord();
 
-							view =Ext.Viewport.add({xtype: 'contactinfo'});
-							view.setRecord(record);
+								view =Ext.Viewport.add({xtype: 'contactinfo'});
+								view.setRecord(record);
 
 
-							Ext.Viewport.setActiveItem(view);*/
+								Ext.Viewport.setActiveItem(view);*/
                         itemId: 'saveContactButton',
                         styleHtmlContent: true,
                         ui: 'confirm',
