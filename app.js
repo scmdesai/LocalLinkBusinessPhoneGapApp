@@ -66873,17 +66873,13 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg);
-                                    console.log(action.msg);
-                                    store.sync();
                                     store.load();
+                                    Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
-                                    Ext.Msg.alert('Failure', action.msg);
-                                    console.log(action.msg);
-                                    store.sync();
                                     store.load();
+                                    Ext.Msg.alert('Failure', action.msg);
                                     form.destroy();
                                 }
                             });
@@ -67849,15 +67845,13 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
-                            Ext.Msg.alert('Success', action.msg);
-                            store.sync();
                             store.load();
+                            Ext.Msg.alert('Success', action.msg);
                             form.destroy();
                         },
                         failure: function(form, action) {
-                            Ext.Msg.alert('Failure', action.msg);
-                            store.sync();
                             store.load();
+                            Ext.Msg.alert('Failure', action.msg);
                             form.destroy();
                         }
                     });
