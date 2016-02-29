@@ -66609,14 +66609,22 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onInfoUpdatedata',
+                event: 'updatedata'
+            }
         ]
+    },
+    onInfoUpdatedata: function(component, newData, eOpts) {
+        console.log(newData);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         console.log('Info page set record');
         if (record) {
             var name = record.get('businessName');
-            console.log(name);
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
@@ -66891,7 +66899,7 @@ Ext.define('Ext.picker.Picker', {
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    view.setRecord(updatedRecord);
+                                    // view.setRecord(updatedRecord);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
