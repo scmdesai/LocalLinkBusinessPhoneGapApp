@@ -66616,6 +66616,7 @@ Ext.define('Ext.picker.Picker', {
         console.log('Info page set record');
         if (record) {
             var name = record.get('businessName');
+            console.log(name);
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
@@ -66885,12 +66886,12 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     store.load();
-                                    form.updateRecord(record);
+                                    var updatedRecord = form.updateRecord(record);
                                     var view = Ext.Viewport.add({
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    view.setRecord(record);
+                                    view.setRecord(updatedRecord);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
