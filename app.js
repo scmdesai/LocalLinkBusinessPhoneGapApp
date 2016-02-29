@@ -66869,29 +66869,21 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('contactform');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
-                            //form.getComponent('businessName').setValue(form.getRecord().get('businessName'));
-                            /*form.getComponent('customerId').setValue(customerId);
-							form.getComponent('category').setValue(form.getRecord().get('category'));
-
-							form.getComponent('emailAddress').setValue(form.getRecord().get('emailAddress'));
-							form.getComponent('city').setValue(form.getRecord().get('city'));
-							form.getComponent('state').setValue(form.getRecord().get('state'));
-							form.getComponent('zipcode').setValue(form.getRecord().get('zipcode'));
-							form.getComponent('pictureURL').setValue(form.getRecord().get('picture'));
-							//form.getComponent('businessName').setValue(form.getRecord().get('phoneNumber'));
-							//form.getComponent('businessName').setValue(form.getRecord().get('address'));*/
+                            var store = Ext.getStore('MyJsonPStore');
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     console.log(action.msg);
-                                    Ext.getStore('MyJsonPStore').load();
+                                    store.sync();
+                                    store.load();
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
                                     Ext.Msg.alert('Failure', action.msg);
                                     console.log(action.msg);
-                                    Ext.getStore('MyJsonPStore').load();
+                                    store.sync();
+                                    store.load();
                                     form.destroy();
                                 }
                             });
@@ -67852,21 +67844,20 @@ Ext.define('Ext.picker.Picker', {
                     var form = this.up('ChangeContactPicForm');
                     var record = form.getRecord();
                     var customerId = form.getRecord().get('customerId');
+                    var store = Ext.getStore('MyJsonPStore');
                     form.submit({
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
                             Ext.Msg.alert('Success', action.msg);
-                            console.log(action.msg);
-                            var rec = store.getUpdatedRecords();
-                            console.log(rec.getData());
-                            Ext.getStore('MyJsonPStore').load();
+                            store.sync();
+                            store.load();
                             form.destroy();
                         },
                         failure: function(form, action) {
                             Ext.Msg.alert('Failure', action.msg);
-                            console.log(action.msg);
-                            Ext.getStore('MyJsonPStore').load();
+                            store.sync();
+                            store.load();
                             form.destroy();
                         }
                     });
