@@ -67029,6 +67029,8 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 height: '20%',
                 html: '',
+                id: 'businessName',
+                itemId: 'businessName',
                 label: 'BusinessName',
                 labelAlign: 'top',
                 labelWidth: '10%',
@@ -67039,6 +67041,8 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 height: '20%',
+                id: 'phoneNumber',
+                itemId: 'phoneNumber',
                 label: 'Phone Number',
                 labelAlign: 'top',
                 labelWrap: true,
@@ -67048,6 +67052,8 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textareafield',
                 height: '',
+                id: 'address',
+                itemId: 'address',
                 label: 'Address',
                 labelAlign: 'top',
                 name: 'address',
@@ -67110,6 +67116,9 @@ Ext.define('Ext.picker.Picker', {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
             this.child('contactpic').setData(record.data);
+            this.down('#businessName').setValue(record.data.businessName);
+            this.down('#phoneNumber').setValue(record.data.phoneNumber);
+            this.down('#address').setValue(record.data.address);
         }
     }
 }, 0, [
@@ -67132,9 +67141,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactform'
 ], 0));
-//this.down('#businessName').setValue(record.data.businessName);
-//this.down('#phoneNumber').setValue(record.data.phoneNumber);
-//this.down('#address').setValue(record.data.address);
 
 /*
  * File: app/controller/Contacts.js
