@@ -66875,7 +66875,7 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     var view = Ext.Viewport.add({
-                                            xtype: 'contactinfo'
+                                            xtype: 'tabPanel'
                                         });
                                     store.on('load', function() {
                                         var record = store.findRecord('customerId', customerId, 0, true, false, false);
