@@ -66886,6 +66886,9 @@ Ext.define('Ext.picker.Picker', {
                             console.log(record.get('state'));
                             console.log(record.get('zipcode'));
                             console.log(record.get('picture'));
+                            console.log(record.get('businessName'));
+                            console.log(record.get('phoneNumber'));
+                            console.log(record.get('address'));
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
