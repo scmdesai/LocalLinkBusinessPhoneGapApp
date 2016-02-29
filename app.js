@@ -66603,6 +66603,7 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        console.log('Info page set record');
         if (record) {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
