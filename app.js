@@ -66604,9 +66604,11 @@ Ext.define('Ext.picker.Picker', {
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         console.log('Info page set record');
+        var customerId = record.get('customerId');
+        var record = store.findRecord('customerId', customerId, 0, true, false, false);
         if (record) {
             var name = record.get('businessName');
-            var customerId = record.get('customerId');
+            //var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
         }
