@@ -66891,7 +66891,6 @@ Ext.define('Ext.picker.Picker', {
                                         });
                                     Ext.Msg.alert('Success', action.msg);
                                     view.setRecord(updatedRecord);
-                                    Ext.Viewport.setActiveItem(view);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
