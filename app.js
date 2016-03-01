@@ -66908,7 +66908,7 @@ Ext.define('Ext.picker.Picker', {
                                     view.getComponent('home').setRecord(record);
                                     //Ext.Viewport.getActiveItem().destroy();
                                     // Ext.Viewport.setActiveItem(view);
-                                    Ext.Viewport.add(view);
+                                    Ext.Viewport.update();
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
