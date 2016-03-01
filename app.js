@@ -66887,10 +66887,9 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     var updatedRecord = form.updateRecord(record);
                                     //var view = Ext.Viewport.add({xtype: 'contactinfo'});
-                                    var info = this.getContactinfo();
-                                    info.setRecord(updatedRecord);
                                     Ext.Msg.alert('Success', action.msg);
                                     //view.setRecord(updatedRecord);
+                                    view.updatedata(updatedRecord);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
@@ -67245,6 +67244,9 @@ Ext.define('Ext.picker.Picker', {
             },
             "button#manageDeals": {
                 tap: 'onManageDealsTap'
+            },
+            "formpanel#info": {
+                updatedata: 'onInfoUpdatedata'
             }
         }
     },
@@ -67503,6 +67505,9 @@ Ext.define('Ext.picker.Picker', {
             xtype: 'DealsPanel'
         });
         Ext.Viewport.setActiveItem(view);
+    },
+    onInfoUpdatedata: function(component, newData, eOpts) {
+        console.log('Updating data');
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.controller,
