@@ -66384,27 +66384,36 @@ Ext.define('Ext.picker.Picker', {
                         'businessName': record.get('businessName')
                     });
                     console.log("User details are : " + email + ',' + record.get('customerId') + ',' + record.get('businessName'));
-                    var view = Ext.create("Ext.tab.Panel", {
-                            fullscreen: true,
-                            tabBarPosition: 'bottom',
-                            alias: 'tabPanel',
-                            items: [
-                                {
-                                    xtype: 'contactinfo',
-                                    title: 'Home',
-                                    itemId: 'home',
-                                    iconCls: 'home'
-                                },
-                                {
-                                    xtype: 'DealsPanel',
-                                    title: 'Deals',
-                                    iconCls: 'info'
-                                }
-                            ]
-                        });
-                    view.getComponent('home').setRecord(record);
-                    Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(view);
+                    /*var view = Ext.create("Ext.tab.Panel", {
+		            fullscreen: true,
+		            tabBarPosition: 'bottom',
+						alias : 'tabPanel',
+
+
+
+		            items: [
+		                {
+		                    xtype: 'contactinfo',
+							title:'Home',
+							itemId:'home',
+							iconCls:'home'
+		                },
+		                {
+		                    xtype: 'DealsPanel',
+							title:'Deals',
+							iconCls:'info'
+		                }
+		            ]
+		        });
+
+
+
+		        view.getComponent('home').setRecord(record);
+					Ext.Viewport.getActiveItem().destroy();
+		        Ext.Viewport.setActiveItem(view);*/
+                    Ext.Viewport.setActiveItem({
+                        xtype: 'Panel'
+                    });
                 } else {
                     console.log('no user info');
                 }
@@ -66886,29 +66895,6 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     form.updateRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
-                                    var view = Ext.create("Ext.tab.Panel", {
-                                            fullscreen: true,
-                                            tabBarPosition: 'bottom',
-                                            alias: 'tabPanel',
-                                            items: [
-                                                {
-                                                    xtype: 'contactinfo',
-                                                    title: 'Home',
-                                                    itemId: 'home',
-                                                    iconCls: 'home'
-                                                },
-                                                {
-                                                    xtype: 'DealsPanel',
-                                                    title: 'Deals',
-                                                    iconCls: 'info'
-                                                }
-                                            ]
-                                        });
-                                    record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
-                                    view.getComponent('home').setRecord(record);
-                                    //Ext.Viewport.getActiveItem().destroy();
-                                    // Ext.Viewport.setActiveItem(view);
-                                    Ext.Viewport.update();
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
@@ -67921,12 +67907,14 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.Panel', Ext.tab.Panel, {
     config: {
+        fullscreen: true,
         id: 'panel',
         itemId: 'panel',
         items: [
             {
                 xtype: 'container',
                 title: 'Home',
+                iconCls: 'home',
                 id: 'home',
                 itemId: 'home',
                 styleHtmlContent: true,
@@ -67940,6 +67928,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 title: 'Deals',
+                iconCls: 'info',
                 styleHtmlContent: true,
                 items: [
                     {
@@ -67948,7 +67937,11 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ]
+        ],
+        tabBar: {
+            docked: 'bottom',
+            activeTab: 0
+        }
     }
 }, 0, [
     "Panel"
