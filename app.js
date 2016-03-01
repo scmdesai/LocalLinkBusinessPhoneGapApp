@@ -66128,7 +66128,6 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        //console.log('Record Updated');
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66886,17 +66885,30 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     var updatedRecord = form.updateRecord(record);
-                                    var view = Ext.Viewport.setActiveItem({
-                                            xtype: 'contactinfo'
-                                        });
                                     Ext.Msg.alert('Success', action.msg);
-                                    //view.setRecord(updatedRecord);
-                                    view.on('update', function() {
-                                        console.log('Updating');
-                                    });
-                                    view.refresh();
-                                    form.destroy();
+                                    var view = Ext.create("Ext.tab.Panel", {
+                                            fullscreen: true,
+                                            tabBarPosition: 'bottom',
+                                            alias: 'tabPanel',
+                                            items: [
+                                                {
+                                                    xtype: 'contactinfo',
+                                                    title: 'Home',
+                                                    itemId: 'home',
+                                                    iconCls: 'home'
+                                                },
+                                                {
+                                                    xtype: 'DealsPanel',
+                                                    title: 'Deals',
+                                                    iconCls: 'info'
+                                                }
+                                            ]
+                                        });
+                                    view.getComponent('home').setRecord(updatedRecord);
+                                    Ext.Viewport.getActiveItem().destroy();
+                                    Ext.Viewport.setActiveItem(view);
                                 },
+                                //form.destroy();
                                 failure: function(form, action) {
                                     store.load();
                                     Ext.Msg.alert('Failure', action.msg);
