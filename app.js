@@ -66884,7 +66884,7 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     store.load();
-                                    var updatedRecord = form.updateRecord(record);
+                                    form.updateRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     var view = Ext.create("Ext.tab.Panel", {
                                             fullscreen: true,
@@ -66904,7 +66904,8 @@ Ext.define('Ext.picker.Picker', {
                                                 }
                                             ]
                                         });
-                                    view.getComponent('home').setRecord(updatedRecord);
+                                    record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                                    view.getComponent('home').setRecord(record);
                                     Ext.Viewport.getActiveItem().destroy();
                                     Ext.Viewport.setActiveItem(view);
                                 },
