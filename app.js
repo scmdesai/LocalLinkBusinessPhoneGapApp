@@ -66610,7 +66610,16 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onInfoUpdatedata',
+                event: 'updatedata'
+            }
         ]
+    },
+    onInfoUpdatedata: function(component, newData, eOpts) {
+        console.log('Data Updating');
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
