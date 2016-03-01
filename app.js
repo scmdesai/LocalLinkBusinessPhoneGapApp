@@ -66610,16 +66610,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onFormpanelUpdatedata',
-                event: 'updatedata'
-            }
         ]
-    },
-    onFormpanelUpdatedata: function(component, newData, eOpts) {
-        component.setData(newData);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -66896,6 +66887,8 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     var updatedRecord = form.updateRecord(record);
                                     //var view = Ext.Viewport.add({xtype: 'contactinfo'});
+                                    var info = this.getContactinfo();
+                                    info.setRecord(updatedRecord);
                                     Ext.Msg.alert('Success', action.msg);
                                     //view.setRecord(updatedRecord);
                                     form.destroy();
