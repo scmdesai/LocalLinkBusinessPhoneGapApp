@@ -67559,16 +67559,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onDealsPanelPainted',
-                event: 'painted'
-            }
         ]
-    },
-    onDealsPanelPainted: function(element, eOpts) {
-        element.repaint();
     }
 }, 0, [
     "DealsPanel"
