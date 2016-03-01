@@ -66886,12 +66886,12 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     store.load();
-                                    form.updateRecord(record);
+                                    var updatedRecord = form.updateRecord(record);
                                     var view = Ext.Viewport.add({
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    view.setData(record.getData());
+                                    view.setData(updatedRecord.getData());
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
