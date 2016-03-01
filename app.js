@@ -66886,7 +66886,9 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     var updatedRecord = form.updateRecord(record);
-                                    //var view = Ext.Viewport.add({xtype: 'contactinfo'});
+                                    var view = Ext.Viewport.add({
+                                            xtype: 'contactinfo'
+                                        });
                                     Ext.Msg.alert('Success', action.msg);
                                     //view.setRecord(updatedRecord);
                                     view.updatedata(updatedRecord);
