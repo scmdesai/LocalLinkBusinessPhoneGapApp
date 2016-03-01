@@ -66411,9 +66411,11 @@ Ext.define('Ext.picker.Picker', {
 		        view.getComponent('home').setRecord(record);
 					Ext.Viewport.getActiveItem().destroy();
 		        Ext.Viewport.setActiveItem(view);*/
-                    Ext.Viewport.setActiveItem({
-                        xtype: 'Panel'
-                    });
+                    var view = Ext.Viewport.add({
+                            xtype: 'Panel'
+                        });
+                    view.getComponent('home').setRecord(record);
+                    Ext.Viewport.setActiveItem(view);
                 } else {
                     console.log('no user info');
                 }
@@ -67921,7 +67923,8 @@ Ext.define('Ext.picker.Picker', {
                 layout: 'fit',
                 items: [
                     {
-                        xtype: 'contactinfo'
+                        xtype: 'contactinfo',
+                        itemId: 'contactinfo1'
                     }
                 ]
             },
