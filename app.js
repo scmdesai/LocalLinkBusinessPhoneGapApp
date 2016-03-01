@@ -66891,7 +66891,7 @@ Ext.define('Ext.picker.Picker', {
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    view.setData(updatedRecord.getData());
+                                    Ext.get('nameTxt').set(updatedRecord.get('businessName'));
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
