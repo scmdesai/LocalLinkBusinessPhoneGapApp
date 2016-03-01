@@ -66887,11 +66887,11 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     var updatedRecord = form.updateRecord(record);
                                     console.log(updatedRecord.get('businessName'));
-                                    var view = Ext.Viewport.setActiveItem({
+                                    var view = Ext.Viewport.add({
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    //view.setData(updatedRecord.getData());
+                                    view.setData(updatedRecord.getData());
                                     //Ext.Viewport.setActiveItem(view);
                                     form.destroy();
                                 },
