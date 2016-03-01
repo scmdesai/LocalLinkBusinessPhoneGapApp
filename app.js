@@ -66610,16 +66610,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onInfoUpdatedata',
-                event: 'updatedata'
-            }
         ]
-    },
-    onInfoUpdatedata: function(component, newData, eOpts) {
-        console.log('Data Updating');
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -66900,7 +66891,9 @@ Ext.define('Ext.picker.Picker', {
                                         });
                                     Ext.Msg.alert('Success', action.msg);
                                     //view.setRecord(updatedRecord);
-                                    view.updatedata(updatedRecord);
+                                    view.fireAction('updateData', function() {
+                                        view.setRecord(updatedRecord);
+                                    });
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
@@ -66953,76 +66946,6 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.showBy(button);
                 },
-                //Ext.Viewport.setActiveItem(view);
-                /* var pictureSource = navigator.camera.PictureSourceType;   // picture source
-					var destinationType = navigator.camera.DestinationType;
-
-					navigator.camera.getPicture(onPhotoDataAccess, onFail, { quality: 20, allowEdit: true,
-					sourceType : pictureSource.SAVEDPHOTOALBUM ,destinationType: destinationType.DATA_URL });
-
-					console.log('Got the image');*/
-                /*function onPhotoDataAccess(imageData) {
-					// Uncomment to view the base64-encoded image data
-					// console.log("onPhotoDataSuccess");
-					console.log(imageData);
-
-					// Get image handle
-					//
-					//var smallImage = Ext.get('contactpic');
-					var pic = "data:image/jpeg;base64," + imageData;
-
-					var data    = dataURItoBlob(pic);
-
-
-
-
-					//smallImage.setSrc(pic);
-
-
-					//var formdata = new FormData();
-					// formdata.append( 'fileUpload', pic );
-					// console.log(formdata);
-
-					// smallImage.setHtml('<img src = ' + '"' + pic + '" width="160px" height="120px"/>' );
-					// smallImage.update('<img src=\"'+ someUrl+'\" width="160px" height="120px" />');
-
-
-					var req = {
-						url: 'http://services.appsonmobile.com/stores',
-						method: 'POST',
-						headers: {
-							"Content-Type": "multipart-form-data"
-						},
-						data: {fileUpload: pic},
-						accept:camera,
-						success: function(response){
-							Ext.Msg.alert('Success');
-							console.log(response);
-
-						},
-						failure: function(response) {
-							Ext.Msg.alert('Failure');
-							console.log(response);
-						}
-
-					};
-					Ext.Ajax.request(req);
-				}
-				function onFail(message) {
-					alert('Failed because: ' + message);
-				}
-				function dataURItoBlob(dataURI) {
-					var binary = atob(dataURI.split(',')[1]);
-					var array = [];
-					for (var i = 0; i < binary.length; i++) {
-						array.push(binary.charCodeAt(i));
-					}
-
-					var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-					return new Blob([new Uint8Array(array)], {
-						type: mimeString
-					});
-				}*/
                 height: '10%',
                 id: 'changePic',
                 itemId: 'changePic',
@@ -67255,9 +67178,6 @@ Ext.define('Ext.picker.Picker', {
             },
             "button#manageDeals": {
                 tap: 'onManageDealsTap'
-            },
-            "formpanel#info": {
-                updatedata: 'onInfoUpdatedata'
             }
         }
     },
@@ -67516,9 +67436,6 @@ Ext.define('Ext.picker.Picker', {
             xtype: 'DealsPanel'
         });
         Ext.Viewport.setActiveItem(view);
-    },
-    onInfoUpdatedata: function(component, newData, eOpts) {
-        console.log('Updating data');
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.controller,
