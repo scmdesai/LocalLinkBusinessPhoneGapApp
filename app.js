@@ -66894,7 +66894,7 @@ Ext.define('Ext.picker.Picker', {
                                     view.on('update', function() {
                                         console.log('Updating');
                                     });
-                                    view.update();
+                                    view.down('nameTxt').setValue('Wrking');
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
