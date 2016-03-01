@@ -66891,7 +66891,7 @@ Ext.define('Ext.picker.Picker', {
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    view.setData(updatedRecord.getData());
+                                    //view.setData(updatedRecord.getData());
                                     //Ext.Viewport.setActiveItem(view);
                                     form.destroy();
                                 },
