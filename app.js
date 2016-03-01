@@ -67923,6 +67923,9 @@ Ext.define('Ext.picker.Picker', {
                 id: 'home',
                 itemId: 'home',
                 styleHtmlContent: true,
+                tpl: Ext.create('Ext.XTemplate', '{nameTxt}', {
+                    disableFormats: true
+                }),
                 layout: 'fit',
                 items: [
                     {
