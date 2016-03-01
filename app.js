@@ -66415,7 +66415,8 @@ Ext.define('Ext.picker.Picker', {
                             xtype: 'Panel'
                         });
                     //console.log(view.getComponent('home').getItemId());
-                    view.getComponent('home').setRecord(record);
+                    view.setData(record.getData());
+                    //view.setRecord(record);
                     Ext.Viewport.setActiveItem(view);
                 } else //view.setData(record.getData());
                 {
