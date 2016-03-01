@@ -66906,10 +66906,11 @@ Ext.define('Ext.picker.Picker', {
                                         });
                                     record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                                     view.getComponent('home').setRecord(record);
-                                    Ext.Viewport.getActiveItem().destroy();
-                                    Ext.Viewport.setActiveItem(view);
+                                    //Ext.Viewport.getActiveItem().destroy();
+                                    // Ext.Viewport.setActiveItem(view);
+                                    Ext.Viewport.add(view);
+                                    form.destroy();
                                 },
-                                //form.destroy();
                                 failure: function(form, action) {
                                     store.load();
                                     Ext.Msg.alert('Failure', action.msg);
