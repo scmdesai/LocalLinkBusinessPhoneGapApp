@@ -66892,6 +66892,7 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     //view.setRecord(updatedRecord);
                                     view.fireAction('updateData', function() {
+                                        console.log('Event Fired');
                                         view.setRecord(updatedRecord);
                                     });
                                     form.destroy();
