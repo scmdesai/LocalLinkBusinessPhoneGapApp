@@ -66890,8 +66890,8 @@ Ext.define('Ext.picker.Picker', {
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    //view.setRecord(updatedRecord);
-                                    //Ext.Viewport.setActiveItem(view);
+                                    view.setRecord(updatedRecord);
+                                    Ext.Viewport.setActiveItem(view);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
