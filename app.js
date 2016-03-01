@@ -66890,7 +66890,7 @@ Ext.define('Ext.picker.Picker', {
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    view.setRecord(updatedRecord);
+                                    //view.setRecord(updatedRecord);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
