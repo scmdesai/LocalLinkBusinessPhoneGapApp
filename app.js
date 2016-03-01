@@ -67947,6 +67947,15 @@ Ext.define('Ext.picker.Picker', {
             docked: 'bottom',
             activeTab: 0
         }
+    },
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.tab.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            var name = record.get('businessName');
+            var customerId = record.get('customerId');
+            this.down('#nameTxt').setHtml(name);
+            this.down('contactpic').setData(record.data);
+        }
     }
 }, 0, [
     "Panel"
