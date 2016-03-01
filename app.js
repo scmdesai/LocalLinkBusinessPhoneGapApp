@@ -66128,7 +66128,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        console.log('Record Updated');
+        //console.log('Record Updated');
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66887,11 +66887,13 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     var updatedRecord = form.updateRecord(record);
+                                    console.log(updatedRecord.get('businessName'));
                                     var view = Ext.Viewport.add({
                                             xtype: 'contactinfo'
                                         });
                                     Ext.Msg.alert('Success', action.msg);
-                                    Ext.get('nameTxt').set(updatedRecord.get('businessName'));
+                                    view.setRecord(updatedRecord);
+                                    Ext.Viewport.setActiveItem(view);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
