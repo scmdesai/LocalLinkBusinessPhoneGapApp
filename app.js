@@ -66886,7 +66886,6 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     var updatedRecord = form.updateRecord(record);
-                                    console.log(updatedRecord.get('businessName'));
                                     var view = Ext.Viewport.add({
                                             xtype: 'contactinfo'
                                         });
