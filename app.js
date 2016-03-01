@@ -66411,8 +66411,11 @@ Ext.define('Ext.picker.Picker', {
 		        view.getComponent('home').setRecord(record);
 					Ext.Viewport.getActiveItem().destroy();
 		        Ext.Viewport.setActiveItem(view);*/
-                    var view = Ext.get('Panel');
-                    view.getComponent('home').setRecord(record);
+                    var view = Ext.Viewport.add({
+                            xtype: 'Panel'
+                        });
+                    console.log(view.getItemId());
+                    // view.getComponent('home').setRecord(record);
                     Ext.Viewport.setActiveItem(view);
                 } else {
                     console.log('no user info');
