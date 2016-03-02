@@ -66914,8 +66914,8 @@ Ext.define('Ext.picker.Picker', {
                                             ]
                                         });
                                     Ext.Viewport.setActiveItem(view);
-                                    view.getComponent('home').setData(record.getData());
-                                    view.Ext.Msg.alert('Success', action.msg);
+                                    view.getComponent('home').setData(record.data);
+                                    Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
                                 //var fields = record.getChanges();
