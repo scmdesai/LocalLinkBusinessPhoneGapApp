@@ -66124,13 +66124,20 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onJsonpstoreUpdaterecord',
                 event: 'updaterecord'
+            },
+            {
+                fn: 'onJsonpstoreWrite',
+                event: 'write'
             }
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        console.log('New Index' + newIndex);
-        console.log('Old Index' + oldIndex);
         return record;
+    },
+    onJsonpstoreWrite: function(store, operation, eOpts) {
+        store.sync();
+        store.load();
+        console.log(operation);
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
