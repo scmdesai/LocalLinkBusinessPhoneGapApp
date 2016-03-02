@@ -66123,13 +66123,21 @@ Ext.define('Ext.picker.Picker', {
         listeners: [
             {
                 fn: 'onJsonpstoreUpdaterecord',
-                single: true,
+                single: false,
                 event: 'updaterecord'
+            },
+            {
+                fn: 'onJsonpstoreLoad',
+                single: true,
+                event: 'load'
             }
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
         return record;
+    },
+    onJsonpstoreLoad: function(store, records, successful, operation, eOpts) {
+        return records;
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
