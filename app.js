@@ -66125,21 +66125,11 @@ Ext.define('Ext.picker.Picker', {
                 fn: 'onJsonpstoreUpdaterecord',
                 single: false,
                 event: 'updaterecord'
-            },
-            {
-                fn: 'onJsonpstoreLoad',
-                single: true,
-                event: 'load'
             }
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
         return record;
-    },
-    onJsonpstoreLoad: function(store, records, successful, operation, eOpts) {
-        console.log(successful);
-        console.log(records);
-        console.log(operation);
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
@@ -66903,7 +66893,7 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     console.log('Saving changes');
-                                    form.updateRecord(record);
+                                    form.updaterecord(record);
                                     var fields = record.getChanges();
                                     Ext.Msg.alert('Success', action.msg);
                                     Ext.Viewport.getComponent('panel').destroy();
