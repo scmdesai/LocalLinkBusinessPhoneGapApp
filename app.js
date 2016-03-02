@@ -66889,11 +66889,12 @@ Ext.define('Ext.picker.Picker', {
                             var store = Ext.getStore('MyJsonPStore');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
-                            store.load();
-                            form.updateRecord(record);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
+                                    store.load();
+                                    form.updateRecord(record);
+                                    Ext.Viewport.getComponent('panel').destroy();
                                     var view = Ext.create("Ext.tab.Panel", {
                                             fullscreen: true,
                                             tabBarPosition: 'bottom',
@@ -66912,7 +66913,6 @@ Ext.define('Ext.picker.Picker', {
                                                 }
                                             ]
                                         });
-                                    Ext.Viewport.getComponent('panel').destroy();
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
