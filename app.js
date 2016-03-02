@@ -66903,34 +66903,33 @@ Ext.define('Ext.picker.Picker', {
                                     //var fields = record.getChanges();
                                     Ext.Msg.alert('Success', action.msg);
                                     Ext.Viewport.getComponent('panel').destroy();
-                                    var view = Ext.create("Ext.tab.Panel", {
-                                            fullscreen: true,
-                                            tabBarPosition: 'bottom',
-                                            itemId: 'panel',
-                                            items: [
-                                                {
-                                                    xtype: 'contactinfo',
-                                                    title: 'Home',
-                                                    itemId: 'home',
-                                                    iconCls: 'home'
-                                                },
-                                                {
-                                                    xtype: 'DealsPanel',
-                                                    title: 'Deals',
-                                                    iconCls: 'info'
-                                                }
-                                            ]
-                                        });
-                                    view.getComponent('home').setRecord(record);
-                                    Ext.Viewport.setActiveItem(view);
-                                    form.destroy();
                                 },
                                 failure: function(form, action) {
                                     store.load();
                                     Ext.Msg.alert('Failure', action.msg);
-                                    form.destroy();
                                 }
                             });
+                            var view = Ext.create("Ext.tab.Panel", {
+                                    fullscreen: true,
+                                    tabBarPosition: 'bottom',
+                                    itemId: 'panel',
+                                    items: [
+                                        {
+                                            xtype: 'contactinfo',
+                                            title: 'Home',
+                                            itemId: 'home',
+                                            iconCls: 'home'
+                                        },
+                                        {
+                                            xtype: 'DealsPanel',
+                                            title: 'Deals',
+                                            iconCls: 'info'
+                                        }
+                                    ]
+                                });
+                            view.getComponent('home').setRecord(record);
+                            Ext.Viewport.setActiveItem(view);
+                            form.destroy();
                         },
                         /*var record = form.getRecord();
 
