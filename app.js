@@ -66913,8 +66913,8 @@ Ext.define('Ext.picker.Picker', {
                                             ]
                                         });
                                     Ext.Viewport.getComponent('panel').destroy();
-                                    view.getComponent('home').setRecord(record);
                                     Ext.Viewport.setActiveItem(view);
+                                    view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
