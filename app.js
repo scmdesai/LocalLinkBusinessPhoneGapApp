@@ -66124,15 +66124,27 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onJsonpstoreUpdaterecord',
                 event: 'updaterecord'
+            },
+            {
+                fn: 'onJsonpstoreLoad',
+                event: 'load'
             }
         ]
     },
-    onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {}
+    onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
+        return record;
+    },
+    onJsonpstoreLoad: function(store, records, successful, operation, eOpts) {
+        store.sync();
+        store.load();
+        console.log(records);
+        console.log(successful);
+        console.log(operation);
+    }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
     'MyJsonPStore'
 ], 0));
-//return record;
 
 /*
  * File: app/store/UserPreferences.js
