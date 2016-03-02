@@ -66893,37 +66893,39 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     store.load();
-                                    form.updateRecord(record);
-                                    //var fields = record.getChanges();
+                                    form.updateRecord(record, {
+                                        single: true
+                                    });
+                                    var view = Ext.create("Ext.tab.Panel", {
+                                            fullscreen: true,
+                                            tabBarPosition: 'bottom',
+                                            itemId: 'panel',
+                                            items: [
+                                                {
+                                                    xtype: 'contactinfo',
+                                                    title: 'Home',
+                                                    itemId: 'home',
+                                                    iconCls: 'home'
+                                                },
+                                                {
+                                                    xtype: 'DealsPanel',
+                                                    title: 'Deals',
+                                                    iconCls: 'info'
+                                                }
+                                            ]
+                                        });
+                                    Ext.Viewport.getComponent('panel').destroy();
+                                    view.getComponent('home').setRecord(record);
+                                    Ext.Viewport.setActiveItem(view);
                                     Ext.Msg.alert('Success', action.msg);
+                                    form.destroy();
                                 },
+                                //var fields = record.getChanges();
                                 failure: function(form, action) {
                                     store.load();
                                     Ext.Msg.alert('Failure', action.msg);
                                 }
                             });
-                            var view = Ext.create("Ext.tab.Panel", {
-                                    fullscreen: true,
-                                    tabBarPosition: 'bottom',
-                                    itemId: 'panel',
-                                    items: [
-                                        {
-                                            xtype: 'contactinfo',
-                                            title: 'Home',
-                                            itemId: 'home',
-                                            iconCls: 'home'
-                                        },
-                                        {
-                                            xtype: 'DealsPanel',
-                                            title: 'Deals',
-                                            iconCls: 'info'
-                                        }
-                                    ]
-                                });
-                            Ext.Viewport.getComponent('panel').destroy();
-                            view.getComponent('home').setRecord(record);
-                            Ext.Viewport.setActiveItem(view);
-                            form.destroy();
                         },
                         /*var record = form.getRecord();
 
