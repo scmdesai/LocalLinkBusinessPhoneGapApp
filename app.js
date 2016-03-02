@@ -66415,7 +66415,7 @@ Ext.define('Ext.picker.Picker', {
                             xtype: 'Panel'
                         });
                     //console.log(view.getComponent('home').getItemId());
-                    view.setData(record.getData());
+                    //view.setData(record.getData());
                     //view.setRecord(record);
                     Ext.Viewport.setActiveItem(view);
                 } else //view.setData(record.getData());
@@ -67915,6 +67915,7 @@ Ext.define('Ext.picker.Picker', {
         fullscreen: true,
         id: 'panel',
         itemId: 'panel',
+        styleHtmlContent: true,
         items: [
             {
                 xtype: 'container',
@@ -67938,6 +67939,11 @@ Ext.define('Ext.picker.Picker', {
         Ext.tab.Panel.prototype.initialize.call(this);
         var customerId;
         var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.each(function(record) {
+            console.log('StoreUserDetails : ' + record.get('customerId'));
+            customerId = record.get('customerId');
+        });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
         var view = this.add({
                 xtype: 'container',
                 title: 'Home',
@@ -67953,12 +67959,6 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             });
-        storeUserDetails.each(function(record) {
-            console.log('StoreUserDetails : ' + record.get('customerId'));
-            customerId = record.get('customerId');
-        });
-        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
-        view.setRecord(record);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.tab.Panel.prototype.setRecord).apply(this, arguments);
