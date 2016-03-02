@@ -67959,21 +67959,14 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             };
-        var name = record.get('businessName');
-        Ext.get('nameTxt').setHtmml(name);
-        Ext.get('contactpic').setData(record.data);
-        //view.down('#nameTxt').setHtml(name);
-        //view.down('contactpic').setData(record.data);
         this.add(view);
-    },
-    setRecord: function(record) {
-        (arguments.callee.$previous || Ext.tab.Panel.prototype.setRecord).apply(this, arguments);
-        if (record) {
+        this.on('add', function(view) {
             var name = record.get('businessName');
-            var customerId = record.get('customerId');
-            this.down('#nameTxt').setHtml(name);
-            this.down('contactpic').setData(record.data);
-        }
+            // Ext.get('nameTxt').setHtmml(name);
+            //Ext.get('contactpic').setData(record.data);
+            view.down('#nameTxt').setHtml(name);
+            view.down('contactpic').setData(record.data);
+        });
     }
 }, 0, [
     "Panel"
