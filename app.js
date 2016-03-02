@@ -66386,7 +66386,7 @@ Ext.define('Ext.picker.Picker', {
                     console.log("User details are : " + email + ',' + record.get('customerId') + ',' + record.get('businessName'));
                     var store = Ext.getStore('MyJsonPStore');
                     var view = Ext.create("Ext.tab.Panel", {
-                            record: store,
+                            itemId: 'panel',
                             fullscreen: true,
                             tabBarPosition: 'bottom',
                             items: [
@@ -66893,6 +66893,7 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     form.updateRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
+                                    console.log(Ext.Viewport.getActiveItem().getItemId());
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
