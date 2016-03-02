@@ -66625,8 +66625,6 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
-            this.down('#phoneNumber').setHtml(record.get('phoneNumber'));
-            this.down('#address').setHtml(record.get('address'));
         }
     }
 }, 0, [
