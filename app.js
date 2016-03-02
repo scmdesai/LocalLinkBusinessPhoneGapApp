@@ -66127,13 +66127,12 @@ Ext.define('Ext.picker.Picker', {
             }
         ]
     },
-    onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        return record;
-    }
+    onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {}
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
     'MyJsonPStore'
 ], 0));
+//return record;
 
 /*
  * File: app/store/UserPreferences.js
@@ -66892,10 +66891,8 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     console.log('Saving changes');
-                                    var record = form.getRecord();
                                     form.updateRecord(record);
                                     var fields = record.getChanges();
-                                    console.log(fields);
                                     Ext.Msg.alert('Success', action.msg);
                                     Ext.Viewport.getComponent('panel').destroy();
                                     var view = Ext.create("Ext.tab.Panel", {
