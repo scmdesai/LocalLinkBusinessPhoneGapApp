@@ -66893,7 +66893,7 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     console.log('Saving changes');
-                                    form.updaterecord(record);
+                                    form.updateRecord(record);
                                     var fields = record.getChanges();
                                     Ext.Msg.alert('Success', action.msg);
                                     Ext.Viewport.getComponent('panel').destroy();
