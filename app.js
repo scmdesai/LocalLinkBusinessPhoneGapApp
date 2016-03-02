@@ -66893,10 +66893,11 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     form.updateRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
-                                    Ext.Viewport.getAt(0).destroy();
+                                    Ext.Viewport.getComponent('panel').destroy();
                                     var view = Ext.create("Ext.tab.Panel", {
                                             fullscreen: true,
                                             tabBarPosition: 'bottom',
+                                            itemId: 'panel',
                                             items: [
                                                 {
                                                     xtype: 'contactinfo',
