@@ -66893,7 +66893,26 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     form.updateRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
-                                    console.log(Ext.Viewport.getAt(0).getItemId());
+                                    Ext.Viewport.getAt(0).destroy();
+                                    var view = Ext.create("Ext.tab.Panel", {
+                                            fullscreen: true,
+                                            tabBarPosition: 'bottom',
+                                            items: [
+                                                {
+                                                    xtype: 'contactinfo',
+                                                    title: 'Home',
+                                                    itemId: 'home',
+                                                    iconCls: 'home'
+                                                },
+                                                {
+                                                    xtype: 'DealsPanel',
+                                                    title: 'Deals',
+                                                    iconCls: 'info'
+                                                }
+                                            ]
+                                        });
+                                    view.getComponent('home').setRecord(record);
+                                    Ext.Viewport.setActiveItem(view);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
