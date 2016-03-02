@@ -66936,7 +66936,6 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'saveContactButton',
                         styleHtmlContent: true,
                         ui: 'confirm',
-                        autoEvent: 'updateRecord',
                         text: 'Save'
                     }
                 ]
