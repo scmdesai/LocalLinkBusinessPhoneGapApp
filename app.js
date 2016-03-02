@@ -67936,21 +67936,38 @@ Ext.define('Ext.picker.Picker', {
     },
     initialize: function() {
         Ext.tab.Panel.prototype.initialize.call(this);
-        this.add({
-            xtype: 'container',
-            title: 'Home',
-            iconCls: 'home',
-            id: 'home',
-            itemId: 'home',
-            styleHtmlContent: true,
-            layout: 'fit',
-            items: [
-                {
-                    xtype: 'contactinfo',
-                    itemId: 'contactinfo1'
-                }
-            ]
+        var customerId;
+        var storeUserDetails = Ext.getStore('UserDetails');
+        var view = this.add({
+                xtype: 'container',
+                title: 'Home',
+                iconCls: 'home',
+                id: 'home',
+                itemId: 'home',
+                styleHtmlContent: true,
+                layout: 'fit',
+                items: [
+                    {
+                        xtype: 'contactinfo',
+                        itemId: 'contactinfo1'
+                    }
+                ]
+            });
+        storeUserDetails.each(function(record) {
+            console.log('StoreUserDetails : ' + record.get('customerId'));
+            customerId = record.get('customerId');
         });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+        view.setRecord(record);
+    },
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.tab.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            var name = record.get('businessName');
+            var customerId = record.get('customerId');
+            this.down('#nameTxt').setHtml(name);
+            this.down('contactpic').setData(record.data);
+        }
     }
 }, 0, [
     "Panel"
