@@ -66411,14 +66411,14 @@ Ext.define('Ext.picker.Picker', {
 		        view.getComponent('home').setRecord(record);
 					Ext.Viewport.getActiveItem().destroy();
 		        Ext.Viewport.setActiveItem(view);*/
-                    var view = Ext.Viewport.add({
-                            xtype: 'Panel'
-                        });
-                    //console.log(view.getComponent('home').getItemId());
-                    //view.setData(record.getData());
-                    //view.setRecord(record);
-                    Ext.Viewport.setActiveItem(view);
-                } else //view.setData(record.getData());
+                    Ext.Viewport.setActiveItem({
+                        xtype: 'Panel'
+                    });
+                } else //console.log(view.getComponent('home').getItemId());
+                //view.setData(record.getData());
+                ////view.setRecord(record);
+                // Ext.Viewport.setActiveItem(view);
+                //view.setData(record.getData());
                 {
                     console.log('no user info');
                 }
@@ -67961,6 +67961,15 @@ Ext.define('Ext.picker.Picker', {
             };
         view.setRecord(record);
         this.add(view);
+        function setRecord(record) {
+            // this.callParent(arguments);
+            if (record) {
+                var name = record.get('businessName');
+                var customerId = record.get('customerId');
+                this.down('#nameTxt').setHtml(name);
+                this.down('contactpic').setData(record.data);
+            }
+        }
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.tab.Panel.prototype.setRecord).apply(this, arguments);
