@@ -66886,11 +66886,11 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var form = this.up('contactform');
+                            var store = Ext.getStore('MyJsonPStore');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
                             store.load();
                             form.updateRecord(record);
-                            var store = Ext.getStore('MyJsonPStore');
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
