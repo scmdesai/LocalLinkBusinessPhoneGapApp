@@ -66625,6 +66625,8 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
+            this.down('#phoneNumber').setHtml(record.get('phoneNumber'));
+            this.down('#address').setHtml(record.get('address'));
         }
     }
 }, 0, [
@@ -66892,6 +66894,8 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     form.updateRecord(record);
+                                    var fields = record.getChanges();
+                                    console.log(fields);
                                     Ext.Msg.alert('Success', action.msg);
                                     Ext.Viewport.getComponent('panel').destroy();
                                     var view = Ext.create("Ext.tab.Panel", {
