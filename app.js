@@ -67944,7 +67944,7 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
-        var view = this.add({
+        var view = {
                 xtype: 'container',
                 title: 'Home',
                 iconCls: 'home',
@@ -67958,7 +67958,9 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'contactinfo1'
                     }
                 ]
-            });
+            };
+        view.setRecord(record);
+        this.add(view);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.tab.Panel.prototype.setRecord).apply(this, arguments);
