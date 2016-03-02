@@ -67918,24 +67918,6 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'container',
-                title: 'Home',
-                iconCls: 'home',
-                id: 'home',
-                itemId: 'home',
-                styleHtmlContent: true,
-                tpl: Ext.create('Ext.XTemplate', '{nameTxt}', {
-                    disableFormats: true
-                }),
-                layout: 'fit',
-                items: [
-                    {
-                        xtype: 'contactinfo',
-                        itemId: 'contactinfo1'
-                    }
-                ]
-            },
-            {
-                xtype: 'container',
                 title: 'Deals',
                 iconCls: 'info',
                 styleHtmlContent: true,
@@ -67952,14 +67934,23 @@ Ext.define('Ext.picker.Picker', {
             activeTab: 0
         }
     },
-    setRecord: function(record) {
-        (arguments.callee.$previous || Ext.tab.Panel.prototype.setRecord).apply(this, arguments);
-        if (record) {
-            var name = record.get('businessName');
-            var customerId = record.get('customerId');
-            this.down('#nameTxt').setHtml(name);
-            this.down('contactpic').setData(record.data);
-        }
+    initialize: function() {
+        Ext.tab.Panel.prototype.initialize.call(this);
+        this.add({
+            xtype: 'container',
+            title: 'Home',
+            iconCls: 'home',
+            id: 'home',
+            itemId: 'home',
+            styleHtmlContent: true,
+            layout: 'fit',
+            items: [
+                {
+                    xtype: 'contactinfo',
+                    itemId: 'contactinfo1'
+                }
+            ]
+        });
     }
 }, 0, [
     "Panel"
