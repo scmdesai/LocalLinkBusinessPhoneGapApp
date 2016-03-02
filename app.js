@@ -66893,7 +66893,7 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     form.updateRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
-                                    console.log(Ext.Viewport.getActiveItem().getItemId());
+                                    console.log(Ext.Viewport.getAt(0).getItemId());
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
