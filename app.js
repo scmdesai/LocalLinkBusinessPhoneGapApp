@@ -67960,7 +67960,7 @@ Ext.define('Ext.picker.Picker', {
                 ]
             };
         this.add(view);
-        this.on('add', function(view) {
+        this.onBefore('add', function(view) {
             var name = record.get('businessName');
             // Ext.get('nameTxt').setHtmml(name);
             //Ext.get('contactpic').setData(record.data);
