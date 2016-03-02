@@ -66135,8 +66135,6 @@ Ext.define('Ext.picker.Picker', {
         return record;
     },
     onJsonpstoreLoad: function(store, records, successful, operation, eOpts) {
-        store.sync();
-        store.load();
         console.log(records);
         console.log(successful);
         console.log(operation);
