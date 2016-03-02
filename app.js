@@ -66892,6 +66892,7 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.load();
                                     console.log('Saving changes');
+                                    var record = form.getRecord();
                                     form.updateRecord(record);
                                     var fields = record.getChanges();
                                     console.log(fields);
