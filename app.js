@@ -67952,21 +67952,15 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'home',
                 styleHtmlContent: true,
                 layout: 'fit',
-                items: [
-                    {
-                        xtype: 'contactinfo',
-                        itemId: 'contactinfo1'
+                items: [],
+                listeners: {
+                    activate: function() {
+                        var infoPage = Ext.create('contactinfo');
+                        infoPage.setRecord(record);
                     }
-                ]
+                }
             };
         this.add(view);
-        this.onBefore('add', function(view) {
-            var name = record.get('businessName');
-            // Ext.get('nameTxt').setHtmml(name);
-            //Ext.get('contactpic').setData(record.data);
-            view.down('#nameTxt').setHtml(name);
-            view.down('contactpic').setData(record.data);
-        });
     }
 }, 0, [
     "Panel"
