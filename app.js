@@ -66973,6 +66973,15 @@ Ext.define('Ext.picker.Picker', {
                     var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                     view.setRecord(record);
                     view.showBy(button);
+                    var form = this.up('contactform');
+                    var store = Ext.getStore('MyJsonPStore');
+                    var rec = form.getRecord();
+                    rec.beginEdit(true, rec.getChanges());
+                    form.updateRecord(record);
+                    rec.endEdit(true, rec.getChanges());
+                    rec.commit();
+                    store.sync();
+                    store.load();
                 },
                 height: '10%',
                 id: 'changePic',
@@ -67180,7 +67189,8 @@ Ext.define('Ext.picker.Picker', {
         },
         control: {
             "contactpic": {
-                change: 'onContactPickerChange'
+                change: 'onContactPickerChange',
+                updatedata: 'onContactpicUpdatedata'
             },
             "list": {
                 activate: 'onListActivate'
@@ -67475,6 +67485,15 @@ Ext.define('Ext.picker.Picker', {
             xtype: 'DealsPanel'
         });
         Ext.Viewport.setActiveItem(view);
+    },
+    onContactpicUpdatedata: function(component, newData, eOpts) {
+        var currentForm = Ext.Viewport.getActiveItem();
+        var record = currentForm.getRecord();
+        if (record) {
+            record.set('pictureURL', newData);
+            record.commit();
+            currentForm.setRecord(record);
+        }
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.controller,
@@ -67841,6 +67860,10 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
+                            record.beginEdit(true, record.getChanges());
+                            form.updateRecord(record);
+                            record.endEdit(true, record.getChanges());
+                            record.commit();
                             store.sync();
                             store.load();
                             //store.load();
