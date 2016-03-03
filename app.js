@@ -66914,7 +66914,6 @@ Ext.define('Ext.picker.Picker', {
                                             ]
                                         });
                                     Ext.Viewport.setActiveItem(view);
-                                    view.relayEvents(record, updateRecord);
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
