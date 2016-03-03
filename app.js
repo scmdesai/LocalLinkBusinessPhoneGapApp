@@ -66893,6 +66893,7 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
+                                    console.log(form.getChanges());
                                     record.beginEdit(false, form.getChanges());
                                     form.updateRecord(record);
                                     record.endEdit(false, form.getChanges());
