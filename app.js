@@ -66130,7 +66130,6 @@ Ext.define('Ext.picker.Picker', {
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
         console.log('Updating record');
-        console.log(modifiedFieldNames);
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66973,6 +66972,12 @@ Ext.define('Ext.picker.Picker', {
                     var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                     view.setRecord(record);
                     view.showBy(button);
+                    record.beginEdit(true, record.getChanges());
+                    form.updateRecord(record);
+                    record.endEdit(true, record.getChanges());
+                    record.commit();
+                    store.sync();
+                    store.load();
                 },
                 height: '10%',
                 id: 'changePic',
@@ -67223,7 +67228,7 @@ Ext.define('Ext.picker.Picker', {
         var currentForm = Ext.Viewport.getActiveItem();
         var record = currentForm.getRecord();
         if (record) {
-            record.set('picture', value);
+            record.set('pictureURL', value);
             record.commit();
             currentForm.setRecord(record);
         }
