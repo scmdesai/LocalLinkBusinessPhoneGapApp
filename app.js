@@ -66892,11 +66892,13 @@ Ext.define('Ext.picker.Picker', {
                             //form.fireEvent('updateRecord',this);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
-                                success: function(cform, action) {
+                                success: function(form, action) {
+                                    record.beginEdit();
+                                    form.updateRecord(record);
+                                    record.endEdit();
+                                    record.beginEdit();
                                     store.sync();
                                     store.load();
-                                    cform.beginEdit();
-                                    cform.updateRecord(record);
                                     Ext.Viewport.getComponent('panel').destroy();
                                     var view = Ext.create("Ext.tab.Panel", {
                                             fullscreen: true,
@@ -66919,8 +66921,7 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
-                                    cform.endEdit();
-                                    cform.destroy();
+                                    form.destroy();
                                 },
                                 //var fields = record.getChanges();
                                 failure: function(form, action) {
