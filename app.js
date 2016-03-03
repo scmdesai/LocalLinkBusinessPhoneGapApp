@@ -66889,7 +66889,8 @@ Ext.define('Ext.picker.Picker', {
                             var store = Ext.getStore('MyJsonPStore');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
-                            form.fireEvent('updateRecord', this);
+                            //form.fireEvent('updateRecord',this);
+                            form.updateRecord(record);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
