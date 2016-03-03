@@ -66448,6 +66448,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
+        itemId: 'contactpic',
         padding: '5 5 5 5',
         style: 'overflow: hidden',
         styleHtmlContent: true,
@@ -66627,6 +66628,7 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
+            console.log(this.down('contactpic').getValue());
         }
     }
 }, 0, [
@@ -66947,7 +66949,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'contactpic',
                 id: 'contactpic',
-                itemId: 'contactpic',
                 maxWidth: '50%',
                 layout: {
                     type: 'vbox',
@@ -66972,12 +66973,6 @@ Ext.define('Ext.picker.Picker', {
                     var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                     view.setRecord(record);
                     view.showBy(button);
-                    record.beginEdit(true, record.getChanges());
-                    form.updateRecord(record);
-                    record.endEdit(true, record.getChanges());
-                    record.commit();
-                    store.sync();
-                    store.load();
                 },
                 height: '10%',
                 id: 'changePic',
@@ -67845,10 +67840,6 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
-                            record.beginEdit(true, record.getChanges());
-                            form.updateRecord(record);
-                            record.endEdit(true, record.getChanges());
-                            record.commit();
                             store.sync();
                             store.load();
                             //store.load();
