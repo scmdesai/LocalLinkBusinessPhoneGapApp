@@ -66895,8 +66895,8 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(cform, action) {
                                     store.sync();
                                     store.load();
-                                    form.beginEdit();
-                                    form.updateRecord(record);
+                                    cform.beginEdit();
+                                    cform.updateRecord(record);
                                     Ext.Viewport.getComponent('panel').destroy();
                                     var view = Ext.create("Ext.tab.Panel", {
                                             fullscreen: true,
@@ -66919,8 +66919,8 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
-                                    form.endEdit();
-                                    form.destroy();
+                                    cform.endEdit();
+                                    cform.destroy();
                                 },
                                 //var fields = record.getChanges();
                                 failure: function(form, action) {
