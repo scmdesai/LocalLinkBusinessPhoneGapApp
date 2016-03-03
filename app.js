@@ -66129,7 +66129,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        console.log('Updating record');
+        //console.log('Updating record');
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66914,6 +66914,7 @@ Ext.define('Ext.picker.Picker', {
                                             ]
                                         });
                                     Ext.Viewport.setActiveItem(view);
+                                    console.log(record.get('businessName'));
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
@@ -67057,7 +67058,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onBusinessNameChange: function(textfield, newValue, oldValue, eOpts) {
-        console.log('BusinessName changed');
+        return newValue;
     },
     getValidationErrors: function() {
         var errors = [];
