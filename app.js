@@ -66892,6 +66892,7 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
+                                    store.sync();
                                     store.load();
                                     form.updateRecord(record);
                                     Ext.Viewport.getComponent('panel').destroy();
@@ -66914,7 +66915,6 @@ Ext.define('Ext.picker.Picker', {
                                             ]
                                         });
                                     Ext.Viewport.setActiveItem(view);
-                                    record.setFields(form.updateRecord(record).getFields());
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
