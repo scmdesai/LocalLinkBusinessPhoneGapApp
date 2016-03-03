@@ -66448,7 +66448,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
-        itemId: 'contactpic',
+        itemId: 'mycontainer3',
         padding: '5 5 5 5',
         style: 'overflow: hidden',
         styleHtmlContent: true,
@@ -66948,6 +66948,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'contactpic',
                 id: 'contactpic',
+                itemId: 'contactpic',
                 maxWidth: '50%',
                 layout: {
                     type: 'vbox',
@@ -67174,7 +67175,8 @@ Ext.define('Ext.picker.Picker', {
             share: 'button#share',
             changePicture: 'button#changePicture',
             manageDeals: 'button#manageDeals',
-            panel: 'panel#panel'
+            panel: 'panel#panel',
+            contactpic: 'contactpic'
         },
         control: {
             "contactpic": {
