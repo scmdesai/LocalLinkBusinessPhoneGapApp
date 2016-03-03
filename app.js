@@ -66892,7 +66892,7 @@ Ext.define('Ext.picker.Picker', {
                             //form.fireEvent('updateRecord',this);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
-                                success: function(form, action) {
+                                success: function(cform, action) {
                                     store.sync();
                                     store.load();
                                     form.updateRecord(record);
@@ -67052,19 +67052,11 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onFormpanelUpdatedata',
-                event: 'updatedata',
-                delegate: '#saveContactButton'
-            },
-            {
                 fn: 'onBusinessNameChange',
                 event: 'change',
                 delegate: '#businessName'
             }
         ]
-    },
-    onFormpanelUpdatedata: function(component, newData, eOpts) {
-        console.log("change in form");
     },
     onBusinessNameChange: function(textfield, newValue, oldValue, eOpts) {
         return newValue;
