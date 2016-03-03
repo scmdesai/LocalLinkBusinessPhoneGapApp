@@ -67838,10 +67838,11 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            console.log(Ext.Viewport.getActiveItem().getItemId());
+                            Ext.Viewport.getActiveItem().destroy();
                             var view = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
+                            Ext.Viewport.setActiveItem(view);
                             view.setRecord(record);
                             //store.load();
                             //form.updateRecord(record);
