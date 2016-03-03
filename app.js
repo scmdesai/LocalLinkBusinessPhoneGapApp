@@ -67838,7 +67838,7 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            Ext.Viewport.getComponent('contactform').destroy();
+                            console.log(Ext.Viewport.getActiveItem().getItemId());
                             var view = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
