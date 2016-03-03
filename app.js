@@ -67839,8 +67839,14 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
-                            store.load();
+                            record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
+                            record.endEdit(true, record.getChanges());
+                            record.commit();
+                            store.sync();
+                            store.load();
+                            //store.load();
+                            //form.updateRecord(record);
                             Ext.Msg.alert('Success', action.msg);
                             form.destroy();
                         },
