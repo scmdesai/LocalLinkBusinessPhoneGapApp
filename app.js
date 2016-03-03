@@ -66895,6 +66895,7 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(cform, action) {
                                     store.sync();
                                     store.load();
+                                    form.beginEdit();
                                     form.updateRecord(record);
                                     Ext.Viewport.getComponent('panel').destroy();
                                     var view = Ext.create("Ext.tab.Panel", {
@@ -66918,6 +66919,7 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
+                                    form.endEdit();
                                     form.destroy();
                                 },
                                 //var fields = record.getChanges();
