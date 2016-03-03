@@ -66972,13 +66972,10 @@ Ext.define('Ext.picker.Picker', {
                     var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                     view.setRecord(record);
                     view.showBy(button);
-                    var form = this.up('contactform');
-                    var store = Ext.getStore('MyJsonPStore');
-                    var rec = form.getRecord();
-                    rec.beginEdit(true, rec.getChanges());
+                    record.beginEdit(true, record.getChanges());
                     form.updateRecord(record);
-                    rec.endEdit(true, rec.getChanges());
-                    rec.commit();
+                    record.endEdit(true, record.getChanges());
+                    record.commit();
                     store.sync();
                     store.load();
                 },
