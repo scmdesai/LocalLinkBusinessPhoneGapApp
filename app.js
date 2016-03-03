@@ -66548,18 +66548,11 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'contactpic',
-                        border: '',
-                        docked: 'left',
-                        maxHeight: '100%',
-                        minHeight: '100%',
-                        minWidth: '100%',
-                        style: '',
-                        ui: 'light',
-                        scrollable: false,
+                        height: '100%',
+                        width: '100%',
                         layout: {
-                            type: 'hbox',
-                            align: 'start',
-                            pack: 'center'
+                            type: 'vbox',
+                            pack: 'start'
                         }
                     }
                 ]
@@ -66628,7 +66621,6 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
-            console.log(record.pictureURL);
         }
     }
 }, 0, [
