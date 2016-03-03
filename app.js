@@ -66914,7 +66914,7 @@ Ext.define('Ext.picker.Picker', {
                                             ]
                                         });
                                     Ext.Viewport.setActiveItem(view);
-                                    console.log(record.get('businessName'));
+                                    record.setFields(form.updateRecord(record).getFields());
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
