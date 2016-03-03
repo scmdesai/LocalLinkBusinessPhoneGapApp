@@ -67832,8 +67832,17 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
+                            record.beginEdit(true, record.getChanges());
+                            form.updateRecord(record);
+                            record.endEdit(true, record.getChanges());
+                            record.commit();
                             store.sync();
                             store.load();
+                            Ext.Viewport.getComponent('contactform').destroy();
+                            var view = Ext.Viewport.add({
+                                    xtype: 'contactform'
+                                });
+                            view.setRecord(record);
                             //store.load();
                             //form.updateRecord(record);
                             Ext.Msg.alert('Success', action.msg);
