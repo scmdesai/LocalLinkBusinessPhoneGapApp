@@ -66890,43 +66890,45 @@ Ext.define('Ext.picker.Picker', {
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
                             //form.fireEvent('updateRecord',this);
-                            form.updateRecord(record);
-                            form.submit({
-                                url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
-                                success: function(form, action) {
-                                    store.sync();
-                                    store.load();
-                                    // form.updateRecord(record);
-                                    Ext.Viewport.getComponent('panel').destroy();
-                                    var view = Ext.create("Ext.tab.Panel", {
-                                            fullscreen: true,
-                                            tabBarPosition: 'bottom',
-                                            itemId: 'panel',
-                                            items: [
-                                                {
-                                                    xtype: 'contactinfo',
-                                                    title: 'Home',
-                                                    itemId: 'home',
-                                                    iconCls: 'home'
-                                                },
-                                                {
-                                                    xtype: 'DealsPanel',
-                                                    title: 'Deals',
-                                                    iconCls: 'info'
-                                                }
-                                            ]
-                                        });
-                                    Ext.Viewport.setActiveItem(view);
-                                    view.getComponent('home').setRecord(record);
-                                    Ext.Msg.alert('Success', action.msg);
-                                    form.destroy();
-                                },
-                                //var fields = record.getChanges();
-                                failure: function(form, action) {
-                                    store.load();
-                                    Ext.Msg.alert('Failure', action.msg);
-                                }
+                            form.on('updateRecord', function() {
+                                form.submit({
+                                    url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
+                                    success: function(form, action) {
+                                        store.sync();
+                                        store.load();
+                                        // form.updateRecord(record);
+                                        Ext.Viewport.getComponent('panel').destroy();
+                                        var view = Ext.create("Ext.tab.Panel", {
+                                                fullscreen: true,
+                                                tabBarPosition: 'bottom',
+                                                itemId: 'panel',
+                                                items: [
+                                                    {
+                                                        xtype: 'contactinfo',
+                                                        title: 'Home',
+                                                        itemId: 'home',
+                                                        iconCls: 'home'
+                                                    },
+                                                    {
+                                                        xtype: 'DealsPanel',
+                                                        title: 'Deals',
+                                                        iconCls: 'info'
+                                                    }
+                                                ]
+                                            });
+                                        Ext.Viewport.setActiveItem(view);
+                                        view.getComponent('home').setRecord(record);
+                                        Ext.Msg.alert('Success', action.msg);
+                                        form.destroy();
+                                    },
+                                    //var fields = record.getChanges();
+                                    failure: function(form, action) {
+                                        store.load();
+                                        Ext.Msg.alert('Failure', action.msg);
+                                    }
+                                });
                             });
+                            form.updateRecord(record);
                         },
                         /*var record = form.getRecord();
 
