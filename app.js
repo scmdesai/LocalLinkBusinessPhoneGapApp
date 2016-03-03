@@ -66894,8 +66894,8 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     store.sync();
                                     store.load();
-                                    //form.updateRecord(record);
-                                    form.fireEvent('updateRecord', form);
+                                    // form.updateRecord(record);
+                                    form.fireEvent('updateRecord', this);
                                     Ext.Viewport.getComponent('panel').destroy();
                                     var view = Ext.create("Ext.tab.Panel", {
                                             fullscreen: true,
