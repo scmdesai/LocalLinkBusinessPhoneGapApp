@@ -66448,6 +66448,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
+        itemId: 'mycontainer3',
         padding: '5 5 5 5',
         style: 'overflow: hidden',
         styleHtmlContent: true,
@@ -67183,11 +67184,13 @@ Ext.define('Ext.picker.Picker', {
             share: 'button#share',
             changePicture: 'button#changePicture',
             manageDeals: 'button#manageDeals',
-            panel: 'panel#panel'
+            panel: 'panel#panel',
+            contactpic: 'contactpic'
         },
         control: {
             "contactpic": {
-                change: 'onContactPickerChange'
+                change: 'onContactPickerChange',
+                updatedata: 'onContactpicUpdatedata'
             },
             "list": {
                 activate: 'onListActivate'
@@ -67482,6 +67485,15 @@ Ext.define('Ext.picker.Picker', {
             xtype: 'DealsPanel'
         });
         Ext.Viewport.setActiveItem(view);
+    },
+    onContactpicUpdatedata: function(component, newData, eOpts) {
+        var currentForm = Ext.Viewport.getActiveItem();
+        var record = currentForm.getRecord();
+        if (record) {
+            record.set('pictureURL', newData);
+            record.commit();
+            currentForm.setRecord(record);
+        }
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.controller,
