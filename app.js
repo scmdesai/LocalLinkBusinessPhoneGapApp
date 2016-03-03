@@ -66914,7 +66914,8 @@ Ext.define('Ext.picker.Picker', {
                                             ]
                                         });
                                     Ext.Viewport.setActiveItem(view);
-                                    view.getComponent('home').setData(record.data);
+                                    view.relayEvents(record, updateRecord);
+                                    view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
@@ -67047,7 +67048,17 @@ Ext.define('Ext.picker.Picker', {
                 hidden: true,
                 name: 'pictureURL'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onBusinessNameChange',
+                event: 'change',
+                delegate: '#businessName'
+            }
         ]
+    },
+    onBusinessNameChange: function(textfield, newValue, oldValue, eOpts) {
+        console.log('BusinessName changed');
     },
     getValidationErrors: function() {
         var errors = [];
