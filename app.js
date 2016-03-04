@@ -67238,7 +67238,9 @@ Ext.define('Ext.picker.Picker', {
             //Ext.Viewport.getActiveItem().destroy();
             //var pic = this.getDealpicture();
             var store = Ext.getStore('MyDealsStore');
+            console.log(index);
             var record = store.getAt(index);
+            console.log(record.get('customerId'));
             var dealPicture = Ext.Viewport.setActiveItem({
                     xtype: 'DealPicturePanel'
                 });
