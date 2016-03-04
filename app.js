@@ -66550,11 +66550,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'contactpic',
                         height: '100%',
-                        width: '100%',
-                        layout: {
-                            type: 'vbox',
-                            pack: 'start'
-                        }
+                        width: '100%'
                     }
                 ]
             },
@@ -66973,6 +66969,7 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.showBy(button);
                 },
+                cls: 'picture',
                 height: '10%',
                 id: 'changePic',
                 itemId: 'changePic',
