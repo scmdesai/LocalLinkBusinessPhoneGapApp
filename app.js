@@ -67407,8 +67407,8 @@ Ext.define('Ext.picker.Picker', {
     },
     onShareTap: function(button, e, eOpts) {
         var pic = this.getDealpicture();
-        console.log(pic.getTpl());
-        window.plugins.socialsharing.share('Hi!Check out the latest deal from', null, null, null);
+        //console.log(pic.getTpl());
+        window.plugins.socialsharing.share('Hi!Check out the latest deal from', null, null, pic);
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
