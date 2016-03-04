@@ -66779,7 +66779,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     setRecord: function(record) {
-        this.down('dealPicture').setData(recod.data);
+        this.down('DealPicture').setData(recod.data);
     }
 }, 0, [
     "dealpicture"
