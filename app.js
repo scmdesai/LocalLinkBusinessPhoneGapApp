@@ -47,7 +47,6 @@ if (!Ext.util.paintmonitor) Ext.util.paintmonitor = {};
 if (!Ext.util.sizemonitor) Ext.util.sizemonitor = {};
 if (!Ext.util.translatable) Ext.util.translatable = {};
 if (!Ext.viewport) Ext.viewport = {};
-var dealPicture = dealPicture || {};
 /* 
  * Helper code for compiler optimization
  */
@@ -66767,9 +66766,6 @@ Ext.define('Ext.picker.Picker', {
  * Do NOT hand edit this file.
  */
 (Ext.cmd.derive('Contact.view.DealPicture', Ext.Container, {
-    alternateClassName: [
-        'dealPicture'
-    ],
     config: {
         fullscreen: true,
         itemId: 'dealPicture',
@@ -66820,9 +66816,7 @@ Ext.define('Ext.picker.Picker', {
     "widget.dealpicture"
 ], 0, [
     Contact.view,
-    'DealPicture',
-    0,
-    'dealPicture'
+    'DealPicture'
 ], 0));
 
 /*
@@ -67267,7 +67261,6 @@ Ext.define('Ext.picker.Picker', {
         {
             //Ext.Viewport.getActiveItem().destroy();
             var pic = this.getDealpicture();
-            pic.setRecord(record);
             Ext.Viewport.setActiveItem(pic);
         }
     },
@@ -67414,9 +67407,8 @@ Ext.define('Ext.picker.Picker', {
     },
     onShareTap: function(button, e, eOpts) {
         //window.plugins.socialsharing('Message via Facebook', null /* img */, null /* url */, function() {console.log('share ok');}, function(errormsg){alert(errormsg);});
-        var record = button.getParent().getParent().getData();
         //console.log(businessName.customerId);
-        window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.customerId, null, null, record.dealPictureURL);
+        window.plugins.socialsharing.share('Hi!Check out the latest deal', null, null, null);
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
