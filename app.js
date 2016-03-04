@@ -66769,6 +66769,7 @@ Ext.define('Ext.picker.Picker', {
     config: {
         fullscreen: true,
         itemId: 'dealPicture',
+        left: 'dealPicture',
         style: 'font-size:6vw',
         styleHtmlContent: true,
         layout: 'fit',
@@ -67406,7 +67407,7 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        var deal = this.up('DealPicture');
+        var deal = Ext.get('dealPicture');
         console.log(deal.getItemId());
         window.plugins.socialsharing.share('Hi!Check out the latest deal from', null, null, dealPictureURL);
     },
