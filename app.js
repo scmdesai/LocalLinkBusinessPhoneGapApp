@@ -67237,7 +67237,7 @@ Ext.define('Ext.picker.Picker', {
         {
             //Ext.Viewport.getActiveItem().destroy();
             //var pic = this.getDealpicture();
-            console.log(record.getAssociatedData());
+            console.log(record.getData());
             var dealPicture = Ext.Viewport.setActiveItem({
                     xtype: 'DealPicturePanel'
                 });
