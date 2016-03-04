@@ -66616,6 +66616,7 @@ Ext.define('Ext.picker.Picker', {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
+            this.down('contactpic').setData(record.data);
         }
     }
 }, 0, [
@@ -66638,7 +66639,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactinfo'
 ], 0));
-// this.down('contactpic').setData(record.data);
 
 /*
  * File: app/view/List.js
@@ -67237,10 +67237,10 @@ Ext.define('Ext.picker.Picker', {
         {
             //Ext.Viewport.getActiveItem().destroy();
             //var pic = this.getDealpicture();
+            console.log(record.getAssociatedData());
             var dealPicture = Ext.Viewport.setActiveItem({
                     xtype: 'DealPicturePanel'
                 });
-            dealPicture.setRecord(record);
         }
     },
     onMycontainer1Activate: function(newActiveItem, container, oldActiveItem, eOpts) {
