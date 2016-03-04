@@ -66777,9 +66777,6 @@ Ext.define('Ext.picker.Picker', {
         tpl: [
             '<img src="{dealPictureURL}" />'
         ]
-    },
-    setRecord: function(record) {
-        this.down('DealPicture').setData(recod.data);
     }
 }, 0, [
     "dealpicture"
