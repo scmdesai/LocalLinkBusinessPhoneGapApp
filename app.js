@@ -66805,10 +66805,6 @@ Ext.define('Ext.picker.Picker', {
                 ]
             }
         ]
-    },
-    setRecord: function(record) {
-        //console.log(record.getData()) ;
-        this.setData(record.getData());
     }
 }, 0, [
     "dealpicture"
@@ -66828,7 +66824,6 @@ Ext.define('Ext.picker.Picker', {
     0,
     'dealPicture'
 ], 0));
-//this.setTpl('<img src="'+record.get('dealPictureURL') +'"/>') ;
 
 /*
  * File: app/view/contactform.js
