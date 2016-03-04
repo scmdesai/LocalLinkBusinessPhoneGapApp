@@ -66777,6 +66777,9 @@ Ext.define('Ext.picker.Picker', {
         tpl: [
             '<img src="{dealPictureURL}" />'
         ]
+    },
+    setRecord: function(record) {
+        this.down('dealPicture').setData(recod.data);
     }
 }, 0, [
     "dealpicture"
@@ -67241,10 +67244,9 @@ Ext.define('Ext.picker.Picker', {
             console.log(index);
             var record = store.getAt(index);
             console.log(record.get('customerId'));
-            var dealPicture = Ext.Viewport.setActiveItem({
-                    xtype: 'DealPicturePanel'
-                });
-            dealPicture.setRecord(record);
+            var pic = this.getDealpicture();
+            pic.setRecord(record);
+            Ext.Viewport.setActiveItem(pic);
         }
     },
     onMycontainer1Activate: function(newActiveItem, container, oldActiveItem, eOpts) {
@@ -67900,10 +67902,6 @@ Ext.define('Ext.picker.Picker', {
                 width: '100%'
             }
         ]
-    },
-    setRecord: function(record) {
-        //this.down('dealPicture').setData(record.data)
-        console.log('Custoer ID :' + record.customerId);
     }
 }, 0, [
     "DealPicturePanel"
