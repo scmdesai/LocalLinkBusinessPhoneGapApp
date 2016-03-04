@@ -67241,7 +67241,6 @@ Ext.define('Ext.picker.Picker', {
                     xtype: 'DealPicturePanel'
                 });
             dealPicture.setRecord(record);
-            console.log(record.get('businessName'));
         }
     },
     onMycontainer1Activate: function(newActiveItem, container, oldActiveItem, eOpts) {
@@ -67901,18 +67900,24 @@ Ext.define('Ext.picker.Picker', {
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
-            this.down('contactpic').setData(record.data);
+            this.down('dealPicture').setData(record.data);
         }
     }
-}, 0, 0, [
+}, 0, [
+    "DealPicturePanel"
+], [
     "component",
     "container",
-    "panel"
+    "panel",
+    "DealPicturePanel"
 ], {
     "component": true,
     "container": true,
-    "panel": true
-}, 0, 0, [
+    "panel": true,
+    "DealPicturePanel": true
+}, [
+    "widget.DealPicturePanel"
+], 0, [
     Contact.view,
     'DealPicturePanel'
 ], 0));
