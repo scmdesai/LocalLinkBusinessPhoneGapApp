@@ -66705,7 +66705,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ListOfDeals', Ext.dataview.List, {
     config: {
-        cls: 'checkbox_hidden',
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
@@ -67229,35 +67228,7 @@ Ext.define('Ext.picker.Picker', {
         ds.clearFilter();
     },
     onDealBackBtnTap: function(button, e, eOpts) {
-        var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter();
-        var dealRecord = this.getContactinfo().getRecord();
-        //console.log("Deal Record is:") ;
-        //console.log(dealRecord) ;
-        var customerId = dealRecord.get('customerId');
-        //console.log("Customer Id is " + customerId) ;
-        ds.filter('customerId', customerId);
-        var customerData = ds.getData().getAt(0);
-        //console.log("Customer Data is:") ;
-        //console.log(customerData) ;
-        var info = this.getContactinfo();
-        info.setRecord(customerData);
-        ds.clearFilter();
-        Ext.Viewport.setActiveItem(info);
-        //Ext.Viewport.setActiveItem('contactinfo') ;
-        //var btn = document.getElementById('DeleteDeal');
-        /*if(btn){
-		btn.parentNode.removeChild(btn);
-			console.log('Removing btn from deal back button');
-		}*/
-        var el = Ext.getCmp('ListOfDeals');
-        if (el) {
-            el.destroy();
-        }
-        var btn = Ext.getCmp('DeleteDeal');
-        if (btn) {
-            btn.destroy();
-        }
+        Ext.Viewport.getActiveItem().destroy();
     },
     onListOfDealsItemTap: function(dataview, index, target, record, e, eOpts) {
         var recordsToDelete = [];
