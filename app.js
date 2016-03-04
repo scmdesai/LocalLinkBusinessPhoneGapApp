@@ -67893,10 +67893,14 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         items: [
             {
-                xtype: 'button',
-                text: 'MyButton'
+                xtype: 'dealpicture',
+                height: '100%',
+                width: '100%'
             }
         ]
+    },
+    setRecord: function(record) {
+        this.down('dealPicture').setData(record.data);
     }
 }, 0, [
     "DealPicturePanel"
