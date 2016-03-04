@@ -67893,9 +67893,8 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         items: [
             {
-                xtype: 'dealpicture',
-                height: '100%',
-                width: '100%'
+                xtype: 'button',
+                text: 'MyButton'
             }
         ]
     }
