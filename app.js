@@ -67237,10 +67237,12 @@ Ext.define('Ext.picker.Picker', {
         {
             //Ext.Viewport.getActiveItem().destroy();
             //var pic = this.getDealpicture();
-            console.log(record.getData());
+            var store = Ext.getStore('MyDealsStore');
+            var record = store.getAt(index);
             var dealPicture = Ext.Viewport.setActiveItem({
                     xtype: 'DealPicturePanel'
                 });
+            dealPicture.setRecord(record);
         }
     },
     onMycontainer1Activate: function(newActiveItem, container, oldActiveItem, eOpts) {
