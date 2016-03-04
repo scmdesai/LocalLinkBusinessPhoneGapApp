@@ -67406,9 +67406,9 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        //window.plugins.socialsharing('Message via Facebook', null /* img */, null /* url */, function() {console.log('share ok');}, function(errormsg){alert(errormsg);});
-        //console.log(businessName.customerId);
-        window.plugins.socialsharing.share('Hi!Check out the latest deal', null, null, null);
+        var pic = this.getDealpicture();
+        console.log(pic.getTpl());
+        window.plugins.socialsharing.share('Hi!Check out the latest deal from', null, null, null);
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
