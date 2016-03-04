@@ -67270,7 +67270,7 @@ Ext.define('Ext.picker.Picker', {
             });
         } else //}
         {
-            Ext.Viewport.getActiveItem().destroy();
+            //Ext.Viewport.getActiveItem().destroy();
             var pic = this.getDealpicture();
             pic.setRecord(record);
             Ext.Viewport.setActiveItem(pic);
