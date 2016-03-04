@@ -67899,9 +67899,7 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.Panel.prototype.setRecord).apply(this, arguments);
-        if (record) {
-            this.down('dealPicture').setData(record.data);
-        }
+        this.down('dealPicture').setData(record.data);
     }
 }, 0, [
     "DealPicturePanel"
