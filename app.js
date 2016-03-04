@@ -67074,9 +67074,6 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        var store = Ext.getStore('MyJsonPStore');
-        store.sync();
-        store.load();
         if (record) {
             this.child('contactpic').setData(record.data);
             this.down('#businessName').setValue(record.data.businessName);
