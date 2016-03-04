@@ -67075,7 +67075,6 @@ Ext.define('Ext.picker.Picker', {
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         var store = Ext.getStore('MyJsonPStore');
-        record.commit();
         store.sync();
         store.load();
         if (record) {
