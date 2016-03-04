@@ -66726,7 +66726,7 @@ Ext.define('Ext.picker.Picker', {
         useSimpleItems: false,
         itemTpl: [
             '',
-            '<div style="font-size:20px" >{dealName}<input type="checkbox"  class="checkbox_hidden" name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
+            '<div style="font-size:20px" >{dealName}<input type="checkbox" name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
             '',
             '',
             '<div style="color:#0000FF;font-size:12px;font-style:italics">{dealStartDate} - {dealEndDate}</div>'
@@ -66969,7 +66969,6 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.showBy(button);
                 },
-                cls: 'picture',
                 height: '10%',
                 id: 'changePic',
                 itemId: 'changePic',
