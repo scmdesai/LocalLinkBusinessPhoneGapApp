@@ -66454,8 +66454,8 @@ Ext.define('Ext.picker.Picker', {
         styleHtmlContent: true,
         ui: '',
         tpl: [
-            '<div><img src="{pictureURL}"/></div>',
-            '<div><button type="button">Click Me </button></div>',
+            '<div><img src="{pictureURL}"/>',
+            '<button type="button">Click Me </button></div>',
             ''
         ],
         layout: {
