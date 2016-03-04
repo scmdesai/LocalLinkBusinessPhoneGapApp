@@ -67903,7 +67903,7 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         //this.down('dealPicture').setData(record.data)
-        console.log(record.getAssociatedModel());
+        console.log('Custoer ID :' + record.customerId);
     }
 }, 0, [
     "DealPicturePanel"
