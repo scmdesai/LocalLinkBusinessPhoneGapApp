@@ -67407,9 +67407,7 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        var deal = Ext.get('dealPicture');
-        console.log(deal.getItemId());
-        window.plugins.socialsharing.share('Hi!Check out the latest deal from', null, null, dealPictureURL);
+        window.plugins.socialsharing.share('Hi!Check out the latest deal from', null, null, null);
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
