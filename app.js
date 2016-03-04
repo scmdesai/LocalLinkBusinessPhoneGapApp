@@ -66449,16 +66449,14 @@ Ext.define('Ext.picker.Picker', {
     config: {
         overflow: 'hidden',
         itemId: 'contactpic',
-        padding: '5 5 5 5',
+        padding: '',
         style: 'overflow: hidden',
         styleHtmlContent: true,
         ui: '',
         tpl: [
-            '<div id="pictureId" class = "picture">',
+            '',
             '\t<img src="{pictureURL}"/>',
-            '\t<button type="button">Click Me</button>',
-            '</div>',
-            ''
+            '\t'
         ],
         layout: {
             type: 'vbox',
@@ -66979,6 +66977,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'changePic',
                 itemId: 'changePic',
                 maxWidth: '20%',
+                ui: 'plain',
                 iconCls: 'add',
                 text: ''
             },
