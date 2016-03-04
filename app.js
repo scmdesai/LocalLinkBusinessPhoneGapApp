@@ -66800,6 +66800,14 @@ Ext.define('Ext.picker.Picker', {
                         iconCls: 'action'
                     }
                 ]
+            },
+            {
+                xtype: 'textfield',
+                name: 'businessName'
+            },
+            {
+                xtype: 'hiddenfield',
+                name: 'dealPictureURL'
             }
         ]
     }
@@ -67263,6 +67271,7 @@ Ext.define('Ext.picker.Picker', {
             //Ext.Viewport.getActiveItem().destroy();
             var pic = this.getDealpicture();
             Ext.Viewport.setActiveItem(pic);
+            console.log(record.businessName);
         }
     },
     onMycontainer1Activate: function(newActiveItem, container, oldActiveItem, eOpts) {
