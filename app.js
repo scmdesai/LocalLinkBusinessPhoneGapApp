@@ -67074,11 +67074,7 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        var form = this.up('contactform');
         var store = Ext.getStore('MyJsonPStore');
-        record.beginEdit(true, record.getChanges());
-        form.updateRecord(record);
-        record.endEdit(true, record.getChanges());
         record.commit();
         store.sync();
         store.load();
