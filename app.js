@@ -67199,7 +67199,7 @@ Ext.define('Ext.picker.Picker', {
             console.log(index);
             var record = store.getAt(index);
             var view = Ext.Viewport.add({
-                    xtype: 'dealPicture'
+                    xtype: 'DealPicturePanel'
                 });
             view.setRecord(record);
             Ext.Viewport.setActiveItem(view);
