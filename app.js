@@ -67388,13 +67388,15 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.DealPicture', Ext.Container, {
+(Ext.cmd.derive('Contact.view.DealPicture', Ext.Panel, {
     config: {
         fullscreen: true,
+        height: '100%',
         itemId: 'dealPicture',
         left: 'dealPicture',
         style: 'overflow: hidden',
         styleHtmlContent: true,
+        width: '100%',
         autoDestroy: false,
         scrollable: true,
         tpl: [
@@ -67402,7 +67404,7 @@ Ext.define('Ext.picker.Picker', {
         ],
         layout: {
             type: 'vbox',
-            align: 'start'
+            align: 'center'
         },
         items: [
             {
@@ -67434,10 +67436,12 @@ Ext.define('Ext.picker.Picker', {
 ], [
     "component",
     "container",
+    "panel",
     "dealPicture"
 ], {
     "component": true,
     "container": true,
+    "panel": true,
     "dealPicture": true
 }, [
     "widget.dealPicture"
