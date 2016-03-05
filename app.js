@@ -67389,7 +67389,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealPicture', Ext.Container, {
     config: {
-        fullscreen: true,
+        fullscreen: false,
         height: '100%',
         itemId: 'dealPicture',
         left: 'dealPicture',
