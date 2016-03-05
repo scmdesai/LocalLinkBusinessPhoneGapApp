@@ -67091,7 +67091,9 @@ Ext.define('Ext.picker.Picker', {
             share: 'button#share',
             changePicture: 'button#changePicture',
             manageDeals: 'button#manageDeals',
-            panel: 'panel#panel'
+            panel: 'panel#panel',
+            dealBackBtn: 'button#dealBackBtn',
+            share: 'button#share'
         },
         control: {
             "contactpic": {
@@ -67899,6 +67901,28 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'dealPicture'
+            },
+            {
+                xtype: 'toolbar',
+                docked: 'top',
+                items: [
+                    {
+                        xtype: 'button',
+                        itemId: 'mybutton',
+                        ui: 'back',
+                        text: 'Back'
+                    },
+                    {
+                        xtype: 'button',
+                        docked: 'right',
+                        itemId: 'share',
+                        margin: '15 5 5 5',
+                        width: '20%',
+                        iconAlign: 'center',
+                        iconCls: 'action',
+                        text: ''
+                    }
+                ]
             }
         ]
     },
