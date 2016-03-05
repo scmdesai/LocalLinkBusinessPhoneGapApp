@@ -67389,7 +67389,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealPicture', Ext.Container, {
     config: {
-        fullscreen: false,
+        fullscreen: true,
         height: '100%',
         itemId: 'dealPicture',
         left: 'dealPicture',
@@ -67408,7 +67408,7 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'button',
-                        itemId: 'mybutton',
+                        itemId: 'dealBackBtn',
                         ui: 'back',
                         text: 'Back'
                     },
