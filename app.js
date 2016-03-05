@@ -67327,7 +67327,7 @@ Ext.define('Ext.picker.Picker', {
         storeUserDetails.load();
         var customerId;
         var businessName;
-        Ext.Viewport.getActiveItem().destroy();
+        //Ext.Viewport.getActiveItem().destroy();
         var view = Ext.Viewport.add({
                 xtype: 'UploadDealForm'
             });
