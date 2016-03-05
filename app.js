@@ -67391,12 +67391,10 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.DealPicture', Ext.Container, {
     config: {
         fullscreen: true,
-        height: '100%',
         itemId: 'dealPicture',
         left: 'dealPicture',
         style: 'overflow: hidden',
         styleHtmlContent: true,
-        width: '100%',
         autoDestroy: false,
         scrollable: true,
         tpl: [
