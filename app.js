@@ -67721,18 +67721,14 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Success', action.msg);
                                     console.log("Action Msg is : " + action.success);
-                                    Ext.Viewport.setActiveItem({
-                                        xtype: 'DealsPanel'
-                                    });
+                                    //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                     uForm.destroy();
                                 },
                                 failure: function(form, action) {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Failed', action.msg);
                                     console.log("Action Msg is : " + action.success);
-                                    Ext.Viewport.setActiveItem({
-                                        xtype: 'DealsPanel'
-                                    });
+                                    //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                     uForm.destroy();
                                 }
                             });
