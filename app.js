@@ -67363,6 +67363,7 @@ Ext.define('Ext.picker.Picker', {
         var record = Ext.getStore('MyDealsStore').findRecord('customerId', customerId, 0, true, false, false);
         //console.log(record.get('dealPictureURL'));
         //window.plugins.socialsharing.shareViaWhatsApp('Hi!Check out the latest deal from '+ record.get('businessName'), null,record.get('dealPictureURL'), null, function() {}, function(errormsg){});
+        window.plugins.socialsharing.canShareVia('whatsapp', 'Hi!Check out the latest deal from', null, null, null, function(e) {}, function(e) {});
         window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.get('businessName'), null, record.get('dealPictureURL'), null);
     },
     onManageDealsTap: function(button, e, eOpts) {
