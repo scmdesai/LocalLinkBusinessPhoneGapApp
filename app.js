@@ -67348,7 +67348,7 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        window.plugins.socialsharing.share('Hi!Check out the latest deal from', null, null, null);
+        window.plugins.socialsharing.share('Hi!Check out the latest deal from' + record.businessName, null, null, record.dealpictureURL);
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
@@ -67428,6 +67428,18 @@ Ext.define('Ext.picker.Picker', {
                         text: ''
                     }
                 ]
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'customerId'
             }
         ]
     }
