@@ -66708,7 +66708,6 @@ Ext.define('Ext.picker.Picker', {
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
         style: 'font-size: 10px',
-        width: 318,
         autoDestroy: false,
         deselectOnContainerClick: false,
         mode: 'MULTI',
@@ -67193,7 +67192,7 @@ Ext.define('Ext.picker.Picker', {
             });
         } else //}
         {
-            //Ext.Viewport.getActiveItem().destroy();
+            Ext.Viewport.getActiveItem().destroy();
             //var pic = this.getDealpicture();
             var store = Ext.getStore('MyDealsStore');
             console.log(index);
