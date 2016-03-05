@@ -67158,8 +67158,8 @@ Ext.define('Ext.picker.Picker', {
         var i = 0;
         if (e.target.type === 'checkbox') {
             var store = Ext.getStore('MyDealsStore');
-            var el = dataview.getParent();
-            Ext.Viewport.setActiveItem(el);
+            //var el=dataview.getParent();
+            //Ext.Viewport.setActiveItem(el);
             var customerId;
             var checkboxes = document.getElementsByName('checkbox');
             checkboxes[index].addEventListener('change', function() {
