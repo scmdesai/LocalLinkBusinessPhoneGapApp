@@ -67192,7 +67192,9 @@ Ext.define('Ext.picker.Picker', {
             });
         } else //}
         {
-            Ext.Viewport.getActiveItem().destroy();
+            Ext.Viewport.add({
+                xtype: 'DealsPanel'
+            });
             //var pic = this.getDealpicture();
             var store = Ext.getStore('MyDealsStore');
             console.log(index);
