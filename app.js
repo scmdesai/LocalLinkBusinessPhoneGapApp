@@ -67361,7 +67361,7 @@ Ext.define('Ext.picker.Picker', {
             businessName = record.get('businessName');
         });
         var record = Ext.getStore('MyDealsStore').findRecord('customerId', customerId, 0, true, false, false);
-        console.log(record.get('dealpictureURL'));
+        console.log(record.get('dealName'));
         window.plugins.socialsharing.share('Hi!Check out the latest deal from' + record.get('businessName'), null, null, record.get('dealpictureURL'));
     },
     onManageDealsTap: function(button, e, eOpts) {
