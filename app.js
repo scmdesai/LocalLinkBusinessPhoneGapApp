@@ -67397,11 +67397,15 @@ Ext.define('Ext.picker.Picker', {
         style: 'overflow: hidden',
         styleHtmlContent: true,
         width: '100%',
-        layout: 'vbox',
+        autoDestroy: false,
         scrollable: true,
         tpl: [
-            '<img src="{dealPictureURL}" />'
+            '<img src="{dealPictureURL}"/>'
         ],
+        layout: {
+            type: 'vbox',
+            align: 'start'
+        },
         items: [
             {
                 xtype: 'toolbar',
