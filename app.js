@@ -67348,7 +67348,16 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        console.log(button.getParent().getParent().get('businessName').getValue());
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        storeUserDetails.each(function(record) {
+            console.log('StoreUserDetails : ' + record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var record = Ext.getStore('MyDealsStore').findRecord('customerId', customerId, 0, true, false, false);
         window.plugins.socialsharing.share('Hi!Check out the latest deal from' + record.businessName, null, null, record.dealpictureURL);
     },
     onManageDealsTap: function(button, e, eOpts) {
