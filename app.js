@@ -67421,7 +67421,7 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        var itemName = Ext.getStore('LocalStore').getAt(0);
+        var itemName = Ext.getStore('LocalStore').getAt(0).itemName;
         console.log(itemName);
         var record = Ext.getStore('MyDealsStore').findRecord('itemName', itemName, 0, 0, true, false, false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
