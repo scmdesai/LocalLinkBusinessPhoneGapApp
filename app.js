@@ -67351,10 +67351,11 @@ Ext.define('Ext.picker.Picker', {
             businessName = record.get('businessName');
         });
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
-        var record = Ext.getStore('MyDealsStore').findRecord('customerId', customerId, 0, true, false, false);
-        var rec = button.getParent().getParent().getDealPicture();
-        console.log(rec);
-        window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.get('businessName'), null, null, record.get('dealPictureURL'));
+        //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
+        //var rec = button.getParent().getParent().getDealPicture();
+        var record = button.getParent().getParent().getData();
+        console.log(record.dealsPictureURL);
+        window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.businessName, null, null, record.dealPictureURL);
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
