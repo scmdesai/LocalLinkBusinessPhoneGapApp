@@ -67341,7 +67341,7 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        console.log(this.dealPictureURL);
+        console.log(e.target.type);
     },
     //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
     //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
@@ -67404,19 +67404,26 @@ Ext.define('Ext.picker.Picker', {
         },
         items: [
             {
-                xtype: 'button',
-                itemId: 'dealBackBtn',
-                ui: 'back',
-                text: 'Back'
-            },
-            {
-                xtype: 'button',
-                itemId: 'share',
-                margin: '15 5 5 5',
-                width: '20%',
-                iconAlign: 'center',
-                iconCls: 'action',
-                text: ''
+                xtype: 'toolbar',
+                docked: 'top',
+                items: [
+                    {
+                        xtype: 'button',
+                        itemId: 'dealBackBtn',
+                        ui: 'back',
+                        text: 'Back'
+                    },
+                    {
+                        xtype: 'button',
+                        docked: 'right',
+                        itemId: 'share',
+                        margin: '15 5 5 5',
+                        width: '20%',
+                        iconAlign: 'center',
+                        iconCls: 'action',
+                        text: ''
+                    }
+                ]
             }
         ]
     }
@@ -67509,6 +67516,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'listofdeals',
                 docked: 'top',
                 height: '90%',
+                itemId: 'listofdeals',
                 styleHtmlContent: true,
                 width: '100%',
                 itemCls: 'listofdealsScss'
@@ -67542,7 +67550,17 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onListOfDealsSelect',
+                event: 'select',
+                delegate: '#listofdeals'
+            }
         ]
+    },
+    onListOfDealsSelect: function(dataview, record, eOpts) {
+        console.log(record.itemName);
     }
 }, 0, [
     "DealsPanel"
