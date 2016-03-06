@@ -67360,6 +67360,10 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
+        //var itemName = record.get('itemName');
+        var rec = this.getRecord().get('itemName');
+        console.log(rec);
+        //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         var record = Ext.getStore('MyDealsStore').findRecord('customerId', customerId, 0, true, false, false);
         //console.log(record.get('dealPictureURL'));
         //window.plugins.socialsharing.shareViaWhatsApp('Hi!Check out the latest deal from '+ record.get('businessName'), null,record.get('dealPictureURL'), null, function() {}, function(errormsg){});
