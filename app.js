@@ -67188,7 +67188,7 @@ Ext.define('Ext.picker.Picker', {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
-            var pic = this.getDealpicture();
+            //var pic = this.getDealpicture();
             var store = Ext.getStore('MyDealsStore');
             console.log(index);
             var record = store.getAt(index);
