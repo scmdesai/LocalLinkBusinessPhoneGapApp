@@ -66971,17 +66971,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: true,
                 name: 'pictureURL'
             }
-        ],
-        listeners: [
-            {
-                fn: 'onBusinessNameChange',
-                event: 'change',
-                delegate: '#businessName'
-            }
         ]
-    },
-    onBusinessNameChange: function(textfield, newValue, oldValue, eOpts) {
-        return newValue;
     },
     getValidationErrors: function() {
         var errors = [];
@@ -67198,7 +67188,7 @@ Ext.define('Ext.picker.Picker', {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
-            //var pic = this.getDealpicture();
+            var pic = this.getDealpicture();
             var store = Ext.getStore('MyDealsStore');
             console.log(index);
             var record = store.getAt(index);
@@ -67360,14 +67350,9 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
-        //console.log(rec.get('dealName'));
-        var rec = button.getParent().getParent().getDealPicture();
-        console.log(rec);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         var record = Ext.getStore('MyDealsStore').findRecord('customerId', customerId, 0, true, false, false);
-        //console.log(record.get('dealPictureURL'));
-        //window.plugins.socialsharing.shareViaWhatsApp('Hi!Check out the latest deal from '+ record.get('businessName'), null,record.get('dealPictureURL'), null, function() {}, function(errormsg){});
-        //window.plugins.socialsharing.canShareVia('whatsapp', 'Hi!Check out the latest deal from', null, null, null, function(e){}, function(e){});
+        console.log(e.statics());
         window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.get('businessName'), null, null, record.get('dealPictureURL'));
     },
     onManageDealsTap: function(button, e, eOpts) {
