@@ -67422,6 +67422,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onShareTap: function(button, e, eOpts) {
         var itemName = Ext.getStore('LocalStore').getAt(0);
+        console.log(itemName);
         var record = Ext.getStore('MyDealsStore').findRecord('itemName', itemName, 0, 0, true, false, false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
         window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.businessName, null, null, record.dealPictureURL);
