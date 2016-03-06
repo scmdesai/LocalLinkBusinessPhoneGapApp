@@ -67188,15 +67188,15 @@ Ext.define('Ext.picker.Picker', {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
-            var pic = this.getDealpicture();
+            var pic = this.getDealPicture();
             var store = Ext.getStore('MyDealsStore');
             console.log(index);
             var record = store.getAt(index);
             var view = Ext.Viewport.add({
                     xtype: 'dealPicture'
                 });
-            pic.setRecord(record);
             view.setRecord(record);
+            console.log(pic);
             Ext.Viewport.setActiveItem(view);
         }
     },
