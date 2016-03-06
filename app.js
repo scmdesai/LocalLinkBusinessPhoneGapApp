@@ -67361,7 +67361,7 @@ Ext.define('Ext.picker.Picker', {
             businessName = record.get('businessName');
         });
         //console.log(rec.get('dealName'));
-        var rec = this.getDealPicture();
+        var rec = this.getParent().getParent().getDealPicture();
         console.log(rec);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         var record = Ext.getStore('MyDealsStore').findRecord('customerId', customerId, 0, true, false, false);
