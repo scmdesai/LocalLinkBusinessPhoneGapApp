@@ -67188,7 +67188,6 @@ Ext.define('Ext.picker.Picker', {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
-            var pic = this.getDealPicture();
             var store = Ext.getStore('MyDealsStore');
             console.log(index);
             var record = store.getAt(index);
@@ -67354,7 +67353,7 @@ Ext.define('Ext.picker.Picker', {
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
         //var rec = button.getParent().getParent().getDealPicture();
-        var record = button.getParent().getParent().getData();
+        var record = button.getParent().getParent().getDealpicture();
         console.log(record);
         window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.businessName, null, null, record.dealPictureURL);
     },
