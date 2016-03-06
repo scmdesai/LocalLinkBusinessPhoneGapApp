@@ -67360,7 +67360,9 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
-        console.log(rec.get('dealName'));
+        //console.log(rec.get('dealName'));
+        var rec = this.getDealPicture();
+        console.log(rec);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         var record = Ext.getStore('MyDealsStore').findRecord('customerId', customerId, 0, true, false, false);
         //console.log(record.get('dealPictureURL'));
@@ -67446,18 +67448,6 @@ Ext.define('Ext.picker.Picker', {
                         text: ''
                     }
                 ]
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'businessName'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'customerId'
             }
         ]
     }
