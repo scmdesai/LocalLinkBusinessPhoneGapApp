@@ -67341,7 +67341,7 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        console.log(button.getParent().getParent().getdealpicture());
+        console.log(this.businessName);
     },
     //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
     //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
@@ -67404,26 +67404,19 @@ Ext.define('Ext.picker.Picker', {
         },
         items: [
             {
-                xtype: 'toolbar',
-                docked: 'top',
-                items: [
-                    {
-                        xtype: 'button',
-                        itemId: 'dealBackBtn',
-                        ui: 'back',
-                        text: 'Back'
-                    },
-                    {
-                        xtype: 'button',
-                        docked: 'right',
-                        itemId: 'share',
-                        margin: '15 5 5 5',
-                        width: '20%',
-                        iconAlign: 'center',
-                        iconCls: 'action',
-                        text: ''
-                    }
-                ]
+                xtype: 'button',
+                itemId: 'dealBackBtn',
+                ui: 'back',
+                text: 'Back'
+            },
+            {
+                xtype: 'button',
+                itemId: 'share',
+                margin: '15 5 5 5',
+                width: '20%',
+                iconAlign: 'center',
+                iconCls: 'action',
+                text: ''
             }
         ]
     }
