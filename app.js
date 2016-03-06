@@ -67341,22 +67341,11 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        var storeUserDetails = Ext.getStore('UserDetails');
-        storeUserDetails.load();
-        var customerId;
-        var businessName;
-        storeUserDetails.each(function(record) {
-            console.log('StoreUserDetails : ' + record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-        });
-        //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
-        //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
-        //var rec = button.getParent().getParent().getDealPicture();
-        var record = button.getParent().getParent().getData();
-        console.log(record);
-        window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.businessName, null, null, record.dealPictureURL);
+        console.log(button.getParent().getParent().getTpl());
     },
+    //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
+    //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
+    //window.plugins.socialsharing.share('Hi!Check out the latest deal from '+ record.businessName, null,null,record.dealPictureURL);
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
