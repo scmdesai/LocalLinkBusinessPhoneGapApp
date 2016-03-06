@@ -66349,12 +66349,8 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.store.LocalStore', Ext.data.Store, {
     config: {
-        storeId: 'LocalStore',
-        fields: [
-            {
-                name: 'itemName'
-            }
-        ]
+        model: 'Contact.model.Deal',
+        storeId: 'LocalStore'
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
@@ -67269,9 +67265,7 @@ Ext.define('Ext.picker.Picker', {
             });
             var store = Ext.getStore('MyDealsStore');
             var record = store.getAt(index);
-            Ext.getStore('LocalStore').add({
-                itemName: record.get('itemName')
-            });
+            Ext.getStore('LocalStore').add(record);
             var view = Ext.Viewport.add({
                     xtype: 'dealPicture'
                 });
@@ -67421,11 +67415,11 @@ Ext.define('Ext.picker.Picker', {
         Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
-        var itemName = Ext.getStore('LocalStore').getAt(0).itemName;
-        console.log(itemName);
-        var record = Ext.getStore('MyDealsStore').findRecord('itemName', itemName, 0, 0, true, false, false);
+        var record = Ext.getStore('LocalStore').getAt(0);
+        console.log(record.get('itemName'));
+        //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
-        window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.businessName, null, null, record.dealPictureURL);
+        window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.get('businessName'), null, null, record.get('dealPictureURL'));
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
