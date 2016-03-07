@@ -67412,11 +67412,12 @@ Ext.define('Ext.picker.Picker', {
         var frame = document.createElement('iframe');
         Ext.Viewport.setActiveItem(view);
     },
-    onDeleteDealTap: function(button, e, eOpts) {},
-    /*var el = document.getElementById('ListOfDeals');
+    onDeleteDealTap: function(button, e, eOpts) {
+        /*var el = document.getElementById('ListOfDeals');
 		 el.setAttribute('class','checkbox_visible');
 		*/
-    // Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
+        Ext.Msg.alert('No Deals To Delete', 'Please select Deals to be Deleted');
+    },
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
