@@ -66800,7 +66800,7 @@ Ext.define('Ext.picker.Picker', {
         useSimpleItems: false,
         itemTpl: [
             '',
-            '<div style="font-size:20px" >{dealName}<input type="checkbox" class="checkbox_hidden" name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
+            '<div style="font-size:20px" >{dealName}<input type="checkbox" class="Unchecked" name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
             '',
             '',
             '<div style="color:#0000FF;font-size:12px;font-style:italics">{dealStartDate} - {dealEndDate}</div>'
@@ -67416,7 +67416,6 @@ Ext.define('Ext.picker.Picker', {
     },
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
-        console.log(record.get('itemName'));
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
         window.plugins.socialsharing.share(null, null, record.get('dealPictureURL'), null);
@@ -67707,9 +67706,9 @@ Ext.define('Ext.picker.Picker', {
                 labelWrap: true,
                 name: 'DealStartDate',
                 value: {
-                    year: 2016,
-                    month: 2,
-                    day: 26
+                    day: new Date().getDate(),
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
                 },
                 placeHolder: 'mm/dd/yyyy',
                 picker: {
@@ -67726,9 +67725,9 @@ Ext.define('Ext.picker.Picker', {
                 labelWrap: true,
                 name: 'DealEndDate',
                 value: {
-                    year: 2016,
-                    month: 2,
-                    day: 26
+                    day: new Date().getDate(),
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
                 },
                 placeHolder: 'mm/dd/yyyy',
                 picker: {
@@ -67738,6 +67737,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'filefield',
+                itemId: 'myfilefield',
                 margin: '5 5 5 5 ',
                 label: 'Deal Image',
                 labelWidth: '50%',
@@ -67864,6 +67864,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'filefield',
                 label: '',
+                labelWrap: true,
                 name: 'fileUpload',
                 capture: 'camera'
             },
@@ -67903,6 +67904,7 @@ Ext.define('Ext.picker.Picker', {
                     });
                 },
                 docked: 'bottom',
+                ui: 'round',
                 text: 'Submit'
             },
             {
