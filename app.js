@@ -67860,9 +67860,9 @@ Ext.define('Ext.picker.Picker', {
         itemId: 'ChangeContactPicForm',
         styleHtmlContent: true,
         width: '80%',
-        hideOnMaskTap: true,
+        hideOnMaskTap: false,
         layout: 'fit',
-        modal: false,
+        modal: true,
         scrollable: false,
         items: [
             {
@@ -67969,7 +67969,20 @@ Ext.define('Ext.picker.Picker', {
                 hidden: true,
                 name: 'pictureURL'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onChangeContactPicFormHide',
+                event: 'hide'
+            }
         ]
+    },
+    onChangeContactPicFormHide: function(component, eOpts) {
+        if (component.isHidden === true) {
+            component.setHidden(false);
+        } else {
+            component.setHidden(true);
+        }
     }
 }, 0, [
     "ChangeContactPicForm"
