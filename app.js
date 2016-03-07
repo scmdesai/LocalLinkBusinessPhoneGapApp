@@ -67860,7 +67860,9 @@ Ext.define('Ext.picker.Picker', {
         itemId: 'ChangeContactPicForm',
         styleHtmlContent: true,
         width: '80%',
+        hideOnMaskTap: true,
         layout: 'fit',
+        modal: true,
         scrollable: false,
         items: [
             {
@@ -67967,18 +67969,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: true,
                 name: 'pictureURL'
             }
-        ],
-        listeners: [
-            {
-                fn: 'onChangeContactPicFormActiveItemChange',
-                event: 'activeitemchange'
-            }
         ]
-    },
-    onChangeContactPicFormActiveItemChange: function(container, value, oldValue, eOpts) {
-        console.log(container.getItemId());
-        console.log(value);
-        console.log(oldValue);
     }
 }, 0, [
     "ChangeContactPicForm"
