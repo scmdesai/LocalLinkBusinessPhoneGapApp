@@ -67979,7 +67979,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onChangeContactPicFormHide: function(component, eOpts) {
         console.log(component.getItemId());
-        component.destroy();
+        console.log(component.isHidden());
     }
 }, 0, [
     "ChangeContactPicForm"
