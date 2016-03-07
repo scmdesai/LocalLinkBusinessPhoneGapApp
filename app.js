@@ -67241,20 +67241,24 @@ Ext.define('Ext.picker.Picker', {
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
-                for (var j = 0; j < itemNames.length; j++) {
-                    var myForm = this.up('DealsPanel');
-                    myForm.submit({
-                        url: 'http://services.appsonmobile.com/deals/' + itemNames[j],
-                        success: function(form, action) {
-                            Ext.Msg.alert('Success', action.msg);
-                            //console.log(action.msg);
-                            var dealsStore = Ext.getStore('MyDealsStore');
-                            dealsStore.load();
-                        },
-                        failure: function(form, action) {
-                            Ext.Msg.alert('Failure', action.msg);
-                        }
-                    });
+                if (itemNames.length === 0) {
+                    Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
+                } else {
+                    for (var j = 0; j < itemNames.length; j++) {
+                        var myForm = this.up('DealsPanel');
+                        myForm.submit({
+                            url: 'http://services.appsonmobile.com/deals/' + itemNames[j],
+                            success: function(form, action) {
+                                Ext.Msg.alert('Success', action.msg);
+                                //console.log(action.msg);
+                                var dealsStore = Ext.getStore('MyDealsStore');
+                                dealsStore.load();
+                            },
+                            failure: function(form, action) {
+                                Ext.Msg.alert('Failure', action.msg);
+                            }
+                        });
+                    }
                 }
             });
         } else //console.log(action.msg);
@@ -67408,12 +67412,11 @@ Ext.define('Ext.picker.Picker', {
         var frame = document.createElement('iframe');
         Ext.Viewport.setActiveItem(view);
     },
-    onDeleteDealTap: function(button, e, eOpts) {
-        /*var el = document.getElementById('ListOfDeals');
+    onDeleteDealTap: function(button, e, eOpts) {},
+    /*var el = document.getElementById('ListOfDeals');
 		 el.setAttribute('class','checkbox_visible');
 		*/
-        Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
-    },
+    // Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
