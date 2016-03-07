@@ -66537,7 +66537,15 @@ Ext.define('Ext.picker.Picker', {
         layout: {
             type: 'vbox',
             align: 'center'
-        }
+        },
+        items: [
+            {
+                xtype: 'button',
+                docked: 'left',
+                top: '30%',
+                text: 'MyButton8'
+            }
+        ]
     }
 }, 0, [
     "contactpic"
@@ -67864,9 +67872,13 @@ Ext.define('Ext.picker.Picker', {
         itemId: 'ChangeContactPicForm',
         width: '80%',
         hideOnMaskTap: true,
-        layout: 'fit',
         modal: true,
         scrollable: false,
+        layout: {
+            type: 'hbox',
+            align: 'center',
+            pack: 'center'
+        },
         items: [
             {
                 xtype: 'filefield',
@@ -67978,8 +67990,6 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onChangeContactPicFormHiddenChange: function(component, value, oldValue, eOpts) {
-        console.log(component.isHidden());
-        console.log(oldValue);
         if (component.isHidden() === true && oldValue !== null) {
             component.destroy();
         }
