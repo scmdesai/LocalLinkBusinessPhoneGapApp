@@ -67979,6 +67979,9 @@ Ext.define('Ext.picker.Picker', {
     },
     onChangeContactPicFormHiddenChange: function(component, value, oldValue, eOpts) {
         console.log(component.isHidden());
+        if (component.isHidden() === true) {
+            component.destroy();
+        }
     }
 }, 0, [
     "ChangeContactPicForm"
@@ -68000,10 +68003,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'ChangeContactPicForm'
 ], 0));
-/*if(component.isHidden()===false){
-
-			component.destroy();
-		}*/
 
 /*
  * File: app.js
