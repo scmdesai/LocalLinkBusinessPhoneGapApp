@@ -67865,7 +67865,7 @@ Ext.define('Ext.picker.Picker', {
         width: '80%',
         hideOnMaskTap: true,
         layout: 'fit',
-        modal: false,
+        modal: true,
         scrollable: false,
         items: [
             {
@@ -67972,17 +67972,14 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onChangeContactPicFormHiddenChange',
-                event: 'hiddenchange'
+                fn: 'onChangeContactPicFormHide',
+                event: 'hide'
             }
         ]
     },
-    onChangeContactPicFormHiddenChange: function(component, value, oldValue, eOpts) {
-        if (component.isHidden() === true) {
-            component.setHidden(true);
-        } else {
-            component.setHidden(false);
-        }
+    onChangeContactPicFormHide: function(component, eOpts) {
+        console.log(component.getItemId());
+        component.destroy();
     }
 }, 0, [
     "ChangeContactPicForm"
