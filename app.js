@@ -67854,7 +67854,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ChangeContactPicForm', Ext.form.Panel, {
     config: {
-        centered: true,
+        centered: false,
         height: '20%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
@@ -67873,10 +67873,6 @@ Ext.define('Ext.picker.Picker', {
                 labelWrap: true,
                 name: 'fileUpload',
                 capture: 'camera'
-            },
-            {
-                xtype: 'spacer',
-                height: '40%'
             },
             {
                 xtype: 'button',
@@ -67914,6 +67910,7 @@ Ext.define('Ext.picker.Picker', {
                     });
                 },
                 left: '30%',
+                margin: '10 10 10 10',
                 style: '',
                 ui: 'round',
                 width: '50%',
