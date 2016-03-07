@@ -67865,7 +67865,7 @@ Ext.define('Ext.picker.Picker', {
         width: '80%',
         hideOnMaskTap: true,
         layout: 'fit',
-        modal: true,
+        modal: false,
         scrollable: false,
         items: [
             {
