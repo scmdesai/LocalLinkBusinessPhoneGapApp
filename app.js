@@ -66181,7 +66181,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        console.log('Updating record');
+        //console.log('Updating record');
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66461,7 +66461,7 @@ Ext.define('Ext.picker.Picker', {
                         'email': email,
                         'businessName': record.get('businessName')
                     });
-                    console.log("User details are : " + email + ',' + record.get('customerId') + ',' + record.get('businessName'));
+                    //console.log("User details are : " + email +','+ record.get('customerId') +','+ record.get('businessName'));
                     var store = Ext.getStore('MyJsonPStore');
                     var view = Ext.create("Ext.tab.Panel", {
                             itemId: 'panel',
@@ -66954,7 +66954,7 @@ Ext.define('Ext.picker.Picker', {
                     var customerId;
                     var businessName;
                     storeUserDetails.each(function(record) {
-                        console.log('StoreUserDetails : ' + record.get('customerId'));
+                        //console.log('StoreUserDetails : ' +record.get('customerId'));
                         customerId = record.get('customerId');
                         businessName = record.get('businessName');
                     });
@@ -67247,18 +67247,18 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/deals/' + itemNames[j],
                         success: function(form, action) {
                             Ext.Msg.alert('Success', action.msg);
-                            console.log(action.msg);
+                            //console.log(action.msg);
                             var dealsStore = Ext.getStore('MyDealsStore');
                             dealsStore.load();
                         },
                         failure: function(form, action) {
                             Ext.Msg.alert('Failure', action.msg);
-                            console.log(action.msg);
                         }
                     });
                 }
             });
-        } else //}
+        } else //console.log(action.msg);
+        //}
         {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
@@ -67399,7 +67399,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'UploadDealForm'
             });
         storeUserDetails.each(function(record) {
-            console.log('StoreUserDetails : ' + record.get('customerId'));
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
             businessName = record.get('businessName');
             view.setRecord(record);
@@ -67425,13 +67425,13 @@ Ext.define('Ext.picker.Picker', {
         storeUserDetails.load();
         var customerId;
         storeUserDetails.each(function(record) {
-            console.log('StoreUserDetails : ' + record.get('customerId'));
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
         });
         var store = Ext.getStore('MyDealsStore');
         store.load();
         store.clearFilter();
-        console.log('Fitering for customerId: ' + customerId);
+        //console.log('Fitering for customerId: ' + customerId);
         store.filter('customerId', customerId);
         var view;
         view = Ext.Viewport.add({
@@ -67794,14 +67794,14 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Success', action.msg);
-                                    console.log("Action Msg is : " + action.success);
+                                    //console.log("Action Msg is : " +action.success);
                                     //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                     uForm.destroy();
                                 },
                                 failure: function(form, action) {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Failed', action.msg);
-                                    console.log("Action Msg is : " + action.success);
+                                    //console.log("Action Msg is : " + action.success);
                                     //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                     uForm.destroy();
                                 }
@@ -67854,19 +67854,27 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ChangeContactPicForm', Ext.form.Panel, {
     config: {
-        height: '50%',
+        centered: true,
+        height: '20%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
         styleHtmlContent: true,
         width: '80%',
-        layout: 'card',
+        layout: 'fit',
+        scrollable: false,
         items: [
             {
                 xtype: 'filefield',
+                docked: 'top',
+                height: '20%',
                 label: '',
                 labelWrap: true,
                 name: 'fileUpload',
                 capture: 'camera'
+            },
+            {
+                xtype: 'spacer',
+                height: '40%'
             },
             {
                 xtype: 'button',
@@ -67903,8 +67911,10 @@ Ext.define('Ext.picker.Picker', {
                         }
                     });
                 },
-                docked: 'bottom',
+                left: '30%',
+                style: '',
                 ui: 'round',
+                width: '50%',
                 text: 'Submit'
             },
             {
@@ -67957,7 +67967,18 @@ Ext.define('Ext.picker.Picker', {
                 hidden: true,
                 name: 'pictureURL'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onChangeContactPicFormActiveItemChange',
+                event: 'activeitemchange'
+            }
         ]
+    },
+    onChangeContactPicFormActiveItemChange: function(container, value, oldValue, eOpts) {
+        console.log(container.getItemId());
+        console.log(value);
+        console.log(oldValue);
     }
 }, 0, [
     "ChangeContactPicForm"
