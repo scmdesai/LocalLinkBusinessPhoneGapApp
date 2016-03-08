@@ -66387,13 +66387,11 @@ Ext.define('Ext.picker.Picker', {
                 id: 'Login',
                 itemId: 'Login',
                 maxHeight: '10%',
-                maxWidth: '40%',
                 style: '',
                 styleHtmlCls: '',
                 ui: 'action-round',
-                width: '60%',
-                iconCls: '',
-                text: 'Login'
+                width: 100,
+                icon: 'resources/images/login.png'
             }
         ],
         listeners: [
@@ -66837,7 +66835,7 @@ Ext.define('Ext.picker.Picker', {
         useSimpleItems: false,
         itemTpl: [
             '',
-            '<div style="font-size:20px" >{dealName}<input type="checkbox" class="Unchecked" name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
+            '<div style="font-size:20px" >{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
             '',
             '',
             '<div style="color:#0000FF;font-size:12px;font-style:italics">{dealStartDate} - {dealEndDate}</div>'
@@ -66977,11 +66975,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'contactpic',
-                height: 160,
-                layout: {
-                    type: 'vbox',
-                    pack: 'start'
-                }
+                height: 160
             },
             {
                 xtype: 'textfield',
@@ -67485,7 +67479,7 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         itemId: 'dealPicture',
         left: 'dealPicture',
-        style: 'overflow: hidden',
+        style: 'overflow: hidden;background:#fff',
         styleHtmlContent: true,
         width: '100%',
         autoDestroy: false,
@@ -67599,12 +67593,12 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealsPanel', Ext.form.Panel, {
     config: {
-        cls: 'listofdeals',
         id: 'dealsPanel',
         itemId: 'dealsPanel',
         minHeight: '80%',
         padding: '5 5 5 5',
         style: 'border:1px inset',
+        styleHtmlContent: true,
         url: '',
         items: [
             {
@@ -67875,10 +67869,13 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ChangeContactPicForm', Ext.form.Panel, {
     config: {
+        baseCls: 'x-panel-body',
         centered: true,
+        cls: 'x-panel-body',
         height: '25%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
+        style: '',
         width: '80%',
         hideOnMaskTap: true,
         modal: true,
