@@ -66977,7 +66977,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'contactpic',
-                height: 120,
+                height: 200,
                 layout: {
                     type: 'vbox',
                     pack: 'start'
