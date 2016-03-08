@@ -66976,7 +66976,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'contactpic',
-                height: 80,
+                height: '',
                 id: 'contactpic',
                 maxWidth: '',
                 layout: {
