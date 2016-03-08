@@ -66536,8 +66536,9 @@ Ext.define('Ext.picker.Picker', {
             '\t'
         ],
         layout: {
-            type: 'hbox',
-            align: 'start'
+            type: 'vbox',
+            align: 'start',
+            pack: 'center'
         },
         items: [
             {
