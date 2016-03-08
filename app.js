@@ -67932,6 +67932,7 @@ Ext.define('Ext.picker.Picker', {
                         }
                     });
                 },
+                height: '25%',
                 left: '30%',
                 margin: '5 0 0 0',
                 style: '',
