@@ -13,3 +13,23 @@
     color:black;
     padding-left: 4px;
 }
+
+.x-panel-body{
+	
+	background: #fff;
+}
+
+.checkbox_hidden {
+	display:none;
+}
+
+.checkbox_visible {
+	display:normal;
+}
+
+
+
+.confirm_button .x-button{
+	
+	background-color:#ff00ff;
+}
