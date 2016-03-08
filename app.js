@@ -66542,7 +66542,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 docked: 'bottom',
-                hidden: false,
+                hidden: true,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
                 width: '30%',
