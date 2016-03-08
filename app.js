@@ -66529,15 +66529,13 @@ Ext.define('Ext.picker.Picker', {
         style: 'overflow: hidden',
         styleHtmlContent: true,
         ui: '',
+        layout: 'fit',
+        scrollable: false,
         tpl: [
             '',
             '\t<img src="{pictureURL}"/>',
             '\t'
         ],
-        layout: {
-            type: 'vbox',
-            align: 'center'
-        },
         items: [
             {
                 xtype: 'button',
@@ -66562,6 +66560,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
+                ui: 'plain',
                 width: '30%',
                 iconAlign: 'center',
                 iconCls: 'add'
@@ -66974,11 +66973,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'contactpic',
                 id: 'contactpic',
-                maxWidth: '50%',
-                layout: {
-                    type: 'vbox',
-                    align: 'start'
-                }
+                maxWidth: '50%'
             },
             {
                 xtype: 'button',
