@@ -67875,7 +67875,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ChangeContactPicForm', Ext.form.Panel, {
     config: {
-        centered: false,
+        centered: true,
         height: '25%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
@@ -67885,7 +67885,6 @@ Ext.define('Ext.picker.Picker', {
         scrollable: false,
         layout: {
             type: 'hbox',
-            align: 'center',
             pack: 'center'
         },
         items: [
