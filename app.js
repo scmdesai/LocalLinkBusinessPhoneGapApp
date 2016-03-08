@@ -66541,6 +66541,23 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'button',
+                handler: function(button, e) {
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.load();
+                    var customerId;
+                    var businessName;
+                    storeUserDetails.each(function(record) {
+                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                        customerId = record.get('customerId');
+                        businessName = record.get('businessName');
+                    });
+                    var view = Ext.Viewport.add({
+                            xtype: 'ChangeContactPicForm'
+                        });
+                    var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                    view.setRecord(record);
+                    view.showBy(button);
+                },
                 docked: 'bottom',
                 hidden: false,
                 id: 'changePicButton',
