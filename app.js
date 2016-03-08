@@ -66541,9 +66541,13 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'button',
-                docked: 'left',
-                top: '30%',
-                text: 'MyButton8'
+                docked: 'bottom',
+                hidden: true,
+                id: 'changePicButton',
+                itemId: 'changePicButton',
+                width: '30%',
+                iconAlign: 'center',
+                iconCls: 'add'
             }
         ]
     }
@@ -66890,6 +66894,8 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
+                            var btn = Ext.get('changePicButton');
+                            btn.setVisible(false);
                             //form.fireEvent('updateRecord',this);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
@@ -67304,6 +67310,8 @@ Ext.define('Ext.picker.Picker', {
     },
     onEditButtonTap: function(button, e, eOpts) {
         var referrer = Ext.Viewport.getActiveItem();
+        var btn = Ext.get('changePicButton');
+        btn.setVisible(true);
         var form = this.getContactform();
         var info = this.getContactinfo().getRecord();
         form.referrer = referrer;
@@ -67380,6 +67388,8 @@ Ext.define('Ext.picker.Picker', {
 		*/
     onCancelButtonTap: function(button, e, eOpts) {
         var form = this.getContactform();
+        var btn = Ext.get('changePicButton');
+        btn.setVisible(false);
         Ext.Viewport.setActiveItem(form.referrer);
         delete form.referrer;
     },
