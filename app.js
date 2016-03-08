@@ -66529,13 +66529,16 @@ Ext.define('Ext.picker.Picker', {
         style: 'overflow: hidden',
         styleHtmlContent: true,
         ui: '',
-        layout: 'fit',
         scrollable: false,
         tpl: [
             '',
             '\t<img src="{pictureURL}"/>',
             '\t'
         ],
+        layout: {
+            type: 'hbox',
+            align: 'start'
+        },
         items: [
             {
                 xtype: 'button',
@@ -66556,7 +66559,6 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.showBy(button);
                 },
-                docked: 'bottom',
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
