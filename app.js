@@ -67624,7 +67624,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'UploadDeal',
                         margin: '5 5 5 5',
                         styleHtmlContent: true,
-                        ui: 'confirm-round',
+                        ui: 'untitled-ui-4',
                         text: 'Upload New Deal'
                     },
                     {
@@ -67634,7 +67634,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'DeleteDeal',
                         margin: '5 5 5 5',
                         styleHtmlContent: true,
-                        ui: 'decline-round',
+                        ui: 'plain',
                         text: 'Delete'
                     }
                 ]
