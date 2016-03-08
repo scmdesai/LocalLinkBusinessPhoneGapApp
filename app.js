@@ -66542,7 +66542,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 docked: 'bottom',
-                hidden: true,
+                hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
                 width: '30%',
@@ -66701,12 +66701,12 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        Ext.get('changePicButton').hide();
         if (record) {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
-            Ext.get('changePicButton').hide();
         }
     }
 }, 0, [
