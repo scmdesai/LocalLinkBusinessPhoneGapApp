@@ -66895,8 +66895,6 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            var btn = Ext.get('changePicButton');
-                            btn.hide();
                             //form.fireEvent('updateRecord',this);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
@@ -66926,6 +66924,7 @@ Ext.define('Ext.picker.Picker', {
                                                 }
                                             ]
                                         });
+                                    Ext.get('changePicButton').hide();
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
