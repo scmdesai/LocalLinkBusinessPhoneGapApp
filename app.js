@@ -66895,7 +66895,7 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             var btn = Ext.get('changePicButton');
-                            btn.setVisible(false);
+                            btn.hide();
                             //form.fireEvent('updateRecord',this);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
@@ -67311,7 +67311,7 @@ Ext.define('Ext.picker.Picker', {
     onEditButtonTap: function(button, e, eOpts) {
         var referrer = Ext.Viewport.getActiveItem();
         var btn = Ext.get('changePicButton');
-        btn.setVisible(true);
+        btn.show();
         var form = this.getContactform();
         var info = this.getContactinfo().getRecord();
         form.referrer = referrer;
@@ -67389,7 +67389,7 @@ Ext.define('Ext.picker.Picker', {
     onCancelButtonTap: function(button, e, eOpts) {
         var form = this.getContactform();
         var btn = Ext.get('changePicButton');
-        btn.setVisible(false);
+        btn.hide();
         Ext.Viewport.setActiveItem(form.referrer);
         delete form.referrer;
     },
