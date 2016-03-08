@@ -1,3 +1,17 @@
+$toolbar-icon-size: 1em;
+$base-color: rgba(0,0,0,0.5);
+$confirm-color: #659D32;
+$font-family: Helvetica, sans-serif;
+$page-bg-color: rgba(0,0,0,0.9);
+$list-active-color: $base-color;
+$list-bg-color: $base-color;
+$list-color: #fff;
+$list-header-bg-color: $base-color;
+$form-bg-color: rgba(0,0,0,0.5);
+$form-dark: rgba(0,0,0,0.5);
+$picker-active-border-color: rgba(0,0,0,0.5);
+
+
 .favorite {
     border: 1px solid #aaa; 
     padding: 5px; 
