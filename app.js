@@ -66561,7 +66561,8 @@ Ext.define('Ext.picker.Picker', {
                         });
                     var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                     view.setRecord(record);
-                    view.showBy(button);
+                    //view.showBy(button);
+                    Ext.Viewport.setActiveItem();
                 },
                 docked: 'bottom',
                 hidden: false,
