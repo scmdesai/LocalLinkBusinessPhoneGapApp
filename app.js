@@ -66709,6 +66709,7 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
+            console.log(this.down('contactpic').getXTypes());
         }
     }
 }, 0, [
