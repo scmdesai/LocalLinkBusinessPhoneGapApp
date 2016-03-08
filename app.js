@@ -67318,7 +67318,10 @@ Ext.define('Ext.picker.Picker', {
         Ext.Viewport.setActiveItem(form);
         form.setRecord(info);
     },
-    onSaveContactButtonTap: function(button, e, eOpts) {},
+    onSaveContactButtonTap: function(button, e, eOpts) {
+        var btn = Ext.get('changePicButton');
+        btn.hide();
+    },
     /*var form = this.getContactform();
 		var errors = form.getValidationErrors();
 		console.log('On Save Button Tap');
