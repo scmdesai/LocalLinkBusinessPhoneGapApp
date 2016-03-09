@@ -1,15 +1,14 @@
 $toolbar-icon-size: 1em;
-$base-color: rgba(0,0,0,0.5);
+$base-color: rgba(255,255,255,1);
 $confirm-color: #659D32;
 $font-family: Helvetica, sans-serif;
-$page-bg-color: rgba(0,0,0,0.9);
+$page-bg-color: rgba(255,255,255,1);
 $list-active-color: $base-color;
 $list-bg-color: $base-color;
 $list-color: #fff;
 $list-header-bg-color: $base-color;
-$form-bg-color: rgba(0,0,0,0.5);
-$form-dark: rgba(0,0,0,0.5);
-$picker-active-border-color: rgba(0,0,0,0.5);
+$form-bg-color: rgba(255,255,255,1);
+
 
 
 .favorite {
@@ -24,13 +23,36 @@ $picker-active-border-color: rgba(0,0,0,0.5);
 }
 
 .contact-name{
-    color:black;
+    color:white;
     padding-left: 4px;
+}
+
+.toolbar{
+	background:rgba(246,88,71, 0.8);
+	font-family: "Helvetica";
+}
+
+.toolbar-button {
+	
+	background:rgba(255,255,255,1);
+	
 }
 
 .x-panel-body{
 	
-	background: #fff;
+	background:rgba(255,255,255,1);
+	border:1px groove #000;
+}
+
+
+.x-field{
+	
+	background:rgba(255,255,255,1);
+	margin: 5px 5px 5px 5px;
+	font-size:4vw;
+	font-family: "Helvetica";
+	
+	
 }
 
 .checkbox_hidden {
@@ -42,8 +64,13 @@ $picker-active-border-color: rgba(0,0,0,0.5);
 }
 
 
-
-.confirm_button .x-button{
+.x-list {
+	background:rgba(255,255,255,1);
+	font-size:4vw;
+	font-family: "Helvetica";
+	
+}
+.confirm_button{
 	
 	background-color:#ff00ff;
 }
