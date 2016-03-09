@@ -67892,18 +67892,17 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'top',
                 height: '20%',
                 itemId: 'myfilefield1',
+                component: {
+                    xtype: 'fileinput',
+                    fastFocus: false,
+                    emptyText: 'Select an image',
+                    fieldLabel: 'Photo',
+                    buttonText: 'Browse'
+                },
                 label: '',
                 labelWrap: true,
                 name: 'fileUpload',
-                capture: 'camera',
-                listeners: [
-                    {
-                        fn: function(component, eOpts) {
-                            component.child().setText('Browse');
-                        },
-                        event: 'initialize'
-                    }
-                ]
+                capture: 'camera'
             },
             {
                 xtype: 'button',
