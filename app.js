@@ -66391,7 +66391,8 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlCls: '',
                 ui: 'action-round',
                 width: 100,
-                icon: 'resources/images/login.png'
+                icon: '',
+                text: 'Login'
             }
         ],
         listeners: [
@@ -66566,7 +66567,8 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                ui: 'plain',
+                style: 'border:none;',
+                ui: 'confirm',
                 width: '10%',
                 iconCls: 'add'
             }
@@ -67624,7 +67626,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'UploadDeal',
                         margin: '5 5 5 5',
                         styleHtmlContent: true,
-                        ui: 'untitled-ui-4',
+                        ui: 'confirm',
                         text: 'Upload New Deal'
                     },
                     {
@@ -67634,7 +67636,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'DeleteDeal',
                         margin: '5 5 5 5',
                         styleHtmlContent: true,
-                        ui: 'plain',
+                        ui: 'decline',
                         text: 'Delete'
                     }
                 ]
@@ -67889,10 +67891,19 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'filefield',
                 docked: 'top',
                 height: '20%',
+                itemId: 'myfilefield1',
                 label: '',
                 labelWrap: true,
                 name: 'fileUpload',
-                capture: 'camera'
+                capture: 'camera',
+                listeners: [
+                    {
+                        fn: function(component, eOpts) {
+                            component.getButton().setText('Browse');
+                        },
+                        event: 'initialize'
+                    }
+                ]
             },
             {
                 xtype: 'button',
