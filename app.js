@@ -61925,95 +61925,6 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /**
- * Hidden fields allow you to easily inject additional data into a {@link Ext.form.Panel form} without displaying
- * additional fields on the screen. This is often useful for sending dynamic or previously collected data back to the
- * server in the same request as the normal form submission. For example, here is how we might set up a form to send
- * back a hidden userId field:
- *
- *     @example
- *     var form = Ext.create('Ext.form.Panel', {
- *         fullscreen: true,
- *         items: [
- *             {
- *                 xtype: 'fieldset',
- *                 title: 'Enter your name',
- *                 items: [
- *                     {
- *                         xtype: 'hiddenfield',
- *                         name: 'userId',
- *                         value: 123
- *                     },
- *                     {
- *                         xtype: 'checkboxfield',
- *                         label: 'Enable notifications',
- *                         name: 'notifications'
- *                     }
- *                 ]
- *             }
- *         ]
- *     });
- *
- * In the form above we created two fields - a hidden field and a {@link Ext.field.Checkbox check box field}. Only the
- * check box will be visible, but both fields will be submitted. Hidden fields cannot be tabbed to - they are removed
- * from the tab index so when your user taps the next/previous field buttons the hidden field is skipped over.
- *
- * It's easy to read and update the value of a hidden field within a form. Using the example above, we can get a
- * reference to the hidden field and then set it to a new value in 2 lines of code:
- *
- *     var userId = form.down('hiddenfield')[0];
- *     userId.setValue(1234);
- *
- * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
- */
-(Ext.cmd.derive('Ext.field.Hidden', Ext.field.Text, {
-    alternateClassName: 'Ext.form.Hidden',
-    config: {
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        component: {
-            xtype: 'input',
-            type: 'hidden'
-        },
-        /**
-         * @cfg
-         * @inheritdoc
-         */
-        ui: 'hidden',
-        /**
-         * @cfg hidden
-         * @hide
-         */
-        hidden: true,
-        /**
-         * @cfg {Number} tabIndex
-         * @hide
-         */
-        tabIndex: -1
-    }
-}, 0, [
-    "hiddenfield"
-], [
-    "component",
-    "field",
-    "textfield",
-    "hiddenfield"
-], {
-    "component": true,
-    "field": true,
-    "textfield": true,
-    "hiddenfield": true
-}, [
-    "widget.hiddenfield"
-], 0, [
-    Ext.field,
-    'Hidden',
-    Ext.form,
-    'Hidden'
-], 0));
-
-/**
  * The Form panel presents a set of form fields and provides convenient ways to load and save data. Usually a form
  * panel just contains the set of fields you want to display, ordered inside the items configuration like this:
  *
@@ -67707,6 +67618,7 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         minHeight: '',
         enctype: 'multipart/form-data',
+        standardSubmit: true,
         url: 'http://services.appsonmobile.com/uploadS3',
         items: [
             {
@@ -67793,12 +67705,14 @@ Ext.define('Ext.picker.Picker', {
                 maxHeight: ''
             },
             {
-                xtype: 'hiddenfield',
-                name: 'CustID'
+                xtype: 'textfield',
+                hidden: true,
+                name: 'customerId'
             },
             {
-                xtype: 'hiddenfield',
-                name: 'BusinessName'
+                xtype: 'textfield',
+                hidden: true,
+                name: 'businessName'
             },
             {
                 xtype: 'container',
