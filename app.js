@@ -66946,15 +66946,13 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.getCmp('changePicButton').hide();
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
-                                    var alert = Ext.Msg.alert('Success', action.msg);
-                                    alert.setStyle('background-color:#fff;color:#1985d0');
+                                    Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
                                 //var fields = record.getChanges();
                                 failure: function(form, action) {
                                     store.load();
-                                    var alert = Ext.Msg.alert('Failure', action.msg);
-                                    alert.setStyle('background-color:#fff;color:#1985d0');
+                                    Ext.Msg.alert('Failure', action.msg);
                                     form.destroy();
                                 }
                             });
@@ -67259,15 +67257,13 @@ Ext.define('Ext.picker.Picker', {
                         myForm.submit({
                             url: 'http://services.appsonmobile.com/deals/' + itemNames[j],
                             success: function(form, action) {
-                                var alert = Ext.Msg.alert('Success', action.msg);
-                                alert.setStyle('background-color:#fff;color:#1985d0');
+                                Ext.Msg.alert('Success', action.msg);
                                 //console.log(action.msg);
                                 var dealsStore = Ext.getStore('MyDealsStore');
                                 dealsStore.load();
                             },
                             failure: function(form, action) {
-                                var alert = Ext.Msg.alert('Failure', action.msg);
-                                alert.setStyle('background-color:#fff;color:#1985d0');
+                                Ext.Msg.alert('Failure', action.msg);
                             }
                         });
                     }
@@ -67844,16 +67840,14 @@ Ext.define('Ext.picker.Picker', {
                                 scope: this,
                                 success: function(form, action) {
                                     Ext.getStore('MyDealsStore').load();
-                                    var alert = Ext.Msg.alert('Success', action.msg);
-                                    alert.setStyle('background-color:#fff;color:#1985d0');
+                                    Ext.Msg.alert('Success', action.msg);
                                     //console.log("Action Msg is : " +action.success);
                                     //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                     uForm.destroy();
                                 },
                                 failure: function(form, action) {
                                     Ext.getStore('MyDealsStore').load();
-                                    var alert = Ext.Msg.alert('Failure', action.msg);
-                                    alert.setStyle('background-color:#fff;color:#1985d0');
+                                    Ext.Msg.alert('Failure', action.msg);
                                     //console.log("Action Msg is : " + action.success);
                                     //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                     uForm.destroy();
@@ -67959,14 +67953,12 @@ Ext.define('Ext.picker.Picker', {
                             view.setRecord(record);
                             //store.load();
                             //form.updateRecord(record);
-                            var alert = Ext.Msg.alert('Success', action.msg);
-                            alert.setStyle('background-color:#fff;color:#1985d0');
+                            Ext.Msg.alert('Success', action.msg);
                             form.destroy();
                         },
                         failure: function(form, action) {
                             store.load();
-                            var alert = Ext.Msg.alert('Failure', action.msg);
-                            alert.setStyle('background-color:#fff;color:#1985d0');
+                            Ext.Msg.alert('Failure', action.msg);
                             form.destroy();
                         }
                     });
