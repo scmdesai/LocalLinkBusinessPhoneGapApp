@@ -66891,13 +66891,13 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'toolbar',
                 docked: 'top',
-                styleHtmlContent: true,
                 autoDestroy: false,
                 items: [
                     {
                         xtype: 'button',
                         itemId: 'cancelButton',
                         style: '',
+                        ui: 'plain',
                         width: '30%',
                         text: 'Cancel'
                     },
@@ -66969,6 +66969,7 @@ Ext.define('Ext.picker.Picker', {
 							Ext.Viewport.setActiveItem(view);*/
                         cls: 'button',
                         itemId: 'saveContactButton',
+                        ui: 'plain',
                         width: '30%',
                         iconCls: '',
                         text: 'Save'
@@ -67957,6 +67958,7 @@ Ext.define('Ext.picker.Picker', {
                 },
                 bottom: 30,
                 centered: false,
+                cls: 'button',
                 height: '30%',
                 left: '20%',
                 margin: '5 0 0 0',
@@ -67964,7 +67966,6 @@ Ext.define('Ext.picker.Picker', {
                 ui: 'plain',
                 width: '45%',
                 iconAlign: 'center',
-                iconCls: '',
                 text: 'Submit'
             },
             {

@@ -9,16 +9,7 @@ $list-color: #fff;
 $list-header-bg-color: $base-color;
 
 
-.favorite {
-    border: 1px solid #aaa; 
-    padding: 5px; 
-    margin: 5px;
-    text-align: center;
-}
 
-.square {
-    border-radius: 0px;
-}
 
 .contact-name{
     color:black;
@@ -26,13 +17,8 @@ $list-header-bg-color: $base-color;
 }
 
 
-.checkbox_hidden {
-	display:none;
+.button{
+	background-color : #1985d0;
 }
-
-.checkbox_visible {
-	display:normal;
-}
-
 
 
