@@ -67707,7 +67707,6 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         minHeight: '',
         enctype: 'multipart/form-data',
-        standardSubmit: true,
         url: 'http://services.appsonmobile.com/uploadS3',
         items: [
             {
@@ -67746,7 +67745,7 @@ Ext.define('Ext.picker.Picker', {
                 label: 'Deal Start',
                 labelWidth: '35%',
                 labelWrap: true,
-                name: 'DealEndDate',
+                name: 'DealStartDate',
                 value: {
                     day: new Date().getDate(),
                     month: (new Date().getMonth() + 1),
