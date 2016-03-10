@@ -87,14 +87,14 @@ $form-bg-color: rgba(255,255,255,1);
 	font-size: 1.5em;
 }
 
-.compose{
+.compose .before {
 	
 	color:white;
 	font-size: 1em;
 	
 }
 
-.action{
+.action .before {
 	
 	color:white;
 	font-size: 1em;
@@ -136,24 +136,24 @@ $form-bg-color: rgba(255,255,255,1);
 	
 }
 
-.home{
+.home .before{
 	
-	color:white;
+	color:e32636;
 	font-size: 1em;
 	
 	
 }
 
 
-.info{
+.info .before{
 	
-	color:white;
+	color:e32636;
 	font-size: 1em;
 	
 	
 }
 
-.login  {
+.login .before {
     background-color: #e32636;
     color:white;
 	font-weight:bold;
