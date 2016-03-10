@@ -67899,7 +67899,7 @@ Ext.define('Ext.picker.Picker', {
                 listeners: [
                     {
                         fn: function(component, eOpts) {
-                            component.child().setText('Browse');
+                            component.getButton().setText('Browse');
                         },
                         event: 'initialize'
                     }
