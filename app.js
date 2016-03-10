@@ -66572,7 +66572,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                style: 'color:blue;',
+                style: 'color:#1985d0;',
                 ui: 'plain',
                 width: '20%',
                 iconCls: 'add'
@@ -66623,14 +66623,13 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 docked: 'top',
                 style: '',
-                ui: 'light',
                 items: [
                     {
                         xtype: 'button',
                         docked: 'right',
                         height: 48,
                         itemId: 'editButton',
-                        style: 'border:none',
+                        style: 'border:none;font-size:1.5em',
                         ui: 'plain',
                         width: '20%',
                         iconCls: 'compose'
@@ -66899,13 +66898,12 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'toolbar',
                 docked: 'top',
-                ui: 'light',
                 autoDestroy: false,
                 items: [
                     {
                         xtype: 'button',
                         itemId: 'cancelButton',
-                        style: '',
+                        style: 'font-size:9vw',
                         ui: 'plain',
                         width: '30%',
                         text: 'Cancel'
@@ -66978,6 +66976,7 @@ Ext.define('Ext.picker.Picker', {
 							Ext.Viewport.setActiveItem(view);*/
                         cls: 'button',
                         itemId: 'saveContactButton',
+                        style: 'font-size:9vw',
                         ui: 'plain',
                         width: '30%',
                         iconCls: '',
@@ -67513,11 +67512,11 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'toolbar',
                 docked: 'top',
-                ui: 'light',
                 items: [
                     {
                         xtype: 'button',
                         itemId: 'dealBackBtn',
+                        style: 'font-size:9vw',
                         ui: 'plain',
                         width: '30%',
                         text: 'Back'
@@ -67526,9 +67525,8 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         docked: 'right',
                         itemId: 'share',
-                        margin: '15 5 5 5',
                         minHeight: '100%',
-                        style: 'border:none',
+                        style: 'border:none;font-size:1.5em',
                         ui: 'plain',
                         width: '20%',
                         iconAlign: 'center',
@@ -67764,6 +67762,7 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlContent: true,
                 width: '100%',
                 label: 'Deal Start',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'DealStartDate',
                 value: {
@@ -67784,6 +67783,7 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlContent: true,
                 width: '100%',
                 label: 'Deal End',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'DealEndDate',
                 value: {
@@ -67985,8 +67985,9 @@ Ext.define('Ext.picker.Picker', {
                 height: '30%',
                 left: '20%',
                 margin: '5 0 0 0',
+                style: 'border:none',
                 styleHtmlContent: true,
-                ui: 'plain',
+                ui: 'action',
                 width: '45%',
                 iconAlign: 'center',
                 text: 'Submit'
