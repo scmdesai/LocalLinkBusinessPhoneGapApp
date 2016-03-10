@@ -66844,7 +66844,7 @@ Ext.define('Ext.picker.Picker', {
         useSimpleItems: false,
         itemTpl: [
             '',
-            '<div style="font-size:20px;color:black">{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;" id= "chkbx" ></div>',
+            '<div style="font-size:20px;color:black">{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.9;float:right;" id= "chkbx" ></div>',
             '',
             '',
             '<div style="color:#e32636;font-size:12px;font-style:italics">Valid {dealStartDate} to {dealEndDate}</div>'
@@ -67579,12 +67579,10 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.Main', Ext.tab.Panel, {
     config: {
-        baseCls: '',
         items: [
             {
                 xtype: 'container',
                 title: 'Home',
-                baseCls: 'x-list',
                 items: [
                     {
                         xtype: 'contactlist',
