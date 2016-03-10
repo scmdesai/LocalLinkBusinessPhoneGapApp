@@ -11,14 +11,14 @@ $list-header-bg-color: $base-color;
 
 
 
-.contact-name{
-    color:black;
+.contact-name {
+    color: #fff ;
     padding-left: 4px;
 }
 
-
-.button{
-	background-color : #1985d0;
+.customfield {
+	border:1px groove #eee;
+	margin:5px 5px 5px 5px;
 }
 
 

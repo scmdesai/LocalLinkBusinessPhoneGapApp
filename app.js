@@ -66389,9 +66389,10 @@ Ext.define('Ext.picker.Picker', {
                 id: 'Login',
                 itemId: 'Login',
                 maxHeight: '',
-                minHeight: '10%',
+                minHeight: '',
+                style: 'border:none',
                 styleHtmlCls: '',
-                ui: 'plain',
+                ui: 'action',
                 width: 100,
                 icon: '',
                 text: 'Login'
@@ -66571,7 +66572,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                style: 'border:none;background-color:rgba(0,0,0,0);',
+                style: 'color:blue;',
                 ui: 'plain',
                 width: '20%',
                 iconCls: 'add'
@@ -66622,14 +66623,15 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 docked: 'top',
                 style: '',
-                styleHtmlContent: true,
+                ui: 'light',
                 items: [
                     {
                         xtype: 'button',
                         docked: 'right',
                         height: 48,
                         itemId: 'editButton',
-                        margin: '15 5 5 5',
+                        style: 'border:none',
+                        ui: 'plain',
                         width: '20%',
                         iconCls: 'compose'
                     },
@@ -66640,7 +66642,7 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         xtype: 'component',
-                        baseCls: 'x-item',
+                        baseCls: 'contact-name',
                         cls: 'contact-name',
                         disabled: true,
                         html: '<b>First Name</b>',
@@ -66683,7 +66685,11 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'textfield',
-                        cls: 'icon-phone',
+                        baseCls: 'customfield',
+                        cls: [
+                            'icon-phone',
+                            'customfield'
+                        ],
                         disabled: false,
                         height: '',
                         html: '',
@@ -66700,11 +66706,13 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         xtype: 'textareafield',
+                        baseCls: 'customfield',
                         cls: 'icon-location',
                         disabled: false,
                         height: '100%',
                         html: '',
                         itemId: 'address',
+                        margin: '',
                         maxHeight: '100%',
                         maxWidth: '100%',
                         minHeight: '100%',
@@ -66817,6 +66825,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ListOfDeals', Ext.dataview.List, {
     config: {
+        cls: 'customlist',
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
@@ -66825,13 +66834,12 @@ Ext.define('Ext.picker.Picker', {
         mode: 'MULTI',
         deferEmptyText: false,
         emptyText: 'No Deals',
-        itemCls: '',
+        itemCls: 'list-item',
         store: 'MyDealsStore',
         onItemDisclosure: false,
         pinHeaders: false,
         preventSelectionOnDisclose: false,
         refreshHeightOnUpdate: false,
-        striped: true,
         useSimpleItems: false,
         itemTpl: [
             '',
@@ -66891,6 +66899,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'toolbar',
                 docked: 'top',
+                ui: 'light',
                 autoDestroy: false,
                 items: [
                     {
@@ -66983,6 +66992,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
+                cls: 'customfield',
                 height: '20%',
                 html: '',
                 id: 'businessName',
@@ -66998,6 +67008,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
+                cls: 'customfield',
                 height: '20%',
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
@@ -67009,6 +67020,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textareafield',
+                cls: 'customfield',
                 height: '15%',
                 id: 'address',
                 itemId: 'address',
@@ -67501,7 +67513,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'toolbar',
                 docked: 'top',
-                styleHtmlContent: true,
+                ui: 'light',
                 items: [
                     {
                         xtype: 'button',
@@ -67638,7 +67650,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                cls: 'button',
+                cls: 'customcontainer',
                 margin: '',
                 maxWidth: '',
                 width: '100%',
@@ -67650,6 +67662,8 @@ Ext.define('Ext.picker.Picker', {
                         id: 'UploadDeal',
                         itemId: 'UploadDeal',
                         margin: '5 5 5 5',
+                        style: 'border:none',
+                        ui: 'confirm',
                         width: '50%',
                         text: 'Upload New Deal'
                     },
@@ -67660,7 +67674,9 @@ Ext.define('Ext.picker.Picker', {
                         id: 'DeleteDeal',
                         itemId: 'DeleteDeal',
                         margin: '5 5 5 5',
-                        width: '50%',
+                        style: 'border:none',
+                        ui: 'decline',
+                        width: '40%',
                         text: 'Delete'
                     }
                 ]
@@ -67711,6 +67727,7 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'textfield',
+                cls: 'customfield',
                 margin: '5 5 5 5 ',
                 inputCls: '',
                 label: 'Deal Name',
@@ -67720,6 +67737,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'selectfield',
+                cls: 'customfield',
                 itemId: 'dealStatus',
                 margin: '5 5 5 5 ',
                 maxHeight: '',
@@ -67740,6 +67758,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'datepickerfield',
+                cls: 'customfield',
                 itemId: 'DealStartDate',
                 margin: '5 5 5 5 ',
                 styleHtmlContent: true,
@@ -67760,6 +67779,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'datepickerfield',
+                cls: 'customfield',
                 margin: '5 5 5 5 ',
                 styleHtmlContent: true,
                 width: '100%',
@@ -67779,6 +67799,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'filefield',
+                cls: 'customfield',
                 itemId: 'myfilefield',
                 margin: '5 5 5 5 ',
                 label: 'Deal Image',
@@ -67816,8 +67837,9 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.setActiveItem(view);
                         },
                         flex: 10,
+                        style: 'border:none',
                         styleHtmlContent: true,
-                        ui: 'plain',
+                        ui: 'decline',
                         text: 'Cancel'
                     },
                     {
@@ -67852,8 +67874,9 @@ Ext.define('Ext.picker.Picker', {
                         },
                         flex: 10,
                         itemId: 'submit',
+                        style: 'border:none',
                         styleHtmlContent: true,
-                        ui: 'plain',
+                        ui: 'confirm',
                         text: 'Submit'
                     }
                 ]
