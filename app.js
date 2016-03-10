@@ -66385,13 +66385,11 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 centered: true,
-                cls: 'login',
                 height: '',
                 id: 'Login',
                 itemId: 'Login',
                 maxHeight: '',
                 minHeight: '10%',
-                style: 'background-color:#e32636;',
                 styleHtmlCls: '',
                 ui: 'plain',
                 width: 100,
@@ -66613,7 +66611,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.contactinfo', Ext.form.Panel, {
     config: {
-        baseCls: 'x-panel-body',
         border: 5,
         height: '100%',
         itemId: 'info',
@@ -67483,7 +67480,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealPicture', Ext.Panel, {
     config: {
-        baseCls: 'x-panel-body',
         fullscreen: true,
         height: '100%',
         itemId: 'dealPicture',
@@ -67707,7 +67703,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.UploadDealForm', Ext.form.Panel, {
     config: {
-        baseCls: 'x-panel-body',
         height: '100%',
         minHeight: '',
         enctype: 'multipart/form-data',
@@ -67905,7 +67900,6 @@ Ext.define('Ext.picker.Picker', {
         height: '25%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
-        style: '',
         width: '80%',
         hideOnMaskTap: true,
         modal: true,
