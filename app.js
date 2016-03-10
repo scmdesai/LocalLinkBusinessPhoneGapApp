@@ -66527,7 +66527,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
-        baseCls: 'customfield',
         height: '100%',
         itemId: 'contactpic',
         margin: '5 5 5 5',
@@ -66647,7 +66646,7 @@ Ext.define('Ext.picker.Picker', {
                         html: '<b>First Name</b>',
                         id: 'nameTxt',
                         itemId: 'nameTxt',
-                        style: 'color:white;font-size:7vw'
+                        style: 'color:white;font-size:7vw;font-weight:bold;'
                     }
                 ]
             },
@@ -66830,10 +66829,11 @@ Ext.define('Ext.picker.Picker', {
         useSimpleItems: false,
         itemTpl: [
             '',
-            '<div style="font-size:5vw;color:black;font-weight:bold">{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;background-color:#fff" id= "chkbx" ></div>',
+            '',
+            '<div style="font-size:6.3vw;color:black;font-weight:normal">{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;background-color:#fff" id= "chkbx" ></div>',
             '',
             '',
-            '<div style="color:#1985d0;font-size:3vw;font-style:italics;font-weight:bold">Valid {dealStartDate} to {dealEndDate}</div>'
+            '<div style="color:#1985d0;font-size:3.3vw;font-style:italics;font-weight:normal">Valid {dealStartDate} to {dealEndDate}</div>'
         ]
     }
 }, 0, [
@@ -66946,7 +66946,8 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.getCmp('changePicButton').hide();
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
-                                    Ext.Msg.alert('Success', action.msg);
+                                    var alert = Ext.Msg.alert('Success', action.msg);
+                                    alert.setStyle('background-color:#fff');
                                     form.destroy();
                                 },
                                 //var fields = record.getChanges();
@@ -67905,7 +67906,7 @@ Ext.define('Ext.picker.Picker', {
         height: '25%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
-        style: 'background;#fff',
+        style: 'background;#fff;border:3px groove #1985d0',
         width: '80%',
         hideOnMaskTap: true,
         modal: true,

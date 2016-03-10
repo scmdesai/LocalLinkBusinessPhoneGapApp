@@ -17,10 +17,10 @@ $list-header-bg-color: $base-color;
 }
 
 .customfield {
-	border:1px outset #eee;
+	border:1px groove #eee;
 	margin:5px 5px 5px 5px;
 	font-size:5vw;
-	font-weight:bold;
+	font-weight:normal;
 }
 
 
