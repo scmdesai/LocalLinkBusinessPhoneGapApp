@@ -28,10 +28,6 @@ $picker-active-border-color: rgba(0,0,0,0.5);
     padding-left: 4px;
 }
 
-.x-panel-body{
-	
-	background: #fff;
-}
 
 .checkbox_hidden {
 	display:none;
@@ -43,7 +39,3 @@ $picker-active-border-color: rgba(0,0,0,0.5);
 
 
 
-.confirm_button .x-button{
-	
-	background-color:#ff00ff;
-}
