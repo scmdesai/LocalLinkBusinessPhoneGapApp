@@ -66527,6 +66527,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
+        baseCls: 'customfield',
         height: '100%',
         itemId: 'contactpic',
         margin: '5 5 5 5',
@@ -66630,7 +66631,7 @@ Ext.define('Ext.picker.Picker', {
                         docked: 'right',
                         height: 48,
                         itemId: 'editButton',
-                        style: 'border:none;font-size:1.4em',
+                        style: 'border:none;font-size:1.2em',
                         ui: 'plain',
                         width: '20%',
                         iconCls: 'compose'
@@ -66646,7 +66647,7 @@ Ext.define('Ext.picker.Picker', {
                         html: '<b>First Name</b>',
                         id: 'nameTxt',
                         itemId: 'nameTxt',
-                        style: 'color:white;font-size:8vw'
+                        style: 'color:white;font-size:7vw'
                     }
                 ]
             },
@@ -66667,65 +66668,49 @@ Ext.define('Ext.picker.Picker', {
                 },
                 items: [
                     {
-                        xtype: 'contactpic',
-                        baseCls: 'x-panel-body',
-                        style: 'overflow: hidden;background-color:#fff'
+                        xtype: 'contactpic'
                     }
                 ]
             },
             {
-                xtype: 'container',
+                xtype: 'textfield',
+                cls: [
+                    'icon-phone',
+                    'customfield'
+                ],
+                disabled: false,
                 height: '',
-                style: 'bacground:#fff',
+                html: '',
+                itemId: 'phoneNumber',
+                maxHeight: '30%',
+                minHeight: '',
+                minWidth: '100%',
+                styleHtmlCls: '',
                 width: '100%',
-                layout: {
-                    type: 'vbox',
-                    align: 'end',
-                    pack: 'end'
-                },
-                items: [
-                    {
-                        xtype: 'textfield',
-                        cls: [
-                            'icon-phone',
-                            'customfield'
-                        ],
-                        disabled: false,
-                        height: '',
-                        html: '',
-                        itemId: 'phoneNumber',
-                        maxHeight: '30%',
-                        minHeight: '',
-                        minWidth: '100%',
-                        styleHtmlCls: '',
-                        width: '100%',
-                        clearIcon: false,
-                        inputCls: '',
-                        name: 'phoneNumber',
-                        readOnly: true
-                    },
-                    {
-                        xtype: 'textareafield',
-                        cls: [
-                            'icon-location',
-                            'customfield'
-                        ],
-                        disabled: false,
-                        height: '100%',
-                        html: '',
-                        itemId: 'address',
-                        margin: '',
-                        maxHeight: '100%',
-                        maxWidth: '100%',
-                        minHeight: '100%',
-                        minWidth: '100%',
-                        width: '100%',
-                        clearIcon: false,
-                        name: 'address',
-                        readOnly: true,
-                        maxRows: 3
-                    }
-                ]
+                clearIcon: false,
+                inputCls: '',
+                name: 'phoneNumber',
+                readOnly: true
+            },
+            {
+                xtype: 'textareafield',
+                cls: [
+                    'icon-location',
+                    'customfield'
+                ],
+                disabled: false,
+                html: '',
+                itemId: 'address',
+                margin: '',
+                maxHeight: '',
+                maxWidth: '100%',
+                minHeight: '',
+                minWidth: '100%',
+                width: '100%',
+                clearIcon: false,
+                name: 'address',
+                readOnly: true,
+                maxRows: 3
             }
         ]
     },
@@ -66845,10 +66830,10 @@ Ext.define('Ext.picker.Picker', {
         useSimpleItems: false,
         itemTpl: [
             '',
-            '<div style="font-size:20px;color:black">{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;background-color:#fff" id= "chkbx" ></div>',
+            '<div style="font-size:5vw;color:black;font-weight:bold">{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;background-color:#fff" id= "chkbx" ></div>',
             '',
             '',
-            '<div style="color:#1985d0;font-size:12px;font-style:italics">Valid {dealStartDate} to {dealEndDate}</div>'
+            '<div style="color:#1985d0;font-size:3vw;font-style:italics;font-weight:bold">Valid {dealStartDate} to {dealEndDate}</div>'
         ]
     }
 }, 0, [
@@ -67000,11 +66985,8 @@ Ext.define('Ext.picker.Picker', {
                 html: '',
                 id: 'businessName',
                 itemId: 'businessName',
-                inputCls: '',
-                label: 'BusinessName',
+                label: 'Business Name',
                 labelAlign: 'top',
-                labelCls: '',
-                labelWidth: '10%',
                 labelWrap: true,
                 name: 'businessName',
                 required: true
