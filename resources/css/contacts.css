@@ -24,33 +24,33 @@ $form-bg-color: rgba(255,255,255,1);
 
 .contact-name{
     color:white;
-	font-family: "Helvetica";
-	font-size:4vw;
-	
+    padding-left: 4px;
 }
 
 .toolbar{
-	background:#e32636;
+	background:rgba(246,88,71, 0.8);
 	font-family: "Helvetica";
 }
 
-
+.toolbar-button {
+	
+	background:rgba(255,255,255,1);
+	
+}
 
 .x-panel-body{
 	
-	background:#fff;
-	
+	background:rgba(255,255,255,1);
+	border:1px groove #000;
 }
 
 
 .x-field{
 	
-	background:#fff;
+	background:rgba(255,255,255,1);
 	margin: 5px 5px 5px 5px;
 	font-size:4vw;
 	font-family: "Helvetica";
-	
-	
 	
 	
 }
@@ -65,101 +65,12 @@ $form-bg-color: rgba(255,255,255,1);
 
 
 .x-list {
-	background:fff;
+	background:rgba(255,255,255,1);
 	font-size:4vw;
-	margin: 5px 5px 5px 5px;
 	font-family: "Helvetica";
-	border: 2px groove #fff;
 	
 }
-.confirm{
+.confirm_button{
 	
 	background-color:#ff00ff;
 }
-
-.button  {
-    background-color: #e32636;
-    color:white;
-	font-weight:bold;
-	font-family: "Helvetica";
-	display:flex;
-	align-items:center;
-	font-size: 1.5em;
-}
-
-.compose{
-	
-	color:white;
-	font-size: 1em;
-	
-}
-
-.action{
-	
-	color:white;
-	font-size: 1em;
-	
-	
-}
-
-.add{
-	
-	color:#e32636;
-	font-size: 1em;
-	
-	
-}
-
-.x-item{
-	
-	color:white;
-	font-weight:bold;
-	font-family: "Helvetica";
-	display:flex;
-	align-items:center;
-	font-size: 1.5em;
-	
-}
-
-.submit {
-	
-	background-color: #e32636;
-    color:white;
-	font-weight:bold;
-	font-family: "Helvetica";
-	display:flex;
-	font-size: 0.95em;
-	border:none;
-	
-	
-	
-	
-}
-
-.home{
-	
-	color:white;
-	font-size: 1em;
-	
-	
-}
-
-
-.info{
-	
-	color:white;
-	font-size: 1em;
-	
-	
-}
-
-.login  {
-    background-color: #e32636;
-    color:white;
-	font-weight:bold;
-	font-family: "Helvetica";
-	display:flex;
-	font-size: 0.95em;
-	border:none;
-}
-
