@@ -34,12 +34,7 @@ $form-bg-color: rgba(255,255,255,1);
 	font-family: "Helvetica";
 }
 
-.x-tab-strip-top{
-	padding-top: 1px;
-	background: repeat-x bottom;
-	border-bottom: 1px solid;
-	background-color: #e32636;
-}
+
 
 .x-panel-body{
 	
