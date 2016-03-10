@@ -66391,8 +66391,7 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlCls: '',
                 ui: 'action-round',
                 width: 100,
-                icon: '',
-                text: 'Login'
+                icon: 'resources/images/login.png'
             }
         ],
         listeners: [
@@ -66567,8 +66566,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                style: 'border:none;',
-                ui: 'confirm',
+                ui: 'plain',
                 width: '10%',
                 iconCls: 'add'
             }
@@ -67626,7 +67624,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'UploadDeal',
                         margin: '5 5 5 5',
                         styleHtmlContent: true,
-                        ui: 'confirm',
+                        ui: 'untitled-ui-4',
                         text: 'Upload New Deal'
                     },
                     {
@@ -67636,7 +67634,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'DeleteDeal',
                         margin: '5 5 5 5',
                         styleHtmlContent: true,
-                        ui: 'decline',
+                        ui: 'plain',
                         text: 'Delete'
                     }
                 ]
@@ -67891,19 +67889,10 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'filefield',
                 docked: 'top',
                 height: '20%',
-                itemId: 'myfilefield1',
                 label: '',
                 labelWrap: true,
                 name: 'fileUpload',
-                capture: 'camera',
-                listeners: [
-                    {
-                        fn: function(component, eOpts) {
-                            component.getButton().setText('Browse');
-                        },
-                        event: 'initialize'
-                    }
-                ]
+                capture: 'camera'
             },
             {
                 xtype: 'button',
