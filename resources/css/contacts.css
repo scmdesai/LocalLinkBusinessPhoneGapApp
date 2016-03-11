@@ -29,6 +29,7 @@ $list-header-bg-color: $base-color;
 
 
 .regular-checkbox {
+	
 	-webkit-appearance: none;
 	background-color: #fafafa;
 	border: 1px solid #cacece;
@@ -44,6 +45,7 @@ $list-header-bg-color: $base-color;
 }
 
 .regular-checkbox:checked {
+	font-family: "Helvetica";
 	background-color: #e9ecee;
 	border: 1px solid #adb8c0;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
@@ -52,7 +54,7 @@ $list-header-bg-color: $base-color;
 
 .regular-checkbox:checked:after {
 	content: '\2714';
-	font-size: 3.5vw;
+	font-size: 7vw;
 	position: absolute;
 	top: 0px;
 	left: 3px;
@@ -65,7 +67,7 @@ $list-header-bg-color: $base-color;
 
 .big-checkbox:checked:after {
 	
-	font-family: "Helvetica";
+	
 	font-size: 7vw;
 	left: 2px;
 }
