@@ -60,10 +60,12 @@ $list-header-bg-color: $base-color;
 }
 
 .big-checkbox {
-	padding: 18px;
+	padding: 3.5vw;
 }
 
 .big-checkbox:checked:after {
-	font-size: 28px;
+	
+	font-family: "Helvetica";
+	font-size: 7vw;
 	left: 6px;
 }
