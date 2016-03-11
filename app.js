@@ -66740,7 +66740,7 @@ Ext.define('Ext.picker.Picker', {
         itemTpl: [
             '',
             '',
-            '<div style="font-size:6.3vw;color:black;font-weight:normal">{dealName}<input type="checkbox"  name="checkbox" style="float:right;background-color:#fff;" id= "chkbx" ></div>',
+            '<div style="font-size:6.3vw;color:black;font-weight:normal">{dealName}<input type="checkbox"  name="checkbox" class="regular-checkbox big-checkbox" style="float:right;background-color:#fff;" id= "chkbx" ></div>',
             '',
             '',
             '<div style="color:#1985d0;font-size:3.3vw;font-style:italics;font-weight:normal">Valid {dealStartDate} to {dealEndDate}</div>'
@@ -67579,16 +67579,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onListOfDealsActivate',
-                event: 'activate'
-            }
         ]
-    },
-    onListOfDealsActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        Ext.get('chkbx').setSize(50, 50);
     }
 }, 0, [
     "DealsPanel"
