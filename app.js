@@ -67579,11 +67579,16 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onDealsPanelActivate',
+                event: 'activate'
+            }
         ]
     },
-    initialize: function() {
-        Ext.form.Panel.prototype.initialize.call(this);
-        var chkbox = Ext.getCmp('chkbx').setSize(200, 200);
+    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        Ext.get('chkbx').setSize(50, 50);
     }
 }, 0, [
     "DealsPanel"
