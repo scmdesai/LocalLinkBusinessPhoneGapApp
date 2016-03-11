@@ -67583,7 +67583,7 @@ Ext.define('Ext.picker.Picker', {
     },
     initialize: function() {
         Ext.form.Panel.prototype.initialize.call(this);
-        var chkbox = Ext.get('chkbx').setSize(200, 200);
+        var chkbox = Ext.getCmp('chkbx').setSize(200, 200);
     }
 }, 0, [
     "DealsPanel"
