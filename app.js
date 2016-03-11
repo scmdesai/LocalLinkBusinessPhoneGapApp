@@ -66540,7 +66540,7 @@ Ext.define('Ext.picker.Picker', {
                         docked: 'right',
                         height: 48,
                         itemId: 'editButton',
-                        style: 'border:none;font-size:1.2em',
+                        style: 'border:none;font-size:6vw',
                         ui: 'plain',
                         width: '20%',
                         iconCls: 'compose'
@@ -66740,7 +66740,7 @@ Ext.define('Ext.picker.Picker', {
         itemTpl: [
             '',
             '',
-            '<div style="font-size:6.3vw;color:black;font-weight:normal">{dealName}<input type="checkbox"  name="checkbox" style="zoom:1.8;float:right;background-color:#fff" id= "chkbx" ></div>',
+            '<div style="font-size:6.3vw;color:black;font-weight:normal">{dealName}<input type="checkbox"  name="checkbox" style="float:right;background-color:#fff;" id= "chkbx" ></div>',
             '',
             '',
             '<div style="color:#1985d0;font-size:3.3vw;font-style:italics;font-weight:normal">Valid {dealStartDate} to {dealEndDate}</div>'
@@ -67580,6 +67580,10 @@ Ext.define('Ext.picker.Picker', {
                 ]
             }
         ]
+    },
+    initialize: function() {
+        Ext.form.Panel.prototype.initialize.call(this);
+        var chkbox = Ext.get('chkbx').setSize(200, 200);
     }
 }, 0, [
     "DealsPanel"
@@ -67856,17 +67860,17 @@ Ext.define('Ext.picker.Picker', {
                         xhr2: true,
                         success: function(form, action) {
                             Ext.Viewport.getActiveItem().destroy();
-                            var view = Ext.Viewport.add({
-                                    xtype: 'contactform'
-                                });
-                            Ext.Viewport.setActiveItem(view);
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
                             record.commit();
                             store.sync();
                             store.load();
+                            var view = Ext.Viewport.add({
+                                    xtype: 'contactform'
+                                });
                             view.setRecord(record);
+                            Ext.Viewport.setActiveItem(view);
                             //store.load();
                             //form.updateRecord(record);
                             Ext.Msg.alert('Success', action.msg);
