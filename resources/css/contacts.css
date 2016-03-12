@@ -19,7 +19,7 @@ $list-header-bg-color: $base-color;
 .customfield {
 	border:2px inset #eee;
 	margin:5px 5px 5px 5px;
-	font-size:4.5vw;
+	font-size:3vw;
 	font-weight:normal;
 	text-align:center;
 	vertical-align:middle;
