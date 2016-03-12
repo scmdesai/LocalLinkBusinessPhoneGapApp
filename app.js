@@ -67150,6 +67150,7 @@ Ext.define('Ext.picker.Picker', {
         var itemNames = [];
         var i = 0;
         if (e.target.type === 'checkbox') {
+            Ext.getCmp('UploadDeal').disable();
             var store = Ext.getStore('MyDealsStore');
             //var el=dataview.getParent();
             //Ext.Viewport.setActiveItem(el);
@@ -67178,16 +67179,18 @@ Ext.define('Ext.picker.Picker', {
                                 //console.log(action.msg);
                                 var dealsStore = Ext.getStore('MyDealsStore');
                                 dealsStore.load();
+                                Ext.getCmp('UploadDeal').enable();
                             },
                             failure: function(form, action) {
                                 Ext.Msg.alert('Failure', action.msg);
+                                //console.log(action.msg);
+                                Ext.getCmp('UploadDeal').enable();
                             }
                         });
                     }
                 }
             });
-        } else //console.log(action.msg);
-        //}
+        } else //}
         {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
