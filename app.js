@@ -66296,7 +66296,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 centered: true,
-                height: '',
+                height: '10%',
                 id: 'Login',
                 itemId: 'Login',
                 maxHeight: '',
@@ -66564,7 +66564,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 border: '',
                 docked: 'top',
-                height: '50%',
+                height: '40%',
                 maxHeight: '',
                 minWidth: '',
                 padding: '5 5 5 5',
@@ -66594,6 +66594,7 @@ Ext.define('Ext.picker.Picker', {
                 maxHeight: '30%',
                 minHeight: '',
                 minWidth: '100%',
+                style: 'font-size:4vw',
                 styleHtmlCls: '',
                 width: '100%',
                 clearIcon: false,
@@ -66615,6 +66616,7 @@ Ext.define('Ext.picker.Picker', {
                 maxWidth: '100%',
                 minHeight: '',
                 minWidth: '100%',
+                style: 'font-size:4vw',
                 width: '100%',
                 clearIcon: false,
                 name: 'address',
@@ -66895,6 +66897,7 @@ Ext.define('Ext.picker.Picker', {
                 html: '',
                 id: 'businessName',
                 itemId: 'businessName',
+                style: 'font-size:4vw',
                 label: '',
                 labelAlign: 'top',
                 labelWidth: '',
@@ -66911,6 +66914,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '20%',
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
+                style: 'font-size:4vw',
                 labelWrap: true,
                 name: 'phoneNumber',
                 required: true
@@ -66924,6 +66928,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '15%',
                 id: 'address',
                 itemId: 'address',
+                style: 'font-size:4vw',
                 name: 'address',
                 required: true
             },
@@ -67411,6 +67416,12 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'toolbar',
                 docked: 'top',
+                width: '100%',
+                scrollable: false,
+                layout: {
+                    type: 'hbox',
+                    align: 'stretchmax'
+                },
                 items: [
                     {
                         xtype: 'button',
@@ -67425,7 +67436,7 @@ Ext.define('Ext.picker.Picker', {
                         docked: 'right',
                         itemId: 'share',
                         minHeight: '100%',
-                        style: 'border:none;font-size:1.4em',
+                        style: 'border:none;font-size:7vw',
                         ui: 'plain',
                         width: '20%',
                         iconAlign: 'center',
@@ -67641,6 +67652,7 @@ Ext.define('Ext.picker.Picker', {
                 labelWidth: '50%',
                 labelWrap: true,
                 name: 'DealStatus',
+                placeHolder: 'Active',
                 autoSelect: false,
                 options: [
                     {
@@ -67819,7 +67831,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.ChangeContactPicForm', Ext.form.Panel, {
     config: {
         centered: true,
-        height: '25%',
+        height: '40%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
         style: 'background;#fff;border:3px groove #1985d0',
@@ -67835,9 +67847,10 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'filefield',
-                height: '20%',
                 itemId: 'myfilefield1',
+                margin: '5 5 5 5',
                 style: 'color:white',
+                width: 214,
                 clearIcon: false,
                 label: '',
                 labelWrap: true,
@@ -67882,13 +67895,13 @@ Ext.define('Ext.picker.Picker', {
                 bottom: 30,
                 centered: false,
                 cls: 'button',
-                height: '30%',
+                height: '35%',
                 left: '25%',
-                margin: '5 0 0 0',
+                margin: '',
                 style: 'border:none',
                 styleHtmlContent: true,
                 ui: 'action',
-                width: '45%',
+                width: 128,
                 iconAlign: 'center',
                 text: 'Submit'
             },
