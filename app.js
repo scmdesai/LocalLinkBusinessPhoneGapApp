@@ -67168,7 +67168,10 @@ Ext.define('Ext.picker.Picker', {
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
                 console.log(recordsToDelete.length);
-                if (recordsToDelete.length !== 0) {
+                if (recordsToDelete.length === 0) {
+                    Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
+                    Ext.getCmp('UploadDeal').enable();
+                } else {
                     for (var j = 0; j < recordsToDelete.length; j++) {
                         var myForm = this.up('DealsPanel');
                         myForm.submit({
@@ -67187,13 +67190,10 @@ Ext.define('Ext.picker.Picker', {
                             }
                         });
                     }
-                } else //}
-                {
-                    Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
-                    Ext.getCmp('UploadDeal').enable();
                 }
             });
-        } else {
+        } else //}
+        {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
