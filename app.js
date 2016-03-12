@@ -67167,10 +67167,10 @@ Ext.define('Ext.picker.Picker', {
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
-                console.log(recordsToDelete.isEmpty());
                 console.log(itemNames.isEmpty());
                 if (itemNames.length !== 0) {
                     for (var j = 0; j < itemNames.length; j++) {
+                        console.log(itemNames.length);
                         var myForm = this.up('DealsPanel');
                         myForm.submit({
                             url: 'http://services.appsonmobile.com/deals/' + itemNames[j],
@@ -67191,6 +67191,7 @@ Ext.define('Ext.picker.Picker', {
                 } else //}
                 {
                     Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
+                    Ext.getCmp('UploadDeal').enable();
                 }
             });
         } else {
@@ -67353,6 +67354,7 @@ Ext.define('Ext.picker.Picker', {
         /*var el = document.getElementById('ListOfDeals');
 		 el.setAttribute('class','checkbox_visible');
 		*/
+        Ext.getCmp('UploadDeal').enable();
         Ext.Msg.alert('No Deals To Delete', 'Please select Deals to be Deleted');
     },
     onShareTap: function(button, e, eOpts) {
