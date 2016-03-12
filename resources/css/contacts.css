@@ -19,9 +19,10 @@ $list-header-bg-color: $base-color;
 .customfield {
 	border:2px inset #eee;
 	margin:5px 5px 5px 5px;
-	font-size:2vw;
+	font-size:4.5vw;
 	font-weight:normal;
 	text-align:center;
+	vertical-align:middle;
 }
 
 .customlabel {
@@ -30,7 +31,6 @@ $list-header-bg-color: $base-color;
 	
 	font-size:5vw;
 	font-weight:normal;
-	text-align:center;
 
 }
 

@@ -66911,7 +66911,6 @@ Ext.define('Ext.picker.Picker', {
                 height: '20%',
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
-                labelAlign: 'top',
                 labelWrap: true,
                 name: 'phoneNumber',
                 required: true
@@ -66925,7 +66924,6 @@ Ext.define('Ext.picker.Picker', {
                 height: '15%',
                 id: 'address',
                 itemId: 'address',
-                labelAlign: 'top',
                 name: 'address',
                 required: true
             },
@@ -67857,7 +67855,9 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
+                            Ext.Msg.alert('Success', action.msg);
                             Ext.Viewport.getActiveItem().destroy();
+                            record.dirty = true;
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
@@ -67871,7 +67871,6 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.setActiveItem(view);
                             //store.load();
                             //form.updateRecord(record);
-                            Ext.Msg.alert('Success', action.msg);
                             form.destroy();
                         },
                         failure: function(form, action) {
