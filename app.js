@@ -67167,10 +67167,9 @@ Ext.define('Ext.picker.Picker', {
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
-                console.log(itemNames.length);
-                if (itemNames.length === 0) {
-                    Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
-                } else {
+                console.log(recordsToDelete.isEmpty());
+                console.log(itemNames.isEmpty());
+                if (itemNames.length !== 0) {
                     for (var j = 0; j < itemNames.length; j++) {
                         var myForm = this.up('DealsPanel');
                         myForm.submit({
@@ -67189,10 +67188,12 @@ Ext.define('Ext.picker.Picker', {
                             }
                         });
                     }
+                } else //}
+                {
+                    Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
                 }
             });
-        } else //}
-        {
+        } else {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
@@ -67712,6 +67713,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'myfilefield',
                 margin: '5 5 5 5 ',
                 style: 'color:white',
+                clearIcon: false,
                 label: 'Deal Image',
                 labelWidth: '50%',
                 labelWrap: true,
