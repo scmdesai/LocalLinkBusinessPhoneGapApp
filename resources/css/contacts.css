@@ -17,10 +17,21 @@ $list-header-bg-color: $base-color;
 }
 
 .customfield {
-	border:1px groove #eee;
+	border:2px inset #eee;
 	margin:5px 5px 5px 5px;
+	font-size:2vw;
+	font-weight:normal;
+	text-align:center;
+}
+
+.customlabel {
+	
+	
+	
 	font-size:5vw;
 	font-weight:normal;
+	text-align:center;
+
 }
 
 

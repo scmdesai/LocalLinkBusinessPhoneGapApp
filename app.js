@@ -67626,10 +67626,12 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
+                style: '',
                 clearIcon: false,
                 inputCls: '',
                 label: 'Deal Name',
-                labelWidth: '35%',
+                labelCls: '',
+                labelWidth: '50%',
                 name: 'DealName'
             },
             {
@@ -67638,9 +67640,10 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'dealStatus',
                 maxHeight: '',
                 label: 'Deal Status',
-                labelWidth: '35%',
+                labelWidth: '50%',
                 labelWrap: true,
                 name: 'DealStatus',
+                autoSelect: false,
                 options: [
                     {
                         text: 'Active',
@@ -67657,7 +67660,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'customfield',
                 width: '97%',
                 label: 'Deal Start',
-                labelWidth: '35%',
+                labelWidth: '50%',
                 labelWrap: true,
                 name: 'DealStartDate',
                 value: {
@@ -67676,8 +67679,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'customfield',
                 width: '97%',
                 label: 'Deal End',
-                labelWidth: '35%',
-                labelWrap: true,
+                labelWidth: '50%',
                 name: 'DealEndDate',
                 value: {
                     day: new Date().getDate(),
@@ -67697,7 +67699,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '5 5 5 5 ',
                 style: 'color:white',
                 label: 'Deal Image',
-                labelWidth: '35%',
+                labelWidth: '50%',
                 labelWrap: true,
                 name: 'fileUpload',
                 capture: 'camera'
