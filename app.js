@@ -67167,9 +67167,9 @@ Ext.define('Ext.picker.Picker', {
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
-                if (itemNames.length !== 0) {
-                    for (var j = 0; j < itemNames.length; j++) {
-                        console.log(itemNames.length);
+                console.log(recordsToDelete.length);
+                if (recordsToDelete.length !== 0) {
+                    for (var j = 0; j < recordsToDelete.length; j++) {
                         var myForm = this.up('DealsPanel');
                         myForm.submit({
                             url: 'http://services.appsonmobile.com/deals/' + itemNames[j],
