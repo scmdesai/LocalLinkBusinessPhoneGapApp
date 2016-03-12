@@ -67167,7 +67167,6 @@ Ext.define('Ext.picker.Picker', {
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
-                console.log(itemNames.isEmpty());
                 if (itemNames.length !== 0) {
                     for (var j = 0; j < itemNames.length; j++) {
                         console.log(itemNames.length);
