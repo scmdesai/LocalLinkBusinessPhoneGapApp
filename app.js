@@ -67161,6 +67161,7 @@ Ext.define('Ext.picker.Picker', {
             var checkboxes = document.getElementsByName('checkbox');
             checkboxes[index].addEventListener('change', function() {
                 if (checkboxes[index].checked) {
+                    Ext.getCmp('UploadDeal').disable();
                     recordsToDelete.push(record);
                     itemNames[i++] = record.get('itemName');
                 } else {
