@@ -67165,7 +67165,8 @@ Ext.define('Ext.picker.Picker', {
                 } else {
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
-                    i--;
+                    recordsToDelete.length--;
+                    itemNames.length--;
                 }
             });
             var btn = Ext.getCmp('DeleteDeal');
