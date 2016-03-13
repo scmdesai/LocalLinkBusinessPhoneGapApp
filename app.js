@@ -67162,9 +67162,9 @@ Ext.define('Ext.picker.Picker', {
                     recordsToDelete.push(record);
                     itemNames[i++] = record.get('itemName');
                 } else {
-                    console.log('Removing records');
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
+                    console.log('i:' + i);
                     if (i <= 0) {
                         recordsToDelete.length = 0;
                         itemNames.length = 0;
