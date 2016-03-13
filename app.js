@@ -67165,12 +67165,12 @@ Ext.define('Ext.picker.Picker', {
                     console.log('Removing records');
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
-                    console.log('Value of i is ' + i);
-                    if (i === 0) {
-                        Ext.getCmp('UploadDeal').enable();
-                    }
                 }
             });
+            console.log('Value of i is ' + i);
+            if (i === 0) {
+                Ext.getCmp('UploadDeal').enable();
+            }
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
                 Ext.getCmp('UploadDeal').enable();
