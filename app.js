@@ -67169,6 +67169,7 @@ Ext.define('Ext.picker.Picker', {
                         recordsToDelete.length = 0;
                         itemNames.length = 0;
                         i = 0;
+                        Ext.getCmp('UploadDeal').enable();
                     }
                 }
             });
