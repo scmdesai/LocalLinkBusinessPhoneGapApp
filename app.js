@@ -67193,12 +67193,12 @@ Ext.define('Ext.picker.Picker', {
                                 Ext.getCmp('UploadDeal').enable();
                             }
                         });
-                        recordsToDelete.length = 0;
                     }
+                    //}
+                    recordsToDelete.length = 0;
                 }
             });
-        } else //}
-        {
+        } else {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
