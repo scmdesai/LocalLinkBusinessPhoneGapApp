@@ -67163,6 +67163,7 @@ Ext.define('Ext.picker.Picker', {
                     recordsToDelete.push(record);
                     itemNames[i++] = record.get('itemName');
                 } else {
+                    console.log('Removing records');
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
                     recordsToDelete.length--;
@@ -67171,11 +67172,11 @@ Ext.define('Ext.picker.Picker', {
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
-                console.log(itemNames.length);
                 if (recordsToDelete.length === 0) {
                     Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
                     Ext.getCmp('UploadDeal').enable();
                 } else {
+                    console.log(recordsToDelete.length);
                     for (var j = 0; j < recordsToDelete.length; j++) {
                         var myForm = this.up('DealsPanel');
                         myForm.submit({
