@@ -67149,7 +67149,7 @@ Ext.define('Ext.picker.Picker', {
         var recordsToDelete = [];
         var itemNames = [];
         var i = 0;
-        //Ext.getCmp('UploadDeal').enable();
+        Ext.getCmp('UploadDeal').enable();
         if (e.target.type === 'checkbox') {
             var store = Ext.getStore('MyDealsStore');
             var customerId;
