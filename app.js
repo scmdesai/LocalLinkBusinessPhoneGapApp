@@ -67163,6 +67163,7 @@ Ext.define('Ext.picker.Picker', {
                 } else {
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
+                    i--;
                 }
             });
             var btn = Ext.getCmp('DeleteDeal');
@@ -67658,6 +67659,7 @@ Ext.define('Ext.picker.Picker', {
                 labelWidth: '50%',
                 labelWrap: true,
                 name: 'DealStatus',
+                value: 'Active',
                 placeHolder: 'Active',
                 autoSelect: false,
                 options: [
