@@ -67150,9 +67150,6 @@ Ext.define('Ext.picker.Picker', {
         var itemNames = [];
         var i = 0;
         if (e.target.type === 'checkbox') {
-            recordsToDelete = [];
-            itemNames = [];
-            i = 0;
             Ext.getCmp('UploadDeal').disable();
             var store = Ext.getStore('MyDealsStore');
             //var el=dataview.getParent();
