@@ -67169,7 +67169,16 @@ Ext.define('Ext.picker.Picker', {
                     Ext.Array.remove(itemNames, record.get('itemName'));
                 }
             });
-            console.log('Length of records:' + recordsToDelete.length);
+            var count = 0;
+            recordsToDelete.forEach(function(rec) {
+                count++;
+            });
+            console.log('Length of records:' + count);
+            if (count === 0) {
+                Ext.getCmp('UploadDeal').enable();
+            } else {
+                Ext.getCmp('UploadDeal').disable();
+            }
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
                 Ext.getCmp('UploadDeal').enable();
