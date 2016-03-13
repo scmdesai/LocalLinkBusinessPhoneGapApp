@@ -67152,6 +67152,7 @@ Ext.define('Ext.picker.Picker', {
         if (e.target.type === 'checkbox') {
             recordsToDelete = [];
             itemNames = [];
+            i = 0;
             Ext.getCmp('UploadDeal').disable();
             var store = Ext.getStore('MyDealsStore');
             //var el=dataview.getParent();
@@ -67166,8 +67167,8 @@ Ext.define('Ext.picker.Picker', {
                     console.log('Removing records');
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
-                    recordsToDelete.length = recordsToDelete.length - 1;
-                    if (recordsToDelete.length === 0) {
+                    i--;
+                    if (i === 0) {
                         Ext.getCmp('UploadDeal').enable();
                     }
                 }
