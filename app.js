@@ -67170,7 +67170,7 @@ Ext.define('Ext.picker.Picker', {
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
-                console.log(recordsToDelete.length);
+                console.log(itemNames.length);
                 if (recordsToDelete.length === 0) {
                     Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
                     Ext.getCmp('UploadDeal').enable();
