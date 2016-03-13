@@ -67164,8 +67164,9 @@ Ext.define('Ext.picker.Picker', {
                 } else {
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
-                    console.log('i:' + i);
                     if (i <= 0) {
+                        Ext.Array.erase(recordsToDelete, 0, recordsToDelete.length);
+                        Ext.Array.erase(itemNames, 0, itemNames.length);
                         recordsToDelete.length = 0;
                         itemNames.length = 0;
                         i = 0;
@@ -67201,6 +67202,8 @@ Ext.define('Ext.picker.Picker', {
                     recordsToDelete.length = 0;
                     itemNames.length = 0;
                     i = 0;
+                    Ext.Array.erase(recordsToDelete, 0, recordsToDelete.length);
+                    Ext.Array.erase(itemNames, 0, itemNames.length);
                 }
             });
         } else {
