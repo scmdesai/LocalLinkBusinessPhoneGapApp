@@ -67176,7 +67176,6 @@ Ext.define('Ext.picker.Picker', {
                     Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
                     Ext.getCmp('UploadDeal').enable();
                 } else {
-                    console.log(recordsToDelete.length);
                     for (var j = 0; j < recordsToDelete.length; j++) {
                         var myForm = this.up('DealsPanel');
                         myForm.submit({
@@ -67194,6 +67193,7 @@ Ext.define('Ext.picker.Picker', {
                                 Ext.getCmp('UploadDeal').enable();
                             }
                         });
+                        recordsToDelete.length = 0;
                     }
                 }
             });
