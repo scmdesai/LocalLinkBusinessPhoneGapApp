@@ -67149,7 +67149,6 @@ Ext.define('Ext.picker.Picker', {
         var recordsToDelete = [];
         var itemNames = [];
         var i = 0;
-        Ext.getCmp('UploadDeal').enable();
         if (e.target.type === 'checkbox') {
             var store = Ext.getStore('MyDealsStore');
             var customerId;
@@ -67161,9 +67160,9 @@ Ext.define('Ext.picker.Picker', {
                     itemNames[i++] = record.get('itemName');
                     Ext.getCmp('UploadDeal').disable();
                 } else {
+                    Ext.getCmp('UploadDeal').enable();
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
-                    Ext.getCmp('UploadDeal').enable();
                 }
             });
             var btn = Ext.getCmp('DeleteDeal');
@@ -67171,6 +67170,7 @@ Ext.define('Ext.picker.Picker', {
                 Ext.getCmp('UploadDeal').enable();
                 if (recordsToDelete.length === 0) {
                     Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
+                    Ext.getCmp('UploadDeal').enable();
                 } else {
                     for (var j = 0; j < recordsToDelete.length; j++) {
                         var myForm = this.up('DealsPanel');
