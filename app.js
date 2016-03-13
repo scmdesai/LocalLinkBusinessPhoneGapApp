@@ -67161,13 +67161,15 @@ Ext.define('Ext.picker.Picker', {
                     Ext.getCmp('UploadDeal').disable();
                     recordsToDelete.push(record);
                     itemNames[i++] = record.get('itemName');
+                    console.log('Value of i is ' + i);
                 } else {
                     console.log('Removing records');
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
+                    console.log('Value of i is ' + i);
                 }
             });
-            console.log('Value of i is ' + i);
+            console.log('Value of i outside loop is ' + i);
             if (i === 0) {
                 Ext.getCmp('UploadDeal').enable();
             }
