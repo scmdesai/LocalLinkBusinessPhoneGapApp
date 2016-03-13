@@ -67166,15 +67166,13 @@ Ext.define('Ext.picker.Picker', {
                     console.log('Removing records');
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
-                    recordsToDelete.length--;
-                    itemNames.length--;
                 }
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
+                Ext.getCmp('UploadDeal').enable();
                 if (recordsToDelete.length === 0) {
                     Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
-                    Ext.getCmp('UploadDeal').enable();
                 } else {
                     for (var j = 0; j < recordsToDelete.length; j++) {
                         var myForm = this.up('DealsPanel');
