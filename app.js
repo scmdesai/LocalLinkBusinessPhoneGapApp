@@ -67149,13 +67149,8 @@ Ext.define('Ext.picker.Picker', {
         var recordsToDelete = [];
         var itemNames = [];
         var i = 0;
-        Ext.Array.erase(recordsToDelete, 0, recordsToDelete.length);
-        Ext.Array.erase(itemNames, 0, itemNames.length);
-        recordsToDelete.length = 0;
-        itemNames.length = 0;
-        Ext.getCmp('UploadDeal').enable();
+        //Ext.getCmp('UploadDeal').enable();
         if (e.target.type === 'checkbox') {
-            Ext.getCmp('UploadDeal').disable();
             var store = Ext.getStore('MyDealsStore');
             var customerId;
             var checkboxes = document.getElementsByName('checkbox');
@@ -67164,21 +67159,13 @@ Ext.define('Ext.picker.Picker', {
                     Ext.getCmp('UploadDeal').disable();
                     recordsToDelete.push(record);
                     itemNames[i++] = record.get('itemName');
+                    Ext.getCmp('UploadDeal').disable();
                 } else {
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
+                    Ext.getCmp('UploadDeal').enable();
                 }
             });
-            var count = 0;
-            recordsToDelete.forEach(function(rec) {
-                count++;
-            });
-            console.log('Length of records:' + count);
-            if (count === 0) {
-                Ext.getCmp('UploadDeal').enable();
-            } else {
-                Ext.getCmp('UploadDeal').disable();
-            }
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
                 Ext.getCmp('UploadDeal').enable();
@@ -67204,12 +67191,9 @@ Ext.define('Ext.picker.Picker', {
                         });
                     }
                     //}
-                    Ext.Array.erase(recordsToDelete, 0, recordsToDelete.length);
-                    Ext.Array.erase(itemNames, 0, itemNames.length);
                     recordsToDelete.length = 0;
                     itemNames.length = 0;
                     i = 0;
-                    Ext.getCmp('UploadDeal').enable();
                 }
             });
         } else {
