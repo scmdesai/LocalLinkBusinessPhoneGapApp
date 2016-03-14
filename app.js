@@ -67588,17 +67588,18 @@ Ext.define('Ext.picker.Picker', {
                 style: '',
                 clearIcon: false,
                 inputCls: '',
-                label: 'Deal Name',
+                label: 'Name',
                 labelCls: '',
                 labelWidth: '50%',
-                name: 'DealName'
+                name: 'DealName',
+                required: true
             },
             {
                 xtype: 'selectfield',
                 cls: 'customfield',
                 itemId: 'dealStatus',
                 maxHeight: '',
-                label: 'Deal Status',
+                label: 'Status',
                 labelWidth: '50%',
                 labelWrap: true,
                 name: 'DealStatus',
@@ -67620,10 +67621,11 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'datepickerfield',
                 cls: 'customfield',
                 width: '97%',
-                label: 'Deal Start',
+                label: 'Start Date',
                 labelWidth: '50%',
                 labelWrap: true,
                 name: 'DealStartDate',
+                required: true,
                 value: {
                     day: new Date().getDate(),
                     month: (new Date().getMonth() + 1),
@@ -67639,9 +67641,10 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'datepickerfield',
                 cls: 'customfield',
                 width: '97%',
-                label: 'Deal End',
+                label: 'End Date',
                 labelWidth: '50%',
                 name: 'DealEndDate',
+                required: true,
                 value: {
                     day: new Date().getDate(),
                     month: (new Date().getMonth() + 1),
@@ -67660,10 +67663,11 @@ Ext.define('Ext.picker.Picker', {
                 margin: '5 5 5 5 ',
                 style: 'color:white',
                 clearIcon: false,
-                label: 'Deal Image',
+                label: 'Image',
                 labelWidth: '50%',
                 labelWrap: true,
                 name: 'fileUpload',
+                required: true,
                 capture: 'camera'
             },
             {
@@ -67819,6 +67823,7 @@ Ext.define('Ext.picker.Picker', {
                     form.submit({
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
+                        waitMsg: 'Updating profile picture...',
                         success: function(form, action) {
                             Ext.Msg.alert('Success', action.msg);
                             Ext.Viewport.getActiveItem().destroy();
