@@ -66731,7 +66731,7 @@ Ext.define('Ext.picker.Picker', {
         deselectOnContainerClick: false,
         mode: 'MULTI',
         deferEmptyText: false,
-        emptyText: 'No Deals',
+        emptyText: 'Create Buzz!',
         itemCls: 'list-item',
         store: 'MyDealsStore',
         onItemDisclosure: false,
@@ -67076,7 +67076,6 @@ Ext.define('Ext.picker.Picker', {
             saveContactButton: 'button#saveContactButton',
             backFromDealsPanelButton: 'button#backFromDealsPanelButton',
             uploadDealBtn: 'button#uploadDealBtn',
-            deleteDealBtn: 'button#deleteDealBtn',
             share: 'button#share',
             changePicture: 'button#changePicture',
             manageDeals: 'button#manageDeals',
@@ -67115,9 +67114,6 @@ Ext.define('Ext.picker.Picker', {
             "button#UploadDeal": {
                 tap: 'onUploadDealTap'
             },
-            "button#DeleteDeal": {
-                tap: 'onDeleteDealTap'
-            },
             "button#share": {
                 tap: 'onShareTap'
             },
@@ -67151,7 +67147,7 @@ Ext.define('Ext.picker.Picker', {
             var store = Ext.getStore('MyDealsStore');
             var record = store.getAt(index);
             var dealName = record.get('dealName');
-            Ext.Msg.confirm('Deleting Buzz ' + dealName + '?', null, function(btnText) {
+            Ext.Msg.confirm('Delete ' + dealName + '?', null, function(btnText) {
                 if (btnText === 'yes') {
                     var itemName = record.get('itemName');
                     var req = Ext.Ajax.request({
@@ -67326,14 +67322,6 @@ Ext.define('Ext.picker.Picker', {
         var frame = document.createElement('iframe');
         Ext.Viewport.setActiveItem(view);
     },
-    onDeleteDealTap: function(button, e, eOpts) {
-        /*var el = document.getElementById('ListOfDeals');
-		 el.setAttribute('class','checkbox_visible');
-		*/
-        Ext.getCmp('checkbox').setCls('checkbox_visible');
-        Ext.getCmp('UploadDeal').disable();
-    },
-    // Ext.Msg.alert('No Deals To Delete', 'Please select Deals to be Deleted');
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
