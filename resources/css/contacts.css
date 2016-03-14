@@ -11,6 +11,7 @@ $list-header-bg-color: $base-color;
 
 
 
+
 .contact-name {
     color: #fff ;
     padding-left: 4px;
@@ -19,7 +20,7 @@ $list-header-bg-color: $base-color;
 .customfield {
 	border:2px inset #eee;
 	margin:5px 5px 5px 5px;
-	font-size:3vw;
+	font-size:3.3vw;
 	font-weight:normal;
 	text-align:center;
 	vertical-align:middle;
@@ -35,6 +36,13 @@ $list-header-bg-color: $base-color;
 }
 
 
+.checkbox_hidden{
+	visibility: hidden;
+}
+
+.checkbox_visible{
+	visibility: visible;
+}
 
 
 

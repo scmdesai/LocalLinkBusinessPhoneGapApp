@@ -67165,9 +67165,8 @@ Ext.define('Ext.picker.Picker', {
                         Ext.Msg.alert('Failure', action.msg);
                     }
                 });
-            //console.log(action.msg);
-            req.submit();
-        } else {
+        } else //console.log(action.msg);
+        {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
