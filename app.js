@@ -67606,10 +67606,14 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var checkbox = document.getElementsByName('checkbox');
-        if (checkbox[index].checked) {
-            Ext.getCmp('UploadDeal').disable();
-        }
+        var store = Ext.getStore('MyDealsStore');
+        var chkbx = container.getCmp('checkbox');
+        store.each(function(rec) {
+            var chkbx = container.getCmp('checkbox');
+            if (chkbx.checked === true) {
+                Ext.getCmp('UploadDeal').disable();
+            }
+        });
     }
 }, 0, [
     "DealsPanel"
