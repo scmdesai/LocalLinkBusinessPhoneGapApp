@@ -67609,7 +67609,7 @@ Ext.define('Ext.picker.Picker', {
         var store = Ext.getStore('MyDealsStore');
         var chkbx = Ext.getCmp('checkbox');
         store.each(function(rec) {
-            var chkbx = container.getCmp('checkbox');
+            var chkbx = Ext.getCmp('checkbox');
             if (chkbx.checked === true) {
                 Ext.getCmp('UploadDeal').disable();
             }
