@@ -67597,7 +67597,21 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onDealsPanelActivate',
+                event: 'activate'
+            }
         ]
+    },
+    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        container.forEach(function(record) {
+            var checkbox = document.getElementsByName('checkbox');
+            if (checkboxe[index].checked) {
+                Ext.getCmp('UploadDeal').disable();
+            }
+        });
     }
 }, 0, [
     "DealsPanel"
