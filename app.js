@@ -67150,21 +67150,25 @@ Ext.define('Ext.picker.Picker', {
         if (e.target.type === 'button') {
             var store = Ext.getStore('MyDealsStore');
             var record = store.getAt(index);
-            var itemName = record.get('itemName');
-            //var myForm = this.up('DealsPanel');
-            var req = Ext.Ajax.request({
-                    method: 'POST',
-                    url: 'http://services.appsonmobile.com/deals/' + itemName,
-                    success: function(form, action) {
-                        Ext.Msg.alert('Success', action.msg);
-                        //console.log(action.msg);
-                        var dealsStore = Ext.getStore('MyDealsStore');
-                        dealsStore.load();
-                    },
-                    failure: function(form, action) {
-                        Ext.Msg.alert('Failure', action.msg);
-                    }
-                });
+            var dealName = record.get('dealName');
+            Ext.Msg.confirm('Deleting Buzz: ' + dealName, 'Are you sure you want to delete it?', function(btnText) {
+                if (btnTxt === 'yes') {
+                    var itemName = record.get('itemName');
+                    var req = Ext.Ajax.request({
+                            method: 'POST',
+                            url: 'http://services.appsonmobile.com/deals/' + itemName,
+                            success: function(form, action) {
+                                Ext.Msg.alert('Success', action.msg);
+                                //console.log(action.msg);
+                                var dealsStore = Ext.getStore('MyDealsStore');
+                                dealsStore.load();
+                            },
+                            failure: function(form, action) {
+                                Ext.Msg.alert('Failure', action.msg);
+                            }
+                        });
+                }
+            });
         } else //console.log(action.msg);
         {
             Ext.Viewport.add({
