@@ -67149,6 +67149,7 @@ Ext.define('Ext.picker.Picker', {
         var i = 0;
         if (e.target.type === 'button') {
             var store = Ext.getStore('MyDealsStore');
+            var record = store.getAt(index);
             var itemName = record.get('itemName');
             //var myForm = this.up('DealsPanel');
             var myForm = Ext.Ajax.request();
