@@ -67152,21 +67152,22 @@ Ext.define('Ext.picker.Picker', {
             var record = store.getAt(index);
             var itemName = record.get('itemName');
             //var myForm = this.up('DealsPanel');
-            var myForm = Ext.Ajax.request();
-            myForm.submit({
-                url: 'http://services.appsonmobile.com/deals/' + itemName,
-                success: function(form, action) {
-                    Ext.Msg.alert('Success', action.msg);
-                    //console.log(action.msg);
-                    var dealsStore = Ext.getStore('MyDealsStore');
-                    dealsStore.load();
-                },
-                failure: function(form, action) {
-                    Ext.Msg.alert('Failure', action.msg);
-                }
-            });
-        } else //console.log(action.msg);
-        {
+            var req = Ext.Ajax.request({
+                    method: 'POST',
+                    url: 'http://services.appsonmobile.com/deals/' + itemName,
+                    success: function(form, action) {
+                        Ext.Msg.alert('Success', action.msg);
+                        //console.log(action.msg);
+                        var dealsStore = Ext.getStore('MyDealsStore');
+                        dealsStore.load();
+                    },
+                    failure: function(form, action) {
+                        Ext.Msg.alert('Failure', action.msg);
+                    }
+                });
+            //console.log(action.msg);
+            req.submit();
+        } else {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
