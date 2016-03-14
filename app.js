@@ -67733,11 +67733,11 @@ Ext.define('Ext.picker.Picker', {
                                     items: [
                                         {
                                             text: 'Create New Buzz',
-                                            ui: 'confirm'
+                                            ui: 'plain'
                                         },
                                         {
                                             text: 'Delete Buzz',
-                                            ui: 'decline'
+                                            ui: 'plain'
                                         }
                                     ]
                                 });
@@ -67746,6 +67746,8 @@ Ext.define('Ext.picker.Picker', {
                                 reveal: true
                             });
                             menu.showBy(button);
+                            menu.setModal(true);
+                            menu.setHideOnMaskTap(true);
                         },
                         docked: 'right',
                         itemId: 'menu',
