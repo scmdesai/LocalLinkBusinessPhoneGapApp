@@ -67600,20 +67600,15 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onDealsPanelActivate',
-                event: 'activate'
+                fn: 'onListOfDealsSelect',
+                event: 'select',
+                delegate: '#listofdeals'
             }
         ]
     },
-    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var store = Ext.getStore('MyDealsStore');
-        var chkbx = Ext.getCmp('checkbox');
-        store.each(function(rec) {
-            var chkbx = Ext.getCmp('checkbox');
-            if (chkbx.checked === true) {
-                Ext.getCmp('UploadDeal').disable();
-            }
-        });
+    onListOfDealsSelect: function(dataview, record, eOpts) {
+        var arr = dataview.getSelectedRecords();
+        console.log(arr);
     }
 }, 0, [
     "DealsPanel"
