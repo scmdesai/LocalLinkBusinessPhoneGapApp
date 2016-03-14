@@ -67151,8 +67151,8 @@ Ext.define('Ext.picker.Picker', {
             var store = Ext.getStore('MyDealsStore');
             var record = store.getAt(index);
             var dealName = record.get('dealName');
-            Ext.Msg.confirm('Deleting Buzz: ' + dealName, 'Are you sure you want to delete it?', function(btnText) {
-                if (btnTxt === 'yes') {
+            Ext.Msg.confirm('Deleting Buzz ' + dealName + '?', null, function(btnText) {
+                if (btnText === 'yes') {
                     var itemName = record.get('itemName');
                     var req = Ext.Ajax.request({
                             method: 'POST',
@@ -67168,9 +67168,9 @@ Ext.define('Ext.picker.Picker', {
                             }
                         });
                 }
-            });
-        } else //console.log(action.msg);
-        {
+            }, //console.log(action.msg);
+            this);
+        } else {
             Ext.Viewport.add({
                 xtype: 'DealsPanel'
             });
