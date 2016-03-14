@@ -67607,7 +67607,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
         var store = Ext.getStore('MyDealsStore');
-        var chkbx = container.getCmp('checkbox');
+        var chkbx = Ext.getCmp('checkbox');
         store.each(function(rec) {
             var chkbx = container.getCmp('checkbox');
             if (chkbx.checked === true) {
