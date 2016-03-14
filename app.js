@@ -67150,7 +67150,8 @@ Ext.define('Ext.picker.Picker', {
         if (e.target.type === 'button') {
             var store = Ext.getStore('MyDealsStore');
             var itemName = record.get('itemName');
-            var myForm = this.up('DealsPanel');
+            //var myForm = this.up('DealsPanel');
+            var myForm = Ext.Ajax.request();
             myForm.submit({
                 url: 'http://services.appsonmobile.com/deals/' + itemName,
                 success: function(form, action) {
