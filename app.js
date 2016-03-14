@@ -32555,6 +32555,175 @@ this);
 ], function() {}));
 
 /**
+ * {@link Ext.Menu}'s are used with {@link Ext.Viewport#setMenu}. A menu can be linked with any side of the screen (top, left, bottom or right)
+ *  and will simply describe the contents of your menu. To use this menu you will call various menu related functions on the {@link Ext.Viewport}
+ * such as {@link Ext.Viewport#showMenu}, {@link Ext.Viewport#hideMenu}, {@link Ext.Viewport#toggleMenu}, {@link Ext.Viewport#hideOtherMenus},
+ * or {@link Ext.Viewport#hideAllMenus}.
+ *
+ *      @example preview
+ *      var menu = Ext.create('Ext.Menu', {
+ *          items: [
+ *              {
+ *                  text: 'Settings',
+ *                  iconCls: 'settings'
+ *              },
+ *              {
+ *                  text: 'New Item',
+ *                  iconCls: 'compose'
+ *              },
+ *              {
+ *                  text: 'Star',
+ *                  iconCls: 'star'
+ *              }
+ *          ]
+ *      });
+ *
+ *      Ext.Viewport.setMenu(menu, {
+ *          side: 'left',
+ *          reveal: true
+ *      });
+ *
+ *      Ext.Viewport.showMenu('left');
+ *
+ * The {@link #defaultType} of a Menu item is a {@link Ext.Button button}.
+ */
+(Ext.cmd.derive('Ext.Menu', Ext.Sheet, {
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: 'x-menu',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        left: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        right: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        bottom: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        height: 'auto',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        width: 'auto',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        defaultType: 'button',
+        /**
+         * @hide
+         */
+        showAnimation: null,
+        /**
+         * @hide
+         */
+        hideAnimation: null,
+        /**
+         * @hide
+         */
+        centered: false,
+        /**
+         * @hide
+         */
+        modal: true,
+        /**
+         * @hide
+         */
+        hidden: true,
+        /**
+         * @hide
+         */
+        hideOnMaskTap: true,
+        /**
+         * @hide
+         */
+        translatable: {
+            translationMethod: null
+        }
+    },
+    constructor: function() {
+        this.config.translatable.translationMethod = Ext.browser.is.AndroidStock2 ? 'cssposition' : 'csstransform';
+        Ext.Sheet.prototype.constructor.apply(this, arguments);
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Windows'
+            ]
+        },
+        {
+            theme: [
+                'Blackberry',
+                'Blackberry103'
+            ],
+            ui: 'context',
+            layout: {
+                pack: 'center'
+            }
+        }
+    ],
+    updateUi: function(newUi, oldUi) {
+        Ext.Sheet.prototype.updateUi.apply(this, arguments);
+        if (newUi != oldUi && (Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103)) {
+            if (newUi == 'context') {
+                this.innerElement.swapCls('x-vertical', 'x-horizontal');
+            } else if (newUi == 'application') {
+                this.innerElement.swapCls('x-horizontal', 'x-vertical');
+            }
+        }
+    },
+    updateHideOnMaskTap: function(hide) {
+        var mask = this.getModal();
+        if (mask) {
+            mask[hide ? 'on' : 'un'].call(mask, 'tap', function() {
+                Ext.Viewport.hideMenu(this.$side);
+            }, this);
+        }
+    },
+    /**
+     * Only fire the hide event if it is initialized
+     */
+    doSetHidden: function() {
+        if (this.initialized) {
+            Ext.Sheet.prototype.doSetHidden.apply(this, arguments);
+        }
+    }
+}, 1, [
+    "menu"
+], [
+    "component",
+    "container",
+    "panel",
+    "sheet",
+    "menu"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "sheet": true,
+    "menu": true
+}, [
+    "widget.menu"
+], 0, [
+    Ext,
+    'Menu'
+], 0));
+
+/**
  * {@link Ext.Title} is used for the {@link Ext.Toolbar#title} configuration in the {@link Ext.Toolbar} component.
  * @private
  */
@@ -66742,7 +66911,7 @@ Ext.define('Ext.picker.Picker', {
         itemTpl: [
             '',
             '',
-            '<div style="font-size:6.3vw;color:black;font-weight:normal">{dealName}<input type="checkbox"  name="checkbox" class="regular-checkbox big-checkbox" style="float:right;background-color:#fff;" id= "chkbx" ></div>',
+            '<div style="font-size:6.3vw;color:black;font-weight:normal">{dealName}<input type="checkbox"  name="checkbox" class="regular-checkbox big-checkbox checkbox_hidden" style="float:right;background-color:#fff;" id= "chkbx" ></div>',
             '',
             '',
             '<div style="color:#1985d0;font-size:3.3vw;font-style:italics;font-weight:normal">Valid {dealStartDate} to {dealEndDate}</div>'
@@ -67155,22 +67324,17 @@ Ext.define('Ext.picker.Picker', {
             var checkboxes = document.getElementsByName('checkbox');
             checkboxes[index].addEventListener('change', function() {
                 if (checkboxes[index].checked) {
-                    Ext.getCmp('UploadDeal').disable();
                     recordsToDelete.push(record);
                     itemNames[i++] = record.get('itemName');
-                    Ext.getCmp('UploadDeal').disable();
                 } else {
-                    Ext.getCmp('UploadDeal').enable();
                     Ext.Array.remove(recordsToDelete, record);
                     Ext.Array.remove(itemNames, record.get('itemName'));
                 }
             });
             var btn = Ext.getCmp('DeleteDeal');
             btn.addListener('tap', function() {
-                Ext.getCmp('UploadDeal').enable();
                 if (recordsToDelete.length === 0) {
                     Ext.Msg.alert('No Records To Delete', 'Please select records to be Deleted');
-                    Ext.getCmp('UploadDeal').enable();
                 } else {
                     for (var j = 0; j < recordsToDelete.length; j++) {
                         var myForm = this.up('DealsPanel');
@@ -67181,19 +67345,18 @@ Ext.define('Ext.picker.Picker', {
                                 //console.log(action.msg);
                                 var dealsStore = Ext.getStore('MyDealsStore');
                                 dealsStore.load();
-                                Ext.getCmp('UploadDeal').enable();
                             },
                             failure: function(form, action) {
                                 Ext.Msg.alert('Failure', action.msg);
-                                //console.log(action.msg);
-                                Ext.getCmp('UploadDeal').enable();
                             }
                         });
                     }
+                    //console.log(action.msg);
                     //}
                     recordsToDelete.length = 0;
                     itemNames.length = 0;
                     i = 0;
+                    Ext.getCmp('UploadDeal').enable();
                 }
             });
         } else {
@@ -67356,9 +67519,10 @@ Ext.define('Ext.picker.Picker', {
         /*var el = document.getElementById('ListOfDeals');
 		 el.setAttribute('class','checkbox_visible');
 		*/
-        Ext.getCmp('UploadDeal').enable();
-        Ext.Msg.alert('No Deals To Delete', 'Please select Deals to be Deleted');
+        Ext.getCmp('checkbox').setCls('checkbox_visible');
+        Ext.getCmp('UploadDeal').disable();
     },
+    // Ext.Msg.alert('No Deals To Delete', 'Please select Deals to be Deleted');
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
@@ -67559,6 +67723,39 @@ Ext.define('Ext.picker.Picker', {
         url: '',
         items: [
             {
+                xtype: 'toolbar',
+                docked: 'top',
+                items: [
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var menu = Ext.create('Ext.Menu', {
+                                    items: [
+                                        {
+                                            text: 'Create New Buzz',
+                                            ui: 'confirm'
+                                        },
+                                        {
+                                            text: 'Delete Buzz',
+                                            ui: 'decline'
+                                        }
+                                    ]
+                                });
+                            Ext.Viewport.setMenu(menu, {
+                                side: 'right',
+                                reveal: true
+                            });
+                            Ext.Viewport.showMenu('right');
+                        },
+                        docked: 'right',
+                        itemId: 'menu',
+                        style: 'border:none;',
+                        ui: 'plain',
+                        iconCls: 'add'
+                    }
+                ]
+            },
+            {
                 xtype: 'listofdeals',
                 docked: 'top',
                 height: '90%',
@@ -67597,17 +67794,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onListOfDealsSelect',
-                event: 'select',
-                delegate: '#listofdeals'
-            }
         ]
-    },
-    onListOfDealsSelect: function(dataview, record, eOpts) {
-        Ext.getCmp('UploadDeal').disable();
     }
 }, 0, [
     "DealsPanel"
