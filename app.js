@@ -67607,8 +67607,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onListOfDealsSelect: function(dataview, record, eOpts) {
-        var arr = dataview.getSelectedRecords();
-        console.log(arr);
+        Ext.getCmp('UploadDeal').disable();
     }
 }, 0, [
     "DealsPanel"
