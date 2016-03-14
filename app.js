@@ -67742,10 +67742,10 @@ Ext.define('Ext.picker.Picker', {
                                     ]
                                 });
                             Ext.Viewport.setMenu(menu, {
-                                side: 'right',
+                                side: 'top',
                                 reveal: true
                             });
-                            Ext.Viewport.showMenu('right');
+                            menu.showBy(button);
                         },
                         docked: 'right',
                         itemId: 'menu',
