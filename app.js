@@ -66389,7 +66389,7 @@ Ext.define('Ext.picker.Picker', {
                                 },
                                 {
                                     xtype: 'DealsPanel',
-                                    title: 'Deals',
+                                    title: 'Buzz',
                                     iconCls: 'info'
                                 }
                             ]
@@ -66635,7 +66635,6 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
-            console.log(this.down('contactpic').getXTypes());
         }
     }
 }, 0, [
@@ -66848,7 +66847,7 @@ Ext.define('Ext.picker.Picker', {
                                                 },
                                                 {
                                                     xtype: 'DealsPanel',
-                                                    title: 'Deals',
+                                                    title: 'Buzz',
                                                     iconCls: 'info'
                                                 }
                                             ]
@@ -67832,14 +67831,15 @@ Ext.define('Ext.picker.Picker', {
                         xhr2: true,
                         waitMsg: 'Updating profile picture...',
                         success: function(form, action) {
-                            Ext.Msg.alert('Success', action.msg);
-                            Ext.Viewport.getActiveItem().destroy();
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
                             record.commit();
+                            record.save();
                             store.sync();
                             store.load();
+                            Ext.Msg.alert('Success', action.msg);
+                            Ext.Viewport.getActiveItem().destroy();
                             var view = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
