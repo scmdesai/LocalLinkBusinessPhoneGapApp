@@ -67720,29 +67720,30 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
                             var file = uForm.getAt(4).getValue();
-                            if (file === "") {
+                            if (file) {
+                                uForm.submit({
+                                    url: 'http://services.appsonmobile.com/uploadS3',
+                                    xhr2: true,
+                                    scope: this,
+                                    success: function(form, action) {
+                                        Ext.getStore('MyDealsStore').load();
+                                        Ext.Msg.alert('Success', action.msg);
+                                        //console.log("Action Msg is : " +action.success);
+                                        //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
+                                        uForm.destroy();
+                                    },
+                                    failure: function(form, action) {
+                                        Ext.getStore('MyDealsStore').load();
+                                        Ext.Msg.alert('Failure', action.msg);
+                                        console.log("Action Msg is : " + action.msg);
+                                        //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
+                                        uForm.destroy();
+                                    }
+                                });
+                            } else {
                                 Ext.Msg.alert('Failure', 'No Image to Upload');
                                 uForm.destroy();
                             }
-                            uForm.submit({
-                                url: 'http://services.appsonmobile.com/uploadS3',
-                                xhr2: true,
-                                scope: this,
-                                success: function(form, action) {
-                                    Ext.getStore('MyDealsStore').load();
-                                    Ext.Msg.alert('Success', action.msg);
-                                    //console.log("Action Msg is : " +action.success);
-                                    //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
-                                    uForm.destroy();
-                                },
-                                failure: function(form, action) {
-                                    Ext.getStore('MyDealsStore').load();
-                                    Ext.Msg.alert('Failure', action.msg);
-                                    console.log("Action Msg is : " + action.msg);
-                                    //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
-                                    uForm.destroy();
-                                }
-                            });
                         },
                         flex: 10,
                         itemId: 'submit',
