@@ -67718,7 +67718,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
-                            var file = uForm.getCmp('fileUpload').getValue();
+                            var file = uForm.getComponent('fileUpload').getValue();
                             if (file === null) {
                                 Ext.Msg.alert('Failure', 'No Image to Upload');
                                 uForm.destroy();
