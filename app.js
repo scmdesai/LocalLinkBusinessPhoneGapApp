@@ -66301,7 +66301,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'Login',
                 maxHeight: '',
                 minHeight: '',
-                style: 'border:none',
+                style: 'border:none;',
                 styleHtmlCls: '',
                 ui: 'plain',
                 iconAlign: 'top'
@@ -66318,7 +66318,7 @@ Ext.define('Ext.picker.Picker', {
     onLoginTap: function(button, e, eOpts) {
         // Settings.
         FacebookInAppBrowser.settings.appId = '900651756709444';
-        FacebookInAppBrowser.settings.redirectUrl = 'appsonmobile.com';
+        FacebookInAppBrowser.settings.redirectUrl = 'http://appsonmobile.com';
         FacebookInAppBrowser.settings.permissions = 'email';
         // Optional
         FacebookInAppBrowser.settings.timeoutDuration = 7500;
@@ -67830,7 +67830,6 @@ Ext.define('Ext.picker.Picker', {
                         xhr2: true,
                         waitMsg: 'Updating profile picture...',
                         success: function(form, action) {
-                            Ext.Viewport.getComponent('contactform').destroy();
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
@@ -67840,6 +67839,7 @@ Ext.define('Ext.picker.Picker', {
                             store.load();
                             Ext.Msg.alert('Success', action.msg);
                             Ext.Viewport.getActiveItem().destroy();
+                            Ext.Viewport.getComponent('contactform').destroy();
                             var view = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
