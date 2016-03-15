@@ -67719,7 +67719,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
-                            var file = uForm.down('fileUpload').getValue();
+                            var file = uForm.getAt(4).getValue();
                             if (file) {
                                 uForm.submit({
                                     url: 'http://services.appsonmobile.com/uploadS3',
