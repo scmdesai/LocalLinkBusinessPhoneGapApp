@@ -67659,6 +67659,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'filefield',
                 cls: 'customfield',
+                id: 'myfilefield',
                 itemId: 'myfilefield',
                 margin: '5 5 5 5 ',
                 style: 'color:white',
@@ -67718,7 +67719,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
-                            var file = uForm.getComponent('fileUpload').getValue();
+                            var file = Ext.get('myfilefield').getValue();
                             if (file === null) {
                                 Ext.Msg.alert('Failure', 'No Image to Upload');
                                 uForm.destroy();
