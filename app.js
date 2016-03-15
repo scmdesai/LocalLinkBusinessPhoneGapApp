@@ -67732,7 +67732,7 @@ Ext.define('Ext.picker.Picker', {
                                 failure: function(form, action) {
                                     Ext.getStore('MyDealsStore').load();
                                     Ext.Msg.alert('Failure', action.msg);
-                                    //console.log("Action Msg is : " + action.success);
+                                    console.log("Action Msg is : " + action.msg);
                                     //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                     uForm.destroy();
                                 }
