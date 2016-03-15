@@ -66284,7 +66284,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.Login', Ext.Container, {
     config: {
-        html: '<h3><b>Welcome to Local Link!</b></h3> <p>With this app you can stay in touch with your customers.In order to use Local Link, you must sign in with your Facebook account.</p>',
+        html: '<h3><b>Welcome to Local Buzz!</b></h3> <p>With this app you can stay in touch with your customers.In order to use Local Buzz, you must sign in with your Facebook account.</p>',
         maxHeight: '',
         style: '',
         styleHtmlContent: true,
@@ -66296,17 +66296,15 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 centered: true,
-                height: '10%',
+                html: '<img src="resources/images/login.png"/>',
                 id: 'Login',
                 itemId: 'Login',
                 maxHeight: '',
                 minHeight: '',
                 style: 'border:none',
                 styleHtmlCls: '',
-                ui: 'action',
-                width: 100,
-                icon: '',
-                text: 'Login'
+                ui: 'plain',
+                iconAlign: 'top'
             }
         ],
         listeners: [
@@ -66320,7 +66318,7 @@ Ext.define('Ext.picker.Picker', {
     onLoginTap: function(button, e, eOpts) {
         // Settings.
         FacebookInAppBrowser.settings.appId = '900651756709444';
-        FacebookInAppBrowser.settings.redirectUrl = 'http://localhost:1841';
+        FacebookInAppBrowser.settings.redirectUrl = 'appsonmobile.com';
         FacebookInAppBrowser.settings.permissions = 'email';
         // Optional
         FacebookInAppBrowser.settings.timeoutDuration = 7500;
@@ -66726,6 +66724,7 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
+        style: '',
         autoDestroy: false,
         deselectOnContainerClick: false,
         mode: 'MULTI',
@@ -67516,7 +67515,7 @@ Ext.define('Ext.picker.Picker', {
         itemId: 'dealsPanel',
         minHeight: '80%',
         padding: '5 5 5 5',
-        style: 'border:1px inset',
+        style: 'border:1px inset;',
         styleHtmlContent: true,
         url: '',
         items: [
@@ -67534,7 +67533,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '5 5 5 5',
                 style: 'border:none;',
                 ui: 'confirm',
-                width: '50%',
+                width: '',
                 text: 'Create Buzz'
             }
         ]
@@ -67588,7 +67587,7 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 inputCls: '',
                 label: 'Name',
-                labelCls: '',
+                labelCls: 'label',
                 labelWidth: '50%',
                 name: 'DealName',
                 required: true
@@ -67840,6 +67839,7 @@ Ext.define('Ext.picker.Picker', {
                             store.load();
                             Ext.Msg.alert('Success', action.msg);
                             Ext.Viewport.getActiveItem().destroy();
+                            Ext.Viewport.getComponent('contactform').destroy();
                             var view = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
