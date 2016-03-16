@@ -67675,12 +67675,12 @@ Ext.define('Ext.picker.Picker', {
                     var form = Ext.Viewport.add({
                             xtype: 'contactform'
                         });
-                    // var info = Ext.Viewport.get('contactinfo').getRecord();
+                    var info = Ext.Viewport.get('contactinfo').getRecord();
                     Ext.Viewport.getActiveItem().destroy();
                     //  form.referrer = referrer;
                     Ext.Viewport.setActiveItem(form);
+                    form.setRecord(info);
                 },
-                // form.setRecord(info);
                 ui: 'plain',
                 text: 'Edit Profile'
             },
