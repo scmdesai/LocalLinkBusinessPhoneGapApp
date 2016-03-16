@@ -66882,6 +66882,14 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'MenuPanel'
             });
         menu.showBy(button);
+        var referrer = Ext.Viewport.getActiveItem();
+        var btn = Ext.get('changePicButton');
+        btn.show();
+        var form = this.getContactform();
+        var info = this.getContactinfo().getRecord();
+        form.referrer = referrer;
+        Ext.Viewport.setActiveItem(form);
+        form.setRecord(info);
     },
     onSaveContactButtonTap: function(button, e, eOpts) {
         var btn = Ext.get('changePicButton');
@@ -67668,16 +67676,6 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'button',
-                handler: function(button, e) {
-                    var referrer = Ext.Viewport.getActiveItem();
-                    var btn = Ext.get('changePicButton');
-                    btn.show();
-                    var form = this.getContactform();
-                    var info = this.getContactinfo().getRecord();
-                    form.referrer = referrer;
-                    Ext.Viewport.setActiveItem(form);
-                    form.setRecord(info);
-                },
                 ui: 'plain',
                 text: 'Edit Profile'
             },
