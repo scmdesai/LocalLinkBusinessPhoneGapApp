@@ -66335,16 +66335,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '20%',
                 iconCls: 'add'
             }
-        ],
-        listeners: [
-            {
-                fn: 'onContactpicUpdatedata',
-                event: 'updatedata'
-            }
         ]
-    },
-    onContactpicUpdatedata: function(component, newData, eOpts) {
-        component.setData(newData);
     }
 }, 0, [
     "contactpic"
@@ -67850,7 +67841,6 @@ Ext.define('Ext.picker.Picker', {
                         xhr2: true,
                         success: function(form, action) {
                             Ext.Viewport.getActiveItem().destroy();
-                            form.destroy();
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
