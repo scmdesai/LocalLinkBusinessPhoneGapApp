@@ -66335,7 +66335,16 @@ Ext.define('Ext.picker.Picker', {
                 width: '20%',
                 iconCls: 'add'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onContactpicUpdatedata',
+                event: 'updatedata'
+            }
         ]
+    },
+    onContactpicUpdatedata: function(component, newData, eOpts) {
+        component.setData(newData);
     }
 }, 0, [
     "contactpic"
