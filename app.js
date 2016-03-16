@@ -66425,7 +66425,8 @@ Ext.define('Ext.picker.Picker', {
                 },
                 items: [
                     {
-                        xtype: 'contactpic'
+                        xtype: 'contactpic',
+                        itemId: 'picture1'
                     }
                 ]
             },
@@ -66471,7 +66472,17 @@ Ext.define('Ext.picker.Picker', {
                 readOnly: true,
                 maxRows: 3
             }
+        ],
+        listeners: [
+            {
+                fn: 'onContactpicUpdatedata',
+                event: 'updatedata',
+                delegate: '#picture1'
+            }
         ]
+    },
+    onContactpicUpdatedata: function(component, newData, eOpts) {
+        component.setData(newData);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -67854,17 +67865,14 @@ Ext.define('Ext.picker.Picker', {
                             record.endEdit(true, record.getChanges());
                             record.commit();
                             store.sync();
-                            store.load({
-                                callback: function(records, operation, success) {
-                                    Ext.Msg.alert('Success', action.msg);
-                                    var view = Ext.Viewport.add({
-                                            xtype: 'contactform'
-                                        });
-                                    view.setRecord(record);
-                                    Ext.Viewport.setActiveItem(view);
-                                    form.destroy();
-                                }
-                            });
+                            store.load();
+                            Ext.Msg.alert('Success', action.msg);
+                            var view = Ext.Viewport.add({
+                                    xtype: 'contactform'
+                                });
+                            view.setRecord(record);
+                            Ext.Viewport.setActiveItem(view);
+                            form.destroy();
                         },
                         failure: function(form, action) {
                             store.load();
