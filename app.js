@@ -66973,16 +66973,16 @@ Ext.define('Ext.picker.Picker', {
                 event: 'updatedata'
             },
             {
-                fn: 'onFormpanelActiveItemChange',
-                event: 'activeitemchange'
+                fn: 'onContactpicUpdatedata',
+                event: 'updatedata'
             }
         ]
     },
     onFormpanelUpdatedata: function(component, newData, eOpts) {
         component.setData(newData);
     },
-    onFormpanelActiveItemChange: function(container, value, oldValue, eOpts) {
-        container.setValue(value);
+    onContactpicUpdatedata: function(component, newData, eOpts) {
+        component.setData(newData);
     },
     getValidationErrors: function() {
         var errors = [];
