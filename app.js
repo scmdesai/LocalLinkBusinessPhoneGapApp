@@ -66966,7 +66966,16 @@ Ext.define('Ext.picker.Picker', {
                 hidden: true,
                 name: 'pictureURL'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onFormpanelUpdatedata',
+                event: 'updatedata'
+            }
         ]
+    },
+    onFormpanelUpdatedata: function(component, newData, eOpts) {
+        component.setData(newData);
     },
     getValidationErrors: function() {
         var errors = [];
@@ -67839,7 +67848,6 @@ Ext.define('Ext.picker.Picker', {
                             store.load();
                             Ext.Msg.alert('Success', action.msg);
                             Ext.Viewport.getActiveItem().destroy();
-                            Ext.Viewport.getComponent('contactform').destroy();
                             var view = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
