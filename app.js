@@ -67840,7 +67840,7 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
-                            //Ext.Viewport.getActiveItem().destroy();
+                            var view = Ext.Viewport.getActiveItem();
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
@@ -67848,11 +67848,9 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             Ext.Msg.alert('Success', action.msg);
-                            var view = Ext.Viewport.add({
-                                    xtype: 'contactform'
-                                });
+                            //var view = Ext.Viewport.add({xtype:'contactform'});
                             view.setRecord(record);
-                            Ext.Viewport.setActiveItem(view);
+                            //Ext.Viewport.setActiveItem(view);
                             form.destroy();
                         },
                         failure: function(form, action) {
