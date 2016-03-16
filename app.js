@@ -66713,8 +66713,8 @@ Ext.define('Ext.picker.Picker', {
     config: {
         stores: [
             'MyJsonPStore',
-            null,
-            null,
+            'MyJsonPStore1',
+            'UserPreferences',
             'MyDealsStore'
         ],
         refs: {
@@ -67669,12 +67669,15 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 handler: function(button, e) {
-                    var referrer = Ext.Viewport.getActiveItem();
+                    //var referrer = Ext.Viewport.getActiveItem();
                     var btn = Ext.get('changePicButton');
                     btn.show();
-                    var form = this.up('contactform');
-                    var info = this.up('contactinfo').getRecord();
-                    form.referrer = referrer;
+                    var form = Ext.Viewport.add({
+                            xtype: 'contactform'
+                        });
+                    var info = Ext.Viewport.get('contactinfo').getRecord();
+                    Ext.Viewport.getActiveItem().destroy();
+                    //  form.referrer = referrer;
                     Ext.Viewport.setActiveItem(form);
                     form.setRecord(info);
                 },
