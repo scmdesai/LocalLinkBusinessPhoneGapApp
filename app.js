@@ -66711,7 +66711,8 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
-                height: 160
+                height: 160,
+                itemId: 'picture'
             },
             {
                 xtype: 'toolbar',
@@ -66884,10 +66885,18 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
+                fn: 'onContactpicUpdatedata',
+                event: 'updatedata',
+                delegate: '#picture'
+            },
+            {
                 fn: 'onFormpanelUpdatedata',
                 event: 'updatedata'
             }
         ]
+    },
+    onContactpicUpdatedata: function(component, newData, eOpts) {
+        component.setData(newData);
     },
     onFormpanelUpdatedata: function(component, newData, eOpts) {
         component.setData(newData);
