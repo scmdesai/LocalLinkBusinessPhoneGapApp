@@ -67686,15 +67686,21 @@ Ext.define('Ext.picker.Picker', {
             }
         ]
     }
-}, 0, 0, [
+}, 0, [
+    "MenuPanel"
+], [
     "component",
     "container",
-    "panel"
+    "panel",
+    "MenuPanel"
 ], {
     "component": true,
     "container": true,
-    "panel": true
-}, 0, 0, [
+    "panel": true,
+    "MenuPanel": true
+}, [
+    "widget.MenuPanel"
+], 0, [
     Contact.view,
     'MenuPanel'
 ], 0));
