@@ -66971,17 +66971,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onFormpanelUpdatedata',
                 event: 'updatedata'
-            },
-            {
-                fn: 'onContactpicUpdatedata',
-                event: 'updatedata'
             }
         ]
     },
     onFormpanelUpdatedata: function(component, newData, eOpts) {
-        component.setData(newData);
-    },
-    onContactpicUpdatedata: function(component, newData, eOpts) {
         component.setData(newData);
     },
     getValidationErrors: function() {
