@@ -66335,16 +66335,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '20%',
                 iconCls: 'add'
             }
-        ],
-        listeners: [
-            {
-                fn: 'onContactpicUpdatedata',
-                event: 'updatedata'
-            }
         ]
-    },
-    onContactpicUpdatedata: function(component, newData, eOpts) {
-        component.setData(newData);
     }
 }, 0, [
     "contactpic"
@@ -66481,7 +66472,16 @@ Ext.define('Ext.picker.Picker', {
                 readOnly: true,
                 maxRows: 3
             }
+        ],
+        listeners: [
+            {
+                fn: 'onInfoUpdatedata',
+                event: 'updatedata'
+            }
         ]
+    },
+    onInfoUpdatedata: function(component, newData, eOpts) {
+        component.setData(newData);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
