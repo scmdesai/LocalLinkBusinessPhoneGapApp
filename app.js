@@ -66709,6 +66709,11 @@ Ext.define('Ext.picker.Picker', {
         multipartDetection: false,
         items: [
             {
+                xtype: 'contactpic',
+                cls: 'x-panel-body',
+                height: 160
+            },
+            {
                 xtype: 'toolbar',
                 docked: 'top',
                 autoDestroy: false,
@@ -66795,11 +66800,6 @@ Ext.define('Ext.picker.Picker', {
                         text: 'Save'
                     }
                 ]
-            },
-            {
-                xtype: 'contactpic',
-                cls: 'x-panel-body',
-                height: 160
             },
             {
                 xtype: 'textfield',
@@ -67845,16 +67845,17 @@ Ext.define('Ext.picker.Picker', {
                             record.endEdit(true, record.getChanges());
                             record.commit();
                             store.sync();
-                            store.load();
-                            Ext.Msg.alert('Success', action.msg);
-                            var view = Ext.Viewport.add({
-                                    xtype: 'contactform'
-                                });
-                            view.setRecord(record);
-                            Ext.Viewport.setActiveItem(view);
-                            //store.load();
-                            //form.updateRecord(record);
-                            form.destroy();
+                            store.load({
+                                callback: function(records, operation, success) {
+                                    Ext.Msg.alert('Success', action.msg);
+                                    var view = Ext.Viewport.add({
+                                            xtype: 'contactform'
+                                        });
+                                    view.setRecord(record);
+                                    Ext.Viewport.setActiveItem(view);
+                                    form.destroy();
+                                }
+                            });
                         },
                         failure: function(form, action) {
                             store.load();
