@@ -67851,7 +67851,6 @@ Ext.define('Ext.picker.Picker', {
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
                             record.commit();
-                            record.save();
                             store.sync();
                             store.load();
                             Ext.Msg.alert('Success', action.msg);
