@@ -66895,18 +66895,10 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onContactpicUpdatedata',
-                event: 'updatedata',
-                delegate: '#picture'
-            },
-            {
                 fn: 'onFormpanelUpdatedata',
                 event: 'updatedata'
             }
         ]
-    },
-    onContactpicUpdatedata: function(component, newData, eOpts) {
-        component.setData(newData);
     },
     onFormpanelUpdatedata: function(component, newData, eOpts) {
         component.setData(newData);
