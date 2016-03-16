@@ -66472,16 +66472,7 @@ Ext.define('Ext.picker.Picker', {
                 readOnly: true,
                 maxRows: 3
             }
-        ],
-        listeners: [
-            {
-                fn: 'onInfoUpdatedata',
-                event: 'updatedata'
-            }
         ]
-    },
-    onInfoUpdatedata: function(component, newData, eOpts) {
-        component.setData(newData);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -67849,7 +67840,7 @@ Ext.define('Ext.picker.Picker', {
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
                         success: function(form, action) {
-                            Ext.Viewport.getActiveItem().destroy();
+                            //Ext.Viewport.getActiveItem().destroy();
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
