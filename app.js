@@ -66092,6 +66092,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
+        store.loadRecords(record);
         console.log('Updating record');
         return record;
     }
@@ -66325,7 +66326,6 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.show();
                 },
-                //Ext.Viewpo90rt.setActiveItem(view);
                 docked: 'bottom',
                 hidden: false,
                 id: 'changePicButton',
@@ -67848,9 +67848,7 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             Ext.Msg.alert('Success', action.msg);
-                            //var view = Ext.Viewport.add({xtype:'contactform'});
                             view.setRecord(record);
-                            //Ext.Viewport.setActiveItem(view);
                             form.destroy();
                         },
                         failure: function(form, action) {
