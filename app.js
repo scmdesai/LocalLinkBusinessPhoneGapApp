@@ -65975,7 +65975,6 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        record.commit();
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -67512,6 +67511,7 @@ Ext.define('Ext.picker.Picker', {
                     form.submit({
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
+                        cache: false,
                         success: function(form, action) {
                             var view = Ext.Viewport.getActiveItem();
                             record.beginEdit(true, record.getChanges());
