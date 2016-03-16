@@ -66713,9 +66713,9 @@ Ext.define('Ext.picker.Picker', {
     config: {
         stores: [
             'MyJsonPStore',
-            'MyJsonPStore1',
-            'UserPreferences',
-            'MyDealsStore'
+            'MyDealsStore',
+            'UserDetails',
+            'LocalStore'
         ],
         refs: {
             contactinfo: {
@@ -66740,11 +66740,6 @@ Ext.define('Ext.picker.Picker', {
             },
             phoneNumber: 'textfield#phoneNumber',
             address: 'textfield#address',
-            mycontainer1: {
-                selector: 'container#mycontainer1',
-                xtype: 'favoriteview'
-            },
-            favoriteview: 'dataview#favoriteview',
             editButton: 'button#editButton',
             dealsPanel: 'panel#dealsPanel',
             contactform: {
@@ -66775,9 +66770,6 @@ Ext.define('Ext.picker.Picker', {
             },
             "listofdeals": {
                 itemtap: 'onListOfDealsItemTap'
-            },
-            "container#mycontainer1": {
-                activate: 'onMycontainer1Activate'
             },
             "button#editButton": {
                 tap: 'onEditButtonTap'
@@ -66859,23 +66851,6 @@ Ext.define('Ext.picker.Picker', {
             view.setRecord(record);
             Ext.Viewport.setActiveItem(view);
         }
-    },
-    onMycontainer1Activate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var store = Ext.getStore('UserPreferences');
-        var records = [];
-        var ds = Ext.getStore('MyJsonPStore1');
-        ds.clearFilter();
-        //store.clearFilter();
-        store.each(function(rec) {
-            if (rec.get('isFavorite') === true) {
-                records.push(rec.get('customerId'));
-            } else {
-                Ext.Array.remove(records, rec.get('customerId'));
-            }
-        });
-        ds.filterBy(function(record) {
-            return Ext.Array.indexOf(records, record.get('customerId')) !== -1;
-        }, this);
     },
     onEditButtonTap: function(button, e, eOpts) {
         var referrer = Ext.Viewport.getActiveItem();
