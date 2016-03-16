@@ -66086,7 +66086,6 @@ Ext.define('Ext.picker.Picker', {
         listeners: [
             {
                 fn: 'onJsonpstoreUpdaterecord',
-                single: false,
                 event: 'updaterecord'
             }
         ]
