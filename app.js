@@ -66971,11 +66971,18 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onFormpanelUpdatedata',
                 event: 'updatedata'
+            },
+            {
+                fn: 'onFormpanelActiveItemChange',
+                event: 'activeitemchange'
             }
         ]
     },
     onFormpanelUpdatedata: function(component, newData, eOpts) {
         component.setData(newData);
+    },
+    onFormpanelActiveItemChange: function(container, value, oldValue, eOpts) {
+        container.setValue(value);
     },
     getValidationErrors: function() {
         var errors = [];
@@ -67837,8 +67844,9 @@ Ext.define('Ext.picker.Picker', {
                     form.submit({
                         url: 'http://services.appsonmobile.com/stores/' + customerId,
                         xhr2: true,
-                        waitMsg: 'Updating profile picture...',
                         success: function(form, action) {
+                            Ext.Viewport.getActiveItem().destroy();
+                            form.destroy();
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
@@ -67847,7 +67855,6 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             Ext.Msg.alert('Success', action.msg);
-                            Ext.Viewport.getActiveItem().destroy();
                             var view = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
