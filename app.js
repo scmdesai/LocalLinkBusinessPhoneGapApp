@@ -67673,7 +67673,7 @@ Ext.define('Ext.picker.Picker', {
                     var btn = Ext.get('changePicButton');
                     btn.show();
                     var form = this.up('contactform');
-                    var info = this.up('contactinfo').getRecord();
+                    var info = this.getContactinfo().getRecord();
                     form.referrer = referrer;
                     Ext.Viewport.setActiveItem(form);
                     form.setRecord(info);
