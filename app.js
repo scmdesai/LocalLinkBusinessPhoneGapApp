@@ -66638,17 +66638,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: true,
                 name: 'pictureURL'
             }
-        ],
-        listeners: [
-            {
-                fn: 'onContactpicUpdatedata',
-                event: 'updatedata',
-                delegate: '#picture'
-            }
         ]
-    },
-    onContactpicUpdatedata: function(component, newData, eOpts) {
-        component.setData(newData);
     },
     getValidationErrors: function() {
         var errors = [];
@@ -66668,6 +66658,7 @@ Ext.define('Ext.picker.Picker', {
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
+            console.log('Setting image');
             this.child('contactpic').setData(record.data);
             this.down('#businessName').setValue(record.data.businessName);
             this.down('#phoneNumber').setValue(record.data.phoneNumber);
