@@ -17,6 +17,14 @@ $list-header-bg-color: $base-color;
     padding-left: 4px;
 }
 
+ .x-form-label  {
+	 
+	 border-radius: 7px;
+	 text-align:center;
+	 font-size:6vw;
+	 vertical-align:middle;
+            
+        }
 .customfield {
 	border:2px inset #eee;
 	margin:5px 5px 5px 5px;
@@ -24,16 +32,15 @@ $list-header-bg-color: $base-color;
 	font-weight:normal;
 	text-align:center;
 	vertical-align:middle;
-}
+	border-radius: 7px;
+	
+	
+   
 
-.customlabel {
-	
-	
-	
-	font-size:5vw;
-	font-weight:normal;
 
 }
+
+
 
 
 .checkbox_hidden{

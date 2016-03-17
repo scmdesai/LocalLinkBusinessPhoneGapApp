@@ -66454,7 +66454,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.contactform', Ext.form.Panel, {
     config: {
-        baseCls: 'x-panel-body',
         html: '',
         id: 'formpanel',
         itemId: 'formpanel',
@@ -67272,7 +67271,7 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 inputCls: '',
                 label: 'Name',
-                labelCls: 'label',
+                labelCls: '',
                 labelWidth: '50%',
                 name: 'DealName',
                 required: true
