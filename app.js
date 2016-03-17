@@ -66642,12 +66642,13 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onFormpanelUpdatedata',
-                event: 'updatedata'
+                fn: 'onContactpicUpdatedata',
+                event: 'updatedata',
+                delegate: '#picture'
             }
         ]
     },
-    onFormpanelUpdatedata: function(component, newData, eOpts) {
+    onContactpicUpdatedata: function(component, newData, eOpts) {
         component.setData(newData);
     },
     getValidationErrors: function() {
