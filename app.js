@@ -67512,8 +67512,10 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            Ext.Msg.alert('Success', action.msg);
-                            view.setRecord(record);
+                            if (store.isLoaded()) {
+                                Ext.Msg.alert('Success', action.msg);
+                                view.setRecord(record);
+                            }
                             form.destroy();
                         },
                         failure: function(form, action) {
