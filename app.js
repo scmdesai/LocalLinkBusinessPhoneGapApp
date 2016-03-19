@@ -66238,7 +66238,6 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                baseCls: 'custominfofield',
                 cls: 'icon-phone',
                 disabled: false,
                 height: '',
