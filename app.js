@@ -66093,10 +66093,8 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
-        height: '100%',
         itemId: 'contactpic',
         margin: '5 5 5 5',
-        minHeight: '100%',
         padding: '',
         style: 'overflow: hidden;',
         styleHtmlContent: true,
@@ -66220,7 +66218,6 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 border: '',
                 docked: 'top',
-                height: '40%',
                 maxHeight: '',
                 minWidth: '',
                 padding: '5 5 5 5',
@@ -66234,6 +66231,7 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'contactpic',
+                        height: '160px',
                         itemId: 'picture1'
                     }
                 ]
@@ -66247,9 +66245,10 @@ Ext.define('Ext.picker.Picker', {
                 html: '',
                 itemId: 'phoneNumber',
                 minHeight: '',
-                minWidth: '100%',
+                minWidth: '',
                 styleHtmlCls: '',
-                width: '100%',
+                styleHtmlContent: true,
+                width: '90%',
                 clearIcon: false,
                 inputCls: '',
                 name: 'phoneNumber',
@@ -66264,9 +66263,9 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'website1',
                 maxHeight: '',
                 minHeight: '',
-                minWidth: '100%',
+                minWidth: '',
                 styleHtmlCls: '',
-                width: '100%',
+                width: '90%',
                 clearIcon: false,
                 inputCls: '',
                 name: 'emailAddress',
@@ -66282,9 +66281,8 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'website',
                 maxHeight: '30%',
                 minHeight: '',
-                minWidth: '100%',
                 styleHtmlCls: '',
-                width: '100%',
+                width: '90%',
                 clearIcon: false,
                 name: 'website',
                 readOnly: true
@@ -66298,10 +66296,8 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'address',
                 margin: '',
                 maxHeight: '',
-                maxWidth: '100%',
                 minHeight: '',
-                minWidth: '100%',
-                width: '100%',
+                width: '90%',
                 clearIcon: false,
                 name: 'address',
                 readOnly: true,
