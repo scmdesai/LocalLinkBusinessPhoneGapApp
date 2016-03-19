@@ -66267,7 +66267,7 @@ Ext.define('Ext.picker.Picker', {
                 maxHeight: '',
                 minHeight: '',
                 minWidth: '',
-                style: 'padding-bottom:5px',
+                style: 'padding-bottom:15px',
                 styleHtmlCls: '',
                 styleHtmlContent: true,
                 width: '90%',
