@@ -66178,6 +66178,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.contactinfo', Ext.form.Panel, {
     config: {
         border: 5,
+        cls: 'globe1',
         height: '100%',
         itemId: 'info',
         minHeight: '100%',
@@ -66257,7 +66258,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                cls: 'icon-phone',
+                cls: 'icon-globe',
                 disabled: false,
                 height: '',
                 html: '',
