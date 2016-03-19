@@ -65818,6 +65818,9 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'customerId'
+            },
+            {
+                name: 'website'
             }
         ]
     }
@@ -66236,10 +66239,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                cls: [
-                    'icon-phone',
-                    'customfield'
-                ],
+                cls: 'icon-phone',
                 disabled: false,
                 height: '',
                 html: '',
@@ -66256,11 +66256,44 @@ Ext.define('Ext.picker.Picker', {
                 readOnly: true
             },
             {
+                xtype: 'textfield',
+                cls: 'icon-phone',
+                disabled: false,
+                height: '',
+                html: '',
+                itemId: 'website',
+                maxHeight: '30%',
+                minHeight: '',
+                minWidth: '100%',
+                style: 'font-size:4vw',
+                styleHtmlCls: '',
+                width: '100%',
+                clearIcon: false,
+                inputCls: '',
+                name: 'website',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-phone',
+                disabled: false,
+                height: '',
+                html: '',
+                itemId: 'website1',
+                maxHeight: '30%',
+                minHeight: '',
+                minWidth: '100%',
+                style: 'font-size:4vw',
+                styleHtmlCls: '',
+                width: '100%',
+                clearIcon: false,
+                inputCls: '',
+                name: 'emailAddress',
+                readOnly: true
+            },
+            {
                 xtype: 'textareafield',
-                cls: [
-                    'icon-location',
-                    'customfield'
-                ],
+                cls: 'icon-location',
                 disabled: false,
                 html: '',
                 itemId: 'address',
@@ -66502,6 +66535,7 @@ Ext.define('Ext.picker.Picker', {
                             //form.fireEvent('updateRecord',this);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
+                                cache: false,
                                 success: function(form, action) {
                                     record.beginEdit(true, record.getChanges());
                                     form.updateRecord(record);
@@ -66637,6 +66671,22 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 hidden: true,
                 name: 'pictureURL'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '20%',
+                hidden: true,
+                html: '',
+                id: 'website',
+                itemId: 'website',
+                style: 'font-size:4vw',
+                label: '',
+                labelAlign: 'top',
+                labelWidth: '',
+                labelWrap: true,
+                name: 'website',
+                required: true
             }
         ]
     },
@@ -67511,10 +67561,8 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            if (store.isLoaded()) {
-                                Ext.Msg.alert('Success', action.msg);
-                                view.setRecord(record);
-                            }
+                            Ext.Msg.alert('Success', action.msg);
+                            view.setRecord(record);
                             form.destroy();
                         },
                         failure: function(form, action) {
@@ -67527,7 +67575,7 @@ Ext.define('Ext.picker.Picker', {
                 bottom: 30,
                 centered: false,
                 cls: 'button',
-                height: '30%',
+                height: '25%',
                 left: '25%',
                 margin: '',
                 style: 'border:none',
@@ -67586,6 +67634,11 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 hidden: true,
                 name: 'pictureURL'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'website'
             }
         ],
         listeners: [
