@@ -66176,7 +66176,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.contactinfo', Ext.form.Panel, {
     config: {
         border: 5,
-        cls: 'globe1',
         height: '100%',
         itemId: 'info',
         minHeight: '100%',
@@ -66238,7 +66237,11 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                cls: 'icon-phone',
+                baseCls: 'custominfofield',
+                cls: [
+                    'icon-phone',
+                    'custominfofield'
+                ],
                 disabled: false,
                 html: '',
                 itemId: 'phoneNumber',
@@ -66250,13 +66253,15 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
-                inputCls: 'custominfofield',
+                inputCls: '',
+                label: '',
                 labelCls: '',
                 name: 'phoneNumber',
                 readOnly: true
             },
             {
                 xtype: 'textfield',
+                baseCls: 'custominfofield',
                 cls: 'icon-email',
                 disabled: false,
                 html: '',
@@ -66276,6 +66281,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
+                baseCls: 'custominfofield',
                 cls: 'icon-globe',
                 disabled: false,
                 height: '',
@@ -66291,6 +66297,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textareafield',
+                baseCls: 'custominfofield',
                 cls: 'icon-location',
                 disabled: false,
                 html: '',
