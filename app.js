@@ -66238,10 +66238,8 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                baseCls: '',
                 cls: 'icon-phone',
                 disabled: false,
-                height: '10vh',
                 html: '',
                 itemId: 'phoneNumber',
                 margin: '',
@@ -66253,6 +66251,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '90%',
                 clearIcon: false,
                 inputCls: 'custominfofield',
+                labelCls: '',
                 name: 'phoneNumber',
                 readOnly: true
             },
@@ -66292,7 +66291,6 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textareafield',
-                baseCls: 'custominfofield',
                 cls: 'icon-location',
                 disabled: false,
                 html: '',
