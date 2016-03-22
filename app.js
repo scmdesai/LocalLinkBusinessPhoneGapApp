@@ -66133,12 +66133,12 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.show();
                 },
-                cls: 'icon-changePic',
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
                 style: ' position:absolute;     top:10px;     left:10px;     width:20%;     height:10%;',
-                ui: 'plain'
+                ui: 'plain',
+                iconCls: 'add'
             }
         ]
     }
