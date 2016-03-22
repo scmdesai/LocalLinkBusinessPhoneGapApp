@@ -66535,29 +66535,40 @@ Ext.define('Ext.picker.Picker', {
                                     record.commit();
                                     store.sync();
                                     store.load();
-                                    Ext.Viewport.getComponent('panel').destroy();
-                                    var view = Ext.create("Ext.tab.Panel", {
-                                            fullscreen: true,
-                                            tabBarPosition: 'bottom',
-                                            itemId: 'panel',
-                                            items: [
-                                                {
-                                                    xtype: 'contactinfo',
-                                                    title: 'Home',
-                                                    itemId: 'home',
-                                                    iconCls: 'home'
-                                                },
-                                                {
-                                                    xtype: 'DealsPanel',
-                                                    title: 'Buzz',
-                                                    iconCls: 'info'
-                                                }
-                                            ]
-                                        });
-                                    Ext.Viewport.setActiveItem(view);
-                                    view.getComponent('home').setRecord(record);
-                                    var btn = Ext.get('changePicButton');
-                                    btn.hide();
+                                    /*Ext.Viewport.getComponent('panel').destroy();
+
+									var view = Ext.create("Ext.tab.Panel", {
+
+									fullscreen: true,
+									tabBarPosition: 'bottom',
+									itemId:'panel',
+
+
+									items: [
+									{
+									xtype: 'contactinfo',
+									title:'Home',
+									itemId:'home',
+									iconCls:'home'
+									},
+									{
+									xtype: 'DealsPanel',
+									title:'Buzz',
+									iconCls:'info'
+									}
+									]
+									});
+
+
+
+
+
+
+
+									Ext.Viewport.setActiveItem(view);*/
+                                    Ext.Viewport.getComponent('home').setRecord(record);
+                                    // var btn = Ext.get('changePicButton');
+                                    // btn.hide();
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
