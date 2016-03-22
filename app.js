@@ -66138,7 +66138,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'changePicButton',
                 itemId: 'changePicButton',
                 left: '0%',
-                style: 'background:color:transparent;opacity:1',
+                style: 'opacity:0.5',
                 styleHtmlContent: true,
                 top: '73%',
                 ui: 'plain',
@@ -66690,6 +66690,22 @@ Ext.define('Ext.picker.Picker', {
                 labelWidth: '',
                 labelWrap: true,
                 name: 'website',
+                required: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '20%',
+                hidden: true,
+                html: '',
+                id: 'websiteDisplayName',
+                itemId: 'websiteDisplayName',
+                style: 'font-size:4vw',
+                label: '',
+                labelAlign: 'top',
+                labelWidth: '',
+                labelWrap: true,
+                name: 'websiteDisplayName',
                 required: true
             }
         ]
@@ -67643,6 +67659,11 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 hidden: true,
                 name: 'website'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'websiteDisplayName'
             }
         ],
         listeners: [
