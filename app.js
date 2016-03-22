@@ -66928,12 +66928,12 @@ Ext.define('Ext.picker.Picker', {
         }
     },
     onEditButtonTap: function(button, e, eOpts) {
-        var referrer = Ext.Viewport.getActiveItem();
+        //var referrer = Ext.Viewport.getActiveItem();
         //var btn = Ext.getCmp('changePicButton');
         //btn.show();
         var form = this.getContactform();
         var info = this.getContactinfo().getRecord();
-        form.referrer = referrer;
+        //form.referrer = referrer;
         Ext.Viewport.setActiveItem(form);
         form.setRecord(info);
     },
@@ -67010,11 +67010,12 @@ Ext.define('Ext.picker.Picker', {
 		*/
     onCancelButtonTap: function(button, e, eOpts) {
         var form = this.getContactform();
-        var btn = Ext.get('changePicButton');
-        btn.hide();
-        Ext.Viewport.setActiveItem(form.referrer);
-        delete form.referrer;
+        frm.destroy();
     },
+    //var btn = Ext.get('changePicButton');
+    //btn.hide();
+    //Ext.Viewport.setActiveItem(form.referrer);
+    //delete form.referrer;
     onBackFromDealsPanelTap: function(button, e, eOpts) {
         var ds = Ext.StoreManager.lookup('MyJsonPStore');
         ds.clearFilter();
