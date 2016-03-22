@@ -66553,9 +66553,8 @@ Ext.define('Ext.picker.Picker', {
                                                 }
                                             ]
                                         });
-                                    var btn = Ext.get('changePicButton');
+                                    var btn = Ext.getCmp('changePicButton');
                                     btn.hide();
-                                    btn.setVisible(false);
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
