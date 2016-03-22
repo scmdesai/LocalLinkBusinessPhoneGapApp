@@ -65821,6 +65821,9 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'website'
+            },
+            {
+                name: 'websiteDisplayName'
             }
         ]
     }
@@ -66108,7 +66111,7 @@ Ext.define('Ext.picker.Picker', {
         layout: {
             type: 'vbox',
             align: 'start',
-            pack: 'center'
+            pack: 'end'
         },
         items: [
             {
@@ -66219,22 +66222,29 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
+                flex: 50,
                 border: '',
-                docked: 'top',
-                maxHeight: '',
+                height: '30%',
                 minWidth: '',
                 padding: '5 5 5 5',
                 style: 'bacground:#fff',
                 width: '100%',
+                scrollable: false,
                 layout: {
                     type: 'vbox',
-                    align: 'start'
+                    align: 'stretchmax'
                 },
                 items: [
                     {
                         xtype: 'contactpic',
-                        height: '160px',
-                        itemId: 'picture1'
+                        itemId: 'picture1',
+                        width: '100%',
+                        flex: 1,
+                        layout: {
+                            type: 'vbox',
+                            align: 'stretchmax',
+                            pack: 'start'
+                        }
                     }
                 ]
             },
