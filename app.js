@@ -66527,7 +66527,6 @@ Ext.define('Ext.picker.Picker', {
                             //form.fireEvent('updateRecord',this);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
-                                cache: false,
                                 success: function(form, action) {
                                     record.beginEdit(true, record.getChanges());
                                     form.updateRecord(record);
@@ -66554,15 +66553,12 @@ Ext.define('Ext.picker.Picker', {
                                                 }
                                             ]
                                         });
+                                    Ext.getCmp('changePicButton').hide();
                                     Ext.Viewport.setActiveItem(view);
-                                    view.setRecord(record);
-                                    //Ext.Viewport.getComponent('home').setRecord(record);
-                                    // var btn = Ext.get('changePicButton');
-                                    // btn.hide();
+                                    view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
-                                //var fields = record.getChanges();
                                 failure: function(form, action) {
                                     store.load();
                                     Ext.Msg.alert('Failure', action.msg);
