@@ -66110,8 +66110,7 @@ Ext.define('Ext.picker.Picker', {
         ],
         layout: {
             type: 'vbox',
-            align: 'start',
-            pack: 'end'
+            align: 'stretchmax'
         },
         items: [
             {
@@ -66138,7 +66137,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                left: '-5%',
+                left: '0%',
                 style: 'background:color:transparent;opacity:1',
                 styleHtmlContent: true,
                 top: '73%',
@@ -66226,11 +66225,10 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                flex: 50,
+                flex: 5,
                 border: '',
                 height: '30%',
                 minWidth: '',
-                padding: '5 5 5 5',
                 style: 'bacground:#fff',
                 width: '100%',
                 scrollable: false,
@@ -66242,11 +66240,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'contactpic',
                         itemId: 'picture1',
-                        flex: 1,
-                        layout: {
-                            type: 'vbox',
-                            align: 'stretchmax'
-                        }
+                        flex: 1
                     }
                 ]
             },
@@ -66259,7 +66253,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '',
                 minHeight: '',
                 minWidth: '',
-                style: '',
+                styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
                 label: '',
@@ -66275,7 +66269,7 @@ Ext.define('Ext.picker.Picker', {
                 maxHeight: '',
                 minHeight: '',
                 minWidth: '',
-                styleHtmlCls: '',
+                styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
                 inputCls: '',
@@ -66594,11 +66588,7 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'top',
                 height: '30%',
                 itemId: 'picture',
-                margin: '5 5 5 5',
-                layout: {
-                    type: 'vbox',
-                    align: 'stretchmax'
-                }
+                margin: '5 5 5 5'
             },
             {
                 xtype: 'textfield',
@@ -66607,7 +66597,9 @@ Ext.define('Ext.picker.Picker', {
                 html: '',
                 id: 'businessName',
                 itemId: 'businessName',
+                margin: '5 5 5 5',
                 style: 'font-size:4vw',
+                styleHtmlContent: true,
                 label: '',
                 labelAlign: 'top',
                 labelWidth: '',
@@ -66624,7 +66616,9 @@ Ext.define('Ext.picker.Picker', {
                 height: '20%',
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
+                margin: '5 5 5 5',
                 style: 'font-size:4vw;',
+                styleHtmlContent: true,
                 labelWrap: true,
                 name: 'phoneNumber',
                 required: true
@@ -66638,7 +66632,9 @@ Ext.define('Ext.picker.Picker', {
                 height: '15%',
                 id: 'address',
                 itemId: 'address',
+                margin: '5 5 5 5',
                 style: 'font-size:4vw;vertical-align:middle;',
+                styleHtmlContent: true,
                 name: 'address',
                 required: true
             },
