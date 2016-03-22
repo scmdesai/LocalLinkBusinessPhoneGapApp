@@ -66491,6 +66491,7 @@ Ext.define('Ext.picker.Picker', {
         ui: 'light',
         autoDestroy: false,
         modal: true,
+        scrollable: true,
         multipartDetection: false,
         items: [
             {
@@ -66680,7 +66681,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: 'customfield',
                 height: '20%',
-                hidden: true,
+                hidden: false,
                 html: '',
                 id: 'website',
                 itemId: 'website',
@@ -66696,7 +66697,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: 'customfield',
                 height: '20%',
-                hidden: true,
+                hidden: false,
                 html: '',
                 id: 'websiteDisplayName',
                 itemId: 'websiteDisplayName',
