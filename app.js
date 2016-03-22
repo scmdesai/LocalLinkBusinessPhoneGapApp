@@ -66309,9 +66309,9 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        var btn = Ext.get('changePicButton');
+        var btn = Ext.getCmp('changePicButton');
         btn.hide();
-        //btn.setVisible(false);
+        btn.setVisible(false);
         if (record) {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
