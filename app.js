@@ -66498,12 +66498,6 @@ Ext.define('Ext.picker.Picker', {
         multipartDetection: false,
         items: [
             {
-                xtype: 'contactpic',
-                cls: 'x-panel-body',
-                height: 160,
-                itemId: 'picture'
-            },
-            {
                 xtype: 'toolbar',
                 docked: 'top',
                 autoDestroy: false,
@@ -66591,6 +66585,20 @@ Ext.define('Ext.picker.Picker', {
                         text: 'Save'
                     }
                 ]
+            },
+            {
+                xtype: 'contactpic',
+                cls: 'x-panel-body',
+                docked: 'top',
+                height: '30%',
+                itemId: 'picture',
+                margin: '5 5 5 5',
+                width: '100%',
+                layout: {
+                    type: 'vbox',
+                    align: 'stretchmax',
+                    pack: 'start'
+                }
             },
             {
                 xtype: 'textfield',
