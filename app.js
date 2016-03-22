@@ -66138,10 +66138,10 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                left: '-6.5%',
+                left: '-5%',
                 style: 'background:color:transparent;opacity:1',
                 styleHtmlContent: true,
-                top: '75%',
+                top: '73%',
                 ui: 'plain',
                 width: '20%',
                 iconCls: 'add'
