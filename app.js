@@ -66312,7 +66312,7 @@ Ext.define('Ext.picker.Picker', {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         var btn = Ext.get('changePicButton');
         btn.hide();
-        //btn.setVisible(false);
+        btn.setVisible(false);
         if (record) {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
@@ -66727,7 +66727,6 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        Ext.getCmp('changePicButton').show();
         if (record) {
             this.down('#businessName').setValue(record.data.businessName);
             this.down('#phoneNumber').setValue(record.data.phoneNumber);
