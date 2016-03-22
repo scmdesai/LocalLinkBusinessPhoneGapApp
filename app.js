@@ -66618,7 +66618,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
                 margin: '5 5 5 5',
-                style: 'font-size:4vw;',
+                style: 'font-size:5vw;',
                 styleHtmlContent: true,
                 labelWrap: true,
                 name: 'phoneNumber',
@@ -66634,7 +66634,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'address',
                 itemId: 'address',
                 margin: '5 5 5 5',
-                style: 'font-size:4vw;vertical-align:middle;',
+                style: 'font-size:5vw;vertical-align:middle;',
                 styleHtmlContent: true,
                 name: 'address',
                 required: true
@@ -66674,7 +66674,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                hidden: false,
+                hidden: true,
                 name: 'pictureURL'
             },
             {
@@ -67541,6 +67541,7 @@ Ext.define('Ext.picker.Picker', {
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
         style: 'background;#fff;border:3px groove #1985d0',
+        styleHtmlContent: true,
         width: '80%',
         hideOnMaskTap: true,
         modal: true,
@@ -67555,7 +67556,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'filefield',
                 itemId: 'myfilefield1',
                 margin: '5 5 5 5',
-                style: 'color:white',
+                style: 'color:white;border:none',
                 width: 214,
                 clearIcon: false,
                 label: '',
@@ -67596,7 +67597,7 @@ Ext.define('Ext.picker.Picker', {
                 bottom: 30,
                 centered: false,
                 cls: 'button',
-                height: '25%',
+                height: '23%',
                 left: '25%',
                 margin: '',
                 style: 'border:none',
@@ -67653,7 +67654,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                hidden: false,
+                hidden: true,
                 name: 'pictureURL'
             },
             {
