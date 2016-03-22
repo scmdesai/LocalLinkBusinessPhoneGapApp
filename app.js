@@ -66134,7 +66134,7 @@ Ext.define('Ext.picker.Picker', {
                 },
                 bottom: '',
                 height: '30%',
-                hidden: true,
+                hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
                 left: '0%',
@@ -66310,7 +66310,7 @@ Ext.define('Ext.picker.Picker', {
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         var btn = Ext.get('changePicButton');
-        //btn.hide();
+        btn.hide();
         //btn.setVisible(false);
         if (record) {
             var name = record.get('businessName');
