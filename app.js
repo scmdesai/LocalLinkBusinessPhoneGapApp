@@ -66105,7 +66105,7 @@ Ext.define('Ext.picker.Picker', {
         scrollable: false,
         tpl: [
             '',
-            '\t<img src="{pictureURL}" style="background:none"/>',
+            '\t<img src="{pictureURL}"/>',
             '\t'
         ],
         layout: {
@@ -66133,13 +66133,13 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.show();
                 },
-                cls: 'icon-changePic',
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                style: ' position:absolute;     top:150px;     left:10px;     width:20%;     height:10%;background:none;text-align:left;',
+                style: 'position:absolute; top:150px;     left:10px;background:none;',
                 styleHtmlContent: true,
-                ui: 'plain'
+                ui: 'plain',
+                iconCls: 'add'
             }
         ]
     }
