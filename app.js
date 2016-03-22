@@ -66741,6 +66741,7 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        Ext.getCmp('changePicButton').show();
         if (record) {
             this.down('#businessName').setValue(record.data.businessName);
             this.down('#phoneNumber').setValue(record.data.phoneNumber);
@@ -66928,8 +66929,8 @@ Ext.define('Ext.picker.Picker', {
     },
     onEditButtonTap: function(button, e, eOpts) {
         var referrer = Ext.Viewport.getActiveItem();
-        var btn = Ext.getCmp('changePicButton');
-        btn.show();
+        //var btn = Ext.getCmp('changePicButton');
+        //btn.show();
         var form = this.getContactform();
         var info = this.getContactinfo().getRecord();
         form.referrer = referrer;
