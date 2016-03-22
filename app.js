@@ -66135,8 +66135,8 @@ Ext.define('Ext.picker.Picker', {
                 },
                 cls: 'icon-changePic',
                 hidden: false,
-                id: 'changePicBtn',
-                itemId: 'changePicBtn',
+                id: 'changePicButton',
+                itemId: 'changePicButton',
                 style: ' position:absolute;     top:10px;     left:10px;     width:20%;     height:10%;',
                 ui: 'plain'
             }
