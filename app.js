@@ -66136,7 +66136,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                style: 'position:absolute; top:150px;     left:10px;background:none;',
+                style: 'position:absolute; top:100px;     left:10px;background:none;',
                 styleHtmlContent: true,
                 ui: 'plain',
                 iconCls: 'add'
