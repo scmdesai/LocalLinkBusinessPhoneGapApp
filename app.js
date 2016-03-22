@@ -66094,7 +66094,6 @@ Ext.define('Ext.picker.Picker', {
     config: {
         overflow: 'hidden',
         itemId: 'contactpic',
-        margin: '5 5 5 5',
         padding: '',
         style: 'overflow: hidden;',
         styleHtmlContent: true,
@@ -66131,14 +66130,14 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.show();
                 },
+                cls: 'icon-changePic',
                 docked: 'bottom',
+                height: '',
                 hidden: false,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
-                style: 'font-size:1.2em;color:#1985d0',
-                ui: 'plain',
-                width: '20%',
-                iconCls: 'add'
+                style: 'font-size:1.2em;color:#1985d0;text-align:center',
+                ui: 'plain'
             }
         ]
     }
@@ -66182,6 +66181,11 @@ Ext.define('Ext.picker.Picker', {
         style: 'background;#fff',
         styleHtmlContent: true,
         modal: true,
+        scrollable: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
         items: [
             {
                 xtype: 'toolbar',
@@ -66221,7 +66225,6 @@ Ext.define('Ext.picker.Picker', {
                 minWidth: '',
                 padding: '5 5 5 5',
                 style: 'bacground:#fff',
-                styleHtmlContent: true,
                 width: '100%',
                 layout: {
                     type: 'vbox',
@@ -66244,8 +66247,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '',
                 minHeight: '',
                 minWidth: '',
-                style: 'padding-bottom:5px',
-                styleHtmlContent: true,
+                style: '',
                 width: '90%',
                 clearIcon: false,
                 label: '',
@@ -66258,13 +66260,10 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 html: '',
                 itemId: 'website1',
-                margin: '5 5 5 5',
                 maxHeight: '',
                 minHeight: '',
                 minWidth: '',
-                style: 'padding-bottom:15px',
                 styleHtmlCls: '',
-                styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
                 inputCls: '',
@@ -66278,28 +66277,27 @@ Ext.define('Ext.picker.Picker', {
                 height: '',
                 html: '',
                 itemId: 'website',
-                maxHeight: '30%',
                 minHeight: '',
                 styleHtmlCls: '',
                 width: '90%',
                 clearIcon: false,
-                name: 'website',
+                name: 'websiteDisplayName',
                 readOnly: true
             },
             {
                 xtype: 'textareafield',
+                baseCls: 'customfield',
                 cls: 'icon-location',
                 disabled: false,
                 html: '',
                 itemId: 'address',
-                margin: '',
                 maxHeight: '',
                 minHeight: '',
                 width: '90%',
                 clearIcon: false,
                 name: 'address',
                 readOnly: true,
-                maxRows: 1
+                maxRows: 2
             }
         ]
     },
