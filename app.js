@@ -66916,7 +66916,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onEditButtonTap: function(button, e, eOpts) {
         var referrer = Ext.Viewport.getActiveItem();
-        var btn = Ext.get('changePicButton');
+        var btn = Ext.getCmp('changePicButton');
         btn.setVisible(true);
         var form = this.getContactform();
         var info = this.getContactinfo().getRecord();
