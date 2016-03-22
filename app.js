@@ -66535,40 +66535,29 @@ Ext.define('Ext.picker.Picker', {
                                     record.commit();
                                     store.sync();
                                     store.load();
-                                    /*Ext.Viewport.getComponent('panel').destroy();
-
-									var view = Ext.create("Ext.tab.Panel", {
-
-									fullscreen: true,
-									tabBarPosition: 'bottom',
-									itemId:'panel',
-
-
-									items: [
-									{
-									xtype: 'contactinfo',
-									title:'Home',
-									itemId:'home',
-									iconCls:'home'
-									},
-									{
-									xtype: 'DealsPanel',
-									title:'Buzz',
-									iconCls:'info'
-									}
-									]
-									});
-
-
-
-
-
-
-
-									Ext.Viewport.setActiveItem(view);*/
-                                    //	Ext.Viewport.getComponent('home').setRecord(record);
-                                    // var btn = Ext.get('changePicButton');
-                                    // btn.hide();
+                                    Ext.Viewport.getComponent('panel').destroy();
+                                    var view = Ext.create("Ext.tab.Panel", {
+                                            fullscreen: true,
+                                            tabBarPosition: 'bottom',
+                                            itemId: 'panel',
+                                            items: [
+                                                {
+                                                    xtype: 'contactinfo',
+                                                    title: 'Home',
+                                                    itemId: 'home',
+                                                    iconCls: 'home'
+                                                },
+                                                {
+                                                    xtype: 'DealsPanel',
+                                                    title: 'Buzz',
+                                                    iconCls: 'info'
+                                                }
+                                            ]
+                                        });
+                                    Ext.Viewport.setActiveItem(view);
+                                    Ext.Viewport.getComponent('home').setRecord(record);
+                                    var btn = Ext.get('changePicButton');
+                                    btn.hide();
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
@@ -66928,12 +66917,12 @@ Ext.define('Ext.picker.Picker', {
         }
     },
     onEditButtonTap: function(button, e, eOpts) {
-        //var referrer = Ext.Viewport.getActiveItem();
-        //var btn = Ext.getCmp('changePicButton');
-        //btn.show();
+        var referrer = Ext.Viewport.getActiveItem();
+        var btn = Ext.get('changePicButton');
+        btn.show();
         var form = this.getContactform();
         var info = this.getContactinfo().getRecord();
-        //form.referrer = referrer;
+        form.referrer = referrer;
         Ext.Viewport.setActiveItem(form);
         form.setRecord(info);
     },
@@ -67010,12 +66999,12 @@ Ext.define('Ext.picker.Picker', {
 		*/
     onCancelButtonTap: function(button, e, eOpts) {
         var form = this.getContactform();
-        frm.destroy();
+        form.destroy();
+        var btn = Ext.get('changePicButton');
+        btn.hide();
+        Ext.Viewport.setActiveItem(form.referrer);
+        delete form.referrer;
     },
-    //var btn = Ext.get('changePicButton');
-    //btn.hide();
-    //Ext.Viewport.setActiveItem(form.referrer);
-    //delete form.referrer;
     onBackFromDealsPanelTap: function(button, e, eOpts) {
         var ds = Ext.StoreManager.lookup('MyJsonPStore');
         ds.clearFilter();
