@@ -66101,7 +66101,7 @@ Ext.define('Ext.picker.Picker', {
         style: 'overflow: hidden;',
         styleHtmlContent: true,
         ui: '',
-        width: '95%',
+        width: '100%',
         scrollable: false,
         tpl: [
             '',
@@ -66134,12 +66134,10 @@ Ext.define('Ext.picker.Picker', {
                     view.show();
                 },
                 cls: 'icon-changePic',
-                docked: 'bottom',
-                height: '',
                 hidden: false,
-                id: 'changePicButton',
-                itemId: 'changePicButton',
-                style: 'font-size:1.2em;color:#1985d0;text-align:center',
+                id: 'changePicBtn',
+                itemId: 'changePicBtn',
+                style: ' position:absolute;     top:10px;     left:10px;     width:20%;     height:10%;',
                 ui: 'plain'
             }
         ]
@@ -66238,12 +66236,10 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'contactpic',
                         itemId: 'picture1',
-                        width: '100%',
                         flex: 1,
                         layout: {
                             type: 'vbox',
-                            align: 'stretchmax',
-                            pack: 'start'
+                            align: 'stretchmax'
                         }
                     }
                 ]
@@ -66593,11 +66589,9 @@ Ext.define('Ext.picker.Picker', {
                 height: '30%',
                 itemId: 'picture',
                 margin: '5 5 5 5',
-                width: '100%',
                 layout: {
                     type: 'vbox',
-                    align: 'stretchmax',
-                    pack: 'start'
+                    align: 'stretchmax'
                 }
             },
             {
