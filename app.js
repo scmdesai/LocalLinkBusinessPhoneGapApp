@@ -66674,7 +66674,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                hidden: true,
+                hidden: false,
                 name: 'pictureURL'
             },
             {
@@ -67653,7 +67653,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                hidden: true,
+                hidden: false,
                 name: 'pictureURL'
             },
             {
