@@ -66096,6 +66096,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
+        id: 'contactpic',
         itemId: 'contactpic',
         padding: '',
         style: 'overflow: hidden;',
@@ -66553,10 +66554,10 @@ Ext.define('Ext.picker.Picker', {
                                                 }
                                             ]
                                         });
-                                    var btn = Ext.getCmp('changePicButton');
-                                    btn.hide();
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
+                                    var btn = Ext.get('changePicButton');
+                                    btn.hide();
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
