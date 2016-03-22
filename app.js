@@ -66134,7 +66134,7 @@ Ext.define('Ext.picker.Picker', {
                 },
                 bottom: '',
                 height: '30%',
-                hidden: false,
+                hidden: true,
                 id: 'changePicButton',
                 itemId: 'changePicButton',
                 left: '0%',
