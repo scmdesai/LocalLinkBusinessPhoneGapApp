@@ -66098,11 +66098,10 @@ Ext.define('Ext.picker.Picker', {
         overflow: 'hidden',
         id: 'contactpic',
         itemId: 'contactpic',
+        margin: '5 5 5 5',
         padding: '',
         style: 'overflow: hidden;border:1px groove #000;background:none',
-        styleHtmlContent: true,
         ui: '',
-        width: '95%',
         scrollable: false,
         tpl: [
             '',
@@ -66192,9 +66191,9 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'contactpic',
+                height: '100%',
                 id: 'picture',
-                maxWidth: '100%',
-                minWidth: '100%',
+                width: '100%',
                 flex: 1
             },
             {
@@ -66539,7 +66538,6 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'top',
                 height: '30%',
                 itemId: 'picture',
-                margin: '5 5 5 5',
                 width: ''
             },
             {
@@ -66587,7 +66585,6 @@ Ext.define('Ext.picker.Picker', {
                     'icon-phone',
                     'customfield'
                 ],
-                height: '15%',
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
                 styleHtmlContent: true,
