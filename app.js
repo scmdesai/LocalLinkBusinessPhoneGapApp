@@ -66206,7 +66206,6 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'contactpic',
-                        itemId: 'picture1',
                         flex: 1
                     }
                 ]
@@ -66303,9 +66302,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactinfo'
 ], 0));
-//var btn = Ext.get('changePicButton');
-// btn.hide();
-//  btn.setVisible(false);
 
 /*
  * File: app/view/ListOfDeals.js
@@ -66884,8 +66880,6 @@ Ext.define('Ext.picker.Picker', {
     },
     onEditButtonTap: function(button, e, eOpts) {
         var referrer = Ext.Viewport.getActiveItem();
-        // var btn = Ext.get('changePicButton');
-        //btn.show();
         var form = this.getContactform();
         var info = this.getContactinfo().getRecord();
         form.referrer = referrer;
