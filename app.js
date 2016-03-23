@@ -66248,6 +66248,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'address',
                 maxHeight: '',
                 minHeight: '',
+                style: 'font-size:4vw;',
                 styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,

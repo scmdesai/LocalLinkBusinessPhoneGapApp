@@ -27,12 +27,12 @@ $list-header-bg-color: $base-color;
 }
 
 .x-field {
-	border-bottom:2px groove #C0C0C0;
+	
 	
 	font-size:4.5vw;
 	height:11vh;
 	font-weight:normal;
-	font-family:sans-serif;
+	font-family:Helvectica sans-serif;
 	text-align:bottom;
 	padding-top:5px;
 	vertical-align: bottom;
