@@ -67432,6 +67432,14 @@ Ext.define('Ext.picker.Picker', {
                             var startYear = start.getFullYear();
                             var formattedStartDate = startMonth + "/" + startDate + "/" + startYear;
                             console.log(formattedStartDate);
+                            uForm.getAt(2).setValue(formattedStartDate);
+                            var end = uForm.getAt(3).getValue();
+                            var endDate = end.getDate();
+                            var endMonth = end.getMonth() + 1;
+                            var endYear = end.getFullYear();
+                            var formattedEndDate = endMonth + "/" + endDate + "/" + endYear;
+                            console.log(formattedEndDate);
+                            uForm.getAt(3).setValue(formattedEndDate);
                             if (file) {
                                 uForm.submit({
                                     url: 'http://services.appsonmobile.com/uploadS3',
