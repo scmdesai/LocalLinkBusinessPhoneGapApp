@@ -66589,8 +66589,7 @@ Ext.define('Ext.picker.Picker', {
                     'customfield'
                 ],
                 height: '15%',
-                styleHtmlContent: true,
-                name: 'phoneNumber'
+                styleHtmlContent: true
             },
             {
                 xtype: 'textareafield',
