@@ -67055,13 +67055,13 @@ Ext.define('Ext.picker.Picker', {
         styleHtmlContent: true,
         width: '100%',
         autoDestroy: false,
-        scrollable: true,
+        scrollable: false,
         tpl: [
-            '<img src="{dealPictureURL}"/>'
+            '<img src="{dealPictureURL}" style= "height:100%;width=100%"/>'
         ],
         layout: {
             type: 'vbox',
-            align: 'center'
+            align: 'stretchmax'
         },
         items: [
             {
