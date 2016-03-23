@@ -66327,21 +66327,6 @@ Ext.define('Ext.picker.Picker', {
             '<div style="color:#1985d0;font-size:3.3vw;font-style:italics;font-weight:normal">Valid {dealStartDate} to {dealEndDate}</div>',
             ''
         ]
-    },
-    initialize: function() {
-        Ext.dataview.List.prototype.initialize.call(this);
-        var storeUserDetails = Ext.getStore('UserDetails');
-        storeUserDetails.load();
-        var customerId;
-        var businessName;
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-        });
-        var store = Ext.getStore('MyDealsStore');
-        store.clearFilter();
-        store.filter(customerId);
     }
 }, 0, [
     "listofdeals"
@@ -66406,7 +66391,27 @@ Ext.define('Ext.picker.Picker', {
                 width: '',
                 text: 'Create Buzz'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onDealsPanelActivate',
+                event: 'activate'
+            }
         ]
+    },
+    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var store = Ext.getStore('MyDealsStore');
+        store.clearFilter();
+        store.filter(customerId);
     }
 }, 0, [
     "DealsPanel"
