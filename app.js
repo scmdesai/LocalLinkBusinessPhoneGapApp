@@ -66102,7 +66102,7 @@ Ext.define('Ext.picker.Picker', {
         style: 'overflow: hidden;border:1px groove #000;background:none',
         styleHtmlContent: true,
         ui: '',
-        width: '100%',
+        width: '95%',
         scrollable: false,
         tpl: [
             '',
@@ -66192,8 +66192,9 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'contactpic',
-                height: '30%',
                 id: 'picture',
+                maxWidth: '100%',
+                minWidth: '100%',
                 flex: 1,
                 layout: {
                     type: 'vbox',
@@ -66207,11 +66208,9 @@ Ext.define('Ext.picker.Picker', {
                 html: '',
                 itemId: 'phoneNumber',
                 margin: '',
-                minHeight: '',
                 minWidth: '',
                 styleHtmlContent: true,
                 width: '90%',
-                clearIcon: false,
                 label: '',
                 name: 'phoneNumber',
                 readOnly: true
@@ -66222,8 +66221,6 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 html: '',
                 itemId: 'website1',
-                maxHeight: '',
-                minHeight: '',
                 minWidth: '',
                 styleHtmlContent: true,
                 width: '90%',
@@ -66236,7 +66233,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: 'icon-globe',
                 disabled: false,
-                height: '',
+                height: '5%',
                 html: '',
                 itemId: 'website',
                 minHeight: '',
@@ -66255,6 +66252,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'address',
                 maxHeight: '',
                 minHeight: '',
+                styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
                 name: 'address',
@@ -66544,7 +66542,8 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'top',
                 height: '30%',
                 itemId: 'picture',
-                margin: '5 5 5 5'
+                margin: '5 5 5 5',
+                width: ''
             },
             {
                 xtype: 'button',
@@ -66565,10 +66564,12 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.showBy(button);
                 },
+                flex: 1,
                 docked: 'top',
                 id: 'changePicButton',
                 left: '0px',
-                style: 'opacity:0.5;background:none;position:absolute',
+                margin: '5 5 5 5',
+                style: 'opacity:0.5;position:absolute',
                 top: '-10px',
                 ui: 'plain',
                 width: '20%',
@@ -66576,36 +66577,19 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                cls: 'customfield',
-                height: '20%',
-                html: '',
-                id: 'businessName',
-                itemId: 'businessName',
-                margin: '5 5 5 5',
-                style: 'font-size:4vw',
+                height: '15%',
+                margin: '30 5 0 5',
                 styleHtmlContent: true,
-                label: '',
-                labelAlign: 'top',
-                labelWidth: '',
-                labelWrap: true,
-                name: 'businessName',
-                required: true
+                name: 'businessName'
             },
             {
                 xtype: 'textfield',
                 cls: [
-                    'customfield',
-                    'icon-phone'
+                    'icon-phone',
+                    'customfield'
                 ],
-                height: '20%',
-                id: 'phoneNumber',
-                itemId: 'phoneNumber',
-                margin: '5 5 5 5',
-                style: 'font-size:5vw;',
-                styleHtmlContent: true,
-                labelWrap: true,
-                name: 'phoneNumber',
-                required: true
+                height: '15%',
+                styleHtmlContent: true
             },
             {
                 xtype: 'textareafield',
@@ -66613,11 +66597,10 @@ Ext.define('Ext.picker.Picker', {
                     'customfield',
                     'icon-location'
                 ],
-                height: '15%',
+                height: '20%',
                 id: 'address',
                 itemId: 'address',
-                margin: '5 5 5 5',
-                style: 'font-size:5vw;vertical-align:middle;',
+                style: 'font-size:5vw;',
                 styleHtmlContent: true,
                 name: 'address',
                 required: true
