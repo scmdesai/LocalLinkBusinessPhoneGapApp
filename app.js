@@ -66553,7 +66553,7 @@ Ext.define('Ext.picker.Picker', {
                                                 }
                                             ]
                                         });
-                                    Ext.getCmp('changePicButton').hide();
+                                    //Ext.getCmp('changePicButton').hide();
                                     Ext.Viewport.setActiveItem(view);
                                     view.getComponent('home').setRecord(record);
                                     Ext.Msg.alert('Success', action.msg);
