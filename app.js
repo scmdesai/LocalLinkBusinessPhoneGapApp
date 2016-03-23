@@ -66106,7 +66106,7 @@ Ext.define('Ext.picker.Picker', {
         scrollable: false,
         tpl: [
             '',
-            '\t<img src="{pictureURL}"/>',
+            '\t<img src="{pictureURL}" style="width:100%;height:30%"/>',
             '\t'
         ],
         layout: {
