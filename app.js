@@ -66315,9 +66315,6 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
-            var btn = Ext.get('changePicButton');
-            // btn.hide();
-            btn.setVisible(false);
         }
     }
 }, 0, [
@@ -66340,6 +66337,9 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactinfo'
 ], 0));
+//var btn = Ext.get('changePicButton');
+// btn.hide();
+//  btn.setVisible(false);
 
 /*
  * File: app/view/ListOfDeals.js
