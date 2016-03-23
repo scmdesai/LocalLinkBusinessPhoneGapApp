@@ -28,8 +28,8 @@ $list-header-bg-color: $base-color;
 
 .x-field {
 	
-	
-	font-size:5.5vw;
+	border-bottom:1px solid #c0c0c0;
+	font-size:5vw;
 	height:11vh;
 	font-weight:normal;
 	font-family:sans-serif;
