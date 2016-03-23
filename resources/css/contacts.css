@@ -13,28 +13,28 @@ $list-header-bg-color: $base-color;
 
 
 .contact-name {
-	color: #fff ;
-	padding-left: 4px;
+    color: #fff ;
+    padding-left: 4px;
 }
 
-.x-form-label  {
-
-	border-radius: 7px;
-	text-align:center;
-	font-size:6vw;
-	vertical-align:middle;
-
-}
+ .x-form-label  {
+	 
+	 border-radius: 7px;
+	 text-align:center;
+	 font-size:6vw;
+	 vertical-align:middle;
+            
+        }
 
 .x-field {
-	border-bottom:2px groove #C0C0C0;
-	margin:5px 5px 5px 5px;
-	font-size:4.5vw;
-	height:9.5vh;
-	font-weight:normal;
-	text-align:center;
-	vertical-align:middle;
-	font-family:sans-serif;
+    border-bottom:2px groove #C0C0C0;
+    margin:5px 5px 5px 5px;
+    font-size:4vw;
+    height:9.5vh;
+    font-weight:normal;
+    text-align:center;
+    vertical-align:middle;
+    font-family:sans-serif;
 
 
 
@@ -59,7 +59,7 @@ $list-header-bg-color: $base-color;
 
 
 .regular-checkbox {
-
+	
 	-webkit-appearance: none;
 	background-color: #fafafa;
 	border: 1px solid #cacece;
@@ -96,8 +96,8 @@ $list-header-bg-color: $base-color;
 }
 
 .big-checkbox:checked:after {
-
-
+	
+	
 	font-size: 7vw;
 	left: 2px;
 }
