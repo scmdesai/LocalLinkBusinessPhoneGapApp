@@ -67057,7 +67057,7 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         scrollable: false,
         tpl: [
-            '<img src="{dealPictureURL}" style= "height:100%;width=100%"/>'
+            '<img src="{dealPictureURL}" style= "height:50%;width=100%"/>'
         ],
         layout: {
             type: 'vbox',
@@ -67773,7 +67773,7 @@ Ext.application({
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'studionafisa@yahoo.com', 0, true, false, false);
+                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'sterling@sterling.com', 0, true, false, false);
                     //console.log(store.getData());
                     //store.loadRecord();
                     //var view = Ext.create('Contact.view.Info');
