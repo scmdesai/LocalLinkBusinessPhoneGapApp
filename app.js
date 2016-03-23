@@ -65860,16 +65860,10 @@ Ext.define('Ext.picker.Picker', {
                 name: 'dealStatus'
             },
             {
-                convert: function(v, rec) {
-                    return Ext.Date.format(new Date(v), 'n/j/Y');
-                },
                 name: 'dealStartDate',
                 type: 'date'
             },
             {
-                convert: function(v, rec) {
-                    return Ext.Date.format(new Date(v), 'n/j/Y');
-                },
                 name: 'dealEndDate',
                 type: 'date'
             },
