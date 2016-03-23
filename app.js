@@ -66099,7 +66099,7 @@ Ext.define('Ext.picker.Picker', {
         id: 'contactpic',
         itemId: 'contactpic',
         padding: '',
-        style: 'overflow: hidden;',
+        style: 'overflow: hidden;border:1px groove #000;background:none',
         styleHtmlContent: true,
         ui: '',
         width: '100%',
@@ -66545,6 +66545,34 @@ Ext.define('Ext.picker.Picker', {
                 height: '30%',
                 itemId: 'picture',
                 margin: '5 5 5 5'
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.load();
+                    var customerId;
+                    var businessName;
+                    storeUserDetails.each(function(record) {
+                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                        customerId = record.get('customerId');
+                        businessName = record.get('businessName');
+                    });
+                    var view = Ext.Viewport.add({
+                            xtype: 'ChangeContactPicForm'
+                        });
+                    var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                    view.setRecord(record);
+                    view.showBy(button);
+                },
+                docked: 'top',
+                id: 'changePicButton',
+                left: '0px',
+                style: 'opacity:0.5;background:none;position:absolute',
+                top: '-10px',
+                ui: 'plain',
+                width: '20%',
+                iconCls: 'add'
             },
             {
                 xtype: 'textfield',
