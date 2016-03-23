@@ -67426,11 +67426,6 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
                             var file = uForm.getAt(4).getValue();
-                            var endDate = uForm.getAt(3).getValue();
-                            var todayDate = new Date();
-                            if (endDate < todayDate) {
-                                uForm.getAt(1).setValue("Expired");
-                            }
                             if (file) {
                                 uForm.submit({
                                     url: 'http://services.appsonmobile.com/uploadS3',
@@ -67754,6 +67749,7 @@ Ext.application({
             },
             timeout: function() {
                 console.log('a timeout has occurred, probably a bad internet connection');
+                Ext.msg.alert('Timeout Has Occured', 'Close Applications running in background and Try Again', null, null);
             },
             complete: function(access_token) {
                 console.log('window closed');
