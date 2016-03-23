@@ -66195,7 +66195,11 @@ Ext.define('Ext.picker.Picker', {
                 id: 'picture',
                 maxWidth: '100%',
                 minWidth: '100%',
-                flex: 1
+                flex: 1,
+                layout: {
+                    type: 'vbox',
+                    pack: 'start'
+                }
             },
             {
                 xtype: 'textfield',
@@ -66574,8 +66578,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 height: '15%',
-                id: 'businessName',
-                itemId: 'businessName',
                 margin: '30 5 0 5',
                 styleHtmlContent: true,
                 name: 'businessName'
@@ -66587,8 +66589,6 @@ Ext.define('Ext.picker.Picker', {
                     'customfield'
                 ],
                 height: '15%',
-                id: 'phoneNumber',
-                itemId: 'phoneNumber',
                 styleHtmlContent: true,
                 name: 'phoneNumber'
             },
