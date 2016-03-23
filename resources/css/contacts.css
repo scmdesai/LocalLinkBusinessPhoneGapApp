@@ -29,10 +29,10 @@ $list-header-bg-color: $base-color;
 .x-field {
 	
 	
-	font-size:4.5vw;
+	font-size:5vw;
 	height:11vh;
 	font-weight:normal;
-	font-family:Helvectica sans-serif;
+	font-family:sans-serif;
 	text-align:bottom;
 	padding-top:5px;
 	vertical-align: bottom;
