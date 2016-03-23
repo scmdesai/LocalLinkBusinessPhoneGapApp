@@ -66533,29 +66533,29 @@ Ext.define('Ext.picker.Picker', {
 									record.endEdit(true, record.getChanges());
 									record.commit();
 									store.sync();
-									store.load();*/
-                                    Ext.Viewport.getComponent('panel').destroy();
-                                    var view = Ext.create("Ext.tab.Panel", {
-                                            fullscreen: true,
-                                            tabBarPosition: 'bottom',
-                                            itemId: 'panel',
-                                            items: [
-                                                {
-                                                    xtype: 'contactinfo',
-                                                    title: 'Home',
-                                                    itemId: 'home',
-                                                    iconCls: 'home'
-                                                },
-                                                {
-                                                    xtype: 'DealsPanel',
-                                                    title: 'Buzz',
-                                                    iconCls: 'info'
-                                                }
-                                            ]
-                                        });
-                                    //Ext.getCmp('changePicButton').hide();
-                                    Ext.Viewport.setActiveItem(view);
-                                    view.getComponent('home').setRecord(record);
+									store.load();
+									Ext.Viewport.getComponent('panel').destroy();
+									var view = Ext.create("Ext.tab.Panel", {
+									fullscreen: true,
+									tabBarPosition: 'bottom',
+									itemId: 'panel',
+									items: [
+									{
+									xtype: 'contactinfo',
+									title: 'Home',
+									itemId: 'home',
+									iconCls: 'home'
+									},
+									{
+									xtype: 'DealsPanel',
+									title: 'Buzz',
+									iconCls: 'info'
+									}
+									]
+									});
+									//Ext.getCmp('changePicButton').hide();
+									Ext.Viewport.setActiveItem(view);
+									view.getComponent('home').setRecord(record);*/
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
@@ -66922,10 +66922,9 @@ Ext.define('Ext.picker.Picker', {
         Ext.Viewport.setActiveItem(form);
         form.setRecord(info);
     },
-    onSaveContactButtonTap: function(button, e, eOpts) {
-        var btn = Ext.get('changePicButton');
-        btn.hide();
-    },
+    onSaveContactButtonTap: function(button, e, eOpts) {},
+    //var btn = Ext.get('changePicButton');
+    //btn.hide();
     /*var form = this.getContactform();
 		var errors = form.getValidationErrors();
 		console.log('On Save Button Tap');
@@ -66996,8 +66995,8 @@ Ext.define('Ext.picker.Picker', {
     onCancelButtonTap: function(button, e, eOpts) {
         var form = this.getContactform();
         form.destroy();
-        var btn = Ext.get('changePicButton');
-        btn.hide();
+        //var btn = Ext.get('changePicButton');
+        //btn.hide();
         Ext.Viewport.setActiveItem(form.referrer);
         delete form.referrer;
     },
