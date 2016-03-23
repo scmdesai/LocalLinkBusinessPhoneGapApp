@@ -67426,23 +67426,11 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
                             var file = uForm.getAt(4).getValue();
-                            /*var start = uForm.getAt(2).getValue();
-							var startDate = start.getDate();
-							var startMonth= start.getMonth()+1;
-							var startYear = start.getFullYear();
-							var formattedStartDate = startMonth + "/"+ startDate + "/" + startYear;
-							console.log(formattedStartDate);
-
-							uForm.getAt(2).setValue(formattedStartDate);
-
-							var end = uForm.getAt(3).getValue();
-							var endDate = end.getDate();
-							var endMonth= end.getMonth()+1;
-							var endYear = end.getFullYear();
-							var formattedEndDate = endMonth + "/"+ endDate + "/" + endYear;
-							console.log(formattedEndDate);
-
-							uForm.getAt(3).setValue(formattedEndDate);*/
+                            var endDate = uForm.getAt(3).getValue();
+                            var todayDate = new Date();
+                            if (endDate < todayDate) {
+                                uForm.getAt(1).setValue("Expired");
+                            }
                             if (file) {
                                 uForm.submit({
                                     url: 'http://services.appsonmobile.com/uploadS3',
