@@ -66492,8 +66492,12 @@ Ext.define('Ext.picker.Picker', {
         ui: 'light',
         autoDestroy: false,
         modal: true,
-        scrollable: true,
+        scrollable: false,
         multipartDetection: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
         items: [
             {
                 xtype: 'toolbar',
