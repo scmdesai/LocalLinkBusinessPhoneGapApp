@@ -66191,24 +66191,14 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'container',
-                flex: 5,
-                border: '',
+                xtype: 'contactpic',
                 height: '30%',
-                minWidth: '',
-                style: 'bacground:#fff',
-                width: '100%',
-                scrollable: false,
+                id: 'picture',
+                flex: 1,
                 layout: {
                     type: 'vbox',
-                    align: 'stretchmax'
-                },
-                items: [
-                    {
-                        xtype: 'contactpic',
-                        flex: 1
-                    }
-                ]
+                    pack: 'start'
+                }
             },
             {
                 xtype: 'textfield',
