@@ -66405,6 +66405,7 @@ Ext.define('Ext.picker.Picker', {
         storeUserDetails.load();
         var customerId;
         var businessName;
+        var date = new Date();
         storeUserDetails.each(function(record) {
             //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
@@ -66414,6 +66415,12 @@ Ext.define('Ext.picker.Picker', {
         var store = Ext.getStore('MyDealsStore');
         store.clearFilter();
         store.filter('customerId', customerId);
+        store.filter(new Ext.util.Filter({
+            filterFn: function(record) {
+                //alert(record.data.dealEndDate);
+                return (record.data.dealEndDate >= date);
+            }
+        }));
     }
 }, 0, [
     "DealsPanel"
