@@ -67458,12 +67458,14 @@ Ext.define('Ext.picker.Picker', {
                             var startMonth = dealStartDate.getMonth() + 1;
                             var startYear = dealStartDate.getFullYear();
                             var dealStart = startDate + "/" + startMonth + "/" + startYear;
+                            console.log(dealStart);
                             uForm.getAt(2).setValue(dealStart);
                             var endDate = dealEndDate.getDate();
                             var endMonth = dealEndDate.getMonth() + 1;
                             var endYear = dealEndDate.getFullYear();
                             var dealEnd = endDate + "/" + endMonth + "/" + endYear;
                             uForm.getAt(3).setValue(dealEnd);
+                            console.log(dealEnd);
                             if (file) {
                                 uForm.submit({
                                     url: 'http://services.appsonmobile.com/uploadS3',
