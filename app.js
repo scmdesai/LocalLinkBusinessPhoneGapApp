@@ -66415,14 +66415,6 @@ Ext.define('Ext.picker.Picker', {
         var store = Ext.getStore('MyDealsStore');
         store.clearFilter();
         store.filter('customerId', customerId);
-        store.filter(new Ext.util.Filter({
-            filterFn: function(record) {
-                //alert(record.data.dealEndDate);
-                if (record.data.dealEndDate >= date) {
-                    return record;
-                }
-            }
-        }));
     }
 }, 0, [
     "DealsPanel"
@@ -66444,6 +66436,15 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'DealsPanel'
 ], 0));
+/*store.filter(
+		new Ext.util.Filter({
+		filterFn: function(record) {
+		//alert(record.data.dealEndDate);
+		if(record.data.dealEndDate >= date){
+			return record;
+		}
+		}
+		}));*/
 
 /*
  * File: app/view/contactform.js
