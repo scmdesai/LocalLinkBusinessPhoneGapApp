@@ -65860,18 +65860,12 @@ Ext.define('Ext.picker.Picker', {
                 name: 'dealStatus'
             },
             {
-                convert: function(v, rec) {
-                    return Ext.Date.format(new Date(v), 'n/j/Y');
-                },
                 name: 'dealStartDate',
-                type: 'date'
+                type: 'string'
             },
             {
-                convert: function(v, rec) {
-                    return Ext.Date.format(new Date(v), 'n/j/Y');
-                },
                 name: 'dealEndDate',
-                type: 'date'
+                type: 'string'
             },
             {
                 name: 'dealPictureURL'
@@ -67458,6 +67452,18 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
                             var file = uForm.getAt(4).getValue();
+                            var dealStartDate = uForm.getAt(2).getValue();
+                            var dealEndDate = uForm.getAt(3).getValue();
+                            var startDate = dealStartDate.getDate();
+                            var startMonth = dealStartDate.getMonth() + 1;
+                            var startYear = dealStartDate.getFullYear();
+                            var dealStart = startDate + "/" + startMonth + "/" + startYear;
+                            uForm.getAt(2).setValue(dealStart);
+                            var endDate = dealEndDate.getDate();
+                            var endMonth = dealEndDate.getMonth() + 1;
+                            var endYear = dealEndDate.getFullYear();
+                            var dealEnd = endDate + "/" + endMonth + "/" + endYear;
+                            uForm.getAt(3).setValue(dealEnd);
                             if (file) {
                                 uForm.submit({
                                     url: 'http://services.appsonmobile.com/uploadS3',
