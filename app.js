@@ -66413,7 +66413,7 @@ Ext.define('Ext.picker.Picker', {
         console.log(customerId);
         var store = Ext.getStore('MyDealsStore');
         store.clearFilter();
-        store.filter(customerId);
+        store.filter('customerId', customerId);
     }
 }, 0, [
     "DealsPanel"
