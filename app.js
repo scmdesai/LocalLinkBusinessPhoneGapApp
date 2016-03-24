@@ -66400,6 +66400,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        console.log('Deals Panel Activated');
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
         var customerId;
@@ -66409,6 +66410,7 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
+        console.log(customerId);
         var store = Ext.getStore('MyDealsStore');
         store.clearFilter();
         store.filter(customerId);
