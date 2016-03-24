@@ -67079,7 +67079,7 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         scrollable: false,
         tpl: [
-            '<img src="{dealPictureURL}" style= "height:50%;width=100%"/>'
+            '<img src="{dealPictureURL}" style="margin:5px 5px 5px 5px;height:100%;width:100%;border:1px groove #C0C0C0;"/>'
         ],
         layout: {
             type: 'vbox',
