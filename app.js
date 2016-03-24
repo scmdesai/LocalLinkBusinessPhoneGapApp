@@ -66418,7 +66418,9 @@ Ext.define('Ext.picker.Picker', {
         store.filter(new Ext.util.Filter({
             filterFn: function(record) {
                 //alert(record.data.dealEndDate);
-                return (record.data.dealEndDate >= date);
+                if (record.data.dealEndDate >= date) {
+                    return record;
+                }
             }
         }));
     }
