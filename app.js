@@ -67462,14 +67462,14 @@ Ext.define('Ext.picker.Picker', {
                             //var dealStartDate = uForm.getAt(2).getValue();
                             //var dealEndDate = uForm.getAt(3).getValue();
                             var startDate = uForm.getAt(2).getValue();
-                            var date = startDate.getDate() + "/" + (startDate.getMonth() + 1) + "/" + startDate.getFullYear();
+                            var date = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + startDate.getFullYear();
                             console.log(date);
                             uForm.getAt(2).setValue(date);
                             var startDate = uForm.getAt(3).getValue();
-                            var date = startDate.getDate() + "/" + (startDate.getMonth() + 1) + "/" + startDate.getFullYear();
+                            var date = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + startDate.getFullYear();
                             console.log(date);
                             uForm.getAt(3).setValue(date);
-                            console.log(endDate);
+                            console.log(date);
                             /*var startDate = dealStartDate.getDate();
 							var startMonth = dealStartDate.getMonth()+1;
 							var startYear = dealStartDate.getFullYear();
