@@ -67360,6 +67360,8 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'datepickerfield',
                 cls: 'customfield',
+                id: 'DealStartDate',
+                itemId: 'DealStartDate',
                 width: '97%',
                 label: 'Start Date',
                 labelWidth: '50%',
@@ -67373,6 +67375,7 @@ Ext.define('Ext.picker.Picker', {
                 },
                 placeHolder: 'mm/dd/yyyy',
                 picker: {
+                    itemId: 'mydatepicker3',
                     styleHtmlContent: true,
                     yearFrom: 2016
                 }
@@ -67391,7 +67394,6 @@ Ext.define('Ext.picker.Picker', {
                     year: new Date().getFullYear()
                 },
                 placeHolder: 'mm/dd/yyyy',
-                dateFormat: '',
                 picker: {
                     styleHtmlContent: true,
                     yearFrom: 2016
@@ -67461,8 +67463,12 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
                             var file = uForm.getAt(4).getValue();
-                            //var dealStartDate = uForm.getAt(2).getValue();
-                            //var dealEndDate = uForm.getAt(3).getValue();
+                            var dealStartDate = uForm.getAt(2).getValue();
+                            var dealEndDate = uForm.getAt(3).getValue();
+                            var startDate = Ext.Date.format(dealStartDate, 'm/d/Y');
+                            var endDate = Ext.Date.format(dealEndDate, 'm/d/Y');
+                            uForm.getAt(2).setValue(startDate);
+                            uForm.getAt(3).setValue(endDate);
                             /*var startDate = uForm.getAt(2).getValue();
 
 							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
