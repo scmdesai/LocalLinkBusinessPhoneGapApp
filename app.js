@@ -66422,7 +66422,7 @@ Ext.define('Ext.picker.Picker', {
         store.each(function(rec) {
             //console.log('Deal End Date: ' + rec.get('dealEndDate'));
             //console.log('Tdays date is : ' + today);
-            if (rec.get('dealEndDate') >= date) {
+            if (rec.get('dealEndDate') >= today) {
                 records.push(rec.get('itemName'));
             } else //console.log('Active deal ' + rec.get('dealName'));
             {
@@ -66431,8 +66431,8 @@ Ext.define('Ext.picker.Picker', {
         });
         //console.log('Expired deal ' + rec.get('dealName'));
         store.clearFilter();
+        console.log(records.length);
         store.filterBy(function(record) {
-            console.log('Active deal ' + record.get('dealName'));
             return Ext.Array.indexOf(records, record.get('itemName')) !== -1;
         }, this);
     }
