@@ -66422,16 +66422,32 @@ Ext.define('Ext.picker.Picker', {
         store.each(function(rec) {
             //console.log('Deal End Date: ' + rec.get('dealEndDate'));
             //console.log('Tdays date is : ' + today);
-            if (rec.get('dealEndDate') >= today) {
-                records.push(rec.get('itemName'));
-            } else //console.log('Active deal ' + rec.get('dealName'));
-            {
-                Ext.Array.remove(records, rec.get('itemName'));
-                //console.log('Expired deal ' + rec.get('dealName'));
-                var req = Ext.Ajax.request({
-                        method: 'POST',
-                        url: 'http://services.appsonmobile.com/deals/' + rec.get('itemName')
-                    });
+            /*if(rec.get('dealEndDate') >= today) {
+
+		                           records.push(rec.get('itemName'));
+								   //console.log('Active deal ' + rec.get('dealName'));
+
+
+		                       }
+		                       else {
+		                           Ext.Array.remove(records,rec.get('itemName'));
+								   //console.log('Expired deal ' + rec.get('dealName'));
+								   var req = Ext.Ajax.request({
+
+						method:'POST',
+
+
+						url  : 'http://services.appsonmobile.com/deals/'+ rec.get('itemName')
+
+			});
+
+
+		                       }*/
+            if (rec.get('dealEndDate') < today) {
+                Ext.Ajax.request({
+                    method: 'POST',
+                    url: 'http://services.appsonmobile.com/deals/' + rec.get('itemName')
+                });
             }
         });
         store.clearFilter();
