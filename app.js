@@ -66417,7 +66417,18 @@ Ext.define('Ext.picker.Picker', {
         var store = Ext.getStore('MyDealsStore');
         store.clearFilter();
         store.filter('customerId', customerId);
-        store.filter('dealEndDate', new Date());
+        var records = [];
+        store.each(function(rec) {
+            if (rec.get('dealEndDate') >= date) {
+                records.push(rec.get('itemName'));
+            } else {
+                Ext.Array.remove(records, rec.get('itemName'));
+            }
+        });
+        store.clearFilter();
+        store.filterBy(function(record) {
+            return Ext.Array.indexOf(records, record.get('itemName')) !== -1;
+        }, this);
     }
 }, 0, [
     "DealsPanel"
