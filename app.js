@@ -66427,9 +66427,13 @@ Ext.define('Ext.picker.Picker', {
             } else //console.log('Active deal ' + rec.get('dealName'));
             {
                 Ext.Array.remove(records, rec.get('itemName'));
+                //console.log('Expired deal ' + rec.get('dealName'));
+                var req = Ext.Ajax.request({
+                        method: 'POST',
+                        url: 'http://services.appsonmobile.com/deals/' + rec.get('itemName')
+                    });
             }
         });
-        //console.log('Expired deal ' + rec.get('dealName'));
         store.clearFilter();
         console.log(records.length);
         store.filterBy(function(record) {
