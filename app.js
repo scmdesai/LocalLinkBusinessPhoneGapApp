@@ -67463,12 +67463,10 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
                             var file = uForm.getAt(4).getValue();
-                            var dealStartDate = uForm.getAt(2).getValue();
-                            var dealEndDate = uForm.getAt(3).getValue();
-                            var startDate = Ext.Date.format(dealStartDate, 'm/d/Y');
-                            var endDate = Ext.Date.format(dealEndDate, 'm/d/Y');
-                            uForm.getAt(2).setValue(startDate);
-                            uForm.getAt(3).setValue(endDate);
+                            //var dealStartDate = uForm.getAt(2).getValue().toDateString();
+                            //var dealEndDate = uForm.getAt(3).getValue();
+                            Ext.Date.format(uForm.getAt(2).getValue(), 'n/j/Y');
+                            Ext.Date.format(uForm.getAt(3).getValue(), 'n/j/Y');
                             /*var startDate = uForm.getAt(2).getValue();
 
 							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
