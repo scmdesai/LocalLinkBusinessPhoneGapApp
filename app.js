@@ -66407,7 +66407,7 @@ Ext.define('Ext.picker.Picker', {
         storeUserDetails.load();
         var customerId;
         var businessName;
-        var date = new Date();
+        var date = new Date('n/j/Y');
         storeUserDetails.each(function(record) {
             //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
@@ -66419,14 +66419,14 @@ Ext.define('Ext.picker.Picker', {
         store.filter('customerId', customerId);
         var records = [];
         store.each(function(rec) {
-            console.log(rec.get('dealEndDate'));
-            console.log(date);
+            console.log('Deal End Date: ' + rec.get('dealEndDate'));
+            console.log('Tdays date is : ' + date);
             if (rec.get('dealEndDate') >= date) {
                 records.push(rec.get('itemName'));
-                console.log('Active deal' + rec.get('dealname'));
+                console.log('Active deal ' + rec.get('dealName'));
             } else {
                 Ext.Array.remove(records, rec.get('itemName'));
-                console.log('Expired deal' + rec.get('dealname'));
+                console.log('Expired deal ' + rec.get('dealName'));
             }
         });
         store.clearFilter();
