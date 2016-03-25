@@ -66419,10 +66419,14 @@ Ext.define('Ext.picker.Picker', {
         store.filter('customerId', customerId);
         var records = [];
         store.each(function(rec) {
+            console.log(rec.get('dealEndDate'));
+            console.log(date);
             if (rec.get('dealEndDate') >= date) {
                 records.push(rec.get('itemName'));
+                console.log('Active deal' + rec.get('dealname'));
             } else {
                 Ext.Array.remove(records, rec.get('itemName'));
+                console.log('Expired deal' + rec.get('dealname'));
             }
         });
         store.clearFilter();
