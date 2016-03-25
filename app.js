@@ -66407,7 +66407,8 @@ Ext.define('Ext.picker.Picker', {
         storeUserDetails.load();
         var customerId;
         var businessName;
-        var date = new Date('n/j/Y');
+        var date = new Date();
+        var today = Ext.Date.format(date, 'n/j/Y');
         storeUserDetails.each(function(record) {
             //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
@@ -66420,7 +66421,7 @@ Ext.define('Ext.picker.Picker', {
         var records = [];
         store.each(function(rec) {
             console.log('Deal End Date: ' + rec.get('dealEndDate'));
-            console.log('Tdays date is : ' + date);
+            console.log('Tdays date is : ' + today);
             if (rec.get('dealEndDate') >= date) {
                 records.push(rec.get('itemName'));
                 console.log('Active deal ' + rec.get('dealName'));
