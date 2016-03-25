@@ -66450,11 +66450,7 @@ Ext.define('Ext.picker.Picker', {
                 });
             }
         });
-        store.clearFilter();
-        console.log(records.length);
-        store.filterBy(function(record) {
-            return Ext.Array.indexOf(records, record.get('itemName')) !== -1;
-        }, this);
+        store.load();
     }
 }, 0, [
     "DealsPanel"
@@ -66476,6 +66472,14 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'DealsPanel'
 ], 0));
+/* store.clearFilter();
+
+		      console.log(records.length);
+
+		        store.filterBy(function(record){
+		            return Ext.Array.indexOf(records, record.get('itemName')) !== -1;
+
+		        }, this);*/
 
 /*
  * File: app/view/contactform.js
