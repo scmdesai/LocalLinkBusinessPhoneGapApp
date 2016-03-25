@@ -65863,6 +65863,7 @@ Ext.define('Ext.picker.Picker', {
                 convert: function(v, rec) {
                     return Ext.Date.format(new Date(v), 'n/j/Y');
                 },
+                dateFormat: 'n/j/Y',
                 name: 'dealStartDate',
                 type: 'date'
             },
@@ -65870,6 +65871,7 @@ Ext.define('Ext.picker.Picker', {
                 convert: function(v, rec) {
                     return Ext.Date.format(new Date(v), 'n/j/Y');
                 },
+                dateFormat: 'n/j/Y',
                 name: 'dealEndDate',
                 type: 'date'
             },
@@ -67461,15 +67463,24 @@ Ext.define('Ext.picker.Picker', {
                             var file = uForm.getAt(4).getValue();
                             //var dealStartDate = uForm.getAt(2).getValue();
                             //var dealEndDate = uForm.getAt(3).getValue();
-                            var startDate = uForm.getAt(2).getValue();
-                            var date = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + startDate.getFullYear();
-                            console.log(date);
-                            uForm.getAt(2).setValue(date);
-                            var startDate = uForm.getAt(3).getValue();
-                            var date = (startDate.getMonth() + 1) + "/" + startDate.getDate() + "/" + startDate.getFullYear();
-                            console.log(date);
-                            uForm.getAt(3).setValue(date);
-                            console.log(date);
+                            /*var startDate = uForm.getAt(2).getValue();
+
+							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
+							console.log(date);
+
+							uForm.getAt(2).setValue(date);
+
+
+							var startDate = uForm.getAt(3).getValue();
+
+							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
+							console.log(date);
+
+
+							uForm.getAt(3).setValue(date);
+
+
+							console.log(date);*/
                             /*var startDate = dealStartDate.getDate();
 							var startMonth = dealStartDate.getMonth()+1;
 							var startYear = dealStartDate.getFullYear();
