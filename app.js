@@ -67374,6 +67374,7 @@ Ext.define('Ext.picker.Picker', {
                     year: new Date().getFullYear()
                 },
                 placeHolder: 'mm/dd/yyyy',
+                dateFormat: 'm/d/Y',
                 picker: {
                     itemId: 'mydatepicker3',
                     styleHtmlContent: true,
@@ -67383,6 +67384,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'datepickerfield',
                 cls: 'customfield',
+                itemId: 'DealEndDate',
                 width: '97%',
                 label: 'End Date',
                 labelWidth: '50%',
@@ -67537,7 +67539,17 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onMydatepicker4Focus',
+                event: 'focus',
+                delegate: '#DealEndDate'
+            }
         ]
+    },
+    onMydatepicker4Focus: function(selectfield, e, eOpts) {
+        return Ext.Date.format(new Date(selectfield.getValue()), 'n/j/Y');
     }
 }, 0, [
     "UploadDealForm"
