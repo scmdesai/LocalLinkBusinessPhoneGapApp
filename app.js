@@ -66420,18 +66420,19 @@ Ext.define('Ext.picker.Picker', {
         store.filter('customerId', customerId);
         var records = [];
         store.each(function(rec) {
-            console.log('Deal End Date: ' + rec.get('dealEndDate'));
-            console.log('Tdays date is : ' + today);
+            //console.log('Deal End Date: ' + rec.get('dealEndDate'));
+            //console.log('Tdays date is : ' + today);
             if (rec.get('dealEndDate') >= date) {
                 records.push(rec.get('itemName'));
-                console.log('Active deal ' + rec.get('dealName'));
-            } else {
+            } else //console.log('Active deal ' + rec.get('dealName'));
+            {
                 Ext.Array.remove(records, rec.get('itemName'));
-                console.log('Expired deal ' + rec.get('dealName'));
             }
         });
+        //console.log('Expired deal ' + rec.get('dealName'));
         store.clearFilter();
         store.filterBy(function(record) {
+            console.log('Active deal ' + record.get('dealName'));
             return Ext.Array.indexOf(records, record.get('itemName')) !== -1;
         }, this);
     }
