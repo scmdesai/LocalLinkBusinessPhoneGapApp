@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.domain.Contact" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Contact</name>
+    <name>Local Buzz For Business</name>
     <description>
         Hello World sample application that responds to the deviceready event.
     </description>
@@ -63,13 +63,13 @@
 	<gap:plugin name="cordova-plugin-imagepicker" source="npm" version="1.3.0" />
 	
 	<!-- Plugin Added for Push Notification -->
-	<gap:plugin name="phonegap-plugin-push" source="npm" version="1.5.2" />
+	<!--<gap:plugin name="phonegap-plugin-push" source="npm" version="1.5.2" /> -->
 	<!-- Plugin Added for Google Analytics -->
-	<gap:plugin name="cordova-plugin-google-analytics"  source="npm" version="0.8.1"/>
+	<!--<gap:plugin name="cordova-plugin-google-analytics"  source="npm" version="0.8.1"/> -->
 	<!-- End Google Analytics -->
 	
 	<!-- Plugin Added for Geolocation -->
-	<gap:plugin name="cordova-plugin-geolocation"  source="npm" version="1.0.1"/>
+	<!--<gap:plugin name="cordova-plugin-geolocation"  source="npm" version="1.0.1"/> -->
 	<!-- End Geolocation -->
 	<!--social sharing -->
 	<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
