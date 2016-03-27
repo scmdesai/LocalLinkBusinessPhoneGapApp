@@ -67885,49 +67885,53 @@ Ext.application({
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'studionafisa@yahoo.com', 0, true, false, false);
+                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'sterling@sterling.com', 0, true, false, false);
                     //console.log(store.getData());
                     //store.loadRecord();
                     //var view = Ext.create('Contact.view.Info');
                     //view.setRecord(record.getRecord());
                     //console.log(view.getData());
                     //Ext.Viewport.setActiveItem(view);
-                    var storeUserDetails = Ext.getStore('UserDetails');
-                    storeUserDetails.removeAll();
-                    storeUserDetails.add({
-                        'customerId': record.get('customerId'),
-                        'email': email,
-                        'businessName': record.get('businessName')
-                    });
-                    //console.log("User details are : " + email +','+ record.get('customerId') +','+ record.get('businessName'));
-                    var store = Ext.getStore('MyJsonPStore');
-                    var view = Ext.create("Ext.tab.Panel", {
-                            itemId: 'panel',
-                            fullscreen: true,
-                            tabBarPosition: 'bottom',
-                            items: [
-                                {
-                                    xtype: 'contactinfo',
-                                    title: 'Home',
-                                    itemId: 'home',
-                                    iconCls: 'home'
-                                },
-                                {
-                                    xtype: 'DealsPanel',
-                                    title: 'Buzz',
-                                    iconCls: 'info'
-                                }
-                            ]
+                    if (record) {
+                        var storeUserDetails = Ext.getStore('UserDetails');
+                        storeUserDetails.removeAll();
+                        storeUserDetails.add({
+                            'customerId': record.get('customerId'),
+                            'email': email,
+                            'businessName': record.get('businessName')
                         });
-                    view.getComponent('home').setRecord(record);
-                    //Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(view);
-                } else //Ext.Viewport.setActiveItem({xtype:'Panel'});
-                //console.log(view.getComponent('home').getItemId());
-                //view.setData(record.getData());
-                ////view.setRecord(record);
-                // Ext.Viewport.setActiveItem(view);
-                //view.setData(record.getData());
+                        //console.log("User details are : " + email +','+ record.get('customerId') +','+ record.get('businessName'));
+                        var store = Ext.getStore('MyJsonPStore');
+                        var view = Ext.create("Ext.tab.Panel", {
+                                itemId: 'panel',
+                                fullscreen: true,
+                                tabBarPosition: 'bottom',
+                                items: [
+                                    {
+                                        xtype: 'contactinfo',
+                                        title: 'Home',
+                                        itemId: 'home',
+                                        iconCls: 'home'
+                                    },
+                                    {
+                                        xtype: 'DealsPanel',
+                                        title: 'Buzz',
+                                        iconCls: 'info'
+                                    }
+                                ]
+                            });
+                        view.getComponent('home').setRecord(record);
+                        //Ext.Viewport.getActiveItem().destroy();
+                        Ext.Viewport.setActiveItem(view);
+                    } else //Ext.Viewport.setActiveItem({xtype:'Panel'});
+                    //console.log(view.getComponent('home').getItemId());
+                    //view.setData(record.getData());
+                    ////view.setRecord(record);
+                    // Ext.Viewport.setActiveItem(view);
+                    {
+                        Ext.msg.alert('Timeout Has Occured', 'Close Applications running in background and Try Again', null, null);
+                    }
+                } else //view.setData(record.getData());
                 {
                     console.log('no user info');
                 }
