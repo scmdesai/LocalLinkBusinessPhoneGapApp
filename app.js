@@ -66936,10 +66936,10 @@ Ext.define('Ext.picker.Picker', {
                             url: 'http://services.appsonmobile.com/deals/' + itemName,
                             success: function(form, action) {
                                 Ext.Msg.alert('Success', action.msg);
+                                //console.log(action.msg);
+                                var dealsStore = Ext.getStore('MyDealsStore');
+                                dealsStore.load();
                             },
-                            //console.log(action.msg);
-                            //var dealsStore = Ext.getStore('MyDealsStore');
-                            //dealsStore.load();
                             failure: function(form, action) {
                                 Ext.Msg.alert('Failure', action.msg);
                             }
@@ -67560,14 +67560,14 @@ Ext.define('Ext.picker.Picker', {
                                     xhr2: true,
                                     scope: this,
                                     success: function(form, action) {
-                                        // Ext.getStore('MyDealsStore').load();
+                                        Ext.getStore('MyDealsStore').load();
                                         Ext.Msg.alert('Success', action.msg);
                                         //console.log("Action Msg is : " +action.success);
                                         //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                         uForm.destroy();
                                     },
                                     failure: function(form, action) {
-                                        //Ext.getStore('MyDealsStore').load();
+                                        Ext.getStore('MyDealsStore').load();
                                         Ext.Msg.alert('Failure', action.msg);
                                         console.log("Action Msg is : " + action.msg);
                                         //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
