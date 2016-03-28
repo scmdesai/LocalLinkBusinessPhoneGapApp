@@ -53,6 +53,8 @@ var app = {
 		//StatusBar Overlay set to false
 		//StatusBar.overlaysWebView(false);
 		
+		
+		
 		/*var fbLoginSuccess = function (userData) {
     alert("UserInfo: " + JSON.stringify(userData));
 }
@@ -78,6 +80,8 @@ facebookConnectPlugin.login(["public_profile"],
 		};
 
 		*/
+		
+		
 
     
     }, // end of onDeviceReady function
