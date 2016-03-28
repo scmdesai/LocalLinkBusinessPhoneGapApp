@@ -66020,7 +66020,16 @@ Ext.define('Ext.picker.Picker', {
                 type: 'json',
                 encode: true
             }
-        }
+        },
+        listeners: [
+            {
+                fn: 'onJsonstoreAddrecords',
+                event: 'addrecords'
+            }
+        ]
+    },
+    onJsonstoreAddrecords: function(store, records, eOpts) {
+        store.load();
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
