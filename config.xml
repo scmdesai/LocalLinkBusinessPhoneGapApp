@@ -28,7 +28,7 @@
     <preference name="android-installLocation" value="auto" />
 	<preference name="StatusBarOverlaysWebView" value="false" />
 	<preference name="StatusBarBackgroundColor" value="#fff" />
-    <preference name="StatusBarStyle" value="darkcontent" />
+    <preference name="StatusBarStyle" value="lightcontent" />
 	
 	
 	<!-- Facebook plugin
