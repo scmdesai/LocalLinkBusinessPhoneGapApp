@@ -67567,18 +67567,15 @@ Ext.define('Ext.picker.Picker', {
 							uForm.getAt(3).setValue(dealEnd);
 							console.log(dealEnd);*/
                             if (file) {
-                                var mask = new Ext.LoadMask({
-                                        msg: 'Uploading Buzz..'
-                                    });
-                                mask.show();
                                 uForm.submit({
                                     url: 'http://services.appsonmobile.com/uploadS3',
                                     xhr2: true,
+                                    waitMsg: 'Please Wait...',
+                                    timeout: 5000,
                                     scope: this,
                                     success: function(form, action) {
                                         Ext.getStore('MyDealsStore').load();
                                         Ext.Msg.alert('Success', action.msg);
-                                        mask.hide();
                                         //console.log("Action Msg is : " +action.success);
                                         //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                         uForm.destroy();
@@ -67586,7 +67583,6 @@ Ext.define('Ext.picker.Picker', {
                                     failure: function(form, action) {
                                         Ext.getStore('MyDealsStore').load();
                                         Ext.Msg.alert('Failure', action.msg);
-                                        mask.hide();
                                         console.log("Action Msg is : " + action.msg);
                                         //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
                                         uForm.destroy();
