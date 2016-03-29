@@ -65883,6 +65883,15 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'businessName'
+            },
+            {
+                convert: function(v, rec) {
+                    var date = new Date();
+                    var test = Ext.Date.add(date, Ext.Date.DAY, 3);
+                    return Ext.Date.format(test, 'n/j/Y');
+                },
+                name: 'todayplusthreedays',
+                type: 'date'
             }
         ]
     }
@@ -66220,7 +66229,7 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 height: '',
                 itemId: 'phoneNumber',
-                margin: '',
+                margin: '0 15 0 15',
                 minWidth: '',
                 styleHtmlContent: true,
                 width: '90%',
@@ -66234,7 +66243,7 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 height: '',
                 itemId: 'email',
-                margin: '',
+                margin: '0 15 0 15',
                 minWidth: '',
                 styleHtmlContent: true,
                 width: '90%',
@@ -66248,8 +66257,9 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 height: '',
                 itemId: 'website',
-                margin: '',
+                margin: '0 15 0 15',
                 minWidth: '',
+                style: 'color:black;text-decoration:underline;font-family:Verdana,sans-serif;font-size:4.5vw',
                 styleHtmlContent: true,
                 width: '90%',
                 label: '',
@@ -66261,11 +66271,13 @@ Ext.define('Ext.picker.Picker', {
                 baseCls: 'customfield',
                 cls: 'icon-location',
                 disabled: false,
+                height: '12vh',
                 html: '',
                 itemId: 'address',
+                margin: '0 15 0 15',
                 maxHeight: '',
                 minHeight: '',
-                style: 'font-size:4vw;',
+                style: '\'font-size:4.2vw;font-family: arial\'',
                 styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
@@ -66342,7 +66354,10 @@ Ext.define('Ext.picker.Picker', {
             '',
             '',
             '<div style="font-size:6.3vw;color:black;font-weight:normal">{dealName}<button type="button" class="delete_button" style="float:right">#</div>',
-            '<div style="color:#1985d0;font-size:3.3vw;font-style:italics;font-weight:normal">Valid {dealStartDate} to {dealEndDate}</div>',
+            '<tpl if="dealEndDate &lt; todayplusthreedays ">',
+            '<div class= expiringDate >Valid {dealStartDate} to {dealEndDate}</div>',
+            '<tpl else>\t',
+            '<div class= dateValidity >Valid {dealStartDate} to {dealEndDate}</div></tpl>',
             ''
         ]
     }
@@ -66401,6 +66416,8 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'button',
+                docked: 'bottom',
+                height: '9%',
                 id: 'UploadDeal',
                 itemId: 'UploadDeal',
                 margin: '5 5 5 5',
@@ -66582,7 +66599,7 @@ Ext.define('Ext.picker.Picker', {
                                                 {
                                                     xtype: 'DealsPanel',
                                                     title: 'Buzz',
-                                                    iconCls: 'info'
+                                                    iconCls: 'icon-bubbles'
                                                 }
                                             ]
                                         });
@@ -66658,7 +66675,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '15%',
                 id: 'businessName',
                 itemId: 'businessName',
-                margin: '30 5 0 5',
+                margin: '30 15 0 15',
                 styleHtmlContent: true,
                 name: 'businessName'
             },
@@ -66670,6 +66687,7 @@ Ext.define('Ext.picker.Picker', {
                 ],
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
+                margin: '0 15 0 15',
                 styleHtmlContent: true,
                 name: 'phoneNumber'
             },
@@ -66682,6 +66700,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '20%',
                 id: 'address',
                 itemId: 'address',
+                margin: '0 15 0 15',
                 style: 'font-size:5vw;',
                 styleHtmlContent: true,
                 name: 'address',
@@ -67374,22 +67393,23 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
+                margin: '5 5 5 5 ',
                 style: '',
                 clearIcon: false,
                 inputCls: '',
                 label: 'Name',
                 labelCls: '',
-                labelWidth: '50%',
-                name: 'DealName',
-                required: true
+                labelWidth: '35%',
+                name: 'DealName'
             },
             {
                 xtype: 'selectfield',
                 cls: 'customfield',
                 itemId: 'dealStatus',
+                margin: '5 5 5 5 ',
                 maxHeight: '',
                 label: 'Status',
-                labelWidth: '50%',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'DealStatus',
                 value: 'Active',
@@ -67411,12 +67431,12 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'customfield',
                 id: 'DealStartDate',
                 itemId: 'DealStartDate',
+                margin: '5 5 5 5 ',
                 width: '97%',
                 label: 'Start Date',
-                labelWidth: '50%',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'DealStartDate',
-                required: true,
                 value: {
                     day: new Date().getDate(),
                     month: (new Date().getMonth() + 1),
@@ -67427,6 +67447,7 @@ Ext.define('Ext.picker.Picker', {
                 picker: {
                     itemId: 'mydatepicker3',
                     styleHtmlContent: true,
+                    stretchX: false,
                     yearFrom: 2016
                 }
             },
@@ -67434,11 +67455,11 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'datepickerfield',
                 cls: 'customfield',
                 itemId: 'DealEndDate',
+                margin: '5 5 5 5 ',
                 width: '97%',
                 label: 'End Date',
-                labelWidth: '50%',
+                labelWidth: '35%',
                 name: 'DealEndDate',
-                required: true,
                 value: {
                     day: new Date().getDate(),
                     month: (new Date().getMonth() + 1),
@@ -67452,17 +67473,15 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'filefield',
-                cls: 'customfield',
                 id: 'myfilefield',
                 itemId: 'myfilefield',
                 margin: '5 5 5 5 ',
                 style: 'color:white',
                 clearIcon: false,
                 label: 'Image',
-                labelWidth: '50%',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'fileUpload',
-                required: true,
                 capture: 'camera'
             },
             {
@@ -67482,32 +67501,27 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 cls: 'button',
-                height: 58,
+                height: 140,
                 margin: '10 10 10 10 10',
+                layout: 'fit',
                 scrollable: false,
-                layout: {
-                    type: 'hbox',
-                    align: 'start',
-                    pack: 'center'
-                },
                 items: [
+                    {
+                        xtype: 'spacer',
+                        maxWidth: '',
+                        minWidth: ''
+                    },
                     {
                         xtype: 'button',
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
                         },
-                        flex: 10,
-                        minHeight: '10%',
+                        height: '30%',
                         style: 'border:none',
                         styleHtmlContent: true,
                         ui: 'decline',
+                        width: '90%',
                         text: 'Cancel'
-                    },
-                    {
-                        xtype: 'spacer',
-                        flex: 0.5,
-                        maxWidth: '',
-                        minWidth: ''
                     },
                     {
                         xtype: 'button',
@@ -67579,11 +67593,13 @@ Ext.define('Ext.picker.Picker', {
                                 uForm.destroy();
                             }
                         },
-                        flex: 10,
+                        docked: 'right',
+                        height: '30%',
                         itemId: 'submit',
                         style: 'border:none',
                         styleHtmlContent: true,
                         ui: 'confirm',
+                        width: '50%',
                         text: 'Submit'
                     }
                 ]
@@ -67932,7 +67948,7 @@ Ext.application({
                                     {
                                         xtype: 'DealsPanel',
                                         title: 'Buzz',
-                                        iconCls: 'info'
+                                        iconCls: 'icon-bubbles'
                                     }
                                 ]
                             });
