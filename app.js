@@ -67567,7 +67567,7 @@ Ext.define('Ext.picker.Picker', {
 							uForm.getAt(3).setValue(dealEnd);
 							console.log(dealEnd);*/
                             if (file) {
-                                var mask = new Ext.LoadMask(uForm.getEl(), {
+                                var mask = new Ext.LoadMask({
                                         msg: 'Uploading Buzz..'
                                     });
                                 mask.show();
