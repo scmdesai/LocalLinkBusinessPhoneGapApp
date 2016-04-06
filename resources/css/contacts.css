@@ -8,112 +8,145 @@ $list-bg-color: $base-color;
 $list-color: #fff;
 $list-header-bg-color: $base-color;
 
-
-
-
-
-.contact-name {
-	color: #fff ;
-	padding-left: 4px;
+.favorite {
+    border: 2px outset #C0C0C0; 
+    padding: 5px 5px 5px 5px; 
+    margin: 5px 5px 5px 5px;
+    text-align: center;
 }
 
-.x-form-label  {
-    border-radius:4px;
-	border:none;
-	text-align:center;
-	font-size:5vw;
-	vertical-align:middle;
-
+.square {
+    border-radius: 0px;
 }
 
-.x-field {
-	
-	border-bottom:1px solid #c0c0c0;
-	font-size:5vw;
-	height:11vh;
-	font-weight:normal;
-	font-family:sans-serif;
-	text-align:bottom;
-	padding-top:5px;
-	vertical-align: bottom;
+.contact-name{
+    color:#00529D;
+    padding-left: 4px;
+    word-wrap: normal;
+}
 
+.toolbarCls {
+    background:white !important;
+    border-bottom:1px solid #C0C0C0 !important;
+}
 
-
-
-
-
-
+.emptyText {
+    
+    color: #C0C0C0 !important;
+    position: absolute !important;
+    text-align:center !important;
+    vertical-align:middle !important;
+    top: 50px !important;
+    left:20px !important;
+    font-family:Arial !important;
+    font-size:4vw !important;
 }
 
 .dateValidity {
-    color:#1985d0;
-    font-size:3.3vw;
+    color:grey;
+    font-size:2.5vw;
     font-style:italics;
     font-weight:normal;
+    font-family:'Arial';
 
 }
 .expiringDate {
     color:#ff0000;
-    font-size:3.3vw;
+    font-size:2.5vw;
     font-style:italics;
     font-weight:normal;
+    font-family:'Arial';
+    
+
+}
+
+
+.toolbar-icon-color{
+    color:white;
+}
+
+
+
+.tabBarCls {
+    padding: 5px,5px,5px,5px;
+}
+
+
+
+.x-field {
+    border-bottom:1px groove #C0C0C0!important;
+    margin:5px 5px 5px 5px;
+    height:12vh;
+    font-weight:normal !important;
+    text-align:center !important;
+    vertical-align:middle !important;
+    font-family:Arial !important;
+    font-size:4vw;
+	border:1px solid #C0C0C0!important;
+
+
+
+
+
+
+
+}
+
+.x-form-label {
+	
+    font-weight:normal !important;
+    text-align:center !important;
+    vertical-align:middle !important;
+	padding-top:15px !important;
+    font-family:Arial !important;
+    font-size:4.5vw;
+	border-top-left-radius:0 em;
+	background:#FFF !important;
+	border-right:1px solid #eee!important;
+	
+}
+
+.customfield {
+    margin:5px 5px 5px 5px;
+    height:12vh;
+    font-weight:normal !important;
+    text-align:center !important;
+    vertical-align:middle !important;
+    font-family:Arial !important;
+    font-size:4vw;
+	border-bottom:1px solid #C0C0C0!important;
+
+
+
+
+
+
+
+}
+
+
+.searchfield {
+    border-bottom:2px groove #C0C0C0;
+    margin:5px 5px 5px 5px;
+    font-size:5vw;
+    height:12vh;
+    font-weight:normal;
+    text-align:center;
+    vertical-align:middle;
+    font-family:Arial;
+    border-radius:7px;
+
+
+
+
+
+
 
 }
 
 
 
-.checkbox_hidden{
-	visibility: hidden;
-}
-
-.checkbox_visible{
-	visibility: visible;
-}
 
 
 
-
-.regular-checkbox {
-
-	-webkit-appearance: none;
-	background-color: #fafafa;
-	border: 1px solid #cacece;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-	padding: 9px;
-	border-radius: 3px;
-	display: inline-block;
-	position: relative;
-}
-
-.regular-checkbox:active, .regular-checkbox:checked:active {
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
-}
-
-.regular-checkbox:checked {
-	font-family: "Helvetica";
-	background-color: #e9ecee;
-	border: 1px solid #adb8c0;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-	color: #99a1a7;
-}
-
-.regular-checkbox:checked:after {
-	content: '\2714';
-	font-size: 17vw;
-	position: absolute;
-	top: 0px;
-	left: 3px;
-	color: #99a1a7;
-}
-
-.big-checkbox {
-	padding: 3.5vw;
-}
-
-.big-checkbox:checked:after {
-
-
-	font-size: 7vw;
-	left: 2px;
-}
 
