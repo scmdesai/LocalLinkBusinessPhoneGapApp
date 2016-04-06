@@ -66213,8 +66213,7 @@ Ext.define('Ext.picker.Picker', {
                         disabled: true,
                         html: '<b>First Name</b>',
                         id: 'nameTxt',
-                        itemId: 'nameTxt',
-                        style: ''
+                        itemId: 'nameTxt'
                     }
                 ]
             },
@@ -66253,10 +66252,9 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'icon-globe',
                 disabled: false,
                 height: '',
-                itemId: 'website',
+                itemId: 'websiteDisplayName',
                 minWidth: '',
                 padding: '10 10 10 10',
-                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw',
                 clearIcon: false,
                 label: '',
                 name: 'websiteDisplayName',
@@ -66270,12 +66268,10 @@ Ext.define('Ext.picker.Picker', {
                 height: '12vh',
                 html: '',
                 itemId: 'address',
-                margin: '0 15 0 15',
                 maxHeight: '',
                 minHeight: '',
                 padding: '10 10 10 10',
                 style: '\'font-size:3.5vw;font-family: arial\'',
-                width: '90%',
                 clearIcon: false,
                 name: 'address',
                 readOnly: true,
