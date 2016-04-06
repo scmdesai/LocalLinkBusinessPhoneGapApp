@@ -66228,7 +66228,6 @@ Ext.define('Ext.picker.Picker', {
                 minWidth: '',
                 padding: '10 10 10 10',
                 clearIcon: false,
-                label: '',
                 name: 'phoneNumber',
                 readOnly: true
             },
@@ -66253,10 +66252,9 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 height: '',
                 itemId: 'websiteDisplayName',
-                minWidth: '',
                 padding: '10 10 10 10',
+                style: 'text-wrap:normal;',
                 clearIcon: false,
-                label: '',
                 name: 'websiteDisplayName',
                 readOnly: true
             },
