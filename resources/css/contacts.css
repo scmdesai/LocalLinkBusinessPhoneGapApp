@@ -23,7 +23,7 @@ $list-header-bg-color: $base-color;
     color:#00529D;
     padding-left: 4px;
     word-wrap: normal;
-	font-size:6vw;
+	font-size:5.2vw;
 }
 
 .toolbarCls {
@@ -114,6 +114,7 @@ $list-header-bg-color: $base-color;
     font-family:Arial !important;
     font-size:4vw !important;
 	border-bottom:1px solid #C0C0C0!important;
+	text-wrap:normal;
 
 
 
