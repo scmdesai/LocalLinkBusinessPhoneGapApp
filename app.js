@@ -66291,7 +66291,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'x-panel-body',
                 docked: 'top',
                 height: '30%',
-                itemId: 'picture1',
+                itemId: 'contactpic',
                 width: ''
             }
         ]
