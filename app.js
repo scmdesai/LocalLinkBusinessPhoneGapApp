@@ -66542,7 +66542,7 @@ Ext.define('Ext.picker.Picker', {
         html: '',
         id: 'formpanel',
         itemId: 'formpanel',
-        style: 'background;#fff',
+        style: 'background:white',
         styleHtmlContent: true,
         ui: 'light',
         autoDestroy: false,
