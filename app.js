@@ -66220,7 +66220,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 baseCls: 'customfield',
-                cls: 'icon-phone',
+                cls: [
+                    'icon-phone',
+                    'customfield'
+                ],
                 disabled: false,
                 height: '',
                 itemId: 'phoneNumber',
@@ -66234,7 +66237,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 baseCls: 'customfield',
-                cls: 'icon-email',
+                cls: [
+                    'icon-email',
+                    'customfield'
+                ],
                 disabled: false,
                 height: '',
                 itemId: 'email',
@@ -66247,6 +66253,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
+                baseCls: 'customfield',
                 cls: [
                     'icon-globe',
                     'customfield'
@@ -66262,8 +66269,11 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textareafield',
-                baseCls: 'customfield1',
-                cls: 'icon-location',
+                baseCls: '',
+                cls: [
+                    'icon-location',
+                    'customfield1'
+                ],
                 disabled: false,
                 height: '12vh',
                 html: '',
