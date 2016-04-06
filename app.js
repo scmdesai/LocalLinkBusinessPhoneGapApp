@@ -66253,7 +66253,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '',
                 itemId: 'websiteDisplayName',
                 padding: '10 10 10 10',
-                style: 'text-wrap:normal;',
+                style: 'word-wrap:break-word;font-size:2vw!important',
                 clearIcon: false,
                 name: 'websiteDisplayName',
                 readOnly: true
