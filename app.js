@@ -66260,7 +66260,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '0 15 0 15',
                 minWidth: '',
                 padding: '10 10 10 10',
-                style: 'color:black;text-decoration:underline;',
+                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw',
                 width: '90%',
                 clearIcon: false,
                 label: '',
@@ -67961,6 +67961,8 @@ Ext.application({
                                 fullscreen: true,
                                 tabBarPosition: 'bottom',
                                 cls: 'toolbarCls',
+                                ui: 'plain',
+                                style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D",
                                 items: [
                                     {
                                         xtype: 'contactinfo',
