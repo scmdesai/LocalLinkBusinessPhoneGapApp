@@ -66247,13 +66247,15 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                baseCls: 'customfield',
-                cls: 'icon-globe',
+                cls: [
+                    'icon-globe',
+                    'customfield'
+                ],
                 disabled: false,
                 height: '',
                 itemId: 'websiteDisplayName',
                 padding: '10 10 10 10',
-                style: 'word-wrap:break-word;font-size:2vw!important',
+                style: 'font-size:2px !important',
                 clearIcon: false,
                 name: 'websiteDisplayName',
                 readOnly: true
