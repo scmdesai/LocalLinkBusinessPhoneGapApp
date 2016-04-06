@@ -66124,7 +66124,7 @@ Ext.define('Ext.picker.Picker', {
     config: {
         overflow: 'hidden',
         id: 'contactpic',
-        itemId: 'contactpic',
+        itemId: 'contactpic1',
         margin: '5 5 5 5',
         padding: '',
         style: 'overflow: hidden;border:1px groove #000;background:none',
@@ -66219,19 +66219,13 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'contactpic',
-                id: 'picture',
-                styleHtmlContent: false,
-                width: '100%',
-                flex: 1
-            },
-            {
                 xtype: 'textfield',
                 baseCls: 'customfield',
                 cls: 'icon-phone',
                 disabled: false,
                 height: '',
                 itemId: 'phoneNumber',
+                margin: '0 15 0 15',
                 minWidth: '',
                 width: '90%',
                 clearIcon: false,
@@ -66246,6 +66240,7 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 height: '',
                 itemId: 'email',
+                margin: '0 15 0 15',
                 minWidth: '',
                 width: '90%',
                 clearIcon: false,
@@ -66260,6 +66255,7 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 height: '',
                 itemId: 'website',
+                margin: '0 15 0 15',
                 minWidth: '',
                 style: 'color:black;text-decoration:underline;',
                 width: '90%',
@@ -66270,12 +66266,13 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textareafield',
-                baseCls: 'customfield',
+                baseCls: 'customfield1',
                 cls: 'icon-location',
                 disabled: false,
                 height: '12vh',
                 html: '',
                 itemId: 'address',
+                margin: '0 15 0 15',
                 maxHeight: '',
                 minHeight: '',
                 style: '\'font-size:3.5vw;font-family: arial\'',
@@ -66284,6 +66281,14 @@ Ext.define('Ext.picker.Picker', {
                 name: 'address',
                 readOnly: true,
                 maxRows: 2
+            },
+            {
+                xtype: 'contactpic',
+                cls: 'x-panel-body',
+                docked: 'top',
+                height: '30%',
+                itemId: 'picture1',
+                width: ''
             }
         ]
     },
@@ -66643,7 +66648,8 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'x-panel-body',
                 docked: 'top',
                 height: '30%',
-                itemId: 'picture'
+                itemId: 'picture',
+                width: ''
             },
             {
                 xtype: 'button',
@@ -67392,7 +67398,7 @@ Ext.define('Ext.picker.Picker', {
         cls: 'customfield',
         height: '100%',
         minHeight: '',
-        style: 'backgrund:white',
+        style: 'background:white',
         enctype: 'multipart/form-data',
         url: 'http://services.appsonmobile.com/uploadS3',
         items: [
@@ -67671,6 +67677,7 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'filefield',
+                baseCls: 'customfield1',
                 itemId: 'myfilefield1',
                 margin: '5 5 5 5',
                 style: 'border:none',
