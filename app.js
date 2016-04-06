@@ -66220,8 +66220,8 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'contactpic',
-                height: '100%',
                 id: 'picture',
+                styleHtmlContent: false,
                 width: '100%',
                 flex: 1
             },
@@ -66233,8 +66233,6 @@ Ext.define('Ext.picker.Picker', {
                 height: '',
                 itemId: 'phoneNumber',
                 minWidth: '',
-                style: 'border:none!important;',
-                styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
                 label: '',
@@ -66249,7 +66247,6 @@ Ext.define('Ext.picker.Picker', {
                 height: '',
                 itemId: 'email',
                 minWidth: '',
-                styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
                 label: '',
@@ -66264,8 +66261,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '',
                 itemId: 'website',
                 minWidth: '',
-                style: 'color:black;text-decoration:underline;font-size:4.5vw',
-                styleHtmlContent: true,
+                style: 'color:black;text-decoration:underline;',
                 width: '90%',
                 clearIcon: false,
                 label: '',
@@ -66283,7 +66279,6 @@ Ext.define('Ext.picker.Picker', {
                 maxHeight: '',
                 minHeight: '',
                 style: '\'font-size:3.5vw;font-family: arial\'',
-                styleHtmlContent: true,
                 width: '90%',
                 clearIcon: false,
                 name: 'address',
@@ -66648,8 +66643,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'x-panel-body',
                 docked: 'top',
                 height: '30%',
-                itemId: 'picture',
-                width: ''
+                itemId: 'picture'
             },
             {
                 xtype: 'button',
@@ -67398,6 +67392,7 @@ Ext.define('Ext.picker.Picker', {
         cls: 'customfield',
         height: '100%',
         minHeight: '',
+        style: 'backgrund:white',
         enctype: 'multipart/form-data',
         url: 'http://services.appsonmobile.com/uploadS3',
         items: [
@@ -67676,9 +67671,9 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'filefield',
-                baseCls: 'customfield',
                 itemId: 'myfilefield1',
                 margin: '5 5 5 5',
+                style: 'border:none',
                 styleHtmlContent: true,
                 width: 214,
                 clearIcon: false,
