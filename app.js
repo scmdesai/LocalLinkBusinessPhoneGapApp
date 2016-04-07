@@ -67417,6 +67417,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'dealStatus',
                 margin: '5 5 5 5 ',
                 maxHeight: '',
+                style: 'border-top-color: red !important',
                 styleHtmlContent: true,
                 label: 'Status',
                 labelWidth: '35%',
@@ -67454,6 +67455,7 @@ Ext.define('Ext.picker.Picker', {
                     year: new Date().getFullYear()
                 },
                 placeHolder: 'mm/dd/yyyy',
+                usePicker: true,
                 dateFormat: 'm/d/Y',
                 picker: {
                     itemId: 'mydatepicker3',
@@ -67478,6 +67480,7 @@ Ext.define('Ext.picker.Picker', {
                     year: new Date().getFullYear()
                 },
                 placeHolder: 'mm/dd/yyyy',
+                usePicker: true,
                 picker: {
                     styleHtmlContent: true,
                     yearFrom: 2016
