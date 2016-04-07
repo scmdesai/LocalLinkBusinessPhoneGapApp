@@ -62,7 +62,24 @@ $list-header-bg-color: $base-color;
 }
 
 
+.customfield {
+    border:1px groove #C0C0C0!important;
+    height:12vh;
+    font-weight:normal !important;
+    text-align:center !important;
+    vertical-align:middle !important;
+    font-family:Arial !important;
+    font-size:4vw !important;
+	padding-right:5px!important;
+	overflow: visible;
 
+
+
+
+
+
+
+}
 
 
 
@@ -74,14 +91,12 @@ $list-header-bg-color: $base-color;
 
 .x-field {
     border-bottom:1px groove #C0C0C0!important;
-    margin:5px 5px 5px 5px;
     height:12vh;
     font-weight:normal !important;
     text-align:center !important;
     vertical-align:middle !important;
     font-family:Arial !important;
     font-size:4vw !important;
-	border:1px solid #C0C0C0!important;
 	padding-right:5px!important;
 
 
@@ -106,27 +121,9 @@ $list-header-bg-color: $base-color;
 	
 }
 
-.customfield {
-    border-bottom:1px groove #C0C0C0!important;
-    height:12vh;
-    font-weight:normal !important;
-    text-align:center !important;
-    vertical-align:middle !important;
-    font-family:Arial !important;
-    font-size:4vw !important;
-	padding-right:5px!important;
-	overflow: visible;
 
-
-
-
-
-
-
-}
 
 .customfield1 {
-    margin:5px 5px 5px 5px;
     height:12vh;
     font-weight:normal !important;
     text-align:center !important;

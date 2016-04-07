@@ -66219,11 +66219,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                baseCls: 'customfield',
-                cls: [
-                    'icon-phone',
-                    'customfield'
-                ],
+                cls: 'icon-phone',
                 disabled: false,
                 height: '',
                 itemId: 'phoneNumber',
@@ -66236,11 +66232,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                baseCls: 'customfield',
-                cls: [
-                    'icon-email',
-                    'customfield'
-                ],
+                cls: 'icon-email',
                 disabled: false,
                 height: '',
                 itemId: 'email',
@@ -66253,11 +66245,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                baseCls: 'customfield',
-                cls: [
-                    'icon-globe',
-                    'customfield'
-                ],
+                cls: 'icon-globe',
                 disabled: false,
                 height: '',
                 itemId: 'websiteDisplayName',
@@ -66690,6 +66678,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
+                cls: 'customfield',
                 height: '15%',
                 id: 'businessName',
                 itemId: 'businessName',
@@ -67411,8 +67400,10 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'textfield',
+                cls: 'customfield',
                 margin: '5 5 5 5 ',
                 padding: '',
+                style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
@@ -67494,6 +67485,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'filefield',
+                cls: 'customfield',
                 id: 'myfilefield',
                 itemId: 'myfilefield',
                 margin: '5 5 5 5 ',
