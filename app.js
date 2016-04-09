@@ -66544,8 +66544,12 @@ Ext.define('Ext.picker.Picker', {
                         waitMsg: 'Please Wait...',
                         timeout: 5000,
                         scope: this,
-                        success: function(form, action) {},
-                        failure: function(form, action) {}
+                        success: function(form, action) {
+                            console.log('Success');
+                        },
+                        failure: function(form, action) {
+                            console.log('Failure');
+                        }
                     });
                 },
                 text: 'Get My Buzzometer!'
@@ -66553,21 +66557,21 @@ Ext.define('Ext.picker.Picker', {
         ]
     }
 }, 0, [
-    "buzzometer"
+    "BuzzOMeter"
 ], [
     "component",
     "container",
     "panel",
     "formpanel",
-    "buzzometer"
+    "BuzzOMeter"
 ], {
     "component": true,
     "container": true,
     "panel": true,
     "formpanel": true,
-    "buzzometer": true
+    "BuzzOMeter": true
 }, [
-    "widget.buzzometer"
+    "widget.BuzzOMeter"
 ], 0, [
     Contact.view,
     'BuzzOMeter'
@@ -66668,7 +66672,7 @@ Ext.define('Ext.picker.Picker', {
                                                     iconCls: 'icon-bubbles'
                                                 },
                                                 {
-                                                    xtype: 'buzzometer',
+                                                    xtype: 'BuzzOMeter',
                                                     title: 'BuzzOMeter',
                                                     iconCls: 'info'
                                                 }
@@ -68048,7 +68052,7 @@ Ext.application({
                                         iconCls: 'icon-bubbles'
                                     },
                                     {
-                                        xtype: 'buzzometer',
+                                        xtype: 'BuzzOMeter',
                                         title: 'BuzzOMeter',
                                         iconCls: 'info'
                                     }
