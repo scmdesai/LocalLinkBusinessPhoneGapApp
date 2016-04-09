@@ -66549,6 +66549,8 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onBuzzometerPainted: function(element, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        var customerId = storeUserDetails.get('customerId');
         element.submit({
             url: 'http://services.appsonmobile.com/analytics/' + customerId,
             method: 'GET',
