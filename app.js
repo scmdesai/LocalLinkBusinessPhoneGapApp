@@ -66549,14 +66549,13 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onBuzzometerPainted: function(element, eOpts) {
-        var storeUserDetails = Ext.getStore('UserDetails');
-        var customerId = storeUserDetails.get('customerId');
+        //var storeUserDetails = Ext.getStore('UserDetails');
+        //var customerId = storeUserDetails.get('customerId');
         element.submit({
-            url: 'http://services.appsonmobile.com/analytics/' + customerId,
+            url: 'http://services.appsonmobile.com/analytics/04',
             method: 'GET',
             waitMsg: 'Please Wait...',
             timeout: 5000,
-            scope: this,
             success: function(form, action) {
                 console.log('Success');
             },
