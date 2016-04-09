@@ -66537,7 +66537,7 @@ Ext.define('Ext.picker.Picker', {
                 handler: function(button, e) {
                     var storeUserDetails = Ext.getStore('UserDetails');
                     var customerId = storeUserDetails.get('customerId');
-                    var uForm = this.up('BuzzOMeter');
+                    var uForm = Ext.get('BuzzOMeter');
                     if (uForm) {
                         console.log('Form');
                     } else {
