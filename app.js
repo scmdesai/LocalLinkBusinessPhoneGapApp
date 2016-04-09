@@ -66546,29 +66546,7 @@ Ext.define('Ext.picker.Picker', {
         layout: {
             type: 'vbox',
             align: 'stretchmax'
-        },
-        listeners: [
-            {
-                fn: 'onBuzzometerPainted',
-                event: 'painted'
-            }
-        ]
-    },
-    onBuzzometerPainted: function(element, eOpts) {
-        //var storeUserDetails = Ext.getStore('UserDetails');
-        //var customerId = storeUserDetails.get('customerId');
-        document.getElementById('buzzometer').submit({
-            url: 'http://services.appsonmobile.com/analytics/04',
-            method: 'GET',
-            waitMsg: 'Please Wait...',
-            timeout: 5000,
-            success: function(form, action) {
-                console.log('Success');
-            },
-            failure: function(form, action) {
-                console.log('Failure');
-            }
-        });
+        }
     }
 }, 0, [
     "buzzometer"
