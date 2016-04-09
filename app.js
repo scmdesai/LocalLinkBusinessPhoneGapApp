@@ -66537,6 +66537,7 @@ Ext.define('Ext.picker.Picker', {
         modal: true,
         scrollable: false,
         method: 'get',
+        standardSubmit: true,
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -66551,7 +66552,7 @@ Ext.define('Ext.picker.Picker', {
     onBuzzometerPainted: function(element, eOpts) {
         //var storeUserDetails = Ext.getStore('UserDetails');
         //var customerId = storeUserDetails.get('customerId');
-        element.submit({
+        element.getForm().submit({
             url: 'http://services.appsonmobile.com/analytics/04',
             method: 'GET',
             waitMsg: 'Please Wait...',
