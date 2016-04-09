@@ -1,3 +1,4 @@
+var BuzzOMeter = BuzzOMeter || {};
 var Contact = Contact || {};
 if (!Contact.controller) Contact.controller = {};
 if (!Contact.model) Contact.model = {};
@@ -66527,6 +66528,9 @@ Ext.define('Ext.picker.Picker', {
  * Do NOT hand edit this file.
  */
 (Ext.cmd.derive('Contact.view.BuzzOMeter', Ext.form.Panel, {
+    alternateClassName: [
+        'BuzzOMeter'
+    ],
     config: {
         border: 5,
         height: '100%',
@@ -66584,6 +66588,8 @@ Ext.define('Ext.picker.Picker', {
     "widget.buzzometer"
 ], 0, [
     Contact.view,
+    'BuzzOMeter',
+    0,
     'BuzzOMeter'
 ], 0));
 
@@ -66970,7 +66976,8 @@ Ext.define('Ext.picker.Picker', {
             manageDeals: 'button#manageDeals',
             panel: 'panel#panel',
             dealBackBtn: 'button#dealBackBtn',
-            share: 'button#share'
+            share: 'button#share',
+            buzzometer: 'formpanel#buzzometer'
         },
         control: {
             "contactpic": {
@@ -67005,6 +67012,9 @@ Ext.define('Ext.picker.Picker', {
             },
             "button#manageDeals": {
                 tap: 'onManageDealsTap'
+            },
+            "formpanel#buzzometer": {
+                activate: 'onBuzzometerActivate'
             }
         }
     },
@@ -67213,6 +67223,20 @@ Ext.define('Ext.picker.Picker', {
             xtype: 'DealsPanel'
         });
         Ext.Viewport.setActiveItem(view);
+    },
+    onBuzzometerActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        document.getElementById('buzzometer').submit({
+            url: 'http://services.appsonmobile.com/analytics/04',
+            method: 'GET',
+            waitMsg: 'Please Wait...',
+            timeout: 5000,
+            success: function(form, action) {
+                console.log('Success');
+            },
+            failure: function(form, action) {
+                console.log('Failure');
+            }
+        });
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.controller,
