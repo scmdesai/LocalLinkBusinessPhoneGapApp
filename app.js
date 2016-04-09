@@ -66528,6 +66528,8 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.BuzzOMeter', Ext.form.Panel, {
     config: {
+        id: 'BuzzOMeter',
+        itemId: 'BuzzOMeter',
         method: 'get',
         listeners: [
             {
