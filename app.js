@@ -66528,16 +66528,13 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.BuzzOMeter', Ext.form.Panel, {
     config: {
-        id: 'BuzzOMeter',
-        itemId: 'BuzzOMeter',
-        method: 'get',
         items: [
             {
                 xtype: 'button',
                 handler: function(button, e) {
                     var storeUserDetails = Ext.getStore('UserDetails');
                     var customerId = storeUserDetails.get('customerId');
-                    var uForm = this.up('BuzzOMeter').getForm();
+                    var uForm = this.up('BuzzOMeter');
                     uForm.submit({
                         url: 'http://services.appsonmobile.com/analytics/' + customerId,
                         method: 'GET',
