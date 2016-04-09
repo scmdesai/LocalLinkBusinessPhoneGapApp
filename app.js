@@ -66530,6 +66530,7 @@ Ext.define('Ext.picker.Picker', {
     config: {
         border: 5,
         height: '100%',
+        id: 'buzzometer',
         itemId: 'buzzometer',
         minHeight: '100%',
         style: 'background;#fff',
@@ -66552,7 +66553,7 @@ Ext.define('Ext.picker.Picker', {
     onBuzzometerPainted: function(element, eOpts) {
         //var storeUserDetails = Ext.getStore('UserDetails');
         //var customerId = storeUserDetails.get('customerId');
-        element.getForm().submit({
+        document.getElementById('buzzometer').submit({
             url: 'http://services.appsonmobile.com/analytics/04',
             method: 'GET',
             waitMsg: 'Please Wait...',
