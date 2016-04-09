@@ -66538,6 +66538,11 @@ Ext.define('Ext.picker.Picker', {
                     var storeUserDetails = Ext.getStore('UserDetails');
                     var customerId = storeUserDetails.get('customerId');
                     var uForm = this.up('BuzzOMeter');
+                    if (uForm) {
+                        console.log('Form');
+                    } else {
+                        console.log('No Form');
+                    }
                     uForm.submit({
                         url: 'http://services.appsonmobile.com/analytics/' + customerId,
                         method: 'GET',
