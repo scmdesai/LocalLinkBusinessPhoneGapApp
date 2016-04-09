@@ -66531,26 +66531,26 @@ Ext.define('Ext.picker.Picker', {
         id: 'BuzzOMeter',
         itemId: 'BuzzOMeter',
         method: 'get',
-        listeners: [
+        items: [
             {
-                fn: 'onFormpanelActivate',
-                event: 'activate'
+                xtype: 'button',
+                handler: function(button, e) {
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    var customerId = storeUserDetails.get('customerId');
+                    var uForm = this.up('BuzzOMeter');
+                    uForm.submit({
+                        url: 'http://services.appsonmobile.com/analytics/' + customerId,
+                        method: 'GET',
+                        waitMsg: 'Please Wait...',
+                        timeout: 5000,
+                        scope: this,
+                        success: function(form, action) {},
+                        failure: function(form, action) {}
+                    });
+                },
+                text: 'Get My Buzzometer!'
             }
         ]
-    },
-    onFormpanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var storeUserDetails = Ext.getStore('UserDetails');
-        var customerId = storeUserDetails.get('customerId');
-        var uForm = this.up('BuzzOMeter');
-        uForm.submit({
-            url: 'http://services.appsonmobile.com/analytics/' + customerId,
-            method: 'GET',
-            waitMsg: 'Please Wait...',
-            timeout: 5000,
-            scope: this,
-            success: function(form, action) {},
-            failure: function(form, action) {}
-        });
     }
 }, 0, [
     "buzzometer"
