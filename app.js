@@ -66540,9 +66540,22 @@ Ext.define('Ext.picker.Picker', {
     },
     onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
         console.log("Panel Activate called");
+        var dealName = [];
+        var zipcode = [];
+        var noOfHits = [];
+        var dealData;
         $.getJSON("http://services.appsonmobile.com/analytics/v3/05", function(json) {
-            console.log(json.totalResults);
-            console.log(json.rows[0]);
+            for (var i = 0; i < json.totalResults; i++) {
+                console.log(json.rows[i]);
+                dealData = json.rows[i];
+                var info = dealData.split(",");
+                dealName[i] = info[0];
+                zipcode[i] = info[1];
+                noOfHits[i] = info[2];
+                console.log("Deal Name : " + dealName[i]);
+                console.log("Zipcode :  " + zipcode[i]);
+                console.log("No of Hits: " + noOfHits[i]);
+            }
         });
     }
 }, 0, [
