@@ -65936,6 +65936,9 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'FBUserId'
+            },
+            {
+                name: 'access_token'
             }
         ]
     }
@@ -66536,8 +66539,9 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var url = 'http://services.appsonmobile.com/analytics/04';
-        window.open(url, '_system', 'location=yes');
+        $.getJSON("http://localhost:3000/analytics/v3/05", function(json) {
+            console.log(json.rows[0]);
+        });
     }
 }, 0, [
     "buzzometer"
@@ -68027,7 +68031,8 @@ Ext.application({
                         storeUserDetails.add({
                             'customerId': record.get('customerId'),
                             'email': email,
-                            'businessName': record.get('businessName')
+                            'businessName': record.get('businessName'),
+                            'access_token': access_token
                         });
                         //console.log("User details are : " + email +','+ record.get('customerId') +','+ record.get('businessName'));
                         var store = Ext.getStore('MyJsonPStore');
