@@ -66539,7 +66539,9 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        $.getJSON("http://localhost:3000/analytics/v3/05", function(json) {
+        console.log("Panel Activate called");
+        $.getJSON("http://services.appsonmobile.com/analytics/v3/05", function(json) {
+            console.log(json.totalResults);
             console.log(json.rows[0]);
         });
     }
