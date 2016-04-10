@@ -68031,8 +68031,7 @@ Ext.application({
                         storeUserDetails.add({
                             'customerId': record.get('customerId'),
                             'email': email,
-                            'businessName': record.get('businessName'),
-                            'access_token': access_token
+                            'businessName': record.get('businessName')
                         });
                         //console.log("User details are : " + email +','+ record.get('customerId') +','+ record.get('businessName'));
                         var store = Ext.getStore('MyJsonPStore');
