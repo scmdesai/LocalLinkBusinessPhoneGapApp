@@ -66609,6 +66609,12 @@ Ext.define('Ext.picker.Picker', {
                 dealName = tmp[0];
                 zipcode = tmp[1];
                 numberOfHits = tmp[2];
+                dataTable.add({
+                    dealName: dealName,
+                    zipcode: zipcode,
+                    numberOfHits: numberOfHits
+                });
+                console.log(dataTable.getAllCount());
             }
         });
     }
@@ -66630,10 +66636,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'BuzzOMeter'
 ], 0));
-/*console.log(dealData);
-				console.log(dealName);
-				console.log(zipcode);
-				console.log(numberOfHits);*/
 
 /*
  * File: app/view/contactform.js
