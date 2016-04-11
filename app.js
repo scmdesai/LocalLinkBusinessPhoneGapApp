@@ -66548,7 +66548,7 @@ Ext.define('Ext.picker.Picker', {
             for (var i = 0; i < json.totalResults; i++) {
                 console.log(json.rows[i]);
                 dealData = json.rows[i];
-                var info = dealData.split(",");
+                var info = dealData.split("\"", "\"");
                 dealName[i] = info[0];
                 zipcode[i] = info[1];
                 noOfHits[i] = info[2];
