@@ -66596,19 +66596,19 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var dealData = [];
+        var dealData;
         var dataTable = Ext.getStore('AnalyticsStore');
         var dealName;
         var zipcode;
         var numberOfHits;
         $.getJSON("http://services.appsonmobile.com/analytics/v3/04", function(json) {
             for (var i = 0; i < json.totalResults; i++) {
-                dealData[i] = json.rows[i].toString();
+                dealData = (json.rows[i]).toString();
                 var tmp = dealData.split(",");
                 dealName = tmp[0];
                 zipcode = tmp[1];
                 numberOfHits = tmp[2];
-                console.log(dealData[i]);
+                console.log(dealData);
                 console.log(dealName);
                 console.log(zipcode);
                 console.log(numberOfHits);
