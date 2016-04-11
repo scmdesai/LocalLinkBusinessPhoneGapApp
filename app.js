@@ -66544,15 +66544,14 @@ Ext.define('Ext.picker.Picker', {
         var zipcode = [];
         var noOfHits = [];
         var dealData;
+        var dealDataString;
         $.getJSON("http://services.appsonmobile.com/analytics/v3/05", function(json) {
             for (var i = 0; i < json.totalResults; i++) {
                 dealData = json.rows[i];
-                console.log(dealData);
-                var tmp = dealData.split("[");
-                tmp = tmp[1].split("]");
-                tmp = tmp[0].split("\"", "\"");
-                console.log("Deal Name : " + tmp[0]);
-                console.log("Zipcode Name : " + tmp[1]);
+                dealDataString = dealData.toString();
+                var tmp = dealDataString.split(",");
+                console.log(tmp[0]);
+                console.log(tmp[1]);
             }
         });
     }
