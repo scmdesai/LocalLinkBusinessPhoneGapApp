@@ -66548,10 +66548,12 @@ Ext.define('Ext.picker.Picker', {
         $.getJSON("http://services.appsonmobile.com/analytics/v3/05", function(json) {
             for (var i = 0; i < json.totalResults; i++) {
                 dealData = json.rows[i];
+                console.log(dealData);
                 dealDataString = dealData.toString();
                 var tmp = dealDataString.split(",");
-                console.log(tmp[0]);
-                console.log(tmp[1]);
+                for (var j = 0; j < tmp.length; j++) {
+                    console.log(tmp[j]);
+                }
             }
         });
     }
