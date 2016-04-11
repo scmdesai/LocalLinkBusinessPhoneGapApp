@@ -66548,6 +66548,11 @@ Ext.define('Ext.picker.Picker', {
             for (var i = 0; i < json.totalResults; i++) {
                 dealData = json.rows[i];
                 console.log(dealData);
+                var tmp = dealData.split("[");
+                tmp = tmp[1].split("]");
+                tmp = tmp[0].split("\"", "\"");
+                console.log("Deal Name : " + tmp[0]);
+                console.log("Zipcode Name : " + tmp[1]);
             }
         });
     }
