@@ -66549,11 +66549,13 @@ Ext.define('Ext.picker.Picker', {
             for (var i = 0; i < json.totalResults; i++) {
                 dealData = json.rows[i];
                 console.log(dealData);
-                dealDataString = dealData.toString();
-                var tmp = dealDataString.split(",");
-                for (var j = 0; j < tmp.length; j++) {
-                    console.log(tmp[j]);
-                }
+                var info = dealDataString.split("\"", "\"");
+                dealName[i] = info[0];
+                zipcode[i] = info[1];
+                noOfHits[i] = info[2];
+                console.log("Deal Name : " + dealName[i]);
+                console.log("Zipcode :  " + zipcode[i]);
+                console.log("No of Hits: " + noOfHits[i]);
             }
         });
     }
@@ -66575,13 +66577,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'BuzzOMeter'
 ], 0));
-/*//var info = dealData.split("\"","\"");
-						  dealName[i]=info[0];
-						  zipcode[i]=info[1];
-						  noOfHits[i]=info[2];
-						  console.log("Deal Name : " + dealName[i]);
-						  console.log("Zipcode :  " + zipcode[i]);
-						  console.log("No of Hits: " + noOfHits[i]);*/
 
 /*
  * File: app/view/contactform.js
