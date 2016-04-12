@@ -66898,6 +66898,9 @@ Ext.define('Ext.picker.Picker', {
         function drawChart() {
             // Create the data table.
             var data = new google.visualization.DataTable();
+            var dealName = [];
+            var zipcode = [];
+            var numberOfHits = [];
             //data.addColumn('string', 'dealName');
             data.addColumn('string', 'zipcode');
             data.addColumn('number', 'NumberOfHits');
@@ -66905,13 +66908,13 @@ Ext.define('Ext.picker.Picker', {
                 for (var i = 0; i < json.totalResults; i++) {
                     var dealData = json.rows[i].toString();
                     var tmp = dealData.split(",");
-                    var dealName = tmp[0];
-                    var zipcode = tmp[1];
-                    var numberOfHits = parseInt(tmp[2], 10);
+                    dealName[i] = tmp[0];
+                    zipcode[i] = tmp[1];
+                    numberOfHits[i] = parseInt(tmp[2], 10);
                     data.addRow([
                         [
-                            zipcode,
-                            numberOfHits
+                            zipcode[i],
+                            numberOfHits[i]
                         ]
                     ]);
                 }
