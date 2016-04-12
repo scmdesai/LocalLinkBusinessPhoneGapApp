@@ -66907,12 +66907,11 @@ Ext.define('Ext.picker.Picker', {
                     console.log('Deal Name is : ' + tmp[0]);
                     console.log('Zipcode is : ' + tmp[1]);
                     console.log('NumberOfHits is : ' + tmp[2]);
-                    var hits = tmp[2].split("\"");
-                    console.log(hits[1]);
+                    var hits = tmp[2].toNumber();
                     data.addRows([
                         [
                             tmp[0],
-                            hits[1]
+                            hits
                         ]
                     ]);
                 }
