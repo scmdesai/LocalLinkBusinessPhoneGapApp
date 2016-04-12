@@ -66899,7 +66899,7 @@ Ext.define('Ext.picker.Picker', {
             // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'zipcode');
-            data.addColumn('number', 'NumberOfHits');
+            data.addColumn('string', 'NumberOfHits');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
                 for (var i = 0; i < json.totalResults; i++) {
                     var dealData = json.rows[i].toString();
@@ -66919,7 +66919,7 @@ Ext.define('Ext.picker.Picker', {
                     'height': 300
                 };
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart1'));
+            var chart = new google.visualization.LineChart(document.getElementById('chart1'));
             chart.draw(data, options);
         }
     }
