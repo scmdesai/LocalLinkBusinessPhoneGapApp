@@ -66951,37 +66951,31 @@ Ext.define('Ext.picker.Picker', {
             dataBarChart.addColumn('number', 'numberOfClicks');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                 for (var i = 0,
-                    j = 0; i < json.totalResults; i++ , j++) {
+                    j = i; i < json.totalResults; i++ , j++) {
                     dealData = json.rows[i].toString();
                     tmp = dealData.split(",");
-                    if (dealName[0]) {
-                        for (var k = 0; k < j; k++) {
-                            if (tmp[0] === dealName[k]) {
-                                numberOfClicks[k] = numberOfClicks[k] + parseInt(tmp[2], 10);
+                    if (i === 0) {
+                        dealName[0] = tmp[0];
+                        numberOfClicks[0] = parseInt(tmp[2], 10);
+                    } else {
+                        for (var m = i - 1; m < i; m++) {
+                            if (tmp[0] === dealName[m]) {
+                                numberOfClicks[m] = numberOfClicks[m] + parseInt(tmp[2], 10);
+                                j--;
                             } else {
                                 dealName[j] = tmp[0];
                                 numberOfClicks[j] = parseInt(tmp[2], 10);
-                                dataBarChart.addRow([
-                                    dealName[j],
-                                    numberOfClicks[j]
-                                ]);
-                                console.log('Deal Name is: ' + dealName[j]);
-                                console.log('Number Of Hits is: ' + numberOfClicks[j]);
                             }
                         }
-                        j--;
-                    } else {
-                        dealName[j] = tmp[0];
-                        numberOfClicks[j] = parseInt(tmp[2], 10);
                     }
-                    for (j = 0; j < numberOfClicks.length; j++) {
-                        dataBarChart.addRow([
-                            dealName[j],
-                            numberOfClicks[j]
-                        ]);
-                        console.log('Deal Name is: ' + dealName[j]);
-                        console.log('Number Of Hits is: ' + numberOfClicks[j]);
-                    }
+                }
+                for (j = 0; j < numberOfClicks.length; j++) {
+                    dataBarChart.addRow([
+                        dealName[j],
+                        numberOfClicks[j]
+                    ]);
+                    console.log('Deal Name is: ' + dealName[j]);
+                    console.log('Number Of Hits is: ' + numberOfClicks[j]);
                 }
                 // Set chart options
                 var optionsBarChart = {
