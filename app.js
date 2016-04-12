@@ -66902,14 +66902,16 @@ Ext.define('Ext.picker.Picker', {
             data.addColumn('number', 'NumberOfHits');
             data.addColumn('string', 'zipcode');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
-                var dealData = json.rows[i].toString();
-                var tmp = dealData.split(",");
-                data.addRows([
-                    [
-                        tmp[0],
-                        tmp[2]
-                    ]
-                ]);
+                for (var i = 0; i < json.totalResults; i++) {
+                    var dealData = json.rows[i].toString();
+                    var tmp = dealData.split(",");
+                    data.addRows([
+                        [
+                            tmp[0],
+                            tmp[2]
+                        ]
+                    ]);
+                }
             });
             // Set chart options
             var options = {
