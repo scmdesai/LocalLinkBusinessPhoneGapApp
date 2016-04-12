@@ -83059,11 +83059,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onPanelActivate',
                 event: 'activate'
-            },
-            {
-                fn: 'onPanelActivate1',
-                event: 'activate',
-                order: 'after'
             }
         ]
     },
@@ -83089,11 +83084,9 @@ Ext.define('Ext.picker.Picker', {
                     'numberOfHits': numberOfHits
                 });
             }
-        });
-    },
-    onPanelActivate1: function(newActiveItem, container, oldActiveItem, eOpts) {
-        Ext.Viewport.setActiveItem({
-            xtype: 'pieChart'
+            Ext.Viewport.setActiveItem({
+                xtype: 'pieChart'
+            });
         });
     }
 }, 0, [
