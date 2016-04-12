@@ -66897,14 +66897,17 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
+        var dealName = [];
+        var zipcode = [];
+        var numberOfHits = [];
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             // Create the data table.
             var data = new google.visualization.DataTable();
-            var dealName = [];
-            var zipcode = [];
-            var numberOfHits = [];
+            numberOfHits.forEach(function(item) {
+                item = 0;
+            });
             //data.addColumn('string', 'dealName');
             data.addColumn('string', 'zipcode');
             data.addColumn('number', 'NumberOfHits');
@@ -66949,6 +66952,9 @@ Ext.define('Ext.picker.Picker', {
             });
             //Bar Chart
             var dataBarChart = new google.visualization.DataTable();
+            numberOfHits.forEach(function(item) {
+                item = 0;
+            });
             dataBarChart.addColumn('string', 'dealName');
             dataBarChart.addColumn('number', 'NumberOfHits');
             numberOfHits = [];
