@@ -66898,7 +66898,6 @@ Ext.define('Ext.picker.Picker', {
         function drawChart() {
             // Create the data table.
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'DealName');
             data.addColumn('number', 'NumberOfHits');
             data.addColumn('string', 'zipcode');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
@@ -66907,9 +66906,8 @@ Ext.define('Ext.picker.Picker', {
                     var tmp = dealData.split(",");
                     data.addRows([
                         [
-                            tmp[0],
-                            tmp[1],
-                            tmp[2]
+                            tmp[2],
+                            tmp[1]
                         ]
                     ]);
                 }
