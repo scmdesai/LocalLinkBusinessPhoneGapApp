@@ -66968,7 +66968,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 }
                 for (j = 0; j < dealName.length; j++) {
-                    data.addRow([
+                    dataBarChart.addRow([
                         dealName[j],
                         parseInt(numberOfHits[j], 10)
                     ]);
@@ -66979,7 +66979,7 @@ Ext.define('Ext.picker.Picker', {
                     };
                 // Instantiate and draw our chart, passing in some options.
                 var chartBar = new google.visualization.BarChart(document.getElementById('chart2'));
-                chartBar.draw(data, optionsBarChart);
+                chartBar.draw(dataBarChart, optionsBarChart);
             });
         }
     }
