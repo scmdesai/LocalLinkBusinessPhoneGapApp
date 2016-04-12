@@ -66910,15 +66910,33 @@ Ext.define('Ext.picker.Picker', {
                     var tmp = dealData.split(",");
                     dealName[i] = tmp[0];
                     zipcode[i] = tmp[1];
-                    numberOfHits[i] = tmp[2];
+                    numberOfHits[i] = parseInt(tmp[2], 10);
                     console.log('Deal Name is: ' + dealName[i]);
                     console.log('Zipcode is: ' + zipcode[i]);
                     console.log('Number Of Hits is: ' + numberOfHits[i]);
-                    data.addRow([
-                        zipcode[i],
-                        parseInt(numberOfHits[i], 10)
-                    ]);
                 }
+                data.addRows([
+                    [
+                        'Mushrooms',
+                        numberOfHits[0]
+                    ],
+                    [
+                        'Onions',
+                        numberOfHits[2]
+                    ],
+                    [
+                        'Olives',
+                        numberOfHits[3]
+                    ],
+                    [
+                        'Zucchini',
+                        numberOfHits[4]
+                    ],
+                    [
+                        'Pepperoni',
+                        2
+                    ]
+                ]);
             });
             // Set chart options
             var options = {
@@ -66927,7 +66945,7 @@ Ext.define('Ext.picker.Picker', {
                     'height': 300
                 };
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.LineChart(document.getElementById('chart1'));
+            var chart = new google.visualization.PieChart(document.getElementById('chart1'));
             chart.draw(data, options);
         }
     }
