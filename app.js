@@ -66908,8 +66908,7 @@ Ext.define('Ext.picker.Picker', {
                     var dealName = tmp[0];
                     var zipcode = tmp[1];
                     var numberOfHits = parseInt(tmp[2], 10);
-                    console.log(numberOfHits);
-                    data.addRows([
+                    data.addRow([
                         [
                             zipcode,
                             numberOfHits
