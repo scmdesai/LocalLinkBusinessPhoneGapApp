@@ -66910,43 +66910,25 @@ Ext.define('Ext.picker.Picker', {
                     var tmp = dealData.split(",");
                     dealName[i] = tmp[0];
                     zipcode[i] = tmp[1];
-                    numberOfHits[i] = parseInt(tmp[2], 10);
+                    numberOfHits[i] = tmp[2];
                     console.log('Deal Name is: ' + dealName[i]);
                     console.log('Zipcode is: ' + zipcode[i]);
                     console.log('Number Of Hits is: ' + numberOfHits[i]);
+                    data.addRow([
+                        zipcode[i],
+                        parseInt(numberOfHits[i], 10)
+                    ]);
                 }
-                data.addRows([
-                    [
-                        'Mushrooms',
-                        1
-                    ],
-                    [
-                        'Onions',
-                        2
-                    ],
-                    [
-                        'Olives',
-                        3
-                    ],
-                    [
-                        'Zucchini',
-                        4
-                    ],
-                    [
-                        'Pepperoni',
-                        2
-                    ]
-                ]);
+                // Set chart options
+                var options = {
+                        'title': 'User Location',
+                        'width': 400,
+                        'height': 300
+                    };
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                chart.draw(data, options);
             });
-            // Set chart options
-            var options = {
-                    'title': 'User Location',
-                    'width': 400,
-                    'height': 300
-                };
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart1'));
-            chart.draw(data, options);
         }
     }
 }, 0, [
