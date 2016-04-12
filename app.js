@@ -66897,7 +66897,6 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
-        var dealName = [];
         var zipcode = [];
         var numberOfHits = [];
         // Set a callback to run when the Google Visualization API is loaded.
@@ -66952,11 +66951,10 @@ Ext.define('Ext.picker.Picker', {
             });
             //Bar Chart
             var dataBarChart = new google.visualization.DataTable();
-            numberOfHits.forEach(function(item) {
-                item = 0;
-            });
+            var dealName = [];
+            var numberOfClicks = [];
             dataBarChart.addColumn('string', 'dealName');
-            dataBarChart.addColumn('number', 'NumberOfHits');
+            dataBarChart.addColumn('number', 'numberOfClicks');
             numberOfHits = [];
             $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                 for (var i = 0,
@@ -66965,22 +66963,22 @@ Ext.define('Ext.picker.Picker', {
                     tmp = dealData.split(",");
                     if (dealName[0]) {
                         for (var k = 0; k < j; k++) if (tmp[0] === dealName[k]) {
-                            numberOfHits[k] = numberOfHits[k] + parseInt(tmp[2], 10);
+                            numberOfClicks[k] = numberOfClicks[k] + parseInt(tmp[2], 10);
                             j--;
                         } else {
                             dealName[j] = tmp[0];
-                            numberOfHits[j] = parseInt(tmp[2], 10);
+                            numberOfClicks[j] = parseInt(tmp[2], 10);
                         };
                         
                     } else {
                         dealName[j] = tmp[0];
-                        numberOfHits[j] = parseInt(tmp[2], 10);
+                        numberOfClicks[j] = parseInt(tmp[2], 10);
                     }
                 }
                 for (j = 0; j < dealName.length; j++) {
                     dataBarChart.addRow([
                         dealName[j],
-                        parseInt(numberOfHits[j], 10)
+                        parseInt(numberOfClicks[j], 10)
                     ]);
                 }
                 // Set chart options
