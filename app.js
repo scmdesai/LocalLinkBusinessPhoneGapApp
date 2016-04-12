@@ -66904,11 +66904,6 @@ Ext.define('Ext.picker.Picker', {
             //data.addColumn('string', 'dealName');
             data.addColumn('string', 'zipcode');
             data.addColumn('number', 'NumberOfHits');
-            var dataBarChart = new google.visualization.DataTable();
-            var dealData;
-            var tmp = [];
-            dataBarChart.addColumn('string', 'dealName');
-            dataBarChart.addColumn('number', 'NumberOfHits');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
                 for (var i = 0,
                     j = 0; i < json.totalResults; i++ , j++) {
@@ -66938,37 +66933,46 @@ Ext.define('Ext.picker.Picker', {
                         parseInt(numberOfHits[j], 10)
                     ]);
                 }
-                //Bar chart
-                for (i = 0 , j = 0; i < json.totalResults; i++ , j++) {
-                    dealData = json.rows[i].toString();
-                    tmp = dealData.split(",");
-                    dealName[i] = tmp[0];
-                    if (dealName[0]) {
-                        for (var m = 0; m < j; m++) if (tmp[0] === dealName[m]) {
-                            numberOfHits[m] = numberOfHits[m] + parseInt(tmp[2], 10);
-                            j--;
-                        } else {
-                            dealName[j] = tmp[1];
-                            numberOfHits[j] = parseInt(tmp[2], 10);
-                        };
-                        
-                    } else {
-                        dealName[j] = tmp[1];
-                        numberOfHits[j] = parseInt(tmp[2], 10);
-                    }
-                }
-                for (j = 0; j < dealName.length; j++) {
-                    dataBarChart.addRow([
-                        dealName[j],
-                        parseInt(numberOfHits[j], 10)
-                    ]);
-                }
                 // Set chart options
                 var options = {
                         'title': 'User Location',
                         'width': 400,
                         'height': 300
                     };
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                chart.draw(data, options);
+            });
+            //Bar Chart
+            var dataBarChart = new google.visualization.DataTable();
+            dataBarChart.addColumn('string', 'dealName');
+            dataBarChart.addColumn('number', 'NumberOfHits');
+            $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
+                for (var i = 0,
+                    j = 0; i < json.totalResults; i++ , j++) {
+                    dealData = json.rows[i].toString();
+                    tmp = dealData.split(",");
+                    dealName[i] = tmp[0];
+                    if (dealName[0]) {
+                        for (var k = 0; k < j; k++) if (tmp[0] === dealName[k]) {
+                            numberOfHits[k] = numberOfHits[k] + parseInt(tmp[2], 10);
+                            j--;
+                        } else {
+                            dealName[j] = tmp[0];
+                            numberOfHits[j] = parseInt(tmp[2], 10);
+                        };
+                        
+                    } else {
+                        dealName[j] = tmp[0];
+                        numberOfHits[j] = parseInt(tmp[2], 10);
+                    }
+                }
+                for (j = 0; j < dealName.length; j++) {
+                    data.addRow([
+                        dealName[j],
+                        parseInt(numberOfHits[j], 10)
+                    ]);
+                }
                 // Set chart options
                 var optionsBarChart = {
                         'title': 'Deal Popularity',
@@ -66976,10 +66980,8 @@ Ext.define('Ext.picker.Picker', {
                         'height': 300
                     };
                 // Instantiate and draw our chart, passing in some options.
-                var chart = new google.visualization.PieChart(document.getElementById('chart1'));
-                chart.draw(data, options);
-                var barchart = new google.visualization.BarChart(document.getElementById('chart2'));
-                chart.draw(dataBarChart, optionsBarChart);
+                var chartBar = new google.visualization.BarChart(document.getElementById('chart2'));
+                chartBar.draw(data, optionsBarChart);
             });
         }
     }
