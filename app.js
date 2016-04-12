@@ -66910,7 +66910,7 @@ Ext.define('Ext.picker.Picker', {
                     var tmp = dealData.split(",");
                     dealName[i] = tmp[0];
                     zipcode[i] = tmp[1];
-                    numberOfHits[i] = parseInt(tmp[2]);
+                    numberOfHits[i] = tmp[2];
                     console.log('Deal Name is: ' + dealName[i]);
                     console.log('Zipcode is: ' + zipcode[i]);
                     console.log('Number Of Hits is: ' + numberOfHits[i]);
@@ -66918,7 +66918,7 @@ Ext.define('Ext.picker.Picker', {
                 data.addRows([
                     [
                         '"' + zipcode + '"',
-                        numberOfHits
+                        parseInt(numberOfHits, 10)
                     ]
                 ]);
             });
