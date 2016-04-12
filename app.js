@@ -66952,7 +66952,6 @@ Ext.define('Ext.picker.Picker', {
                     j = 0; i < json.totalResults; i++ , j++) {
                     dealData = json.rows[i].toString();
                     tmp = dealData.split(",");
-                    dealName[i] = tmp[0];
                     if (dealName[0]) {
                         for (var k = 0; k < j; k++) if (tmp[0] === dealName[k]) {
                             numberOfHits[k] = numberOfHits[k] + parseInt(tmp[2], 10);
@@ -66975,7 +66974,16 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var optionsBarChart = {
-                        'title': 'Deal Popularity'
+                        'title': 'Deal Popularity',
+                        vAxis: {
+                            title: 'Number of Deal Clicks',
+                            minValue: 0
+                        },
+                        hAxis: {
+                            title: 'Deal Name'
+                        },
+                        legend: 'none',
+                        orientation: 'horizontal'
                     };
                 // Instantiate and draw our chart, passing in some options.
                 var chartBar = new google.visualization.BarChart(document.getElementById('chart2'));
