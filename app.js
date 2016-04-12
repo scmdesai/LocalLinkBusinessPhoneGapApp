@@ -66900,7 +66900,7 @@ Ext.define('Ext.picker.Picker', {
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'dealName');
             data.addColumn('string', 'zipcode');
-            data.addColumn('integer', 'NumberOfHits');
+            data.addColumn('number', 'NumberOfHits');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
                 for (var i = 0; i < json.totalResults; i++) {
                     var dealData = json.rows[i];
