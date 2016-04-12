@@ -66955,23 +66955,26 @@ Ext.define('Ext.picker.Picker', {
                     dealData = json.rows[i].toString();
                     tmp = dealData.split(",");
                     if (dealName[0]) {
-                        for (var k = 0; k < j; k++) if (tmp[0] === dealName[k]) {
-                            numberOfClicks[k] = numberOfClicks[k] + parseInt(tmp[2], 10);
-                            j--;
-                        } else {
-                            dealName[j] = tmp[0];
-                            numberOfClicks[j] = parseInt(tmp[2], 10);
-                            dataBarChart.addRow([
-                                dealName[j],
-                                numberOfClicks[j]
-                            ]);
-                            console.log('Deal Name is: ' + dealName[j]);
-                            console.log('Number Of Hits is: ' + numberOfClicks[j]);
-                        };
-                        
+                        for (var k = 0; k < j; k++) {
+                            if (tmp[0] === dealName[k]) {
+                                numberOfClicks[k] = numberOfClicks[k] + parseInt(tmp[2], 10);
+                            } else {
+                                dealName[j] = tmp[0];
+                                numberOfClicks[j] = parseInt(tmp[2], 10);
+                                dataBarChart.addRow([
+                                    dealName[j],
+                                    numberOfClicks[j]
+                                ]);
+                                console.log('Deal Name is: ' + dealName[j]);
+                                console.log('Number Of Hits is: ' + numberOfClicks[j]);
+                            }
+                        }
+                        j--;
                     } else {
                         dealName[j] = tmp[0];
                         numberOfClicks[j] = parseInt(tmp[2], 10);
+                    }
+                    for (j = 0; j < numberOfClicks.length; j++) {
                         dataBarChart.addRow([
                             dealName[j],
                             numberOfClicks[j]
