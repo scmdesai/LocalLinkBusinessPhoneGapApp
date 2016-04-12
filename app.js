@@ -82624,34 +82624,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.store.AnalyticsStore', Ext.data.Store, {
     config: {
-        autoLoad: true,
-        data: [
-            {
-                dealName: 'sit',
-                numberOfHits: 99,
-                zipcode: 'harum'
-            },
-            {
-                dealName: 'et',
-                numberOfHits: 162,
-                zipcode: 'architecto'
-            },
-            {
-                dealName: 'ea',
-                numberOfHits: 649,
-                zipcode: 'qui'
-            },
-            {
-                dealName: 'ducimus',
-                numberOfHits: 337,
-                zipcode: 'voluptatem'
-            },
-            {
-                dealName: 'ea',
-                numberOfHits: 839,
-                zipcode: 'repellendus'
-            }
-        ],
         model: 'Contact.model.AnalyticsData',
         storeId: 'AnalyticsStore'
     }
@@ -84495,7 +84467,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.MyPieChart', Ext.chart.PolarChart, {
     config: {
         height: '100%',
-        store: 'AnalyticsStore',
         colors: [
             '#115fa6',
             '#94ae0a',
