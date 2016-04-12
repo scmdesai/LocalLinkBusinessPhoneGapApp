@@ -66914,6 +66914,9 @@ Ext.define('Ext.picker.Picker', {
                         if (tmp[1] === zipcode[j - 1]) {
                             numberOfHits[j - 1] = numberOfHits[j - 1] + parseInt(tmp[2], 10);
                             j--;
+                        } else {
+                            zipcode[j] = tmp[1];
+                            numberOfHits[j] = parseInt(tmp[2], 10);
                         }
                     } else {
                         zipcode[j] = tmp[1];
