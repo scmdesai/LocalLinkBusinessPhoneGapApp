@@ -66878,6 +66878,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.BuzzOMeter', Ext.Panel, {
     config: {
+        html: '<div id="chart1"></div>',
         styleHtmlContent: true,
         listeners: [
             {
@@ -66894,9 +66895,6 @@ Ext.define('Ext.picker.Picker', {
         });
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
         function drawChart() {
             // Create the data table.
             var data = new google.visualization.DataTable();
@@ -66931,7 +66929,7 @@ Ext.define('Ext.picker.Picker', {
                     'height': 300
                 };
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(container);
+            var chart = new google.visualization.PieChart(document.getElementById('chart1'));
             chart.draw(data, options);
         }
     }
