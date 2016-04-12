@@ -66915,7 +66915,7 @@ Ext.define('Ext.picker.Picker', {
                 data.addRows([
                     [
                         '"' + zipcode + '"',
-                        numberOfHits
+                        '"' + numberOfHits + '"'
                     ]
                 ]);
             });
