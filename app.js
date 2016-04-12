@@ -66912,7 +66912,7 @@ Ext.define('Ext.picker.Picker', {
                     dealName[i] = tmp[0];
                     if (zipcode[0]) {
                         for (var k = 0; k < j; k++) if (tmp[1] === zipcode[k]) {
-                            numberOfHits[j] = numberOfHits[j] + parseInt(tmp[2], 10);
+                            numberOfHits[k] = numberOfHits[k] + parseInt(tmp[2], 10);
                             j--;
                         } else {
                             zipcode[j] = tmp[1];
