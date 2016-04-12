@@ -83075,6 +83075,9 @@ Ext.define('Ext.picker.Picker', {
                 dealName = tmp[0];
                 zipcode = tmp[1];
                 numberOfHits = tmp[2];
+                console.log(dealName);
+                console.log(zipcode);
+                console.log(numberOfHits);
                 dataTable.add({
                     'dealName': dealName,
                     'zipcode': zipcode,
@@ -83082,7 +83085,7 @@ Ext.define('Ext.picker.Picker', {
                 });
             }
         });
-        console.log(dataTable.getCount());
+        console.log(dataTable.getAllCount());
         Ext.Viewport.setActiveItem({
             xtype: 'pieChart'
         });
