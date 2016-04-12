@@ -66904,9 +66904,6 @@ Ext.define('Ext.picker.Picker', {
         function drawChart() {
             // Create the data table.
             var data = new google.visualization.DataTable();
-            numberOfHits.forEach(function(item) {
-                item = 0;
-            });
             //data.addColumn('string', 'dealName');
             data.addColumn('string', 'zipcode');
             data.addColumn('number', 'NumberOfHits');
