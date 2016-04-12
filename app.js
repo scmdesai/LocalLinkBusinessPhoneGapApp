@@ -66903,11 +66903,20 @@ Ext.define('Ext.picker.Picker', {
             data.addColumn('number', 'NumberOfHits');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
                 for (var i = 0; i < json.totalResults; i++) {
-                    var dealData = json.rows[i];
-                    console.log(dealData.dealName);
+                    var dealData = json.rows[i].toString();
+                    var tmp = dealData.split(",");
+                    var dealName = tmp[0];
+                    var zipcode = tmp[1];
+                    var numberOfHits = tmp[2].split("\"");
+                    console.log(numberOfHits.length);
+                    for (var j = 0; j < numberOfHits.length; j++) {
+                        console.log(numberOfHits[j]);
+                    }
                     data.addRows([
                         [
-                            dealData
+                            dealName,
+                            zipcode,
+                            numberOfHits
                         ]
                     ]);
                 }
