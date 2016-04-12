@@ -66908,6 +66908,7 @@ Ext.define('Ext.picker.Picker', {
                     console.log('Zipcode is : ' + tmp[1]);
                     console.log('NumberOfHits is : ' + tmp[2]);
                     var hits = tmp[2].split("\"");
+                    console.log(hits[1]);
                     data.addRows([
                         [
                             tmp[0],
