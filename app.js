@@ -83075,9 +83075,9 @@ Ext.define('Ext.picker.Picker', {
                 zipcode = tmp[1];
                 numberOfHits = tmp[2].toNumber();
                 dataTable.add({
-                    dealName: dealName,
-                    zipcode: zipcode,
-                    numberOfHits: numberOfHits
+                    'dealName': dealName,
+                    'zipcode': zipcode,
+                    'numberOfHits': numberOfHits
                 });
             }
         });
