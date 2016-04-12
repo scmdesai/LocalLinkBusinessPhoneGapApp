@@ -66909,7 +66909,7 @@ Ext.define('Ext.picker.Picker', {
             data.addColumn('number', 'NumberOfHits');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                 for (var i = 0,
-                    j = 0; i < json.totalResults; i++ , j++) {
+                    j = i; i < json.totalResults; i++ , j++) {
                     dealData = json.rows[i].toString();
                     tmp = dealData.split(",");
                     dealName[i] = tmp[0];
