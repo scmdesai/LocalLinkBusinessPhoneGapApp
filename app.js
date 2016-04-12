@@ -66910,12 +66910,12 @@ Ext.define('Ext.picker.Picker', {
                     var tmp = dealData.split(",");
                     dealName[i] = tmp[0];
                     zipcode[i] = tmp[1].toString();
-                    numberOfHits[i] = parseInt(tmp[2], 10);
+                    numberOfHits[i] = tmp[2];
                 }
                 data.addRows([
                     [
                         '"' + zipcode + '"',
-                        '"' + numberOfHits + '"'
+                        numberOfHits
                     ]
                 ]);
             });
