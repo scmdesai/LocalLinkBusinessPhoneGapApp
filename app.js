@@ -83071,9 +83071,8 @@ Ext.define('Ext.picker.Picker', {
         var request = Ext.Ajax.request({
                 url: 'http://services.appsonmobile.com/analytics/v3/04',
                 method: 'GET',
-                success: function(json) {
+                success: function(data) {
                     console.log('Success');
-                    var data = JSON.parse(json);
                     for (var i = 0; i < data.totalResults; i++) {
                         dealData = (data.rows[i]).toString();
                         var tmp = dealData.split(",");
@@ -83091,7 +83090,6 @@ Ext.define('Ext.picker.Picker', {
                     }
                 }
             });
-        request.submit();
         console.log(dataTable.getAllCount());
         /*$.getJSON("http://services.appsonmobile.com/analytics/v3/04",function(json){
 			for(var i = 0;i<json.totalResults;i++){
