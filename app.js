@@ -66915,7 +66915,7 @@ Ext.define('Ext.picker.Picker', {
                     console.log('Zipcode is: ' + zipcode[i]);
                     console.log('Number Of Hits is: ' + numberOfHits[i]);
                     data.addRow([
-                        '"' + zipcode[i] + '"',
+                        zipcode[i],
                         parseInt(numberOfHits[i], 10)
                     ]);
                 }
@@ -66927,7 +66927,7 @@ Ext.define('Ext.picker.Picker', {
                     'height': 300
                 };
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.PieChart(document.getElementById('chart1'));
+            var chart = new google.visualization.LineChart(document.getElementById('chart1'));
             chart.draw(data, options);
         }
     }
