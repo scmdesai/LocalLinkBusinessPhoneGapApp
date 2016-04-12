@@ -16,7 +16,6 @@ if (!Ext.chart.grid) Ext.chart.grid = {};
 if (!Ext.chart.interactions) Ext.chart.interactions = {};
 if (!Ext.chart.label) Ext.chart.label = {};
 if (!Ext.chart.series) Ext.chart.series = {};
-if (!Ext.chart.series.sprite) Ext.chart.series.sprite = {};
 if (!Ext.data) Ext.data = {};
 if (!Ext.data.association) Ext.data.association = {};
 if (!Ext.data.identifier) Ext.data.identifier = {};
@@ -66740,413 +66739,422 @@ function() {
 ], 0));
 
 /**
- * @class Ext.chart.grid.CircularGrid
- * @extends Ext.draw.sprite.Circle
+ * @class Ext.chart.grid.HorizontalGrid
+ * @extends Ext.draw.sprite.Sprite
  * 
- * Circular Grid sprite. Used by Radar chart to render a series of concentric circles.
+ * Horizontal Grid sprite. Used in Cartesian Charts.
  */
-(Ext.cmd.derive('Ext.chart.grid.CircularGrid', Ext.draw.sprite.Circle, {
-    inheritableStatics: {
-        def: {
-            defaults: {
-                r: 1,
-                strokeStyle: '#DDD'
-            }
-        }
-    }
-}, 0, 0, 0, 0, [
-    "grid.circular"
-], 0, [
-    Ext.chart.grid,
-    'CircularGrid'
-], 0));
-
-/**
- * @class Ext.chart.grid.RadialGrid
- * @extends Ext.draw.sprite.Path
- * 
- * Radial Grid sprite. Used by Radar chart to render a series of radial lines.
- * Represents the scale of the radar chart on the yField.
- */
-(Ext.cmd.derive('Ext.chart.grid.RadialGrid', Ext.draw.sprite.Path, {
+(Ext.cmd.derive('Ext.chart.grid.HorizontalGrid', Ext.draw.sprite.Sprite, {
     inheritableStatics: {
         def: {
             processors: {
-                startRadius: 'number',
-                endRadius: 'number'
+                x: 'number',
+                y: 'number',
+                width: 'number',
+                height: 'number'
             },
             defaults: {
-                startRadius: 0,
-                endRadius: 1,
-                scalingCenterX: 0,
-                scalingCenterY: 0,
+                x: 0,
+                y: 0,
+                width: 1,
+                height: 1,
                 strokeStyle: '#DDD'
-            },
-            dirtyTriggers: {
-                startRadius: 'path,bbox',
-                endRadius: 'path,bbox'
             }
         }
     },
-    render: function() {
-        Ext.draw.sprite.Path.prototype.render.apply(this, arguments);
-    },
-    updatePath: function(path, attr) {
-        var startRadius = attr.startRadius,
-            endRadius = attr.endRadius;
-        path.moveTo(startRadius, 0);
-        path.lineTo(endRadius, 0);
+    render: function(surface, ctx, clipRegion) {
+        var attr = this.attr,
+            y = surface.roundPixel(attr.y),
+            halfLineWidth = ctx.lineWidth * 0.5;
+        ctx.beginPath();
+        ctx.rect(clipRegion[0] - surface.matrix.getDX(), y + halfLineWidth, +clipRegion[2], attr.height);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(clipRegion[0] - surface.matrix.getDX(), y + halfLineWidth);
+        ctx.lineTo(clipRegion[0] + clipRegion[2] - surface.matrix.getDX(), y + halfLineWidth);
+        ctx.stroke();
     }
 }, 0, 0, 0, 0, [
-    "grid.radial"
+    "grid.horizontal"
 ], 0, [
     Ext.chart.grid,
-    'RadialGrid'
+    'HorizontalGrid'
 ], 0));
 
 /**
- * @class Ext.chart.PolarChart
+ * @class Ext.chart.grid.VerticalGrid
+ * @extends Ext.draw.sprite.Sprite
+ * 
+ * Vertical Grid sprite. Used in Cartesian Charts.
+ */
+(Ext.cmd.derive('Ext.chart.grid.VerticalGrid', Ext.draw.sprite.Sprite, {
+    inheritableStatics: {
+        def: {
+            processors: {
+                x: 'number',
+                y: 'number',
+                width: 'number',
+                height: 'number'
+            },
+            defaults: {
+                x: 0,
+                y: 0,
+                width: 1,
+                height: 1,
+                strokeStyle: '#DDD'
+            }
+        }
+    },
+    render: function(surface, ctx, clipRegion) {
+        var attr = this.attr,
+            x = surface.roundPixel(attr.x),
+            halfLineWidth = ctx.lineWidth * 0.5;
+        ctx.beginPath();
+        ctx.rect(x - halfLineWidth, clipRegion[1] - surface.matrix.getDY(), attr.width, clipRegion[3]);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x - halfLineWidth, clipRegion[1] - surface.matrix.getDY());
+        ctx.lineTo(x - halfLineWidth, clipRegion[1] + clipRegion[3] - surface.matrix.getDY());
+        ctx.stroke();
+    }
+}, 0, 0, 0, 0, [
+    "grid.vertical"
+], 0, [
+    Ext.chart.grid,
+    'VerticalGrid'
+], 0));
+
+/**
+ * @class Ext.chart.CartesianChart
  * @extends Ext.chart.AbstractChart
  *
- * Creates a chart that uses polar coordinates.
+ * Represents a chart that uses cartesian coordinates.
+ * A cartesian chart have two directions, X direction and Y direction.
+ * The series and axes are coordinated along these directions.
+ * By default the x direction is horizontal and y direction is vertical,
+ * You can swap the by setting {@link #flipXY} config to `true`.
+ *
+ * Cartesian series often treats x direction an y direction differently.
+ * In most cases, data on x direction are assumed to be monotonically increasing.
+ * Based on this property, cartesian series can be trimmed and summarized properly
+ * to gain a better performance.
+ *
+ * @xtype chart
  */
-(Ext.cmd.derive('Ext.chart.PolarChart', Ext.chart.AbstractChart, {
+(Ext.cmd.derive('Ext.chart.CartesianChart', Ext.chart.AbstractChart, {
+    alternateClassName: 'Ext.chart.Chart',
     config: {
         /**
-         * @cfg {Array} center Determines the center of the polar chart.
-         * Updated when the chart performs layout.
+         * @cfg {Boolean} flipXY Flip the direction of X and Y axis.
+         * If flipXY is true, the X axes will be vertical and Y axes will be horizontal.
          */
-        center: [
+        flipXY: false,
+        innerRegion: [
             0,
-            0
-        ],
-        /**
-         * @cfg {Number} radius Determines the radius of the polar chart.
-         * Updated when the chart performs layout.
-         */
-        radius: 0
+            0,
+            1,
+            1
+        ]
     },
     getDirectionForAxis: function(position) {
-        if (position === 'radial') {
-            return 'Y';
+        var flipXY = this.getFlipXY();
+        if (position === 'left' || position === 'right') {
+            if (flipXY) {
+                return 'X';
+            } else {
+                return 'Y';
+            }
         } else {
-            return 'X';
+            if (flipXY) {
+                return 'Y';
+            } else {
+                return 'X';
+            }
         }
     },
-    applyCenter: function(center, oldCenter) {
-        if (oldCenter && center[0] === oldCenter[0] && center[1] === oldCenter[1]) {
-            return;
-        }
-        return [
-            +center[0],
-            +center[1]
-        ];
-    },
-    updateCenter: function(center) {
-        var me = this,
-            axes = me.getAxes(),
-            axis,
-            series = me.getSeries(),
-            seriesItem, i, ln;
-        for (i = 0 , ln = axes.length; i < ln; i++) {
-            axis = axes[i];
-            axis.setCenter(center);
-        }
-        for (i = 0 , ln = series.length; i < ln; i++) {
-            seriesItem = series[i];
-            seriesItem.setCenter(center);
-        }
-    },
-    updateRadius: function(radius) {
-        var me = this,
-            axes = me.getAxes(),
-            axis,
-            series = me.getSeries(),
-            seriesItem, i, ln;
-        for (i = 0 , ln = axes.length; i < ln; i++) {
-            axis = axes[i];
-            axis.setMinimum(0);
-            axis.setLength(radius);
-            axis.getSprites();
-        }
-        for (i = 0 , ln = series.length; i < ln; i++) {
-            seriesItem = series[i];
-            seriesItem.setRadius(radius);
-        }
-    },
-    doSetSurfaceRegion: function(surface, region) {
-        var mainRegion = this.getMainRegion();
-        surface.setRegion(region);
-        surface.matrix.set(1, 0, 0, 1, mainRegion[0] - region[0], mainRegion[1] - region[1]);
-        surface.inverseMatrix.set(1, 0, 0, 1, region[0] - mainRegion[0], region[1] - mainRegion[1]);
-    },
+    /**
+     * Layout the axes and series.
+     */
     performLayout: function() {
         try {
             this.resizing++;
             Ext.chart.AbstractChart.prototype.performLayout.call(this);
+            this.suspendThicknessChanged();
             var me = this,
-                size = me.element.getSize(),
-                fullRegion = [
-                    0,
-                    0,
-                    size.width,
-                    size.height
-                ],
-                inset = me.getInsetPadding(),
-                inner = me.getInnerPadding(),
-                left = inset.left,
-                top = inset.top,
-                width = size.width - left - inset.right,
-                height = size.height - top - inset.bottom,
-                region = [
-                    inset.left,
-                    inset.top,
-                    width,
-                    height
-                ],
-                innerWidth = width - inner.left - inner.right,
-                innerHeight = height - inner.top - inner.bottom,
-                center = [
-                    innerWidth * 0.5 + inner.left,
-                    innerHeight * 0.5 + inner.top
-                ],
-                radius = Math.min(innerWidth, innerHeight) * 0.5,
                 axes = me.getAxes(),
                 axis,
-                series = me.getSeries(),
-                seriesItem, i, ln;
-            me.setMainRegion(region);
-            for (i = 0 , ln = series.length; i < ln; i++) {
-                seriesItem = series[i];
-                me.doSetSurfaceRegion(seriesItem.getSurface(), region);
-                me.doSetSurfaceRegion(seriesItem.getOverlaySurface(), fullRegion);
+                seriesList = me.getSeries(),
+                series, axisSurface, thickness,
+                size = me.element.getSize(),
+                width = size.width,
+                height = size.height,
+                insetPadding = me.getInsetPadding(),
+                innerPadding = me.getInnerPadding(),
+                surface,
+                shrinkBox = {
+                    top: insetPadding.top,
+                    left: insetPadding.left,
+                    right: insetPadding.right,
+                    bottom: insetPadding.bottom
+                },
+                gridSurface, mainRegion, innerWidth, innerHeight, elements, floating, matrix, i, ln,
+                flipXY = me.getFlipXY();
+            if (width <= 0 || height <= 0) {
+                return;
             }
-            me.doSetSurfaceRegion(me.getSurface(), fullRegion);
-            for (i = 0 , ln = me.surfaceMap.grid && me.surfaceMap.grid.length; i < ln; i++) {
-                me.doSetSurfaceRegion(me.surfaceMap.grid[i], fullRegion);
-            }
-            for (i = 0 , ln = axes.length; i < ln; i++) {
+            for (i = 0; i < axes.length; i++) {
                 axis = axes[i];
-                me.doSetSurfaceRegion(axis.getSurface(), fullRegion);
+                axisSurface = axis.getSurface();
+                floating = axis.getStyle && axis.getStyle() && axis.getStyle().floating;
+                thickness = axis.getThickness();
+                switch (axis.getPosition()) {
+                    case 'top':
+                        axisSurface.setRegion([
+                            0,
+                            shrinkBox.top,
+                            width,
+                            thickness
+                        ]);
+                        break;
+                    case 'bottom':
+                        axisSurface.setRegion([
+                            0,
+                            height - (shrinkBox.bottom + thickness),
+                            width,
+                            thickness
+                        ]);
+                        break;
+                    case 'left':
+                        axisSurface.setRegion([
+                            shrinkBox.left,
+                            0,
+                            thickness,
+                            height
+                        ]);
+                        break;
+                    case 'right':
+                        axisSurface.setRegion([
+                            width - (shrinkBox.right + thickness),
+                            0,
+                            thickness,
+                            height
+                        ]);
+                        break;
+                }
+                if (!floating) {
+                    shrinkBox[axis.getPosition()] += thickness;
+                }
             }
-            me.setRadius(radius);
-            me.setCenter(center);
+            width -= shrinkBox.left + shrinkBox.right;
+            height -= shrinkBox.top + shrinkBox.bottom;
+            mainRegion = [
+                shrinkBox.left,
+                shrinkBox.top,
+                width,
+                height
+            ];
+            shrinkBox.left += innerPadding.left;
+            shrinkBox.top += innerPadding.top;
+            shrinkBox.right += innerPadding.right;
+            shrinkBox.bottom += innerPadding.bottom;
+            innerWidth = width - innerPadding.left - innerPadding.right;
+            innerHeight = height - innerPadding.top - innerPadding.bottom;
+            me.setInnerRegion([
+                shrinkBox.left,
+                shrinkBox.top,
+                innerWidth,
+                innerHeight
+            ]);
+            if (innerWidth <= 0 || innerHeight <= 0) {
+                return;
+            }
+            me.setMainRegion(mainRegion);
+            me.getSurface('main').setRegion(mainRegion);
+            for (i = 0 , ln = me.surfaceMap.grid && me.surfaceMap.grid.length; i < ln; i++) {
+                gridSurface = me.surfaceMap.grid[i];
+                gridSurface.setRegion(mainRegion);
+                gridSurface.matrix.set(1, 0, 0, 1, innerPadding.left, innerPadding.top);
+                gridSurface.matrix.inverse(gridSurface.inverseMatrix);
+            }
+            for (i = 0; i < axes.length; i++) {
+                axis = axes[i];
+                axisSurface = axis.getSurface();
+                matrix = axisSurface.matrix;
+                elements = matrix.elements;
+                switch (axis.getPosition()) {
+                    case 'top':
+                    case 'bottom':
+                        elements[4] = shrinkBox.left;
+                        axis.setLength(innerWidth);
+                        break;
+                    case 'left':
+                    case 'right':
+                        elements[5] = shrinkBox.top;
+                        axis.setLength(innerHeight);
+                        break;
+                }
+                axis.updateTitleSprite();
+                matrix.inverse(axisSurface.inverseMatrix);
+            }
+            for (i = 0 , ln = seriesList.length; i < ln; i++) {
+                series = seriesList[i];
+                surface = series.getSurface();
+                surface.setRegion(mainRegion);
+                if (flipXY) {
+                    surface.matrix.set(0, -1, 1, 0, innerPadding.left, innerHeight + innerPadding.top);
+                } else {
+                    surface.matrix.set(1, 0, 0, -1, innerPadding.left, innerHeight + innerPadding.top);
+                }
+                surface.matrix.inverse(surface.inverseMatrix);
+                series.getOverlaySurface().setRegion(mainRegion);
+            }
             me.redraw();
+            me.onPlaceWatermark();
         } finally {
             this.resizing--;
+            this.resumeThicknessChanged();
         }
-    },
-    getEventXY: function(e) {
-        e = (e.changedTouches && e.changedTouches[0]) || e.event || e.browserEvent || e;
-        var me = this,
-            xy = me.element.getXY(),
-            padding = me.getInsetPadding();
-        return [
-            e.pageX - xy[0] - padding.left,
-            e.pageY - xy[1] - padding.top
-        ];
     },
     redraw: function() {
         var me = this,
-            axes = me.getAxes(),
-            axis,
             series = me.getSeries(),
-            seriesItem, i, ln;
-        for (i = 0 , ln = axes.length; i < ln; i++) {
-            axis = axes[i];
-            axis.getSprites();
+            axes = me.getAxes(),
+            region = me.getMainRegion(),
+            innerWidth, innerHeight,
+            innerPadding = me.getInnerPadding(),
+            left, right, top, bottom, i, j, sprites, xRange, yRange, isSide, attr, axisX, axisY, range, visibleRange,
+            flipXY = me.getFlipXY(),
+            sprite, zIndex,
+            zBase = 1000,
+            markers, markerCount, markerIndex, markerSprite, markerZIndex;
+        if (!region) {
+            return;
         }
-        for (i = 0 , ln = series.length; i < ln; i++) {
-            seriesItem = series[i];
-            seriesItem.getSprites();
+        innerWidth = region[2] - innerPadding.left - innerPadding.right;
+        innerHeight = region[3] - innerPadding.top - innerPadding.bottom;
+        for (i = 0; i < series.length; i++) {
+            if ((axisX = series[i].getXAxis())) {
+                visibleRange = axisX.getVisibleRange();
+                xRange = axisX.getRange();
+                xRange = [
+                    xRange[0] + (xRange[1] - xRange[0]) * visibleRange[0],
+                    xRange[0] + (xRange[1] - xRange[0]) * visibleRange[1]
+                ];
+            } else {
+                xRange = series[i].getXRange();
+            }
+            if ((axisY = series[i].getYAxis())) {
+                visibleRange = axisY.getVisibleRange();
+                yRange = axisY.getRange();
+                yRange = [
+                    yRange[0] + (yRange[1] - yRange[0]) * visibleRange[0],
+                    yRange[0] + (yRange[1] - yRange[0]) * visibleRange[1]
+                ];
+            } else {
+                yRange = series[i].getYRange();
+            }
+            left = xRange[0];
+            right = xRange[1];
+            top = yRange[0];
+            bottom = yRange[1];
+            attr = {
+                visibleMinX: xRange[0],
+                visibleMaxX: xRange[1],
+                visibleMinY: yRange[0],
+                visibleMaxY: yRange[1],
+                innerWidth: innerWidth,
+                innerHeight: innerHeight,
+                flipXY: flipXY
+            };
+            sprites = series[i].getSprites();
+            for (j = 0; j < sprites.length; j++) {
+                // All the series now share the same surface, so we must assign
+                // the sprites a zIndex that depends on the index of their series.
+                sprite = sprites[j];
+                zIndex = (sprite.attr.zIndex || 0);
+                if (zIndex < zBase) {
+                    // Set the sprite's zIndex
+                    zIndex += (i + 1) * 100 + zBase;
+                    sprite.attr.zIndex = zIndex;
+                    // Iterate through its marker sprites to do the same.
+                    markers = sprite.boundMarkers;
+                    if (markers) {
+                        markerCount = (markers.items ? markers.items.length : 0);
+                        if (markerCount) {
+                            for (markerIndex = 0; markerIndex < markerCount; markerIndex++) {
+                                markerSprite = markers.items[markerIndex];
+                                markerZIndex = (markerSprite.attr.zIndex || 0);
+                                if (markerZIndex == Number.MAX_VALUE) {
+                                    markerSprite.attr.zIndex = zIndex;
+                                } else {
+                                    if (markerZIndex < zBase) {
+                                        markerSprite.attr.zIndex = zIndex + markerZIndex;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                sprite.setAttributes(attr, true);
+            }
+        }
+        for (i = 0; i < axes.length; i++) {
+            isSide = axes[i].isSide();
+            sprites = axes[i].getSprites();
+            range = axes[i].getRange();
+            visibleRange = axes[i].getVisibleRange();
+            attr = {
+                dataMin: range[0],
+                dataMax: range[1],
+                visibleMin: visibleRange[0],
+                visibleMax: visibleRange[1]
+            };
+            if (isSide) {
+                attr.length = innerHeight;
+                attr.startGap = innerPadding.bottom;
+                attr.endGap = innerPadding.top;
+            } else {
+                attr.length = innerWidth;
+                attr.startGap = innerPadding.left;
+                attr.endGap = innerPadding.right;
+            }
+            for (j = 0; j < sprites.length; j++) {
+                sprites[j].setAttributes(attr, true);
+            }
         }
         me.renderFrame();
         Ext.chart.AbstractChart.prototype.redraw.apply(this, arguments);
+    },
+    onPlaceWatermark: function() {
+        var region0 = this.element.getBox(),
+            region = this.getSurface ? this.getSurface('main').getRegion() : this.getItems().get(0).getRegion();
+        if (region) {
+            this.watermarkElement.setStyle({
+                right: Math.round(region0.width - (region[2] + region[0])) + 'px',
+                bottom: Math.round(region0.height - (region[3] + region[1])) + 'px'
+            });
+        }
     }
 }, 0, [
-    "polar"
+    "chart"
 ], [
     "component",
     "container",
     "draw",
-    "polar"
+    "chart"
 ], {
     "component": true,
     "container": true,
     "draw": true,
-    "polar": true
+    "chart": true
 }, [
-    "widget.polar"
+    "Ext.chart.Chart",
+    "widget.chart"
 ], 0, [
     Ext.chart,
-    'PolarChart'
-], 0));
-
-/**
- * @class Ext.chart.interactions.Rotate
- * @extends Ext.chart.interactions.Abstract
- *
- * The Rotate interaction allows the user to rotate a polar chart about its central point.
- *
- *     @example preview
- *     var chart = new Ext.chart.PolarChart({
- *         animate: true,
- *         interactions: ['rotate'],
- *         colors: ["#115fa6", "#94ae0a", "#a61120", "#ff8809", "#ffd13e"],
- *         store: {
- *           fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
- *           data: [
- *               {'name':'metric one', 'data1':10, 'data2':12, 'data3':14, 'data4':8, 'data5':13},
- *               {'name':'metric two', 'data1':7, 'data2':8, 'data3':16, 'data4':10, 'data5':3},
- *               {'name':'metric three', 'data1':5, 'data2':2, 'data3':14, 'data4':12, 'data5':7},
- *               {'name':'metric four', 'data1':2, 'data2':14, 'data3':6, 'data4':1, 'data5':23},
- *               {'name':'metric five', 'data1':27, 'data2':38, 'data3':36, 'data4':13, 'data5':33}
- *           ]
- *         },
- *         series: [{
- *             type: 'pie',
- *             label: {
- *                 field: 'name',
- *                 display: 'rotate'
- *             },
- *             xField: 'data3',
- *             donut: 30
- *         }]
- *     });
- *     Ext.Viewport.setLayout('fit');
- *     Ext.Viewport.add(chart);
- */
-(Ext.cmd.derive('Ext.chart.interactions.Rotate', Ext.chart.interactions.Abstract, {
-    type: 'rotate',
-    /**
-     * @event rotate
-     * Fires on every tick of the rotation
-     * @param {Ext.chart.interactions.Rotate} this This interaction.
-     * @param {Number} angle The new current rotation angle.
-     */
-    /**
-     * @event rotationEnd
-     * Fires after a user finishes the rotation
-     * @param {Ext.chart.interactions.Rotate} this This interaction.
-     * @param {Number} angle The new current rotation angle.
-     */
-    config: {
-        /**
-         * @cfg {String} gesture
-         * Defines the gesture type that will be used to rotate the chart. Currently only
-         * supports `pinch` for two-finger rotation and `drag` for single-finger rotation.
-         */
-        gesture: 'rotate',
-        /**
-         * @cfg {Number} currentRotation
-         * Saves the current rotation of the series. Accepts negative values and values > 360 ( / 180 * Math.PI)
-         * @private
-         */
-        currentRotation: 0
-    },
-    oldRotations: null,
-    getGestures: function() {
-        return {
-            rotate: 'onRotate',
-            rotateend: 'onRotate',
-            dragstart: 'onGestureStart',
-            drag: 'onGesture',
-            dragend: 'onGestureEnd'
-        };
-    },
-    getAngle: function(e) {
-        var me = this,
-            chart = me.getChart(),
-            xy = chart.getEventXY(e),
-            center = chart.getCenter();
-        return Math.atan2(xy[1] - center[1], xy[0] - center[0]);
-    },
-    getEventRadius: function(e) {
-        var me = this,
-            chart = me.getChart(),
-            xy = chart.getEventXY(e),
-            center = chart.getCenter(),
-            dx = xy[0] - center[0],
-            dy = xy[1] - center[1];
-        return Math.sqrt(dx * dx + dy * dy);
-    },
-    onGestureStart: function(e) {
-        var me = this,
-            chart = me.getChart(),
-            radius = chart.getRadius(),
-            eventRadius = me.getEventRadius(e);
-        if (radius >= eventRadius) {
-            me.lockEvents('drag');
-            me.angle = me.getAngle(e);
-            me.oldRotations = {};
-            return false;
-        }
-    },
-    onGesture: function(e) {
-        var me = this,
-            chart = me.getChart(),
-            angle = me.getAngle(e) - me.angle,
-            axes = chart.getAxes(),
-            series = chart.getSeries(),
-            seriesItem,
-            oldRotations = me.oldRotations,
-            axis, oldRotation, i, ln;
-        if (me.getLocks().drag === me) {
-            chart.suspendAnimation();
-            for (i = 0 , ln = axes.length; i < ln; i++) {
-                axis = axes[i];
-                oldRotation = oldRotations[axis.getId()] || (oldRotations[axis.getId()] = axis.getRotation());
-                axis.setRotation(angle + oldRotation);
-            }
-            for (i = 0 , ln = series.length; i < ln; i++) {
-                seriesItem = series[i];
-                oldRotation = oldRotations[seriesItem.getId()] || (oldRotations[seriesItem.getId()] = seriesItem.getRotation());
-                seriesItem.setRotation(angle + oldRotation);
-            }
-            me.setCurrentRotation(angle + oldRotation);
-            me.fireEvent('rotate', me, me.getCurrentRotation());
-            me.sync();
-            chart.resumeAnimation();
-            return false;
-        }
-    },
-    rotateTo: function(angle) {
-        var me = this,
-            chart = me.getChart(),
-            axes = chart.getAxes(),
-            series = chart.getSeries(),
-            i, ln;
-        chart.suspendAnimation();
-        for (i = 0 , ln = axes.length; i < ln; i++) {
-            axes[i].setRotation(angle);
-        }
-        for (i = 0 , ln = series.length; i < ln; i++) {
-            series[i].setRotation(angle);
-        }
-        me.setCurrentRotation(angle);
-        me.fireEvent('rotate', me, me.getCurrentRotation());
-        me.sync();
-        chart.resumeAnimation();
-    },
-    onGestureEnd: function(e) {
-        var me = this;
-        if (me.getLocks().drag === me) {
-            me.onGesture(e);
-            me.unlockEvents('drag');
-            me.fireEvent('rotationEnd', me, me.getCurrentRotation());
-            return false;
-        }
-    },
-    onRotate: function(e) {}
-}, 0, 0, [
-    "interaction"
-], {
-    "interaction": true
-}, [
-    "interaction.rotate"
-], 0, [
-    Ext.chart.interactions,
-    'Rotate'
+    'CartesianChart',
+    Ext.chart,
+    'Chart'
 ], 0));
 
 /**
@@ -67542,631 +67550,6 @@ function() {
     Ext.chart.series,
     'ItemPublisher'
 ], function() {}));
-
-/**
- * Polar series.
- */
-(Ext.cmd.derive('Ext.chart.series.Polar', Ext.chart.series.Series, {
-    config: {
-        /**
-         * @cfg {Number} rotation
-         * The angle in degrees at which the first polar series item should start.
-         */
-        rotation: 0,
-        /**
-         * @cfg {Number} radius
-         * The radius of the polar series. Set to `null` will fit the polar series to the boundary.
-         */
-        radius: null,
-        /**
-         * @cfg {Array} center for the polar series.
-         */
-        center: [
-            0,
-            0
-        ],
-        /**
-         * @cfg {Number} offsetX
-         * The x-offset of center of the polar series related to the center of the boundary.
-         */
-        offsetX: 0,
-        /**
-         * @cfg {Number} offsetY
-         * The y-offset of center of the polar series related to the center of the boundary.
-         */
-        offsetY: 0,
-        /**
-         * @cfg {Boolean} showInLegend
-         * Whether to add the series elements as legend items.
-         */
-        showInLegend: true,
-        /**
-         * @cfg {String} xField
-         * The store record field name for the labels used in the radar series.
-         */
-        xField: null,
-        /**
-         * @cfg {String} yField
-         * The store record field name for the deflection of the graph in the radar series.
-         */
-        yField: null,
-        xAxis: null,
-        yAxis: null
-    },
-    directions: [
-        'X',
-        'Y'
-    ],
-    fieldCategoryX: [
-        'X'
-    ],
-    fieldCategoryY: [
-        'Y'
-    ],
-    getDefaultSpriteConfig: function() {
-        return {
-            type: this.seriesType,
-            renderer: this.getRenderer(),
-            centerX: 0,
-            centerY: 0,
-            rotationCenterX: 0,
-            rotationCenterY: 0
-        };
-    },
-    applyRotation: function(rotation) {
-        var twoPie = Math.PI * 2;
-        return (rotation % twoPie + Math.PI) % twoPie - Math.PI;
-    },
-    updateRotation: function(rotation) {
-        var sprites = this.getSprites();
-        if (sprites && sprites[0]) {
-            sprites[0].setAttributes({
-                baseRotation: rotation
-            });
-        }
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Ext.chart.series,
-    'Polar'
-], 0));
-
-/**
- * @class Ext.chart.series.sprite.PieSlice
- *
- * Pie slice sprite.
- */
-(Ext.cmd.derive('Ext.chart.series.sprite.PieSlice', Ext.draw.sprite.Sector, {
-    inheritableStatics: {
-        def: {
-            processors: {
-                /**
-                 * @cfg {Boolean} [doCallout=true] 'true' if the pie series uses label callouts.
-                 */
-                doCallout: 'bool',
-                /**
-                 * @cfg {Boolean} [rotateLabels=true] 'true' if the labels are rotated for easier reading.
-                 */
-                rotateLabels: 'bool',
-                /**
-                 * @cfg {String} [label=''] Label associated with the Pie sprite.
-                 */
-                label: 'string',
-                /**
-                 * @cfg {Number} [labelOverflowPadding=10] Padding around labels to determine overlap.
-                 * Any negative number allows the labels to overlap.
-                 */
-                labelOverflowPadding: 'number',
-                renderer: 'default'
-            },
-            defaults: {
-                doCallout: true,
-                rotateLabels: true,
-                label: '',
-                labelOverflowPadding: 10,
-                renderer: null
-            }
-        }
-    },
-    config: {
-        /**
-         * @private
-         * @cfg {Object} rendererData The object that is passed to the renderer.
-         *
-         * For instance when the PieSlice sprite is used in a Gauge chart, the object
-         * contains the 'store' and 'field' properties, and the 'value' as well
-         * for that one PieSlice that is used to draw the needle of the Gauge.
-         */
-        rendererData: null,
-        rendererIndex: 0
-    },
-    render: function(ctx, surface, clipRegion) {
-        var me = this,
-            attr = me.attr,
-            itemCfg = {},
-            changes;
-        if (attr.renderer) {
-            itemCfg = {
-                type: 'sector',
-                text: attr.text,
-                centerX: attr.centerX,
-                centerY: attr.centerY,
-                margin: attr.margin,
-                startAngle: Math.min(attr.startAngle, attr.endAngle),
-                endAngle: Math.max(attr.startAngle, attr.endAngle),
-                startRho: Math.min(attr.startRho, attr.endRho),
-                endRho: Math.max(attr.startRho, attr.endRho)
-            };
-            changes = attr.renderer.call(me, me, itemCfg, me.rendererData, me.rendererIndex);
-            Ext.apply(me.attr, changes);
-        }
-        // Draw the sector
-        Ext.draw.sprite.Sector.prototype.render.apply(this, arguments);
-        // Draw the labels
-        if (attr.label && me.getBoundMarker('labels')) {
-            me.placeLabel();
-        }
-    },
-    placeLabel: function() {
-        var me = this,
-            attr = me.attr,
-            startAngle = Math.min(attr.startAngle, attr.endAngle),
-            endAngle = Math.max(attr.startAngle, attr.endAngle),
-            midAngle = (startAngle + endAngle) * 0.5,
-            margin = attr.margin,
-            centerX = attr.centerX,
-            centerY = attr.centerY,
-            startRho = Math.min(attr.startRho, attr.endRho) + margin,
-            endRho = Math.max(attr.startRho, attr.endRho) + margin,
-            midRho = (startRho + endRho) * 0.5,
-            surfaceMatrix = me.surfaceMatrix,
-            labelCfg = me.labelCfg || (me.labelCfg = {}),
-            labelTpl = me.getBoundMarker('labels')[0].getTemplate(),
-            labelBox, x, y, changes;
-        surfaceMatrix.appendMatrix(attr.matrix);
-        labelCfg.text = attr.label;
-        x = centerX + Math.cos(midAngle) * midRho;
-        y = centerY + Math.sin(midAngle) * midRho;
-        labelCfg.x = surfaceMatrix.x(x, y);
-        labelCfg.y = surfaceMatrix.y(x, y);
-        x = centerX + Math.cos(midAngle) * endRho;
-        y = centerY + Math.sin(midAngle) * endRho;
-        labelCfg.calloutStartX = surfaceMatrix.x(x, y);
-        labelCfg.calloutStartY = surfaceMatrix.y(x, y);
-        x = centerX + Math.cos(midAngle) * (endRho + 40);
-        y = centerY + Math.sin(midAngle) * (endRho + 40);
-        labelCfg.calloutPlaceX = surfaceMatrix.x(x, y);
-        labelCfg.calloutPlaceY = surfaceMatrix.y(x, y);
-        labelCfg.rotationRads = (attr.rotateLabels ? midAngle + Math.atan2(surfaceMatrix.y(1, 0) - surfaceMatrix.y(0, 0), surfaceMatrix.x(1, 0) - surfaceMatrix.x(0, 0)) : 0);
-        labelCfg.calloutColor = me.attr.fillStyle;
-        labelCfg.globalAlpha = attr.globalAlpha * attr.fillOpacity;
-        // If a slice is empty, don't display the label.
-        // This behavior can be overridden by a renderer.
-        labelCfg.hidden = (attr.startAngle == attr.endAngle);
-        if (attr.renderer) {
-            labelCfg.type = 'label';
-            changes = attr.renderer.call(me, me, labelCfg, me.rendererData, me.rendererIndex);
-            Ext.apply(labelCfg, changes);
-        }
-        me.putMarker('labels', labelCfg, me.attr.attributeId);
-        labelBox = me.getMarkerBBox('labels', me.attr.attributeId, true);
-        if (labelBox) {
-            if (attr.doCallout) {
-                if (labelTpl.attr.display === 'outside') {
-                    me.putMarker('labels', {
-                        callout: 1
-                    }, me.attr.attributeId);
-                } else {
-                    me.putMarker('labels', {
-                        callout: 1 - +me.sliceContainsLabel(attr, labelBox)
-                    }, me.attr.attributeId);
-                }
-            } else {
-                me.putMarker('labels', {
-                    globalAlpha: +me.sliceContainsLabel(attr, labelBox)
-                }, me.attr.attributeId);
-            }
-        }
-    },
-    sliceContainsLabel: function(attr, bbox) {
-        var padding = attr.labelOverflowPadding,
-            middle = (attr.endRho + attr.startRho) / 2,
-            outer = middle + (bbox.width + padding) / 2,
-            inner = middle - (bbox.width + padding) / 2,
-            sliceAngle, l1, l2, l3;
-        if (padding < 0) {
-            return 1;
-        }
-        if (bbox.width + padding * 2 > (attr.endRho - attr.startRho)) {
-            return 0;
-        }
-        l1 = Math.sqrt(attr.endRho * attr.endRho - outer * outer);
-        l2 = Math.sqrt(attr.endRho * attr.endRho - inner * inner);
-        sliceAngle = Math.abs(attr.endAngle - attr.startAngle);
-        l3 = (sliceAngle > Math.PI / 2 ? inner : Math.abs(Math.tan(sliceAngle / 2)) * inner);
-        if (bbox.height + padding * 2 > Math.min(l1, l2, l3) * 2) {
-            return 0;
-        }
-        return 1;
-    }
-}, 0, 0, 0, 0, [
-    "sprite.pieslice"
-], [
-    [
-        'markerHolder',
-        Ext.chart.MarkerHolder
-    ]
-], [
-    Ext.chart.series.sprite,
-    'PieSlice'
-], 0));
-
-/**
- * @class Ext.chart.series.Pie
- * @extends Ext.chart.series.Polar
- *
- * Creates a Pie Chart. A Pie Chart is a useful visualization technique to display quantitative information for different
- * categories that also have a meaning as a whole.
- * As with all other series, the Pie Series must be appended in the *series* Chart array configuration. See the Chart
- * documentation for more information. A typical configuration object for the pie series could be:
- *
- *     @example preview
- *     var chart = new Ext.chart.PolarChart({
- *         animate: true,
- *         interactions: ['rotate'],
- *         colors: ['#115fa6', '#94ae0a', '#a61120', '#ff8809', '#ffd13e'],
- *         store: {
- *           fields: ['name', 'data1', 'data2', 'data3', 'data4', 'data5'],
- *           data: [
- *               {name: 'metric one',   data1: 10, data2: 12, data3: 14, data4: 8,  data5: 13},
- *               {name: 'metric two',   data1: 7,  data2: 8,  data3: 16, data4: 10, data5: 3},
- *               {name: 'metric three', data1: 5,  data2: 2,  data3: 14, data4: 12, data5: 7},
- *               {name: 'metric four',  data1: 2,  data2: 14, data3: 6,  data4: 1,  data5: 23},
- *               {name: 'metric five',  data1: 27, data2: 38, data3: 36, data4: 13, data5: 33}
- *           ]
- *         },
- *         series: [{
- *             type: 'pie',
- *             label: {
- *                 field: 'name',
- *                 display: 'rotate'
- *             },
- *             xField: 'data3',
- *             donut: 30
- *         }]
- *     });
- *     Ext.Viewport.setLayout('fit');
- *     Ext.Viewport.add(chart);
- *
- * In this configuration we set `pie` as the type for the series, set an object with specific style properties for highlighting options
- * (triggered when hovering elements). We also set true to `showInLegend` so all the pie slices can be represented by a legend item.
- * We set `data1` as the value of the field to determine the angle span for each pie slice. We also set a label configuration object
- * where we set the field name of the store field to be rendered as text for the label. The labels will also be displayed rotated.
- * We set `contrast` to `true` to flip the color of the label if it is to similar to the background color. Finally, we set the font family
- * and size through the `font` parameter.
- *
- */
-(Ext.cmd.derive('Ext.chart.series.Pie', Ext.chart.series.Polar, {
-    type: 'pie',
-    seriesType: 'pieslice',
-    config: {
-        /**
-         * @cfg {String} labelField
-         * @deprecated Use {@link Ext.chart.series.Pie#label} instead.
-         * The store record field name to be used for the pie slice labels.
-         */
-        labelField: false,
-        /**
-         * @cfg {Number} donut Specifies the radius of the donut hole, as a percentage of the chart's radius.
-         * Defaults to 0 (no donut hole).
-         */
-        donut: 0,
-        /**
-         * @cfg {String} field
-         * @deprecated Use xField directly
-         */
-        field: null,
-        /**
-         * @cfg {Number} rotation The starting angle of the pie slices.
-         */
-        rotation: 0,
-        /**
-         * @cfg {Number} [totalAngle=2*PI] The total angle of the pie series.
-         */
-        totalAngle: Math.PI * 2,
-        /**
-         * @cfg {Array} hidden Determines which pie slices are hidden.
-         */
-        hidden: [],
-        /**
-         * @cfg {Number} Allows adjustment of the radius by a spefic perfentage.
-         */
-        radiusFactor: 100,
-        style: {}
-    },
-    directions: [
-        'X'
-    ],
-    setField: function(f) {
-        return this.setXField(f);
-    },
-    getField: function() {
-        return this.getXField();
-    },
-    applyRadius: function(radius) {
-        return radius * this.getRadiusFactor() * 0.01;
-    },
-    updateLabelData: function() {
-        var me = this,
-            store = me.getStore(),
-            items = store.getData().items,
-            sprites = me.getSprites(),
-            labelField = me.getLabel().getTemplate().getField(),
-            hidden = me.getHidden(),
-            i, ln, labels, sprite;
-        if (sprites.length > 0 && labelField) {
-            labels = [];
-            for (i = 0 , ln = items.length; i < ln; i++) {
-                labels.push(items[i].get(labelField));
-            }
-            for (i = 0 , ln = sprites.length; i < ln; i++) {
-                sprite = sprites[i];
-                sprite.setAttributes({
-                    label: labels[i]
-                });
-                sprite.putMarker('labels', {
-                    hidden: hidden[i]
-                }, sprite.attr.attributeId);
-            }
-        }
-    },
-    coordinateX: function() {
-        var me = this,
-            store = me.getStore(),
-            items = store.getData().items,
-            length = items.length,
-            field = me.getXField(),
-            value,
-            sum = 0,
-            hidden = me.getHidden(),
-            summation = [],
-            i,
-            lastAngle = 0,
-            totalAngle = me.getTotalAngle(),
-            sprites = me.getSprites();
-        if (!sprites) {
-            return;
-        }
-        for (i = 0; i < length; i++) {
-            value = Math.abs(Number(items[i].get(field))) || 0;
-            if (!hidden[i]) {
-                sum += value;
-            }
-            summation[i] = sum;
-            if (i >= hidden.length) {
-                hidden[i] = false;
-            }
-        }
-        if (sum !== 0) {
-            sum = totalAngle / sum;
-        }
-        for (i = 0; i < length; i++) {
-            sprites[i].setAttributes({
-                startAngle: lastAngle,
-                endAngle: lastAngle = (sum ? summation[i] * sum : 0),
-                globalAlpha: 1
-            });
-        }
-        for (; i < me.sprites.length; i++) {
-            sprites[i].setAttributes({
-                startAngle: totalAngle,
-                endAngle: totalAngle,
-                globalAlpha: 0
-            });
-        }
-        me.getChart().refreshLegendStore();
-    },
-    updateCenter: function(center) {
-        this.setStyle({
-            translationX: center[0] + this.getOffsetX(),
-            translationY: center[1] + this.getOffsetY()
-        });
-        this.doUpdateStyles();
-    },
-    updateRadius: function(radius) {
-        this.setStyle({
-            startRho: radius * this.getDonut() * 0.01,
-            // Percentage
-            endRho: radius
-        });
-        this.doUpdateStyles();
-    },
-    updateDonut: function(donut) {
-        var radius = this.getRadius();
-        this.setStyle({
-            startRho: radius * donut * 0.01,
-            // Percentage
-            endRho: radius
-        });
-        this.doUpdateStyles();
-    },
-    updateRotation: function(rotation) {
-        this.setStyle({
-            rotationRads: rotation
-        });
-        this.doUpdateStyles();
-    },
-    updateTotalAngle: function(totalAngle) {
-        this.processData();
-    },
-    getSprites: function() {
-        var me = this,
-            chart = me.getChart(),
-            store = me.getStore();
-        if (!chart || !store) {
-            return [];
-        }
-        me.getColors();
-        me.getSubStyle();
-        var items = store.getData().items,
-            length = items.length,
-            animation = chart && chart.getAnimate(),
-            sprites = me.sprites,
-            sprite,
-            spriteIndex = 0,
-            rendererData, i,
-            spriteCreated = false,
-            label = me.getLabel(),
-            labelTpl = label.getTemplate();
-        rendererData = {
-            store: store,
-            field: me.getField(),
-            series: me
-        };
-        for (i = 0; i < length; i++) {
-            sprite = sprites[i];
-            if (!sprite) {
-                sprite = me.createSprite();
-                if (me.getHighlightCfg()) {
-                    sprite.config.highlightCfg = me.getHighlightCfg();
-                    sprite.addModifier('highlight', true);
-                }
-                if (labelTpl.getField()) {
-                    labelTpl.setAttributes({
-                        labelOverflowPadding: me.getLabelOverflowPadding()
-                    });
-                    labelTpl.fx.setCustomDuration({
-                        'callout': 200
-                    });
-                    sprite.bindMarker('labels', label);
-                }
-                sprite.setAttributes(me.getStyleByIndex(i));
-                sprite.rendererData = rendererData;
-                sprite.rendererIndex = spriteIndex++;
-                spriteCreated = true;
-            }
-            sprite.fx.setConfig(animation);
-        }
-        if (spriteCreated) {
-            me.doUpdateStyles();
-        }
-        return me.sprites;
-    },
-    normalizeAngle: function(angle) {
-        var pi2 = Math.PI * 2;
-        if (angle >= 0) {
-            return angle % pi2;
-        }
-        return (angle % pi2 + pi2) % pi2;
-    },
-    betweenAngle: function(x, a, b) {
-        var normalize = this.normalizeAngle;
-        a = normalize(a);
-        b = normalize(b);
-        x = normalize(x);
-        if (b === 0) {
-            b = Math.PI * 2;
-        }
-        return x >= a && x < b;
-    },
-    /**
-     * Returns the pie slice for a given angle
-     * @param {Number} angle The angle to search for the slice
-     * @return {Object} An object containing the reocord, sprite, scope etc.
-     */
-    getItemForAngle: function(angle) {
-        var me = this,
-            sprites = me.getSprites(),
-            attr;
-        angle %= Math.PI * 2;
-        while (angle < 0) {
-            angle += Math.PI * 2;
-        }
-        if (sprites) {
-            var store = me.getStore(),
-                items = store.getData().items,
-                hidden = me.getHidden(),
-                i = 0,
-                ln = store.getCount();
-            for (; i < ln; i++) {
-                if (!hidden[i]) {
-                    // Fortunately, the id of items equals the index of it in instances list.
-                    attr = sprites[i].attr;
-                    if (attr.startAngle <= angle && attr.endAngle >= angle) {
-                        return {
-                            series: me,
-                            sprite: sprites[i],
-                            index: i,
-                            record: items[i],
-                            field: me.getXField()
-                        };
-                    }
-                }
-            }
-        }
-        return null;
-    },
-    getItemForPoint: function(x, y) {
-        var me = this,
-            sprites = me.getSprites();
-        if (sprites) {
-            var center = me.getCenter(),
-                offsetX = me.getOffsetX(),
-                offsetY = me.getOffsetY(),
-                originalX = x - center[0] + offsetX,
-                originalY = y - center[1] + offsetY,
-                store = me.getStore(),
-                donut = me.getDonut(),
-                items = store.getData().items,
-                direction = Math.atan2(originalY, originalX) - me.getRotation(),
-                donutLimit = Math.sqrt(originalX * originalX + originalY * originalY),
-                endRadius = me.getRadius(),
-                startRadius = donut / 100 * endRadius,
-                hidden = me.getHidden(),
-                i, ln, attr;
-            for (i = 0 , ln = items.length; i < ln; i++) {
-                if (!hidden[i]) {
-                    // Fortunately, the id of items equals the index of it in instances list.
-                    attr = sprites[i].attr;
-                    if (startRadius + attr.margin <= donutLimit && donutLimit + attr.margin <= endRadius) {
-                        if (this.betweenAngle(direction, attr.startAngle, attr.endAngle)) {
-                            return {
-                                series: this,
-                                sprite: sprites[i],
-                                index: i,
-                                record: items[i],
-                                field: this.getXField()
-                            };
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-    },
-    provideLegendInfo: function(target) {
-        var store = this.getStore();
-        if (store) {
-            var items = store.getData().items,
-                labelField = this.getLabel().getTemplate().getField(),
-                field = this.getField(),
-                hidden = this.getHidden();
-            for (var i = 0; i < items.length; i++) {
-                target.push({
-                    name: labelField ? String(items[i].get(labelField)) : field + ' ' + i,
-                    mark: this.getStyleByIndex(i).fillStyle || this.getStyleByIndex(i).strokeStyle || 'black',
-                    disabled: hidden[i],
-                    series: this.getId(),
-                    index: i
-                });
-            }
-        }
-    }
-}, 0, 0, 0, 0, [
-    "series.pie"
-], 0, [
-    Ext.chart.series,
-    'Pie'
-], 0));
 
 /**
  * @author Ed Spencer
@@ -83094,8 +82477,25 @@ Ext.define('Ext.picker.Picker', {
                     'numberOfHits': numberOfHits
                 });
             }
-            Ext.Viewport.setActiveItem({
-                xtype: 'pieChart'
+            Ext.create('Ext.chart.Chart', {
+                renderTo: Ext.getBody(),
+                width: 500,
+                height: 350,
+                animate: true,
+                store: dataTable,
+                series: [
+                    {
+                        type: 'pie',
+                        angleField: 'numberOfHits',
+                        showInLegend: true,
+                        label: {
+                            field: 'dealName',
+                            display: 'rotate',
+                            contrast: true,
+                            font: '18px Arial'
+                        }
+                    }
+                ]
             });
         });
     }
@@ -84465,69 +83865,6 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /*
- * File: app/view/MyPieChart.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.MyPieChart', Ext.chart.PolarChart, {
-    config: {
-        height: '100%',
-        colors: [
-            '#115fa6',
-            '#94ae0a',
-            '#a61120',
-            '#ff8809',
-            '#ffd13e',
-            '#a61187',
-            '#24ad9a',
-            '#7c7474',
-            '#a66111'
-        ],
-        series: [
-            {
-                type: 'pie',
-                labelField: 'zipcode',
-                xField: 'numberOfHits',
-                yField: 'zipcode'
-            }
-        ],
-        interactions: [
-            {
-                type: 'rotate'
-            }
-        ]
-    }
-}, 0, [
-    "pieChart"
-], [
-    "component",
-    "container",
-    "draw",
-    "polar",
-    "pieChart"
-], {
-    "component": true,
-    "container": true,
-    "draw": true,
-    "polar": true,
-    "pieChart": true
-}, [
-    "widget.pieChart"
-], 0, [
-    Contact.view,
-    'MyPieChart'
-], 0));
-
-/*
  * File: app.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
@@ -84567,8 +83904,7 @@ Ext.application({
         'UploadDealForm',
         'ChangeContactPicForm',
         'contactinfo',
-        'BuzzOMeter',
-        'MyPieChart'
+        'BuzzOMeter'
     ],
     controllers: [
         'Contacts'
