@@ -66975,9 +66975,7 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var optionsBarChart = {
-                        'title': 'Deal Popularity',
-                        'width': 400,
-                        'height': 300
+                        'title': 'Deal Popularity'
                     };
                 // Instantiate and draw our chart, passing in some options.
                 var chartBar = new google.visualization.BarChart(document.getElementById('chart2'));
