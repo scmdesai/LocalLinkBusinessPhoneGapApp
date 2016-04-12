@@ -66905,18 +66905,28 @@ Ext.define('Ext.picker.Picker', {
             data.addColumn('string', 'zipcode');
             data.addColumn('number', 'NumberOfHits');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
-                for (var i = 0; i < json.totalResults; i++) {
+                for (var i = 0,
+                    j = 0; i < json.totalResults; i++ , j++) {
                     var dealData = json.rows[i].toString();
                     var tmp = dealData.split(",");
                     dealName[i] = tmp[0];
-                    zipcode[i] = tmp[1];
-                    numberOfHits[i] = tmp[2];
+                    if (zipcode[0]) {
+                        if (tmp[1] === zipcode[j - 1]) {
+                            numberOfHits[j - 1] = numberOfHits[j - 1] + tmp[2];
+                            j--;
+                        }
+                    } else {
+                        zipcode[j] = tmp[1];
+                        numberOfHits[j] = tmp[2];
+                    }
                     console.log('Deal Name is: ' + dealName[i]);
                     console.log('Zipcode is: ' + zipcode[i]);
                     console.log('Number Of Hits is: ' + numberOfHits[i]);
+                }
+                for (j = 0; j < zipcode.length; j++) {
                     data.addRow([
-                        zipcode[i],
-                        parseInt(numberOfHits[i], 10)
+                        zipcode[j],
+                        parseInt(numberOfHits[j], 10)
                     ]);
                 }
                 // Set chart options
