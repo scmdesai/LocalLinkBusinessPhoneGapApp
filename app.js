@@ -66886,40 +66886,49 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var chart = new google.visualization.PieChart(container);
-        // Create the data table.
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-            [
-                'Mushrooms',
-                3
-            ],
-            [
-                'Onions',
-                1
-            ],
-            [
-                'Olives',
-                1
-            ],
-            [
-                'Zucchini',
-                1
-            ],
-            [
-                'Pepperoni',
-                2
-            ]
-        ]);
-        // Set chart options
-        var options = {
-                'title': 'How Much Pizza I Ate Last Night',
-                'width': 400,
-                'height': 300
-            };
-        chart.draw(data, options);
+        var mygooglemap = new Ext.ux.GoogleVisualizationComponent({
+                xtype: 'googlevisualizationcomponent',
+                visualizationType: 'PieChart',
+                visualizationConfig: {
+                    width: 400,
+                    height: 240,
+                    is3D: true,
+                    title: 'MyDailyActivities'
+                },
+                columns: [
+                    [
+                        'string',
+                        'Task'
+                    ],
+                    [
+                        'number',
+                        'Hours per day'
+                    ]
+                ],
+                data: [
+                    [
+                        'Work',
+                        11
+                    ],
+                    [
+                        'Eat',
+                        2
+                    ],
+                    [
+                        'Commute',
+                        2
+                    ],
+                    [
+                        'Watch TV',
+                        2
+                    ],
+                    [
+                        'Sleep',
+                        7
+                    ]
+                ]
+            });
+        container.add(mygooglemap);
     }
 }, 0, [
     "buzzometer"
