@@ -66922,7 +66922,7 @@ Ext.define('Ext.picker.Picker', {
                     'height': 300
                 };
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.LineChart(document.getElementById('chart1'));
+            var chart = new google.visualization.PieChart(document.getElementById('chart1'));
             chart.draw(data, options);
         }
     }
