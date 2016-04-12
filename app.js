@@ -66961,29 +66961,25 @@ Ext.define('Ext.picker.Picker', {
                         } else {
                             dealName[j] = tmp[0];
                             numberOfClicks[j] = parseInt(tmp[2], 10);
+                            dataBarChart.addRow([
+                                dealName[j],
+                                numberOfClicks[j]
+                            ]);
+                            console.log('Deal Name is: ' + dealName[j]);
+                            console.log('Number Of Hits is: ' + numberOfClicks[j]);
                         };
                         
                     } else {
                         dealName[j] = tmp[0];
                         numberOfClicks[j] = parseInt(tmp[2], 10);
+                        dataBarChart.addRow([
+                            dealName[j],
+                            numberOfClicks[j]
+                        ]);
+                        console.log('Deal Name is: ' + dealName[j]);
+                        console.log('Number Of Hits is: ' + numberOfClicks[j]);
                     }
-                    dataBarChart.addRow([
-                        dealName[j],
-                        numberOfClicks[j]
-                    ]);
-                    console.log('Deal Name is: ' + dealName[j]);
-                    console.log('Number Of Hits is: ' + numberOfClicks[j]);
                 }
-                //
-                //for(j=0;j< dealName.length;j++) {
-                /*	 dataBarChart.addRow(
-				[dealName[j],numberOfClicks[j]]
-
-			);
-				console.log('Deal Name is: ' + dealName[j]);
-
-				console.log('Number Of Hits is: ' + numberOfClicks[j]);*/
-                //}
                 // Set chart options
                 var optionsBarChart = {
                         'title': 'Buzz Popularity',
