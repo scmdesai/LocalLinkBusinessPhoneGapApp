@@ -66908,6 +66908,7 @@ Ext.define('Ext.picker.Picker', {
                     data.addRows([
                         [
                             tmp[0],
+                            tmp[1],
                             tmp[2]
                         ]
                     ]);
