@@ -66909,13 +66909,16 @@ Ext.define('Ext.picker.Picker', {
                     var dealData = json.rows[i].toString();
                     var tmp = dealData.split(",");
                     dealName[i] = tmp[0];
-                    zipcode[i] = tmp[1].toString();
-                    numberOfHits[i] = tmp[2];
+                    zipcode[i] = tmp[1];
+                    numberOfHits[i] = parseInt(tmp[2]);
+                    console.log('Deal Name is: ' + dealName[i]);
+                    console.log('Zipcode is: ' + zipcode[i]);
+                    console.log('Number Of Hits is: ' + numberOfHits[i]);
                 }
                 data.addRows([
                     [
                         '"' + zipcode + '"',
-                        '"' + numberOfHits + '"'
+                        numberOfHits
                     ]
                 ]);
             });
