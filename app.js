@@ -66911,13 +66911,13 @@ Ext.define('Ext.picker.Picker', {
                     dealName[i] = tmp[0];
                     zipcode[i] = tmp[1];
                     numberOfHits[i] = parseInt(tmp[2], 10);
-                    data.addRow([
-                        [
-                            tmp[1],
-                            numberOfHits[i]
-                        ]
-                    ]);
                 }
+                data.addRows([
+                    [
+                        zipcode,
+                        numberOfHits
+                    ]
+                ]);
             });
             // Set chart options
             var options = {
