@@ -66909,7 +66909,7 @@ Ext.define('Ext.picker.Picker', {
                     var dealData = json.rows[i].toString();
                     var tmp = dealData.split(",");
                     dealName[i] = tmp[0];
-                    zipcode[i] = tmp[1];
+                    zipcode[i] = tmp[1].toString();
                     numberOfHits[i] = parseInt(tmp[2], 10);
                 }
                 data.addRows([
