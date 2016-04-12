@@ -66907,11 +66907,8 @@ Ext.define('Ext.picker.Picker', {
                     var tmp = dealData.split(",");
                     var dealName = tmp[0];
                     var zipcode = tmp[1];
-                    var numberOfHits = tmp[2].split("\"");
-                    console.log(numberOfHits.length);
-                    for (var j = 0; j < numberOfHits.length; j++) {
-                        console.log(numberOfHits[j]);
-                    }
+                    var numberOfHits = parseInt(tmp[2], 10);
+                    console.log(numberOfHits);
                     data.addRows([
                         [
                             dealName,
