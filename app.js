@@ -66940,7 +66940,7 @@ Ext.define('Ext.picker.Picker', {
                         'height': 300
                     };
                 // Instantiate and draw our chart, passing in some options.
-                var chart = new google.visualization.PieChart(document.getElementById('chart1'));
+                var chart = new google.visualization.PieChart(document.getElementById('chart2'));
                 chart.draw(data, options);
             });
             //Bar Chart
@@ -66977,7 +66977,8 @@ Ext.define('Ext.picker.Picker', {
                         'title': 'Deal Popularity',
                         vAxis: {
                             title: 'Number of Deal Clicks',
-                            minValue: 0
+                            minValue: 0,
+                            format: 0
                         },
                         hAxis: {
                             title: 'Deal Name'
@@ -66986,7 +66987,7 @@ Ext.define('Ext.picker.Picker', {
                         orientation: 'horizontal'
                     };
                 // Instantiate and draw our chart, passing in some options.
-                var chartBar = new google.visualization.BarChart(document.getElementById('chart2'));
+                var chartBar = new google.visualization.BarChart(document.getElementById('chart1'));
                 chartBar.draw(dataBarChart, optionsBarChart);
             });
         }
