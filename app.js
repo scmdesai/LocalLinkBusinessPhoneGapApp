@@ -66889,85 +66889,87 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        Ext.define('App.view.linechart', {
-            extend: 'Ext.Panel',
-            alias: 'widget.googlechartw2',
-            // xtype: 'googlechartw1',
-            height: '',
-            width: '',
-            config: {
-                html: ' <div id="chartdiv" >Chart Loading....</div>',
-                layout: 'fit'
-            },
-            constructor: function() {
-                this.drawChart();
-            },
-            drawChart: function() {
-                try {
-                    console.log('drawChart  fn');
-                    google.load('visualization', '1', {
-                        packages: [
-                            'corechart'
-                        ]
-                    });
-                    var data = google.visualization.arrayToDataTable([
-                            [
-                                'Year',
-                                'Sales',
-                                'Expenses'
-                            ],
-                            [
-                                '2004',
-                                1000,
-                                400
-                            ],
-                            [
-                                '2005',
-                                1170,
-                                460
-                            ],
-                            [
-                                '2006',
-                                660,
-                                1120
-                            ],
-                            [
-                                '2007',
-                                1030,
-                                540
+        var view = Ext.define('App.view.linechart', {
+                extend: 'Ext.Panel',
+                alias: 'widget.googlechartw2',
+                // xtype: 'googlechartw1',
+                height: '',
+                width: '',
+                config: {
+                    html: ' <div id="chartdiv" >Chart Loading....</div>',
+                    layout: 'fit'
+                },
+                constructor: function() {
+                    this.drawChart();
+                },
+                drawChart: function() {
+                    try {
+                        console.log('drawChart  fn');
+                        google.load('visualization', '1', {
+                            packages: [
+                                'corechart'
                             ]
-                        ]);
-                    var options = {
-                            width: 300,
-                            height: 500,
-                            title: 'Company Performance',
-                            curveType: 'function',
-                            legend: {
-                                position: 'top'
-                            },
-                            tooltip: {
-                                trigger: 'selection'
+                        });
+                        var data = google.visualization.arrayToDataTable([
+                                [
+                                    'Year',
+                                    'Sales',
+                                    'Expenses'
+                                ],
+                                [
+                                    '2004',
+                                    1000,
+                                    400
+                                ],
+                                [
+                                    '2005',
+                                    1170,
+                                    460
+                                ],
+                                [
+                                    '2006',
+                                    660,
+                                    1120
+                                ],
+                                [
+                                    '2007',
+                                    1030,
+                                    540
+                                ]
+                            ]);
+                        var options = {
+                                width: 300,
+                                height: 500,
+                                title: 'Company Performance',
+                                curveType: 'function',
+                                legend: {
+                                    position: 'top'
+                                },
+                                tooltip: {
+                                    trigger: 'selection'
+                                }
+                            };
+                        var chart = new google.visualization.LineChart(document.getElementById('chartdiv'));
+                        //console.log('4  fn');
+                        chart.draw(data, options);
+                        chart.setAction({
+                            id: 'increase',
+                            text: 'Details',
+                            action: function() {
+                                selection = chart.getSelection();
+                                alert('Hiii');
+                                console.log('Chart Action ' + selection[0].row);
                             }
-                        };
-                    var chart = new google.visualization.LineChart(document.getElementById('chartdiv'));
-                    //console.log('4  fn');
-                    chart.draw(data, options);
-                    chart.setAction({
-                        id: 'increase',
-                        text: 'Details',
-                        action: function() {
-                            selection = chart.getSelection();
-                            alert('Hiii');
-                            console.log('Chart Action ' + selection[0].row);
-                        }
-                    });
-                } //var ti=data.getValue(selection[0].row, 0);
-                //  console.log(data.getValue(selection[0].row, 0)+" "+data.getValue(selection[0].row, 1)+" "+data.getValue(selection[0].row, 2));
-                catch (e) {
-                    console.log("drawChart Fn Exe:" + e);
+                        });
+                    } //var ti=data.getValue(selection[0].row, 0);
+                    //  console.log(data.getValue(selection[0].row, 0)+" "+data.getValue(selection[0].row, 1)+" "+data.getValue(selection[0].row, 2));
+                    catch (e) {
+                        console.log("drawChart Fn Exe:" + e);
+                    }
                 }
-            }
-        });
+            });
+        //alert(e);
+        Ext.Viewport.setActiveItem(view);
     }
 }, 0, [
     "buzzometer"
@@ -66987,7 +66989,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'BuzzOMeter'
 ], 0));
-//alert(e);
 
 /*
  * File: app/view/contactform.js
