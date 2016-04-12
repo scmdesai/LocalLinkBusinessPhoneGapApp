@@ -66978,13 +66978,16 @@ Ext.define('Ext.picker.Picker', {
                         vAxis: {
                             title: 'Number of Deal Clicks',
                             minValue: 0,
-                            format: 0
+                            format: 1
                         },
                         hAxis: {
                             title: 'Deal Name'
                         },
                         legend: 'none',
-                        orientation: 'horizontal'
+                        orientation: 'horizontal',
+                        bar: {
+                            groupWidth: 20
+                        }
                     };
                 // Instantiate and draw our chart, passing in some options.
                 var chartBar = new google.visualization.BarChart(document.getElementById('chart1'));
