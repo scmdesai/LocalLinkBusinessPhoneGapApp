@@ -82625,7 +82625,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.store.AnalyticsStore', Ext.data.Store, {
     config: {
         autoLoad: true,
-        autoSync: true,
         model: 'Contact.model.AnalyticsData',
         storeId: 'AnalyticsStore'
     }
@@ -83083,6 +83082,7 @@ Ext.define('Ext.picker.Picker', {
                 });
             }
         });
+        console.log(dataTable.getCount());
         Ext.Viewport.setActiveItem({
             xtype: 'pieChart'
         });
