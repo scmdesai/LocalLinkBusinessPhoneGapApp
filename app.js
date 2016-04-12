@@ -83068,24 +83068,50 @@ Ext.define('Ext.picker.Picker', {
         var dealName;
         var zipcode;
         var numberOfHits;
-        $.getJSON("http://services.appsonmobile.com/analytics/v3/04", function(json) {
-            for (var i = 0; i < json.totalResults; i++) {
-                dealData = (json.rows[i]).toString();
-                var tmp = dealData.split(",");
-                dealName = tmp[0];
-                zipcode = tmp[1];
-                numberOfHits = tmp[2];
-                console.log(dealName);
-                console.log(zipcode);
-                console.log(numberOfHits);
-                dataTable[i].add({
-                    'dealName': dealName,
-                    'zipcode': zipcode,
-                    'numberOfHits': numberOfHits
-                });
-            }
-        });
+        var request = Ext.Ajax.request({
+                url: 'http://services.appsonmobile.com/analytics/v3/04',
+                method: 'GET',
+                success: function(data) {
+                    for (var i = 0; i < data.totalResults; i++) {
+                        dealData = (data.rows[i]).toString();
+                        var tmp = dealData.split(",");
+                        dealName = tmp[0];
+                        zipcode = tmp[1];
+                        numberOfHits = tmp[2];
+                        console.log(dealName);
+                        console.log(zipcode);
+                        console.log(numberOfHits);
+                        dataTable.add({
+                            'dealName': dealName,
+                            'zipcode': zipcode,
+                            'numberOfHits': numberOfHits
+                        });
+                    }
+                }
+            });
         console.log(dataTable.getAllCount());
+        /*$.getJSON("http://services.appsonmobile.com/analytics/v3/04",function(json){
+			for(var i = 0;i<json.totalResults;i++){
+
+				dealData = (json.rows[i]).toString();
+				var tmp = dealData.split(",");
+
+
+
+				dealName = tmp[0];
+				zipcode = tmp[1];
+				numberOfHits = tmp[2];
+
+				console.log(dealName);
+				console.log(zipcode);
+				console.log(numberOfHits);
+				dataTable.add({'dealName':dealName,
+							   'zipcode':zipcode,
+							   'numberOfHits':numberOfHits});
+
+			}
+
+		});*/
         Ext.Viewport.setActiveItem({
             xtype: 'pieChart'
         });
