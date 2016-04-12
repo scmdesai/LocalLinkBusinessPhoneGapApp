@@ -66918,19 +66918,19 @@ Ext.define('Ext.picker.Picker', {
                 data.addRows([
                     [
                         'Mushrooms',
-                        numberOfHits[0]
+                        1
                     ],
                     [
                         'Onions',
-                        numberOfHits[2]
+                        2
                     ],
                     [
                         'Olives',
-                        numberOfHits[3]
+                        3
                     ],
                     [
                         'Zucchini',
-                        numberOfHits[4]
+                        4
                     ],
                     [
                         'Pepperoni',
