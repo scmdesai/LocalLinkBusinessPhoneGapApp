@@ -66978,7 +66978,9 @@ Ext.define('Ext.picker.Picker', {
                         vAxis: {
                             title: 'Number of Deal Clicks',
                             minValue: 0,
-                            format: 1
+                            gridlines: {
+                                count: -1
+                            }
                         },
                         hAxis: {
                             title: 'Deal Name'
