@@ -66904,6 +66904,7 @@ Ext.define('Ext.picker.Picker', {
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
                 for (var i = 0; i < json.totalResults; i++) {
                     var dealData = json.rows[i];
+                    console.log(dealData.dealName);
                     data.addRows([
                         [
                             dealData
