@@ -83078,7 +83078,7 @@ Ext.define('Ext.picker.Picker', {
                 console.log(dealName);
                 console.log(zipcode);
                 console.log(numberOfHits);
-                dataTable.add({
+                dataTable[i].add({
                     'dealName': dealName,
                     'zipcode': zipcode,
                     'numberOfHits': numberOfHits
