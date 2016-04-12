@@ -66897,13 +66897,13 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
-        var zipcode = [];
-        var numberOfHits = [];
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             // Create the data table.
             var data = new google.visualization.DataTable();
+            var zipcode = [];
+            var numberOfHits = [];
             //data.addColumn('string', 'dealName');
             data.addColumn('string', 'zipcode');
             data.addColumn('number', 'NumberOfHits');
@@ -66926,9 +66926,6 @@ Ext.define('Ext.picker.Picker', {
                         zipcode[j] = tmp[1];
                         numberOfHits[j] = parseInt(tmp[2], 10);
                     }
-                    console.log('Deal Name is: ' + dealName[i]);
-                    console.log('Zipcode is: ' + zipcode[i]);
-                    console.log('Number Of Hits is: ' + numberOfHits[i]);
                 }
                 for (j = 0; j < zipcode.length; j++) {
                     data.addRow([
@@ -66952,7 +66949,6 @@ Ext.define('Ext.picker.Picker', {
             var numberOfClicks = [];
             dataBarChart.addColumn('string', 'dealName');
             dataBarChart.addColumn('number', 'numberOfClicks');
-            numberOfHits = [];
             $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                 for (var i = 0,
                     j = 0; i < json.totalResults; i++ , j++) {
@@ -66977,6 +66973,8 @@ Ext.define('Ext.picker.Picker', {
                         dealName[j],
                         parseInt(numberOfClicks[j], 10)
                     ]);
+                    console.log('Deal Name is: ' + dealName[j]);
+                    console.log('Number Of Hits is: ' + numberOfClicks[j]);
                 }
                 // Set chart options
                 var optionsBarChart = {
