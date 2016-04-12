@@ -66951,21 +66951,23 @@ Ext.define('Ext.picker.Picker', {
             dataBarChart.addColumn('number', 'numberOfClicks');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                 for (var i = 0,
-                    j = 0; i < json.totalResults; i++ , j++) {
+                    j = 0; i < json.totalResults; i++) {
                     dealData = json.rows[i].toString();
                     tmp = dealData.split(",");
                     if (dealName[0]) {
                         for (var k = 0; k < j; k++) if (tmp[0] === dealName[k]) {
                             numberOfClicks[k] = numberOfClicks[k] + parseInt(tmp[2], 10);
-                            j--;
-                        } else {
+                        } else //j--;
+                        {
                             dealName[j] = tmp[0];
                             numberOfClicks[j] = parseInt(tmp[2], 10);
+                            j++;
                         };
                         
                     } else {
                         dealName[j] = tmp[0];
                         numberOfClicks[j] = parseInt(tmp[2], 10);
+                        j++;
                     }
                 }
                 for (j = 0; j < dealName.length; j++) {
