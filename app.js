@@ -66888,11 +66888,6 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        google.charts.load('current', {
-            'packages': [
-                'corechart'
-            ]
-        });
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
@@ -66974,7 +66969,7 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var optionsBarChart = {
-                        'title': 'Deal Popularity',
+                        'title': 'Buzz Popularity',
                         vAxis: {
                             title: 'Number of Deal Clicks',
                             minValue: 0,
@@ -68515,6 +68510,12 @@ Ext.application({
                                     }
                                 ]
                             });
+                        //Load google charts
+                        google.charts.load('current', {
+                            'packages': [
+                                'corechart'
+                            ]
+                        });
                         view.getComponent('home').setRecord(record);
                         //Ext.Viewport.getActiveItem().destroy();
                         Ext.Viewport.setActiveItem(view);
