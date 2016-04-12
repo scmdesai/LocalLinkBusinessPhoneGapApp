@@ -82626,7 +82626,17 @@ Ext.define('Ext.picker.Picker', {
     config: {
         autoLoad: true,
         model: 'Contact.model.AnalyticsData',
-        storeId: 'AnalyticsStore'
+        storeId: 'AnalyticsStore',
+        listeners: [
+            {
+                fn: 'onStoreAddrecords',
+                event: 'addrecords'
+            }
+        ]
+    },
+    onStoreAddrecords: function(store, records, eOpts) {
+        store.load();
+        console.log('store added');
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
