@@ -66888,6 +66888,15 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
@@ -66899,7 +66908,7 @@ Ext.define('Ext.picker.Picker', {
             //data.addColumn('string', 'dealName');
             data.addColumn('string', 'zipcode');
             data.addColumn('number', 'NumberOfHits');
-            $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
+            $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                 for (var i = 0,
                     j = 0; i < json.totalResults; i++ , j++) {
                     dealData = json.rows[i].toString();
@@ -66942,7 +66951,8 @@ Ext.define('Ext.picker.Picker', {
             var dataBarChart = new google.visualization.DataTable();
             dataBarChart.addColumn('string', 'dealName');
             dataBarChart.addColumn('number', 'NumberOfHits');
-            $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
+            numberOfHits = [];
+            $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                 for (var i = 0,
                     j = 0; i < json.totalResults; i++ , j++) {
                     dealData = json.rows[i].toString();
@@ -66971,7 +66981,7 @@ Ext.define('Ext.picker.Picker', {
                 var optionsBarChart = {
                         'title': 'Buzz Popularity',
                         vAxis: {
-                            title: 'Number of Deal Clicks',
+                            title: 'Number of Clicks',
                             minValue: 0,
                             gridlines: {
                                 count: -1
