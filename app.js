@@ -66898,7 +66898,7 @@ Ext.define('Ext.picker.Picker', {
         function drawChart() {
             // Create the data table.
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'dealName');
+            //data.addColumn('string', 'dealName');
             data.addColumn('string', 'zipcode');
             data.addColumn('number', 'NumberOfHits');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
@@ -66911,7 +66911,6 @@ Ext.define('Ext.picker.Picker', {
                     console.log(numberOfHits);
                     data.addRows([
                         [
-                            dealName,
                             zipcode,
                             numberOfHits
                         ]
@@ -66920,7 +66919,7 @@ Ext.define('Ext.picker.Picker', {
             });
             // Set chart options
             var options = {
-                    'title': 'How Much Pizza I Ate Last Night',
+                    'title': 'User Location',
                     'width': 400,
                     'height': 300
                 };
