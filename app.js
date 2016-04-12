@@ -66899,19 +66899,14 @@ Ext.define('Ext.picker.Picker', {
             // Create the data table.
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'dealName');
-            data.addColumn('number', 'NumberOfHits');
+            data.addColumn('string', 'zipcode');
+            data.addColumn('integer', 'NumberOfHits');
             $.getJSON('http://services.appsonmobile.com/analytics/v3/04', function(json) {
                 for (var i = 0; i < json.totalResults; i++) {
-                    var dealData = json.rows[0].toString();
-                    var tmp = dealData.split(",");
-                    console.log('Deal Name is : ' + tmp[0]);
-                    console.log('Zipcode is : ' + tmp[1]);
-                    console.log('NumberOfHits is : ' + tmp[2]);
-                    var hits = tmp[2].toNumber();
+                    var dealData = json.rows[i];
                     data.addRows([
                         [
-                            tmp[0],
-                            hits
+                            dealData
                         ]
                     ]);
                 }
