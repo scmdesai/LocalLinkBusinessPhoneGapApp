@@ -66549,6 +66549,11 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'mypanel1'
             }
         ],
+        tabBar: {
+            docked: 'top',
+            padding: '15 15 10 40',
+            styleHtmlContent: true
+        },
         listeners: [
             {
                 fn: 'onPanelActivate',
@@ -66661,12 +66666,6 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var optionsBarChart = {
-                        'title': 'none',
-                        'titleTextStyle': {
-                            color: '#00529D',
-                            fontName: 'Arial',
-                            fontSize: 10
-                        },
                         vAxis: {
                             title: 'Number of Views',
                             minValue: 0,
@@ -66738,7 +66737,6 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var options = {
-                        'title': 'none',
                         'width': 500,
                         'height': 500,
                         'pieHole': 0.4,
@@ -66784,12 +66782,6 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var optionsBarChart = {
-                        'title': 'Buzz Popularity',
-                        'titleTextStyle': {
-                            color: '#00529D',
-                            fontName: 'Arial',
-                            fontSize: 10
-                        },
                         vAxis: {
                             title: 'Number of Views',
                             minValue: 0,
@@ -68310,7 +68302,7 @@ Ext.application({
                                 tabBarPosition: 'bottom',
                                 cls: 'toolbarCls',
                                 ui: 'plain',
-                                style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D",
+                                style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D;padding:10px 10px 10px 40px",
                                 items: [
                                     {
                                         xtype: 'contactinfo',
