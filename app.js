@@ -66300,7 +66300,6 @@ Ext.define('Ext.picker.Picker', {
         storeUserDetails.load();
         var customerId;
         var businessName;
-        console.log('Info page painted');
         storeUserDetails.each(function(record) {
             //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
