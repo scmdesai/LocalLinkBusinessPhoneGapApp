@@ -66538,7 +66538,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'panel',
                 title: 'Buzz Popularity',
                 height: '100%',
-                html: '<div id="chart1" style="vertical-align:middle"></div>',
+                html: '<div id="chart1" ></div>',
                 itemId: 'mypanel'
             },
             {
@@ -66688,7 +66688,8 @@ Ext.define('Ext.picker.Picker', {
                 var options = {
                         'pieHole': 0.4,
                         'pieSliceTextStyle': {
-                            color: 'black'
+                            color: 'black',
+                            height: '300'
                         }
                     };
                 // Instantiate and draw our chart, passing in some options.
