@@ -66295,7 +66295,6 @@ Ext.define('Ext.picker.Picker', {
         var name = record.get('businessName');
         var customerId = record.get('customerId');
         this.down('#nameTxt').setHtml(name);
-        this.down('contactpic').setData(record.get('pictureURL'));
     }
 }, 0, [
     "contactinfo"
@@ -66317,6 +66316,7 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactinfo'
 ], 0));
+//this.down('contactpic').setData(record.get('pictureURL'));
 //}
 
 /*
