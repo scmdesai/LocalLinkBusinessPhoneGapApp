@@ -67937,7 +67937,8 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'filefield',
-                baseCls: 'customfield1',
+                baseCls: '',
+                cls: 'customfield1',
                 itemId: 'myfilefield1',
                 margin: '5 5 5 5',
                 style: 'border:none',
