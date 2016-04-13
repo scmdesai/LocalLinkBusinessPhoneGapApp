@@ -66196,9 +66196,14 @@ Ext.define('Ext.picker.Picker', {
                 ui: 'plain',
                 items: [
                     {
-                        xtype: 'spacer',
-                        height: 11,
-                        width: 18
+                        xtype: 'button',
+                        docked: 'right',
+                        hidden: false,
+                        itemId: 'editButton',
+                        style: 'color:#00529D',
+                        ui: 'plain',
+                        width: '20%',
+                        iconCls: 'compose'
                     },
                     {
                         xtype: 'component',
@@ -66206,32 +66211,33 @@ Ext.define('Ext.picker.Picker', {
                         disabled: true,
                         html: '<b>First Name</b>',
                         id: 'nameTxt',
-                        itemId: 'nameTxt'
+                        itemId: 'nameTxt',
+                        padding: '15 5 5 15'
                     },
                     {
-                        xtype: 'button',
-                        docked: 'right',
-                        itemId: 'editButton',
-                        style: 'color:#00529D',
-                        ui: 'plain',
-                        width: '20%',
-                        iconCls: 'compose'
+                        xtype: 'spacer',
+                        height: 11,
+                        width: 18
                     }
                 ]
             },
             {
-                xtype: 'contactpic',
-                cls: 'x-panel-body',
-                docked: 'top',
-                height: 135,
-                itemId: 'picture1',
-                width: '',
-                flex: 1,
-                layout: {
-                    type: 'fit',
-                    align: 'start',
-                    pack: 'end'
-                }
+                xtype: 'container',
+                flex: 5,
+                items: [
+                    {
+                        xtype: 'contactpic',
+                        cls: 'x-panel-body',
+                        height: 151,
+                        itemId: 'picture1',
+                        minHeight: '100%',
+                        width: '',
+                        layout: {
+                            type: 'vbox',
+                            pack: 'start'
+                        }
+                    }
+                ]
             },
             {
                 xtype: 'textfield',
@@ -66969,12 +66975,12 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
-                height: 138,
+                height: 154,
                 itemId: 'picture',
                 width: '',
                 flex: 10,
                 layout: {
-                    type: 'fit',
+                    type: 'vbox',
                     align: 'start',
                     pack: 'end'
                 }
