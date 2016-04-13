@@ -66532,6 +66532,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.BuzzOMeter', Ext.tab.Panel, {
     config: {
         html: '',
+        padding: '',
         styleHtmlContent: true,
         items: [
             {
@@ -66551,7 +66552,6 @@ Ext.define('Ext.picker.Picker', {
         ],
         tabBar: {
             docked: 'top',
-            padding: '15 15 10 40',
             styleHtmlContent: true
         },
         listeners: [
@@ -66742,7 +66742,8 @@ Ext.define('Ext.picker.Picker', {
                         'pieHole': 0.4,
                         'pieSliceTextStyle': {
                             color: 'black'
-                        }
+                        },
+                        legend: 'top'
                     };
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.PieChart(document.getElementById('chart2'));
@@ -68302,7 +68303,7 @@ Ext.application({
                                 tabBarPosition: 'bottom',
                                 cls: 'toolbarCls',
                                 ui: 'plain',
-                                style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D;padding:10px 10px 10px 40px",
+                                style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D; margin-left:2px; margin-right: 2px;",
                                 items: [
                                     {
                                         xtype: 'contactinfo',
