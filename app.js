@@ -66591,7 +66591,7 @@ Ext.define('Ext.picker.Picker', {
                                     var optionsBarChart = {
                                             vAxis: {
                                                 title: 'Number of Views',
-                                                textStyle: {
+                                                titleTextStyle: {
                                                     color: '#00529D',
                                                     fontSize: 16
                                                 },
@@ -66602,7 +66602,7 @@ Ext.define('Ext.picker.Picker', {
                                             },
                                             hAxis: {
                                                 title: 'Buzz Name',
-                                                textStyle: {
+                                                titleTextStyle: {
                                                     color: '#00529D',
                                                     fontSize: 16
                                                 }
@@ -68223,7 +68223,7 @@ Ext.application({
                                     cls: 'tabBarCls',
                                     docked: 'bottom',
                                     height: '9%',
-                                    padding: '5 15 0 15',
+                                    padding: '5 50 0 50',
                                     style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
                                     ui: 'plain',
                                     modal: false,
