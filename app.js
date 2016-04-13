@@ -66286,7 +66286,16 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'contactpic',
                 width: ''
             }
+        ],
+        listeners: [
+            {
+                fn: 'onInfoPainted',
+                event: 'painted'
+            }
         ]
+    },
+    onInfoPainted: function(element, eOpts) {
+        Ext.getCmp('contactpic').setData(record.data);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
