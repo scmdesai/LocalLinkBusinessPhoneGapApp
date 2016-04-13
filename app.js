@@ -66678,7 +66678,7 @@ Ext.define('Ext.picker.Picker', {
                                                 color: 'black'
                                             },
                                             height: '500',
-                                            width: '300'
+                                            width: '500'
                                         };
                                     // Instantiate and draw our chart, passing in some options.
                                     var chart = new google.visualization.PieChart(document.getElementById('chart2'));
