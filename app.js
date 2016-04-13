@@ -66126,6 +66126,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
+        height: '100%',
         id: 'contactpic',
         itemId: 'contactpic1',
         margin: '5 5 5 5',
@@ -66284,18 +66285,9 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'top',
                 height: '30%',
                 itemId: 'contactpic',
-                width: ''
-            }
-        ],
-        listeners: [
-            {
-                fn: 'onInfoPainted',
-                event: 'painted'
+                minHeight: '30%'
             }
         ]
-    },
-    onInfoPainted: function(element, eOpts) {
-        Ext.getCmp('contactpic').setData(record.data);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -66895,7 +66887,7 @@ Ext.define('Ext.picker.Picker', {
                     var customerId;
                     var businessName;
                     storeUserDetails.each(function(record) {
-                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                        console.log('StoreUserDetails : ' + record.get('customerId'));
                         customerId = record.get('customerId');
                         businessName = record.get('businessName');
                     });
