@@ -68451,10 +68451,11 @@ Ext.application({
                         //view.getComponent('home').setRecord(record);
                         //Ext.Viewport.getActiveItem().destroy();
                         //Ext.Viewport.setActiveItem(view);
-                        var view = Ext.Viewport.setActiveItem({
+                        var view = Ext.Viewport.add({
                                 xtype: 'panel'
                             });
                         view.getComponent('home').setRecord(record);
+                        Ext.Viewport.setActiveItem(view);
                     } else //console.log(view.getComponent('home').getItemId());
                     //view.setData(record.getData());
                     ////view.setRecord(record);
