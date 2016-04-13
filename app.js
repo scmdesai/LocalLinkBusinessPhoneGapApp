@@ -66643,7 +66643,7 @@ Ext.define('Ext.picker.Picker', {
                             fontName: 'Arial',
                             fontSize: 10
                         },
-                        'titlePosition': center,
+                        'titlePosition': 'center',
                         vAxis: {
                             title: 'Number of Views',
                             minValue: 0,
