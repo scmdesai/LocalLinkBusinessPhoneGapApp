@@ -66222,6 +66222,19 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'contactpic',
+                cls: 'x-panel-body',
+                height: '30%',
+                itemId: 'picture1',
+                width: '',
+                flex: 5,
+                layout: {
+                    type: 'vbox',
+                    align: 'start',
+                    pack: 'end'
+                }
+            },
+            {
                 xtype: 'textfield',
                 cls: 'icon-phone',
                 disabled: false,
@@ -66278,14 +66291,6 @@ Ext.define('Ext.picker.Picker', {
                 name: 'address',
                 readOnly: true,
                 maxRows: 2
-            },
-            {
-                xtype: 'contactpic',
-                cls: 'x-panel-body',
-                docked: 'top',
-                height: '30%',
-                itemId: 'contactpic',
-                minHeight: '30%'
             }
         ]
     },
@@ -66437,7 +66442,6 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        console.log('Deals Panel Activated');
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
         var customerId;
@@ -67940,7 +67944,6 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'customfield1',
                 itemId: 'myfilefield1',
                 margin: '5 5 5 5',
-                style: 'border:none',
                 styleHtmlContent: true,
                 width: 214,
                 clearIcon: false,
