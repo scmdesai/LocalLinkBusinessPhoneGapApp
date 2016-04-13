@@ -66810,14 +66810,14 @@ Ext.define('Ext.picker.Picker', {
                                                 cls: 'tabBarCls',
                                                 docked: 'bottom',
                                                 height: '9%',
-                                                padding: '5 15 0 15',
+                                                padding: '5 50 0 50',
                                                 style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
                                                 ui: 'plain',
                                                 modal: false,
                                                 activeTab: 0,
                                                 layout: {
                                                     type: 'hbox',
-                                                    align: 'start',
+                                                    align: 'center',
                                                     pack: 'justify'
                                                 }
                                             },
