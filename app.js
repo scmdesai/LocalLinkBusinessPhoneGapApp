@@ -66812,12 +66812,12 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    record.beginEdit(true, record.getChanges());
-                                    form.updateRecord(record);
-                                    record.endEdit(true, record.getChanges());
-                                    record.commit();
-                                    store.sync();
-                                    store.load();
+                                    /*record.beginEdit(true, record.getChanges());
+									form.updateRecord(record);
+									record.endEdit(true, record.getChanges());
+									record.commit();
+									store.sync();
+									store.load();*/
                                     /*Ext.Viewport.getComponent('panel').destroy();
 									var view = Ext.create("Ext.tab.Panel", {
 									fullscreen: true,
