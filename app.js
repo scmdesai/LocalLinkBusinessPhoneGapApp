@@ -66675,9 +66675,9 @@ Ext.define('Ext.picker.Picker', {
                                     var options = {
                                             'pieHole': 0.4,
                                             'pieSliceTextStyle': {
-                                                color: 'black',
-                                                height: '500'
-                                            }
+                                                color: 'black'
+                                            },
+                                            height: '500'
                                         };
                                     // Instantiate and draw our chart, passing in some options.
                                     var chart = new google.visualization.PieChart(document.getElementById('chart2'));
