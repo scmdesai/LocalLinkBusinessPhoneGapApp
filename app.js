@@ -66196,16 +66196,6 @@ Ext.define('Ext.picker.Picker', {
                 ui: 'plain',
                 items: [
                     {
-                        xtype: 'button',
-                        docked: 'right',
-                        height: 48,
-                        itemId: 'editButton',
-                        style: 'color:#00529D',
-                        ui: 'plain',
-                        width: '20%',
-                        iconCls: 'compose'
-                    },
-                    {
                         xtype: 'spacer',
                         height: 11,
                         width: 18
@@ -66217,6 +66207,15 @@ Ext.define('Ext.picker.Picker', {
                         html: '<b>First Name</b>',
                         id: 'nameTxt',
                         itemId: 'nameTxt'
+                    },
+                    {
+                        xtype: 'button',
+                        docked: 'right',
+                        itemId: 'editButton',
+                        style: 'color:#00529D',
+                        ui: 'plain',
+                        width: '20%',
+                        iconCls: 'compose'
                     }
                 ]
             },
@@ -68272,7 +68271,7 @@ Ext.application({
             },
             timeout: function() {
                 console.log('a timeout has occurred, probably a bad internet connection');
-                Ext.msg.alert('Timeout Has Occured', 'Close Applications running in background and Try Again', null, null);
+                Ext.Msg.alert('Timeout Has Occured', 'Close Applications running in background and Try Again', null, null);
             },
             complete: function(access_token) {
                 console.log('window closed');
@@ -68317,9 +68316,6 @@ Ext.application({
                                 itemId: 'panel',
                                 fullscreen: true,
                                 tabBarPosition: 'bottom',
-                                cls: 'toolbarCls',
-                                ui: 'plain',
-                                style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D;",
                                 tabBar: {
                                     cls: 'tabBarCls',
                                     docked: 'bottom',
@@ -68369,7 +68365,7 @@ Ext.application({
                     ////view.setRecord(record);
                     // Ext.Viewport.setActiveItem(view);
                     {
-                        Ext.msg.alert('Timeout Has Occured', 'Close Applications running in background and Try Again', null, null);
+                        Ext.Msg.alert('Timeout Has Occured', 'Close Applications running in background and Try Again', null, null);
                     }
                 } else //view.setData(record.getData());
                 {
