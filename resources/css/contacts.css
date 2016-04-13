@@ -69,7 +69,26 @@ $list-header-bg-color: $base-color;
     text-align:center !important;
     vertical-align:middle !important;
     font-family:Arial !important;
-    font-size:4.5vw !important;
+    font-size:5vw !important;
+	padding-right:5px!important;
+	overflow: visible;
+
+
+
+
+
+
+
+}
+
+.filefield {
+    border:1px groove #C0C0C0!important;
+    height:12vh;
+    font-weight:normal !important;
+    text-align:center !important;
+    vertical-align:middle !important;
+    font-family:Arial !important;
+    font-size:4vw !important;
 	padding-right:5px!important;
 	overflow: visible;
 
@@ -96,7 +115,7 @@ $list-header-bg-color: $base-color;
     text-align:center !important;
     vertical-align:middle !important;
     font-family:Arial !important;
-    font-size:4vw !important;
+    font-size:4.5vw;
 	padding-right:5px!important;
 
 

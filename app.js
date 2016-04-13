@@ -66591,13 +66591,21 @@ Ext.define('Ext.picker.Picker', {
                                     var optionsBarChart = {
                                             vAxis: {
                                                 title: 'Number of Views',
+                                                textStyle: {
+                                                    color: '#00529D',
+                                                    fontSize: 16
+                                                },
                                                 minValue: 0,
                                                 gridlines: {
                                                     count: -1
                                                 }
                                             },
                                             hAxis: {
-                                                title: 'Buzz Name'
+                                                title: 'Buzz Name',
+                                                textStyle: {
+                                                    color: '#00529D',
+                                                    fontSize: 16
+                                                }
                                             },
                                             legend: 'none',
                                             height: '400',
@@ -67737,7 +67745,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'filefield',
-                cls: 'customfield',
+                cls: 'filefield',
                 id: 'myfilefield',
                 itemId: 'myfilefield',
                 margin: '5 5 5 5 ',
@@ -68222,7 +68230,7 @@ Ext.application({
                                     activeTab: 0,
                                     layout: {
                                         type: 'hbox',
-                                        align: 'start',
+                                        align: 'center',
                                         pack: 'justify'
                                     }
                                 },
