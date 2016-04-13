@@ -66532,7 +66532,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.BuzzOMeter', Ext.tab.Panel, {
     config: {
         html: '',
-        padding: '',
         styleHtmlContent: true,
         items: [
             {
@@ -66552,6 +66551,7 @@ Ext.define('Ext.picker.Picker', {
         ],
         tabBar: {
             docked: 'top',
+            padding: '15 15 15 15',
             styleHtmlContent: true
         },
         listeners: [
@@ -66737,8 +66737,8 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var options = {
-                        'width': 500,
-                        'height': 500,
+                        'width': 300,
+                        'height': 400,
                         'pieHole': 0.4,
                         'pieSliceTextStyle': {
                             color: 'black'
@@ -68303,7 +68303,7 @@ Ext.application({
                                 tabBarPosition: 'bottom',
                                 cls: 'toolbarCls',
                                 ui: 'plain',
-                                style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D; margin-left:2px; margin-right: 2px;",
+                                style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D;",
                                 items: [
                                     {
                                         xtype: 'contactinfo',
