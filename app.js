@@ -66176,14 +66176,15 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.contactinfo', Ext.form.Panel, {
     config: {
-        border: 5,
-        height: '100%',
-        itemId: 'info',
-        minHeight: '100%',
-        style: 'background;#fff',
-        styleHtmlContent: true,
+        html: '',
+        id: 'formpanel1',
+        itemId: 'formpanel',
+        style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
         modal: true,
         scrollable: false,
+        multipartDetection: false,
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -66193,8 +66194,18 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
+                style: 'border-top:none',
                 ui: 'plain',
+                autoDestroy: false,
                 items: [
+                    {
+                        xtype: 'component',
+                        cls: 'contact-name',
+                        disabled: true,
+                        html: '<b>First Name</b>',
+                        id: 'nameTxt',
+                        itemId: 'nameTxt'
+                    },
                     {
                         xtype: 'button',
                         docked: 'right',
@@ -66204,19 +66215,6 @@ Ext.define('Ext.picker.Picker', {
                         ui: 'plain',
                         width: '20%',
                         iconCls: 'compose'
-                    },
-                    {
-                        xtype: 'spacer',
-                        height: 11,
-                        width: 18
-                    },
-                    {
-                        xtype: 'component',
-                        cls: 'contact-name',
-                        disabled: true,
-                        html: '<b>First Name</b>',
-                        id: 'nameTxt',
-                        itemId: 'nameTxt'
                     }
                 ]
             },
@@ -66224,10 +66222,10 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
-                height: 135,
-                itemId: 'picture1',
+                height: 138,
+                itemId: 'picture',
                 width: '',
-                flex: 1,
+                flex: 10,
                 layout: {
                     type: 'fit',
                     align: 'start',
@@ -66236,162 +66234,130 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: true,
+                id: 'businessName1',
+                itemId: 'businessName',
+                margin: '30 15 2 15',
+                styleHtmlContent: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
                 cls: 'icon-phone',
-                disabled: false,
-                height: '',
+                id: 'phoneNumber1',
                 itemId: 'phoneNumber',
-                margin: '',
-                minWidth: '',
-                padding: '10 10 10 10',
-                clearIcon: false,
-                name: 'phoneNumber',
-                readOnly: true
+                margin: '0 15 2 15',
+                styleHtmlContent: true,
+                name: 'phoneNumber'
+            },
+            {
+                xtype: 'textareafield',
+                cls: 'icon-location',
+                height: '20%',
+                id: 'address1',
+                itemId: 'address',
+                margin: '0 15 0 15',
+                styleHtmlContent: true,
+                name: 'address',
+                required: true
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'customerId1',
+                itemId: 'customerId',
+                name: 'customerId'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                itemId: '',
+                name: 'category'
             },
             {
                 xtype: 'textfield',
                 cls: 'icon-email',
-                disabled: false,
-                height: '',
-                itemId: 'email',
-                minWidth: '',
-                padding: '10 10 10 10',
+                hidden: false,
+                name: 'emailAddress'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'city'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'state'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'zipcode'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'pictureURL'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '20%',
+                hidden: true,
+                html: '',
+                id: 'website1',
+                itemId: 'website',
+                style: 'font-size:4vw',
+                label: '',
+                labelAlign: 'top',
+                labelWidth: '',
+                labelWrap: true,
+                name: 'website',
+                required: true
+            },
+            {
+                xtype: 'textfield',
+                height: '20%',
+                hidden: false,
+                html: '',
+                id: 'websiteDisplayName1',
+                itemId: 'websiteDisplayName',
+                style: 'font-size:4vw',
                 clearIcon: false,
                 label: '',
-                name: 'emailAddress',
-                readOnly: true
-            },
-            {
-                xtype: 'textfield',
-                cls: 'icon-globe',
-                disabled: false,
-                height: '',
-                itemId: 'websiteDisplayName',
-                padding: '10 10 10 10',
-                style: 'font-size:2px !important',
-                clearIcon: false,
+                labelAlign: 'top',
+                labelWidth: '',
+                labelWrap: true,
                 name: 'websiteDisplayName',
-                readOnly: true
-            },
-            {
-                xtype: 'textareafield',
-                baseCls: '',
-                cls: [
-                    'icon-location',
-                    'customfield1'
-                ],
-                disabled: false,
-                height: '12vh',
-                html: '',
-                itemId: 'address',
-                maxHeight: '',
-                minHeight: '',
-                padding: '10 10 10 10',
-                style: '\'font-size:3.5vw;font-family: arial\'',
-                clearIcon: false,
-                name: 'address',
-                readOnly: true,
-                maxRows: 2
-            },
-            {
-                xtype: 'textfield',
-                disabled: false,
-                height: '',
-                hidden: true,
-                itemId: 'phoneNumber1',
-                margin: '',
-                minWidth: '',
-                padding: '10 10 10 10',
-                clearIcon: false,
-                name: 'city',
-                readOnly: true
-            },
-            {
-                xtype: 'textfield',
-                disabled: false,
-                height: '',
-                hidden: true,
-                itemId: 'phoneNumber2',
-                margin: '',
-                minWidth: '',
-                padding: '10 10 10 10',
-                clearIcon: false,
-                name: 'state',
-                readOnly: true
-            },
-            {
-                xtype: 'textfield',
-                disabled: false,
-                height: '',
-                hidden: true,
-                itemId: 'phoneNumber3',
-                margin: '',
-                minWidth: '',
-                padding: '10 10 10 10',
-                clearIcon: false,
-                name: 'zipcode',
-                readOnly: true
-            },
-            {
-                xtype: 'textfield',
-                disabled: false,
-                height: '',
-                hidden: true,
-                itemId: 'phoneNumber4',
-                margin: '',
-                minWidth: '',
-                padding: '10 10 10 10',
-                clearIcon: false,
-                name: 'pictureURL',
-                readOnly: true
-            },
-            {
-                xtype: 'textfield',
-                disabled: false,
-                height: '',
-                hidden: true,
-                itemId: 'phoneNumber5',
-                margin: '',
-                minWidth: '',
-                padding: '10 10 10 10',
-                clearIcon: false,
-                name: 'customerId',
-                readOnly: true
-            },
-            {
-                xtype: 'textfield',
-                disabled: false,
-                height: '',
-                hidden: true,
-                itemId: 'phoneNumber6',
-                margin: '',
-                minWidth: '',
-                padding: '10 10 10 10',
-                clearIcon: false,
-                name: 'category',
-                readOnly: true
-            },
-            {
-                xtype: 'textfield',
-                disabled: false,
-                height: '',
-                hidden: true,
-                itemId: 'phoneNumber7',
-                margin: '',
-                minWidth: '',
-                padding: '10 10 10 10',
-                clearIcon: false,
-                name: 'businessName',
-                readOnly: true
+                required: true
             }
         ]
+    },
+    getValidationErrors: function() {
+        var errors = [];
+        var reqFields = this.query('field[required=true]');
+        var i = 0,
+            ln = reqFields.length,
+            field;
+        for (; i < ln; i++) {
+            field = reqFields[i];
+            if (!field.getValue()) {
+                errors.push(field.getLabel() + ' must be completed.');
+            }
+        }
+        console.dir(errors);
+        return errors;
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
-            var name = record.get('businessName');
-            var customerId = record.get('customerId');
-            this.down('#nameTxt').setHtml(name);
-            this.down('contactpic').setData(record.data);
+            this.down('#businessName').setValue(record.data.businessName);
+            this.down('#phoneNumber').setValue(record.data.phoneNumber);
+            this.down('#address').setValue(record.data.address);
+            this.child('contactpic').setData(record.data);
         }
     }
 }, 0, [
@@ -68187,6 +68153,243 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /*
+ * File: app/view/contactinfo1.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.contactinfo1', Ext.form.Panel, {
+    config: {
+        border: 5,
+        height: '100%',
+        itemId: 'info',
+        minHeight: '100%',
+        style: 'background;#fff',
+        styleHtmlContent: true,
+        modal: true,
+        scrollable: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'toolbar',
+                cls: 'toolbarCls',
+                docked: 'top',
+                ui: 'plain',
+                items: [
+                    {
+                        xtype: 'spacer',
+                        height: 11,
+                        width: 18
+                    }
+                ]
+            },
+            {
+                xtype: 'contactpic',
+                cls: 'x-panel-body',
+                docked: 'top',
+                height: 135,
+                itemId: 'picture1',
+                width: '',
+                flex: 1,
+                layout: {
+                    type: 'fit',
+                    align: 'start',
+                    pack: 'end'
+                }
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-phone',
+                disabled: false,
+                height: '',
+                itemId: 'phoneNumber',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'phoneNumber',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-email',
+                disabled: false,
+                height: '',
+                itemId: 'email',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                label: '',
+                name: 'emailAddress',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-globe',
+                disabled: false,
+                height: '',
+                itemId: 'websiteDisplayName',
+                padding: '10 10 10 10',
+                style: 'font-size:2px !important',
+                clearIcon: false,
+                name: 'websiteDisplayName',
+                readOnly: true
+            },
+            {
+                xtype: 'textareafield',
+                baseCls: '',
+                cls: [
+                    'icon-location',
+                    'customfield1'
+                ],
+                disabled: false,
+                height: '12vh',
+                html: '',
+                itemId: 'address',
+                maxHeight: '',
+                minHeight: '',
+                padding: '10 10 10 10',
+                style: '\'font-size:3.5vw;font-family: arial\'',
+                clearIcon: false,
+                name: 'address',
+                readOnly: true,
+                maxRows: 2
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber1',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'city',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber2',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'state',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber3',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'zipcode',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber4',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'pictureURL',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber5',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'customerId',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber6',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'category',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber7',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'businessName',
+                readOnly: true
+            }
+        ]
+    },
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            var name = record.get('businessName');
+            var customerId = record.get('customerId');
+            this.down('#nameTxt').setHtml(name);
+            this.down('contactpic').setData(record.data);
+        }
+    }
+}, 0, [
+    "contactinfo1"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "contactinfo1"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "contactinfo1": true
+}, [
+    "widget.contactinfo1"
+], 0, [
+    Contact.view,
+    'contactinfo1'
+], 0));
+
+/*
  * File: app.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
@@ -68223,8 +68426,9 @@ Ext.application({
         'Login',
         'UploadDealForm',
         'ChangeContactPicForm',
-        'contactinfo',
-        'BuzzOMeter'
+        'contactinfo1',
+        'BuzzOMeter',
+        'contactinfo'
     ],
     controllers: [
         'Contacts'
