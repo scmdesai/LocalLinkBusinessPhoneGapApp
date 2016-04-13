@@ -66878,7 +66878,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.BuzzOMeter', Ext.Panel, {
     config: {
-        html: '<div id="chart1"></div><div id="chart2"></div>',
+        html: '<div id="chart1" style="color:#00529D"></div><div id="chart2"></div>',
         styleHtmlContent: true,
         listeners: [
             {
@@ -66937,7 +66937,8 @@ Ext.define('Ext.picker.Picker', {
                 var options = {
                         'title': 'User Location',
                         'width': 400,
-                        'height': 300
+                        'height': 300,
+                        'pieHole': 0.4
                     };
                 // Instantiate and draw our chart, passing in some options.
                 var chart = new google.visualization.PieChart(document.getElementById('chart2'));
@@ -66974,21 +66975,19 @@ Ext.define('Ext.picker.Picker', {
                         dealName[j],
                         numberOfClicks[j]
                     ]);
-                    console.log('Deal Name is: ' + dealName[j]);
-                    console.log('Number Of Hits is: ' + numberOfClicks[j]);
                 }
                 // Set chart options
                 var optionsBarChart = {
                         'title': 'Buzz Popularity',
                         vAxis: {
-                            title: 'Number of Clicks',
+                            title: 'Number of Views',
                             minValue: 0,
                             gridlines: {
                                 count: -1
                             }
                         },
                         hAxis: {
-                            title: 'Deal Name'
+                            title: 'Buzz Name'
                         },
                         legend: 'none',
                         orientation: 'horizontal',
