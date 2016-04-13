@@ -66594,7 +66594,6 @@ Ext.define('Ext.picker.Picker', {
                             fontName: 'Arial',
                             fontSize: 10
                         },
-                        'titlePosition': center,
                         'width': 400,
                         'height': 300,
                         'pieHole': 0.4
