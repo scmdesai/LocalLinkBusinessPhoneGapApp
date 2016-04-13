@@ -66677,6 +66677,8 @@ Ext.define('Ext.picker.Picker', {
                         },
                         legend: 'none',
                         orientation: 'horizontal',
+                        width: '50%',
+                        height: '60%',
                         bar: {
                             groupWidth: 20
                         }
