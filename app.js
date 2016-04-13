@@ -66818,51 +66818,52 @@ Ext.define('Ext.picker.Picker', {
                                     record.commit();
                                     store.sync();
                                     store.load();
-                                    Ext.Viewport.getComponent('panel').destroy();
-                                    var view = Ext.create("Ext.tab.Panel", {
-                                            itemId: 'panel',
-                                            fullscreen: true,
-                                            tabBarPosition: 'bottom',
-                                            cls: 'toolbarCls',
-                                            ui: 'plain',
-                                            style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D;",
-                                            tabBar: {
-                                                cls: 'tabBarCls',
-                                                docked: 'bottom',
-                                                height: '9%',
-                                                padding: '5 50 0 50',
-                                                style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
-                                                ui: 'plain',
-                                                modal: false,
-                                                activeTab: 0,
-                                                layout: {
-                                                    type: 'hbox',
-                                                    align: 'center',
-                                                    pack: 'justify'
-                                                }
-                                            },
-                                            items: [
-                                                {
-                                                    xtype: 'contactinfo',
-                                                    title: 'Home',
-                                                    itemId: 'home',
-                                                    iconCls: 'icon-home'
-                                                },
-                                                {
-                                                    xtype: 'DealsPanel',
-                                                    title: 'Buzz',
-                                                    iconCls: 'icon-bubbles'
-                                                },
-                                                {
-                                                    xtype: 'buzzometer',
-                                                    title: 'BuzzOMeter',
-                                                    iconCls: 'info'
-                                                }
-                                            ]
-                                        });
-                                    view.getComponent('home').setRecord(record);
+                                    /*Ext.Viewport.getComponent('panel').destroy();
+									var view = Ext.create("Ext.tab.Panel", {
+									fullscreen: true,
+									tabBarPosition: 'bottom',
+									itemId: 'panel',
+									cls:'toolbarCls',
+									ui:'plain',
+									style:"font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D",
+									tabBar: {
+									cls: 'tabBarCls',
+									docked: 'bottom',
+									height: '9%',
+									padding: '5 50 0 50',
+									style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
+									ui: 'plain',
+									modal: false,
+									activeTab: 0,
+									layout: {
+									type: 'hbox',
+									align: 'center',
+									pack: 'justify'
+									}
+									},
+									items: [
+									{
+									xtype: 'contactinfo',
+									title: 'Home',
+									itemId: 'home',
+									iconCls: 'icon-home'
+									},
+									{
+									xtype: 'DealsPanel',
+									title: 'Buzz',
+									iconCls: 'icon-bubbles'
+									},
+									{
+									xtype:'buzzometer',
+									title:'BuzzOMeter',
+									iconCls:'info'
+									}
+									]
+									});
+									//Ext.getCmp('changePicButton').hide();
+									Ext.Viewport.setActiveItem(view);
+									view.getComponent('home').setRecord(record);*/
                                     //Ext.Viewport.getActiveItem().destroy();
-                                    Ext.Viewport.setActiveItem(view);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
