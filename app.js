@@ -66222,19 +66222,6 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'contactpic',
-                cls: 'x-panel-body',
-                height: '30%',
-                itemId: 'picture1',
-                width: '',
-                flex: 5,
-                layout: {
-                    type: 'vbox',
-                    align: 'start',
-                    pack: 'end'
-                }
-            },
-            {
                 xtype: 'textfield',
                 cls: 'icon-phone',
                 disabled: false,
@@ -66291,8 +66278,36 @@ Ext.define('Ext.picker.Picker', {
                 name: 'address',
                 readOnly: true,
                 maxRows: 2
+            },
+            {
+                xtype: 'contactpic',
+                cls: 'x-panel-body',
+                docked: 'top',
+                height: '30%',
+                itemId: 'picture1',
+                width: ''
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onInfoPainted',
+                event: 'painted'
             }
         ]
+    },
+    onInfoPainted: function(element, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        console.log('Info page painted');
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var rec = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+        this.setRecord(rec);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -66803,63 +66818,51 @@ Ext.define('Ext.picker.Picker', {
                                     record.commit();
                                     store.sync();
                                     store.load();
-                                    //Ext.Viewport.getComponent('panel').destroy();
-                                    /* var view = Ext.create("Ext.tab.Panel", {
-									itemId: 'panel' ,
-									fullscreen: true,
-									tabBarPosition: 'bottom',
-									cls: 'toolbarCls',
-									ui:'plain',
-									style:"font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D;",
-									tabBar: {
-									cls: 'tabBarCls',
-									docked: 'bottom',
-									height: '9%',
-									padding: '5 50 0 50',
-									style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
-									ui: 'plain',
-									modal: false,
-									activeTab: 0,
-									layout: {
-									type: 'hbox',
-									align: 'center',
-									pack: 'justify'
-									}
-									},
-
-
-
-
-
-									items: [
-									{
-									xtype: 'contactinfo',
-									title:'Home',
-									itemId:'home',
-									iconCls:'icon-home',
-
-
-									},
-									{
-									xtype: 'DealsPanel',
-									title:'Buzz',
-									iconCls:'icon-bubbles'
-									},
-									{
-									xtype:'buzzometer',
-									title:'BuzzOMeter',
-									iconCls:'info'
-									}
-									]
-									});
-
-
-
-
-
-									view.getComponent('home').setRecord(record);
-									//Ext.Viewport.getActiveItem().destroy();
-									Ext.Viewport.setActiveItem(view);*/
+                                    Ext.Viewport.getComponent('panel').destroy();
+                                    var view = Ext.create("Ext.tab.Panel", {
+                                            itemId: 'panel',
+                                            fullscreen: true,
+                                            tabBarPosition: 'bottom',
+                                            cls: 'toolbarCls',
+                                            ui: 'plain',
+                                            style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D;",
+                                            tabBar: {
+                                                cls: 'tabBarCls',
+                                                docked: 'bottom',
+                                                height: '9%',
+                                                padding: '5 50 0 50',
+                                                style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
+                                                ui: 'plain',
+                                                modal: false,
+                                                activeTab: 0,
+                                                layout: {
+                                                    type: 'hbox',
+                                                    align: 'center',
+                                                    pack: 'justify'
+                                                }
+                                            },
+                                            items: [
+                                                {
+                                                    xtype: 'contactinfo',
+                                                    title: 'Home',
+                                                    itemId: 'home',
+                                                    iconCls: 'icon-home'
+                                                },
+                                                {
+                                                    xtype: 'DealsPanel',
+                                                    title: 'Buzz',
+                                                    iconCls: 'icon-bubbles'
+                                                },
+                                                {
+                                                    xtype: 'buzzometer',
+                                                    title: 'BuzzOMeter',
+                                                    iconCls: 'info'
+                                                }
+                                            ]
+                                        });
+                                    view.getComponent('home').setRecord(record);
+                                    //Ext.Viewport.getActiveItem().destroy();
+                                    Ext.Viewport.setActiveItem(view);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
