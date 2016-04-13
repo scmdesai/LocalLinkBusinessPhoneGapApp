@@ -66296,7 +66296,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onInfoPainted: function(element, eOpts) {
-        document.getElementById('contactpic').show();
+        Ext.getElementById('contactpic').show();
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
