@@ -66126,7 +66126,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
         overflow: 'hidden',
-        height: '100%',
         id: 'contactpic',
         itemId: 'contactpic1',
         margin: '5 5 5 5',
@@ -66224,12 +66223,13 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
-                height: '30%',
+                docked: 'top',
+                height: 135,
                 itemId: 'picture1',
                 width: '',
-                flex: 5,
+                flex: 1,
                 layout: {
-                    type: 'vbox',
+                    type: 'fit',
                     align: 'start',
                     pack: 'end'
                 }
@@ -66879,9 +66879,15 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
-                height: '30%',
+                height: 138,
                 itemId: 'picture',
-                width: ''
+                width: '',
+                flex: 10,
+                layout: {
+                    type: 'fit',
+                    align: 'start',
+                    pack: 'end'
+                }
             },
             {
                 xtype: 'button',
