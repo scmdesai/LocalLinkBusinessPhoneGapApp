@@ -66625,6 +66625,7 @@ Ext.define('Ext.picker.Picker', {
                             title: 'Buzz Name'
                         },
                         legend: 'none',
+                        height: '200',
                         orientation: 'horizontal',
                         bar: {
                             groupWidth: 20
