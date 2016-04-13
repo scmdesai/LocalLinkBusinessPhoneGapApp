@@ -66737,7 +66737,6 @@ Ext.define('Ext.picker.Picker', {
         id: 'formpanel',
         itemId: 'formpanel',
         style: 'background:white',
-        styleHtmlContent: true,
         ui: 'light',
         autoDestroy: false,
         modal: true,
@@ -66799,6 +66798,21 @@ Ext.define('Ext.picker.Picker', {
                                             cls: 'toolbarCls',
                                             ui: 'plain',
                                             style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D",
+                                            tabBar: {
+                                                cls: 'tabBarCls',
+                                                docked: 'bottom',
+                                                height: '9%',
+                                                padding: '5 15 0 15',
+                                                style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
+                                                ui: 'plain',
+                                                modal: false,
+                                                activeTab: 0,
+                                                layout: {
+                                                    type: 'hbox',
+                                                    align: 'start',
+                                                    pack: 'justify'
+                                                }
+                                            },
                                             items: [
                                                 {
                                                     xtype: 'contactinfo',
@@ -68201,7 +68215,7 @@ Ext.application({
                                     cls: 'tabBarCls',
                                     docked: 'bottom',
                                     height: '9%',
-                                    padding: '5 5 0 5',
+                                    padding: '5 15 0 15',
                                     style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
                                     ui: 'plain',
                                     modal: false,
