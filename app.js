@@ -66291,11 +66291,12 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        //if (record) {
-        var name = record.get('businessName');
-        var customerId = record.get('customerId');
-        this.down('#nameTxt').setHtml(name);
-        this.down('contactpic').setData(record.get('pictureURL'));
+        if (record) {
+            var name = record.get('businessName');
+            var customerId = record.get('customerId');
+            this.down('#nameTxt').setHtml(name);
+            this.down('contactpic').setData(record.data);
+        }
     }
 }, 0, [
     "contactinfo"
@@ -66317,7 +66318,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactinfo'
 ], 0));
-//}
 
 /*
  * File: app/view/ListOfDeals.js
