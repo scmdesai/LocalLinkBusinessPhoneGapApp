@@ -66537,12 +66537,14 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'panel',
                 title: 'Buzz Popularity',
+                height: '100%',
                 html: '<div id="chart1" ></div>',
                 itemId: 'mypanel'
             },
             {
                 xtype: 'panel',
                 title: 'User Location',
+                height: '100%',
                 html: '<div id="chart2"></div>',
                 itemId: 'mypanel1'
             }
@@ -66659,7 +66661,7 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var optionsBarChart = {
-                        'title': 'Buzz Popularity',
+                        'title': 'none',
                         'titleTextStyle': {
                             color: '#00529D',
                             fontName: 'Arial',
@@ -66677,8 +66679,7 @@ Ext.define('Ext.picker.Picker', {
                         },
                         legend: 'none',
                         orientation: 'horizontal',
-                        width: '50%',
-                        height: '60%',
+                        height: 500,
                         bar: {
                             groupWidth: 20
                         }
@@ -66737,14 +66738,9 @@ Ext.define('Ext.picker.Picker', {
                 }
                 // Set chart options
                 var options = {
-                        'title': 'User Location',
-                        'titleTextStyle': {
-                            color: '#00529D',
-                            fontName: 'Arial',
-                            fontSize: 10
-                        },
-                        'width': 400,
-                        'height': 300,
+                        'title': 'none',
+                        'width': 500,
+                        'height': 500,
                         'pieHole': 0.4,
                         'pieSliceTextStyle': {
                             color: 'black'
