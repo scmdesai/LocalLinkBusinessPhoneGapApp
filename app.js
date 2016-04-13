@@ -66536,11 +66536,13 @@ Ext.define('Ext.picker.Picker', {
         items: [
             {
                 xtype: 'panel',
+                title: 'Buzz Popularity',
                 html: '<div id="chart1" ></div>',
                 itemId: 'mypanel'
             },
             {
                 xtype: 'panel',
+                title: 'User Location',
                 html: '<div id="chart2"></div>',
                 itemId: 'mypanel1'
             }
