@@ -66538,7 +66538,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'panel',
                 title: 'Buzz Popularity',
                 height: '100%',
-                html: '<div id="chart1" ></div>',
+                html: '<div id="chart1" style="vertical-align:middle"></div>',
                 itemId: 'mypanel'
             },
             {
