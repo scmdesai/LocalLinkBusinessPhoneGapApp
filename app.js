@@ -66600,7 +66600,7 @@ Ext.define('Ext.picker.Picker', {
                                                 title: 'Buzz Name'
                                             },
                                             legend: 'none',
-                                            height: '200',
+                                            height: '400',
                                             orientation: 'horizontal',
                                             bar: {
                                                 groupWidth: 20
@@ -66676,7 +66676,7 @@ Ext.define('Ext.picker.Picker', {
                                             'pieHole': 0.4,
                                             'pieSliceTextStyle': {
                                                 color: 'black',
-                                                height: '300'
+                                                height: '500'
                                             }
                                         };
                                     // Instantiate and draw our chart, passing in some options.
