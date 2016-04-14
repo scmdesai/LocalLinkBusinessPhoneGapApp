@@ -66199,7 +66199,7 @@ Ext.define('Ext.picker.Picker', {
                     var view = Ext.Viewport.add({
                             xtype: 'panel'
                         });
-                    view.getComponent('home').setRecord(record);
+                    //view.getComponent('home').setRecord(record);
                     //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 } else {
@@ -67959,36 +67959,18 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 title: 'Home',
                 iconCls: 'icon-home',
-                itemId: 'home',
-                items: [
-                    {
-                        xtype: 'contactinfo',
-                        height: '100%'
-                    }
-                ]
+                itemId: 'home'
             },
             {
                 xtype: 'container',
                 title: 'Manage Buzz',
-                iconCls: 'icon-bubbles',
-                items: [
-                    {
-                        xtype: 'DealsPanel',
-                        minHeight: '95%'
-                    }
-                ]
+                iconCls: 'icon-bubbles'
             },
             {
                 xtype: 'container',
                 title: 'BuzzOMeter',
                 iconCls: 'info',
-                style: 'color: #00529D;',
-                items: [
-                    {
-                        xtype: 'buzzometer',
-                        height: '100%'
-                    }
-                ]
+                style: 'color: #00529D;'
             }
         ],
         tabBar: {
