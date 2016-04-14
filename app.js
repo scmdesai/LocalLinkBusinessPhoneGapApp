@@ -66287,6 +66287,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.contactinfo', Ext.form.Panel, {
     config: {
         border: 5,
+        id: 'info',
         itemId: 'info',
         style: 'background;#fff',
         styleHtmlContent: true,
@@ -66515,7 +66516,7 @@ Ext.define('Ext.picker.Picker', {
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         console.log(record.get('pictureURL'));
-        Ext.getCmp('contactinfo').setRecord(record);
+        this.setRecord(record);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
