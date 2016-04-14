@@ -67943,101 +67943,69 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'mypanel1',
                 listeners: [
                     {
-                        fn: function(element, eOpts) {},
-                        /*var storeUserDetails = Ext.getStore('UserDetails');
-							storeUserDetails.load();
-							var customerId;
-							var businessName;
-
-							storeUserDetails.each(function(record){
-							//console.log('StoreUserDetails : ' +record.get('customerId'));
-							customerId = record.get('customerId');
-							businessName = record.get('businessName');
-
-						});
-
-						var dealName=[];
-
-
-
-						/*     // Set a callback to run when the Google Visualization API is loaded.
-						google.charts.setOnLoadCallback(drawChart);
-						function drawChart() {
-
-						// Create the data table.
-						var data = new google.visualization.DataTable();
-						var zipcode=[];
-						var numberOfHits=[];
-
-						//data.addColumn('string', 'dealName');
-						data.addColumn('string', 'zipcode');
-						data.addColumn('number', 'NumberOfHits');
-
-
-						$.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId,function(json){
-							for(var i=0,j=i;i<json.totalResults;i++,j++){
-
-								dealData = json.rows[i].toString();
-								tmp = dealData.split(",");
-								dealName[i] = tmp[0];
-								if(zipcode[0]) {
-
-									for(var k=0;k<j;k++)
-									if(tmp[1]=== zipcode[k]) {
-
-										numberOfHits[k]= numberOfHits[k] + parseInt(tmp[2],10);
-										j--;
-									}
-									else {
-										zipcode[j] = tmp[1];
-										numberOfHits[j] = parseInt(tmp[2],10);
-									}
-								}
-								else {
-									zipcode[j] = tmp[1];
-									numberOfHits[j] = parseInt(tmp[2],10);
-								}
-
-
-
-
-
-
-
-
-							}
-
-							for(j=0;j< zipcode.length;j++) {
-								data.addRow(
-								[zipcode[j],parseInt(numberOfHits[j],10)]
-								);
-							}
-							// Set chart options
-							var options = {
-
-								'pieHole':0.4,
-								'pieSliceTextStyle': {
-									color: 'black',
-
-
-								},
-								height:'500',
-								width:'300',
-								legend:'top'
-
-							};
-							// Instantiate and draw our chart, passing in some options.
-							var chart = new google.visualization.PieChart(document.getElementById('chart2'));
-							chart.draw(data, options);
-
-
-
-						});
-
-
-
-
-					}*/
+                        fn: function(element, eOpts) {
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var businessName;
+                            storeUserDetails.each(function(record) {
+                                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            var dealName = [];
+                            // Set a callback to run when the Google Visualization API is loaded.
+                            google.charts.setOnLoadCallback(drawChart);
+                            function drawChart() {
+                                // Create the data table.
+                                var data = new google.visualization.DataTable();
+                                var zipcode = [];
+                                var numberOfHits = [];
+                                //data.addColumn('string', 'dealName');
+                                data.addColumn('string', 'zipcode');
+                                data.addColumn('number', 'NumberOfHits');
+                                $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
+                                    for (var i = 0,
+                                        j = i; i < json.totalResults; i++ , j++) {
+                                        dealData = json.rows[i].toString();
+                                        tmp = dealData.split(",");
+                                        dealName[i] = tmp[0];
+                                        if (zipcode[0]) {
+                                            for (var k = 0; k < j; k++) if (tmp[1] === zipcode[k]) {
+                                                numberOfHits[k] = numberOfHits[k] + parseInt(tmp[2], 10);
+                                                j--;
+                                            } else {
+                                                zipcode[j] = tmp[1];
+                                                numberOfHits[j] = parseInt(tmp[2], 10);
+                                            };
+                                            
+                                        } else {
+                                            zipcode[j] = tmp[1];
+                                            numberOfHits[j] = parseInt(tmp[2], 10);
+                                        }
+                                    }
+                                    for (j = 0; j < zipcode.length; j++) {
+                                        data.addRow([
+                                            zipcode[j],
+                                            parseInt(numberOfHits[j], 10)
+                                        ]);
+                                    }
+                                    // Set chart options
+                                    var options = {
+                                            'pieHole': 0.4,
+                                            'pieSliceTextStyle': {
+                                                color: 'black'
+                                            },
+                                            height: '500',
+                                            width: '300',
+                                            legend: 'top'
+                                        };
+                                    // Instantiate and draw our chart, passing in some options.
+                                    var chart = new google.visualization.PieChart(document.getElementById('chart2'));
+                                    chart.draw(data, options);
+                                });
+                            }
+                        },
                         event: 'painted'
                     }
                 ]
