@@ -66462,11 +66462,14 @@ Ext.define('Ext.picker.Picker', {
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
         var customerId;
+        var store = Ext.getStore('MyJsonPStore');
         storeUserDetails.each(function(record) {
             //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
+        store.sync();
+        store.load();
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         this.setSrc(record.get('pictureURL'));
     }
@@ -66553,7 +66556,9 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'myimg',
                 flex: 1,
-                height: 100
+                docked: 'top',
+                height: '30%',
+                margin: '5 5 5 5'
             },
             {
                 xtype: 'textfield',
@@ -67988,8 +67993,8 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             Ext.Msg.alert('Success', action.msg);
-                            view.setRecord(record);
                             form.destroy();
+                            view.setRecord(record);
                         },
                         failure: function(form, action) {
                             store.load();
@@ -68328,13 +68333,12 @@ Ext.define('Ext.picker.Picker', {
         ],
         tabBar: {
             docked: 'bottom',
-            height: '10%',
-            padding: '5 40 5 40',
+            padding: '35 40 0 40',
             style: 'color:#c0c0c0;background:#FFF;font-size:4vw',
             ui: 'plain',
             layout: {
                 type: 'hbox',
-                align: 'stretchmax',
+                align: 'end',
                 pack: 'justify'
             }
         }
