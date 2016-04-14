@@ -66515,7 +66515,7 @@ Ext.define('Ext.picker.Picker', {
             businessName = record.get('businessName');
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
-        console.log(record.get('pictureURL'));
+        console.log(this.getComponent('contactpic').getItemId());
         this.setRecord(record);
     },
     setRecord: function(record) {
@@ -66680,7 +66680,6 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
-                                    this.getContactinfo().refresh();
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
