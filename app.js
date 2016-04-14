@@ -66341,7 +66341,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '',
                 flex: 10,
                 layout: {
-                    type: 'vbox',
+                    type: 'fit',
                     align: 'start',
                     pack: 'end'
                 }
@@ -67876,13 +67876,7 @@ Ext.define('Ext.picker.Picker', {
                 title: 'Home',
                 iconCls: 'icon-home',
                 id: 'home',
-                itemId: 'home',
-                items: [
-                    {
-                        xtype: 'contactinfo',
-                        height: '100%'
-                    }
-                ]
+                itemId: 'home'
             },
             {
                 xtype: 'container',
@@ -68071,6 +68065,10 @@ Ext.define('Ext.picker.Picker', {
                         ]
                     }
                 ]
+            },
+            {
+                xtype: 'contactinfo',
+                iconCls: 'info'
             }
         ],
         tabBar: {
