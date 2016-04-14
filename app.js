@@ -66328,10 +66328,14 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'contactpic',
+                flex: 1,
+                height: ''
+            },
+            {
                 xtype: 'textfield',
                 cls: 'icon-phone',
                 disabled: false,
-                docked: 'top',
                 height: '',
                 hidden: false,
                 itemId: 'phoneNumber',
@@ -66361,7 +66365,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'icon-globe',
                 disabled: false,
                 height: '',
-                hidden: true,
+                hidden: false,
                 itemId: 'websiteDisplayName',
                 padding: '10 10 10 10',
                 style: 'font-size:2px !important',
@@ -66378,7 +66382,7 @@ Ext.define('Ext.picker.Picker', {
                 ],
                 disabled: false,
                 height: '12vh',
-                hidden: true,
+                hidden: false,
                 html: '',
                 itemId: 'address',
                 maxHeight: '',
@@ -66480,10 +66484,6 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 name: 'businessName',
                 readOnly: true
-            },
-            {
-                xtype: 'contactpic',
-                flex: 10
             }
         ],
         listeners: [
@@ -66619,7 +66619,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.Picture2', Ext.Container, {
     config: {
-        itemId: 'contactpic1',
+        itemId: 'contactpic',
         margin: '5 5 5 5',
         style: 'overflow:hidden;border:1px groove #000;background:none',
         styleHtmlContent: true,
@@ -66737,7 +66737,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'picture2',
-                flex: 10
+                height: 128
             },
             {
                 xtype: 'button',
