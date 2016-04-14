@@ -66496,12 +66496,12 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onInfoActivate',
-                event: 'activate'
+                fn: 'onInfoPainted',
+                event: 'painted'
             }
         ]
     },
-    onInfoActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+    onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
         var customerId;
@@ -66515,7 +66515,7 @@ Ext.define('Ext.picker.Picker', {
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         console.log(record.get('pictureURL'));
-        newActiveItem.setRecord(record);
+        Ext.getCmp('contactinfo').setRecord(record);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
