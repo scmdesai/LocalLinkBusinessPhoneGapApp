@@ -66680,6 +66680,7 @@ Ext.define('Ext.picker.Picker', {
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
+                                    this.getContactinfo().refresh();
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
@@ -67058,10 +67059,8 @@ Ext.define('Ext.picker.Picker', {
         }
     },
     onEditButtonTap: function(button, e, eOpts) {
-        var referrer = Ext.Viewport.getActiveItem();
         var form = this.getContactform();
         var info = this.getContactinfo().getRecord();
-        form.referrer = referrer;
         Ext.Viewport.setActiveItem(form);
         form.setRecord(info);
     },
@@ -67139,10 +67138,6 @@ Ext.define('Ext.picker.Picker', {
         var form = this.getContactform();
         form.destroy();
     },
-    //var btn = Ext.get('changePicButton');
-    //btn.hide();
-    // Ext.Viewport.setActiveItem(form.referrer);
-    // delete form.referrer;
     onBackFromDealsPanelTap: function(button, e, eOpts) {
         var ds = Ext.StoreManager.lookup('MyJsonPStore');
         ds.clearFilter();
