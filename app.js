@@ -66730,25 +66730,21 @@ Ext.define('Ext.picker.Picker', {
             }
         ]
     },
-    onInfoPainted: function(element, eOpts) {},
-    /*var storeUserDetails = Ext.getStore('UserDetails');
-		storeUserDetails.load();
-		var customerId;
-		var businessName;
-		var date = new Date();
-
-		var today = Ext.Date.format(date, 'n/j/Y');
-
-		storeUserDetails.each(function(record){
-			//console.log('StoreUserDetails : ' +record.get('customerId'));
-			customerId = record.get('customerId');
-			businessName = record.get('businessName');
-
-		});
-
-		var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId);
-
-		this.setRecord(record);*/
+    onInfoPainted: function(element, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        var date = new Date();
+        var today = Ext.Date.format(date, 'n/j/Y');
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+        this.setRecord(record);
+    },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
@@ -67748,12 +67744,17 @@ Ext.define('Ext.picker.Picker', {
                 },
                 placeHolder: 'mm/dd/yyyy',
                 autoSelect: false,
+                options: {
+                    minValue: new Date()
+                },
                 usePicker: true,
                 dateFormat: 'm/d/Y',
                 picker: {
                     itemId: 'mydatepicker3',
-                    styleHtmlContent: true,
+                    style: '',
+                    scrollable: false,
                     stretchX: false,
+                    stretchY: false,
                     yearFrom: 2016
                 }
             },
