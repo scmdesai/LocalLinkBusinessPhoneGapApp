@@ -67137,11 +67137,11 @@ Ext.define('Ext.picker.Picker', {
     onCancelButtonTap: function(button, e, eOpts) {
         var form = this.getContactform();
         form.destroy();
-        //var btn = Ext.get('changePicButton');
-        //btn.hide();
-        Ext.Viewport.setActiveItem(form.referrer);
-        delete form.referrer;
     },
+    //var btn = Ext.get('changePicButton');
+    //btn.hide();
+    // Ext.Viewport.setActiveItem(form.referrer);
+    // delete form.referrer;
     onBackFromDealsPanelTap: function(button, e, eOpts) {
         var ds = Ext.StoreManager.lookup('MyJsonPStore');
         ds.clearFilter();
