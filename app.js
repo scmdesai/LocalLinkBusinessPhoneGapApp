@@ -67866,7 +67866,7 @@ Ext.define('Ext.picker.Picker', {
                                     url: 'http://services.appsonmobile.com/uploadS3',
                                     xhr2: true,
                                     waitMsg: 'Please Wait...',
-                                    timeout: 5000,
+                                    cache: false,
                                     scope: this,
                                     success: function(form, action) {
                                         Ext.getStore('MyDealsStore').load();
