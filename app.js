@@ -66308,6 +66308,7 @@ Ext.define('Ext.picker.Picker', {
                         docked: 'right',
                         hidden: false,
                         itemId: 'editButton',
+                        padding: '5 0 0 0',
                         style: 'color:#00529D',
                         ui: 'plain',
                         width: '20%',
@@ -66513,6 +66514,7 @@ Ext.define('Ext.picker.Picker', {
             businessName = record.get('businessName');
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+        console.log(record.get('pictureURL'));
         newActiveItem.setRecord(record);
     },
     setRecord: function(record) {
@@ -66673,60 +66675,9 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            //form.fireEvent('updateRecord',this);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    /*record.beginEdit(true, record.getChanges());
-									form.updateRecord(record);
-									record.endEdit(true, record.getChanges());
-									record.commit();
-									store.sync();
-									store.load();*/
-                                    //Ext.Viewport.getComponent('panel').destroy();
-                                    /* var view = Ext.create("Ext.tab.Panel", {
-									fullscreen: true,
-									tabBarPosition: 'bottom',
-									itemId: 'panel',
-									cls: 'toolbarCls',
-									ui: 'plain',
-									style: "font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D",
-									tabBar: {
-									cls: 'tabBarCls',
-									docked: 'bottom',
-									height: '9%',
-									padding: '5 50 0 50',
-									style: 'font-size:5vw;border-top:1px solid #eee;background:white;color:#00529D',
-									ui: 'plain',
-									modal: false,
-									activeTab: 0,
-									layout: {
-									type: 'hbox',
-									align: 'center',
-									pack: 'justify'
-									}
-									},
-									items: [
-									{
-									xtype: 'contactinfo',
-									title: 'Home',
-									itemId: 'home',
-									iconCls: 'icon-home'
-									},
-									{
-									xtype: 'DealsPanel',
-									title: 'Buzz',
-									iconCls: 'icon-bubbles'
-									},
-									{
-									xtype: 'buzzometer',
-									title: 'BuzzOMeter',
-									iconCls: 'info'
-									}
-									]
-									});*/
-                                    //var view = Ext.Viewport.add({xtype:'panel'});
-                                    //Ext.Viewport.setActiveItem(view);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
@@ -66737,13 +66688,6 @@ Ext.define('Ext.picker.Picker', {
                                 }
                             });
                         },
-                        /*var record = form.getRecord();
-
-							view =Ext.Viewport.add({xtype: 'contactinfo'});
-							view.setRecord(record);
-
-
-							Ext.Viewport.setActiveItem(view);*/
                         cls: 'button',
                         itemId: 'saveContactButton',
                         margin: '0 10 0 0',
@@ -67960,7 +67904,6 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'tabpanel',
                 title: 'BuzzOMeter',
                 iconCls: 'info',
-                activeItem: 1,
                 id: 'buzzometer',
                 itemId: 'buzzometer',
                 styleHtmlContent: true,
@@ -68137,7 +68080,13 @@ Ext.define('Ext.picker.Picker', {
         ],
         tabBar: {
             docked: 'bottom',
-            style: 'color:#00529D'
+            padding: '5 50 5 50',
+            style: 'color:#00529D',
+            layout: {
+                type: 'hbox',
+                align: 'stretchmax',
+                pack: 'justify'
+            }
         }
     }
 }, 0, [
