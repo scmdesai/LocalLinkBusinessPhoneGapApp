@@ -67981,13 +67981,7 @@ Ext.define('Ext.picker.Picker', {
                 title: 'Home',
                 iconCls: 'icon-home',
                 id: 'home',
-                itemId: 'home',
-                items: [
-                    {
-                        xtype: 'contactinfo',
-                        height: '100%'
-                    }
-                ]
+                itemId: 'home'
             },
             {
                 xtype: 'container',
