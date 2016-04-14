@@ -66140,6 +66140,12 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onContainerPainted: function(element, eOpts) {
+        //Load google charts
+        google.charts.load('current', {
+            'packages': [
+                'corechart'
+            ]
+        });
         // Settings.
         FacebookInAppBrowser.settings.appId = '900651756709444';
         FacebookInAppBrowser.settings.redirectUrl = 'http://appsonmobile.com';
@@ -68265,12 +68271,6 @@ Ext.application({
             }
         }
         //do nothing
-        //Load google charts
-        google.charts.load('current', {
-            'packages': [
-                'corechart'
-            ]
-        });
         Ext.create('Contact.view.Login', {
             fullscreen: true
         });
