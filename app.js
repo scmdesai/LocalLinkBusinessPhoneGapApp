@@ -67939,15 +67939,13 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.panel', Ext.tab.Panel, {
     config: {
-        activeItem: 1,
         itemId: 'panel',
         items: [
             {
-                xtype: 'panel',
+                xtype: 'container',
                 title: 'User Location',
                 iconCls: 'info',
                 height: '100%',
-                html: '<div id="chart2"></div>',
                 itemId: 'mypanel1',
                 listeners: [
                     {
@@ -68075,11 +68073,10 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'panel',
+                xtype: 'container',
                 title: 'Buzz Popularity',
                 iconCls: 'info',
                 height: '100%',
-                html: '<div id="chart1" ></div>',
                 itemId: 'mypanel',
                 listeners: [
                     {
