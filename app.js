@@ -66140,12 +66140,6 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onContainerPainted: function(element, eOpts) {
-        //Load google charts
-        google.charts.load('current', {
-            'packages': [
-                'corechart'
-            ]
-        });
         // Settings.
         FacebookInAppBrowser.settings.appId = '900651756709444';
         FacebookInAppBrowser.settings.redirectUrl = 'http://appsonmobile.com';
@@ -68260,19 +68254,26 @@ Ext.application({
         Ext.util.Format.undef = function(value, defaultValue) {
             return Ext.isDefined(value) ? value : defaultValue;
         };
-        if (Ext.os.is('Android')) {
-            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
-            // add back button listener
-            function onBackKeyDown(eve) {
-                eve.preventDefault();
-                Ext.Msg.confirm("Exit", "", function(answer) {
-                    if (answer == 'yes') {
-                        navigator.app.exitApp();
-                    } else {}
-                });
-            }
-        }
-        //do nothing
+        //Load google charts
+        google.charts.load('current', {
+            'packages': [
+                'corechart'
+            ]
+        });
+        /*if (Ext.os.is('Android')) {
+			document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);  // add back button listener
+
+			function onBackKeyDown(eve) {
+				eve.preventDefault();
+				Ext.Msg.confirm("Exit", "",  function ( answer ) {
+					if ( answer == 'yes') {
+						navigator.app.exitApp();
+					} else {
+						//do nothing
+					}
+				});
+			}
+		}*/
         Ext.create('Contact.view.Login', {
             fullscreen: true
         });
