@@ -66834,7 +66834,15 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.MyImg', Ext.Img, {
     config: {
         html: '',
-        src: 'http://appsonmobile.com/locallink/stores/Studio%20Nafisa%20Arts.jpg'
+        listeners: [
+            {
+                fn: 'onImagePainted',
+                event: 'painted'
+            }
+        ]
+    },
+    onImagePainted: function(element, eOpts) {
+        this.setSrc('http://appsonmobile.com/locallink/stores/Studio%20Nafisa%20Arts.jpg');
     }
 }, 0, [
     "myimg"
