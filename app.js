@@ -66451,8 +66451,7 @@ Ext.define('Ext.picker.Picker', {
     config: {
         id: 'contactpic',
         itemId: 'contactpic',
-        margin: '5 5 5 5',
-        style: 'overflow:hidden;border:1px groove #000;background:none',
+        style: 'overflow:hidden;',
         styleHtmlContent: true,
         autoDestroy: false,
         layout: 'fit',
@@ -66543,8 +66542,8 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'contactpic',
-                flex: 1,
-                height: ''
+                width: '100%',
+                flex: 2
             },
             {
                 xtype: 'textfield',
@@ -66834,6 +66833,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.MyImg', Ext.Img, {
     config: {
         html: '',
+        padding: '5 5 5 5',
         listeners: [
             {
                 fn: 'onImagePainted',
@@ -67096,9 +67096,10 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'myimg',
-                flex: 5,
                 docked: 'top',
-                height: '30%'
+                height: '30%',
+                margin: '5 5 5 5',
+                flex: 5
             }
         ]
     },
@@ -68149,7 +68150,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'tabpanel',
                 title: 'BuzzOMeter',
-                iconCls: 'info',
+                iconCls: 'icon-buzzometer',
                 id: 'buzzometer',
                 itemId: 'buzzometer',
                 styleHtmlContent: true,
@@ -68326,8 +68327,9 @@ Ext.define('Ext.picker.Picker', {
         ],
         tabBar: {
             docked: 'bottom',
-            padding: '5 50 5 50',
-            style: 'color:#00529D',
+            padding: '5 40 5 40',
+            style: 'color:#c0c0c0;background:#FFF;font-size:4.1vh',
+            ui: 'plain',
             layout: {
                 type: 'hbox',
                 align: 'stretchmax',
