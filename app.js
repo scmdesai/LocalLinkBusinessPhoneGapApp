@@ -66284,6 +66284,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: 'icon-phone',
                 disabled: false,
+                docked: 'top',
                 height: '',
                 hidden: false,
                 itemId: 'phoneNumber',
