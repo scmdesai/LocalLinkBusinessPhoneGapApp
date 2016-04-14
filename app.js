@@ -68451,9 +68451,7 @@ Ext.application({
                         //view.getComponent('home').setRecord(record);
                         //Ext.Viewport.getActiveItem().destroy();
                         //Ext.Viewport.setActiveItem(view);
-                        var view = Ext.Viewport.add({
-                                xtype: 'panel'
-                            });
+                        var view = Ext.create('Contact.view.panel');
                         view.getComponent('home').setRecord(record);
                         Ext.Viewport.setActiveItem(view);
                     } else //console.log(view.getComponent('home').getItemId());
