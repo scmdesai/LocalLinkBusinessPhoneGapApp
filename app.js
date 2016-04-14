@@ -66523,8 +66523,7 @@ Ext.define('Ext.picker.Picker', {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
-            this.down('contactpic').setData(record.data);
-            console.log(record.data);
+            this.down('contactpic').setData(record.data.pictureURL);
         }
     }
 }, 0, [
