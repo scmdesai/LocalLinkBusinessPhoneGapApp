@@ -66492,7 +66492,28 @@ Ext.define('Ext.picker.Picker', {
                 name: 'businessName',
                 readOnly: true
             }
+        ],
+        listeners: [
+            {
+                fn: 'onInfoActivate',
+                event: 'activate'
+            }
         ]
+    },
+    onInfoActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        var date = new Date();
+        var today = Ext.Date.format(date, 'n/j/Y');
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+        newActiveItem.setRecord(record);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -67959,18 +67980,37 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 title: 'Home',
                 iconCls: 'icon-home',
-                itemId: 'home'
+                id: 'home',
+                itemId: 'home',
+                items: [
+                    {
+                        xtype: 'contactinfo',
+                        height: '100%'
+                    }
+                ]
             },
             {
                 xtype: 'container',
                 title: 'Manage Buzz',
-                iconCls: 'icon-bubbles'
+                iconCls: 'icon-bubbles',
+                items: [
+                    {
+                        xtype: 'DealsPanel',
+                        height: '100%'
+                    }
+                ]
             },
             {
                 xtype: 'container',
                 title: 'BuzzOMeter',
                 iconCls: 'info',
-                style: 'color: #00529D;'
+                style: 'color: #00529D;',
+                items: [
+                    {
+                        xtype: 'buzzometer',
+                        height: '100%'
+                    }
+                ]
             }
         ],
         tabBar: {
