@@ -66125,7 +66125,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.Login', Ext.Container, {
     config: {
-        html: '<h3><b>Welcome to Local Buzz!</b></h3> <p>With this app you can stay in touch with your customers.In order to use Local Buzz, you must sign in with your Facebook account.</p>',
         maxHeight: '',
         style: '',
         styleHtmlContent: true,
@@ -66201,7 +66200,7 @@ Ext.define('Ext.picker.Picker', {
                             xtype: 'panel'
                         });
                     view.getComponent('home').setRecord(record);
-                    Ext.Viewport.getActiveItem().destroy();
+                    //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 } else {
                     console.log('no user info');
