@@ -66235,19 +66235,17 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
     config: {
-        overflow: 'hidden',
         id: 'contactpic',
         itemId: 'contactpic',
         margin: '5 5 5 5',
-        padding: '',
         style: 'border:1px groove #000;background:none',
-        ui: '',
+        styleHtmlContent: true,
         autoDestroy: false,
         layout: 'fit',
         scrollable: false,
         tpl: [
             '',
-            '<div><img src="{pictureURL}" style="width:100%;height:30%"/></div>',
+            '<img src="{pictureURL}" style="width:100%;height:30%"/>',
             '\t'
         ]
     }
