@@ -66242,6 +66242,7 @@ Ext.define('Ext.picker.Picker', {
         padding: '',
         style: 'overflow: hidden;border:1px groove #000;background:none',
         ui: '',
+        autoDestroy: false,
         scrollable: false,
         tpl: [
             '',
@@ -66524,7 +66525,6 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
-            this.down('contactpic').setHeight('160');
         }
     }
 }, 0, [
