@@ -66730,21 +66730,25 @@ Ext.define('Ext.picker.Picker', {
             }
         ]
     },
-    onInfoPainted: function(element, eOpts) {
-        var storeUserDetails = Ext.getStore('UserDetails');
-        storeUserDetails.load();
-        var customerId;
-        var businessName;
-        var date = new Date();
-        var today = Ext.Date.format(date, 'n/j/Y');
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-        });
-        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
-        this.setRecord(record);
-    },
+    onInfoPainted: function(element, eOpts) {},
+    /*var storeUserDetails = Ext.getStore('UserDetails');
+		storeUserDetails.load();
+		var customerId;
+		var businessName;
+		var date = new Date();
+
+		var today = Ext.Date.format(date, 'n/j/Y');
+
+		storeUserDetails.each(function(record){
+			//console.log('StoreUserDetails : ' +record.get('customerId'));
+			customerId = record.get('customerId');
+			businessName = record.get('businessName');
+
+		});
+
+		var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId);
+
+		this.setRecord(record);*/
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
@@ -67767,7 +67771,7 @@ Ext.define('Ext.picker.Picker', {
                 labelWidth: '35%',
                 name: 'DealEndDate',
                 value: {
-                    day: new Date().getDate(),
+                    day: new Date().getDate() + 1,
                     month: (new Date().getMonth() + 1),
                     year: new Date().getFullYear()
                 },
