@@ -67972,7 +67972,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'container',
                         title: 'Buzz Popularity',
                         height: '100%',
-                        html: '<div id="chart2"></div>',
+                        html: '<div id="chart1"></div>',
                         itemId: 'mypanel',
                         styleHtmlContent: true,
                         listeners: [
@@ -68063,7 +68063,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'container',
                         title: 'User Location',
                         height: '100%',
-                        html: '<div id="chart1"></div>',
+                        html: '<div id="chart2"></div>',
                         itemId: 'mypanel1',
                         styleHtmlContent: true,
                         listeners: [
