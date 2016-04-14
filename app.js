@@ -67940,6 +67940,7 @@ Ext.define('Ext.picker.Picker', {
                 title: 'User Location',
                 iconCls: 'info',
                 height: '100%',
+                html: '<div id="chart1"></div>',
                 itemId: 'mypanel1',
                 listeners: [
                     {
@@ -68039,107 +68040,88 @@ Ext.define('Ext.picker.Picker', {
                 title: 'Buzz Popularity',
                 iconCls: 'info',
                 height: '100%',
+                html: '<div id="chart2"></div>',
                 itemId: 'mypanel',
                 listeners: [
                     {
-                        fn: function(element, eOpts) {},
-                        /*var storeUserDetails = Ext.getStore('UserDetails');
-							storeUserDetails.load();
-							var customerId;
-							var businessName;
-
-							storeUserDetails.each(function(record){
-							//console.log('StoreUserDetails : ' +record.get('customerId'));
-							customerId = record.get('customerId');
-							businessName = record.get('businessName');
-
-						});*/
-                        // Set a callback to run when the Google Visualization API is loaded.
-                        /*google.charts.setOnLoadCallback(drawChart);
-						function drawChart() {
-
-
-						//Bar Chart
-						var dataBarChart = new google.visualization.DataTable();
-						var dealName=[];
-						var numberOfClicks=[];
-						dataBarChart.addColumn('string', 'dealName');
-
-						dataBarChart.addColumn('number', 'numberOfClicks');
-
-						$.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId,function(json){
-							for(var i=0,j=i;i<json.totalResults;i++,j++){
-
-								dealData = json.rows[i].toString();
-
-								tmp = dealData.split(",");
-								if(i===0){
-									dealName[0] = tmp[0];
-									numberOfClicks[0] = parseInt(tmp[2],10);
-								}
-								else {
-									for(var m =i-1;m<i;m++) {
-										if(tmp[0]===dealName[m]){
-											numberOfClicks[m] = numberOfClicks[m] + parseInt(tmp[2],10);
-											j--;
-										}
-
-										else {
-
-											dealName[j] = tmp[0];
-											numberOfClicks[j] = parseInt(tmp[2],10);
-										}
-									}
-
-								}
-							}
-
-
-							for( j=0;j<numberOfClicks.length;j++){
-								dataBarChart.addRow(
-								[dealName[j],numberOfClicks[j]]
-
-								);
-
-							}
-
-
-
-							// Set chart options
-							var optionsBarChart = {
-								vAxis: {
-									title: 'Number of Views',
-									titleTextStyle: {
-										color: '#00529D',
-										fontSize: 16
-									},
-
-									minValue: 0,
-									gridlines: { count: -1}
-								},
-								hAxis: {
-									title: 'Buzz Name',
-									titleTextStyle: {
-										color: '#00529D',
-										fontSize: 16
-									}
-								},
-								legend:'none',
-								height:'400',
-								orientation:'horizontal',
-
-								bar: {
-									groupWidth: 20
-								}
-							};
-							// Instantiate and draw our chart, passing in some options.
-							var chartBar = new google.visualization.BarChart(document.getElementById('chart1'));
-							chartBar.draw(dataBarChart, optionsBarChart);
-
-
-
-						});
-					}*/
+                        fn: function(element, eOpts) {
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var businessName;
+                            storeUserDetails.each(function(record) {
+                                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            // Set a callback to run when the Google Visualization API is loaded.
+                            google.charts.setOnLoadCallback(drawChart);
+                            function drawChart() {
+                                //Bar Chart
+                                var dataBarChart = new google.visualization.DataTable();
+                                var dealName = [];
+                                var numberOfClicks = [];
+                                dataBarChart.addColumn('string', 'dealName');
+                                dataBarChart.addColumn('number', 'numberOfClicks');
+                                $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
+                                    for (var i = 0,
+                                        j = i; i < json.totalResults; i++ , j++) {
+                                        dealData = json.rows[i].toString();
+                                        tmp = dealData.split(",");
+                                        if (i === 0) {
+                                            dealName[0] = tmp[0];
+                                            numberOfClicks[0] = parseInt(tmp[2], 10);
+                                        } else {
+                                            for (var m = i - 1; m < i; m++) {
+                                                if (tmp[0] === dealName[m]) {
+                                                    numberOfClicks[m] = numberOfClicks[m] + parseInt(tmp[2], 10);
+                                                    j--;
+                                                } else {
+                                                    dealName[j] = tmp[0];
+                                                    numberOfClicks[j] = parseInt(tmp[2], 10);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    for (j = 0; j < numberOfClicks.length; j++) {
+                                        dataBarChart.addRow([
+                                            dealName[j],
+                                            numberOfClicks[j]
+                                        ]);
+                                    }
+                                    // Set chart options
+                                    var optionsBarChart = {
+                                            vAxis: {
+                                                title: 'Number of Views',
+                                                titleTextStyle: {
+                                                    color: '#00529D',
+                                                    fontSize: 16
+                                                },
+                                                minValue: 0,
+                                                gridlines: {
+                                                    count: -1
+                                                }
+                                            },
+                                            hAxis: {
+                                                title: 'Buzz Name',
+                                                titleTextStyle: {
+                                                    color: '#00529D',
+                                                    fontSize: 16
+                                                }
+                                            },
+                                            legend: 'none',
+                                            height: '400',
+                                            orientation: 'horizontal',
+                                            bar: {
+                                                groupWidth: 20
+                                            }
+                                        };
+                                    // Instantiate and draw our chart, passing in some options.
+                                    var chartBar = new google.visualization.BarChart(document.getElementById('chart1'));
+                                    chartBar.draw(dataBarChart, optionsBarChart);
+                                });
+                            }
+                        },
                         event: 'painted'
                     }
                 ]
