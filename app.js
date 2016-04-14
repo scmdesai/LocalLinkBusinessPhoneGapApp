@@ -66683,7 +66683,7 @@ Ext.define('Ext.picker.Picker', {
 									record.commit();
 									store.sync();
 									store.load();*/
-                                    Ext.Viewport.getComponent('panel').destroy();
+                                    //Ext.Viewport.getComponent('panel').destroy();
                                     /* var view = Ext.create("Ext.tab.Panel", {
 									fullscreen: true,
 									tabBarPosition: 'bottom',
@@ -66725,10 +66725,8 @@ Ext.define('Ext.picker.Picker', {
 									}
 									]
 									});*/
-                                    var view = Ext.Viewport.add({
-                                            xtype: 'panel'
-                                        });
-                                    Ext.Viewport.setActiveItem(view);
+                                    //var view = Ext.Viewport.add({xtype:'panel'});
+                                    //Ext.Viewport.setActiveItem(view);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
@@ -68023,7 +68021,7 @@ Ext.define('Ext.picker.Picker', {
                                             }
                                             // Set chart options
                                             var optionsBarChart = {
-                                                    hAxis: {
+                                                    vAxis: {
                                                         title: 'Number of Views',
                                                         titleTextStyle: {
                                                             color: '#00529D',
@@ -68034,7 +68032,7 @@ Ext.define('Ext.picker.Picker', {
                                                             count: -1
                                                         }
                                                     },
-                                                    vAxis: {
+                                                    hAxis: {
                                                         title: 'Buzz Name',
                                                         titleTextStyle: {
                                                             color: '#00529D',
@@ -68043,7 +68041,7 @@ Ext.define('Ext.picker.Picker', {
                                                     },
                                                     legend: 'none',
                                                     height: '400',
-                                                    orientation: 'vertical',
+                                                    orientation: 'horizontal',
                                                     bar: {
                                                         groupWidth: 20
                                                     }
