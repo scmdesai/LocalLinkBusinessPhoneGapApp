@@ -66240,14 +66240,14 @@ Ext.define('Ext.picker.Picker', {
         itemId: 'contactpic',
         margin: '5 5 5 5',
         padding: '',
-        style: 'overflow: hidden;border:1px groove #000;background:none',
+        style: 'border:1px groove #000;background:none',
         ui: '',
         autoDestroy: false,
         layout: 'fit',
         scrollable: false,
         tpl: [
             '',
-            '\t<img src="{pictureURL}" style="width:100%;height:30%"/>',
+            '<div><img src="{pictureURL}" style="width:100%;height:30%"/></div>',
             '\t'
         ]
     }
