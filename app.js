@@ -66328,13 +66328,24 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'contactpic',
-                cls: 'x-panel-body',
+                xtype: 'container',
                 docked: 'top',
-                height: '30%',
-                itemId: 'picture',
-                width: '',
-                flex: 10
+                height: '50%',
+                layout: {
+                    type: 'vbox',
+                    align: 'stretchmax'
+                },
+                items: [
+                    {
+                        xtype: 'contactpic',
+                        cls: 'x-panel-body',
+                        docked: 'top',
+                        height: '100%',
+                        itemId: 'picture',
+                        width: '',
+                        flex: 10
+                    }
+                ]
             },
             {
                 xtype: 'textfield',
