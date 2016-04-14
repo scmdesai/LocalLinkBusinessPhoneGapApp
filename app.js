@@ -67436,39 +67436,6 @@ Ext.define('Ext.picker.Picker', {
         var store = Ext.getStore('MyDealsStore');
         store.clearFilter();
         store.filter('customerId', customerId);
-        var records = [];
-        store.each(function(rec) {
-            //console.log('Deal End Date: ' + rec.get('dealEndDate'));
-            //console.log('Tdays date is : ' + today);
-            /*if(rec.get('dealEndDate') >= today) {
-
-		                           records.push(rec.get('itemName'));
-								   //console.log('Active deal ' + rec.get('dealName'));
-
-
-		                       }
-		                       else {
-		                           Ext.Array.remove(records,rec.get('itemName'));
-								   //console.log('Expired deal ' + rec.get('dealName'));
-								   var req = Ext.Ajax.request({
-
-						method:'POST',
-
-
-						url  : 'http://services.appsonmobile.com/deals/'+ rec.get('itemName')
-
-			});
-
-
-		                       }*/
-            if (rec.get('dealEndDate') < today) {
-                Ext.Ajax.request({
-                    method: 'POST',
-                    url: 'http://services.appsonmobile.com/deals/' + rec.get('itemName')
-                });
-            }
-        });
-        store.load();
     }
 }, 0, [
     "DealsPanel"
@@ -67490,14 +67457,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'DealsPanel'
 ], 0));
-/* store.clearFilter();
-
-		      console.log(records.length);
-
-		        store.filterBy(function(record){
-		            return Ext.Array.indexOf(records, record.get('itemName')) !== -1;
-
-		        }, this);*/
 
 /*
  * File: app/view/UploadDealForm.js
@@ -67981,18 +67940,18 @@ Ext.define('Ext.picker.Picker', {
                 title: 'Home',
                 iconCls: 'icon-home',
                 id: 'home',
-                itemId: 'home'
+                itemId: 'home',
+                items: [
+                    {
+                        xtype: 'contactinfo',
+                        height: '100%'
+                    }
+                ]
             },
             {
                 xtype: 'container',
                 title: 'Manage Buzz',
-                iconCls: 'icon-bubbles',
-                items: [
-                    {
-                        xtype: 'DealsPanel',
-                        height: '100%'
-                    }
-                ]
+                iconCls: 'icon-bubbles'
             },
             {
                 xtype: 'container',
