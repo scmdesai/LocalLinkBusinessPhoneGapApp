@@ -66200,7 +66200,7 @@ Ext.define('Ext.picker.Picker', {
                             xtype: 'panel'
                         });
                     //view.getComponent('home').setRecord(record);
-                    //Ext.Viewport.getActiveItem().destroy();
+                    Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 } else {
                     console.log('no user info');
