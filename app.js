@@ -66331,7 +66331,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
-                height: '100%',
+                height: '30%',
                 itemId: 'picture',
                 width: '',
                 flex: 10
@@ -66341,6 +66341,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'icon-phone',
                 disabled: false,
                 height: '',
+                hidden: true,
                 itemId: 'phoneNumber',
                 margin: '',
                 minWidth: '',
@@ -66354,6 +66355,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'icon-email',
                 disabled: false,
                 height: '',
+                hidden: true,
                 itemId: 'email',
                 minWidth: '',
                 padding: '10 10 10 10',
@@ -66367,6 +66369,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'icon-globe',
                 disabled: false,
                 height: '',
+                hidden: true,
                 itemId: 'websiteDisplayName',
                 padding: '10 10 10 10',
                 style: 'font-size:2px !important',
@@ -66383,6 +66386,7 @@ Ext.define('Ext.picker.Picker', {
                 ],
                 disabled: false,
                 height: '12vh',
+                hidden: true,
                 html: '',
                 itemId: 'address',
                 maxHeight: '',
@@ -66693,10 +66697,10 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
-                height: '100%',
+                height: '30%',
                 itemId: 'picture1',
                 width: '',
-                layout: 'hbox'
+                layout: 'vbox'
             },
             {
                 xtype: 'button',
