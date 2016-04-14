@@ -66237,22 +66237,19 @@ Ext.define('Ext.picker.Picker', {
     config: {
         overflow: 'hidden',
         id: 'contactpic',
-        itemId: 'contactpic1',
+        itemId: 'contactpic',
         margin: '5 5 5 5',
         padding: '',
         style: 'overflow: hidden;border:1px groove #000;background:none',
         ui: '',
         autoDestroy: false,
+        layout: 'fit',
         scrollable: false,
         tpl: [
             '',
             '\t<img src="{pictureURL}" style="width:100%;height:30%"/>',
             '\t'
-        ],
-        layout: {
-            type: 'vbox',
-            align: 'stretchmax'
-        }
+        ]
     }
 }, 0, [
     "contactpic"
@@ -66339,12 +66336,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '30%',
                 itemId: 'picture',
                 width: '',
-                flex: 10,
-                layout: {
-                    type: 'fit',
-                    align: 'start',
-                    pack: 'end'
-                }
+                flex: 10
             },
             {
                 xtype: 'textfield',
@@ -66706,12 +66698,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '30%',
                 itemId: 'picture1',
                 width: '',
-                flex: 10,
-                layout: {
-                    type: 'vbox',
-                    align: 'start',
-                    pack: 'end'
-                }
+                flex: 10
             },
             {
                 xtype: 'button',
@@ -67876,7 +67863,13 @@ Ext.define('Ext.picker.Picker', {
                 title: 'Home',
                 iconCls: 'icon-home',
                 id: 'home',
-                itemId: 'home'
+                itemId: 'home',
+                items: [
+                    {
+                        xtype: 'contactinfo',
+                        height: '100%'
+                    }
+                ]
             },
             {
                 xtype: 'container',
@@ -68065,10 +68058,6 @@ Ext.define('Ext.picker.Picker', {
                         ]
                     }
                 ]
-            },
-            {
-                xtype: 'contactinfo',
-                iconCls: 'info'
             }
         ],
         tabBar: {
