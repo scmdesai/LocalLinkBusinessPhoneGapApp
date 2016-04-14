@@ -66238,7 +66238,7 @@ Ext.define('Ext.picker.Picker', {
         id: 'contactpic',
         itemId: 'contactpic',
         margin: '5 5 5 5',
-        style: 'border:1px groove #000;background:none',
+        style: 'overflow:hidden;border:1px groove #000;background:none',
         styleHtmlContent: true,
         autoDestroy: false,
         layout: 'fit',
@@ -66331,7 +66331,6 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
-                height: '30%',
                 itemId: 'picture',
                 width: '',
                 flex: 10
@@ -66693,7 +66692,6 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
-                height: '30%',
                 itemId: 'picture1',
                 width: '',
                 flex: 10
