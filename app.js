@@ -66515,7 +66515,6 @@ Ext.define('Ext.picker.Picker', {
             businessName = record.get('businessName');
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
-        console.log(this.getComponent('contactpic').getItemId());
         this.setRecord(record);
     },
     setRecord: function(record) {
@@ -66525,6 +66524,7 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             this.down('contactpic').setData(record.data);
+            console.log(record.data);
         }
     }
 }, 0, [
