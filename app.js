@@ -66331,6 +66331,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
+                height: '100%',
                 itemId: 'picture',
                 width: '',
                 flex: 10
@@ -66692,9 +66693,10 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'contactpic',
                 cls: 'x-panel-body',
                 docked: 'top',
+                height: '100%',
                 itemId: 'picture1',
                 width: '',
-                flex: 10
+                layout: 'hbox'
             },
             {
                 xtype: 'button',
