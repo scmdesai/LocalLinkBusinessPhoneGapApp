@@ -67963,13 +67963,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 title: 'BuzzOMeter',
                 iconCls: 'info',
-                style: 'color: #00529D;',
-                items: [
-                    {
-                        xtype: 'buzzometer',
-                        height: '100%'
-                    }
-                ]
+                style: 'color: #00529D;'
             }
         ],
         tabBar: {
