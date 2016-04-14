@@ -67938,7 +67938,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 title: 'Home',
-                iconCls: 'info',
+                iconCls: 'icon-home',
                 id: 'home',
                 itemId: 'home',
                 items: [
@@ -67951,7 +67951,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 title: 'Manage Buzz',
-                iconCls: 'info',
+                iconCls: 'icon-bubbles',
                 items: [
                     {
                         xtype: 'DealsPanel',
@@ -67960,10 +67960,8 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'container',
-                title: 'BuzzOMeter',
-                iconCls: 'info',
-                style: 'color: #00529D;'
+                xtype: 'buzzometer',
+                iconCls: 'info'
             }
         ],
         tabBar: {
