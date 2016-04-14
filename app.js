@@ -66725,11 +66725,10 @@ Ext.define('Ext.picker.Picker', {
 									}
 									]
 									});*/
-                                    //Ext.getCmp('changePicButton').hide();
-                                    var view = Ext.Viewport.setActiveItem({
+                                    var view = Ext.Viewport.add({
                                             xtype: 'panel'
                                         });
-                                    view.getComponent('home').setRecord(record);
+                                    Ext.Viewport.setActiveItem(view);
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
                                 },
@@ -68024,7 +68023,7 @@ Ext.define('Ext.picker.Picker', {
                                             }
                                             // Set chart options
                                             var optionsBarChart = {
-                                                    vAxis: {
+                                                    hAxis: {
                                                         title: 'Number of Views',
                                                         titleTextStyle: {
                                                             color: '#00529D',
@@ -68035,7 +68034,7 @@ Ext.define('Ext.picker.Picker', {
                                                             count: -1
                                                         }
                                                     },
-                                                    hAxis: {
+                                                    vAxis: {
                                                         title: 'Buzz Name',
                                                         titleTextStyle: {
                                                             color: '#00529D',
@@ -68044,7 +68043,7 @@ Ext.define('Ext.picker.Picker', {
                                                     },
                                                     legend: 'none',
                                                     height: '400',
-                                                    orientation: 'horizontal',
+                                                    orientation: 'vertical',
                                                     bar: {
                                                         groupWidth: 20
                                                     }
