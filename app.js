@@ -66313,7 +66313,7 @@ Ext.define('Ext.picker.Picker', {
                             store.clearFilter();
                             store.load();
                             store.filter('customerId', customerId);
-                            element.repaint();
+                            element.setHtml('<img src = """ + record.get("pictureURL") + """/>');
                         },
                         event: 'painted'
                     }
