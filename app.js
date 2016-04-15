@@ -66498,16 +66498,19 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'dataview',
                 docked: 'top',
-                height: '20%',
+                height: '30%',
                 itemId: 'mydataview',
                 margin: '5 5 5 5',
                 padding: '',
                 style: 'overflow:hidden',
+                width: '100%',
                 scrollable: false,
+                deferEmptyText: false,
                 itemTpl: [
                     '<img src = "{pictureURL}"/>'
                 ],
                 store: 'MyJsonPStore',
+                useComponents: false,
                 listeners: [
                     {
                         fn: function(element, eOpts) {
@@ -66927,6 +66930,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'image',
                 docked: 'top',
                 height: '30%',
+                hidden: true,
                 html: '',
                 id: 'picture1',
                 itemId: 'picture1',
@@ -66982,6 +66986,40 @@ Ext.define('Ext.picker.Picker', {
                 ui: 'plain',
                 width: '20%',
                 iconCls: 'add'
+            },
+            {
+                xtype: 'dataview',
+                docked: 'top',
+                height: '30%',
+                itemId: 'mydataview1',
+                margin: '5 5 5 5',
+                padding: '',
+                style: 'overflow:hidden',
+                width: '100%',
+                scrollable: false,
+                deferEmptyText: false,
+                itemTpl: [
+                    '<img src = "{pictureURL}"/>'
+                ],
+                store: 'MyJsonPStore',
+                useComponents: false,
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var store = Ext.getStore('MyJsonPStore');
+                            storeUserDetails.each(function(record) {
+                                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            store.filter('customerId', customerId);
+                        },
+                        event: 'painted'
+                    }
+                ]
             },
             {
                 xtype: 'textfield',
