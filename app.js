@@ -65996,7 +65996,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        console.log('Updating record ' + modifiedFieldNames + modifiedValues);
+        console.log('Updating record');
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -67742,6 +67742,7 @@ Ext.define('Ext.picker.Picker', {
                         waitMsg: 'Please Wait...',
                         success: function(form, action) {
                             var view = Ext.Viewport.getActiveItem();
+                            record.setDirty();
                             record.beginEdit(true, record.getChanges());
                             form.updateRecord(record);
                             record.endEdit(true, record.getChanges());
