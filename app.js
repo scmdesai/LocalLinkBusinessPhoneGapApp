@@ -65997,9 +65997,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
         console.log('Updating record');
-        record.commit();
-        store.sync();
-        store.load();
+        store.loadRecords(record);
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66316,7 +66314,6 @@ Ext.define('Ext.picker.Picker', {
                             store.clearFilter();
                             store.load();
                             store.filter('customerId', customerId);
-                            element.setHtml('<img src = """ + record.get("pictureURL") + """/>');
                         },
                         event: 'painted'
                     }
