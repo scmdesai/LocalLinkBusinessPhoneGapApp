@@ -66496,7 +66496,7 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'container',
+                xtype: 'dataview',
                 docked: 'top',
                 height: '30%',
                 itemId: 'mydataview',
@@ -66504,6 +66504,11 @@ Ext.define('Ext.picker.Picker', {
                 padding: '',
                 style: 'overflow:hidden',
                 width: '98%',
+                scrollable: false,
+                itemTpl: [
+                    '<img src = "{pictureURL}" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>'
+                ],
+                store: 'MyJsonPStore',
                 listeners: [
                     {
                         fn: function(element, eOpts) {
@@ -66516,6 +66521,8 @@ Ext.define('Ext.picker.Picker', {
                                 customerId = record.get('customerId');
                                 businessName = record.get('businessName');
                             });
+                            store.clearFilter();
+                            store.load();
                             store.filter('customerId', customerId);
                         },
                         event: 'painted'
@@ -66951,6 +66958,40 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'dataview',
+                docked: 'top',
+                height: '30%',
+                itemId: 'mydataview1',
+                margin: '5 5 5 5',
+                padding: '',
+                style: 'overflow:hidden',
+                width: '98%',
+                scrollable: false,
+                itemTpl: [
+                    '<img src = "{pictureURL}" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>'
+                ],
+                store: 'MyJsonPStore',
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var store = Ext.getStore('MyJsonPStore');
+                            storeUserDetails.each(function(record) {
+                                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            store.clearFilter();
+                            store.load();
+                            store.filter('customerId', customerId);
+                        },
+                        event: 'painted'
+                    }
+                ]
+            },
+            {
                 xtype: 'button',
                 handler: function(button, e) {
                     var storeUserDetails = Ext.getStore('UserDetails');
@@ -66979,33 +67020,6 @@ Ext.define('Ext.picker.Picker', {
                 ui: 'plain',
                 width: '20%',
                 iconCls: 'add'
-            },
-            {
-                xtype: 'container',
-                docked: 'top',
-                height: '30%',
-                itemId: 'mydataview1',
-                margin: '5 5 5 5',
-                padding: '',
-                style: 'overflow:hidden',
-                width: '98%',
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            var storeUserDetails = Ext.getStore('UserDetails');
-                            storeUserDetails.load();
-                            var customerId;
-                            var store = Ext.getStore('MyJsonPStore');
-                            storeUserDetails.each(function(record) {
-                                //console.log('StoreUserDetails : ' +record.get('customerId'));
-                                customerId = record.get('customerId');
-                                businessName = record.get('businessName');
-                            });
-                            store.filter('customerId', customerId);
-                        },
-                        event: 'painted'
-                    }
-                ]
             },
             {
                 xtype: 'textfield',
