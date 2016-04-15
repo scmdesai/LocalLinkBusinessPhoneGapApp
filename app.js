@@ -66496,21 +66496,14 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'dataview',
+                xtype: 'container',
                 docked: 'top',
                 height: '30%',
                 itemId: 'mydataview',
                 margin: '5 5 5 5',
                 padding: '',
                 style: 'overflow:hidden',
-                width: '100%',
-                scrollable: false,
-                deferEmptyText: false,
-                itemTpl: [
-                    '<img src = "{pictureURL}"/>'
-                ],
-                store: 'MyJsonPStore',
-                useComponents: false,
+                width: '98%',
                 listeners: [
                     {
                         fn: function(element, eOpts) {
@@ -66988,21 +66981,14 @@ Ext.define('Ext.picker.Picker', {
                 iconCls: 'add'
             },
             {
-                xtype: 'dataview',
+                xtype: 'container',
                 docked: 'top',
                 height: '30%',
                 itemId: 'mydataview1',
                 margin: '5 5 5 5',
                 padding: '',
                 style: 'overflow:hidden',
-                width: '100%',
-                scrollable: false,
-                deferEmptyText: false,
-                itemTpl: [
-                    '<img src = "{pictureURL}"/>'
-                ],
-                store: 'MyJsonPStore',
-                useComponents: false,
+                width: '98%',
                 listeners: [
                     {
                         fn: function(element, eOpts) {
