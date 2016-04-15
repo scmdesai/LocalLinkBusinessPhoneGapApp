@@ -66456,6 +66456,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onImagePainted',
                 event: 'painted'
+            },
+            {
+                fn: 'onImageUpdatedata',
+                event: 'updatedata'
             }
         ]
     },
@@ -66473,6 +66477,9 @@ Ext.define('Ext.picker.Picker', {
         store.load();
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         this.setSrc(record.get('pictureURL'));
+    },
+    onImageUpdatedata: function(component, newData, eOpts) {
+        console.log('Image changed');
     }
 }, 0, [
     "myimg"
@@ -66752,7 +66759,6 @@ Ext.define('Ext.picker.Picker', {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
-            this.down('contactpic').setData(record.data);
         }
     }
 }, 0, [
@@ -66775,6 +66781,7 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactinfo'
 ], 0));
+//this.down('contactpic').setData(record.data);
 
 /*
  * File: app/view/ListOfDeals.js
@@ -67093,7 +67100,6 @@ Ext.define('Ext.picker.Picker', {
             this.down('#businessName').setValue(record.data.businessName);
             this.down('#phoneNumber').setValue(record.data.phoneNumber);
             this.down('#address').setValue(record.data.address);
-            this.child('contactpic').setData(record.data);
         }
     }
 }, 0, [
@@ -67116,6 +67122,7 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactform'
 ], 0));
+//this.child('contactpic').setData(record.data);
 
 /*
  * File: app/controller/Contacts.js
