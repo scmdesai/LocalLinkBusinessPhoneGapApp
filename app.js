@@ -67745,7 +67745,7 @@ Ext.define('Ext.picker.Picker', {
                 placeHolder: 'mm/dd/yyyy',
                 autoSelect: false,
                 options: {
-                    minValue: new Date()
+                    minDate: new Date()
                 },
                 usePicker: true,
                 dateFormat: 'm/d/Y',
