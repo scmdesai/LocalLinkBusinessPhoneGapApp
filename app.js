@@ -66690,10 +66690,19 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
+                fn: 'onChangeContactPicFormSubmit',
+                event: 'submit',
+                delegate: '#picture'
+            },
+            {
                 fn: 'onInfoPainted',
                 event: 'painted'
             }
         ]
+    },
+    onChangeContactPicFormSubmit: function(formpanel, result, e, eOpts) {
+        console.log('Form submitted');
+        console.log(result);
     },
     onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
@@ -68116,6 +68125,7 @@ Ext.define('Ext.picker.Picker', {
                 iconCls: 'icon-buzzometer',
                 id: 'buzzometer',
                 itemId: 'buzzometer',
+                style: 'font-size:5vw',
                 styleHtmlContent: true,
                 items: [
                     {
@@ -68290,6 +68300,7 @@ Ext.define('Ext.picker.Picker', {
         ],
         tabBar: {
             docked: 'bottom',
+            height: '9%',
             padding: '35 40 0 40',
             style: 'color:#c0c0c0;background:#FFF;font-size:4vw',
             ui: 'plain',
