@@ -65997,6 +65997,9 @@ Ext.define('Ext.picker.Picker', {
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
         console.log('Updating record');
+        record.commit();
+        store.sync();
+        store.load();
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
