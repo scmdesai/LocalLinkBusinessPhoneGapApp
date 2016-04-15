@@ -66496,10 +66496,42 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'dataview',
+                docked: 'top',
+                height: '20%',
+                itemId: 'mydataview',
+                margin: '5 5 5 5',
+                padding: '',
+                style: 'overflow:hidden',
+                scrollable: false,
+                itemTpl: [
+                    '<img src = "{pictureURL}"/>'
+                ],
+                store: 'MyJsonPStore',
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var store = Ext.getStore('MyJsonPStore');
+                            storeUserDetails.each(function(record) {
+                                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            store.filter('customerId', customerId);
+                        },
+                        event: 'painted'
+                    }
+                ]
+            },
+            {
                 xtype: 'image',
                 flex: 1,
                 docked: 'top',
                 height: '30%',
+                hidden: true,
                 html: '',
                 id: 'picture',
                 itemId: 'picture',
@@ -68038,10 +68070,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onChangeContactPicFormHiddenChange',
                 event: 'hiddenchange'
-            },
-            {
-                fn: 'onChangeContactPicFormSubmit',
-                event: 'submit'
             }
         ]
     },
@@ -68049,9 +68077,6 @@ Ext.define('Ext.picker.Picker', {
         if (component.isHidden() === true && oldValue !== null) {
             component.destroy();
         }
-    },
-    onChangeContactPicFormSubmit: function(formpanel, result, e, eOpts) {
-        console.log(result);
     }
 }, 0, [
     "ChangeContactPicForm"
