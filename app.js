@@ -66892,6 +66892,36 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'image',
+                docked: 'top',
+                height: '30%',
+                html: '',
+                id: 'picture1',
+                itemId: 'picture1',
+                margin: '5 5 5 5',
+                padding: '5 5 5 5',
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var store = Ext.getStore('MyJsonPStore');
+                            storeUserDetails.each(function(record) {
+                                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            store.sync();
+                            store.load();
+                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+                            this.setSrc(record.get('pictureURL'));
+                        },
+                        event: 'painted'
+                    }
+                ]
+            },
+            {
                 xtype: 'button',
                 handler: function(button, e) {
                     var storeUserDetails = Ext.getStore('UserDetails');
@@ -67026,33 +67056,6 @@ Ext.define('Ext.picker.Picker', {
                 labelWrap: true,
                 name: 'websiteDisplayName',
                 required: true
-            },
-            {
-                xtype: 'image',
-                html: '',
-                id: 'picture1',
-                itemId: 'picture1',
-                padding: '5 5 5 5',
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            var storeUserDetails = Ext.getStore('UserDetails');
-                            storeUserDetails.load();
-                            var customerId;
-                            var store = Ext.getStore('MyJsonPStore');
-                            storeUserDetails.each(function(record) {
-                                //console.log('StoreUserDetails : ' +record.get('customerId'));
-                                customerId = record.get('customerId');
-                                businessName = record.get('businessName');
-                            });
-                            store.sync();
-                            store.load();
-                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
-                            this.setSrc(record.get('pictureURL'));
-                        },
-                        event: 'painted'
-                    }
-                ]
             }
         ]
     },
