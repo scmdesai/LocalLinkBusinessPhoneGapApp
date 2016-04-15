@@ -66690,19 +66690,10 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onChangeContactPicFormSubmit',
-                event: 'submit',
-                delegate: '#picture'
-            },
-            {
                 fn: 'onInfoPainted',
                 event: 'painted'
             }
         ]
-    },
-    onChangeContactPicFormSubmit: function(formpanel, result, e, eOpts) {
-        console.log('Form submitted');
-        console.log(result);
     },
     onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
@@ -68047,6 +68038,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onChangeContactPicFormHiddenChange',
                 event: 'hiddenchange'
+            },
+            {
+                fn: 'onChangeContactPicFormSubmit',
+                event: 'submit'
             }
         ]
     },
@@ -68054,6 +68049,9 @@ Ext.define('Ext.picker.Picker', {
         if (component.isHidden() === true && oldValue !== null) {
             component.destroy();
         }
+    },
+    onChangeContactPicFormSubmit: function(formpanel, result, e, eOpts) {
+        console.log(result);
     }
 }, 0, [
     "ChangeContactPicForm"
