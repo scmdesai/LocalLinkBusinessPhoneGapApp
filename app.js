@@ -66286,6 +66286,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'dataview',
                 docked: 'top',
                 height: '30%',
+                id: 'mydataview',
                 itemId: 'mydataview',
                 margin: '5 5 5 5',
                 padding: '',
@@ -66312,6 +66313,7 @@ Ext.define('Ext.picker.Picker', {
                             store.clearFilter();
                             store.load();
                             store.filter('customerId', customerId);
+                            this.update();
                         },
                         event: 'painted'
                     }
@@ -66715,6 +66717,7 @@ Ext.define('Ext.picker.Picker', {
                             store.clearFilter();
                             store.load();
                             store.filter('customerId', customerId);
+                            this.update();
                         },
                         event: 'painted'
                     }
