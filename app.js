@@ -66313,7 +66313,7 @@ Ext.define('Ext.picker.Picker', {
                             store.clearFilter();
                             store.load();
                             store.filter('customerId', customerId);
-                            this.update();
+                            element.repaint();
                         },
                         event: 'painted'
                     }
@@ -66717,7 +66717,7 @@ Ext.define('Ext.picker.Picker', {
                             store.clearFilter();
                             store.load();
                             store.filter('customerId', customerId);
-                            this.update();
+                            element.repaint();
                         },
                         event: 'painted'
                     }
