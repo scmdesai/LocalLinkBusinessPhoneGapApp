@@ -67946,34 +67946,39 @@ Ext.define('Ext.picker.Picker', {
                                         //Bar Chart
                                         var dataBarChart = new google.visualization.DataTable();
                                         var dealName = [];
+                                        var zipcode = [];
                                         var numberOfClicks = [];
                                         dataBarChart.addColumn('string', 'dealName');
+                                        dataBarChart.addColumn('string', 'zipcode');
                                         dataBarChart.addColumn('number', 'numberOfClicks');
                                         $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                                             for (var i = 0,
                                                 j = i; i < json.totalResults; i++ , j++) {
                                                 dealData = json.rows[i].toString();
                                                 tmp = dealData.split(",");
-                                                if (i === 0) {
-                                                    dealName[0] = tmp[0];
-                                                    numberOfClicks[0] = parseInt(tmp[2], 10);
-                                                } else {
-                                                    for (var m = i - 1; m < i; m++) {
-                                                        if (tmp[0] === dealName[m]) {
-                                                            console.log(dealName[m]);
-                                                            numberOfClicks[m] = numberOfClicks[m] + parseInt(tmp[2], 10);
-                                                            j--;
-                                                        } else {
-                                                            dealName[j] = tmp[0];
-                                                            console.log(dealName[j]);
-                                                            numberOfClicks[j] = parseInt(tmp[2], 10);
-                                                        }
-                                                    }
-                                                }
+                                                /*if(i===0){
+												dealName[0] = tmp[0];
+												numberOfClicks[0] = parseInt(tmp[2],10);
+												}
+												else {
+												for(var m =i-1;m<i;m++) {
+												if(tmp[0]===dealName[m]){
+												numberOfClicks[m] = numberOfClicks[m] + parseInt(tmp[2],10);
+												j--;
+												}
+
+												else {*/
+                                                dealName[j] = tmp[0];
+                                                zipcode[j] = tmp[1];
+                                                numberOfClicks[j] = parseInt(tmp[2], 10);
                                             }
+                                            //}
+                                            //}
+                                            //}
                                             for (j = 0; j < numberOfClicks.length; j++) {
                                                 dataBarChart.addRow([
                                                     dealName[j],
+                                                    zipcode[j],
                                                     numberOfClicks[j]
                                                 ]);
                                             }
