@@ -67965,6 +67965,7 @@ Ext.define('Ext.picker.Picker', {
                                                             j--;
                                                         } else {
                                                             dealName[j] = tmp[0];
+                                                            console.log(dealName[j]);
                                                             numberOfClicks[j] = parseInt(tmp[2], 10);
                                                         }
                                                     }
