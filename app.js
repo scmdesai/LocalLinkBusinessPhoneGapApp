@@ -67944,13 +67944,45 @@ Ext.define('Ext.picker.Picker', {
                                     google.charts.setOnLoadCallback(drawChart);
                                     function drawChart() {
                                         //Bar Chart
-                                        var dataBarChart = new google.visualization.DataTable();
+                                        var dataBarChartArr = new google.visualization.DataTable();
+                                        var dataBarChart = new google.visualization.arrayToDataTable(getPivotArray(dataBarChartArr, 0, 1, 2));
                                         var dealName = [];
                                         var zipcode = [];
                                         var numberOfClicks = [];
-                                        dataBarChart.addColumn('string', 'dealName');
-                                        dataBarChart.addColumn('string', 'zipcode');
-                                        dataBarChart.addColumn('number', 'numberOfClicks');
+                                        dataBarChartArr.addColumn('string', 'dealName');
+                                        dataBarChartArr.addColumn('string', 'zipcode');
+                                        dataBarChartArr.addColumn('number', 'numberOfClicks');
+                                        function getPivotArray(dataArray, rowIndex, colIndex, dataIndex) {
+                                            var result = {},
+                                                ret = [];
+                                            var newCols = [];
+                                            for (var i = 0; i < dataArray.length; i++) {
+                                                if (!result[dataArray[i][rowIndex]]) {
+                                                    result[dataArray[i][rowIndex]] = {};
+                                                }
+                                                result[dataArray[i][rowIndex]][dataArray[i][colIndex]] = dataArray[i][dataIndex];
+                                                //To get column names
+                                                if (newCols.indexOf(dataArray[i][colIndex]) == -1) {
+                                                    newCols.push(dataArray[i][colIndex]);
+                                                }
+                                            }
+                                            newCols.sort();
+                                            var item = [];
+                                            //Add Header Row
+                                            item.push('Performance');
+                                            item.push.apply(item, newCols);
+                                            ret.push(item);
+                                            //Add content
+                                            for (var key in result) {
+                                                item = [];
+                                                item.push(key);
+                                                for (var i = 0; i < newCols.length; i++) {
+                                                    item.push(result[key][newCols[i]] || 0);
+                                                }
+                                                ret.push(item);
+                                            }
+                                            return ret;
+                                        }
                                         $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                                             for (var i = 0,
                                                 j = i; i < json.totalResults; i++ , j++) {
@@ -67976,7 +68008,7 @@ Ext.define('Ext.picker.Picker', {
                                             //}
                                             //}
                                             for (j = 0; j < numberOfClicks.length; j++) {
-                                                dataBarChart.addRow([
+                                                dataBarChartArr.addRow([
                                                     dealName[j],
                                                     zipcode[j],
                                                     numberOfClicks[j]
