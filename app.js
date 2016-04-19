@@ -67951,37 +67951,6 @@ Ext.define('Ext.picker.Picker', {
                                         dataBarChartArr.addColumn('string', 'dealName');
                                         dataBarChartArr.addColumn('string', 'zipcode');
                                         dataBarChartArr.addColumn('number', 'numberOfClicks');
-                                        function getPivotArray(dataArray, rowIndex, colIndex, dataIndex) {
-                                            var result = {},
-                                                ret = [];
-                                            var newCols = [];
-                                            for (var i = 0; i < dataArray.length; i++) {
-                                                if (!result[dataArray[i][rowIndex]]) {
-                                                    result[dataArray[i][rowIndex]] = {};
-                                                }
-                                                result[dataArray[i][rowIndex]][dataArray[i][colIndex]] = dataArray[i][dataIndex];
-                                                //To get column names
-                                                if (newCols.indexOf(dataArray[i][colIndex]) == -1) {
-                                                    newCols.push(dataArray[i][colIndex]);
-                                                }
-                                            }
-                                            newCols.sort();
-                                            var item = [];
-                                            //Add Header Row
-                                            item.push('numberOfClicks');
-                                            item.push.apply(item, newCols);
-                                            ret.push(item);
-                                            //Add content
-                                            for (var key in result) {
-                                                item = [];
-                                                item.push(key);
-                                                for (var i = 0; i < newCols.length; i++) {
-                                                    item.push(result[key][newCols[i]] || 0);
-                                                }
-                                                ret.push(item);
-                                            }
-                                            return ret;
-                                        }
                                         $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
                                             for (var i = 0,
                                                 j = i; i < json.totalResults; i++ , j++) {
@@ -68014,6 +67983,38 @@ Ext.define('Ext.picker.Picker', {
                                                 ]);
                                             }
                                             var dataBarChart = new google.visualization.arrayToDataTable(getPivotArray(dataBarChartArr, 0, 1, 2));
+                                            function getPivotArray(dataArray, rowIndex, colIndex, dataIndex) {
+                                                var result = {},
+                                                    ret = [];
+                                                var newCols = [];
+                                                console.log(dataArray.length);
+                                                for (var i = 0; i < dataArray.length; i++) {
+                                                    if (!result[dataArray[i][rowIndex]]) {
+                                                        result[dataArray[i][rowIndex]] = {};
+                                                    }
+                                                    result[dataArray[i][rowIndex]][dataArray[i][colIndex]] = dataArray[i][dataIndex];
+                                                    //To get column names
+                                                    if (newCols.indexOf(dataArray[i][colIndex]) == -1) {
+                                                        newCols.push(dataArray[i][colIndex]);
+                                                    }
+                                                }
+                                                newCols.sort();
+                                                var item = [];
+                                                //Add Header Row
+                                                item.push('numberOfClicks');
+                                                item.push.apply(item, newCols);
+                                                ret.push(item);
+                                                //Add content
+                                                for (var key in result) {
+                                                    item = [];
+                                                    item.push(key);
+                                                    for (var i = 0; i < newCols.length; i++) {
+                                                        item.push(result[key][newCols[i]] || 0);
+                                                    }
+                                                    ret.push(item);
+                                                }
+                                                return ret;
+                                            }
                                             // Set chart options
                                             var optionsBarChart = {
                                                     vAxis: {
@@ -68043,7 +68044,7 @@ Ext.define('Ext.picker.Picker', {
                                                 };
                                             // Instantiate and draw our chart, passing in some options.
                                             var chartBar = new google.visualization.BarChart(document.getElementById('chart1'));
-                                            chartBar.draw(dataBarChart, optionsBarChart);
+                                            chartBar.draw(dataBarChart, {});
                                         });
                                     }
                                 },
