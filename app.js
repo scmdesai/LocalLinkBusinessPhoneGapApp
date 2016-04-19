@@ -67982,39 +67982,43 @@ Ext.define('Ext.picker.Picker', {
                                                     numberOfClicks[j]
                                                 ]);
                                             }
-                                            var dataBarChart = new google.visualization.arrayToDataTable(getPivotArray(dataBarChartArr, 0, 2, 1));
-                                            function getPivotArray(dataArray, rowIndex, colIndex, dataIndex) {
-                                                var result = {},
-                                                    ret = [];
-                                                var newCols = [];
-                                                console.log(dataArray.length);
-                                                for (var i = 0; i < dataArray.length; i++) {
-                                                    if (!result[dataArray[i][rowIndex]]) {
-                                                        result[dataArray[i][rowIndex]] = {};
-                                                    }
-                                                    result[dataArray[i][rowIndex]][dataArray[i][colIndex]] = dataArray[i][dataIndex];
-                                                    //To get column names
-                                                    if (newCols.indexOf(dataArray[i][colIndex]) == -1) {
-                                                        newCols.push(dataArray[i][colIndex]);
-                                                    }
-                                                }
-                                                newCols.sort();
-                                                var item = [];
-                                                //Add Header Row
-                                                item.push('numberOfClicks');
-                                                item.push.apply(item, newCols);
-                                                ret.push(item);
-                                                //Add content
-                                                for (var key in result) {
-                                                    item = [];
-                                                    item.push(key);
-                                                    for (var i = 0; i < newCols.length; i++) {
-                                                        item.push(result[key][newCols[i]] || 0);
-                                                    }
-                                                    ret.push(item);
-                                                }
-                                                return ret;
-                                            }
+                                            var dataBarChart = new google.visualization.arrayToDataTable(dataBarChartArr, 0);
+                                            /*function getPivotArray(dataArray, rowIndex, colIndex, dataIndex) {
+											var result = {}, ret = [];
+											var newCols = [];
+											console.log(dataArray.length);
+											for (var i = 0; i < dataArray.length; i++) {
+
+											if (!result[dataArray[i][rowIndex]]) {
+											result[dataArray[i][rowIndex]] = {};
+											}
+											result[dataArray[i][rowIndex]][dataArray[i][colIndex]] = dataArray[i][dataIndex];
+
+											//To get column names
+											if (newCols.indexOf(dataArray[i][colIndex]) == -1) {
+												newCols.push(dataArray[i][colIndex]);
+											}
+										}
+
+										newCols.sort();
+										var item = [];
+
+										//Add Header Row
+										item.push('numberOfClicks');
+										item.push.apply(item, newCols);
+										ret.push(item);
+
+										//Add content
+										for (var key in result) {
+											item = [];
+											item.push(key);
+											for (var i = 0; i < newCols.length; i++) {
+												item.push(result[key][newCols[i]] || 0);
+											}
+											ret.push(item);
+										}
+										return ret;
+									}*/
                                             // Set chart options
                                             var optionsBarChart = {
                                                     vAxis: {
