@@ -67982,7 +67982,7 @@ Ext.define('Ext.picker.Picker', {
                                                     numberOfClicks[j]
                                                 ]);
                                             }
-                                            var dataBarChart = new google.visualization.arrayToDataTable(getPivotArray(dataBarChartArr, 0, 1, 2));
+                                            var dataBarChart = new google.visualization.arrayToDataTable(getPivotArray(dataBarChartArr, 0, 2, 1));
                                             function getPivotArray(dataArray, rowIndex, colIndex, dataIndex) {
                                                 var result = {},
                                                     ret = [];
