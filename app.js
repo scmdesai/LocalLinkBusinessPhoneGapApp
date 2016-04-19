@@ -67945,7 +67945,6 @@ Ext.define('Ext.picker.Picker', {
                                     function drawChart() {
                                         //Bar Chart
                                         var dataBarChartArr = new google.visualization.DataTable();
-                                        var dataBarChart = new google.visualization.arrayToDataTable(getPivotArray(dataBarChartArr, 0, 1, 2));
                                         var dealName = [];
                                         var zipcode = [];
                                         var numberOfClicks = [];
@@ -67969,7 +67968,7 @@ Ext.define('Ext.picker.Picker', {
                                             newCols.sort();
                                             var item = [];
                                             //Add Header Row
-                                            item.push('Performance');
+                                            item.push('numberOfClicks');
                                             item.push.apply(item, newCols);
                                             ret.push(item);
                                             //Add content
@@ -68014,6 +68013,7 @@ Ext.define('Ext.picker.Picker', {
                                                     numberOfClicks[j]
                                                 ]);
                                             }
+                                            var dataBarChart = new google.visualization.arrayToDataTable(getPivotArray(dataBarChartArr, 0, 1, 2));
                                             // Set chart options
                                             var optionsBarChart = {
                                                     vAxis: {
