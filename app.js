@@ -67946,7 +67946,7 @@ Ext.define('Ext.picker.Picker', {
                                         //Bar Chart
                                         var dataBarChart = new google.visualization.DataTable();
                                         var dealName = [];
-                                        //var zipcode=[];
+                                        var zipcode = [];
                                         var numberOfClicks = [];
                                         dataBarChart.addColumn('string', 'dealName');
                                         //dataBarChart.addColumn('string', 'zipcode');
@@ -67956,30 +67956,29 @@ Ext.define('Ext.picker.Picker', {
                                                 j = i; i < json.totalResults; i++ , j++) {
                                                 dealData = json.rows[i].toString();
                                                 tmp = dealData.split(",");
-                                                /*if(i===0){
-												dealName[0] = tmp[0];
-												numberOfClicks[0] = parseInt(tmp[2],10);
-												}
-												else {
-												for(var m =i-1;m<i;m++) {
-												if(tmp[0]===dealName[m]){
-												numberOfClicks[m] = numberOfClicks[m] + parseInt(tmp[2],10);
-												j--;
-												}
-
-												else {*/
-                                                dealName[j] = tmp[0];
-                                                // zipcode[j] = tmp[1];
-                                                numberOfClicks[j] = parseInt(tmp[2], 10);
+                                                if (i === 0) {
+                                                    dealName[0] = tmp[0];
+                                                    numberOfClicks[0] = parseInt(tmp[2], 10);
+                                                } else {
+                                                    for (var m = i - 1; m < i; m++) {
+                                                        if (tmp[0] === dealName[m]) {
+                                                            numberOfClicks[m] = numberOfClicks[m] + parseInt(tmp[2], 10);
+                                                            j--;
+                                                        } else {
+                                                            dealName[j] = tmp[0];
+                                                            zipcode[j] = tmp[1];
+                                                            numberOfClicks[j] = parseInt(tmp[2], 10);
+                                                        }
+                                                    }
+                                                }
                                             }
-                                            //}
-                                            //}
-                                            //}
-                                            for (j = 0; j < numberOfClicks.length; j++) {
-                                                dataBarChart.addRow([
-                                                    dealName[j],
-                                                    numberOfClicks[j]
-                                                ]);
+                                            for (j = 0; j < dealName.length; j++) {
+                                                for (j = 0; j < zipcode.length; j++) {
+                                                    dataBarChart.addRow([
+                                                        dealName[j][i],
+                                                        numberOfClicks[j][i]
+                                                    ]);
+                                                }
                                             }
                                             // Set chart options
                                             var optionsBarChart = {
