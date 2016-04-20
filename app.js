@@ -67946,39 +67946,22 @@ Ext.define('Ext.picker.Picker', {
                                         //Bar Chart
                                         var dataBarChart = new google.visualization.DataTable();
                                         var dealName = [];
-                                        var zipcode = [];
                                         var numberOfClicks = [];
                                         dataBarChart.addColumn('string', 'dealName');
-                                        //dataBarChart.addColumn('string', 'zipcode');
                                         dataBarChart.addColumn('number', 'numberOfClicks');
-                                        $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
+                                        $.getJSON('http://services.appsonmobile.com/analytics_buzz_popularity/v3/' + customerId, function(json) {
                                             for (var i = 0,
                                                 j = i; i < json.totalResults; i++ , j++) {
                                                 dealData = json.rows[i].toString();
                                                 tmp = dealData.split(",");
-                                                if (i === 0) {
-                                                    dealName[0] = tmp[0];
-                                                    numberOfClicks[0] = parseInt(tmp[2], 10);
-                                                } else {
-                                                    for (var m = i - 1; m < i; m++) {
-                                                        if (tmp[0] === dealName[m]) {
-                                                            numberOfClicks[m] = numberOfClicks[m] + parseInt(tmp[2], 10);
-                                                            j--;
-                                                        } else {
-                                                            dealName[j] = tmp[0];
-                                                            zipcode[j] = tmp[1];
-                                                            numberOfClicks[j] = parseInt(tmp[2], 10);
-                                                        }
-                                                    }
-                                                }
+                                                dealName[j] = tmp[0];
+                                                numberOfClicks[j] = parseInt(tmp[1], 10);
                                             }
                                             for (j = 0; j < dealName.length; j++) {
-                                                for (j = 0; j < zipcode.length; j++) {
-                                                    dataBarChart.addRow([
-                                                        dealName[j][i],
-                                                        numberOfClicks[j][i]
-                                                    ]);
-                                                }
+                                                dataBarChart.addRow([
+                                                    dealName[j],
+                                                    numberOfClicks[j]
+                                                ]);
                                             }
                                             // Set chart options
                                             var optionsBarChart = {
@@ -68047,30 +68030,18 @@ Ext.define('Ext.picker.Picker', {
                                         //data.addColumn('string', 'dealName');
                                         data.addColumn('string', 'zipcode');
                                         data.addColumn('number', 'NumberOfHits');
-                                        $.getJSON('http://services.appsonmobile.com/analytics/v3/' + customerId, function(json) {
+                                        $.getJSON('http://services.appsonmobile.com/analytics_user_location/v3/' + customerId, function(json) {
                                             for (var i = 0,
                                                 j = i; i < json.totalResults; i++ , j++) {
                                                 dealData = json.rows[i].toString();
                                                 tmp = dealData.split(",");
-                                                dealName[i] = tmp[0];
-                                                if (zipcode[0]) {
-                                                    for (var k = 0; k < j; k++) if (tmp[1] === zipcode[k]) {
-                                                        numberOfHits[k] = numberOfHits[k] + parseInt(tmp[2], 10);
-                                                        j--;
-                                                    } else {
-                                                        zipcode[j] = tmp[1];
-                                                        numberOfHits[j] = parseInt(tmp[2], 10);
-                                                    };
-                                                    
-                                                } else {
-                                                    zipcode[j] = tmp[1];
-                                                    numberOfHits[j] = parseInt(tmp[2], 10);
-                                                }
+                                                zipcode[j] = tmp[0];
+                                                numberOfHits[j] = parseInt(tmp[1], 10);
                                             }
                                             for (j = 0; j < zipcode.length; j++) {
                                                 data.addRow([
                                                     zipcode[j],
-                                                    parseInt(numberOfHits[j], 10)
+                                                    numberOfHits[j]
                                                 ]);
                                             }
                                             // Set chart options
