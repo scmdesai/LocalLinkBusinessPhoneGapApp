@@ -67599,8 +67599,8 @@ Ext.define('Ext.picker.Picker', {
                             var file = uForm.getAt(4).getValue();
                             //var dealStartDate = uForm.getAt(2).getValue().toDateString();
                             //var dealEndDate = uForm.getAt(3).getValue();
-                            Ext.Date.format(uForm.getAt(2).getValue(), 'n/j/Y');
-                            Ext.Date.format(uForm.getAt(3).getValue(), 'n/j/Y');
+                            //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
+                            //Ext.Date.format(uForm.getAt(3).getValue(),'n/j/Y');
                             /*var startDate = uForm.getAt(2).getValue();
 
 							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
