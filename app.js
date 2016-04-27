@@ -67571,7 +67571,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 height: '40px',
-                html: '<input type="checkbox" name="chkbx" id="chkbx"><span id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</span>',
+                html: '<input type="checkbox" name="chkbx" id="chkbx"><a href="#" onclick = "Ext.Viewport.add({xtype:\'Terms\'}).show();"  id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                 margin: '5 5 5 5',
                 padding: '5 5 5 5',
                 styleHtmlContent: true,
@@ -67689,16 +67689,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onFormpanelPainted',
-                event: 'painted'
-            }
         ]
-    },
-    onFormpanelPainted: function(element, eOpts) {
-        document.getElementById('terms').onclick = "var view = Ext.Viewport.add({xtype:'Terms'});view.show();";
     }
 }, 0, [
     "UploadDealForm"
