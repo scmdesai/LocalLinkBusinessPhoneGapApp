@@ -68158,19 +68158,6 @@ Ext.define('Ext.picker.Picker', {
                 height: '100%',
                 html: 'Terms and conditions here',
                 readOnly: true
-            },
-            {
-                xtype: 'button',
-                handler: function(button, e) {
-                    Ext.Viewport.getActiveItem().destroy();
-                },
-                docked: 'bottom',
-                height: '10%',
-                left: '30%',
-                top: '80%',
-                ui: 'action',
-                width: '50%',
-                text: 'Close'
             }
         ]
     }
