@@ -67571,7 +67571,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 height: '40px',
-                html: '<input type="checkbox" id="chkbx"><span style="font-size:2.5vw;">       I Agree to Apps On Mobile LLC\'s Terms & Conditions</span>',
+                html: '<input type="checkbox" name="chkbx" id="chkbx"><span style="font-size:2.5vw;">       I Agree to Apps On Mobile LLC\'s Terms & Conditions</span>',
                 margin: '5 5 5 5',
                 padding: '5 5 5 5',
                 styleHtmlContent: true,
@@ -67648,7 +67648,7 @@ Ext.define('Ext.picker.Picker', {
 							uForm.getAt(3).setValue(dealEnd);
 							console.log(dealEnd);*/
                             if (file) {
-                                if (document.getElementById('chkbx').isChecked()) {
+                                if (document.getElementById('chkbx').checked) {
                                     uForm.submit({
                                         url: 'http://services.appsonmobile.com/uploadS3',
                                         xhr2: true,
