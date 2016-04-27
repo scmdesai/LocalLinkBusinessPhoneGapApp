@@ -67571,7 +67571,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 height: '40px',
-                html: '<input type="checkbox" name="chkbx" id="chkbx"><span id="terms" style="font-size:2.5vw;" onclick = "function(){ \tvar view = Ext.Viewport.add({xtype:\'Terms\'}); \tview.show(); }; "> I Agree to Apps On Mobile LLC\'s Terms & Conditions</span>',
+                html: '<input type="checkbox" name="chkbx" id="chkbx"><span id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</span>',
                 margin: '5 5 5 5',
                 padding: '5 5 5 5',
                 styleHtmlContent: true,
@@ -67692,15 +67692,18 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onFormpanelHiddenChange',
-                event: 'hiddenchange'
+                fn: 'onFormpanelPainted',
+                event: 'painted'
             }
         ]
     },
-    onFormpanelHiddenChange: function(component, value, oldValue, eOpts) {
-        if (component.isHidden() === true && oldValue !== null) {
-            component.destroy();
-        }
+    onFormpanelPainted: function(element, eOpts) {
+        Ext.get('terms').addListener('click', function() {
+            var view = Ext.Viewport.add({
+                    xtype: 'Terms'
+                });
+            view.show();
+        });
     }
 }, 0, [
     "UploadDealForm"
@@ -68167,7 +68170,18 @@ Ext.define('Ext.picker.Picker', {
                 html: 'Terms and conditions here',
                 readOnly: true
             }
+        ],
+        listeners: [
+            {
+                fn: 'onTermsHiddenChange',
+                event: 'hiddenchange'
+            }
         ]
+    },
+    onTermsHiddenChange: function(component, value, oldValue, eOpts) {
+        if (component.isHidden() === true && oldValue !== null) {
+            component.destroy();
+        }
     }
 }, 0, [
     "Terms"
