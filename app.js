@@ -67648,7 +67648,7 @@ Ext.define('Ext.picker.Picker', {
 							uForm.getAt(3).setValue(dealEnd);
 							console.log(dealEnd);*/
                             if (file) {
-                                if (Ext.get('chkbx').isChecked()) {
+                                if (document.getElementById('chkbx').isChecked()) {
                                     uForm.submit({
                                         url: 'http://services.appsonmobile.com/uploadS3',
                                         xhr2: true,
