@@ -67698,7 +67698,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onFormpanelPainted: function(element, eOpts) {
-        document.getElementById('terms').onmousedown = "var view = Ext.Viewport.add({xtype:'Terms'});view.show();";
+        document.getElementById('terms').onclick = "var view = Ext.Viewport.add({xtype:'Terms'});view.show();";
     }
 }, 0, [
     "UploadDealForm"
