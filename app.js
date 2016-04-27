@@ -67698,7 +67698,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onFormpanelPainted: function(element, eOpts) {
-        Ext.get('terms').addListener('tap', function() {
+        document.getElementById('terms').addListener('tap', function() {
             var view = Ext.Viewport.add({
                     xtype: 'Terms'
                 });
@@ -68156,17 +68156,20 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.Terms', Ext.Panel, {
     config: {
+        centered: true,
         height: '50%',
         id: 'Terms',
         itemId: 'Terms',
         style: 'background:#FFF',
+        width: '100%',
         hideOnMaskTap: true,
+        modal: true,
         scrollable: true,
         items: [
             {
-                xtype: 'textareafield',
+                xtype: 'textfield',
                 disabled: false,
-                height: '50%',
+                height: '100%',
                 html: 'Terms and conditions here',
                 readOnly: true
             }
