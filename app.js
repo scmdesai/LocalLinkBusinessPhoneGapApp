@@ -68172,19 +68172,21 @@ Ext.define('Ext.picker.Picker', {
                 height: '100%',
                 html: 'Terms and conditions here',
                 readOnly: true
-            }
-        ],
-        listeners: [
+            },
             {
-                fn: 'onTermsHiddenChange',
-                event: 'hiddenchange'
+                xtype: 'button',
+                handler: function(button, e) {
+                    Ext.Viewport.getActiveItem().destroy();
+                },
+                docked: 'bottom',
+                height: '10%',
+                left: '30%',
+                top: '80%',
+                ui: 'action',
+                width: '50%',
+                text: 'Close'
             }
         ]
-    },
-    onTermsHiddenChange: function(component, value, oldValue, eOpts) {
-        if (component.isHidden() === true && oldValue !== null) {
-            component.destroy();
-        }
     }
 }, 0, [
     "Terms"
