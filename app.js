@@ -67466,6 +67466,19 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'textfield',
+                cls: 'customfield',
+                margin: '5 5 5 5 ',
+                padding: '',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
                 xtype: 'datepickerfield',
                 cls: [
                     'customfield',
