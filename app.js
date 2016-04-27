@@ -67698,7 +67698,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onFormpanelPainted: function(element, eOpts) {
-        Ext.get('terms').addListener('click', function() {
+        Ext.get('terms').addListener('tap', function() {
             var view = Ext.Viewport.add({
                     xtype: 'Terms'
                 });
