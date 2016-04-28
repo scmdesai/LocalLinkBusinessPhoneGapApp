@@ -67570,23 +67570,39 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                height: '40px',
-                html: '<input type="checkbox" name="chkbx" id="chkbx"><a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
-                itemId: 'mycontainer5',
-                margin: '5 5 5 5',
-                padding: '5 5 5 5',
-                styleHtmlContent: true,
+                left: '',
                 layout: 'hbox',
-                listeners: [
+                items: [
                     {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                Ext.Viewport.add({
-                                    xtype: 'Terms'
-                                }).show();
-                            });
-                        },
-                        event: 'painted'
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '50%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 10',
+                        padding: '5 30 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        Ext.Viewport.add({
+                                            xtype: 'Terms'
+                                        }).show();
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
                     }
                 ]
             },
@@ -67661,7 +67677,7 @@ Ext.define('Ext.picker.Picker', {
 
 							uForm.getAt(3).setValue(dealEnd);
 							console.log(dealEnd);*/
-                            if (!dealName) {
+                            if (dealName === '') {
                                 Ext.Msg.alert(null, 'Deal Name Field is Empty', null, null);
                             }
                             if (file) {
@@ -68094,8 +68110,8 @@ Ext.define('Ext.picker.Picker', {
                                                     'pieSliceTextStyle': {
                                                         color: 'black'
                                                     },
-                                                    height: '600',
-                                                    width: '350',
+                                                    height: '800',
+                                                    width: '400',
                                                     legend: 'left'
                                                 };
                                             // Instantiate and draw our chart, passing in some options.
