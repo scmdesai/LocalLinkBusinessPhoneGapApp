@@ -66291,7 +66291,9 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
                                 if (btn == 'yes') {
-                                    FacebookInAppBrowser.logout(function() {});
+                                    FacebookInAppBrowser.logout(function() {
+                                        location.reload();
+                                    });
                                 }
                             });
                         },
@@ -68315,20 +68317,41 @@ Ext.application({
                 'corechart'
             ]
         });
-        /*if (Ext.os.is('Android')) {
-			document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);  // add back button listener
-
-			function onBackKeyDown(eve) {
-				eve.preventDefault();
-				Ext.Msg.confirm("Exit", "",  function ( answer ) {
-					if ( answer == 'yes') {
-						navigator.app.exitApp();
-					} else {
-						//do nothing
-					}
-				});
-			}
-		}*/
+        if (Ext.os.is('Android')) {
+            var BackButtonPanel;
+            var exitApp = false;
+            BackButtonPanel = Ext.create('Ext.Panel', {
+                // fullscreen: true,
+                html: 'Tap on Back Button Again To Exit',
+                id: 'BackButtonPanel',
+                itemId: 'BackButtonPanel',
+                baseCls: 'x-box'
+            });
+            BackButtonPanel.setBottom('100px');
+            BackButtonPanel.setLeft('170px');
+            BackButtonPanel.setHeight('50px');
+            BackButtonPanel.setWidth('100%');
+            var intval = setInterval(function() {
+                    exitApp = false;
+                }, 3000);
+            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+            // add back button listener
+            function onBackKeyDown(e) {
+                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
+                    if (exitApp) {
+                        clearInterval(intval);
+                        navigator.app.exitApp();
+                    } else {
+                        exitApp = true;
+                        Ext.Viewport.add(BackButtonPanel);
+                        BackButtonPanel.show();
+                        setTimeout(function() {
+                            BackButtonPanel.hide();
+                        }, 3000);
+                    }
+                }
+            }
+        }
         Ext.create('Contact.view.Login', {
             fullscreen: true
         });
