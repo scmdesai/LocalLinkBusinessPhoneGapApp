@@ -67620,6 +67620,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
                             var file = uForm.getAt(5).getValue();
+                            var dealName = uForm.getAt(0).getValue();
                             //var dealStartDate = uForm.getAt(2).getValue().toDateString();
                             //var dealEndDate = uForm.getAt(3).getValue();
                             //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
@@ -67660,6 +67661,9 @@ Ext.define('Ext.picker.Picker', {
 
 							uForm.getAt(3).setValue(dealEnd);
 							console.log(dealEnd);*/
+                            if (!dealName) {
+                                Ext.Msg.alert(null, 'Deal Name Field is Empty', null, null);
+                            }
                             if (file) {
                                 if (document.getElementById('chkbx').checked) {
                                     uForm.submit({
@@ -68090,8 +68094,8 @@ Ext.define('Ext.picker.Picker', {
                                                     'pieSliceTextStyle': {
                                                         color: 'black'
                                                     },
-                                                    height: '500',
-                                                    width: '300',
+                                                    height: '600',
+                                                    width: '350',
                                                     legend: 'left'
                                                 };
                                             // Instantiate and draw our chart, passing in some options.
