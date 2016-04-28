@@ -67577,7 +67577,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'container',
                         docked: 'left',
                         html: '<input type="checkbox" name="chkbx" id="chkbx">',
-                        left: '50%',
+                        left: '40%',
                         margin: '5 5 5 15',
                         top: '50%'
                     },
@@ -67677,40 +67677,41 @@ Ext.define('Ext.picker.Picker', {
 
 							uForm.getAt(3).setValue(dealEnd);
 							console.log(dealEnd);*/
-                            if (dealName === '') {
+                            if (dealName) {
+                                if (file) {
+                                    if (document.getElementById('chkbx').checked) {
+                                        uForm.submit({
+                                            url: 'http://services.appsonmobile.com/uploadS3',
+                                            xhr2: true,
+                                            waitMsg: 'Please Wait...',
+                                            cache: false,
+                                            scope: this,
+                                            success: function(form, action) {
+                                                Ext.getStore('MyDealsStore').load();
+                                                Ext.Msg.alert('Success', action.msg);
+                                                //console.log("Action Msg is : " +action.success);
+                                                //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
+                                                uForm.destroy();
+                                            },
+                                            failure: function(form, action) {
+                                                Ext.getStore('MyDealsStore').load();
+                                                Ext.Msg.alert('Failure', action.msg);
+                                                console.log("Action Msg is : " + action.msg);
+                                                //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
+                                                uForm.destroy();
+                                            }
+                                        });
+                                    } else {
+                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    }
+                                } else {
+                                    Ext.Msg.alert('Failure', 'No Image to Upload');
+                                }
+                            } else //uForm.destroy();
+                            {
                                 Ext.Msg.alert(null, 'Deal Name Field is Empty', null, null);
                             }
-                            if (file) {
-                                if (document.getElementById('chkbx').checked) {
-                                    uForm.submit({
-                                        url: 'http://services.appsonmobile.com/uploadS3',
-                                        xhr2: true,
-                                        waitMsg: 'Please Wait...',
-                                        cache: false,
-                                        scope: this,
-                                        success: function(form, action) {
-                                            Ext.getStore('MyDealsStore').load();
-                                            Ext.Msg.alert('Success', action.msg);
-                                            //console.log("Action Msg is : " +action.success);
-                                            //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
-                                            uForm.destroy();
-                                        },
-                                        failure: function(form, action) {
-                                            Ext.getStore('MyDealsStore').load();
-                                            Ext.Msg.alert('Failure', action.msg);
-                                            console.log("Action Msg is : " + action.msg);
-                                            //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
-                                            uForm.destroy();
-                                        }
-                                    });
-                                } else {
-                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
-                                }
-                            } else {
-                                Ext.Msg.alert('Failure', 'No Image to Upload');
-                            }
                         },
-                        //uForm.destroy();
                         docked: 'right',
                         height: '20%',
                         itemId: 'submit',
