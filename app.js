@@ -66266,11 +66266,10 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'button',
-                        docked: 'right',
-                        hidden: true,
+                        hidden: false,
                         itemId: 'editButton',
                         padding: '5 0 0 0',
-                        style: 'color:#00529D;font-size:7vw',
+                        style: 'color:#00529D;font-size:6vw',
                         styleHtmlContent: true,
                         ui: 'plain',
                         width: '20%',
@@ -66302,7 +66301,11 @@ Ext.define('Ext.picker.Picker', {
                             });
                         },
                         docked: 'right',
-                        iconCls: 'settings'
+                        padding: '10 0 0 0',
+                        style: '',
+                        ui: 'plain',
+                        width: '10%',
+                        iconCls: 'icon-signout'
                     }
                 ]
             },
@@ -68333,7 +68336,8 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 label: 'Name',
                 labelWidth: '35%',
-                name: 'DealName'
+                name: 'DealName',
+                readOnly: true
             },
             {
                 xtype: 'selectfield',
@@ -68514,18 +68518,22 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UpdateDealForm');
                             var itemName = form.getAt(7).getValue();
-                            form.submit({
-                                url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
-                                success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg);
-                                    form.destroy();
-                                },
-                                failure: function(form, action) {
-                                    store.load();
-                                    Ext.Msg.alert('Failure', action.msg);
-                                    form.destroy();
-                                }
-                            });
+                            if (document.getElementById('chkbx').checked) {
+                                form.submit({
+                                    url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                    success: function(form, action) {
+                                        Ext.Msg.alert('Success', action.msg);
+                                        form.destroy();
+                                    },
+                                    failure: function(form, action) {
+                                        store.load();
+                                        Ext.Msg.alert('Failure', action.msg);
+                                        form.destroy();
+                                    }
+                                });
+                            } else {
+                                Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                            }
                         },
                         docked: 'right',
                         height: '20%',
