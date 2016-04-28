@@ -68642,7 +68642,7 @@ Ext.define('Ext.picker.Picker', {
                             if (dealName) {
                                 if (document.getElementById('chkbx').checked) {
                                     uForm.submit({
-                                        url: 'http://services.appsonmobile.com/deals/editDeal' + itemName,
+                                        url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
                                         waitMsg: 'Please Wait...',
                                         cache: false,
                                         scope: this,
