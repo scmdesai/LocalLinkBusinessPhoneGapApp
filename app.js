@@ -66295,7 +66295,9 @@ Ext.define('Ext.picker.Picker', {
                                     location.reload();
                                 });
                             }
-                            function onNo() {}
+                            function onNo() {
+                                return false;
+                            }
                         },
                         docked: 'right',
                         iconCls: 'settings'
