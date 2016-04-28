@@ -68157,9 +68157,21 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 height: '100%',
                 html: 'Terms and conditions here',
+                itemId: 'mytextfield38',
                 readOnly: true
             }
+        ],
+        listeners: [
+            {
+                fn: 'onTermsHiddenChange',
+                event: 'hiddenchange'
+            }
         ]
+    },
+    onTermsHiddenChange: function(component, value, oldValue, eOpts) {
+        if (component.isHidden() === true && oldValue !== null) {
+            component.destroy();
+        }
     }
 }, 0, [
     "Terms"
