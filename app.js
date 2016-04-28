@@ -68334,7 +68334,7 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 label: 'Name',
                 labelWidth: '35%',
-                name: 'dealName'
+                name: 'DealName'
             },
             {
                 xtype: 'selectfield',
@@ -68348,7 +68348,7 @@ Ext.define('Ext.picker.Picker', {
                 label: 'Status',
                 labelWidth: '35%',
                 labelWrap: true,
-                name: 'dealStatus',
+                name: 'DealStatus',
                 value: 'Active',
                 placeHolder: 'Active',
                 autoSelect: false,
@@ -68376,7 +68376,7 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 label: 'Description',
                 labelWidth: '35%',
-                name: 'dealDescription'
+                name: 'DealDescription'
             },
             {
                 xtype: 'datepickerfield',
@@ -68392,7 +68392,7 @@ Ext.define('Ext.picker.Picker', {
                 label: 'Start Date',
                 labelWidth: '35%',
                 labelWrap: true,
-                name: 'dealStartDate',
+                name: 'DealStartDate',
                 value: {
                     day: new Date().getDate(),
                     month: (new Date().getMonth() + 1),
@@ -68427,7 +68427,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '97%',
                 label: 'End Date',
                 labelWidth: '35%',
-                name: 'dealEndDate',
+                name: 'DealEndDate',
                 value: {
                     day: new Date().getDate() + 1,
                     month: (new Date().getMonth() + 1),
@@ -68452,7 +68452,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: true,
                 id: 'DealPictureURL',
                 itemId: 'DealPictureURL',
-                name: 'dealPictureURL'
+                name: 'DealPictureURL'
             },
             {
                 xtype: 'button',
@@ -68495,14 +68495,6 @@ Ext.define('Ext.picker.Picker', {
         }
         console.dir(errors);
         return errors;
-    },
-    setRecord: function(record) {
-        (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        if (record) {
-            this.down('#DealName').setValue(record.data.dealName);
-            this.down('#DealStatus').setValue(record.data.dealStatus);
-            this.down('#DealDescription').setValue(record.data.dealDescription);
-        }
     }
 }, 0, [
     "UpdateDealForm"
@@ -68524,7 +68516,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'UpdateDealForm'
 ], 0));
-//this.child('contactpic').setData(record.data);
 
 /*
  * File: app.js
