@@ -68289,13 +68289,9 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.UpdateDealForm', Ext.form.Panel, {
     config: {
         height: '100%',
-        html: '',
-        minHeight: '',
         style: 'background:white',
-        enctype: 'multipart/form-data',
         multipartDetection: false,
         standardSubmit: true,
-        url: '',
         items: [
             {
                 xtype: 'textfield',
@@ -68602,8 +68598,6 @@ Ext.define('Ext.picker.Picker', {
         if (record) {
             this.down('#DealName').setValue(record.data.dealName);
             this.down('#DealStatus').setValue(record.data.dealStatus);
-            this.down('#DealStartDate').setValue(record.data.dealStartDate);
-            this.down('#DealEndDate').setValue(record.data.dealEndDate);
             this.down('#DealDescription').setValue(record.data.dealDescription);
             this.down('#DealPictureURL').setValue(record.data.dealPictureURL);
             this.down('#itemName').setValue(record.data.itemName);
