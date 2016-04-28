@@ -68584,8 +68584,15 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var uForm = this.up('UpdateDealForm');
-                            var dealName = uForm.getAt(0).getValue();
-                            var itemName = uForm.getAt(5).getValue();
+                            console.log('Form 0 : ' + uForm.getAt(0).getValue());
+                            console.log('Form 1 : ' + uForm.getAt(1).getValue());
+                            console.log('Form 2 : ' + uForm.getAt(2).getValue());
+                            console.log('Form 3 : ' + uForm.getAt(3).getValue());
+                            console.log('Form 4 : ' + uForm.getAt(4).getValue());
+                            console.log('Form 5 : ' + uForm.getAt(5).getValue());
+                            console.log('Form 6 : ' + uForm.getAt(6).getValue());
+                            console.log('Form 7 : ' + uForm.getAt(7).getValue());
+                            //var itemName = uForm.getAt(5).getValue();
                             //var dealStartDate = uForm.getAt(2).getValue().toDateString();
                             //var dealEndDate = uForm.getAt(3).getValue();
                             //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
@@ -68629,7 +68636,7 @@ Ext.define('Ext.picker.Picker', {
                             if (dealName) {
                                 if (document.getElementById('chkbx').checked) {
                                     uForm.submit({
-                                        url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                        url: 'http://services.appsonmobile.com/deals/editDeal/d6184660-f6a5-11e5-86f8-df5465367956',
                                         waitMsg: 'Please Wait...',
                                         cache: false,
                                         scope: this,
