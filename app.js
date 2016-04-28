@@ -67698,7 +67698,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onFormpanelPainted: function(element, eOpts) {
-        Ext.getCmp('Terms').hide();
+        Ext.Viewport.getComponent('Terms').hide();
     }
 }, 0, [
     "UploadDealForm"
