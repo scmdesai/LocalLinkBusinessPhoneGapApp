@@ -67572,6 +67572,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 height: '40px',
                 html: '<input type="checkbox" name="chkbx" id="chkbx"><span onclick="Ext.Viewport.add({xtype:\'Terms\'}).show();"  id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</span>',
+                itemId: 'mycontainer5',
                 margin: '5 5 5 5',
                 padding: '5 5 5 5',
                 styleHtmlContent: true,
@@ -68167,6 +68168,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onTermsHiddenChange',
                 event: 'hiddenchange'
+            },
+            {
+                fn: 'onTermsInitialize',
+                event: 'initialize'
             }
         ]
     },
@@ -68174,6 +68179,9 @@ Ext.define('Ext.picker.Picker', {
         if (component.isHidden() === true && oldValue !== null) {
             component.destroy();
         }
+    },
+    onTermsInitialize: function(component, eOpts) {
+        component.hide();
     }
 }, 0, [
     "Terms"
