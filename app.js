@@ -68297,7 +68297,6 @@ Ext.define('Ext.picker.Picker', {
         modal: true,
         scrollable: false,
         multipartDetection: false,
-        standardSubmit: true,
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -68448,13 +68447,6 @@ Ext.define('Ext.picker.Picker', {
                 name: 'itemName'
             },
             {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'DealPictureURL',
-                itemId: 'DealPictureURL',
-                name: 'DealPictureURL'
-            },
-            {
                 xtype: 'container',
                 left: '',
                 layout: 'hbox',
@@ -68522,7 +68514,6 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UpdateDealForm');
                             var itemName = form.getAt(7).getValue();
-                            console.log(itemName);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
                                 success: function(form, action) {
