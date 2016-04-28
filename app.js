@@ -68384,6 +68384,8 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
+                id: 'DealName',
+                itemId: 'DealName',
                 margin: '5 5 5 5 ',
                 padding: '',
                 style: 'border:1px solid #C0C0C0!important',
@@ -68397,7 +68399,8 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'selectfield',
                 cls: 'customfield',
-                itemId: 'dealStatus',
+                id: 'DealStatus',
+                itemId: 'DealStatus',
                 margin: '5 5 5 5 ',
                 maxHeight: '',
                 style: '',
@@ -68423,6 +68426,8 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
+                id: 'DealDescription',
+                itemId: 'DealDescription',
                 margin: '5 5 5 5 ',
                 padding: '',
                 style: 'border:1px solid #C0C0C0!important',
@@ -68475,6 +68480,7 @@ Ext.define('Ext.picker.Picker', {
                     'customfield',
                     'x-field-select'
                 ],
+                id: 'DealEndDate1',
                 itemId: 'DealEndDate',
                 margin: '5 5 5 5 ',
                 styleHtmlContent: true,
@@ -68501,19 +68507,27 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 hidden: true,
+                id: 'customerId1',
+                itemId: 'customerId',
                 name: 'customerId'
             },
             {
                 xtype: 'textfield',
                 hidden: true,
+                id: 'businessName1',
+                itemId: 'businessName',
                 name: 'businessName'
             },
             {
                 xtype: 'hiddenfield',
+                id: 'itemName',
+                itemId: 'itemName',
                 name: 'itemName'
             },
             {
                 xtype: 'hiddenfield',
+                id: 'DealPictureURL',
+                itemId: 'DealPictureURL',
                 name: 'DealPictureURL'
             },
             {
