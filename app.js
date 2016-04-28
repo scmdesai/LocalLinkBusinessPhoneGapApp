@@ -68178,6 +68178,8 @@ Ext.define('Ext.picker.Picker', {
     onTermsHiddenChange: function(component, value, oldValue, eOpts) {
         if (component.isHidden() === true && oldValue !== null) {
             component.destroy();
+        } else {
+            component.hide();
         }
     },
     onTermsInitialize: function(component, eOpts) {
