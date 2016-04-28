@@ -67571,7 +67571,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 height: '40px',
-                html: '<input type="checkbox" name="chkbx" id="chkbx"><span onclick="Ext.Viewport.add({xtype:\'Terms\'}).show();"  id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s <a> Terms & Conditions</a></span>',
+                html: '<input type="checkbox" name="chkbx" id="chkbx"><a onclick="Ext.Viewport.add({xtype:\'Terms\'}).show();"  id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                 margin: '5 5 5 5',
                 padding: '5 5 5 5',
                 styleHtmlContent: true,
