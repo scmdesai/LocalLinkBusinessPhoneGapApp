@@ -68009,7 +68009,7 @@ Ext.define('Ext.picker.Picker', {
                                         var dealName = [];
                                         var numberOfClicks = [];
                                         dataBarChart.addColumn('string', 'dealName');
-                                        dataBarChart.addColumn('number', 'numberOfClicks');
+                                        dataBarChart.addColumn('number', 'Number Of Clicks');
                                         $.getJSON('http://services.appsonmobile.com/analytics_buzz_popularity/v3/' + customerId, function(json) {
                                             for (var i = 0,
                                                 j = i; i < json.totalResults; i++ , j++) {
@@ -68090,7 +68090,7 @@ Ext.define('Ext.picker.Picker', {
                                         var numberOfHits = [];
                                         //data.addColumn('string', 'dealName');
                                         data.addColumn('string', 'zipcode');
-                                        data.addColumn('number', 'NumberOfHits');
+                                        data.addColumn('number', 'Number Of Hits');
                                         $.getJSON('http://services.appsonmobile.com/analytics_user_location/v3/' + customerId, function(json) {
                                             for (var i = 0,
                                                 j = i; i < json.totalResults; i++ , j++) {
@@ -68113,7 +68113,7 @@ Ext.define('Ext.picker.Picker', {
                                                     },
                                                     height: '700',
                                                     width: '375',
-                                                    legend: 'left'
+                                                    legend: 'top'
                                                 };
                                             // Instantiate and draw our chart, passing in some options.
                                             var chart = new google.visualization.PieChart(document.getElementById('chart2'));
