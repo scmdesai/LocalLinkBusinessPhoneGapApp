@@ -68185,16 +68185,26 @@ Ext.define('Ext.picker.Picker', {
         style: 'background;#fff;border:3px groove #1985d0',
         width: '95%',
         hideOnMaskTap: true,
-        modal: true,
-        scrollable: true,
         items: [
             {
                 xtype: 'textfield',
                 disabled: false,
-                height: '100%',
                 html: 'Terms and conditions here',
                 itemId: 'mytextfield38',
                 readOnly: true
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    this.up('Terms').destroy();
+                },
+                docked: 'bottom',
+                left: '30%',
+                style: 'background:#00529D;color:white',
+                top: '80%',
+                ui: 'plain',
+                width: '40%',
+                text: 'Close'
             }
         ],
         listeners: [
