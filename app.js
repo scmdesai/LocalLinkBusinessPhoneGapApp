@@ -68179,7 +68179,7 @@ Ext.define('Ext.picker.Picker', {
         if (component.isHidden() === true && oldValue !== null) {
             component.destroy();
         } else if (oldValue === null) {
-            component.hide();
+            component.destroy();
         }
     },
     onTermsInitialize: function(component, eOpts) {
