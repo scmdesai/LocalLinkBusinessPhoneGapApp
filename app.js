@@ -66209,13 +66209,19 @@ Ext.define('Ext.picker.Picker', {
             }
         });
     }
-}, 0, 0, [
+}, 0, [
+    "Login"
+], [
     "component",
-    "container"
+    "container",
+    "Login"
 ], {
     "component": true,
-    "container": true
-}, 0, 0, [
+    "container": true,
+    "Login": true
+}, [
+    "widget.Login"
+], 0, [
     Contact.view,
     'Login'
 ], 0));
@@ -66283,7 +66289,14 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         handler: function(button, e) {
-                            FacebookInAppBrowser.logout();
+                            Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', onYes, null);
+                            function onYes() {
+                                FacebookInAppBrowser.logout();
+                                Ext.Viewport.getActiveItem().destroy();
+                                Ext.Viewport.add({
+                                    xtype: 'Login'
+                                });
+                            }
                         },
                         docked: 'right',
                         iconCls: 'settings'
