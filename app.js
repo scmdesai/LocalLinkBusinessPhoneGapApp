@@ -67689,16 +67689,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onFormpanelPainted',
-                event: 'painted'
-            }
         ]
-    },
-    onFormpanelPainted: function(element, eOpts) {
-        Ext.Viewport.getComponent('Terms').hide();
     }
 }, 0, [
     "UploadDealForm"
@@ -68153,7 +68144,7 @@ Ext.define('Ext.picker.Picker', {
     config: {
         centered: true,
         height: '50%',
-        hidden: false,
+        hidden: true,
         id: 'Terms',
         itemId: 'Terms',
         margin: '0 5 5 5',
