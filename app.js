@@ -68666,6 +68666,18 @@ Ext.define('Ext.picker.Picker', {
                 ]
             }
         ]
+    },
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            this.down('#DealName').setValue(record.data.deaName);
+            this.down('#DealStatus').setValue(record.data.dealStatus);
+            this.down('#DealStartDate').setValue(record.data.dealStartDate);
+            this.down('#DealEndDate').setValue(record.data.dealEndDate);
+            this.down('#DealDescription').setValue(record.data.dealDescription);
+            this.down('#DealPictureURL').setValue(record.data.dealPictureURL);
+            this.down('#itemName').setValue(record.data.itemName);
+        }
     }
 }, 0, [
     "UpdateDealForm"
@@ -68687,6 +68699,7 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'UpdateDealForm'
 ], 0));
+//this.child('contactpic').setData(record.data);
 
 /*
  * File: app.js
