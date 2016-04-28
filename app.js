@@ -68288,11 +68288,39 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.UpdateDealForm', Ext.form.Panel, {
     config: {
-        height: '100%',
+        html: '',
+        id: 'formpanel1',
+        itemId: 'formpanel',
         style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
+        modal: true,
+        scrollable: false,
         multipartDetection: false,
         standardSubmit: true,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
         items: [
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: true,
+                id: 'businessName1',
+                itemId: 'businessName',
+                margin: '30 15 2 15',
+                styleHtmlContent: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'customerId1',
+                itemId: 'customerId',
+                name: 'customerId'
+            },
             {
                 xtype: 'textfield',
                 cls: 'customfield',
@@ -68413,10 +68441,6 @@ Ext.define('Ext.picker.Picker', {
                 }
             },
             {
-                xtype: 'spacer',
-                maxHeight: ''
-            },
-            {
                 xtype: 'textfield',
                 hidden: true,
                 id: 'itemName',
@@ -68431,176 +68455,53 @@ Ext.define('Ext.picker.Picker', {
                 name: 'dealPictureURL'
             },
             {
-                xtype: 'container',
-                left: '',
-                layout: 'hbox',
-                items: [
-                    {
-                        xtype: 'container',
-                        docked: 'left',
-                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
-                        left: '40%',
-                        margin: '5 5 5 15',
-                        top: '50%'
-                    },
-                    {
-                        xtype: 'container',
-                        docked: 'right',
-                        height: '40px',
-                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
-                        itemId: 'mycontainer5',
-                        margin: '5 5 5 10',
-                        padding: '5 30 5 0',
-                        styleHtmlContent: true,
-                        layout: 'hbox',
-                        listeners: [
-                            {
-                                fn: function(element, eOpts) {
-                                    element.addListener('tap', function() {
-                                        Ext.Viewport.add({
-                                            xtype: 'Terms'
-                                        }).show();
-                                    });
-                                },
-                                event: 'painted'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                xtype: 'container',
-                height: 140,
-                margin: '10 10 10 10 10',
+                xtype: 'button',
+                handler: function(button, e) {
+                    var form = this.up('UpdateDealForm');
+                    form.submit({
+                        url: 'http://services.appsonmobile.com/deals/editDeal/d6184660-f6a5-11e5-86f8-df5465367956',
+                        success: function(form, action) {
+                            Ext.Msg.alert('Success', action.msg);
+                            form.destroy();
+                        },
+                        failure: function(form, action) {
+                            store.load();
+                            Ext.Msg.alert('Failure', action.msg);
+                            form.destroy();
+                        }
+                    });
+                },
+                cls: 'button',
+                itemId: 'saveContactButton1',
+                margin: '0 10 0 0',
                 styleHtmlContent: true,
-                layout: 'fit',
-                scrollable: false,
-                items: [
-                    {
-                        xtype: 'spacer',
-                        maxWidth: '',
-                        minWidth: ''
-                    },
-                    {
-                        xtype: 'button',
-                        handler: function(button, e) {
-                            Ext.Viewport.getActiveItem().destroy();
-                        },
-                        height: '20%',
-                        style: 'font-size:5vw!important',
-                        styleHtmlContent: true,
-                        ui: 'decline',
-                        width: '40%',
-                        text: 'Cancel'
-                    },
-                    {
-                        xtype: 'button',
-                        handler: function(button, e) {
-                            var uForm = this.up('UpdateDealForm');
-                            var dealName = uForm.getAt(0).getValue();
-                            console.log('Form 0 : ' + uForm.getAt(0).getValue());
-                            console.log('Form 1 : ' + uForm.getAt(1).getValue());
-                            console.log('Form 2 : ' + uForm.getAt(2).getValue());
-                            console.log('Form 3 : ' + uForm.getAt(3).getValue());
-                            console.log('Form 4 : ' + uForm.getAt(4).getValue());
-                            //var itemName = uForm.getAt(5).getValue();
-                            //var dealStartDate = uForm.getAt(2).getValue().toDateString();
-                            //var dealEndDate = uForm.getAt(3).getValue();
-                            //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
-                            //Ext.Date.format(uForm.getAt(3).getValue(),'n/j/Y');
-                            /*var startDate = uForm.getAt(2).getValue();
-
-							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
-							console.log(date);
-
-							uForm.getAt(2).setValue(date);
-
-
-							var startDate = uForm.getAt(3).getValue();
-
-							var date = (startDate.getMonth()+1)+"/"+ startDate.getDate() + "/" + startDate.getFullYear();
-							console.log(date);
-
-
-							uForm.getAt(3).setValue(date);
-
-
-							console.log(date);*/
-                            /*var startDate = dealStartDate.getDate();
-							var startMonth = dealStartDate.getMonth()+1;
-							var startYear = dealStartDate.getFullYear();
-
-							var dealStart = startDate + "/" + startMonth + "/" + startYear ;
-
-							console.log(dealStart);
-
-							uForm.getAt(2).setValue(dealStart);
-
-							var endDate = dealEndDate.getDate();
-							var endMonth = dealEndDate.getMonth()+1;
-							var endYear = dealEndDate.getFullYear();
-
-							var dealEnd = endDate + "/" + endMonth + "/" + endYear ;
-
-							uForm.getAt(3).setValue(dealEnd);
-							console.log(dealEnd);*/
-                            if (dealName) {
-                                if (document.getElementById('chkbx').checked) {
-                                    uForm.submit({
-                                        url: 'http://services.appsonmobile.com/deals/editDeal/d6184660-f6a5-11e5-86f8-df5465367956',
-                                        waitMsg: 'Please Wait...',
-                                        cache: false,
-                                        scope: this,
-                                        success: function(form, action) {
-                                            Ext.getStore('MyDealsStore').load();
-                                            Ext.Msg.alert('Success', action.msg);
-                                            //console.log("Action Msg is : " +action.success);
-                                            //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
-                                            uForm.destroy();
-                                        },
-                                        failure: function(form, action) {
-                                            Ext.getStore('MyDealsStore').load();
-                                            Ext.Msg.alert('Failure', action.msg);
-                                            console.log("Action Msg is : " + action.msg);
-                                            //Ext.Viewport.setActiveItem({xtype:'DealsPanel'});
-                                            uForm.destroy();
-                                        }
-                                    });
-                                } else {
-                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
-                                }
-                            } else {
-                                Ext.Msg.alert(null, 'Deal Name Field is Empty', null, null);
-                            }
-                        },
-                        docked: 'right',
-                        height: '20%',
-                        itemId: 'submit',
-                        style: 'font:size:4vw',
-                        styleHtmlContent: true,
-                        ui: 'confirm',
-                        width: '30%',
-                        text: 'Submit'
-                    }
-                ]
+                ui: 'confirm',
+                width: '30%',
+                text: 'Save'
             }
         ]
     },
+    getValidationErrors: function() {
+        var errors = [];
+        var reqFields = this.query('field[required=true]');
+        var i = 0,
+            ln = reqFields.length,
+            field;
+        for (; i < ln; i++) {
+            field = reqFields[i];
+            if (!field.getValue()) {
+                errors.push(field.getLabel() + ' must be completed.');
+            }
+        }
+        console.dir(errors);
+        return errors;
+    },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        console.log(record.data.dealName);
-        console.log(record.data.dealStatus);
-        console.log(record.data.dealStartDate);
-        console.log(record.data.dealEndDate);
-        console.log(record.data.dealDescription);
-        console.log(record.data.dealPictureURL);
-        console.log(record.data.itemName);
         if (record) {
             this.down('#DealName').setValue(record.data.dealName);
             this.down('#DealStatus').setValue(record.data.dealStatus);
             this.down('#DealDescription').setValue(record.data.dealDescription);
-            this.down('#DealPictureURL').setValue(record.data.dealPictureURL);
-            this.down('#itemName').setValue(record.data.itemName);
         }
     }
 }, 0, [
