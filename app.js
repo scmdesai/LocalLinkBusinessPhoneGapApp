@@ -68379,6 +68379,7 @@ Ext.define('Ext.picker.Picker', {
         style: 'background:white',
         enctype: 'multipart/form-data',
         multipartDetection: false,
+        standardSubmit: true,
         url: '',
         items: [
             {
@@ -68394,7 +68395,7 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 label: 'Name',
                 labelWidth: '35%',
-                name: 'DealName'
+                name: 'dealName'
             },
             {
                 xtype: 'selectfield',
@@ -68408,7 +68409,7 @@ Ext.define('Ext.picker.Picker', {
                 label: 'Status',
                 labelWidth: '35%',
                 labelWrap: true,
-                name: 'DealStatus',
+                name: 'dealStatus',
                 value: 'Active',
                 placeHolder: 'Active',
                 autoSelect: false,
@@ -68436,7 +68437,7 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 label: 'Description',
                 labelWidth: '35%',
-                name: 'DealDescription'
+                name: 'dealDescription'
             },
             {
                 xtype: 'datepickerfield',
@@ -68452,7 +68453,7 @@ Ext.define('Ext.picker.Picker', {
                 label: 'Start Date',
                 labelWidth: '35%',
                 labelWrap: true,
-                name: 'DealStartDate',
+                name: 'dealStartDate',
                 value: {
                     day: new Date().getDate(),
                     month: (new Date().getMonth() + 1),
@@ -68487,7 +68488,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '97%',
                 label: 'End Date',
                 labelWidth: '35%',
-                name: 'DealEndDate',
+                name: 'dealEndDate',
                 value: {
                     day: new Date().getDate() + 1,
                     month: (new Date().getMonth() + 1),
@@ -68528,7 +68529,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'hiddenfield',
                 id: 'DealPictureURL',
                 itemId: 'DealPictureURL',
-                name: 'DealPictureURL'
+                name: 'dealPictureURL'
             },
             {
                 xtype: 'container',
@@ -68683,6 +68684,7 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        console.log(record.data.itemName);
         if (record) {
             this.down('#DealName').setValue(record.data.deaName);
             this.down('#DealStatus').setValue(record.data.dealStatus);
