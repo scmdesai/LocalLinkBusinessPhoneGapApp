@@ -68506,20 +68506,6 @@ Ext.define('Ext.picker.Picker', {
                 maxHeight: ''
             },
             {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'customerId1',
-                itemId: 'customerId',
-                name: 'customerId'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'businessName1',
-                itemId: 'businessName',
-                name: 'businessName'
-            },
-            {
                 xtype: 'hiddenfield',
                 id: 'itemName',
                 itemId: 'itemName',
@@ -68684,9 +68670,15 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        console.log(record.data.dealName);
+        console.log(record.data.dealStatus);
+        console.log(record.data.dealStartDate);
+        console.log(record.data.dealEndDate);
+        console.log(record.data.dealDescription);
+        console.log(record.data.dealPictureURL);
         console.log(record.data.itemName);
         if (record) {
-            this.down('#DealName').setValue(record.data.deaName);
+            this.down('#DealName').setValue(record.data.dealName);
             this.down('#DealStatus').setValue(record.data.dealStatus);
             this.down('#DealStartDate').setValue(record.data.dealStartDate);
             this.down('#DealEndDate').setValue(record.data.dealEndDate);
