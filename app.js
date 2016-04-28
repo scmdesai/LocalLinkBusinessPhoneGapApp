@@ -68501,6 +68501,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var uForm = this.up('UpdateDealForm');
+                            var dealName = uForm.getAt(0).getValue();
                             console.log('Form 0 : ' + uForm.getAt(0).getValue());
                             console.log('Form 1 : ' + uForm.getAt(1).getValue());
                             console.log('Form 2 : ' + uForm.getAt(2).getValue());
