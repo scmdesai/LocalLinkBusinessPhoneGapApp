@@ -68111,7 +68111,7 @@ Ext.define('Ext.picker.Picker', {
                                                     'pieSliceTextStyle': {
                                                         color: 'black'
                                                     },
-                                                    height: '700',
+                                                    height: '600',
                                                     width: '375',
                                                     legend: 'top'
                                                 };
