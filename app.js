@@ -67689,7 +67689,16 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onFormpanelPainted',
+                event: 'painted'
+            }
         ]
+    },
+    onFormpanelPainted: function(element, eOpts) {
+        Ext.getCmp('Terms').hide();
     }
 }, 0, [
     "UploadDealForm"
@@ -68144,10 +68153,12 @@ Ext.define('Ext.picker.Picker', {
     config: {
         centered: true,
         height: '50%',
+        hidden: false,
         id: 'Terms',
         itemId: 'Terms',
+        margin: '0 5 5 5',
         style: 'background;#fff;border:3px groove #1985d0',
-        width: '100%',
+        width: '95%',
         hideOnMaskTap: true,
         modal: true,
         scrollable: true,
