@@ -66289,15 +66289,13 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         handler: function(button, e) {
-                            Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', onYes, onNo);
-                            function onYes() {
-                                FacebookInAppBrowser.logout(function() {
-                                    location.reload();
-                                });
-                            }
-                            function onNo() {
-                                return false;
-                            }
+                            Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
+                                if (btn == 'yes') {
+                                    FacebookInAppBrowser.logout(function() {
+                                        location.reload();
+                                    });
+                                }
+                            });
                         },
                         docked: 'right',
                         iconCls: 'settings'
