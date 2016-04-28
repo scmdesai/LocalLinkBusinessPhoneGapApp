@@ -68455,29 +68455,97 @@ Ext.define('Ext.picker.Picker', {
                 name: 'DealPictureURL'
             },
             {
-                xtype: 'button',
-                handler: function(button, e) {
-                    var form = this.up('UpdateDealForm');
-                    form.submit({
-                        url: 'http://services.appsonmobile.com/deals/editDeal/d6184660-f6a5-11e5-86f8-df5465367956',
-                        success: function(form, action) {
-                            Ext.Msg.alert('Success', action.msg);
-                            form.destroy();
-                        },
-                        failure: function(form, action) {
-                            store.load();
-                            Ext.Msg.alert('Failure', action.msg);
-                            form.destroy();
-                        }
-                    });
-                },
-                cls: 'button',
-                itemId: 'saveContactButton1',
-                margin: '0 10 0 0',
+                xtype: 'container',
+                left: '',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 10',
+                        padding: '5 30 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        Ext.Viewport.add({
+                                            xtype: 'Terms'
+                                        }).show();
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                height: 140,
+                margin: '10 10 10 10 10',
                 styleHtmlContent: true,
-                ui: 'confirm',
-                width: '30%',
-                text: 'Save'
+                layout: 'fit',
+                scrollable: false,
+                items: [
+                    {
+                        xtype: 'spacer',
+                        maxWidth: '',
+                        minWidth: ''
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getActiveItem().destroy();
+                        },
+                        height: '20%',
+                        style: 'font-size:5vw!important',
+                        styleHtmlContent: true,
+                        ui: 'decline',
+                        width: '40%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var form = this.up('UpdateDealForm');
+                            var itemName = form.getAt(7).getValue();
+                            console.log(itemName);
+                            form.submit({
+                                url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                success: function(form, action) {
+                                    Ext.Msg.alert('Success', action.msg);
+                                    form.destroy();
+                                },
+                                failure: function(form, action) {
+                                    store.load();
+                                    Ext.Msg.alert('Failure', action.msg);
+                                    form.destroy();
+                                }
+                            });
+                        },
+                        docked: 'right',
+                        height: '20%',
+                        itemId: 'submit',
+                        style: 'font:size:4vw',
+                        styleHtmlContent: true,
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Submit'
+                    }
+                ]
             }
         ]
     },
@@ -68495,6 +68563,14 @@ Ext.define('Ext.picker.Picker', {
         }
         console.dir(errors);
         return errors;
+    },
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            this.down('#DealName').setValue(record.data.dealName);
+            this.down('#DealStatus').setValue(record.data.dealStatus);
+            this.down('#DealDescription').setValue(record.data.dealDescription);
+        }
     }
 }, 0, [
     "UpdateDealForm"
@@ -68516,6 +68592,7 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'UpdateDealForm'
 ], 0));
+//this.child('contactpic').setData(record.data);
 
 /*
  * File: app.js
