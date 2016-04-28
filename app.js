@@ -66293,11 +66293,9 @@ Ext.define('Ext.picker.Picker', {
                             function onYes() {
                                 FacebookInAppBrowser.logout();
                                 Ext.Viewport.getActiveItem().destroy();
-                                Ext.Viewport.add({
-                                    xtype: 'Login'
-                                });
                             }
                         },
+                        //Ext.Viewport.add({xtype:'Login'});
                         docked: 'right',
                         iconCls: 'settings'
                     }
