@@ -66283,12 +66283,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         handler: function(button, e) {
-                            FacebookInAppBrowser.logout(function() {
-                                Ext.Msg.confirm(null, 'Do you want to Log Out?', onYes, null);
-                            });
-                            function onYes() {
-                                Ext.Msg.alert('Bye', null, null, null);
-                            }
+                            FacebookInAppBrowser.logout();
                         },
                         docked: 'right',
                         iconCls: 'settings'
