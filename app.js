@@ -68583,7 +68583,6 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var uForm = this.up('UpdateDealForm');
-                            var file = uForm.getAt(5).getValue();
                             var dealName = uForm.getAt(0).getValue();
                             var itemName = uForm.getAt(7).getValue();
                             //var dealStartDate = uForm.getAt(2).getValue().toDateString();
