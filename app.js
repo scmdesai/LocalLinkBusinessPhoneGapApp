@@ -66257,7 +66257,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         docked: 'right',
-                        hidden: false,
+                        hidden: true,
                         itemId: 'editButton',
                         padding: '5 0 0 0',
                         style: 'color:#00529D;font-size:7vw',
@@ -66290,6 +66290,7 @@ Ext.define('Ext.picker.Picker', {
                                 Ext.Msg.alert('Bye', null, null, null);
                             }
                         },
+                        docked: 'right',
                         iconCls: 'settings'
                     }
                 ]
