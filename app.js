@@ -68178,7 +68178,7 @@ Ext.define('Ext.picker.Picker', {
     onTermsHiddenChange: function(component, value, oldValue, eOpts) {
         if (component.isHidden() === true && oldValue !== null) {
             component.destroy();
-        } else if (oldValue !== null) {
+        } else if (component.value === null) {
             component.destroy();
         }
     },
