@@ -66292,7 +66292,7 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
                                 if (btn == 'yes') {
                                     FacebookInAppBrowser.logout(function() {
-                                        location.reload();
+                                        location.reload(true);
                                     });
                                 }
                             });
