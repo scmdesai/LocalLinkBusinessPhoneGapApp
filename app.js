@@ -68311,6 +68311,7 @@ Ext.application({
         Ext.util.Format.undef = function(value, defaultValue) {
             return Ext.isDefined(value) ? value : defaultValue;
         };
+        window.cache.clear();
         //Load google charts
         google.charts.load('current', {
             'packages': [
