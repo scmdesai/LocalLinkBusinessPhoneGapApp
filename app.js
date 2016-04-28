@@ -68271,9 +68271,7 @@ Ext.define('Ext.picker.Picker', {
  * Do NOT hand edit this file.
  */
 // @require @packageOverrides
-Ext.Loader.setConfig({
-    disableCaching: false
-});
+Ext.Loader.setConfig({});
 Ext.application({
     models: [
         'Contact',
@@ -68311,7 +68309,6 @@ Ext.application({
         Ext.util.Format.undef = function(value, defaultValue) {
             return Ext.isDefined(value) ? value : defaultValue;
         };
-        window.cache.clear();
         //Load google charts
         google.charts.load('current', {
             'packages': [
