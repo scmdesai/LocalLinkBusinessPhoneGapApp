@@ -68111,8 +68111,8 @@ Ext.define('Ext.picker.Picker', {
                                                     'pieSliceTextStyle': {
                                                         color: 'black'
                                                     },
-                                                    height: '800',
-                                                    width: '400',
+                                                    height: '700',
+                                                    width: '375',
                                                     legend: 'left'
                                                 };
                                             // Instantiate and draw our chart, passing in some options.
