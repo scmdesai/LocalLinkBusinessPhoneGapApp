@@ -66291,10 +66291,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
                                 if (btn == 'yes') {
-                                    FacebookInAppBrowser.logout(function() {
-                                        window.cache.clear();
-                                        location.reload();
-                                    });
+                                    FacebookInAppBrowser.logout(function() {});
                                 }
                             });
                         },
@@ -68274,7 +68271,9 @@ Ext.define('Ext.picker.Picker', {
  * Do NOT hand edit this file.
  */
 // @require @packageOverrides
-Ext.Loader.setConfig({});
+Ext.Loader.setConfig({
+    disableCaching: false
+});
 Ext.application({
     models: [
         'Contact',
