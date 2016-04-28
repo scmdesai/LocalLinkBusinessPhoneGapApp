@@ -30,6 +30,7 @@
 	<preference name="StatusBarBackgroundColor" value="#00529D" />
     <preference name="StatusBarStyle" value="lightcontent" />
 	<preference name="android-windowSoftInputMode" value="adjustNothing" />
+	<preference name="HideKeyboardFormAccessoryBar" value="true"/>
 	
 	
 	<!-- Facebook plugin
