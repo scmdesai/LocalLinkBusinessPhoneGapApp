@@ -66279,6 +66279,18 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'spacer',
                         height: 11,
                         width: 18
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            FacebookInAppBrowser.logout(function() {
+                                Ext.Msg.confirm(null, 'Do you want to Log Out?', onYes, null);
+                            });
+                            function onYes() {
+                                Ext.Msg.alert('Bye', null, null, null);
+                            }
+                        },
+                        iconCls: 'settings'
                     }
                 ]
             },
