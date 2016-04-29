@@ -66431,38 +66431,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
-                ui: 'plain',
-                items: [
-                    {
-                        xtype: 'button',
-                        docked: 'right',
-                        hidden: false,
-                        itemId: 'editButton',
-                        style: 'color:#00529D;font-size:6vw',
-                        styleHtmlContent: true,
-                        ui: 'plain',
-                        width: '20%',
-                        iconCls: 'compose'
-                    },
-                    {
-                        xtype: 'button',
-                        handler: function(button, e) {
-                            Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
-                                if (btn == 'yes') {
-                                    FacebookInAppBrowser.logout(function() {
-                                        location.reload();
-                                    });
-                                }
-                            });
-                        },
-                        docked: 'right',
-                        padding: '10 0 0 0',
-                        style: '',
-                        ui: 'plain',
-                        width: '10%',
-                        iconCls: 'icon-signout'
-                    }
-                ]
+                ui: 'plain'
             },
             {
                 xtype: 'toolbar',
@@ -68803,17 +68772,43 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.MyMenu', Ext.Menu, {
     config: {
+        height: '32%',
+        margin: '15 15 5 5',
+        padding: '',
         style: 'background:white',
+        width: '25%',
+        scrollable: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
         items: [
             {
                 xtype: 'button',
-                style: 'background:white',
+                hidden: false,
+                itemId: 'editButton',
+                margin: '5 5 5 5',
+                style: 'color:#00529D;font-size:6vw',
+                styleHtmlContent: true,
                 ui: 'plain',
-                iconCls: 'icon-edit'
+                iconCls: 'compose'
             },
             {
                 xtype: 'button',
-                style: 'background:white',
+                handler: function(button, e) {
+                    Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
+                        if (btn == 'yes') {
+                            FacebookInAppBrowser.logout(function() {
+                                location.reload();
+                            });
+                        }
+                    });
+                },
+                docked: 'right',
+                margin: '',
+                padding: '10 0 0 0',
+                style: '',
+                top: '30%',
                 ui: 'plain',
                 iconCls: 'icon-signout'
             }
