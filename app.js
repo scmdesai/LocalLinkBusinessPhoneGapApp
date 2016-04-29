@@ -68879,6 +68879,7 @@ Ext.application({
             ]
         });
         if (Ext.os.is('Android')) {
+            navigator.app.clearHistory();
             var BackButtonPanel;
             var exitApp = false;
             BackButtonPanel = Ext.create('Ext.Panel', {
