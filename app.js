@@ -66751,7 +66751,7 @@ Ext.define('Ext.picker.Picker', {
                                 if (btn == 'yes') {
                                     FacebookInAppBrowser.logout(function() {
                                         //location.reload();
-                                        location.replace('http://appsonmobile.com');
+                                        history.go(-(history.length - 1));
                                     });
                                 }
                             });
