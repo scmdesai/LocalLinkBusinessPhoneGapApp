@@ -66711,16 +66711,19 @@ Ext.define('Ext.picker.Picker', {
                             });
                         }
                     }
-                ]
+                ],
+                listeners: {
+                    'mouseleave': function(menu, e, eOpts) {
+                        console.log('bye bye ');
+                        menu.hide();
+                    }
+                }
             });
         Ext.Viewport.setMenu(menu, {
             side: 'right',
             reveal: true
         });
         Ext.Viewport.showMenu('right');
-        menu.on('tap', function() {
-            menu.hide();
-        });
     },
     onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
