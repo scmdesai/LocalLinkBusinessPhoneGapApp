@@ -66751,7 +66751,7 @@ Ext.define('Ext.picker.Picker', {
                                 if (btn == 'yes') {
                                     FacebookInAppBrowser.logout(function() {
                                         //location.reload();
-                                        window.close();
+                                        location.hash = '';
                                     });
                                 }
                             });
