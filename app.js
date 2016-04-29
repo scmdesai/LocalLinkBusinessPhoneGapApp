@@ -66752,7 +66752,7 @@ Ext.define('Ext.picker.Picker', {
                                     FacebookInAppBrowser.logout(function() {
                                         //location.reload();
                                         //history.go(-(history.length - 1));
-                                        location.replace(history.go(-(history.length - 1)));
+                                        location.replace(document.URL);
                                     });
                                 }
                             });
