@@ -66717,8 +66717,10 @@ Ext.define('Ext.picker.Picker', {
             side: 'right',
             reveal: true
         });
-        //Ext.Viewport.showMenu('right');
-        Ext.Viewport.toggleMenu('right');
+        Ext.Viewport.showMenu('right');
+        menu.on('tap', function() {
+            menu.hide();
+        });
     },
     onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
