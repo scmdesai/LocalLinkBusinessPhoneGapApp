@@ -68894,7 +68894,7 @@ Ext.application({
             BackButtonPanel.setLeft('170px');
             BackButtonPanel.setHeight('50px');
             BackButtonPanel.setWidth('100%');
-            BackButtonPanel.setCls(backButtonPanel);
+            BackButtonPanel.setCls('backButtonPanel');
             var intval = setInterval(function() {
                     exitApp = false;
                 }, 3000);
