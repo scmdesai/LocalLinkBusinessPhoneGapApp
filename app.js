@@ -66717,7 +66717,7 @@ Ext.define('Ext.picker.Picker', {
     //this.down('contactpic').setData(record.data);
     initialize: function() {
         Ext.form.Panel.prototype.initialize.call(this);
-        Ext.Viewport.setMenu(this.createMenu(), {
+        Ext.Viewport.setMenu(createMenu, {
             side: 'left'
         });
         function createMenu() {
