@@ -68898,23 +68898,27 @@ Ext.application({
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
-                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
-                    if (exitApp) {
-                        clearInterval(intval);
-                        navigator.app.exitApp();
-                    } else {
-                        exitApp = true;
-                        Ext.Viewport.add(BackButtonPanel);
-                        BackButtonPanel.show();
-                        setTimeout(function() {
-                            BackButtonPanel.hide();
-                        }, 3000);
-                    }
-                } else if (Ext.Viewport.getActiveItem().xtype === 'Login') {
+                //if(Ext.Viewport.getActiveItem().xtype==='panel'){
+                if (exitApp) {
+                    clearInterval(intval);
                     navigator.app.exitApp();
+                } else {
+                    exitApp = true;
+                    Ext.Viewport.add(BackButtonPanel);
+                    BackButtonPanel.show();
+                    setTimeout(function() {
+                        BackButtonPanel.hide();
+                    }, 3000);
                 }
             }
         }
+        //}
+        /*else
+					if(Ext.Viewport.getActiveItem().xtype==='Login'){
+
+
+		              navigator.app.exitApp();*/
+        //}
         Ext.create('Contact.view.Login', {
             fullscreen: true
         });
