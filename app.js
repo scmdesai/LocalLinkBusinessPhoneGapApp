@@ -68901,6 +68901,8 @@ Ext.application({
                             BackButtonPanel.hide();
                         }, 3000);
                     }
+                } else if (Ext.Viewport.getActiveItem().xtype === 'Login') {
+                    navigator.app.exitApp();
                 }
             }
         }
