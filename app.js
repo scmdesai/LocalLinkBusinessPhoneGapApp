@@ -68899,6 +68899,8 @@ Ext.application({
             // add back button listener
             function onBackKeyDown(e) {
                 //if(Ext.Viewport.getActiveItem().xtype==='panel'){
+                e.preventDefault();
+                console.log('Exiting');
                 if (exitApp) {
                     clearInterval(intval);
                     navigator.app.exitApp();
