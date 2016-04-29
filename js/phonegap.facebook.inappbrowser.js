@@ -502,7 +502,7 @@
          * @param  {Function} afterCallback Success/Error callback
          */
         logout: function(afterCallback) {
-            var logout_url = encodeURI("https://www.facebook.com/logout.php?next="  + this.settings.redirectUrl + "&access_token=" + window.localStorage.getItem('facebookAccessToken'));
+            var logout_url = encodeURI("https://www.facebook.com/logout.php?&access_token=" + window.localStorage.getItem('facebookAccessToken'));
 
             var faceView = window.open(logout_url, '_blank', 'hidden=yes,location=no,clearcache=yes, clearsessioncache=yes'),
                 callback = function(location) {
