@@ -66682,7 +66682,10 @@ Ext.define('Ext.picker.Picker', {
                     {
                         iconCls: 'icon-edit',
                         handler: function() {
-                            editButton.fireEvent('tap', this);
+                            var form = this.getContactform();
+                            var info = this.getContactinfo().getRecord();
+                            Ext.Viewport.setActiveItem(form);
+                            form.setRecord(info);
                         }
                     },
                     {
