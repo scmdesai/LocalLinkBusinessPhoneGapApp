@@ -68881,7 +68881,6 @@ Ext.application({
             ]
         });
         if (Ext.os.is('Android')) {
-            navigator.app.clearHistory();
             var BackButtonPanel;
             var exitApp = false;
             BackButtonPanel = Ext.create('Ext.Panel', {
@@ -68895,6 +68894,7 @@ Ext.application({
             BackButtonPanel.setLeft('170px');
             BackButtonPanel.setHeight('50px');
             BackButtonPanel.setWidth('100%');
+            BackButtonPanel.setCls(backButtonPanel);
             var intval = setInterval(function() {
                     exitApp = false;
                 }, 3000);
