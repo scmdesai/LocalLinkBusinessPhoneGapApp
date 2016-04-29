@@ -66682,6 +66682,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         iconCls: 'icon-edit',
                         handler: function() {
+                            Ext.Viewport.hideMenu();
                             var storeUserDetails = Ext.getStore('UserDetails');
                             storeUserDetails.load();
                             var customerId;
@@ -66702,6 +66703,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         iconCls: 'icon-signout',
                         handler: function() {
+                            Ext.Viewport.hideMenu();
                             Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
                                 if (btn == 'yes') {
                                     FacebookInAppBrowser.logout(function() {
@@ -66711,13 +66713,7 @@ Ext.define('Ext.picker.Picker', {
                             });
                         }
                     }
-                ],
-                listeners: {
-                    'mouseleave': function(menu, e, eOpts) {
-                        console.log('bye bye ');
-                        menu.hide();
-                    }
-                }
+                ]
             });
         Ext.Viewport.setMenu(menu, {
             side: 'right',
