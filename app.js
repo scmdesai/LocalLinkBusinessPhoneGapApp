@@ -66749,8 +66749,9 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.hideMenu('right');
                             Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
                                 if (btn == 'yes') {
-                                    console.log(window.localStorage.getItem('facebookAccessToken'));
-                                    FacebookInAppBrowser.logout();
+                                    FacebookInAppBrowser.logout(function() {
+                                        window.localStorage.setItem('facebookAccessToken', null);
+                                    });
                                 }
                             });
                         }
