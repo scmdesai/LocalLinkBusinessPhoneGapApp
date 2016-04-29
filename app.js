@@ -66682,10 +66682,21 @@ Ext.define('Ext.picker.Picker', {
                     {
                         iconCls: 'icon-edit',
                         handler: function() {
-                            var form = this.getContactform();
-                            var info = this.getContactinfo().getRecord();
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var businessName;
+                            storeUserDetails.each(function(record) {
+                                console.log('StoreUserDetails : ' + record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            var form = Ext.Viewport.add({
+                                    xtype: 'contactform'
+                                });
+                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                             Ext.Viewport.setActiveItem(form);
-                            form.setRecord(info);
+                            form.setRecord(record);
                         }
                     },
                     {
