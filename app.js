@@ -66450,8 +66450,9 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         docked: 'right',
                         itemId: 'mybutton10',
+                        style: 'color:#00529D',
                         ui: 'plain',
-                        iconCls: 'list'
+                        iconCls: 'icon-menu'
                     }
                 ]
             },
