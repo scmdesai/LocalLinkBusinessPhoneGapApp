@@ -68541,6 +68541,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
+                disabled: true,
                 id: 'DealName',
                 itemId: 'DealName',
                 margin: '5 5 5 5 ',
