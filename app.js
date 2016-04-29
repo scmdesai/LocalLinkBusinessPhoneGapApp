@@ -66677,51 +66677,49 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onMybutton10Tap: function(button, e, eOpts) {
-        if (menu) {
-            Ext.Viewport.hideMenu('side');
-        } else {
-            var menu = Ext.create('Ext.Menu', {
-                    items: [
-                        {
-                            iconCls: 'icon-edit',
-                            handler: function() {
-                                var storeUserDetails = Ext.getStore('UserDetails');
-                                storeUserDetails.load();
-                                var customerId;
-                                var businessName;
-                                storeUserDetails.each(function(record) {
-                                    console.log('StoreUserDetails : ' + record.get('customerId'));
-                                    customerId = record.get('customerId');
-                                    businessName = record.get('businessName');
+        var menu = Ext.create('Ext.Menu', {
+                items: [
+                    {
+                        iconCls: 'icon-edit',
+                        handler: function() {
+                            Ext.Viewport.hideMenu('right');
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var businessName;
+                            storeUserDetails.each(function(record) {
+                                console.log('StoreUserDetails : ' + record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            var form = Ext.Viewport.add({
+                                    xtype: 'contactform'
                                 });
-                                var form = Ext.Viewport.add({
-                                        xtype: 'contactform'
-                                    });
-                                var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
-                                Ext.Viewport.setActiveItem(form);
-                                form.setRecord(record);
-                            }
-                        },
-                        {
-                            iconCls: 'icon-signout',
-                            handler: function() {
-                                Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
-                                    if (btn == 'yes') {
-                                        FacebookInAppBrowser.logout(function() {
-                                            location.reload();
-                                        });
-                                    }
-                                });
-                            }
+                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                            Ext.Viewport.setActiveItem(form);
+                            form.setRecord(record);
                         }
-                    ]
-                });
-            Ext.Viewport.setMenu(menu, {
-                side: 'right',
-                reveal: true
+                    },
+                    {
+                        iconCls: 'icon-signout',
+                        handler: function() {
+                            Ext.Viewport.hideMenu('right');
+                            Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
+                                if (btn == 'yes') {
+                                    FacebookInAppBrowser.logout(function() {
+                                        location.reload();
+                                    });
+                                }
+                            });
+                        }
+                    }
+                ]
             });
-            Ext.Viewport.showMenu('right');
-        }
+        Ext.Viewport.setMenu(menu, {
+            side: 'right',
+            reveal: true
+        });
+        Ext.Viewport.showMenu('right');
     },
     onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
