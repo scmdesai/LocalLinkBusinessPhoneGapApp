@@ -32555,6 +32555,175 @@ this);
 ], function() {}));
 
 /**
+ * {@link Ext.Menu}'s are used with {@link Ext.Viewport#setMenu}. A menu can be linked with any side of the screen (top, left, bottom or right)
+ *  and will simply describe the contents of your menu. To use this menu you will call various menu related functions on the {@link Ext.Viewport}
+ * such as {@link Ext.Viewport#showMenu}, {@link Ext.Viewport#hideMenu}, {@link Ext.Viewport#toggleMenu}, {@link Ext.Viewport#hideOtherMenus},
+ * or {@link Ext.Viewport#hideAllMenus}.
+ *
+ *      @example preview
+ *      var menu = Ext.create('Ext.Menu', {
+ *          items: [
+ *              {
+ *                  text: 'Settings',
+ *                  iconCls: 'settings'
+ *              },
+ *              {
+ *                  text: 'New Item',
+ *                  iconCls: 'compose'
+ *              },
+ *              {
+ *                  text: 'Star',
+ *                  iconCls: 'star'
+ *              }
+ *          ]
+ *      });
+ *
+ *      Ext.Viewport.setMenu(menu, {
+ *          side: 'left',
+ *          reveal: true
+ *      });
+ *
+ *      Ext.Viewport.showMenu('left');
+ *
+ * The {@link #defaultType} of a Menu item is a {@link Ext.Button button}.
+ */
+(Ext.cmd.derive('Ext.Menu', Ext.Sheet, {
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: 'x-menu',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        left: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        right: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        bottom: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        height: 'auto',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        width: 'auto',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        defaultType: 'button',
+        /**
+         * @hide
+         */
+        showAnimation: null,
+        /**
+         * @hide
+         */
+        hideAnimation: null,
+        /**
+         * @hide
+         */
+        centered: false,
+        /**
+         * @hide
+         */
+        modal: true,
+        /**
+         * @hide
+         */
+        hidden: true,
+        /**
+         * @hide
+         */
+        hideOnMaskTap: true,
+        /**
+         * @hide
+         */
+        translatable: {
+            translationMethod: null
+        }
+    },
+    constructor: function() {
+        this.config.translatable.translationMethod = Ext.browser.is.AndroidStock2 ? 'cssposition' : 'csstransform';
+        Ext.Sheet.prototype.constructor.apply(this, arguments);
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Windows'
+            ]
+        },
+        {
+            theme: [
+                'Blackberry',
+                'Blackberry103'
+            ],
+            ui: 'context',
+            layout: {
+                pack: 'center'
+            }
+        }
+    ],
+    updateUi: function(newUi, oldUi) {
+        Ext.Sheet.prototype.updateUi.apply(this, arguments);
+        if (newUi != oldUi && (Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103)) {
+            if (newUi == 'context') {
+                this.innerElement.swapCls('x-vertical', 'x-horizontal');
+            } else if (newUi == 'application') {
+                this.innerElement.swapCls('x-horizontal', 'x-vertical');
+            }
+        }
+    },
+    updateHideOnMaskTap: function(hide) {
+        var mask = this.getModal();
+        if (mask) {
+            mask[hide ? 'on' : 'un'].call(mask, 'tap', function() {
+                Ext.Viewport.hideMenu(this.$side);
+            }, this);
+        }
+    },
+    /**
+     * Only fire the hide event if it is initialized
+     */
+    doSetHidden: function() {
+        if (this.initialized) {
+            Ext.Sheet.prototype.doSetHidden.apply(this, arguments);
+        }
+    }
+}, 1, [
+    "menu"
+], [
+    "component",
+    "container",
+    "panel",
+    "sheet",
+    "menu"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "sheet": true,
+    "menu": true
+}, [
+    "widget.menu"
+], 0, [
+    Ext,
+    'Menu'
+], 0));
+
+/**
  * {@link Ext.Title} is used for the {@link Ext.Toolbar#title} configuration in the {@link Ext.Toolbar} component.
  * @private
  */
@@ -66266,28 +66435,14 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'button',
+                        docked: 'right',
                         hidden: false,
                         itemId: 'editButton',
-                        padding: '5 0 0 0',
                         style: 'color:#00529D;font-size:6vw',
                         styleHtmlContent: true,
                         ui: 'plain',
                         width: '20%',
                         iconCls: 'compose'
-                    },
-                    {
-                        xtype: 'component',
-                        cls: 'contact-name',
-                        disabled: true,
-                        html: '<b>First Name</b>',
-                        id: 'nameTxt',
-                        itemId: 'nameTxt',
-                        padding: '15 5 5 15'
-                    },
-                    {
-                        xtype: 'spacer',
-                        height: 11,
-                        width: 18
                     },
                     {
                         xtype: 'button',
@@ -66306,6 +66461,27 @@ Ext.define('Ext.picker.Picker', {
                         ui: 'plain',
                         width: '10%',
                         iconCls: 'icon-signout'
+                    }
+                ]
+            },
+            {
+                xtype: 'toolbar',
+                cls: 'toolbarCls',
+                docked: 'top',
+                ui: 'plain',
+                items: [
+                    {
+                        xtype: 'component',
+                        cls: 'contact-name',
+                        disabled: true,
+                        html: '<b>First Name</b>',
+                        id: 'nameTxt',
+                        itemId: 'nameTxt'
+                    },
+                    {
+                        xtype: 'spacer',
+                        height: 11,
+                        width: 18
                     }
                 ]
             },
@@ -66537,6 +66713,34 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
         }
+    },
+    //this.down('contactpic').setData(record.data);
+    initialize: function() {
+        Ext.form.Panel.prototype.initialize.call(this);
+        Ext.Viewport.setMenu(this.createMenu(), {
+            side: 'left'
+        });
+        function createMenu() {
+            var items = [
+                    {
+                        xtype: 'button',
+                        iconCls: 'icon-edit',
+                        cls: 'menu-button'
+                    },
+                    {
+                        xtype: 'button',
+                        iconCls: 'icon-signout',
+                        cls: 'menu-button'
+                    }
+                ];
+            return Ext.create('Ext.Menu', {
+                style: 'padding: 0',
+                id: 'menu',
+                width: 200,
+                scrollable: 'vertical',
+                items: items
+            });
+        }
     }
 }, 0, [
     "contactinfo"
@@ -66558,7 +66762,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactinfo'
 ], 0));
-//this.down('contactpic').setData(record.data);
 
 /*
  * File: app/view/ListOfDeals.js
@@ -68594,6 +68797,46 @@ Ext.define('Ext.picker.Picker', {
 //this.child('contactpic').setData(record.data);
 
 /*
+ * File: app/view/MyContainer10.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.MyContainer10', Ext.Container, {
+    config: {
+        items: [
+            {
+                xtype: 'toolbar',
+                docked: 'top',
+                items: [
+                    {
+                        xtype: 'button',
+                        iconCls: 'list'
+                    }
+                ]
+            }
+        ]
+    }
+}, 0, 0, [
+    "component",
+    "container"
+], {
+    "component": true,
+    "container": true
+}, 0, 0, [
+    Contact.view,
+    'MyContainer10'
+], 0));
+
+/*
  * File: app.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
@@ -68632,7 +68875,8 @@ Ext.application({
         'contactinfo',
         'panel',
         'Terms',
-        'UpdateDealForm'
+        'UpdateDealForm',
+        'MyContainer10'
     ],
     controllers: [
         'Contacts'
