@@ -66385,6 +66385,7 @@ Ext.define('Ext.picker.Picker', {
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
+                console.log('Exiting');
                 e.preventDefault();
                 navigator.app.exitApp();
             }
