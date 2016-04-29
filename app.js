@@ -66749,7 +66749,7 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.hideMenu('right');
                             Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
                                 if (btn == 'yes') {
-                                    location.reload();
+                                    location.replace('index.html');
                                     FacebookInAppBrowser.logout();
                                 }
                             });
