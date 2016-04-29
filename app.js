@@ -68902,8 +68902,6 @@ Ext.application({
             // add back button listener
             function onBackKeyDown(e) {
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
-                    e.preventDefault();
-                    console.log('Exiting');
                     if (exitApp) {
                         clearInterval(intval);
                         navigator.app.exitApp();
@@ -68918,12 +68916,6 @@ Ext.application({
                 }
             }
         }
-        //}
-        /*else
-					if(Ext.Viewport.getActiveItem().xtype==='Login'){
-
-
-		              navigator.app.exitApp();*/
         Ext.create('Contact.view.Login', {
             fullscreen: true
         });
