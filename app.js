@@ -66431,12 +66431,6 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
-                ui: 'plain'
-            },
-            {
-                xtype: 'toolbar',
-                cls: 'toolbarCls',
-                docked: 'top',
                 ui: 'plain',
                 items: [
                     {
@@ -66661,32 +66655,13 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'button',
-                hidden: false,
+                hidden: true,
                 itemId: 'editButton',
                 margin: '5 5 5 5',
                 style: 'color:#00529D;font-size:6vw;',
                 styleHtmlContent: true,
                 ui: 'plain',
                 iconCls: 'compose'
-            },
-            {
-                xtype: 'button',
-                handler: function(button, e) {
-                    Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
-                        if (btn == 'yes') {
-                            FacebookInAppBrowser.logout(function() {
-                                location.reload();
-                            });
-                        }
-                    });
-                },
-                docked: 'right',
-                margin: '',
-                padding: '10 0 0 0',
-                style: '',
-                top: '30%',
-                ui: 'plain',
-                iconCls: 'icon-signout'
             }
         ],
         listeners: [
@@ -66705,24 +66680,30 @@ Ext.define('Ext.picker.Picker', {
         var menu = Ext.create('Ext.Menu', {
                 items: [
                     {
-                        text: 'Settings',
-                        iconCls: 'settings'
+                        iconCls: 'icon-edit',
+                        handler: function() {
+                            editButton.fireEvent('tap', this);
+                        }
                     },
                     {
-                        text: 'New Item',
-                        iconCls: 'compose'
-                    },
-                    {
-                        text: 'Star',
-                        iconCls: 'star'
+                        iconCls: 'icon-signout',
+                        handler: function() {
+                            Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
+                                if (btn == 'yes') {
+                                    FacebookInAppBrowser.logout(function() {
+                                        location.reload();
+                                    });
+                                }
+                            });
+                        }
                     }
                 ]
             });
         Ext.Viewport.setMenu(menu, {
-            side: 'left',
+            side: 'right',
             reveal: true
         });
-        Ext.Viewport.showMenu('left');
+        Ext.Viewport.showMenu('right');
     },
     onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
