@@ -66381,6 +66381,13 @@ Ext.define('Ext.picker.Picker', {
                 }
             }
         });
+        if (Ext.os.is('Android')) {
+            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+            // add back button listener
+            function onBackKeyDown(e) {
+                navigator.app.exitApp();
+            }
+        }
     }
 }, 0, [
     "Login"
