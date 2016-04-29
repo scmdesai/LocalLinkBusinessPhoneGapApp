@@ -66750,7 +66750,8 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
                                 if (btn == 'yes') {
                                     FacebookInAppBrowser.logout(function() {
-                                        location.reload();
+                                        //location.reload();
+                                        window.close();
                                     });
                                 }
                             });
@@ -68899,19 +68900,20 @@ Ext.application({
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
-                //if(Ext.Viewport.getActiveItem().xtype==='panel'){
-                e.preventDefault();
-                console.log('Exiting');
-                if (exitApp) {
-                    clearInterval(intval);
-                    navigator.app.exitApp();
-                } else {
-                    exitApp = true;
-                    Ext.Viewport.add(BackButtonPanel);
-                    BackButtonPanel.show();
-                    setTimeout(function() {
-                        BackButtonPanel.hide();
-                    }, 3000);
+                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
+                    e.preventDefault();
+                    console.log('Exiting');
+                    if (exitApp) {
+                        clearInterval(intval);
+                        navigator.app.exitApp();
+                    } else {
+                        exitApp = true;
+                        Ext.Viewport.add(BackButtonPanel);
+                        BackButtonPanel.show();
+                        setTimeout(function() {
+                            BackButtonPanel.hide();
+                        }, 3000);
+                    }
                 }
             }
         }
@@ -68921,7 +68923,6 @@ Ext.application({
 
 
 		              navigator.app.exitApp();*/
-        //}
         Ext.create('Contact.view.Login', {
             fullscreen: true
         });
