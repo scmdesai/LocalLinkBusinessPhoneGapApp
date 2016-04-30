@@ -66383,6 +66383,16 @@ Ext.define('Ext.picker.Picker', {
                 }
             }
         });
+    },
+    initialize: function() {
+        Ext.Container.prototype.initialize.call(this);
+        if (Ext.os.is('Android')) {
+            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+            // add back button listener
+            function onBackKeyDown(e) {
+                navigator.app.exitApp();
+            }
+        }
     }
 }, 0, [
     "Login"
@@ -68907,7 +68917,7 @@ Ext.application({
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
-                if (Ext.Viewport.getActiveItem().xtype === 'panel' || Ext.Viewport.getActiveItem().xtype === 'Login') {
+                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
                     if (exitApp) {
                         clearInterval(intval);
                         navigator.app.exitApp();
