@@ -68923,6 +68923,9 @@ Ext.application({
                     Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                 }
+                if (!history.back()) {
+                    navigator.app.exitApp();
+                }
             }
         }
         document.addEventListener("resume", Ext.bind(onResume, this), false);
