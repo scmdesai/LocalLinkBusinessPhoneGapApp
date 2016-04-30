@@ -68914,6 +68914,7 @@ Ext.application({
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
+                console.log('Back Button');
                 if (Ext.Viewport.getActiveItem().getItemId() === 'panel') {
                     if (exitApp) {
                         clearInterval(intval);
