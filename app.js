@@ -68914,10 +68914,7 @@ Ext.application({
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
-                console.log(Ext.Viewport.getActiveItem().getItemId());
-                console.log(exitApp);
-                e.preventDefault();
-                if (Ext.Viewport.getActiveItem().getItemId() === 'panel') {
+                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
                     if (exitApp) {
                         clearInterval(intval);
                         navigator.app.exitApp();
@@ -68931,12 +68928,90 @@ Ext.application({
                     }
                 } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
-                    if (Ext.Viewport.getComponent('DealsPanel')) {
-                        Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
-                    }
+                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                 }
             }
         }
+        document.addEventListener("resume", Ext.bind(onResume, this), false);
+        function onResume(e) {}
+        //Ext.Msg.alert('Resume',null,null,null);
+        /* var store = Ext.getStore('MyDealsStore');
+		    store.load();
+		    navigator.geolocation.getCurrentPosition(function showPosition(position) {
+		        Ext.getCmp('mymap').show();
+		        Ext.getCmp('locationOffText').hide();
+		        Ext.getCmp('lookUpZipcode').hide();
+		         var store1 = Ext.getStore('MyJsonPStore');
+		            store1.load();
+		            store1.clearFilter();
+		            store1.filterBy(function(record) {
+		                var address = record.get('address');
+		                var customerId;
+		                $.getJSON("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + latitude + "," + longitude + "&destinations=" + address + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM",
+		                   function(json) {
+		                       if(task){
+
+		                        task.cancel();
+		                        store.clearFilter();
+		                        store.load();
+
+		                        var store1 = Ext.getStore('calculateDistances');
+
+		                        var stores = [];
+
+		                      store1.each(function(record){
+		                      // stores.push(record.get('customerId'));
+		                          Ext.Array.include(stores,record.get('customerId'));
+
+
+		});
+		console.log(stores.length);
+
+		store.filterBy(function(record){
+		    return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
+
+		}, this);
+
+
+
+
+
+		                       }
+		                    var distance = json.rows[0].elements[0].distance.value;
+		                    if (distance <= 40234) {
+		                        storesNearBy.add({'customerId':record.get('customerId')});
+
+		                        return true;
+
+		                    } else {
+		                        return false;
+
+		                    }
+
+
+
+		                                      });
+		            });
+
+
+
+		var task = Ext.create('Ext.util.DelayedTask', function() {
+		    Ext.Viewport.mask({ xtype: 'loadmask',
+		                       message: "Loading Latest Buzz.." });
+		}, this);
+		},onError);
+
+
+
+		    function onError(error){
+
+		        Ext.getCmp('mymap').hide();
+		        Ext.getCmp('locationOffText').show();
+		        Ext.getCmp('lookUpZipcode').show();
+
+
+
+		    }*/
         Ext.create('Contact.view.Login', {
             fullscreen: true
         });
