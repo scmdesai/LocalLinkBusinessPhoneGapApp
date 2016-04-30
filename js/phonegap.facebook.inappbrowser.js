@@ -146,7 +146,7 @@
                 userDenied = false;
 
             // Open the url command
-            faceView = window.open(authorize_url, '_blank', 'location=no,hidden=yes,clearcache=yes, clearsessioncache=yes');
+            faceView = window.open(authorize_url, '_blank', 'location=no,hidden=yes');
 
             // On timeout
             var timeoutOccurred = false;

@@ -66752,6 +66752,7 @@ Ext.define('Ext.picker.Picker', {
                                     FacebookInAppBrowser.logout(function() {
                                         window.localStorage.setItem('facebookAccessToken', null);
                                         location.reload();
+                                        navigator.app.exitApp();
                                     });
                                 }
                             });
@@ -67507,8 +67508,8 @@ Ext.define('Ext.picker.Picker', {
     config: {
         fullscreen: true,
         height: '100%',
+        id: 'dealPicture',
         itemId: 'dealPicture',
-        left: 'dealPicture',
         style: 'overflow: hidden;background:#fff',
         styleHtmlContent: true,
         width: '100%',
@@ -67537,6 +67538,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         cls: 'icon-back-button',
+                        id: 'dealBackBtn',
                         itemId: 'dealBackBtn',
                         style: 'font-size:8vw',
                         ui: 'plain'
@@ -67554,7 +67556,18 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onDealPictureInitialize',
+                event: 'initialize'
+            }
         ]
+    },
+    onDealPictureInitialize: function(component, eOpts) {
+        if (Ext.os.is('Android')) {
+            Ext.getCmp('dealBackBtn').hide();
+        }
     }
 }, 0, [
     "dealPicture"
@@ -68208,6 +68221,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.panel', Ext.tab.Panel, {
     config: {
+        id: 'panel',
         itemId: 'panel',
         items: [
             {
@@ -68900,7 +68914,7 @@ Ext.application({
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
-                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
+                if (Ext.Viewport.getActiveItem().getItemId() === 'panel') {
                     if (exitApp) {
                         clearInterval(intval);
                         navigator.app.exitApp();
@@ -68911,6 +68925,11 @@ Ext.application({
                         setTimeout(function() {
                             BackButtonPanel.hide();
                         }, 3000);
+                    }
+                } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
+                    Ext.Viewport.getActiveItem().destroy();
+                    if (Ext.Viewport.getComponent('DealsPanel')) {
+                        Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                     }
                 }
             }
