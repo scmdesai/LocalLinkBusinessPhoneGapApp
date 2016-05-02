@@ -67517,7 +67517,7 @@ Ext.define('Ext.picker.Picker', {
         styleHtmlContent: true,
         width: '100%',
         autoDestroy: false,
-        scrollable: false,
+        scrollable: true,
         tpl: [
             '<img src="{dealPictureURL}" style="margin:5px 5px 5px 5px;height:100%;width:100%;border:1px groove #C0C0C0;"/>'
         ],
