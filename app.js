@@ -67709,6 +67709,7 @@ Ext.define('Ext.picker.Picker', {
         style: 'background:white',
         enctype: 'multipart/form-data',
         multipartDetection: false,
+        standardSubmit: true,
         url: 'http://services.appsonmobile.com/createNewDeal',
         items: [
             {
