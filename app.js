@@ -67934,8 +67934,9 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
                             var record = Ext.getStore('UserDetails').getAt(0);
-                            var file = uForm.getAt(5).getValue();
+                            //var file = uForm.getAt(5).getValue();
                             var dealName = uForm.getAt(0).getValue();
+                            uForm.getAt(3).setValue(record.get('DealPictureURL'));
                             //var dealStartDate = uForm.getAt(2).getValue().toDateString();
                             //var dealEndDate = uForm.getAt(3).getValue();
                             //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
