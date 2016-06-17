@@ -67841,22 +67841,6 @@ Ext.define('Ext.picker.Picker', {
                 }
             },
             {
-                xtype: 'filefield',
-                cls: 'filefield',
-                hidden: true,
-                id: 'myfilefield',
-                itemId: 'myfilefield',
-                margin: '5 5 5 5 ',
-                style: 'color:white',
-                styleHtmlContent: true,
-                clearIcon: false,
-                label: 'Image',
-                labelWidth: '35%',
-                labelWrap: true,
-                name: 'fileUpload',
-                capture: 'camera'
-            },
-            {
                 xtype: 'spacer',
                 maxHeight: ''
             },
