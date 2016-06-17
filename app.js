@@ -67763,7 +67763,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
-                hidden: true,
+                hidden: false,
                 id: 'DealPictureURL',
                 itemId: 'DealPictureURL',
                 margin: '5 5 5 5 ',
@@ -67936,7 +67936,7 @@ Ext.define('Ext.picker.Picker', {
                             var record = Ext.getStore('UserDetails').getAt(0);
                             //var file = uForm.getAt(5).getValue();
                             var dealName = uForm.getAt(0).getValue();
-                            uForm.getAt(3).setValue(record.get('DealPictureURL'));
+                            Ext.getCmp('DealPictureURL').setValue(record.get('DealPictureURL'));
                             //var dealStartDate = uForm.getAt(2).getValue().toDateString();
                             //var dealEndDate = uForm.getAt(3).getValue();
                             //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
