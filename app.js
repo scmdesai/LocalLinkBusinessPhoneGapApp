@@ -67439,6 +67439,7 @@ Ext.define('Ext.picker.Picker', {
         storeUserDetails.load();
         var customerId;
         var businessName;
+        var DealPictureURL;
         //Ext.Viewport.getActiveItem().destroy();
         var view = Ext.Viewport.add({
                 xtype: 'UploadDealForm'
@@ -67447,6 +67448,7 @@ Ext.define('Ext.picker.Picker', {
             //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
             businessName = record.get('businessName');
+            DealPictureURL = record.get('DealPictureURL');
             view.setRecord(record);
         });
         //view.showBy(button);
@@ -67706,7 +67708,8 @@ Ext.define('Ext.picker.Picker', {
         minHeight: '',
         style: 'background:white',
         enctype: 'multipart/form-data',
-        url: 'http://services.appsonmobile.com/uploadS3',
+        multipartDetection: false,
+        url: 'http://services.appsonmobile.com/createNewDeal',
         items: [
             {
                 xtype: 'textfield',
@@ -67763,7 +67766,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
-                hidden: false,
+                hidden: true,
                 id: 'DealPictureURL',
                 itemId: 'DealPictureURL',
                 margin: '5 5 5 5 ',
@@ -67933,10 +67936,8 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var uForm = this.up('UploadDealForm');
-                            var record = Ext.getStore('UserDetails').getAt(0);
                             //var file = uForm.getAt(5).getValue();
                             var dealName = uForm.getAt(0).getValue();
-                            Ext.getCmp('DealPictureURL').setValue(record.get('DealPictureURL'));
                             //var dealStartDate = uForm.getAt(2).getValue().toDateString();
                             //var dealEndDate = uForm.getAt(3).getValue();
                             //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
