@@ -67923,14 +67923,7 @@ Ext.define('Ext.picker.Picker', {
                             var uForm = this.up('UploadDealForm');
                             //var file = uForm.getAt(5).getValue();
                             var dealName = uForm.getAt(0).getValue();
-                            Ext.Msg.alert('Deal Name: ', uForm.getAt(0).getValue(), null, null);
-                            Ext.Msg.alert('Deal Status: ', uForm.getAt(1).getValue(), null, null);
-                            Ext.Msg.alert('Deal Description: ', uForm.getAt(2).getValue(), null, null);
                             Ext.Msg.alert('URL: ', uForm.getAt(3).getValue(), null, null);
-                            Ext.Msg.alert('Start date: ', uForm.getAt(4).getValue(), null, null);
-                            Ext.Msg.alert('End: ', uForm.getAt(5).getValue(), null, null);
-                            Ext.Msg.alert('customerId: ', uForm.getAt(6).getValue(), null, null);
-                            Ext.Msg.alert('businessName: ', uForm.getAt(7).getValue(), null, null);
                             //var dealStartDate = uForm.getAt(2).getValue().toDateString();
                             //var dealEndDate = uForm.getAt(3).getValue();
                             //Ext.Date.format(uForm.getAt(2).getValue(),'n/j/Y');
