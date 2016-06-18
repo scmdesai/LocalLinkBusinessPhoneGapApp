@@ -68535,9 +68535,22 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: 'customfield',
                 height: '15%',
-                hidden: true,
+                hidden: false,
                 id: 'businessName2',
                 itemId: 'businessName',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                label: 'Name',
+                labelWrap: true,
+                name: 'DealName'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: true,
+                id: 'businessName3',
+                itemId: 'businessName1',
                 margin: '30 15 2 15',
                 styleHtmlContent: true,
                 name: 'businessName'
@@ -68548,22 +68561,6 @@ Ext.define('Ext.picker.Picker', {
                 id: 'customerId2',
                 itemId: 'customerId',
                 name: 'customerId'
-            },
-            {
-                xtype: 'textfield',
-                cls: 'customfield',
-                id: 'DealName1',
-                itemId: 'DealName',
-                margin: '5 5 5 5 ',
-                padding: '',
-                style: 'border:1px solid #C0C0C0!important',
-                styleHtmlContent: true,
-                width: '',
-                clearIcon: false,
-                label: 'Name',
-                labelWidth: '35%',
-                name: 'DealName',
-                readOnly: true
             },
             {
                 xtype: 'selectfield',
