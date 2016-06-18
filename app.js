@@ -68572,7 +68572,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
-                disabled: true,
+                disabled: false,
                 id: 'DealName',
                 itemId: 'DealName',
                 margin: '5 5 5 5 ',
@@ -68627,21 +68627,6 @@ Ext.define('Ext.picker.Picker', {
                 label: 'Description',
                 labelWidth: '35%',
                 name: 'DealDescription'
-            },
-            {
-                xtype: 'textfield',
-                cls: 'customfield',
-                hidden: true,
-                id: 'DealPictureURL1',
-                itemId: 'DealPictureURL',
-                margin: '5 5 5 5 ',
-                padding: '',
-                style: 'border:1px solid #C0C0C0!important',
-                styleHtmlContent: true,
-                width: '',
-                clearIcon: false,
-                labelWidth: '35%',
-                name: 'DealPictureURL'
             },
             {
                 xtype: 'datepickerfield',
