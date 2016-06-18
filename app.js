@@ -68784,14 +68784,6 @@ Ext.define('Ext.picker.Picker', {
         }
         console.dir(errors);
         return errors;
-    },
-    setRecord: function(record) {
-        (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
-        if (record) {
-            this.down('#DealName').setValue(record.data.dealName);
-            this.down('#DealStatus').setValue(record.data.dealStatus);
-            this.down('#DealDescription').setValue(record.data.dealDescription);
-        }
     }
 }, 0, [
     "UploadDealForm"
@@ -68813,7 +68805,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'UploadDealForm'
 ], 0));
-//this.child('contactpic').setData(record.data);
 
 /*
  * File: app.js
