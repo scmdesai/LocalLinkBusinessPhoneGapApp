@@ -68205,7 +68205,6 @@ Ext.define('Ext.picker.Picker', {
         modal: true,
         scrollable: false,
         multipartDetection: false,
-        standardSubmit: true,
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -68525,7 +68524,6 @@ Ext.define('Ext.picker.Picker', {
         modal: true,
         scrollable: false,
         multipartDetection: false,
-        standardSubmit: true,
         layout: {
             type: 'vbox',
             align: 'stretchmax'
