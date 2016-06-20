@@ -68541,6 +68541,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '5 5 5 5 ',
                 styleHtmlContent: true,
                 label: 'Name',
+                labelWidth: '35%',
                 labelWrap: true,
                 name: 'DealName'
             },
@@ -68595,7 +68596,6 @@ Ext.define('Ext.picker.Picker', {
                 id: 'DealDescription1',
                 itemId: 'DealDescription',
                 margin: '5 5 5 5 ',
-                padding: '',
                 style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
