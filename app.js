@@ -68424,21 +68424,27 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UpdateDealForm');
                             var itemName = form.getAt(7).getValue();
-                            if (document.getElementById('chkbx').checked) {
-                                form.submit({
-                                    url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
-                                    success: function(form, action) {
-                                        Ext.Msg.alert('Success', action.msg);
-                                        form.destroy();
-                                    },
-                                    failure: function(form, action) {
-                                        store.load();
-                                        Ext.Msg.alert('Failure', action.msg);
-                                        form.destroy();
-                                    }
-                                });
+                            var endDate = form.getAt(6).getValue();
+                            var date = new Date();
+                            if (endDate >= date) {
+                                if (document.getElementById('chkbx').checked) {
+                                    form.submit({
+                                        url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                        success: function(form, action) {
+                                            Ext.Msg.alert('Success', action.msg);
+                                            form.destroy();
+                                        },
+                                        failure: function(form, action) {
+                                            store.load();
+                                            Ext.Msg.alert('Failure', action.msg);
+                                            form.destroy();
+                                        }
+                                    });
+                                } else {
+                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                }
                             } else {
-                                Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                             }
                         },
                         docked: 'right',
@@ -68743,21 +68749,28 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var form = this.up('UploadDealForm');
-                            if (document.getElementById('chkbx').checked) {
-                                form.submit({
-                                    url: 'http://services.appsonmobile.com/createNewDeal',
-                                    success: function(form, action) {
-                                        Ext.Msg.alert('Success', action.msg);
-                                        form.destroy();
-                                    },
-                                    failure: function(form, action) {
-                                        store.load();
-                                        Ext.Msg.alert('Failure', action.msg);
-                                        form.destroy();
-                                    }
-                                });
+                            var date = new Date();
+                            var startDate = form.getAt(5).getValue();
+                            var endDate = form.getAt(6).getValue();
+                            if (endDate >= date) {
+                                if (document.getElementById('chkbx').checked) {
+                                    form.submit({
+                                        url: 'http://services.appsonmobile.com/createNewDeal',
+                                        success: function(form, action) {
+                                            Ext.Msg.alert('Success', action.msg);
+                                            form.destroy();
+                                        },
+                                        failure: function(form, action) {
+                                            store.load();
+                                            Ext.Msg.alert('Failure', action.msg);
+                                            form.destroy();
+                                        }
+                                    });
+                                } else {
+                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                }
                             } else {
-                                Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                             }
                         },
                         docked: 'right',
