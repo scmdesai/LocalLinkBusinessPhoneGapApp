@@ -68628,6 +68628,10 @@ Ext.define('Ext.picker.Picker', {
                     minDate: new Date()
                 },
                 usePicker: true,
+                component: {
+                    useMask: true,
+                    minValue: new Date()
+                },
                 dateFormat: 'm/d/Y',
                 picker: {
                     itemId: 'mydatepicker3',
@@ -68635,6 +68639,7 @@ Ext.define('Ext.picker.Picker', {
                     scrollable: false,
                     stretchX: false,
                     stretchY: false,
+                    useTitles: true,
                     yearFrom: 2016
                 }
             },
@@ -68660,7 +68665,7 @@ Ext.define('Ext.picker.Picker', {
                 placeHolder: 'mm/dd/yyyy',
                 usePicker: true,
                 picker: {
-                    styleHtmlContent: true,
+                    useTitles: true,
                     yearFrom: 2016
                 }
             },
