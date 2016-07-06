@@ -68857,15 +68857,17 @@ Ext.define('Ext.picker.Picker', {
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
                                             //Ext.Msg.alert('Success', action.msg);
-                                            Ext.Msg.confirm('Success', action.msg, function() {
-                                                var form = this.up('UploadDealForm');
-                                                var dealName = form.getAt(0).getValue();
-                                                var view = Ext.Viewport.add({
-                                                        xtype: 'UploadDealImage'
-                                                    });
-                                                Ext.getStore('Temp').add(dealName);
-                                                view.showBy(button);
-                                            }, null);
+                                            Ext.Msg.confirm('Success', action.msg, function(id) {
+                                                if (id === 'yes') {
+                                                    var form = this.up('UploadDealForm');
+                                                    var dealName = form.getAt(0).getValue();
+                                                    var view = Ext.Viewport.add({
+                                                            xtype: 'UploadDealImage'
+                                                        });
+                                                    Ext.getStore('Temp').add(dealName);
+                                                    view.showBy(button);
+                                                }
+                                            }, this);
                                             form.destroy();
                                         },
                                         failure: function(form, action) {
