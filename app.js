@@ -68963,7 +68963,7 @@ Ext.define('Ext.picker.Picker', {
                     var form = this.up('UploadDealImage');
                     var dealName = Ext.getStore('Temp').getAt(0);
                     Ext.getStore('Temp').removeAt(0);
-                    var itemName = form.getRecord().get('dealName');
+                    //var itemName = form.getRecord().get('dealName');
                     //Ext.Msg.alert(itemName,null,null,null);
                     form.submit({
                         url: 'http://services.appsonmobile.com/uploadS3/b7b49a50-4350-11e6-83b2',
