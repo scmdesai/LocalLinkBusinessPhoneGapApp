@@ -68856,18 +68856,13 @@ Ext.define('Ext.picker.Picker', {
                                         url: 'http://services.appsonmobile.com/createNewDeal',
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
-                                            //Ext.Msg.alert('Success', action.msg);
-                                            Ext.Msg.confirm('Success', action.msg, function(id) {
-                                                if (id === 'yes') {
-                                                    var form = this.up('UploadDealForm');
-                                                    var dealName = form.getAt(0).getValue();
-                                                    var view = Ext.Viewport.add({
-                                                            xtype: 'UploadDealImage'
-                                                        });
-                                                    Ext.getStore('Temp').add(dealName);
-                                                    view.showBy(button);
-                                                }
-                                            }, this);
+                                            Ext.Msg.alert('Success', action.msg);
+                                            var dealName = form.getAt(0).getValue();
+                                            var view = Ext.Viewport.add({
+                                                    xtype: 'UploadDealImage'
+                                                });
+                                            Ext.getStore('Temp').add(dealName);
+                                            view.showBy(button);
                                         },
                                         //form.destroy();
                                         failure: function(form, action) {
