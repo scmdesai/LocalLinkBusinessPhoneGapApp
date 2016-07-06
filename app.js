@@ -68964,6 +68964,7 @@ Ext.define('Ext.picker.Picker', {
                     //var dealName = Ext.getStore('Temp').getAt(0);
                     //Ext.getStore('Temp').removeAt(0);
                     var itemName = form.getRecord().get('itemName');
+                    Ext.Msg.alert(itemName, nul, nul, null);
                     form.submit({
                         url: 'http://services.appsonmobile.com/uploadS3/' + itemName,
                         xhr2: true,
