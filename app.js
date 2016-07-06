@@ -69027,7 +69027,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 hidden: true,
                 label: 'Field',
-                name: 'dealDesciption'
+                name: 'dealDescription'
             },
             {
                 xtype: 'textfield',
