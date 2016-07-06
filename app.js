@@ -68842,7 +68842,7 @@ Ext.define('Ext.picker.Picker', {
                                                     var view = Ext.Viewport.add({
                                                             xtype: 'UploadDealImage'
                                                         });
-                                                    //Ext.getStore('Temp').add(dealName);
+                                                    Ext.getStore('Temp').add(dealName);
                                                     var record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
                                                     view.setRecord(record);
                                                     view.showBy(button);
@@ -68961,12 +68961,12 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'button',
                 handler: function(button, e) {
                     var form = this.up('UploadDealImage');
-                    //var dealName = Ext.getStore('Temp').getAt(0);
-                    //Ext.getStore('Temp').removeAt(0);
-                    var itemName = form.getRecord().get('itemName');
-                    Ext.Msg.alert(itemName, null, null, null);
+                    var dealName = Ext.getStore('Temp').getAt(0);
+                    Ext.getStore('Temp').removeAt(0);
+                    //var itemName = form.getRecord().get('dealName');
+                    //Ext.Msg.alert(itemName,null,null,null);
                     form.submit({
-                        url: 'http://services.appsonmobile.com/uploadS3/' + itemName,
+                        url: 'http://services.appsonmobile.com/uploadS3/' + dealName,
                         xhr2: true,
                         cache: false,
                         waitMsg: 'Please Wait...',
