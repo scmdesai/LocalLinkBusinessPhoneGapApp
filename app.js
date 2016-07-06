@@ -68978,11 +68978,9 @@ Ext.define('Ext.picker.Picker', {
                         cache: false,
                         waitMsg: 'Please Wait...',
                         success: function(form, action) {
-                            Ext.Msg.alert('Success', action.msg);
                             form.destroy();
                         },
                         failure: function(form, action) {
-                            Ext.Msg.alert('Failure', action.msg);
                             form.destroy();
                         }
                     });
@@ -68999,6 +68997,30 @@ Ext.define('Ext.picker.Picker', {
                 width: 128,
                 iconAlign: 'center',
                 text: 'Submit'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'customerId'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'itemName1',
+                itemId: 'itemName1',
+                name: 'itemName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'dealImageURL1',
+                itemId: 'dealImageURL1',
+                name: 'dealImageURL'
             }
         ],
         listeners: [
