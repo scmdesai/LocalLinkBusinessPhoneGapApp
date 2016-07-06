@@ -68947,6 +68947,7 @@ Ext.define('Ext.picker.Picker', {
         hideOnMaskTap: true,
         modal: true,
         scrollable: false,
+        standardSubmit: true,
         layout: {
             type: 'vbox',
             align: 'stretchmax',
@@ -68979,14 +68980,14 @@ Ext.define('Ext.picker.Picker', {
                         waitMsg: 'Please Wait...',
                         success: function(form, action) {
                             Ext.Msg.alert('Success', action.msg);
-                            form.destroy();
                         },
+                        //form.destroy();
                         failure: function(form, action) {
                             Ext.Msg.alert('Failure', action.msg);
-                            form.destroy();
                         }
                     });
                 },
+                //form.destroy();
                 bottom: 30,
                 centered: false,
                 cls: 'button',
