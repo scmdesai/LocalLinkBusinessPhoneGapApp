@@ -69035,17 +69035,23 @@ Ext.define('Ext.picker.Picker', {
             component.destroy();
         }
     }
-}, 0, 0, [
+}, 0, [
+    "UploadDealImage"
+], [
     "component",
     "container",
     "panel",
-    "formpanel"
+    "formpanel",
+    "UploadDealImage"
 ], {
     "component": true,
     "container": true,
     "panel": true,
-    "formpanel": true
-}, 0, 0, [
+    "formpanel": true,
+    "UploadDealImage": true
+}, [
+    "widget.UploadDealImage"
+], 0, [
     Contact.view,
     'UploadDealImage'
 ], 0));
