@@ -68761,26 +68761,6 @@ Ext.define('Ext.picker.Picker', {
                 name: 'DealImageURL'
             },
             {
-                xtype: 'button',
-                handler: function(button, e) {
-                    var form = this.up('UploadDealForm');
-                    var dealName = form.getAt(0).getValue();
-                    var view = Ext.Viewport.add({
-                            xtype: 'UploadDealImage'
-                        });
-                    Ext.getStore('Temp').add(dealName);
-                    view.showBy(button);
-                },
-                margin: '5 80 0 80',
-                padding: '',
-                style: '',
-                styleHtmlContent: true,
-                ui: 'action',
-                width: '50%',
-                iconCls: 'add',
-                text: 'Add Deal Image'
-            },
-            {
                 xtype: 'container',
                 left: '',
                 layout: 'hbox',
@@ -68862,7 +68842,9 @@ Ext.define('Ext.picker.Picker', {
                                                     var view = Ext.Viewport.add({
                                                             xtype: 'UploadDealImage'
                                                         });
-                                                    Ext.getStore('Temp').add(dealName);
+                                                    //Ext.getStore('Temp').add(dealName);
+                                                    var record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
+                                                    view.setRecord(record);
                                                     view.showBy(button);
                                                 }
                                                 form.destroy();
@@ -68979,10 +68961,10 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'button',
                 handler: function(button, e) {
                     var form = this.up('UploadDealImage');
-                    var dealName = Ext.getStore('Temp').getAt(0);
-                    Ext.getStore('Temp').removeAt(0);
+                    //var dealName = Ext.getStore('Temp').getAt(0);
+                    //Ext.getStore('Temp').removeAt(0);
                     form.submit({
-                        url: 'http://services.appsonmobile.com/uploadS3/' + dealName,
+                        url: 'http://services.appsonmobile.com/uploadS3/' + itemName,
                         xhr2: true,
                         cache: false,
                         waitMsg: 'Please Wait...',
@@ -69008,6 +68990,66 @@ Ext.define('Ext.picker.Picker', {
                 width: 128,
                 iconAlign: 'center',
                 text: 'Submit'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'dealName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'itemName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'dealStatus'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'dealStartDate'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'dealEndDate'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'dealDesciption'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'dealImageURL'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'dealPictureURL'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'customerId'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                label: 'Field',
+                name: 'businessName'
             }
         ],
         listeners: [
