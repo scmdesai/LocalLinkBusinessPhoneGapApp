@@ -68856,7 +68856,16 @@ Ext.define('Ext.picker.Picker', {
                                         url: 'http://services.appsonmobile.com/createNewDeal',
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
-                                            Ext.Msg.alert('Success', action.msg);
+                                            //Ext.Msg.alert('Success', action.msg);
+                                            Ext.Msg.confirm('Success', action.msg, function() {
+                                                var form = this.up('UploadDealForm');
+                                                var dealName = form.getAt(0).getValue();
+                                                var view = Ext.Viewport.add({
+                                                        xtype: 'UploadDealImage'
+                                                    });
+                                                Ext.getStore('Temp').add(dealName);
+                                                view.showBy(button);
+                                            }, null);
                                             form.destroy();
                                         },
                                         failure: function(form, action) {
@@ -68978,9 +68987,11 @@ Ext.define('Ext.picker.Picker', {
                         cache: false,
                         waitMsg: 'Please Wait...',
                         success: function(form, action) {
+                            Ext.Msg.alert('Success', null, null, null);
                             form.destroy();
                         },
                         failure: function(form, action) {
+                            Ext.Msg.alert('Failure', null, null, null);
                             form.destroy();
                         }
                     });
@@ -68997,30 +69008,6 @@ Ext.define('Ext.picker.Picker', {
                 width: 128,
                 iconAlign: 'center',
                 text: 'Submit'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                name: 'customerId'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                name: 'businessName'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'itemName1',
-                itemId: 'itemName1',
-                name: 'itemName'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'dealImageURL1',
-                itemId: 'dealImageURL1',
-                name: 'dealImageURL'
             }
         ],
         listeners: [
