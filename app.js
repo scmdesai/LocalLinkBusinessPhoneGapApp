@@ -68966,7 +68966,8 @@ Ext.define('Ext.picker.Picker', {
                     var itemName = form.getRecord().get('dealName');
                     //Ext.Msg.alert(itemName,null,null,null);
                     form.submit({
-                        url: 'http://services.appsonmobile.com/uploadS3/' + itemName,
+                        url: 'http://services.appsonmobile.com/uploadS3/b7b49a50-4350-11e6-83b2',
+                        //+ itemName ,
                         xhr2: true,
                         cache: false,
                         waitMsg: 'Please Wait...',
