@@ -68868,8 +68868,8 @@ Ext.define('Ext.picker.Picker', {
                                                     view.showBy(button);
                                                 }
                                             }, this);
-                                            form.destroy();
                                         },
+                                        //form.destroy();
                                         failure: function(form, action) {
                                             store.load();
                                             Ext.Msg.alert('Failure', action.msg);
