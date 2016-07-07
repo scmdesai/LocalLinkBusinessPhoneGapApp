@@ -69275,17 +69275,23 @@ Ext.define('Ext.picker.Picker', {
         console.dir(errors);
         return errors;
     }
-}, 0, 0, [
+}, 0, [
+    "UploadDealWithImageForm"
+], [
     "component",
     "container",
     "panel",
-    "formpanel"
+    "formpanel",
+    "UploadDealWithImageForm"
 ], {
     "component": true,
     "container": true,
     "panel": true,
-    "formpanel": true
-}, 0, 0, [
+    "formpanel": true,
+    "UploadDealWithImageForm": true
+}, [
+    "widget.UploadDealWithImageForm"
+], 0, [
     Contact.view,
     'UploadDealWithImageForm'
 ], 0));
@@ -69331,6 +69337,7 @@ Ext.define('Ext.picker.Picker', {
                     });
                     //view.showBy(button);
                     var frame = document.createElement('iframe');
+                    Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
                 text: 'Create Buzz With Image'
@@ -69356,6 +69363,7 @@ Ext.define('Ext.picker.Picker', {
                     });
                     //view.showBy(button);
                     var frame = document.createElement('iframe');
+                    Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
                 text: 'Create Buzz No Image'
