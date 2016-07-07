@@ -68839,6 +68839,7 @@ Ext.define('Ext.picker.Picker', {
                                             Ext.Msg.confirm('Buzz Created!', 'Do you want to upload an Image?', function(btn) {
                                                 if (btn === 'yes') {
                                                     var dealName = form.getAt(0).getValue();
+                                                    Ext.getStore('MyDealsStore').load();
                                                     var view = Ext.Viewport.add({
                                                             xtype: 'UploadDealImage'
                                                         });
