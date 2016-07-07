@@ -67793,7 +67793,7 @@ Ext.define('Ext.picker.Picker', {
         var view = Ext.Viewport.add({
                 xtype: 'CreateBuzzOption'
             });
-        view.showBy(button);
+        Ext.Viewport.setActiveItem(view);
     },
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
@@ -69323,8 +69323,10 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.CreateBuzzOption', Ext.form.Panel, {
     config: {
+        height: '100%',
         id: 'CreateBuzzOption',
         itemId: 'CreateBuzzOption',
+        width: '100%',
         layout: {
             type: 'vbox',
             align: 'stretchmax'
