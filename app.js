@@ -68846,7 +68846,8 @@ Ext.define('Ext.picker.Picker', {
                                                     //Ext.getStore('Temp').add(dealName);
                                                     var record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
                                                     view.setRecord(record);
-                                                    Ext.Viewport.setActiveItem(view);
+                                                    //Ext.Viewport.setActiveItem(view);
+                                                    view.showBy(button);
                                                 }
                                             }, this);
                                             form.destroy();
