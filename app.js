@@ -67535,7 +67535,9 @@ Ext.define('Ext.picker.Picker', {
             '                <div style="font-size:3vw;color:red;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
             '                <tpl else>',
             '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
-            '                </tpl>'
+            '                </tpl>',
+            '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;" /></div>',
+            '\t\t\t\t'
         ],
         layout: {
             type: 'vbox',
