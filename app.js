@@ -68824,11 +68824,17 @@ Ext.define('Ext.picker.Picker', {
                                     });
                                     form.addAfterListener('submit', function() {
                                         Ext.Msg.confirm('Upload an image?', null, function(btn) {
-                                            if (btn === 'yes') {}
-                                        }, //var view = Ext.Viewport.add({xtype: 'UploadDealImage'});
-                                        // view.setRecord(dealDetails);
-                                        //Ext.Viewport.setActiveItem(view);
-                                        this);
+                                            if (btn === 'yes') {
+                                                var view = Ext.Viewport.add({
+                                                        xtype: 'UploadDealImage'
+                                                    });
+                                                var store = Ext.getStore('MyDealsStore');
+                                                store.load();
+                                                var dealDetails = store.findRecord('dealName', form.getAt(0).getValue(), true, false, false);
+                                                view.setRecord(dealDetails);
+                                                Ext.Viewport.setActiveItem(view);
+                                            }
+                                        }, this);
                                     });
                                 } else {
                                     Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
