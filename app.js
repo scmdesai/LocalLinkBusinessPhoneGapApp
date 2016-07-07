@@ -67521,7 +67521,9 @@ Ext.define('Ext.picker.Picker', {
             '                <tpl else>',
             '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
             '                </tpl>',
+            '\t\t\t<tpl if="dealImageURL &ne;= null">',
             '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;" /></div>',
+            '\t\t\t\t</tpl>',
             '\t\t\t\t'
         ],
         layout: {
@@ -67561,24 +67563,6 @@ Ext.define('Ext.picker.Picker', {
                         text: ''
                     }
                 ]
-            },
-            {
-                xtype: 'button',
-                handler: function(button, e) {
-                    var dealDetails = Ext.getStore('LocalStore').getAt(0);
-                    var view = Ext.Viewport.add({
-                            xtype: 'UploadDealImage'
-                        });
-                    view.setRecord(dealDetails);
-                    view.showBy(button);
-                },
-                height: '1%',
-                margin: '0 100 0 80',
-                styleHtmlContent: true,
-                top: '50%',
-                ui: 'action',
-                width: '50%',
-                text: 'Add Deal Image'
             }
         ],
         listeners: [
