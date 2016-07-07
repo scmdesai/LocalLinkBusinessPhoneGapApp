@@ -68831,12 +68831,14 @@ Ext.define('Ext.picker.Picker', {
                             var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(5).getValue();
                             var endDate = form.getAt(6).getValue();
+                            var record;
                             if (endDate >= date) {
                                 if (document.getElementById('chkbx').checked) {
                                     form.submit({
                                         url: 'http://services.appsonmobile.com/createNewDeal',
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
+                                            record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
                                             Ext.Msg.confirm('Buzz Created!', 'Do you want to upload an Image?', function(btn) {
                                                 if (btn === 'yes') {
                                                     // Ext.getStore('MyDealsStore').load();
@@ -68844,7 +68846,6 @@ Ext.define('Ext.picker.Picker', {
                                                             xtype: 'UploadDealImage'
                                                         });
                                                     //Ext.getStore('Temp').add(dealName);
-                                                    var record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
                                                     view.setRecord(record);
                                                     //Ext.Viewport.setActiveItem(view);
                                                     view.showBy(button);
