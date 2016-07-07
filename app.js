@@ -68836,6 +68836,19 @@ Ext.define('Ext.picker.Picker', {
                                         url: 'http://services.appsonmobile.com/createNewDeal',
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
+                                            Ext.Msg.confirm('Buzz Created!', 'Do you want to upload an Image?', function(btn) {
+                                                if (btn === 'yes') {
+                                                    //var dealName = form.getAt(0).getValue();
+                                                    // Ext.getStore('MyDealsStore').load();
+                                                    var view = Ext.Viewport.add({
+                                                            xtype: 'UploadDealImage'
+                                                        });
+                                                    //Ext.getStore('Temp').add(dealName);
+                                                    var record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
+                                                    view.setRecord(record);
+                                                    Ext.Viewport.setActiveItem(view);
+                                                }
+                                            }, this);
                                             form.destroy();
                                         },
                                         failure: function(form, action) {
@@ -68844,19 +68857,6 @@ Ext.define('Ext.picker.Picker', {
                                             form.destroy();
                                         }
                                     });
-                                    Ext.Msg.confirm('Buzz Created!', 'Do you want to upload an Image?', function(btn) {
-                                        if (btn === 'yes') {
-                                            //var dealName = form.getAt(0).getValue();
-                                            // Ext.getStore('MyDealsStore').load();
-                                            var view = Ext.Viewport.add({
-                                                    xtype: 'UploadDealImage'
-                                                });
-                                            //Ext.getStore('Temp').add(dealName);
-                                            var record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
-                                            view.setRecord(record);
-                                            Ext.Viewport.setActiveItem(view);
-                                        }
-                                    }, this);
                                 } else {
                                     Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
                                 }
