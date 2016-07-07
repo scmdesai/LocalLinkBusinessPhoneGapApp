@@ -68839,13 +68839,15 @@ Ext.define('Ext.picker.Picker', {
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
                                             var itemName = action.msg;
-                                            record = Ext.getStore('MyDealsStore').findRecord('itemName', itemName, true, false, false);
                                             Ext.Msg.confirm('Buzz Created!', 'Do you want to upload an Image?', function(btn) {
                                                 if (btn === 'yes') {
                                                     // Ext.getStore('MyDealsStore').load();
                                                     var view = Ext.Viewport.add({
                                                             xtype: 'UploadDealImage'
                                                         });
+                                                    Ext.getStore('MyDealsStore').load();
+                                                    var itemName = action.msg;
+                                                    record = Ext.getStore('MyDealsStore').findRecord('itemName', itemName, true, false, false);
                                                     //Ext.getStore('Temp').add(dealName);
                                                     view.setRecord(record);
                                                     //Ext.Viewport.setActiveItem(view);
