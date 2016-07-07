@@ -67527,14 +67527,18 @@ Ext.define('Ext.picker.Picker', {
         width: '100%',
         autoDestroy: false,
         scrollable: true,
-        tpl: Ext.create('Ext.XTemplate', '<div><img src="{dealPictureURL}" style="margin:5px 5px 5px 5px;height:100px;width:100%;" /></div>', '            <div style="font-size:6vw;color:green">{dealName}</div>', '            <div style="font-size:5vw;color:black">{dealDescription}</div>', '            <tpl if="dealEndDate &lt;= todayplusfivedays">', '                <div style="font-size:3vw;color:red;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>', '                <tpl else>', '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>', '                </tpl>', '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;" /></div>', '\t\t\t\t', {
-            onDealImageTap: function() {
-                var view = Ext.Viewport.add({
-                        xtype: 'DealImage'
-                    });
-                Ext.Viewport.setActiveItem(view);
-            }
-        }),
+        tpl: [
+            '<div><img src="{dealPictureURL}" style="margin:5px 5px 5px 5px;height:100px;width:100%;" /></div>',
+            '            <div style="font-size:6vw;color:green">{dealName}</div>',
+            '            <div style="font-size:5vw;color:black">{dealDescription}</div>',
+            '            <tpl if="dealEndDate &lt;= todayplusfivedays">',
+            '                <div style="font-size:3vw;color:red;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
+            '                <tpl else>',
+            '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
+            '                </tpl>',
+            '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;" /></div>',
+            '\t\t\t\t'
+        ],
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -68810,13 +68814,21 @@ Ext.define('Ext.picker.Picker', {
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
                                             Ext.Msg.alert('Success!', action.msg);
-                                            form.destroy();
                                         },
+                                        //form.destroy();
                                         failure: function(form, action) {
                                             store.load();
                                             Ext.Msg.alert('Failure', action.msg);
                                             form.destroy();
                                         }
+                                    });
+                                    form.addAfterListener('submit', function() {
+                                        Ext.Msg.confirm('Upload an image?', null, function(btn) {
+                                            if (btn === 'yes') {}
+                                        }, //var view = Ext.Viewport.add({xtype: 'UploadDealImage'});
+                                        // view.setRecord(dealDetails);
+                                        //Ext.Viewport.setActiveItem(view);
+                                        this);
                                     });
                                 } else {
                                     Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
