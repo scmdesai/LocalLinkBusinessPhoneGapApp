@@ -68831,7 +68831,6 @@ Ext.define('Ext.picker.Picker', {
                             //var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(5).getValue();
                             var endDate = form.getAt(6).getValue();
-                            var record;
                             if (endDate >= date) {
                                 if (document.getElementById('chkbx').checked) {
                                     form.submit({
@@ -68846,8 +68845,9 @@ Ext.define('Ext.picker.Picker', {
                                                             xtype: 'UploadDealImage'
                                                         });
                                                     Ext.getStore('MyDealsStore').load();
-                                                    var itemName = action.msg;
-                                                    record = Ext.getStore('MyDealsStore').findRecord('itemName', itemName, true, false, false);
+                                                    var item = action.msg;
+                                                    var itemName = item.toString();
+                                                    var record = Ext.getStore('MyDealsStore').findRecord('itemName', itemName, true, false, false);
                                                     //Ext.getStore('Temp').add(dealName);
                                                     view.setRecord(record);
                                                     //Ext.Viewport.setActiveItem(view);
