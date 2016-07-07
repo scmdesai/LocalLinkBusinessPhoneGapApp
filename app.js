@@ -62012,6 +62012,358 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /**
+ * The radio field is an enhanced version of the native browser radio controls and is a good way of allowing your user
+ * to choose one option out of a selection of several (for example, choosing a favorite color):
+ *
+ *     @example
+ *     var form = Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'radiofield',
+ *                 name : 'color',
+ *                 value: 'red',
+ *                 label: 'Red',
+ *                 checked: true
+ *             },
+ *             {
+ *                 xtype: 'radiofield',
+ *                 name : 'color',
+ *                 value: 'green',
+ *                 label: 'Green'
+ *             },
+ *             {
+ *                 xtype: 'radiofield',
+ *                 name : 'color',
+ *                 value: 'blue',
+ *                 label: 'Blue'
+ *             }
+ *         ]
+ *     });
+ *
+ * Above we created a simple form which allows the user to pick a color from the options red, green and blue. Because
+ * we gave each of the fields above the same {@link #name}, the radio field ensures that only one of them can be
+ * checked at a time. When we come to get the values out of the form again or submit it to the server, only 1 value
+ * will be sent for each group of radio fields with the same name:
+ *
+ *     form.getValues(); //looks like {color: 'red'}
+ *     form.submit(); //sends a single field back to the server (in this case color: red)
+ *
+ * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
+ */
+(Ext.cmd.derive('Ext.field.Radio', Ext.field.Checkbox, {
+    alternateClassName: 'Ext.form.Radio',
+    isRadio: true,
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        ui: 'radio',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        component: {
+            type: 'radio',
+            cls: 'x-input-radio'
+        }
+    },
+    getValue: function() {
+        return (typeof this._value === 'undefined') ? null : this._value;
+    },
+    setValue: function(value) {
+        this._value = value;
+        return this;
+    },
+    getSubmitValue: function() {
+        var value = this._value;
+        if (typeof value == "undefined" || value == null) {
+            value = true;
+        }
+        return (this.getChecked()) ? value : null;
+    },
+    updateChecked: function(newChecked) {
+        this.getComponent().setChecked(newChecked);
+        if (this.initialized) {
+            this.refreshGroupValues();
+        }
+    },
+    // @private
+    onMaskTap: function(component, e) {
+        var me = this,
+            dom = me.getComponent().input.dom;
+        if (me.getDisabled()) {
+            return false;
+        }
+        if (!me.getChecked()) {
+            dom.checked = true;
+        }
+        me.refreshGroupValues();
+        //return false so the mask does not disappear
+        return false;
+    },
+    /**
+     * Returns the selected value if this radio is part of a group (other radio fields with the same name, in the same FormPanel),
+     * @return {String}
+     */
+    getGroupValue: function() {
+        var fields = this.getSameGroupFields(),
+            ln = fields.length,
+            i = 0,
+            field;
+        for (; i < ln; i++) {
+            field = fields[i];
+            if (field.getChecked()) {
+                return field.getValue();
+            }
+        }
+        return null;
+    },
+    /**
+     * Set the matched radio field's status (that has the same value as the given string) to checked.
+     * @param {String} value The value of the radio field to check.
+     * @return {Ext.field.Radio} The field that is checked.
+     */
+    setGroupValue: function(value) {
+        var fields = this.getSameGroupFields(),
+            ln = fields.length,
+            i = 0,
+            field;
+        for (; i < ln; i++) {
+            field = fields[i];
+            if (field.getValue() === value) {
+                field.setChecked(true);
+                return field;
+            }
+        }
+    },
+    /**
+     * Loops through each of the fields this radiofield is linked to (has the same name) and
+     * calls `onChange` on those fields so the appropriate event is fired.
+     * @private
+     */
+    refreshGroupValues: function() {
+        var fields = this.getSameGroupFields(),
+            ln = fields.length,
+            i = 0,
+            field;
+        for (; i < ln; i++) {
+            field = fields[i];
+            field.onChange();
+        }
+    }
+}, 0, [
+    "radiofield"
+], [
+    "component",
+    "field",
+    "checkboxfield",
+    "radiofield"
+], {
+    "component": true,
+    "field": true,
+    "checkboxfield": true,
+    "radiofield": true
+}, [
+    "widget.radiofield"
+], 0, [
+    Ext.field,
+    'Radio',
+    Ext.form,
+    'Radio'
+], 0));
+
+/**
+ * A FieldSet is a great way to visually separate elements of a form. It's normally used when you have a form with
+ * fields that can be divided into groups - for example a customer's billing details in one fieldset and their shipping
+ * address in another. A fieldset can be used inside a form or on its own elsewhere in your app. Fieldsets can
+ * optionally have a title at the top and instructions at the bottom. Here's how we might create a FieldSet inside a
+ * form:
+ *
+ *     @example
+ *     Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'fieldset',
+ *                 title: 'About You',
+ *                 instructions: 'Tell us all about yourself',
+ *                 items: [
+ *                     {
+ *                         xtype: 'textfield',
+ *                         name : 'firstName',
+ *                         label: 'First Name'
+ *                     },
+ *                     {
+ *                         xtype: 'textfield',
+ *                         name : 'lastName',
+ *                         label: 'Last Name'
+ *                     }
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *
+ * Above we created a {@link Ext.form.Panel form} with a fieldset that contains two text fields. In this case, all
+ * of the form fields are in the same fieldset, but for longer forms we may choose to use multiple fieldsets. We also
+ * configured a {@link #title} and {@link #instructions} to give the user more information on filling out the form if
+ * required.
+ *
+ * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
+ */
+(Ext.cmd.derive('Ext.form.FieldSet', Ext.Container, {
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: 'x-form-fieldset',
+        /**
+         * @cfg {String} title
+         * Optional fieldset title, rendered just above the grouped fields.
+         *
+         * ## Example
+         *
+         *     Ext.create('Ext.form.Fieldset', {
+         *         fullscreen: true,
+         *
+         *         title: 'Login',
+         *
+         *         items: [{
+         *             xtype: 'textfield',
+         *             label: 'Email'
+         *         }]
+         *     });
+         * 
+         * @accessor
+         */
+        title: null,
+        /**
+         * @cfg {String} instructions
+         * Optional fieldset instructions, rendered just below the grouped fields.
+         *
+         * ## Example
+         *
+         *     Ext.create('Ext.form.Fieldset', {
+         *         fullscreen: true,
+         *
+         *         instructions: 'Please enter your email address.',
+         *
+         *         items: [{
+         *             xtype: 'textfield',
+         *             label: 'Email'
+         *         }]
+         *     });
+         * 
+         * @accessor
+         */
+        instructions: null
+    },
+    // @private
+    applyTitle: function(title) {
+        if (typeof title == 'string') {
+            title = {
+                title: title
+            };
+        }
+        Ext.applyIf(title, {
+            docked: 'top',
+            baseCls: this.getBaseCls() + '-title'
+        });
+        return Ext.factory(title, Ext.Title, this._title);
+    },
+    // @private
+    updateTitle: function(newTitle, oldTitle) {
+        if (newTitle) {
+            this.add(newTitle);
+        }
+        if (oldTitle) {
+            this.remove(oldTitle);
+        }
+    },
+    // @private
+    getTitle: function() {
+        var title = this._title;
+        if (title && title instanceof Ext.Title) {
+            return title.getTitle();
+        }
+        return title;
+    },
+    // @private
+    applyInstructions: function(instructions) {
+        if (typeof instructions == 'string') {
+            instructions = {
+                title: instructions
+            };
+        }
+        Ext.applyIf(instructions, {
+            docked: 'bottom',
+            baseCls: this.getBaseCls() + '-instructions'
+        });
+        return Ext.factory(instructions, Ext.Title, this._instructions);
+    },
+    // @private
+    updateInstructions: function(newInstructions, oldInstructions) {
+        if (newInstructions) {
+            this.add(newInstructions);
+        }
+        if (oldInstructions) {
+            this.remove(oldInstructions);
+        }
+    },
+    // @private
+    getInstructions: function() {
+        var instructions = this._instructions;
+        if (instructions && instructions instanceof Ext.Title) {
+            return instructions.getTitle();
+        }
+        return instructions;
+    },
+    /**
+     * A convenient method to disable all fields in this FieldSet
+     * @return {Ext.form.FieldSet} This FieldSet
+     */
+    doSetDisabled: function(newDisabled) {
+        this.getFieldsAsArray().forEach(function(field) {
+            field.setDisabled(newDisabled);
+        });
+        return this;
+    },
+    /**
+     * @private
+     */
+    getFieldsAsArray: function() {
+        var fields = [],
+            getFieldsFrom = function(item) {
+                if (item.isField) {
+                    fields.push(item);
+                }
+                if (item.isContainer) {
+                    item.getItems().each(getFieldsFrom);
+                }
+            };
+        this.getItems().each(getFieldsFrom);
+        return fields;
+    }
+}, 0, [
+    "fieldset"
+], [
+    "component",
+    "container",
+    "fieldset"
+], {
+    "component": true,
+    "container": true,
+    "fieldset": true
+}, [
+    "widget.fieldset"
+], 0, [
+    Ext.form,
+    'FieldSet'
+], 0));
+
+/**
  * The Form panel presents a set of form fields and provides convenient ways to load and save data. Usually a form
  * panel just contains the set of fields you want to display, ordered inside the items configuration like this:
  *
@@ -67438,25 +67790,10 @@ Ext.define('Ext.picker.Picker', {
         Ext.Viewport.setActiveItem(info);
     },
     onUploadDealTap: function(button, e, eOpts) {
-        var storeUserDetails = Ext.getStore('UserDetails');
-        storeUserDetails.load();
-        var customerId;
-        var businessName;
-        var DealPictureURL;
-        //Ext.Viewport.getActiveItem().destroy();
         var view = Ext.Viewport.add({
-                xtype: 'UploadDealForm'
+                xtype: 'CreateBuzzOption'
             });
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-            DealPictureURL = record.get('DealPictureURL');
-            view.setRecord(record);
-        });
-        //view.showBy(button);
-        var frame = document.createElement('iframe');
-        Ext.Viewport.setActiveItem(view);
+        view.showBy(button);
     },
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
@@ -68553,7 +68890,7 @@ Ext.define('Ext.picker.Picker', {
 //this.child('contactpic').setData(record.data);
 
 /*
- * File: app/view/UploadDealForm.js
+ * File: app/view/UploadDealNoImageForm.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -68566,7 +68903,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.UploadDealForm', Ext.form.Panel, {
+(Ext.cmd.derive('Contact.view.UploadDealNoImageForm', Ext.form.Panel, {
     config: {
         html: '',
         id: 'formpanel2',
@@ -68802,7 +69139,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         handler: function(button, e) {
-                            var form = this.up('UploadDealForm');
+                            var form = this.up('UploadDealNoImageForm');
                             var date = new Date();
                             //var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(5).getValue();
@@ -68814,27 +69151,13 @@ Ext.define('Ext.picker.Picker', {
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
                                             Ext.Msg.alert('Success!', action.msg);
+                                            form.destroy();
                                         },
-                                        //form.destroy();
                                         failure: function(form, action) {
                                             store.load();
                                             Ext.Msg.alert('Failure', action.msg);
                                             form.destroy();
                                         }
-                                    });
-                                    form.addAfterListener('submit', function() {
-                                        Ext.Msg.confirm('Upload an image?', null, function(btn) {
-                                            if (btn === 'yes') {
-                                                var view = Ext.Viewport.add({
-                                                        xtype: 'UploadDealImage'
-                                                    });
-                                                var store = Ext.getStore('MyDealsStore');
-                                                store.load();
-                                                var dealDetails = store.findRecord('dealName', form.getAt(0).getValue(), true, false, false);
-                                                view.setRecord(dealDetails);
-                                                Ext.Viewport.setActiveItem(view);
-                                            }
-                                        }, this);
                                     });
                                 } else {
                                     Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
@@ -68872,197 +69195,24 @@ Ext.define('Ext.picker.Picker', {
         return errors;
     }
 }, 0, [
-    "UploadDealForm"
+    "UploadDealNoImageForm"
 ], [
     "component",
     "container",
     "panel",
     "formpanel",
-    "UploadDealForm"
+    "UploadDealNoImageForm"
 ], {
     "component": true,
     "container": true,
     "panel": true,
     "formpanel": true,
-    "UploadDealForm": true
+    "UploadDealNoImageForm": true
 }, [
-    "widget.UploadDealForm"
+    "widget.UploadDealNoImageForm"
 ], 0, [
     Contact.view,
-    'UploadDealForm'
-], 0));
-
-/*
- * File: app/view/UploadDealImage.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.UploadDealImage', Ext.form.Panel, {
-    config: {
-        centered: true,
-        height: '40%',
-        id: 'UploadDealImage',
-        itemId: 'UploadDealImage',
-        style: 'background;#fff;border:3px groove #1985d0',
-        styleHtmlContent: true,
-        width: '80%',
-        hideOnMaskTap: true,
-        modal: true,
-        scrollable: false,
-        layout: {
-            type: 'vbox',
-            align: 'stretchmax',
-            pack: 'end'
-        },
-        items: [
-            {
-                xtype: 'filefield',
-                cls: 'customfield1',
-                itemId: 'myfilefield1',
-                margin: '5 5 5 5',
-                styleHtmlContent: true,
-                width: 214,
-                clearIcon: false,
-                label: '',
-                labelWrap: true,
-                name: 'fileUpload',
-                capture: 'camera'
-            },
-            {
-                xtype: 'button',
-                handler: function(button, e) {
-                    var form = this.up('UploadDealImage');
-                    var itemName = form.getRecord().get('itemName');
-                    //Ext.Msg.alert(itemName,null,null,null);
-                    form.submit({
-                        url: 'http://services.appsonmobile.com/uploadS3/' + itemName,
-                        xhr2: true,
-                        cache: false,
-                        waitMsg: 'Please Wait...',
-                        success: function(form, action) {
-                            Ext.Msg.alert('Success', action.msg);
-                            form.destroy();
-                        },
-                        failure: function(form, action) {
-                            Ext.Msg.alert('Failure', action.msg);
-                            form.destroy();
-                        }
-                    });
-                },
-                bottom: 30,
-                centered: false,
-                cls: 'button',
-                height: '23%',
-                left: '25%',
-                margin: '',
-                style: 'font-size:5vw!important',
-                styleHtmlContent: true,
-                ui: 'action',
-                width: 128,
-                iconAlign: 'center',
-                text: 'Submit'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'dealName'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'itemName'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'dealStatus'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'dealStartDate'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'dealEndDate'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'dealDescription'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'dealImageURL'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'dealPictureURL'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'customerId'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                label: 'Field',
-                name: 'businessName'
-            }
-        ],
-        listeners: [
-            {
-                fn: 'onDealUploadImageHiddenChange',
-                event: 'hiddenchange'
-            }
-        ]
-    },
-    onDealUploadImageHiddenChange: function(component, value, oldValue, eOpts) {
-        if (component.isHidden() === true && oldValue !== null) {
-            component.destroy();
-        }
-    }
-}, 0, [
-    "UploadDealImage"
-], [
-    "component",
-    "container",
-    "panel",
-    "formpanel",
-    "UploadDealImage"
-], {
-    "component": true,
-    "container": true,
-    "panel": true,
-    "formpanel": true,
-    "UploadDealImage": true
-}, [
-    "widget.UploadDealImage"
-], 0, [
-    Contact.view,
-    'UploadDealImage'
+    'UploadDealNoImageForm'
 ], 0));
 
 /*
@@ -69158,6 +69308,460 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /*
+ * File: app/view/CreateBuzzOption.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.CreateBuzzOption', Ext.form.Panel, {
+    config: {
+        id: 'CreateBuzzOption',
+        itemId: 'CreateBuzzOption',
+        items: [
+            {
+                xtype: 'fieldset',
+                items: [
+                    {
+                        xtype: 'radiofield',
+                        cls: 'customfield',
+                        id: 'radiofieldNoImage',
+                        style: 'border:none!important',
+                        styleHtmlContent: true,
+                        label: 'Create Buzz with no Image',
+                        labelCls: 'label',
+                        labelWidth: '80%',
+                        checked: true
+                    },
+                    {
+                        xtype: 'radiofield',
+                        cls: 'customfield',
+                        id: 'radiofieldWithImage',
+                        styleHtmlContent: true,
+                        label: 'Create Buzz with Image',
+                        labelWidth: '80%',
+                        labelWrap: true
+                    }
+                ]
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    if (document.getElementById('radiofieldNoImage').checked) {
+                        var storeUserDetails = Ext.getStore('UserDetails');
+                        storeUserDetails.load();
+                        var customerId;
+                        var businessName;
+                        var DealPictureURL;
+                        //Ext.Viewport.getActiveItem().destroy();
+                        var view = Ext.Viewport.add({
+                                xtype: 'UploadDealNoImageForm'
+                            });
+                        storeUserDetails.each(function(record) {
+                            //console.log('StoreUserDetails : ' +record.get('customerId'));
+                            customerId = record.get('customerId');
+                            businessName = record.get('businessName');
+                            DealPictureURL = record.get('DealPictureURL');
+                            view.setRecord(record);
+                        });
+                        //view.showBy(button);
+                        var frame = document.createElement('iframe');
+                        Ext.Viewport.setActiveItem(view);
+                    } else if (document.getElementById('radiofieldWithImage').checked) {
+                        var storeUserDetails = Ext.getStore('UserDetails');
+                        storeUserDetails.load();
+                        var customerId;
+                        var businessName;
+                        var DealPictureURL;
+                        //Ext.Viewport.getActiveItem().destroy();
+                        var view = Ext.Viewport.add({
+                                xtype: 'UploadDealWithImageForm'
+                            });
+                        storeUserDetails.each(function(record) {
+                            //console.log('StoreUserDetails : ' +record.get('customerId'));
+                            customerId = record.get('customerId');
+                            businessName = record.get('businessName');
+                            DealPictureURL = record.get('DealPictureURL');
+                            view.setRecord(record);
+                        });
+                        //view.showBy(button);
+                        var frame = document.createElement('iframe');
+                        Ext.Viewport.setActiveItem(view);
+                    }
+                },
+                margin: '0 50 0 90',
+                padding: '',
+                styleHtmlContent: true,
+                ui: 'confirm',
+                width: '50%',
+                text: 'Go'
+            }
+        ]
+    }
+}, 0, [
+    "CreateBuzzOption"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "CreateBuzzOption"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "CreateBuzzOption": true
+}, [
+    "widget.CreateBuzzOption"
+], 0, [
+    Contact.view,
+    'CreateBuzzOption'
+], 0));
+
+/*
+ * File: app/view/UploadDealWithImageForm.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.UploadDealWithImageForm', Ext.form.Panel, {
+    config: {
+        html: '',
+        id: 'formpanel3',
+        itemId: 'formpanel',
+        style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
+        modal: true,
+        scrollable: false,
+        multipartDetection: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: false,
+                id: 'businessName4',
+                itemId: 'businessName',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                label: 'Name',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealName'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: true,
+                id: 'businessName5',
+                itemId: 'businessName1',
+                margin: '30 15 2 15',
+                styleHtmlContent: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'customerId3',
+                itemId: 'customerId',
+                name: 'customerId'
+            },
+            {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                id: 'DealStatus2',
+                itemId: 'DealStatus',
+                margin: '5 5 5 5 ',
+                maxHeight: '',
+                style: '',
+                styleHtmlContent: true,
+                label: 'Status',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStatus',
+                value: 'Active',
+                placeHolder: 'Active',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Active',
+                        value: 'Active'
+                    },
+                    {
+                        text: 'Expired',
+                        value: 'Expired'
+                    }
+                ]
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                id: 'DealDescription2',
+                itemId: 'DealDescription',
+                margin: '5 5 5 5 ',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealStartDate3',
+                itemId: 'DealStartDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'Start Date',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStartDate',
+                value: {
+                    day: new Date().getDate(),
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                autoSelect: false,
+                options: {
+                    minDate: new Date()
+                },
+                usePicker: true,
+                component: {
+                    useMask: true,
+                    minValue: new Date()
+                },
+                dateFormat: 'm/d/Y',
+                picker: {
+                    itemId: 'mydatepicker3',
+                    style: '',
+                    scrollable: false,
+                    stretchX: false,
+                    stretchY: false,
+                    useTitles: true,
+                    yearFrom: 2016
+                }
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealEndDate3',
+                itemId: 'DealEndDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'End Date',
+                labelWidth: '35%',
+                name: 'DealEndDate',
+                value: {
+                    day: new Date().getDate() + 1,
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                usePicker: true,
+                picker: {
+                    useTitles: true,
+                    yearFrom: 2016
+                }
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'DealPictureURL2',
+                itemId: 'DealPictureURL',
+                name: 'DealPictureURL'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'DealImageURL3',
+                itemId: 'DealImageURL2',
+                name: 'DealImageURL'
+            },
+            {
+                xtype: 'filefield',
+                cls: 'customfield',
+                itemId: 'myfilefield2',
+                margin: '5 5 5 5',
+                styleHtmlContent: true,
+                width: '97%',
+                clearIcon: false,
+                label: 'Add Image',
+                labelWidth: '29%',
+                labelWrap: true,
+                name: 'fileUpload',
+                capture: 'camera'
+            },
+            {
+                xtype: 'container',
+                left: '',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 10',
+                        padding: '5 30 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        Ext.Viewport.add({
+                                            xtype: 'Terms'
+                                        }).show();
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                height: 140,
+                margin: '10 10 10 10 10',
+                styleHtmlContent: true,
+                layout: 'fit',
+                scrollable: false,
+                items: [
+                    {
+                        xtype: 'spacer',
+                        maxWidth: '',
+                        minWidth: ''
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getActiveItem().destroy();
+                        },
+                        height: '20%',
+                        style: 'font-size:5vw!important',
+                        styleHtmlContent: true,
+                        ui: 'decline',
+                        width: '40%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var form = this.up('UploadDealWithImageForm');
+                            var date = new Date();
+                            //var dealName = form.getAt(0).getValue();
+                            var startDate = form.getAt(5).getValue();
+                            var endDate = form.getAt(6).getValue();
+                            if (endDate >= date) {
+                                if (document.getElementById('chkbx').checked) {
+                                    form.submit({
+                                        url: 'http://services.appsonmobile.com/uploadS3/',
+                                        xhr2: true,
+                                        cache: false,
+                                        waitMsg: 'Please Wait...',
+                                        success: function(form, action) {
+                                            Ext.Msg.alert('Success', action.msg);
+                                            form.destroy();
+                                        },
+                                        failure: function(form, action) {
+                                            Ext.Msg.alert('Failure', action.msg);
+                                            form.destroy();
+                                        }
+                                    });
+                                } else {
+                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                }
+                            } else {
+                                Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                            }
+                        },
+                        docked: 'right',
+                        height: '20%',
+                        itemId: 'submit',
+                        style: 'font:size:4vw',
+                        styleHtmlContent: true,
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Submit'
+                    }
+                ]
+            }
+        ]
+    },
+    getValidationErrors: function() {
+        var errors = [];
+        var reqFields = this.query('field[required=true]');
+        var i = 0,
+            ln = reqFields.length,
+            field;
+        for (; i < ln; i++) {
+            field = reqFields[i];
+            if (!field.getValue()) {
+                errors.push(field.getLabel() + ' must be completed.');
+            }
+        }
+        console.dir(errors);
+        return errors;
+    }
+}, 0, 0, [
+    "component",
+    "container",
+    "panel",
+    "formpanel"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true
+}, 0, 0, [
+    Contact.view,
+    'UploadDealWithImageForm'
+], 0));
+
+/*
  * File: app.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
@@ -69196,9 +69800,10 @@ Ext.application({
         'panel',
         'Terms',
         'UpdateDealForm',
-        'UploadDealForm',
-        'UploadDealImage',
-        'DealImage'
+        'UploadDealNoImageForm',
+        'DealImage',
+        'CreateBuzzOption',
+        'UploadDealWithImageForm'
     ],
     controllers: [
         'Contacts'
