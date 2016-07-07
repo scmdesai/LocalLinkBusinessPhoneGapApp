@@ -66144,7 +66144,9 @@ Ext.define('Ext.picker.Picker', {
     config: {
         fields: [
             {
-                name: 'dealName'
+                defaultValue: false,
+                name: 'flagAddDealImage',
+                type: 'boolean'
             }
         ]
     }
@@ -67618,6 +67620,24 @@ Ext.define('Ext.picker.Picker', {
                         text: ''
                     }
                 ]
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    var dealDetails = Ext.getStore('LocalStore').getAt(0);
+                    var view = Ext.Viewport.add({
+                            xtype: 'UploadDealImage'
+                        });
+                    view.setRecord(dealDetails);
+                    view.showBy(button);
+                },
+                height: '1%',
+                margin: '0 100 0 80',
+                styleHtmlContent: true,
+                top: '50%',
+                ui: 'action',
+                width: '50%',
+                text: 'Add Deal Image'
             }
         ],
         listeners: [
@@ -68814,6 +68834,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         handler: function(button, e) {
+                            Ext.getStore('Temp').removeAt(0);
                             Ext.Viewport.getActiveItem().destroy();
                         },
                         height: '20%',
