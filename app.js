@@ -68846,12 +68846,12 @@ Ext.define('Ext.picker.Picker', {
                                     });
                                     Ext.Msg.confirm('Buzz Created!', 'Do you want to upload an Image?', function(btn) {
                                         if (btn === 'yes') {
-                                            var dealName = form.getAt(0).getValue();
-                                            Ext.getStore('MyDealsStore').load();
+                                            //var dealName = form.getAt(0).getValue();
+                                            // Ext.getStore('MyDealsStore').load();
                                             var view = Ext.Viewport.add({
                                                     xtype: 'UploadDealImage'
                                                 });
-                                            Ext.getStore('Temp').add(dealName);
+                                            //Ext.getStore('Temp').add(dealName);
                                             var record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
                                             view.setRecord(record);
                                             Ext.Viewport.setActiveItem(view);
@@ -68962,8 +68962,8 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'button',
                 handler: function(button, e) {
                     var form = this.up('UploadDealImage');
-                    var dealName = Ext.getStore('Temp').getAt(0);
-                    Ext.getStore('Temp').removeAt(0);
+                    //var dealName = Ext.getStore('Temp').getAt(0);
+                    //Ext.getStore('Temp').removeAt(0);
                     var itemName = form.getRecord().get('itemName');
                     //Ext.Msg.alert(itemName,null,null,null);
                     form.submit({
