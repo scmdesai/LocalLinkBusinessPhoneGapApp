@@ -68828,6 +68828,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UploadDealForm');
                             var date = new Date();
+                            var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(5).getValue();
                             var endDate = form.getAt(6).getValue();
                             if (endDate >= date) {
@@ -68838,7 +68839,6 @@ Ext.define('Ext.picker.Picker', {
                                             Ext.getStore('MyDealsStore').load();
                                             Ext.Msg.confirm('Buzz Created!', 'Do you want to upload an Image?', function(btn) {
                                                 if (btn === 'yes') {
-                                                    var dealName = form.getAt(0).getValue();
                                                     // Ext.getStore('MyDealsStore').load();
                                                     var view = Ext.Viewport.add({
                                                             xtype: 'UploadDealImage'
