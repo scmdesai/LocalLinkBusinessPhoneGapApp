@@ -69325,6 +69325,10 @@ Ext.define('Ext.picker.Picker', {
     config: {
         id: 'CreateBuzzOption',
         itemId: 'CreateBuzzOption',
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
         items: [
             {
                 xtype: 'fieldset',
