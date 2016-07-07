@@ -68828,7 +68828,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UploadDealForm');
                             var date = new Date();
-                            var dealName = form.getAt(0).getValue();
+                            //var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(5).getValue();
                             var endDate = form.getAt(6).getValue();
                             var record;
@@ -68838,7 +68838,8 @@ Ext.define('Ext.picker.Picker', {
                                         url: 'http://services.appsonmobile.com/createNewDeal',
                                         success: function(form, action) {
                                             Ext.getStore('MyDealsStore').load();
-                                            record = Ext.getStore('MyDealsStore').findRecord('dealName', dealName, true, false, false);
+                                            var itemName = action.msg;
+                                            record = Ext.getStore('MyDealsStore').findRecord('itemName', itemName, true, false, false);
                                             Ext.Msg.confirm('Buzz Created!', 'Do you want to upload an Image?', function(btn) {
                                                 if (btn === 'yes') {
                                                     // Ext.getStore('MyDealsStore').load();
