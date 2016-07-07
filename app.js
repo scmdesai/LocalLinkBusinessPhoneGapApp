@@ -68972,7 +68972,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.CreateBuzzOption', Ext.form.Panel, {
     config: {
         height: '100%',
-        html: '<label><input type="radio" name="option" id="radiofieldNoImage" value="Option 1">   Create Buzz with no Image</label><br><label><input type="radio" name="option" id="radiofieldWithImage" value="Option 2">   Create Buzz with  Image</label>',
+        html: '<div><input type="radio" name="option" id="radiofieldNoImage" value="Option 1">   Create Buzz with no Image</div><div><input type="radio" name="option" id="radiofieldWithImage" value="Option 2">   Create Buzz with  Image</div>',
         id: 'CreateBuzzOption',
         itemId: 'CreateBuzzOption',
         padding: '5 5 5 5',
