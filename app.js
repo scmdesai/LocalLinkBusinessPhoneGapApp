@@ -68856,7 +68856,6 @@ Ext.define('Ext.picker.Picker', {
                                             view.setRecord(record);
                                             view.showBy(button);
                                         }
-                                        form.destroy();
                                     }, this);
                                 } else {
                                     Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
