@@ -67591,6 +67591,9 @@ Ext.define('Ext.picker.Picker', {
         var record = Ext.getStore('LocalStore').getAt(0);
         if (record.get('dealImageURL').toString().charAt(0) === 'h') {
             this.down('#dealimage').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;"/>');
+            this.down('#dealimage').on('tap', function() {
+                Ext.Msg.alert('Deal Image!', null, null, null);
+            });
         }
     }
 }, 0, [
