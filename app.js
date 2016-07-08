@@ -67593,7 +67593,10 @@ Ext.define('Ext.picker.Picker', {
             this.down('#dealimage').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;"/>');
         }
         component.element.addListener('tap', function() {
-            Ext.Msg.alert("Hi", null, null, null);
+            var view = Ext.Viewport.add({
+                    xtype: 'DealImage'
+                });
+            Ext.Viewport.setActiveItem(view);
         });
     }
 }, 0, [
@@ -68883,17 +68886,19 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
     config: {
         fullscreen: true,
-        height: '100%',
+        height: '50%',
         id: 'dealImage',
         itemId: 'dealImage',
         style: 'overflow: hidden;background:#fff',
         styleHtmlContent: true,
-        width: '100%',
+        width: '50%',
         autoDestroy: false,
         scrollable: true,
-        tpl: Ext.create('Ext.XTemplate', '', '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:100%;width:100%;" /></div>', '\t\t\t\t', {
-            onDealImageTap: function() {}
-        }),
+        tpl: [
+            '',
+            '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50%;width:50%;" /></div>',
+            '\t\t\t\t'
+        ],
         layout: {
             type: 'vbox',
             align: 'stretchmax'
