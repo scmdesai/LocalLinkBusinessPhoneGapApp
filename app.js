@@ -68894,11 +68894,6 @@ Ext.define('Ext.picker.Picker', {
         width: '100%',
         autoDestroy: false,
         scrollable: true,
-        tpl: [
-            '',
-            '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50%;width:50%;" /></div>',
-            '\t\t\t\t'
-        ],
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -68936,12 +68931,24 @@ Ext.define('Ext.picker.Picker', {
                         text: ''
                     }
                 ]
+            },
+            {
+                xtype: 'container',
+                docked: 'top',
+                height: '50%',
+                id: 'dealimage1',
+                itemId: 'dealimage1',
+                layout: 'hbox'
             }
         ],
         listeners: [
             {
                 fn: 'onDealImageInitialize',
                 event: 'initialize'
+            },
+            {
+                fn: 'onDealImageShow',
+                event: 'show'
             }
         ]
     },
@@ -68949,6 +68956,10 @@ Ext.define('Ext.picker.Picker', {
         if (Ext.os.is('Android')) {
             Ext.getCmp('dealBackBtn').hide();
         }
+    },
+    onDealImageShow: function(component, eOpts) {
+        var record = Ext.getStore('LocalStore').getAt(0);
+        this.down('#dealimage1').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:50%;width:50%;border:none;"/>');
     }
 }, 0, [
     "DealImage"
