@@ -67521,7 +67521,7 @@ Ext.define('Ext.picker.Picker', {
             '                <tpl else>',
             '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
             '                </tpl>',
-            '\t\t\t<tpl if="dealImageURL &ne;= NULL">',
+            '\t\t\t<tpl if="dealImageURL &ne; NULL">',
             '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;" /></div>',
             '\t\t\t\t</tpl>',
             '\t\t\t\t'
