@@ -67441,9 +67441,9 @@ Ext.define('Ext.picker.Picker', {
         var view = Ext.Viewport.add({
                 xtype: 'CreateBuzzOption'
             });
-        //Ext.Viewport.setActiveItem(view);
-        view.showBy(button);
+        Ext.Viewport.setActiveItem(view);
     },
+    //view.showBy(button);
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
