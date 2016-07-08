@@ -68887,17 +68887,18 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
     config: {
         fullscreen: true,
-        height: '100%',
+        height: '50%',
         id: 'dealImage',
         itemId: 'dealImage',
         style: 'overflow: hidden;background:#fff',
         styleHtmlContent: true,
         width: '100%',
         autoDestroy: false,
-        scrollable: true,
+        scrollable: false,
         layout: {
             type: 'vbox',
-            align: 'stretchmax'
+            align: 'center',
+            pack: 'center'
         },
         items: [
             {
