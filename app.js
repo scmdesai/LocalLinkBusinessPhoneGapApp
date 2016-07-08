@@ -68950,15 +68950,21 @@ Ext.define('Ext.picker.Picker', {
             Ext.getCmp('dealBackBtn').hide();
         }
     }
-}, 0, 0, [
+}, 0, [
+    "DealImage"
+], [
     "component",
     "container",
-    "panel"
+    "panel",
+    "DealImage"
 ], {
     "component": true,
     "container": true,
-    "panel": true
-}, 0, 0, [
+    "panel": true,
+    "DealImage": true
+}, [
+    "widget.DealImage"
+], 0, [
     Contact.view,
     'DealImage'
 ], 0));
