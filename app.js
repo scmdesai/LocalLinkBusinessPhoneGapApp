@@ -67441,7 +67441,8 @@ Ext.define('Ext.picker.Picker', {
         var view = Ext.Viewport.add({
                 xtype: 'CreateBuzzOption'
             });
-        Ext.Viewport.setActiveItem(view);
+        //Ext.Viewport.setActiveItem(view);
+        view.showBy(button);
     },
     onShareTap: function(button, e, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
@@ -67596,7 +67597,7 @@ Ext.define('Ext.picker.Picker', {
             var view = Ext.Viewport.add({
                     xtype: 'DealImage'
                 });
-            view.showBy(component, 'tc-bc');
+            view.showBy(Ext.getCmp('dealimage'));
         });
     }
 }, 0, [
