@@ -69148,10 +69148,12 @@ Ext.define('Ext.picker.Picker', {
                                         waitMsg: 'Please Wait...',
                                         success: function(form, action) {
                                             Ext.Msg.alert('Success', action.msg);
+                                            Ext.getStore('MyDealsStore').load();
                                             form.destroy();
                                         },
                                         failure: function(form, action) {
                                             Ext.Msg.alert('Failure', action.msg);
+                                            Ext.getStore('MyDealsStore').load();
                                             form.destroy();
                                         }
                                     });
@@ -69231,6 +69233,7 @@ Ext.define('Ext.picker.Picker', {
         height: '60%',
         id: 'DealImage',
         itemId: 'DealImage',
+        margin: '0 10 0 0',
         style: 'background;#fff;border:3px groove #1985d0',
         styleHtmlContent: true,
         width: '80%',
@@ -69239,8 +69242,7 @@ Ext.define('Ext.picker.Picker', {
         scrollable: false,
         layout: {
             type: 'vbox',
-            align: 'stretchmax',
-            pack: 'end'
+            align: 'start'
         },
         items: [
             {
@@ -69266,6 +69268,14 @@ Ext.define('Ext.picker.Picker', {
                         ui: 'plain',
                         iconAlign: 'center',
                         text: ''
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.getCmp('DealImage').destroy();
+                        },
+                        ui: 'plain',
+                        iconCls: 'icon-close'
                     }
                 ]
             },
