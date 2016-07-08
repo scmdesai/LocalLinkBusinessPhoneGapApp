@@ -67577,8 +67577,8 @@ Ext.define('Ext.picker.Picker', {
                 event: 'initialize'
             },
             {
-                fn: 'onDealimageShow',
-                event: 'show',
+                fn: 'onDealimageActivate',
+                event: 'activate',
                 delegate: '#dealimage'
             },
             {
@@ -67592,10 +67592,8 @@ Ext.define('Ext.picker.Picker', {
             Ext.getCmp('dealBackBtn').hide();
         }
     },
-    onDealimageShow: function(component, eOpts) {
-        component.on('tap', function() {
-            Ext.Msg.alert('Deal Image', null, null, null);
-        });
+    onDealimageActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        Ext.Msg.alert('Deal Image', null, null, null);
     },
     onDealPictureShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
