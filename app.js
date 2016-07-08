@@ -68943,6 +68943,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onDealImageShow',
                 event: 'show'
+            },
+            {
+                fn: 'onDealImageHiddenChange',
+                event: 'hiddenchange'
             }
         ]
     },
@@ -68954,6 +68958,11 @@ Ext.define('Ext.picker.Picker', {
     onDealImageShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
         this.down('#dealimage1').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:100%;width:100%;border:none;"/>');
+    },
+    onDealImageHiddenChange: function(component, value, oldValue, eOpts) {
+        if (component.isHidden() === true && oldValue !== null) {
+            component.destroy();
+        }
     }
 }, 0, [
     "DealImage"
