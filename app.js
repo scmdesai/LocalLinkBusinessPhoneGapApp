@@ -67596,7 +67596,7 @@ Ext.define('Ext.picker.Picker', {
             var view = Ext.Viewport.add({
                     xtype: 'DealImage'
                 });
-            Ext.Viewport.setActiveItem(view);
+            view.showBy(component, 'tc-bc');
         });
     }
 }, 0, [
@@ -68913,14 +68913,6 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'button',
-                        cls: 'icon-back-button',
-                        id: 'dealBackBtn1',
-                        itemId: 'dealBackBtn',
-                        style: 'font-size:8vw',
-                        ui: 'plain'
-                    },
-                    {
-                        xtype: 'button',
                         cls: 'icon-share',
                         docked: 'right',
                         itemId: 'share',
@@ -68959,7 +68951,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onDealImageShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
-        this.down('#dealimage1').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:50%;width:50%;border:none;"/>');
+        this.down('#dealimage1').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:100%;width:100%;border:none;"/>');
     }
 }, 0, [
     "DealImage"
