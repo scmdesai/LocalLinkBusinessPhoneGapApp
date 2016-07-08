@@ -67522,7 +67522,7 @@ Ext.define('Ext.picker.Picker', {
             '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
             '                </tpl>',
             '\t\t\t',
-            '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;" /></div>',
+            '',
             '\t\t\t',
             '\t\t\t\t'
         ],
@@ -67563,18 +67563,34 @@ Ext.define('Ext.picker.Picker', {
                         text: ''
                     }
                 ]
+            },
+            {
+                xtype: 'container',
+                id: 'dealimage',
+                itemId: 'dealimage',
+                top: '40%'
             }
         ],
         listeners: [
             {
                 fn: 'onDealPictureInitialize',
                 event: 'initialize'
+            },
+            {
+                fn: 'onDealPictureShow',
+                event: 'show'
             }
         ]
     },
     onDealPictureInitialize: function(component, eOpts) {
         if (Ext.os.is('Android')) {
             Ext.getCmp('dealBackBtn').hide();
+        }
+    },
+    onDealPictureShow: function(component, eOpts) {
+        var record = Ext.getStore('LocalStore').getAt(0);
+        if (record.get('dealImageURL') !== null) {
+            Ext.get('dealimage').setHTML('<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;"/></div>');
         }
     }
 }, 0, [
