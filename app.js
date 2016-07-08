@@ -69347,7 +69347,7 @@ Ext.define('Ext.picker.Picker', {
                     var customerId;
                     var businessName;
                     var DealPictureURL;
-                    //Ext.Viewport.getActiveItem().destroy();
+                    Ext.Viewport.getActiveItem().destroy();
                     var view = Ext.Viewport.add({
                             xtype: 'UploadDealWithImageForm'
                         });
@@ -69360,7 +69360,7 @@ Ext.define('Ext.picker.Picker', {
                     });
                     //view.showBy(button);
                     var frame = document.createElement('iframe');
-                    Ext.Viewport.getActiveItem().destroy();
+                    //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
                 text: 'Create Buzz With Image'
@@ -69373,7 +69373,7 @@ Ext.define('Ext.picker.Picker', {
                     var customerId;
                     var businessName;
                     var DealPictureURL;
-                    //Ext.Viewport.getActiveItem().destroy();
+                    Ext.Viewport.getActiveItem().destroy();
                     var view = Ext.Viewport.add({
                             xtype: 'UploadDealNoImageForm'
                         });
@@ -69386,7 +69386,7 @@ Ext.define('Ext.picker.Picker', {
                     });
                     //view.showBy(button);
                     var frame = document.createElement('iframe');
-                    Ext.Viewport.getActiveItem().destroy();
+                    //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
                 text: 'Create Buzz No Image'
