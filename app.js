@@ -67519,10 +67519,10 @@ Ext.define('Ext.picker.Picker', {
             '            <tpl if="dealEndDate &lt;= todayplusfivedays">',
             '                <div style="font-size:3vw;color:red;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
             '                <tpl else>',
-            '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;border:none;">Valid from {dealStartDate} through {dealEndDate}</div>',
+            '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
             '                </tpl>',
             '\t\t\t',
-            '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;" /></div>',
+            '<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;" /></div>',
             '\t\t\t',
             '\t\t\t\t'
         ],
