@@ -68886,12 +68886,12 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
     config: {
         fullscreen: true,
-        height: '50%',
+        height: '100%',
         id: 'dealImage',
         itemId: 'dealImage',
         style: 'overflow: hidden;background:#fff',
         styleHtmlContent: true,
-        width: '50%',
+        width: '100%',
         autoDestroy: false,
         scrollable: true,
         tpl: [
