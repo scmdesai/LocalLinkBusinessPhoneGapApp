@@ -67577,11 +67577,6 @@ Ext.define('Ext.picker.Picker', {
                 event: 'initialize'
             },
             {
-                fn: 'onDealimageActivate',
-                event: 'activate',
-                delegate: '#dealimage'
-            },
-            {
                 fn: 'onDealPictureShow',
                 event: 'show'
             }
@@ -67592,14 +67587,14 @@ Ext.define('Ext.picker.Picker', {
             Ext.getCmp('dealBackBtn').hide();
         }
     },
-    onDealimageActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        Ext.Msg.alert('Deal Image', null, null, null);
-    },
     onDealPictureShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
         if (record.get('dealImageURL').toString().charAt(0) === 'h') {
             this.down('#dealimage').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;"/>');
         }
+        component.addListener('tap', function() {
+            Ext.Msg.alert('Deal Image', null, null, null);
+        });
     }
 }, 0, [
     "dealPicture"
