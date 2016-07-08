@@ -67592,8 +67592,8 @@ Ext.define('Ext.picker.Picker', {
         if (record.get('dealImageURL').toString().charAt(0) === 'h') {
             this.down('#dealimage').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;"/>');
         }
-        component.addListener('tap', function() {
-            Ext.Msg.alert('Deal Image', null, null, null);
+        this.down('#dealimage').addListener('onmousedown', function() {
+            Ext.Msg.alert("Hi", null, null, null);
         });
     }
 }, 0, [
