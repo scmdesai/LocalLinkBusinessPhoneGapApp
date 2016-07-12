@@ -67508,21 +67508,17 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         id: 'dealPicture',
         itemId: 'dealPicture',
+        margin: '',
         style: 'overflow: hidden;background:#fff',
         styleHtmlContent: true,
         width: '100%',
         autoDestroy: false,
         scrollable: true,
         tpl: [
-            '<div><img src="{dealPictureURL}" style="margin:5px 5px 5px 5px;height:100px;width:100%;" /></div>',
-            '            <div style="font-size:6vw;color:green">{dealName}</div>',
-            '            <div style="font-size:5vw;color:black">{dealDescription}</div>',
-            '            <tpl if="dealEndDate &lt;= todayplusfivedays">',
-            '                <div style="font-size:3vw;color:red;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
-            '                <tpl else>',
-            '                    <div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>',
-            '                </tpl>',
-            '\t\t\t',
+            '<tpl if="dealImageURL">',
+            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:30%;width:95%;border:none;"/></div>',
+            '                            ',
+            '\t\t\t\t</tpl>\t\t',
             '',
             '\t\t\t',
             '\t\t\t\t'
@@ -67562,6 +67558,11 @@ Ext.define('Ext.picker.Picker', {
                         ui: 'plain',
                         iconAlign: 'center',
                         text: ''
+                    },
+                    {
+                        xtype: 'container',
+                        id: 'nameTxt1',
+                        itemId: 'nameTxt1'
                     }
                 ]
             },
@@ -67570,6 +67571,78 @@ Ext.define('Ext.picker.Picker', {
                 id: 'dealimage',
                 itemId: 'dealimage',
                 top: '40%'
+            },
+            {
+                xtype: 'container',
+                id: 'nameTxt3',
+                itemId: 'nameTxt3'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-phone1',
+                docked: 'bottom',
+                height: '8vh',
+                id: 'phoneNumber1',
+                itemId: 'phoneNumber1',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'font-size:2vw !important',
+                styleHtmlContent: true,
+                top: '63%',
+                width: '90%',
+                clearIcon: false,
+                name: 'phoneNumber',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-globe1',
+                docked: 'bottom',
+                height: '8vh',
+                id: 'website3',
+                itemId: 'website3',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
+                styleHtmlContent: true,
+                top: '75%',
+                width: '90%',
+                clearIcon: false,
+                name: 'websiteDisplayName',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-phone1',
+                docked: 'bottom',
+                hidden: true,
+                id: 'website2',
+                itemId: 'website2',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'font-size:2vw !important',
+                styleHtmlContent: true,
+                top: '65%',
+                width: '90%',
+                clearIcon: false,
+                name: 'website',
+                readOnly: true
+            },
+            {
+                xtype: 'textareafield',
+                cls: [
+                    'icon-location1',
+                    'customfield1'
+                ],
+                height: '9vh',
+                id: 'address1',
+                itemId: 'address1',
+                margin: '0 0 0 5',
+                style: 'font-size:4.2vw;font-family:Arial;',
+                styleHtmlContent: true,
+                top: '87%',
+                width: '95%',
+                name: 'address'
             }
         ],
         listeners: [
@@ -67590,14 +67663,25 @@ Ext.define('Ext.picker.Picker', {
     },
     onDealPictureShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
-        if (record.get('dealImageURL').toString().charAt(0) === 'h') {
-            this.down('#dealimage').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:50px;width:50px;border:none;"/>');
-            this.down('#dealimage').element.addListener('tap', function() {
-                var view = Ext.Viewport.add({
-                        xtype: 'DealImage'
-                    });
-                view.showBy(Ext.getCmp('dealimage'));
-            });
+        if (record.get('dealImageURL')) {
+            this.down('#nameTxt3').hide();
+        } else {
+            this.down('#nameTxt3').setHtml('<br><div style="font-size:6vw;color:green">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:black">' + record.get('dealDescription') + '</div><br><br><div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from' + record.get('dealStartDate') + ' through ' + record.get('dealEndDate') + '</div>');
+            this.down('#dealimage').hide();
+        }
+    },
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            var name = record.get('itemName');
+            var businessName = record.get('businessName');
+            this.down('#nameTxt1').setHtml(record.get('businessName'));
+            var store = Ext.getStore('MyJsonPStore');
+            var rec = store.findRecord('businessName', businessName);
+            Ext.getCmp('phoneNumber1').setValue(rec.get('phoneNumber'));
+            Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
+            Ext.getCmp('website2').setValue(rec.get('website'));
+            Ext.getCmp('address1').setValue(rec.get('address'));
         }
     }
 }, 0, [
