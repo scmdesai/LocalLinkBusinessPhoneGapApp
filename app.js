@@ -66067,7 +66067,7 @@ Ext.define('Ext.picker.Picker', {
                 type: 'string'
             },
             {
-                name: 'dealImageURL'
+                name: 'DealImageURL'
             }
         ]
     }
@@ -68429,7 +68429,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '',
                 clearIcon: false,
                 labelWidth: '35%',
-                name: 'dealImageURL',
+                name: 'DealImageURL',
                 readOnly: true
             },
             {
