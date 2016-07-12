@@ -68419,7 +68419,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: 'customfield',
                 disabled: false,
-                hidden: false,
+                hidden: true,
                 id: 'DealImageURL',
                 itemId: 'DealImageURL',
                 margin: '5 5 5 5 ',
