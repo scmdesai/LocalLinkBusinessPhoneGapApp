@@ -68626,6 +68626,7 @@ Ext.define('Ext.picker.Picker', {
             this.down('#DealName').setValue(record.data.dealName);
             this.down('#DealStatus').setValue(record.data.dealStatus);
             this.down('#DealDescription').setValue(record.data.dealDescription);
+            this.down('#DealImageURL').setValue(record.data.dealImageURL);
         }
     }
 }, 0, [
