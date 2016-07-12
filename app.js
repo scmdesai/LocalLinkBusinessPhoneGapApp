@@ -67561,10 +67561,26 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         xtype: 'container',
+                        cls: 'contact-name',
+                        disabled: true,
+                        html: '<b>Business Name</b>',
                         id: 'nameTxt1',
-                        itemId: 'nameTxt1'
+                        itemId: 'nameTxt1',
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                        width: '65%'
                     }
                 ]
+            },
+            {
+                xtype: 'container',
+                cls: 'contact-name',
+                disabled: true,
+                docked: 'bottom',
+                html: '<p style="font-size:3vw;text-align:center">       Get all the latest buzz only on Local Buzz',
+                id: 'nameTxt2',
+                itemId: 'nameTxt2',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                width: '65%'
             },
             {
                 xtype: 'container',
@@ -67574,8 +67590,14 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
+                disabled: true,
+                height: '250px',
                 id: 'nameTxt3',
-                itemId: 'nameTxt3'
+                itemId: 'nameTxt3',
+                margin: '5 5 5 5',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0:background:#C0D9D9',
+                styleHtmlContent: true,
+                width: '95%'
             },
             {
                 xtype: 'textfield',
@@ -67588,7 +67610,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 10 10',
                 style: 'font-size:2vw !important',
                 styleHtmlContent: true,
-                top: '63%',
+                top: '65%',
                 width: '90%',
                 clearIcon: false,
                 name: 'phoneNumber',
@@ -67605,7 +67627,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 10 10',
                 style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
                 styleHtmlContent: true,
-                top: '75%',
+                top: '77%',
                 width: '90%',
                 clearIcon: false,
                 name: 'websiteDisplayName',
@@ -67640,7 +67662,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '0 0 0 5',
                 style: 'font-size:4.2vw;font-family:Arial;',
                 styleHtmlContent: true,
-                top: '87%',
+                top: '88%',
                 width: '95%',
                 name: 'address'
             }
