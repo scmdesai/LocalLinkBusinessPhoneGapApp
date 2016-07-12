@@ -68429,7 +68429,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '',
                 clearIcon: false,
                 labelWidth: '35%',
-                name: 'DealImageURL',
+                name: 'dealImageURL',
                 readOnly: true
             },
             {
@@ -68573,13 +68573,6 @@ Ext.define('Ext.picker.Picker', {
                             var date = new Date();
                             if (endDate >= date) {
                                 if (document.getElementById('chkbx').checked) {
-                                    var record = form.getRecord();
-                                    record.beginEdit(true, record.getChanges());
-                                    form.updateRecord(record);
-                                    record.endEdit(true, record.getChanges());
-                                    record.commit();
-                                    store.sync();
-                                    store.load();
                                     form.submit({
                                         url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
                                         success: function(form, action) {
