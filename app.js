@@ -66067,7 +66067,7 @@ Ext.define('Ext.picker.Picker', {
                 type: 'string'
             },
             {
-                name: 'DealImageURL'
+                name: 'dealImageURL'
             }
         ]
     }
@@ -67515,8 +67515,8 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         scrollable: true,
         tpl: [
-            '<tpl if="DealImageURL">',
-            '\t<div><img src="{DealImageURL}" style="margin:5px 5px 5px 5px;height:30%;width:95%;border:none;"/></div>',
+            '<tpl if="dealImageURL">',
+            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:30%;width:95%;border:none;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
@@ -67683,9 +67683,9 @@ Ext.define('Ext.picker.Picker', {
             Ext.getCmp('dealBackBtn').hide();
         }
     },
-    onDealPictureDealPictureShow: function(component, eOpts) {
+    onDealPictureShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
-        if (record.get('DealImageURL')) {
+        if (record.get('dealImageURL')) {
             this.down('#nameTxt3').hide();
         } else {
             this.down('#nameTxt3').setHtml('<br><div style="font-size:6vw;color:green">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:black">' + record.get('dealDescription') + '</div><br><br><div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from' + record.get('dealStartDate') + ' through ' + record.get('dealEndDate') + '</div>');
@@ -68419,7 +68419,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: 'customfield',
                 disabled: false,
-                hidden: true,
+                hidden: false,
                 id: 'DealImageURL',
                 itemId: 'DealImageURL',
                 margin: '5 5 5 5 ',
@@ -69154,13 +69154,6 @@ Ext.define('Ext.picker.Picker', {
                 name: 'DealPictureURL'
             },
             {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'DealImageURL3',
-                itemId: 'DealImageURL2',
-                name: 'DealImageURL'
-            },
-            {
                 xtype: 'filefield',
                 cls: 'customfield',
                 itemId: 'myfilefield2',
@@ -69414,7 +69407,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onDealImageShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
-        this.down('#dealimage1').setHtml('<img src="' + record.get('DealImageURL') + '" style="margin:5px 5px 5px 5px;height:100%;width:100%;border:none;"/>');
+        this.down('#dealimage1').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:100%;width:100%;border:none;"/>');
     }
 }, 0, [
     "DealImage"
