@@ -66812,7 +66812,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ListOfDeals', Ext.dataview.List, {
     config: {
-        cls: 'customlist',
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
@@ -66828,6 +66827,10 @@ Ext.define('Ext.picker.Picker', {
         preventSelectionOnDisclose: false,
         refreshHeightOnUpdate: false,
         useSimpleItems: false,
+        cls: [
+            'customlist',
+            'customfield2'
+        ],
         itemTpl: [
             '',
             '',
@@ -69473,9 +69476,17 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.CreateBuzzOption', Ext.ActionSheet, {
     config: {
+        height: '100%',
         id: 'CreateBuzzOption',
         itemId: 'CreateBuzzOption',
+        style: 'background:none',
         styleHtmlContent: true,
+        scrollable: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax',
+            pack: 'center'
+        },
         items: [
             {
                 xtype: 'button',
