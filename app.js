@@ -69025,11 +69025,12 @@ Ext.define('Ext.picker.Picker', {
         html: '',
         id: 'formpanel3',
         itemId: 'formpanel',
+        padding: '5 5 5 5',
         style: 'background:white',
         ui: 'light',
         autoDestroy: false,
         modal: true,
-        scrollable: false,
+        scrollable: true,
         multipartDetection: false,
         layout: {
             type: 'vbox',
