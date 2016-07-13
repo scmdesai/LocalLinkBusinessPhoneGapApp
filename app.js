@@ -67456,7 +67456,7 @@ Ext.define('Ext.picker.Picker', {
             } else {
                 //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
                 window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
-                Ext.getCmp('dealpictureBackBtn').show();
+                Ext.getCmp('dealBackBtn').show();
                 Ext.get('share').show();
             }
         }, 'jpg', 50, 'myScreenShot');
