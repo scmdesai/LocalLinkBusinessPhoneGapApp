@@ -66812,17 +66812,17 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ListOfDeals', Ext.dataview.List, {
     config: {
+        cls: 'customlist',
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
-        style: '',
-        styleHtmlContent: true,
         autoDestroy: false,
         allowDeselect: true,
         deselectOnContainerClick: false,
         mode: 'MULTI',
         deferEmptyText: false,
         emptyText: 'Create Buzz!',
+        itemCls: 'list-item',
         store: 'MyDealsStore',
         pinHeaders: false,
         preventSelectionOnDisclose: false,
