@@ -67450,6 +67450,7 @@ Ext.define('Ext.picker.Picker', {
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
         Ext.getCmp('dealBackBtn').hide();
         Ext.get('share').hide();
+        Ext.get('nameTxt1').show();
         navigator.screenshot.save(function(error, res) {
             if (error) {
                 console.error(error);
@@ -67563,13 +67564,13 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         cls: 'icon-share',
                         docked: 'right',
+                        id: 'share',
                         itemId: 'share',
                         minHeight: '100%',
                         style: 'border:none;font-size:7vw',
                         ui: 'plain',
                         iconAlign: 'center',
-                        text: '',
-						id:'share'
+                        text: ''
                     },
                     {
                         xtype: 'container',
@@ -67676,9 +67677,9 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlContent: true,
                 top: '88%',
                 width: '95%',
+                clearIcon: false,
                 name: 'address',
-				clearIcon: false,
-				readOnly:true
+                readOnly: true
             }
         ],
         listeners: [
