@@ -67676,7 +67676,9 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlContent: true,
                 top: '88%',
                 width: '95%',
-                name: 'address'
+                name: 'address',
+				clearIcon: false,
+				readOnly:true
             }
         ],
         listeners: [
