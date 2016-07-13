@@ -69476,10 +69476,9 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.CreateBuzzOption', Ext.ActionSheet, {
     config: {
-        height: '40%',
+        height: '100%',
         id: 'CreateBuzzOption',
         itemId: 'CreateBuzzOption',
-        margin: '0 5 170 5',
         style: 'background:white',
         styleHtmlContent: true,
         scrollable: false,
@@ -69513,16 +69512,9 @@ Ext.define('Ext.picker.Picker', {
                     //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
-                flex: 0.5,
-                height: '',
-                styleHtmlContent: true,
+                margin: '10 10 20 10',
                 ui: 'action',
                 text: 'Create Buzz With Image'
-            },
-            {
-                xtype: 'spacer',
-                flex: 0.2,
-                maxHeight: ''
             },
             {
                 xtype: 'button',
@@ -69548,8 +69540,7 @@ Ext.define('Ext.picker.Picker', {
                     //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
-                flex: 0.5,
-                styleHtmlContent: true,
+                margin: '20 10 10 10',
                 ui: 'action',
                 text: 'Create Buzz No Image'
             }
