@@ -67576,6 +67576,7 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         xtype: 'container',
+                        flex: 2,
                         cls: 'contact-name',
                         disabled: true,
                         html: '<b>Business Name</b>',
@@ -67583,7 +67584,12 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'nameTxt1',
                         padding: '15 0 0 0',
                         style: 'word-wrap:break-word;font-family:Arial;font-size:5vw',
-                        width: '65%'
+                        width: '65%',
+                        scrollable: false,
+                        layout: {
+                            type: 'hbox',
+                            align: 'end'
+                        }
                     }
                 ]
             },
