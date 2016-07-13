@@ -69025,7 +69025,6 @@ Ext.define('Ext.picker.Picker', {
         html: '',
         id: 'formpanel3',
         itemId: 'formpanel',
-        padding: '5 5 5 5',
         style: 'background:white',
         ui: 'light',
         autoDestroy: false,
@@ -69040,7 +69039,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
-                height: '15%',
                 hidden: false,
                 id: 'businessName4',
                 itemId: 'businessName',
