@@ -67568,7 +67568,8 @@ Ext.define('Ext.picker.Picker', {
                         style: 'border:none;font-size:7vw',
                         ui: 'plain',
                         iconAlign: 'center',
-                        text: ''
+                        text: '',
+						id:'share'
                     },
                     {
                         xtype: 'container',
