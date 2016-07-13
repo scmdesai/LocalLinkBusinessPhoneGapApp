@@ -66523,7 +66523,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'phoneNumber',
                 margin: '',
                 minWidth: '',
-                padding: '0 10 10 10',
+                padding: '10 10 10 10',
                 clearIcon: false,
                 name: 'phoneNumber',
                 readOnly: true
@@ -66539,7 +66539,7 @@ Ext.define('Ext.picker.Picker', {
                 hidden: false,
                 itemId: 'email',
                 minWidth: '',
-                padding: '0 10 0 10',
+                padding: '10 10 10 10',
                 clearIcon: false,
                 label: '',
                 name: 'emailAddress',
@@ -66555,7 +66555,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '',
                 hidden: false,
                 itemId: 'websiteDisplayName',
-                padding: '0 10 0 10',
+                padding: '10 10 10 10',
                 style: 'font-size:2px !important',
                 clearIcon: false,
                 name: 'websiteDisplayName',
@@ -66574,7 +66574,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'address',
                 maxHeight: '',
                 minHeight: '',
-                padding: '0 10 0 10',
+                padding: '10 10 10 10',
                 style: '\'font-size:3.5vw;font-family: arial\'',
                 clearIcon: false,
                 name: 'address',
@@ -66756,7 +66756,7 @@ Ext.define('Ext.picker.Picker', {
                         iconCls: 'icon-signout',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
-                            Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
+                            Ext.Msg.confirm('Logout', 'Are you sure you want to Logout?', function(btn) {
                                 if (btn == 'yes') {
                                     FacebookInAppBrowser.logout(function() {
                                         window.localStorage.setItem('facebookAccessToken', null);
