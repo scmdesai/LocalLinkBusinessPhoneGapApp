@@ -67454,8 +67454,7 @@ Ext.define('Ext.picker.Picker', {
             if (error) {
                 console.error(error);
             } else {
-                Ext.Msg.alert(res.filePath, null, null, null);
-                //should be path/to/myScreenshot.jpg
+                //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
                 window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
                 Ext.getCmp('dealBackBtn').show();
                 Ext.get('share').show();
@@ -67565,7 +67564,6 @@ Ext.define('Ext.picker.Picker', {
                         cls: 'icon-share',
                         docked: 'right',
                         itemId: 'share',
-						id:'share',
                         minHeight: '100%',
                         style: 'border:none;font-size:7vw',
                         ui: 'plain',
