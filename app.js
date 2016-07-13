@@ -67555,9 +67555,11 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         cls: 'icon-back-button',
+                        height: '100%',
                         id: 'dealBackBtn',
                         itemId: 'dealBackBtn',
                         style: 'font-size:8vw',
+                        styleHtmlContent: true,
                         ui: 'plain'
                     },
                     {
@@ -67579,7 +67581,8 @@ Ext.define('Ext.picker.Picker', {
                         html: '<b>Business Name</b>',
                         id: 'nameTxt1',
                         itemId: 'nameTxt1',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                        padding: '15 0 0 0',
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw',
                         width: '65%'
                     }
                 ]
