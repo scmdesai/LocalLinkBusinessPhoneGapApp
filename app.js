@@ -66515,7 +66515,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: [
                     'icon-phone',
-                    'customfield1'
+                    'customfield2'
                 ],
                 disabled: false,
                 height: '',
@@ -66523,7 +66523,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'phoneNumber',
                 margin: '',
                 minWidth: '',
-                padding: '10 10 10 10',
+                padding: '0 10 10 10',
                 clearIcon: false,
                 name: 'phoneNumber',
                 readOnly: true
@@ -66532,14 +66532,14 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: [
                     'icon-email',
-                    'customfield1'
+                    'customfield2'
                 ],
                 disabled: false,
                 height: '',
                 hidden: false,
                 itemId: 'email',
                 minWidth: '',
-                padding: '10 10 10 10',
+                padding: '0 10 0 10',
                 clearIcon: false,
                 label: '',
                 name: 'emailAddress',
@@ -66549,13 +66549,13 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 cls: [
                     'icon-globe',
-                    'customfield1'
+                    'customfield2'
                 ],
                 disabled: false,
                 height: '',
                 hidden: false,
                 itemId: 'websiteDisplayName',
-                padding: '10 10 10 10',
+                padding: '0 10 0 10',
                 style: 'font-size:2px !important',
                 clearIcon: false,
                 name: 'websiteDisplayName',
@@ -66563,7 +66563,6 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textareafield',
-                baseCls: '',
                 cls: [
                     'icon-location',
                     'customfield1'
@@ -66575,7 +66574,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'address',
                 maxHeight: '',
                 minHeight: '',
-                padding: '10 10 10 10',
+                padding: '0 10 0 10',
                 style: '\'font-size:3.5vw;font-family: arial\'',
                 clearIcon: false,
                 name: 'address',
