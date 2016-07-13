@@ -67448,8 +67448,8 @@ Ext.define('Ext.picker.Picker', {
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
-        //Ext.getCmp('dealBackBtn').hide();
-        // Ext.get('share').hide();
+        Ext.getCmp('dealBackBtn').hide();
+        Ext.getCmp('share').hide();
         Ext.get('nameTxt1').show();
         navigator.screenshot.save(function(error, res) {
             if (error) {
@@ -67458,7 +67458,7 @@ Ext.define('Ext.picker.Picker', {
                 //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
                 window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
                 Ext.getCmp('dealBackBtn').show();
-                Ext.get('share').show();
+                Ext.getCmp('share').show();
             }
         }, 'jpg', 50, 'myScreenShot');
     },
