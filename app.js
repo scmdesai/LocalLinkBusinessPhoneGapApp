@@ -67599,7 +67599,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '250px',
                 id: 'nameTxt3',
                 itemId: 'nameTxt3',
-                margin: '5 0 5 0',
+                margin: '15 0 5 0',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0:background:#C0D9D9',
                 styleHtmlContent: true,
                 width: '95%'
@@ -67614,7 +67614,7 @@ Ext.define('Ext.picker.Picker', {
                 html: '<b>Business Name</b>',
                 id: 'nameTxt1',
                 itemId: 'nameTxt1',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:5vw',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:5vw;text-align:center',
                 width: '65%',
                 scrollable: false,
                 layout: {
