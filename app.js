@@ -67450,7 +67450,7 @@ Ext.define('Ext.picker.Picker', {
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
         Ext.getCmp('dealBackBtn').hide();
         Ext.getCmp('share').hide();
-        Ext.get('nameTxt1').show();
+        Ext.get('nameTxt1').setHtml(record.get('businessName'));
         navigator.screenshot.save(function(error, res) {
             if (error) {
                 console.error(error);
