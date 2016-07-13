@@ -67573,23 +67573,6 @@ Ext.define('Ext.picker.Picker', {
                         ui: 'plain',
                         iconAlign: 'center',
                         text: ''
-                    },
-                    {
-                        xtype: 'container',
-                        flex: 2,
-                        cls: 'contact-name',
-                        disabled: true,
-                        html: '<b>Business Name</b>',
-                        id: 'nameTxt1',
-                        itemId: 'nameTxt1',
-                        padding: '15 0 0 0',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw',
-                        width: '65%',
-                        scrollable: false,
-                        layout: {
-                            type: 'hbox',
-                            align: 'end'
-                        }
                     }
                 ]
             },
@@ -67616,10 +67599,28 @@ Ext.define('Ext.picker.Picker', {
                 height: '250px',
                 id: 'nameTxt3',
                 itemId: 'nameTxt3',
-                margin: '5 5 5 5',
+                margin: '5 0 5 0',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0:background:#C0D9D9',
                 styleHtmlContent: true,
                 width: '95%'
+            },
+            {
+                xtype: 'container',
+                centered: false,
+                cls: 'contact-name',
+                disabled: true,
+                docked: 'top',
+                height: '4%',
+                html: '<b>Business Name</b>',
+                id: 'nameTxt1',
+                itemId: 'nameTxt1',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:5vw',
+                width: '65%',
+                scrollable: false,
+                layout: {
+                    type: 'vbox',
+                    align: 'start'
+                }
             },
             {
                 xtype: 'textfield',
