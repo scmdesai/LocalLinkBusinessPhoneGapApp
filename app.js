@@ -67586,7 +67586,7 @@ Ext.define('Ext.picker.Picker', {
                         html: '<b>Business Name</b>',
                         id: 'nameTxt1',
                         itemId: 'nameTxt1',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw',
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:4vw;text-align:center',
                         width: '65%'
                     }
                 ]
