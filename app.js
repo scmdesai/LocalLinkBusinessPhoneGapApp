@@ -67545,6 +67545,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
+                height: '10px',
                 ui: 'plain',
                 width: '100%',
                 scrollable: false,
