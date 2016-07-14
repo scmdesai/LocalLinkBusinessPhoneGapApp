@@ -67451,7 +67451,7 @@ Ext.define('Ext.picker.Picker', {
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
         Ext.getCmp('dealBackBtn').hide();
-        Ext.getCmp('share').hide();
+        Ext.get('share').hide();
         navigator.screenshot.save(function(error, res) {
             if (error) {
                 console.error(error);
@@ -67459,7 +67459,7 @@ Ext.define('Ext.picker.Picker', {
                 //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
                 window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
                 Ext.getCmp('dealBackBtn').show();
-                Ext.getCmp('share').show();
+                Ext.get('share').show();
             }
         }, 'jpg', 50, 'myScreenShot');
     },
@@ -67581,6 +67581,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'component',
                         cls: 'contact-name',
                         disabled: true,
+                        height: '100%',
                         html: '<b>Business Name</b>',
                         id: 'nameTxt1',
                         itemId: 'nameTxt1',
