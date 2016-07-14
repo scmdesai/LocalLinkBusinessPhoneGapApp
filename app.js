@@ -67452,7 +67452,6 @@ Ext.define('Ext.picker.Picker', {
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
         Ext.getCmp('dealBackBtn').hide();
         Ext.getCmp('share').hide();
-        Ext.get('nameTxt1').setHtml(record.get('businessName'));
         navigator.screenshot.save(function(error, res) {
             if (error) {
                 console.error(error);
@@ -67581,10 +67580,11 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'component',
                         cls: 'contact-name',
+                        disabled: true,
                         html: '<b>Business Name</b>',
                         id: 'nameTxt1',
                         itemId: 'nameTxt1',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw',
                         width: '65%'
                     }
                 ]
