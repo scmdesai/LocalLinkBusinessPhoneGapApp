@@ -67587,7 +67587,7 @@ Ext.define('Ext.picker.Picker', {
                         id: 'nameTxt1',
                         itemId: 'nameTxt1',
                         style: 'word-wrap:break-word;font-family:Arial;font-size:5vw;text-align:center',
-                        width: '65%'
+                        width: '100%'
                     }
                 ]
             },
