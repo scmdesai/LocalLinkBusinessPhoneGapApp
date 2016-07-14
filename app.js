@@ -67551,18 +67551,39 @@ Ext.define('Ext.picker.Picker', {
                 scrollable: false,
                 layout: {
                     type: 'hbox',
-                    align: 'stretchmax'
+                    align: 'center'
                 },
                 items: [
                     {
                         xtype: 'button',
                         cls: 'icon-back-button',
+                        docked: 'left',
                         height: '100%',
                         id: 'dealBackBtn',
                         itemId: 'dealBackBtn',
+                        margin: '10 0 0 0',
                         style: 'font-size:8vw',
                         styleHtmlContent: true,
                         ui: 'plain'
+                    },
+                    {
+                        xtype: 'container',
+                        centered: false,
+                        cls: 'contact-name',
+                        disabled: true,
+                        docked: 'top',
+                        height: '100%',
+                        html: '<b>Business Name</b>',
+                        id: 'nameTxt1',
+                        itemId: 'nameTxt1',
+                        margin: '10 10 10 10',
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw;text-align:center',
+                        width: '65%',
+                        scrollable: false,
+                        layout: {
+                            type: 'vbox',
+                            align: 'start'
+                        }
                     },
                     {
                         xtype: 'button',
@@ -67601,29 +67622,9 @@ Ext.define('Ext.picker.Picker', {
                 height: '250px',
                 id: 'nameTxt3',
                 itemId: 'nameTxt3',
-                margin: '25 0 0 10',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0:background:#C0D9D9',
                 styleHtmlContent: true,
                 width: '95%'
-            },
-            {
-                xtype: 'container',
-                centered: false,
-                cls: 'contact-name',
-                disabled: true,
-                docked: 'top',
-                height: '4%',
-                html: '<b>Business Name</b>',
-                id: 'nameTxt1',
-                itemId: 'nameTxt1',
-                margin: '2 0 0 0',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:5vw;text-align:center',
-                width: '65%',
-                scrollable: false,
-                layout: {
-                    type: 'vbox',
-                    align: 'start'
-                }
             },
             {
                 xtype: 'textfield',
