@@ -67450,18 +67450,18 @@ Ext.define('Ext.picker.Picker', {
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
-        Ext.getCmp('dealBackBtn').hide();
-        Ext.get('share').hide();
+        //Ext.getCmp('dealBackBtn').hide();
+        // Ext.get('share').hide();
         navigator.screenshot.save(function(error, res) {
             if (error) {
                 console.error(error);
             } else {
                 //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
                 window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
-                Ext.getCmp('dealBackBtn').show();
-                Ext.get('share').show();
             }
-        }, 'jpg', 50, 'myScreenShot');
+        }, // Ext.getCmp('dealBackBtn').show();
+        // Ext.get('share').show();
+        'jpg', 50, 'myScreenShot');
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
