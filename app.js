@@ -67450,8 +67450,8 @@ Ext.define('Ext.picker.Picker', {
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
-        Ext.getCmp('dealBackBtn').setHidden(true);
-        Ext.getCmp('share').setHidden(true);
+        Ext.getCmp('dealBackBtn').hide();
+        Ext.getCmp('share').hide();
         Ext.get('nameTxt1').setHtml(record.get('businessName'));
         navigator.screenshot.save(function(error, res) {
             if (error) {
@@ -67567,25 +67567,6 @@ Ext.define('Ext.picker.Picker', {
                         ui: 'plain'
                     },
                     {
-                        xtype: 'container',
-                        centered: false,
-                        cls: 'contact-name',
-                        disabled: true,
-                        docked: 'top',
-                        height: '100%',
-                        html: '<b>Business Name</b>',
-                        id: 'nameTxt1',
-                        itemId: 'nameTxt1',
-                        margin: '10 10 10 10',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw;',
-                        width: '65%',
-                        scrollable: false,
-                        layout: {
-                            type: 'vbox',
-                            align: 'start'
-                        }
-                    },
-                    {
                         xtype: 'button',
                         cls: 'icon-share',
                         docked: 'right',
@@ -67596,6 +67577,15 @@ Ext.define('Ext.picker.Picker', {
                         ui: 'plain',
                         iconAlign: 'center',
                         text: ''
+                    },
+                    {
+                        xtype: 'component',
+                        cls: 'contact-name',
+                        html: '<b>Business Name</b>',
+                        id: 'nameTxt1',
+                        itemId: 'nameTxt1',
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                        width: '65%'
                     }
                 ]
             },
