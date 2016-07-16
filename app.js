@@ -67711,7 +67711,7 @@ Ext.define('Ext.picker.Picker', {
         if (record.get('dealImageURL')) {
             this.down('#nameTxt3').hide();
         } else {
-            this.down('#nameTxt3').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;">Valid from' + record.get('dealStartDate') + ' through ' + record.get('dealEndDate') + '</div>');
+            this.down('#nameTxt3').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
             this.down('#dealimage').hide();
         }
     },
