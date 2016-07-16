@@ -69165,7 +69165,7 @@ Ext.define('Ext.picker.Picker', {
                 options: {
                     minDate: new Date(),
                     disabledDates: [
-                        '../10/2014'
+                        '../10/2016'
                     ]
                 },
                 usePicker: true,
