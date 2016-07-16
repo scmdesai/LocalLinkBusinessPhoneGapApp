@@ -69130,13 +69130,22 @@ Ext.define('Ext.picker.Picker', {
                 },
                 dateFormat: 'm/d/Y',
                 picker: {
+                    id: 'startDatepicker',
                     itemId: 'mydatepicker3',
                     style: '',
                     scrollable: false,
                     stretchX: false,
                     stretchY: false,
                     useTitles: true,
-                    yearFrom: 2016
+                    yearFrom: 2016,
+                    listeners: [
+                        {
+                            fn: function(element, eOpts) {
+                                component.setMinValue(new Date());
+                            },
+                            event: 'painted'
+                        }
+                    ]
                 }
             },
             {
@@ -69315,20 +69324,11 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onMydatepicker3Activate',
-                event: 'activate',
-                delegate: '#mydatepicker3'
-            },
-            {
                 fn: 'onDealEndDate3Change',
                 event: 'change',
                 delegate: '#DealEndDate3'
             }
         ]
-    },
-    onMydatepicker3Activate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        newActiveItem.setMinValue(new Date());
-        newActiveItem.setMinText("Invalid Date");
     },
     onDealEndDate3Change: function(datepickerfield, newDate, oldDate, eOpts) {
         var today = new Date();
