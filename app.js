@@ -69124,7 +69124,8 @@ Ext.define('Ext.picker.Picker', {
                 placeHolder: 'mm/dd/yyyy',
                 autoSelect: false,
                 options: {
-                    minDate: new Date()
+                    minValue: new Date(),
+                    minText: 'Invalid Date'
                 },
                 usePicker: true,
                 component: {
