@@ -69314,6 +69314,7 @@ Ext.define('Ext.picker.Picker', {
         var today = new Date();
         if (newDate < today) {
             datepickerfield.setCls('dateErrorCls');
+            Ext.Msg.alert('Date error', null, null, null);
         }
     },
     getValidationErrors: function() {
