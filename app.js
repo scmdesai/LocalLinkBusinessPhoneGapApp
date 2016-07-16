@@ -69137,15 +69137,13 @@ Ext.define('Ext.picker.Picker', {
                     stretchX: false,
                     stretchY: false,
                     useTitles: true,
+                    value: {
+                        year: 2016,
+                        month: 7,
+                        day: 16
+                    },
                     yearFrom: 2016,
-                    listeners: [
-                        {
-                            fn: function(element, eOpts) {
-                                component.setMinValue(new Date());
-                            },
-                            event: 'painted'
-                        }
-                    ]
+                    yearTo: 2017
                 }
             },
             {
