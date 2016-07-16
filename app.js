@@ -67528,7 +67528,7 @@ Ext.define('Ext.picker.Picker', {
         scrollable: true,
         tpl: [
             '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:250px;width:95%;border:2px dotted #c0c0c0;"/></div>',
+            '\t<div><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:250px;width:95%;border:2px dotted #c0c0c0;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
@@ -67598,6 +67598,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'nameTxt2',
                 itemId: 'nameTxt2',
                 left: '40%',
+                margin: '10 5 5 5',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
                 top: '52%',
                 width: '65%'
