@@ -69316,16 +69316,16 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onDealEndDate3Change',
-                event: 'change',
-                delegate: '#DealEndDate3'
+                fn: 'onMydatepicker3Pick',
+                event: 'pick',
+                delegate: '#mydatepicker3'
             }
         ]
     },
-    onDealEndDate3Change: function(datepickerfield, newDate, oldDate, eOpts) {
+    onMydatepicker3Pick: function(picker, value, slot, eOpts) {
         var today = new Date();
-        if (newDate < today) {
-            datepickerfield.setCls('dateErrorCls');
+        if (value < today) {
+            picker.setValue(today);
         }
     },
     getValidationErrors: function() {
