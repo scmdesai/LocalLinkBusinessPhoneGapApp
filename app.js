@@ -69163,19 +69163,23 @@ Ext.define('Ext.picker.Picker', {
                 },
                 placeHolder: 'mm/dd/yyyy',
                 options: {
-                    minDate: new Date(),
-                    disabledDates: [
-                        '../10/2016'
-                    ]
+                    minValue: new Date()
                 },
                 usePicker: true,
                 component: {
                     useMask: true
                 },
                 picker: {
+                    itemId: 'mydatepicker3',
                     useTitles: true,
                     yearFrom: 2016,
-                    yearTo: 2017
+                    yearTo: 2017,
+                    listeners: [
+                        {
+                            fn: function(component, eOpts) {},
+                            event: 'initialize'
+                        }
+                    ]
                 }
             },
             {
