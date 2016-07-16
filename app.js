@@ -67610,6 +67610,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
+                cls: 'contact-name',
                 disabled: true,
                 height: '250px',
                 id: 'nameTxt3',
