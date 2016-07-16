@@ -67521,7 +67521,6 @@ Ext.define('Ext.picker.Picker', {
         height: '100%',
         id: 'dealPicture',
         itemId: 'dealPicture',
-        margin: '',
         style: 'overflow: hidden;background:#fff',
         styleHtmlContent: true,
         width: '100%',
@@ -67529,7 +67528,7 @@ Ext.define('Ext.picker.Picker', {
         scrollable: true,
         tpl: [
             '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:250px;width:95%;border:none;"/></div>',
+            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:250px;width:95%;border:2px dotted #c0c0c0;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
@@ -67600,7 +67599,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'nameTxt2',
                 left: '40%',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                top: '51%',
+                top: '52%',
                 width: '65%'
             },
             {
@@ -67631,7 +67630,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 10 10',
                 style: 'font-size:2vw !important',
                 styleHtmlContent: true,
-                top: '55%',
+                top: '56%',
                 width: '90%',
                 clearIcon: false,
                 name: 'phoneNumber',
