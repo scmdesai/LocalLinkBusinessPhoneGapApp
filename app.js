@@ -68592,26 +68592,31 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('UpdateDealForm');
                             var itemName = form.getAt(8).getValue();
                             var endDate = form.getAt(7).getValue();
+                            var dealName = form.getAt(0).getValue();
                             var date = new Date();
-                            if (endDate >= date) {
-                                if (document.getElementById('chkbx').checked) {
-                                    form.submit({
-                                        url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
-                                        success: function(form, action) {
-                                            Ext.Msg.alert('Success', action.msg);
-                                            form.destroy();
-                                        },
-                                        failure: function(form, action) {
-                                            store.load();
-                                            Ext.Msg.alert('Failure', action.msg);
-                                            form.destroy();
-                                        }
-                                    });
+                            if (dealName) {
+                                if (endDate >= date) {
+                                    if (document.getElementById('chkbx').checked) {
+                                        form.submit({
+                                            url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                            success: function(form, action) {
+                                                Ext.Msg.alert('Success', action.msg);
+                                                form.destroy();
+                                            },
+                                            failure: function(form, action) {
+                                                store.load();
+                                                Ext.Msg.alert('Failure', action.msg);
+                                                form.destroy();
+                                            }
+                                        });
+                                    } else {
+                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    }
                                 } else {
-                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
                             }
                         },
                         docked: 'right',
@@ -68649,6 +68654,9 @@ Ext.define('Ext.picker.Picker', {
             this.down('#DealStatus').setValue(record.data.dealStatus);
             this.down('#DealDescription').setValue(record.data.dealDescription);
             this.down('#DealImageURL').setValue(record.data.dealImageURL);
+            //this.child('contactpic').setData(record.data);
+            this.down('#DealStartDate').setValue(record.data.dealStartDate);
+            this.down('#DealEndDate').setValue(record.data.dealEndDate);
         }
     }
 }, 0, [
@@ -68671,7 +68679,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'UpdateDealForm'
 ], 0));
-//this.child('contactpic').setData(record.data);
 
 /*
  * File: app/view/UploadDealNoImageForm.js
@@ -68925,29 +68932,33 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UploadDealNoImageForm');
                             var date = new Date();
-                            //var dealName = form.getAt(0).getValue();
+                            var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(5).getValue();
                             var endDate = form.getAt(6).getValue();
-                            if (endDate >= date) {
-                                if (document.getElementById('chkbx').checked) {
-                                    form.submit({
-                                        url: 'http://services.appsonmobile.com/createNewDeal',
-                                        success: function(form, action) {
-                                            Ext.getStore('MyDealsStore').load();
-                                            Ext.Msg.alert('Success!', action.msg);
-                                            form.destroy();
-                                        },
-                                        failure: function(form, action) {
-                                            store.load();
-                                            Ext.Msg.alert('Failure', action.msg);
-                                            form.destroy();
-                                        }
-                                    });
+                            if (dealName) {
+                                if (endDate >= date) {
+                                    if (document.getElementById('chkbx').checked) {
+                                        form.submit({
+                                            url: 'http://services.appsonmobile.com/createNewDeal',
+                                            success: function(form, action) {
+                                                Ext.getStore('MyDealsStore').load();
+                                                Ext.Msg.alert('Success!', action.msg);
+                                                form.destroy();
+                                            },
+                                            failure: function(form, action) {
+                                                store.load();
+                                                Ext.Msg.alert('Failure', action.msg);
+                                                form.destroy();
+                                            }
+                                        });
+                                    } else {
+                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    }
                                 } else {
-                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
                             }
                         },
                         docked: 'right',
@@ -69273,33 +69284,38 @@ Ext.define('Ext.picker.Picker', {
                             var startDate = form.getAt(5).getValue();
                             var endDate = form.getAt(6).getValue();
                             var file = form.getAt(8).getValue();
-                            if (file) {
-                                if (endDate >= date) {
-                                    if (document.getElementById('chkbx').checked) {
-                                        form.submit({
-                                            url: 'http://services.appsonmobile.com/uploadS3/',
-                                            xhr2: true,
-                                            cache: false,
-                                            waitMsg: 'Please Wait...',
-                                            success: function(form, action) {
-                                                Ext.Msg.alert('Success', action.msg);
-                                                Ext.getStore('MyDealsStore').load();
-                                                form.destroy();
-                                            },
-                                            failure: function(form, action) {
-                                                Ext.Msg.alert('Failure', action.msg);
-                                                Ext.getStore('MyDealsStore').load();
-                                                form.destroy();
-                                            }
-                                        });
+                            var dealName = form.getAt(0).getValue();
+                            if (dealName) {
+                                if (file) {
+                                    if (endDate >= date) {
+                                        if (document.getElementById('chkbx').checked) {
+                                            form.submit({
+                                                url: 'http://services.appsonmobile.com/uploadS3/',
+                                                xhr2: true,
+                                                cache: false,
+                                                waitMsg: 'Please Wait...',
+                                                success: function(form, action) {
+                                                    Ext.Msg.alert('Success', action.msg);
+                                                    Ext.getStore('MyDealsStore').load();
+                                                    form.destroy();
+                                                },
+                                                failure: function(form, action) {
+                                                    Ext.Msg.alert('Failure', action.msg);
+                                                    Ext.getStore('MyDealsStore').load();
+                                                    form.destroy();
+                                                }
+                                            });
+                                        } else {
+                                            Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                        }
                                     } else {
-                                        Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                        Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                                     }
                                 } else {
-                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                    Ext.Msg.alert('Error!', 'No Image to upload ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'No Image to upload ', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
                             }
                         },
                         docked: 'right',
