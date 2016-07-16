@@ -67632,7 +67632,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 10 10',
                 style: 'font-size:2vw !important',
                 styleHtmlContent: true,
-                top: '56%',
+                top: '57%',
                 width: '90%',
                 clearIcon: false,
                 name: 'phoneNumber',
@@ -67649,7 +67649,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 10 10',
                 style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
                 styleHtmlContent: true,
-                top: '65%',
+                top: '66%',
                 width: '90%',
                 clearIcon: false,
                 name: 'websiteDisplayName',
@@ -67684,7 +67684,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '0 0 0 5',
                 style: 'font-size:4.2vw;font-family:Arial;',
                 styleHtmlContent: true,
-                top: '75%',
+                top: '76%',
                 width: '95%',
                 clearIcon: false,
                 name: 'address',
@@ -67712,7 +67712,7 @@ Ext.define('Ext.picker.Picker', {
         if (record.get('dealImageURL')) {
             this.down('#nameTxt3').hide();
         } else {
-            this.down('#nameTxt3').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
+            this.down('#nameTxt3').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;color:#00529D;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:#00529D;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;color:#00529D;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
             this.down('#dealimage').hide();
         }
     },
