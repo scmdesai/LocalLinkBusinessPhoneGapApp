@@ -69162,10 +69162,20 @@ Ext.define('Ext.picker.Picker', {
                     year: new Date().getFullYear()
                 },
                 placeHolder: 'mm/dd/yyyy',
+                options: {
+                    minDate: new Date(),
+                    disabledDates: [
+                        '../10/2014'
+                    ]
+                },
                 usePicker: true,
+                component: {
+                    useMask: true
+                },
                 picker: {
                     useTitles: true,
-                    yearFrom: 2016
+                    yearFrom: 2016,
+                    yearTo: 2017
                 }
             },
             {
@@ -69314,7 +69324,6 @@ Ext.define('Ext.picker.Picker', {
         var today = new Date();
         if (newDate < today) {
             datepickerfield.setCls('dateErrorCls');
-            Ext.Msg.alert('Date error', null, null, null);
         }
     },
     getValidationErrors: function() {
