@@ -69123,10 +69123,6 @@ Ext.define('Ext.picker.Picker', {
                 },
                 placeHolder: 'mm/dd/yyyy',
                 autoSelect: false,
-                options: {
-                    minValue: new Date(),
-                    minText: 'Invalid Date'
-                },
                 usePicker: true,
                 component: {
                     useMask: true,
@@ -69319,11 +69315,20 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
+                fn: 'onMydatepicker3Activate',
+                event: 'activate',
+                delegate: '#mydatepicker3'
+            },
+            {
                 fn: 'onDealEndDate3Change',
                 event: 'change',
                 delegate: '#DealEndDate3'
             }
         ]
+    },
+    onMydatepicker3Activate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        newActiveItem.setMinValue(new Date());
+        newActiveItem.setMinText("Invalid Date");
     },
     onDealEndDate3Change: function(datepickerfield, newDate, oldDate, eOpts) {
         var today = new Date();
