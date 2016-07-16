@@ -69177,13 +69177,7 @@ Ext.define('Ext.picker.Picker', {
                     itemId: 'mydatepicker3',
                     useTitles: true,
                     yearFrom: 2016,
-                    yearTo: 2017,
-                    listeners: [
-                        {
-                            fn: function(component, eOpts) {},
-                            event: 'initialize'
-                        }
-                    ]
+                    yearTo: 2017
                 }
             },
             {
