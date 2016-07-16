@@ -182,7 +182,9 @@ $list-header-bg-color: $base-color;
 
 
 
-
+.dateErrorCls{
+	background:red;
+}
 
 
 

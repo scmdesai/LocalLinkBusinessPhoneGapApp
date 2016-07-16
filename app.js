@@ -69301,7 +69301,20 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onDealEndDate3Change',
+                event: 'change',
+                delegate: '#DealEndDate3'
+            }
         ]
+    },
+    onDealEndDate3Change: function(datepickerfield, newDate, oldDate, eOpts) {
+        var today = new Date();
+        if (newDate < today) {
+            datepickerfield.setCls('dateErrorCls');
+        }
     },
     getValidationErrors: function() {
         var errors = [];
