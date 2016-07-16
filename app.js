@@ -69281,7 +69281,7 @@ Ext.define('Ext.picker.Picker', {
                                             }
                                         });
                                     } else {
-                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                        Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
                                     }
                                 } else {
                                     Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
