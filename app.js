@@ -67614,6 +67614,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '250px',
                 id: 'nameTxt3',
                 itemId: 'nameTxt3',
+                margin: '5 5 5 5',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0:background:#FFF',
                 styleHtmlContent: true,
                 width: '95%'
