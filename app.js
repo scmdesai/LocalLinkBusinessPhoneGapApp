@@ -66364,7 +66364,7 @@ Ext.define('Ext.picker.Picker', {
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'rinarockers@gmail.com', 0, true, false, false);
+                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'owner@thehairsalon.com', 0, true, false, false);
                     //console.log(store.getData());
                     //store.loadRecord();
                     //var view = Ext.create('Contact.view.Info');
