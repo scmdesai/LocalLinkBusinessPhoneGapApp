@@ -67667,7 +67667,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                cls: 'icon-email1',
+                cls: 'icon-globe1',
                 docked: 'bottom',
                 height: '8vh',
                 id: 'website3',
@@ -67684,7 +67684,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                cls: 'icon-globe1',
+                cls: 'icon-email1',
                 docked: 'bottom',
                 height: '8vh',
                 hidden: false,
