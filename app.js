@@ -67624,7 +67624,7 @@ Ext.define('Ext.picker.Picker', {
                                             xtype: 'DealImage'
                                         });
                                     view.setRecord(record);
-                                    view.showBy(element);
+                                    Ext.Viewport.setActiveItem(view);
                                 });
                             }
                         },
