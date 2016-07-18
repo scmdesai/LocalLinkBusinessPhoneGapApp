@@ -66478,7 +66478,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'dataview',
                 docked: 'top',
-                height: '30%',
+                height: '45%',
                 id: 'mydataview',
                 itemId: 'mydataview',
                 margin: '5 5 5 5',
@@ -66490,6 +66490,7 @@ Ext.define('Ext.picker.Picker', {
                 itemTpl: [
                     '<img src = "{pictureURL}" style="height:30%;width:98%;margin-left:5px;margin-top:2px;"/>'
                 ],
+                maxItemCache: 1,
                 store: 'MyJsonPStore',
                 listeners: [
                     {
@@ -66512,20 +66513,44 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'textareafield',
+                cls: [
+                    'icon-location',
+                    'customfield1'
+                ],
+                disabled: false,
+                docked: 'bottom',
+                height: '12vh',
+                hidden: false,
+                html: '',
+                itemId: 'address',
+                maxHeight: '',
+                minHeight: '',
+                padding: '10 10 10 10',
+                style: '\'font-size:3.5vw;font-family: arial\'',
+                styleHtmlContent: true,
+                clearIcon: false,
+                name: 'address',
+                readOnly: true,
+                maxRows: 2
+            },
+            {
                 xtype: 'textfield',
                 cls: [
-                    'icon-phone',
+                    'icon-globe',
                     'customfield2'
                 ],
                 disabled: false,
+                docked: 'bottom',
                 height: '',
                 hidden: false,
-                itemId: 'phoneNumber',
-                margin: '',
-                minWidth: '',
+                itemId: 'websiteDisplayName',
                 padding: '10 10 10 10',
+                style: 'font-size:2px !important',
+                styleHtmlContent: true,
                 clearIcon: false,
-                name: 'phoneNumber',
+                name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
@@ -66535,11 +66560,13 @@ Ext.define('Ext.picker.Picker', {
                     'customfield2'
                 ],
                 disabled: false,
+                docked: 'bottom',
                 height: '',
                 hidden: false,
                 itemId: 'email',
                 minWidth: '',
                 padding: '10 10 10 10',
+                styleHtmlContent: true,
                 clearIcon: false,
                 label: '',
                 name: 'emailAddress',
@@ -66548,39 +66575,19 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: [
-                    'icon-globe',
+                    'icon-phone',
                     'customfield2'
                 ],
                 disabled: false,
-                height: '',
+                docked: 'bottom',
                 hidden: false,
-                itemId: 'websiteDisplayName',
+                itemId: 'phoneNumber',
+                minWidth: '',
                 padding: '10 10 10 10',
-                style: 'font-size:2px !important',
+                styleHtmlContent: true,
                 clearIcon: false,
-                name: 'websiteDisplayName',
-                placeHolder: 'Not Listed',
+                name: 'phoneNumber',
                 readOnly: true
-            },
-            {
-                xtype: 'textareafield',
-                cls: [
-                    'icon-location',
-                    'customfield1'
-                ],
-                disabled: false,
-                height: '12vh',
-                hidden: false,
-                html: '',
-                itemId: 'address',
-                maxHeight: '',
-                minHeight: '',
-                padding: '10 10 10 10',
-                style: '\'font-size:3.5vw;font-family: arial\'',
-                clearIcon: false,
-                name: 'address',
-                readOnly: true,
-                maxRows: 2
             },
             {
                 xtype: 'textfield',
