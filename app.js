@@ -69232,7 +69232,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'filefield',
                 cls: 'customfield',
                 itemId: 'myfilefield2',
-                margin: '5 5 5 5',
+                margin: '5 5 0 5',
                 styleHtmlContent: true,
                 width: '97%',
                 clearIcon: false,
@@ -69245,6 +69245,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
+                margin: '0 0 10 0',
                 layout: 'hbox',
                 items: [
                     {
@@ -69263,6 +69264,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'mycontainer5',
                         margin: '5 5 5 10',
                         padding: '5 30 5 0',
+                        style: 'vertical-align: middle!important;',
                         styleHtmlContent: true,
                         layout: 'hbox',
                         listeners: [
@@ -69284,6 +69286,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 height: 140,
                 margin: '0 10 50 10',
+                padding: '5 5 5 5',
                 styleHtmlContent: true,
                 layout: 'fit',
                 scrollable: false,
