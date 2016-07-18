@@ -66559,6 +66559,7 @@ Ext.define('Ext.picker.Picker', {
                 style: 'font-size:2px !important',
                 clearIcon: false,
                 name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
@@ -67612,7 +67613,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'dealimage',
                 left: '2%',
                 padding: '10 10 10 10',
-                style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:#FFF',
+                style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:none',
                 top: '1%',
                 width: '95%',
                 listeners: [
@@ -67679,6 +67680,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '90%',
                 clearIcon: false,
                 name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
