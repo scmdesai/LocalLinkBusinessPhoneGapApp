@@ -67519,7 +67519,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.DealPicture', Ext.Panel, {
     config: {
         fullscreen: true,
-        height: '100%',
         id: 'dealPicture',
         itemId: 'dealPicture',
         style: 'overflow: hidden;background:#fff',
@@ -67529,7 +67528,7 @@ Ext.define('Ext.picker.Picker', {
         scrollable: true,
         tpl: [
             '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:0px 5px 0px 5px;height:250px;width:95%;border:none;"/></div>',
+            '\t<div><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:250px;width:100%;border:none;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
@@ -67612,7 +67611,6 @@ Ext.define('Ext.picker.Picker', {
                 id: 'dealimage',
                 itemId: 'dealimage',
                 left: '2%',
-                padding: '10 10 10 10',
                 style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:none',
                 top: '1%',
                 width: '95%',
