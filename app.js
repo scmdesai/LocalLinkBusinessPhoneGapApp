@@ -66820,6 +66820,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ListOfDeals', Ext.dataview.List, {
     config: {
+        cls: 'customlist',
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
@@ -66835,10 +66836,6 @@ Ext.define('Ext.picker.Picker', {
         preventSelectionOnDisclose: false,
         refreshHeightOnUpdate: false,
         useSimpleItems: false,
-        cls: [
-            'customlist',
-            'customfield2'
-        ],
         itemTpl: [
             '',
             '',
@@ -69061,6 +69058,7 @@ Ext.define('Ext.picker.Picker', {
         html: '',
         id: 'formpanel3',
         itemId: 'formpanel',
+        padding: '0 0 35 0',
         style: 'background:white',
         ui: 'light',
         autoDestroy: false,
@@ -69251,7 +69249,7 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'container',
-                        docked: 'left',
+                        docked: 'top',
                         html: '<input type="checkbox" name="chkbx" id="chkbx">',
                         left: '40%',
                         margin: '5 5 5 15',
@@ -69285,7 +69283,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 height: 140,
-                margin: '10 10 10 10 10',
+                margin: '0 10 50 10',
                 styleHtmlContent: true,
                 layout: 'fit',
                 scrollable: false,

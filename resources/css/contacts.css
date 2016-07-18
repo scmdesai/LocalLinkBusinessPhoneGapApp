@@ -52,7 +52,7 @@ $list-header-bg-color: $base-color;
 
 }
 .expiringDate {
-	color:#ff0000;
+	color:grey;
 	font-size:2.5vw;
 	font-style:italics;
 	font-weight:normal;
