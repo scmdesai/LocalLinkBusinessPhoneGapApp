@@ -67610,9 +67610,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '250px',
                 id: 'dealimage',
                 itemId: 'dealimage',
-                left: '2%',
                 style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:none',
-                top: '1%',
                 width: '95%',
                 listeners: [
                     {
