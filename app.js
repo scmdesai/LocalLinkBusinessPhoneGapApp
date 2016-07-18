@@ -67680,6 +67680,7 @@ Ext.define('Ext.picker.Picker', {
                 width: '90%',
                 clearIcon: false,
                 name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
