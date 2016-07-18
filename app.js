@@ -66960,7 +66960,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'dataview',
                 docked: 'top',
-                height: '30%',
+                height: '40%',
                 itemId: 'mydataview1',
                 margin: '5 5 5 5',
                 padding: '',
@@ -67028,7 +67028,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
-                height: '15%',
                 id: 'businessName',
                 itemId: 'businessName',
                 margin: '30 15 2 15',
