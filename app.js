@@ -66488,7 +66488,7 @@ Ext.define('Ext.picker.Picker', {
                 scrollable: false,
                 deferEmptyText: false,
                 itemTpl: [
-                    '<img src = "{pictureURL}" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>'
+                    '<img src = "{pictureURL}" style="height:30%;width:98%;margin-left:5px;margin-top:2px;"/>'
                 ],
                 store: 'MyJsonPStore',
                 listeners: [
