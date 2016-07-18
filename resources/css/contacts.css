@@ -159,7 +159,22 @@ $list-header-bg-color: $base-color;
 
 }
 
+.customfield2 {
+	height:12vh;
+	font-weight:normal !important;
+	text-align:center !important;
+	vertical-align:middle !important;
+	font-family:Arial !important;
+	font-size:4vw;
+	border-bottom:2px groove #C0C0C0;
 
+
+
+
+
+
+
+}
 
 .searchfield {
 	border-bottom:2px groove #C0C0C0;
@@ -183,7 +198,7 @@ $list-header-bg-color: $base-color;
 
 
 .dateErrorCls{
-	color:red !important;
+	background:red !important;
 }
 
 
