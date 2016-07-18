@@ -69558,6 +69558,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             Ext.Viewport.getComponent('DealImage').destroy();
+                            Ext.Viewport.getActiveItem().destroy();
                         },
                         cls: 'icon-close',
                         docked: 'right',
