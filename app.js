@@ -69531,7 +69531,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
     config: {
-        height: 'background:#FFF;border:1px solid #00529D',
+        height: '100%',
         id: 'DealImage',
         itemId: 'DealImage',
         style: 'background:#FFF;border:1px solid #00529D',
