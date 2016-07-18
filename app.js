@@ -67526,7 +67526,7 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         tpl: [
             '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:10px 10px 10px 10px;height:250px;width:95%;border:none;"/></div>',
+            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:250px;width:95%;border:none;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
