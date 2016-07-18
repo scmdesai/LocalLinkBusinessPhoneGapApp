@@ -67521,6 +67521,7 @@ Ext.define('Ext.picker.Picker', {
         fullscreen: true,
         id: 'dealPicture',
         itemId: 'dealPicture',
+        padding: '5 5 5 5',
         style: 'background:#fff',
         width: '100%',
         autoDestroy: false,
@@ -69531,7 +69532,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
     config: {
-        height: '100%',
+        height: '80%',
         id: 'DealImage',
         itemId: 'DealImage',
         style: 'background:#FFF;border:1px solid #00529D',
