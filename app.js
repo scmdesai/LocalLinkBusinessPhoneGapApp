@@ -67526,7 +67526,7 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         tpl: [
             '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:10px 10px 10px 10px;height:250px;width:100%;border:none;"/></div>',
+            '\t<div><img src="{dealImageURL}" style="margin:10px 10px 10px 10px;height:250px;width:95%;border:none;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
@@ -69558,7 +69558,6 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             Ext.Viewport.getComponent('DealImage').destroy();
-                            Ext.Viewport.getActiveItem().destroy();
                         },
                         cls: 'icon-close',
                         docked: 'right',
@@ -69569,18 +69568,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
-        ],
-        listeners: [
-            {
-                fn: 'onPanelHiddenChange',
-                event: 'hiddenchange'
-            }
         ]
-    },
-    onPanelHiddenChange: function(component, value, oldValue, eOpts) {
-        if (component.isHidden() === true && oldValue !== null) {
-            component.destroy();
-        }
     }
 }, 0, [
     "DealImage"
