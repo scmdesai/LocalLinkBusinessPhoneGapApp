@@ -67667,7 +67667,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                cls: 'icon-globe1',
+                cls: 'icon-email1',
                 docked: 'bottom',
                 height: '8vh',
                 id: 'website3',
@@ -67680,6 +67680,24 @@ Ext.define('Ext.picker.Picker', {
                 width: '90%',
                 clearIcon: false,
                 name: 'websiteDisplayName',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-globe1',
+                docked: 'bottom',
+                height: '8vh',
+                hidden: false,
+                id: 'email1',
+                itemId: 'email1',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
+                styleHtmlContent: true,
+                top: '76%',
+                width: '90%',
+                clearIcon: false,
+                name: 'emailAddress',
                 placeHolder: 'Not Listed',
                 readOnly: true
             },
@@ -67712,7 +67730,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '0 0 0 5',
                 style: 'font-size:4.2vw;font-family:Arial;',
                 styleHtmlContent: true,
-                top: '76%',
+                top: '86%',
                 width: '95%',
                 clearIcon: false,
                 name: 'address',
@@ -67755,6 +67773,7 @@ Ext.define('Ext.picker.Picker', {
             Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
             Ext.getCmp('website2').setValue(rec.get('website'));
             Ext.getCmp('address1').setValue(rec.get('address'));
+            Ext.getCmp('email1').setValue(rec.get('emailAddress'));
         }
     }
 }, 0, [
