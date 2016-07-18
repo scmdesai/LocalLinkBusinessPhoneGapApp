@@ -67526,7 +67526,7 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         tpl: [
             '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:250px;width:100%;border:none;"/></div>',
+            '\t<div><img src="{dealImageURL}" style="margin:10px 10px 10px 10px;height:250px;width:100%;border:none;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
@@ -67624,7 +67624,7 @@ Ext.define('Ext.picker.Picker', {
                                             xtype: 'DealImage'
                                         });
                                     view.setRecord(record);
-                                    view.showBy(Ext.get('dealPicture'));
+                                    view.showBy(element);
                                 });
                             }
                         },
