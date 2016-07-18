@@ -67528,7 +67528,7 @@ Ext.define('Ext.picker.Picker', {
         scrollable: true,
         tpl: [
             '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:250px;width:95%;border:2px dotted #c0c0c0;"/></div>',
+            '\t<div><img src="{dealImageURL}" style="margin:0px 5px 0px 5px;height:250px;width:95%;border:none;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
@@ -67605,15 +67605,41 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
+                cls: 'contact-name',
+                docked: 'top',
+                height: '250px',
                 id: 'dealimage',
                 itemId: 'dealimage',
-                top: '40%'
+                left: '2%',
+                padding: '10 10 10 10',
+                style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:#FFF',
+                top: '1%',
+                width: '95%',
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var record = Ext.getStore('LocalStore').getAt(0);
+                            if (record.get('dealImageURL')) {
+                                element.addListener('tap', function() {
+                                    console.log('DealImage Tap');
+                                    var view = Ext.Viewport.add({
+                                            xtype: 'DealImage'
+                                        });
+                                    view.setRecord(record);
+                                    view.showBy(Ext.get('dealPicture'));
+                                });
+                            }
+                        },
+                        event: 'painted'
+                    }
+                ]
             },
             {
                 xtype: 'container',
                 cls: 'contact-name',
                 disabled: true,
                 height: '250px',
+                hidden: true,
                 id: 'nameTxt3',
                 itemId: 'nameTxt3',
                 margin: '5 5 5 5',
@@ -67709,18 +67735,12 @@ Ext.define('Ext.picker.Picker', {
     },
     onDealPictureShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
-        if (record.get('dealImageURL')) {
-            this.down('#nameTxt3').hide();
-        } else {
-            this.down('#nameTxt3').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;color:#00529D;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:#00529D;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;color:#00529D;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
-            this.down('#dealimage').hide();
+        if (record.get('dealImageURL')) {} else //this.down('#nameTxt3').hide();
+        {
+            this.down('#dealimage').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;color:#00529D;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:#00529D;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;color:#00529D;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
         }
-        var view = Ext.Viewport.add({
-                xtype: 'DealImage'
-            });
-        view.setRecord(record);
-        Ext.Viewport.setActiveItem(view);
     },
+    // this.down('#dealimage').hide();
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
@@ -69512,6 +69532,11 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
     config: {
+        height: 'background:#FFF;border:1px solid #00529D',
+        id: 'DealImage',
+        itemId: 'DealImage',
+        style: 'background:#FFF;border:1px solid #00529D',
+        width: '95%',
         scrollable: true,
         tpl: [
             '<tpl if="dealImageURL">',
@@ -69533,9 +69558,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         handler: function(button, e) {
-                            //var view = this.up('DealImage');
-                            //view.destroy();
-                            Ext.Viewport.getActiveItem().destroy();
+                            Ext.Viewport.getComponent('DealImage').destroy();
                         },
                         cls: 'icon-close',
                         docked: 'right',
