@@ -69565,7 +69565,7 @@ Ext.define('Ext.picker.Picker', {
         width: '95%',
         scrollable: true,
         tpl: [
-            '',
+            '<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">',
             '\t',
             '  <div id="wrapper">',
             '\t<div id="scroller">',
