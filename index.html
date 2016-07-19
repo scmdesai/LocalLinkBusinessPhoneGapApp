@@ -11,7 +11,7 @@
         * It is recommended to keep this as minimal as possible to provide instant feedback
         * while other resources are still being loaded for the first time
         */
-        html, body {
+       /* html, body {
             height: 100%;
             <!--background-color: #00529D;-->
 			background-color: #FFFFFF;
@@ -19,8 +19,49 @@
 			
 			
 			
-        }
+        }*/
+		* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 
+html {
+	-ms-touch-action: none;
+}
+#wrapper {
+	position: absolute;
+	z-index: 1;
+	top: 50px;
+	bottom: 50px;
+	left: 50px;
+	right: 50px;
+	background: #ccc;
+	overflow: hidden;
+}
+
+#scroller {
+	position: absolute;
+	z-index: 1;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	width: 100%;
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-ms-text-size-adjust: none;
+	-o-text-size-adjust: none;
+	text-size-adjust: none;
+}
+</style>
         #appLoadingIndicator {
             position: absolute;
             top: 50%;
@@ -94,12 +135,16 @@ break;case "android":f=/(Android|Silk)/.test(e);break;case "blackberry":f=/(Blac
 if(g){if(!k(g)||k(j))continue;b.theme||(b.theme={});b.theme.name||(b.theme.name=n||"Default")}document.write('\x3clink rel\x3d"stylesheet" href\x3d"'+c+'"\x3e')}a=0;for(h=m.length;a<h;a++)c=m[a],"string"!=typeof c&&(g=c.platform,j=c.exclude,c=c.path),(!g||k(g)&&!k(j))&&document.write('\x3cscript src\x3d"'+c+'"\x3e\x3c/script\x3e')}})(this);
 Ext.blink({id:"bfd9c2ff-6347-4718-8919-f7a4bd0f7cde",js:[{path:"phonegap.js",remote:!0},{path:"app.js",update:"delta"}],css:[{path:"resources/css/contacts.css"},{path:"resources/css/sencha-touch-7a7e94c9-893d-4b38-b73b-2b335ebd90b1.css",update:"delta",theme:"Default",platform:["phone","tablet","desktop"]}]});</script>
 </head>
-<body>
+<body onload="loaded()">
     <!-- <div id="appLoadingIndicator1"><img src="Default-568h@2x.png"/></div>-->
+	<div id="wrapper">
+	<div id="scroller">
     <div id="appLoadingIndicator">
         <div></div>
         <div></div>
         <div></div>
     </div>
+	</div>
+	</div>
 </body>
 </html>
