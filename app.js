@@ -69598,7 +69598,22 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onDealImageShow',
+                event: 'show'
+            }
         ]
+    },
+    onDealImageShow: function(component, eOpts) {
+        var myScroll = new IScroll('#wrapper', {
+                zoom: true,
+                scrollX: true,
+                scrollY: true,
+                mouseWheel: true,
+                wheelAction: 'zoom'
+            });
     }
 }, 0, [
     "DealImage"
