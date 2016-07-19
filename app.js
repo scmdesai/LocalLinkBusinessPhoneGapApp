@@ -69567,7 +69567,7 @@ Ext.define('Ext.picker.Picker', {
         tpl: [
             '<head>',
             '    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>',
-            '</head>',
+            '',
             '<script type="text/javascript" src="/js/iscroll-zoom.js"></script>',
             '',
             '<script type="text/javascript">',
