@@ -49,17 +49,6 @@ var app = {
     onDeviceReady: function() {
 		console.log("Device is ready");
 		
-		var theScroll;
-		function scroll() {
-			theScroll = new iScroll('#wrapper',{
-		zoom: true,
-		scrollX: true,
-		scrollY: true,
-		mouseWheel: true,
-		wheelAction: 'zoom'
-	});
-		}
-		document.addEventListener('DOMContentLoaded', scroll, false);
 		
 		//this.receivedEvent('deviceready');
 		
