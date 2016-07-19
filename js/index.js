@@ -49,6 +49,12 @@ var app = {
     onDeviceReady: function() {
 		console.log("Device is ready");
 		
+		var theScroll;
+		function scroll() {
+			theScroll = new iScroll('wrapper');
+		}
+		document.addEventListener('DOMContentLoaded', scroll, false);
+		
 		//this.receivedEvent('deviceready');
 		
 		//StatusBar Overlay set to false
