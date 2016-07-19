@@ -51,7 +51,7 @@ var app = {
 		
 		var theScroll;
 		function scroll() {
-			theScroll = new iScroll('wrapper',{
+			theScroll = new iScroll('#wrapper',{
 		zoom: true,
 		scrollX: true,
 		scrollY: true,
