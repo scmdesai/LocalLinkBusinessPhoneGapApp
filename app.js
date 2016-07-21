@@ -69737,7 +69737,9 @@ Ext.application({
             function onBackKeyDown(e) {
                 console.log('Back Button pressed');
                 console.log(Ext.Viewport.getActiveItem().xtype);
+                e.preventDefault();
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
+                    e.preventDefault();
                     if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
