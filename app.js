@@ -69737,14 +69737,12 @@ Ext.application({
             function onBackKeyDown(e) {
                 console.log('Back Button pressed');
                 console.log(Ext.Viewport.getActiveItem().xtype);
-                e.preventDefault();
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
-                    e.preventDefault();
                     if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
-                    } else // navigator.app.exitApp();
-                    {
+                        navigator.app.exitApp();
+                    } else {
                         console.log('First time Back Button pressed');
                         exitApp = true;
                         Ext.Viewport.add(BackButtonPanel);
@@ -69754,10 +69752,10 @@ Ext.application({
                         }, 3000);
                     }
                 } else if (Ext.Viewport.getActiveItem().xtype === 'dealPicture') {
-                    console.log('DealPicture');
                     Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                 }
+                return false;
             }
         }
         document.addEventListener("resume", Ext.bind(onResume, this), false);
