@@ -69750,12 +69750,12 @@ Ext.application({
                         setTimeout(function() {
                             BackButtonPanel.hide();
                         }, 3000);
+                        return false;
                     }
                 } else if (Ext.Viewport.getActiveItem().xtype === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                 }
-                return false;
             }
         }
         document.addEventListener("resume", Ext.bind(onResume, this), false);
