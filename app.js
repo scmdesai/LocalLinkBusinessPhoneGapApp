@@ -69750,7 +69750,6 @@ Ext.application({
                         setTimeout(function() {
                             BackButtonPanel.hide();
                         }, 3000);
-                        return false;
                     }
                 } else if (Ext.Viewport.getActiveItem().xtype === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
