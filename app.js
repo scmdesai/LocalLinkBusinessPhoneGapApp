@@ -67457,16 +67457,32 @@ Ext.define('Ext.picker.Picker', {
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
         Ext.getCmp('dealBackBtn').hide();
         Ext.get('share').hide();
-        navigator.screenshot.save(function(error, res) {
-            if (error) {
-                console.error(error);
-            } else {
-                //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
-                window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
-                Ext.getCmp('dealBackBtn').show();
-                Ext.get('share').show();
-            }
-        }, 'jpg', 50, 'myScreenShot');
+        if (Ext.os.is('Android')) {
+            navigator.screenshot.URI(function(error, res) {
+                if (error) {
+                    console.error(error);
+                } else {
+                    //html = '<img style="width:100%;" src="'+res.URI+'">';
+                    //document.body.innerHTML = html;
+                    window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.URI, null);
+                }
+            }, 50);
+            Ext.get('share').show();
+            var view = Ext.Viewport.getComponent('dealPicture');
+            view.setRecord(record);
+            Ext.Viewport.setActiveItem(view);
+        } else {
+            navigator.screenshot.save(function(error, res) {
+                if (error) {
+                    console.error(error);
+                } else {
+                    //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
+                    window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
+                    Ext.getCmp('dealBackBtn').show();
+                    Ext.get('share').show();
+                }
+            }, 'jpg', 50, 'myScreenShot');
+        }
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
