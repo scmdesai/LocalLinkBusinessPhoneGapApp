@@ -69735,12 +69735,15 @@ Ext.application({
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
+                console.log('Back Button pressed');
+                console.log(Ext.Viewport.getActiveItem().xtype);
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
                     if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
                         navigator.app.exitApp();
                     } else {
+                        console.log('First time Back Button pressed');
                         exitApp = true;
                         Ext.Viewport.add(BackButtonPanel);
                         BackButtonPanel.show();
