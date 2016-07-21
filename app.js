@@ -67562,7 +67562,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
-                height: '10px',
+                height: '8vh',
                 ui: 'plain',
                 width: '100%',
                 scrollable: false,
@@ -67609,19 +67609,6 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'container',
-                cls: 'contact-name',
-                disabled: true,
-                html: '<p style="font-size:3vw;text-align:center">       Published through Local Buzz',
-                id: 'nameTxt2',
-                itemId: 'nameTxt2',
-                left: '40%',
-                margin: '10 5 5 5',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                top: '52%',
-                width: '65%'
-            },
-            {
                 xtype: 'component',
                 cls: 'contact-name',
                 disabled: true,
@@ -67650,6 +67637,19 @@ Ext.define('Ext.picker.Picker', {
                         event: 'painted'
                     }
                 ]
+            },
+            {
+                xtype: 'container',
+                cls: 'contact-name',
+                disabled: true,
+                html: '<p style="font-size:3vw;text-align:center">       Published through Local Buzz',
+                id: 'nameTxt2',
+                itemId: 'nameTxt2',
+                left: '40%',
+                margin: '10 5 5 5',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '47%',
+                width: '65%'
             },
             {
                 xtype: 'container',
@@ -69599,6 +69599,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
+                height: '8vh',
                 items: [
                     {
                         xtype: 'button',
@@ -69735,6 +69736,7 @@ Ext.application({
             // add back button listener
             function onBackKeyDown(e) {
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
+                    console.log('Panel');
                     if (exitApp) {
                         clearInterval(intval);
                         navigator.app.exitApp();
