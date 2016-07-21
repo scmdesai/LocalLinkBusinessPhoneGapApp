@@ -69741,8 +69741,8 @@ Ext.application({
                     if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
-                        navigator.app.exitApp();
-                    } else {
+                    } else // navigator.app.exitApp();
+                    {
                         console.log('First time Back Button pressed');
                         exitApp = true;
                         Ext.Viewport.add(BackButtonPanel);
@@ -69751,7 +69751,7 @@ Ext.application({
                             BackButtonPanel.hide();
                         }, 3000);
                     }
-                } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
+                } else if (Ext.Viewport.getActiveItem().xtype === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                 }
