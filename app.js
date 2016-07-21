@@ -69754,6 +69754,7 @@ Ext.application({
                         }, 3000);
                     }
                 } else if (Ext.Viewport.getActiveItem().xtype === 'dealPicture') {
+                    console.log('DealPicture');
                     Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                 }
