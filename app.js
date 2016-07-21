@@ -69737,6 +69737,7 @@ Ext.application({
             function onBackKeyDown(e) {
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
                     if (exitApp) {
+                        console.log('Exiting app');
                         clearInterval(intval);
                         navigator.app.exitApp();
                     } else {
@@ -69745,7 +69746,7 @@ Ext.application({
                         BackButtonPanel.show();
                         setTimeout(function() {
                             BackButtonPanel.hide();
-                        }, 30000);
+                        }, 3000);
                     }
                 } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
