@@ -67648,7 +67648,7 @@ Ext.define('Ext.picker.Picker', {
                 left: '40%',
                 margin: '10 5 5 5',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                top: '47%',
+                top: '52%',
                 width: '65%'
             },
             {
@@ -69736,7 +69736,7 @@ Ext.application({
             // add back button listener
             function onBackKeyDown(e) {
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
-                    console.log('Panel');
+                    e.preventDefault();
                     if (exitApp) {
                         clearInterval(intval);
                         navigator.app.exitApp();
