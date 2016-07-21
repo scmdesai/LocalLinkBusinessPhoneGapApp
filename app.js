@@ -69731,7 +69731,7 @@ Ext.application({
             BackButtonPanel.setCls('backButtonPanel');
             var intval = setInterval(function() {
                     exitApp = false;
-                }, 30000);
+                }, 3000);
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
