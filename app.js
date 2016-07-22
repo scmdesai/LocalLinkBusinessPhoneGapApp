@@ -69755,13 +69755,17 @@ Ext.application({
 		                setTimeout(function () {BackButtonPanel.hide();}, 3000);
 
 		            }*/
-                    Ext.Msg.confirm("Exit", "¿Seguro que quieres cerrar el app?", function(answer) {
-                        if (answer == 'yes') {
+                    navigator.notification.confirm('Are you certain you want to close the app?', // message
+                    function(index) {
+                        if (index == 1) {
+                            //look at the docs for this part
                             navigator.app.exitApp();
-                        } else {}
-                    });
+                        }
+                    }, // callback to invoke with index of button pressed
+                    'Exit', // title
+                    'Yes,No');
                 }
-                //do nothing
+                // buttonLabels
                 else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
