@@ -69735,55 +69735,27 @@ Ext.application({
 		    var intval = setInterval(function () { exitApp = false; }, 3000);*/
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), true);
             // add back button listener
-            function onBackKeyDown(e) {}
+            function onBackKeyDown(e) {
+                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
+                    if (exitApp) {
+                        console.log('Exiting app');
+                        clearInterval(intval);
+                        navigator.app.exitApp();
+                    } else {
+                        console.log('First time Back Button pressed');
+                        exitApp = true;
+                        Ext.Viewport.add(BackButtonPanel);
+                        BackButtonPanel.show();
+                        setTimeout(function() {
+                            BackButtonPanel.hide();
+                        }, 3000);
+                    }
+                } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
+                    Ext.Viewport.getActiveItem().destroy();
+                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
+                }
+            }
         }
-        /*if(Ext.Viewport.getActiveItem().xtype==='panel'){
-
-
-		           /* if (exitApp) {
-
-						console.log('Exiting app');
-
-		                clearInterval(intval);
-
-		                navigator.app.exitApp();
-		            }
-		            else {
-						console.log('First time Back Button pressed');
-		                exitApp = true;
-		                Ext.Viewport.add(BackButtonPanel);
-		                BackButtonPanel.show();
-
-		                setTimeout(function () {BackButtonPanel.hide();}, 3000);
-
-		            }
-
-
-
-					 navigator.notification.confirm(
-		            'Are you certain you want to close the app?',  // message
-		            function( index ){
-		                if( index == 1 ){//look at the docs for this part
-		                    navigator.app.exitApp();
-		                }
-		            },              // callback to invoke with index of button pressed
-		            'Exit',            // title
-		            'Yes,No'          // buttonLabels
-		        );
-				}
-
-
-		        else if(Ext.Viewport.getActiveItem().getItemId()==='dealPicture'){
-
-
-		            Ext.Viewport.getActiveItem().destroy();
-
-		                Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
-
-
-				}
-
-		*/
         document.addEventListener("resume", Ext.bind(onResume, this), false);
         function onResume(e) {}
         //Ext.Msg.alert('Resume',null,null,null);
