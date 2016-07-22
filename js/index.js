@@ -70,13 +70,18 @@ var app = {
     BackButtonPanel.setHeight('50px');
     BackButtonPanel.setWidth('100%');
     BackButtonPanel.setCls('backButtonPanel');
-    var intval = setInterval(function () { exitApp = false; }, 500000);
+    var intval = setInterval(function () { exitApp = false; }, 3000);
 		
 		document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
 		
 		function onBackKeyDown(e) {
 		console.log('Back Button pressed Index.js');
-		return false;
+		Ext.Viewport.add(BackButtonPanel);
+                BackButtonPanel.show();
+
+                setTimeout(function () {BackButtonPanel.hide();}, 3000);
+		
+		
 		 if (exitApp) {
 
 				console.log('Exiting app');
