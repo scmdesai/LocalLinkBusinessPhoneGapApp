@@ -72,34 +72,14 @@ var app = {
     BackButtonPanel.setCls('backButtonPanel');
     var intval = setInterval(function () { exitApp = false; }, 3000);
 		
-		document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+		document.addEventListener("backbutton", onBackKeyDown, false);
 		
-		function onBackKeyDown(e) {
+		
+		}
+		
+		function onBackKeyDown() {
 		console.log('Back Button pressed Index.js');
-		Ext.Viewport.add(BackButtonPanel);
-                BackButtonPanel.show();
-
-                setTimeout(function () {BackButtonPanel.hide();}, 3000);
 		
-		
-		 if (exitApp) {
-
-				console.log('Exiting app');
-
-                clearInterval(intval);
-
-                navigator.app.exitApp();
-            }
-            else {
-				console.log('First time Back Button pressed');
-                exitApp = true;
-                Ext.Viewport.add(BackButtonPanel);
-                BackButtonPanel.show();
-
-                setTimeout(function () {BackButtonPanel.hide();}, 500000);
-				
-		}
-		}
 		}
 		
 		//this.receivedEvent('deviceready');
