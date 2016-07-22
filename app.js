@@ -4,6 +4,7 @@ if (!Contact.model) Contact.model = {};
 if (!Contact.store) Contact.store = {};
 if (!Contact.view) Contact.view = {};
 var Ext = Ext || {};
+if (!Ext.Picker) Ext.Picker = {};
 if (!Ext.app) Ext.app = {};
 if (!Ext.behavior) Ext.behavior = {};
 if (!Ext.data) Ext.data = {};
@@ -18,7 +19,6 @@ if (!Ext.dataview.element) Ext.dataview.element = {};
 if (!Ext.device) Ext.device = {};
 if (!Ext.device.camera) Ext.device.camera = {};
 if (!Ext.device.communicator) Ext.device.communicator = {};
-if (!Ext.device.device) Ext.device.device = {};
 if (!Ext.direct) Ext.direct = {};
 if (!Ext.dom) Ext.dom = {};
 if (!Ext.env) Ext.env = {};
@@ -37,6 +37,7 @@ if (!Ext.layout) Ext.layout = {};
 if (!Ext.layout.wrapper) Ext.layout.wrapper = {};
 if (!Ext.lib) Ext.lib = {};
 if (!Ext.mixin) Ext.mixin = {};
+if (!Ext.picker) Ext.picker = {};
 if (!Ext.proxy) Ext.proxy = {};
 if (!Ext.scroll) Ext.scroll = {};
 if (!Ext.scroll.indicator) Ext.scroll.indicator = {};
@@ -46,7 +47,6 @@ if (!Ext.util.paintmonitor) Ext.util.paintmonitor = {};
 if (!Ext.util.sizemonitor) Ext.util.sizemonitor = {};
 if (!Ext.util.translatable) Ext.util.translatable = {};
 if (!Ext.viewport) Ext.viewport = {};
-var dealPicture = dealPicture || {};
 /* 
  * Helper code for compiler optimization
  */
@@ -30580,6 +30580,103 @@ this);
 ], 0));
 
 /**
+ * {@link Ext.ActionSheet ActionSheets} are used to display a list of {@link Ext.Button buttons} in a popup dialog.
+ *
+ * The key difference between ActionSheet and {@link Ext.Sheet} is that ActionSheets are docked at the bottom of the
+ * screen, and the {@link #defaultType} is set to {@link Ext.Button button}.
+ *
+ * ## Example
+ *
+ *     @example preview miniphone
+ *     var actionSheet = Ext.create('Ext.ActionSheet', {
+ *         items: [
+ *             {
+ *                 text: 'Delete draft',
+ *                 ui  : 'decline'
+ *             },
+ *             {
+ *                 text: 'Save draft'
+ *             },
+ *             {
+ *                 text: 'Cancel',
+ *                 ui  : 'confirm'
+ *             }
+ *         ]
+ *     });
+ *
+ *     Ext.Viewport.add(actionSheet);
+ *     actionSheet.show();
+ *
+ * As you can see from the code above, you no longer have to specify a `xtype` when creating buttons within a {@link Ext.ActionSheet ActionSheet},
+ * because the {@link #defaultType} is set to {@link Ext.Button button}.
+ *
+ */
+(Ext.cmd.derive('Ext.ActionSheet', Ext.Sheet, {
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: 'x-sheet-action',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        left: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        right: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        bottom: 0,
+        // @hide
+        centered: false,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        height: 'auto',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        defaultType: 'button'
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Windows'
+            ],
+            top: 0,
+            bottom: null
+        }
+    ]
+}, 0, [
+    "actionsheet"
+], [
+    "component",
+    "container",
+    "panel",
+    "sheet",
+    "actionsheet"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "sheet": true,
+    "actionsheet": true
+}, [
+    "widget.actionsheet"
+], 0, [
+    Ext,
+    'ActionSheet'
+], 0));
+
+/**
  * The Connection class encapsulates a connection to the page's originating domain, allowing requests to be made either
  * to a configured URL, or to a URL specified at request time.
  *
@@ -31598,739 +31695,6 @@ this);
 ], 0));
 
 /**
- * Provides a cross browser class for retrieving location information.
- *
- * Based on the [Geolocation API Specification](http://dev.w3.org/geo/api/spec-source.html)
- *
- * When instantiated, by default this class immediately begins tracking location information,
- * firing a {@link #locationupdate} event when new location information is available.  To disable this
- * location tracking (which may be battery intensive on mobile devices), set {@link #autoUpdate} to `false`.
- *
- * When this is done, only calls to {@link #updateLocation} will trigger a location retrieval.
- *
- * A {@link #locationerror} event is raised when an error occurs retrieving the location, either due to a user
- * denying the application access to it, or the browser not supporting it.
- *
- * The below code shows a GeoLocation making a single retrieval of location information.
- *
- *     var geo = Ext.create('Ext.util.Geolocation', {
- *         autoUpdate: false,
- *         listeners: {
- *             locationupdate: function(geo) {
- *                 alert('New latitude: ' + geo.getLatitude());
- *             },
- *             locationerror: function(geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
- *                 if(bTimeout){
- *                     alert('Timeout occurred.');
- *                 } else {
- *                     alert('Error occurred.');
- *                 }
- *             }
- *         }
- *     });
- *     geo.updateLocation();
- */
-(Ext.cmd.derive('Ext.util.Geolocation', Ext.Evented, {
-    alternateClassName: [
-        'Ext.util.GeoLocation'
-    ],
-    config: {
-        /**
-         * @event locationerror
-         * Raised when a location retrieval operation failed.
-         *
-         * In the case of calling updateLocation, this event will be raised only once.
-         *
-         * If {@link #autoUpdate} is set to `true`, this event could be raised repeatedly.
-         * The first error is relative to the moment {@link #autoUpdate} was set to `true`
-         * (or this {@link Ext.util.Geolocation} was initialized with the {@link #autoUpdate} config option set to `true`).
-         * Subsequent errors are relative to the moment when the device determines that it's position has changed.
-         * @param {Ext.util.Geolocation} this
-         * @param {Boolean} timeout
-         * Boolean indicating a timeout occurred
-         * @param {Boolean} permissionDenied
-         * Boolean indicating the user denied the location request
-         * @param {Boolean} locationUnavailable
-         * Boolean indicating that the location of the device could not be determined.
-         * For instance, one or more of the location providers used in the location acquisition
-         * process reported an internal error that caused the process to fail entirely.
-         * @param {String} message An error message describing the details of the error encountered.
-         *
-         * This attribute is primarily intended for debugging and should not be used
-         * directly in an application user interface.
-         */
-        /**
-         * @event locationupdate
-         * Raised when a location retrieval operation has been completed successfully.
-         * @param {Ext.util.Geolocation} this
-         * Retrieve the current location information from the GeoLocation object by using the read-only
-         * properties: {@link #latitude}, {@link #longitude}, {@link #accuracy}, {@link #altitude}, {@link #altitudeAccuracy}, {@link #heading}, and {@link #speed}.
-         */
-        /**
-         * @cfg {Boolean} autoUpdate
-         * When set to `true`, continually monitor the location of the device (beginning immediately)
-         * and fire {@link #locationupdate} and {@link #locationerror} events.
-         */
-        autoUpdate: true,
-        /**
-         * @cfg {Number} frequency
-         * The frequency of each update if {@link #autoUpdate} is set to `true`.
-         */
-        frequency: 10000,
-        /**
-         * Read-only property representing the last retrieved
-         * geographical coordinate specified in degrees.
-         * @type Number
-         * @readonly
-         */
-        latitude: null,
-        /**
-         * Read-only property representing the last retrieved
-         * geographical coordinate specified in degrees.
-         * @type Number
-         * @readonly
-         */
-        longitude: null,
-        /**
-         * Read-only property representing the last retrieved
-         * accuracy level of the latitude and longitude coordinates,
-         * specified in meters.
-         *
-         * This will always be a non-negative number.
-         *
-         * This corresponds to a 95% confidence level.
-         * @type Number
-         * @readonly
-         */
-        accuracy: null,
-        /**
-         * Read-only property representing the last retrieved
-         * height of the position, specified in meters above the ellipsoid
-         * [WGS84](http://dev.w3.org/geo/api/spec-source.html#ref-wgs).
-         * @type Number
-         * @readonly
-         */
-        altitude: null,
-        /**
-         * Read-only property representing the last retrieved
-         * accuracy level of the altitude coordinate, specified in meters.
-         *
-         * If altitude is not null then this will be a non-negative number.
-         * Otherwise this returns `null`.
-         *
-         * This corresponds to a 95% confidence level.
-         * @type Number
-         * @readonly
-         */
-        altitudeAccuracy: null,
-        /**
-         * Read-only property representing the last retrieved
-         * direction of travel of the hosting device,
-         * specified in non-negative degrees between 0 and 359,
-         * counting clockwise relative to the true north.
-         *
-         * If speed is 0 (device is stationary), then this returns `NaN`.
-         * @type Number
-         * @readonly
-         */
-        heading: null,
-        /**
-         * Read-only property representing the last retrieved
-         * current ground speed of the device, specified in meters per second.
-         *
-         * If this feature is unsupported by the device, this returns `null`.
-         *
-         * If the device is stationary, this returns 0,
-         * otherwise it returns a non-negative number.
-         * @type Number
-         * @readonly
-         */
-        speed: null,
-        /**
-         * Read-only property representing when the last retrieved
-         * positioning information was acquired by the device.
-         * @type Date
-         * @readonly
-         */
-        timestamp: null,
-        //PositionOptions interface
-        /**
-         * @cfg {Boolean} allowHighAccuracy
-         * When set to `true`, provide a hint that the application would like to receive
-         * the best possible results. This may result in slower response times or increased power consumption.
-         * The user might also deny this capability, or the device might not be able to provide more accurate
-         * results than if this option was set to `false`.
-         */
-        allowHighAccuracy: false,
-        /**
-         * @cfg {Number} timeout
-         * The maximum number of milliseconds allowed to elapse between a location update operation
-         * and the corresponding {@link #locationupdate} event being raised.  If a location was not successfully
-         * acquired before the given timeout elapses (and no other internal errors have occurred in this interval),
-         * then a {@link #locationerror} event will be raised indicating a timeout as the cause.
-         *
-         * Note that the time that is spent obtaining the user permission is **not** included in the period
-         * covered by the timeout.  The `timeout` attribute only applies to the location acquisition operation.
-         *
-         * In the case of calling `updateLocation`, the {@link #locationerror} event will be raised only once.
-         *
-         * If {@link #autoUpdate} is set to `true`, the {@link #locationerror} event could be raised repeatedly.
-         * The first timeout is relative to the moment {@link #autoUpdate} was set to `true`
-         * (or this {@link Ext.util.Geolocation} was initialized with the {@link #autoUpdate} config option set to `true`).
-         * Subsequent timeouts are relative to the moment when the device determines that it's position has changed.
-         */
-        timeout: Infinity,
-        /**
-         * @cfg {Number} maximumAge
-         * This option indicates that the application is willing to accept cached location information whose age
-         * is no greater than the specified time in milliseconds. If `maximumAge` is set to 0, an attempt to retrieve
-         * new location information is made immediately.
-         *
-         * Setting the `maximumAge` to Infinity returns a cached position regardless of its age.
-         *
-         * If the device does not have cached location information available whose age is no
-         * greater than the specified `maximumAge`, then it must acquire new location information.
-         *
-         * For example, if location information no older than 10 minutes is required, set this property to 600000.
-         */
-        maximumAge: 0,
-        // @private
-        provider: undefined
-    },
-    updateMaximumAge: function() {
-        if (this.watchOperation) {
-            this.updateWatchOperation();
-        }
-    },
-    updateTimeout: function() {
-        if (this.watchOperation) {
-            this.updateWatchOperation();
-        }
-    },
-    updateAllowHighAccuracy: function() {
-        if (this.watchOperation) {
-            this.updateWatchOperation();
-        }
-    },
-    applyProvider: function(config) {
-        if (Ext.feature.has.Geolocation) {
-            if (!config) {
-                if (navigator && navigator.geolocation) {
-                    config = navigator.geolocation;
-                } else if (window.google) {
-                    config = google.gears.factory.create('beta.geolocation');
-                }
-            }
-        } else {
-            this.fireEvent('locationerror', this, false, false, true, 'This device does not support Geolocation.');
-        }
-        return config;
-    },
-    updateAutoUpdate: function(newAutoUpdate, oldAutoUpdate) {
-        var me = this,
-            provider = me.getProvider();
-        if (oldAutoUpdate && provider) {
-            clearInterval(me.watchOperationId);
-            me.watchOperationId = null;
-        }
-        if (newAutoUpdate) {
-            if (!provider) {
-                me.fireEvent('locationerror', me, false, false, true, null);
-                return;
-            }
-            try {
-                me.updateWatchOperation();
-            } catch (e) {
-                me.fireEvent('locationerror', me, false, false, true, e.message);
-            }
-        }
-    },
-    // @private
-    updateWatchOperation: function() {
-        var me = this,
-            provider = me.getProvider();
-        // The native watchPosition method is currently broken in iOS5...
-        if (me.watchOperationId) {
-            clearInterval(me.watchOperationId);
-        }
-        function pollPosition() {
-            provider.getCurrentPosition(Ext.bind(me.fireUpdate, me), Ext.bind(me.fireError, me), me.parseOptions());
-        }
-        pollPosition();
-        me.watchOperationId = setInterval(pollPosition, this.getFrequency());
-    },
-    /**
-     * Executes a onetime location update operation,
-     * raising either a {@link #locationupdate} or {@link #locationerror} event.
-     *
-     * Does not interfere with or restart ongoing location monitoring.
-     * @param {Function} callback
-     * A callback method to be called when the location retrieval has been completed.
-     *
-     * Will be called on both success and failure.
-     *
-     * The method will be passed one parameter, {@link Ext.util.Geolocation}
-     * (**this** reference), set to `null` on failure.
-     *
-     *     geo.updateLocation(function (geo) {
-     *         alert('Latitude: ' + (geo !== null ? geo.latitude : 'failed'));
-     *     });
-     *
-     * @param {Object} [scope]
-     * The scope (**this** reference) in which the handler function is executed.
-     *
-     * **If omitted, defaults to the object which fired the event.**
-     *
-     * <!--positonOptions undocumented param, see W3C spec-->
-     */
-    updateLocation: function(callback, scope, positionOptions) {
-        var me = this,
-            provider = me.getProvider();
-        var failFunction = function(message, error) {
-                if (error) {
-                    me.fireError(error);
-                } else {
-                    me.fireEvent('locationerror', me, false, false, true, message);
-                }
-                if (callback) {
-                    callback.call(scope || me, null, me);
-                }
-            };
-        //last parameter for legacy purposes
-        if (!provider) {
-            failFunction(null);
-            return;
-        }
-        try {
-            provider.getCurrentPosition(//success callback
-            function(position) {
-                me.fireUpdate(position);
-                if (callback) {
-                    callback.call(scope || me, me, me);
-                }
-            }, //last parameter for legacy purposes
-            //error callback
-            function(error) {
-                failFunction(null, error);
-            }, positionOptions || me.parseOptions());
-        } catch (e) {
-            failFunction(e.message);
-        }
-    },
-    // @private
-    fireUpdate: function(position) {
-        var me = this,
-            coords = position.coords;
-        this.position = position;
-        me.setConfig({
-            timestamp: position.timestamp,
-            latitude: coords.latitude,
-            longitude: coords.longitude,
-            accuracy: coords.accuracy,
-            altitude: coords.altitude,
-            altitudeAccuracy: coords.altitudeAccuracy,
-            heading: coords.heading,
-            speed: coords.speed
-        });
-        me.fireEvent('locationupdate', me);
-    },
-    // @private
-    fireError: function(error) {
-        var errorCode = error.code;
-        this.fireEvent('locationerror', this, errorCode == error.TIMEOUT, errorCode == error.PERMISSION_DENIED, errorCode == error.POSITION_UNAVAILABLE, error.message == undefined ? null : error.message);
-    },
-    // @private
-    parseOptions: function() {
-        var timeout = this.getTimeout(),
-            ret = {
-                maximumAge: this.getMaximumAge(),
-                enableHighAccuracy: this.getAllowHighAccuracy()
-            };
-        //Google doesn't like Infinity
-        if (timeout !== Infinity) {
-            ret.timeout = timeout;
-        }
-        return ret;
-    },
-    destroy: function() {
-        this.setAutoUpdate(false);
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Ext.util,
-    'Geolocation',
-    Ext.util,
-    'GeoLocation'
-], 0));
-
-/**
- * Wraps a Google Map in an Ext.Component using the [Google Maps API](http://code.google.com/apis/maps/documentation/v3/introduction.html).
- *
- * To use this component you must include an additional JavaScript file from Google:
- *
- *     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
- *
- * ## Example
- *
- *     Ext.Viewport.add({
- *         xtype: 'map',
- *         useCurrentLocation: true
- *     });
- *
- */
-(Ext.cmd.derive('Ext.Map', Ext.Container, {
-    isMap: true,
-    config: {
-        /**
-         * @event maprender
-         * Fired when Map initially rendered.
-         * @param {Ext.Map} this
-         * @param {google.maps.Map} map The rendered google.map.Map instance
-         */
-        /**
-         * @event centerchange
-         * Fired when map is panned around.
-         * @param {Ext.Map} this
-         * @param {google.maps.Map} map The rendered google.map.Map instance
-         * @param {google.maps.LatLng} center The current LatLng center of the map
-         */
-        /**
-         * @event typechange
-         * Fired when display type of the map changes.
-         * @param {Ext.Map} this
-         * @param {google.maps.Map} map The rendered google.map.Map instance
-         * @param {Number} mapType The current display type of the map
-         */
-        /**
-         * @event zoomchange
-         * Fired when map is zoomed.
-         * @param {Ext.Map} this
-         * @param {google.maps.Map} map The rendered google.map.Map instance
-         * @param {Number} zoomLevel The current zoom level of the map
-         */
-        /**
-         * @cfg {String} baseCls
-         * The base CSS class to apply to the Map's element
-         * @accessor
-         */
-        baseCls: 'x-map',
-        /**
-         * @cfg {Boolean/Ext.util.Geolocation} useCurrentLocation
-         * Pass in true to center the map based on the geolocation coordinates or pass a
-         * {@link Ext.util.Geolocation GeoLocation} config to have more control over your GeoLocation options
-         * @accessor
-         */
-        useCurrentLocation: false,
-        /**
-         * @cfg {google.maps.Map} map
-         * The wrapped map.
-         * @accessor
-         */
-        map: null,
-        /**
-         * @cfg {Ext.util.Geolocation} geo
-         * Geolocation provider for the map.
-         * @accessor
-         */
-        geo: null,
-        /**
-         * @cfg {Object} mapOptions
-         * MapOptions as specified by the Google Documentation:
-         * [http://code.google.com/apis/maps/documentation/v3/reference.html](http://code.google.com/apis/maps/documentation/v3/reference.html)
-         * @accessor
-         */
-        mapOptions: {},
-        /**
-         * @cfg {Object} mapListeners
-         * Listeners for any Google Maps events specified by the Google Documentation:
-         * [http://code.google.com/apis/maps/documentation/v3/reference.html](http://code.google.com/apis/maps/documentation/v3/reference.html)
-         *
-         * @accessor
-         */
-        mapListeners: null
-    },
-    constructor: function() {
-        Ext.Container.prototype.constructor.apply(this, arguments);
-        // this.element.setVisibilityMode(Ext.Element.OFFSETS);
-        if (!(window.google || {}).maps) {
-            this.setHtml('Google Maps API is required');
-        }
-    },
-    initialize: function() {
-        Ext.Container.prototype.initialize.call(this);
-        this.initMap();
-        this.on({
-            painted: 'doResize',
-            scope: this
-        });
-        this.innerElement.on('touchstart', 'onTouchStart', this);
-    },
-    initMap: function() {
-        var map = this.getMap();
-        if (!map) {
-            var gm = (window.google || {}).maps;
-            if (!gm) {
-                return null;
-            }
-            var element = this.mapContainer,
-                mapOptions = this.getMapOptions(),
-                event = gm.event,
-                me = this;
-            //Remove the API Required div
-            if (element.dom.firstChild) {
-                Ext.fly(element.dom.firstChild).destroy();
-            }
-            if (Ext.os.is.iPad) {
-                Ext.merge({
-                    navigationControlOptions: {
-                        style: gm.NavigationControlStyle.ZOOM_PAN
-                    }
-                }, mapOptions);
-            }
-            mapOptions.mapTypeId = mapOptions.mapTypeId || gm.MapTypeId.ROADMAP;
-            mapOptions.center = mapOptions.center || new gm.LatLng(37.381592, -122.135672);
-            // Palo Alto
-            if (mapOptions.center && mapOptions.center.latitude && !Ext.isFunction(mapOptions.center.lat)) {
-                mapOptions.center = new gm.LatLng(mapOptions.center.latitude, mapOptions.center.longitude);
-            }
-            mapOptions.zoom = mapOptions.zoom || 12;
-            map = new gm.Map(element.dom, mapOptions);
-            this.setMap(map);
-            event.addListener(map, 'zoom_changed', Ext.bind(me.onZoomChange, me));
-            event.addListener(map, 'maptypeid_changed', Ext.bind(me.onTypeChange, me));
-            event.addListener(map, 'center_changed', Ext.bind(me.onCenterChange, me));
-            event.addListenerOnce(map, 'tilesloaded', Ext.bind(me.onTilesLoaded, me));
-            this.addMapListeners();
-        }
-        return this.getMap();
-    },
-    // added for backwards compatibility for touch < 2.3
-    renderMap: function() {
-        this.initMap();
-    },
-    getElementConfig: function() {
-        return {
-            reference: 'element',
-            className: 'x-container',
-            children: [
-                {
-                    reference: 'innerElement',
-                    className: 'x-inner',
-                    children: [
-                        {
-                            reference: 'mapContainer',
-                            className: 'x-map-container'
-                        }
-                    ]
-                }
-            ]
-        };
-    },
-    onTouchStart: function(e) {
-        e.makeUnpreventable();
-    },
-    applyMapOptions: function(options) {
-        return Ext.merge({}, this.options, options);
-    },
-    updateMapOptions: function(newOptions) {
-        var gm = (window.google || {}).maps,
-            map = this.getMap();
-        if (gm && map) {
-            map.setOptions(newOptions);
-        }
-    },
-    doMapCenter: function() {
-        this.setMapCenter(this.getMapOptions().center);
-    },
-    getMapOptions: function() {
-        return Ext.merge({}, this.options || this.getInitialConfig('mapOptions'));
-    },
-    updateUseCurrentLocation: function(useCurrentLocation) {
-        this.setGeo(useCurrentLocation);
-        if (!useCurrentLocation) {
-            this.setMapCenter();
-        }
-    },
-    applyGeo: function(config) {
-        return Ext.factory(config, Ext.util.Geolocation, this.getGeo());
-    },
-    updateGeo: function(newGeo, oldGeo) {
-        var events = {
-                locationupdate: 'onGeoUpdate',
-                locationerror: 'onGeoError',
-                scope: this
-            };
-        if (oldGeo) {
-            oldGeo.un(events);
-        }
-        if (newGeo) {
-            newGeo.on(events);
-            newGeo.updateLocation();
-        }
-    },
-    doResize: function() {
-        var gm = (window.google || {}).maps,
-            map = this.getMap();
-        if (gm && map) {
-            gm.event.trigger(map, "resize");
-        }
-    },
-    // @private
-    onTilesLoaded: function() {
-        this.fireEvent('maprender', this, this.getMap());
-    },
-    // @private
-    addMapListeners: function() {
-        var gm = (window.google || {}).maps,
-            map = this.getMap(),
-            mapListeners = this.getMapListeners();
-        if (gm) {
-            var event = gm.event,
-                me = this,
-                listener, scope, fn, callbackFn, handle;
-            if (Ext.isSimpleObject(mapListeners)) {
-                for (var eventType in mapListeners) {
-                    listener = mapListeners[eventType];
-                    if (Ext.isSimpleObject(listener)) {
-                        scope = listener.scope;
-                        fn = listener.fn;
-                    } else if (Ext.isFunction(listener)) {
-                        scope = null;
-                        fn = listener;
-                    }
-                    if (fn) {
-                        callbackFn = function() {
-                            this.fn.apply(this.scope, [
-                                me
-                            ]);
-                            if (this.handle) {
-                                event.removeListener(this.handle);
-                                delete this.handle;
-                                delete this.fn;
-                                delete this.scope;
-                            }
-                        };
-                        handle = event.addListener(map, eventType, Ext.bind(callbackFn, callbackFn));
-                        callbackFn.fn = fn;
-                        callbackFn.scope = scope;
-                        if (listener.single === true) {
-                            callbackFn.handle = handle;
-                        }
-                    }
-                }
-            }
-        }
-    },
-    // @private
-    onGeoUpdate: function(geo) {
-        if (geo) {
-            this.setMapCenter(new google.maps.LatLng(geo.getLatitude(), geo.getLongitude()));
-        }
-    },
-    // @private
-    onGeoError: Ext.emptyFn,
-    /**
-     * Moves the map center to the designated coordinates hash of the form:
-     *
-     *     { latitude: 37.381592, longitude: -122.135672 }
-     *
-     * or a google.maps.LatLng object representing to the target location.
-     *
-     * @param {Object/google.maps.LatLng} coordinates Object representing the desired Latitude and
-     * longitude upon which to center the map.
-     */
-    setMapCenter: function(coordinates) {
-        var me = this,
-            map = me.getMap(),
-            mapOptions = me.getMapOptions(),
-            gm = (window.google || {}).maps;
-        if (gm) {
-            if (!coordinates) {
-                if (map && map.getCenter) {
-                    coordinates = map.getCenter();
-                } else if (mapOptions.hasOwnProperty('center')) {
-                    coordinates = mapOptions.center;
-                } else {
-                    coordinates = new gm.LatLng(37.381592, -122.135672);
-                }
-            }
-            // Palo Alto
-            if (coordinates && !(coordinates instanceof gm.LatLng) && 'longitude' in coordinates) {
-                coordinates = new gm.LatLng(coordinates.latitude, coordinates.longitude);
-            }
-            if (!map) {
-                mapOptions.center = mapOptions.center || coordinates;
-                me.renderMap();
-                map = me.getMap();
-            }
-            if (map && coordinates instanceof gm.LatLng) {
-                map.panTo(coordinates);
-            } else {
-                this.options = Ext.apply(this.getMapOptions(), {
-                    center: coordinates
-                });
-            }
-        }
-    },
-    // @private
-    onZoomChange: function() {
-        var mapOptions = this.getMapOptions(),
-            map = this.getMap(),
-            zoom;
-        zoom = (map && map.getZoom) ? map.getZoom() : mapOptions.zoom || 10;
-        this.options = Ext.apply(mapOptions, {
-            zoom: zoom
-        });
-        this.fireEvent('zoomchange', this, map, zoom);
-    },
-    // @private
-    onTypeChange: function() {
-        var mapOptions = this.getMapOptions(),
-            map = this.getMap(),
-            mapTypeId;
-        mapTypeId = (map && map.getMapTypeId) ? map.getMapTypeId() : mapOptions.mapTypeId;
-        this.options = Ext.apply(mapOptions, {
-            mapTypeId: mapTypeId
-        });
-        this.fireEvent('typechange', this, map, mapTypeId);
-    },
-    // @private
-    onCenterChange: function() {
-        var mapOptions = this.getMapOptions(),
-            map = this.getMap(),
-            center;
-        center = (map && map.getCenter) ? map.getCenter() : mapOptions.center;
-        this.options = Ext.apply(mapOptions, {
-            center: center
-        });
-        this.fireEvent('centerchange', this, map, center);
-    },
-    // @private
-    destroy: function() {
-        Ext.destroy(this.getGeo());
-        var map = this.getMap();
-        if (map && (window.google || {}).maps) {
-            google.maps.event.clearInstanceListeners(map);
-        }
-        Ext.Container.prototype.destroy.call(this);
-    }
-}, 1, [
-    "map"
-], [
-    "component",
-    "container",
-    "map"
-], {
-    "component": true,
-    "container": true,
-    "map": true
-}, [
-    "widget.map"
-], 0, [
-    Ext,
-    'Map'
-], function() {}));
-
-/**
  * @class Ext.ComponentQuery
  * @extends Object
  * @singleton
@@ -33189,6 +32553,175 @@ this);
     Ext,
     'LoadMask'
 ], function() {}));
+
+/**
+ * {@link Ext.Menu}'s are used with {@link Ext.Viewport#setMenu}. A menu can be linked with any side of the screen (top, left, bottom or right)
+ *  and will simply describe the contents of your menu. To use this menu you will call various menu related functions on the {@link Ext.Viewport}
+ * such as {@link Ext.Viewport#showMenu}, {@link Ext.Viewport#hideMenu}, {@link Ext.Viewport#toggleMenu}, {@link Ext.Viewport#hideOtherMenus},
+ * or {@link Ext.Viewport#hideAllMenus}.
+ *
+ *      @example preview
+ *      var menu = Ext.create('Ext.Menu', {
+ *          items: [
+ *              {
+ *                  text: 'Settings',
+ *                  iconCls: 'settings'
+ *              },
+ *              {
+ *                  text: 'New Item',
+ *                  iconCls: 'compose'
+ *              },
+ *              {
+ *                  text: 'Star',
+ *                  iconCls: 'star'
+ *              }
+ *          ]
+ *      });
+ *
+ *      Ext.Viewport.setMenu(menu, {
+ *          side: 'left',
+ *          reveal: true
+ *      });
+ *
+ *      Ext.Viewport.showMenu('left');
+ *
+ * The {@link #defaultType} of a Menu item is a {@link Ext.Button button}.
+ */
+(Ext.cmd.derive('Ext.Menu', Ext.Sheet, {
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: 'x-menu',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        left: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        right: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        bottom: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        height: 'auto',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        width: 'auto',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        defaultType: 'button',
+        /**
+         * @hide
+         */
+        showAnimation: null,
+        /**
+         * @hide
+         */
+        hideAnimation: null,
+        /**
+         * @hide
+         */
+        centered: false,
+        /**
+         * @hide
+         */
+        modal: true,
+        /**
+         * @hide
+         */
+        hidden: true,
+        /**
+         * @hide
+         */
+        hideOnMaskTap: true,
+        /**
+         * @hide
+         */
+        translatable: {
+            translationMethod: null
+        }
+    },
+    constructor: function() {
+        this.config.translatable.translationMethod = Ext.browser.is.AndroidStock2 ? 'cssposition' : 'csstransform';
+        Ext.Sheet.prototype.constructor.apply(this, arguments);
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Windows'
+            ]
+        },
+        {
+            theme: [
+                'Blackberry',
+                'Blackberry103'
+            ],
+            ui: 'context',
+            layout: {
+                pack: 'center'
+            }
+        }
+    ],
+    updateUi: function(newUi, oldUi) {
+        Ext.Sheet.prototype.updateUi.apply(this, arguments);
+        if (newUi != oldUi && (Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103)) {
+            if (newUi == 'context') {
+                this.innerElement.swapCls('x-vertical', 'x-horizontal');
+            } else if (newUi == 'application') {
+                this.innerElement.swapCls('x-horizontal', 'x-vertical');
+            }
+        }
+    },
+    updateHideOnMaskTap: function(hide) {
+        var mask = this.getModal();
+        if (mask) {
+            mask[hide ? 'on' : 'un'].call(mask, 'tap', function() {
+                Ext.Viewport.hideMenu(this.$side);
+            }, this);
+        }
+    },
+    /**
+     * Only fire the hide event if it is initialized
+     */
+    doSetHidden: function() {
+        if (this.initialized) {
+            Ext.Sheet.prototype.doSetHidden.apply(this, arguments);
+        }
+    }
+}, 1, [
+    "menu"
+], [
+    "component",
+    "container",
+    "panel",
+    "sheet",
+    "menu"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "sheet": true,
+    "menu": true
+}, [
+    "widget.menu"
+], 0, [
+    Ext,
+    'Menu'
+], 0));
 
 /**
  * {@link Ext.Title} is used for the {@link Ext.Toolbar#title} configuration in the {@link Ext.Toolbar} component.
@@ -35995,6 +35528,347 @@ function() {}));
         Ext.Msg = new MessageBox();
     });
 }));
+
+/**
+ * {@link Ext.TitleBar}'s are most commonly used as a docked item within an {@link Ext.Container}.
+ *
+ * The main difference between a {@link Ext.TitleBar} and an {@link Ext.Toolbar} is that
+ * the {@link #title} configuration is **always** centered horizontally in a {@link Ext.TitleBar} between
+ * any items aligned left or right.
+ *
+ * You can also give items of a {@link Ext.TitleBar} an `align` configuration of `left` or `right`
+ * which will dock them to the `left` or `right` of the bar.
+ *
+ * ## Examples
+ *
+ *     @example preview
+ *     Ext.Viewport.add({
+ *         xtype: 'titlebar',
+ *         docked: 'top',
+ *         title: 'Navigation',
+ *         items: [
+ *             {
+ *                 iconCls: 'add',
+ *                 align: 'left'
+ *             },
+ *             {
+ *                 iconCls: 'home',
+ *                 align: 'right'
+ *             }
+ *         ]
+ *     });
+ *
+ *     Ext.Viewport.setStyleHtmlContent(true);
+ *     Ext.Viewport.setHtml('This shows the title being centered and buttons using align <i>left</i> and <i>right</i>.');
+ *
+ * <br />
+ *
+ *     @example preview
+ *     Ext.Viewport.add({
+ *         xtype: 'titlebar',
+ *         docked: 'top',
+ *         title: 'Navigation',
+ *         items: [
+ *             {
+ *                 align: 'left',
+ *                 text: 'This button has a super long title'
+ *             },
+ *             {
+ *                 iconCls: 'home',
+ *                 align: 'right'
+ *             }
+ *         ]
+ *     });
+ *
+ *     Ext.Viewport.setStyleHtmlContent(true);
+ *     Ext.Viewport.setHtml('This shows how the title is automatically moved to the right when one of the aligned buttons is very wide.');
+ *
+ * <br />
+ *
+ *     @example preview
+ *     Ext.Viewport.add({
+ *         xtype: 'titlebar',
+ *         docked: 'top',
+ *         title: 'A very long title',
+ *         items: [
+ *             {
+ *                 align: 'left',
+ *                 text: 'This button has a super long title'
+ *             },
+ *             {
+ *                 align: 'right',
+ *                 text: 'Another button'
+ *             }
+ *         ]
+ *     });
+ *
+ *     Ext.Viewport.setStyleHtmlContent(true);
+ *     Ext.Viewport.setHtml('This shows how the title and buttons will automatically adjust their size when the width of the items are too wide..');
+ *
+ * The {@link #defaultType} of Toolbar's is {@link Ext.Button button}.
+ */
+(Ext.cmd.derive('Ext.TitleBar', Ext.Container, {
+    // @private
+    isToolbar: true,
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: 'x-toolbar',
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        cls: 'x-navigation-bar',
+        /**
+         * @cfg {String} ui
+         * Style options for Toolbar. Either 'light' or 'dark'.
+         * @accessor
+         */
+        ui: 'dark',
+        /**
+         * @cfg {String} title
+         * The title of the toolbar.
+         * @accessor
+         */
+        title: null,
+        /**
+         * @cfg {String} titleAlign
+         * The alignment for the title of the toolbar.
+         * @accessor
+         */
+        titleAlign: 'center',
+        /**
+         * @cfg {String} defaultType
+         * The default xtype to create.
+         * @accessor
+         */
+        defaultType: 'button',
+        /**
+         * @cfg {String} minHeight
+         * The minimum height height of the Toolbar.
+         * @accessor
+         */
+        minHeight: null,
+        /**
+         * @cfg
+         * @hide
+         */
+        layout: {
+            type: 'hbox'
+        },
+        /**
+         * @cfg {Array/Object} items The child items to add to this TitleBar. The {@link #defaultType} of
+         * a TitleBar is {@link Ext.Button}, so you do not need to specify an `xtype` if you are adding
+         * buttons.
+         *
+         * You can also give items a `align` configuration which will align the item to the `left` or `right` of
+         * the TitleBar.
+         * @accessor
+         */
+        items: [],
+        /**
+         * @cfg {String} maxButtonWidth The maximum width of the button by percentage
+         * @accessor
+         */
+        maxButtonWidth: '40%'
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Blackberry',
+                'Blackberry103',
+                'Tizen'
+            ],
+            titleAlign: 'left'
+        },
+        {
+            theme: [
+                'Cupertino'
+            ],
+            maxButtonWidth: '80%'
+        }
+    ],
+    hasCSSMinHeight: true,
+    beforeInitialize: function() {
+        this.applyItems = this.applyInitialItems;
+    },
+    initialize: function() {
+        delete this.applyItems;
+        this.add(this.initialItems);
+        delete this.initialItems;
+        this.on({
+            painted: 'refreshTitlePosition',
+            single: true
+        });
+    },
+    applyInitialItems: function(items) {
+        var me = this,
+            titleAlign = me.getTitleAlign(),
+            defaults = me.getDefaults() || {};
+        me.initialItems = items;
+        me.leftBox = me.add({
+            xtype: 'container',
+            style: 'position: relative',
+            layout: {
+                type: 'hbox',
+                align: 'center'
+            },
+            listeners: {
+                resize: 'refreshTitlePosition',
+                scope: me
+            }
+        });
+        me.spacer = me.add({
+            xtype: 'component',
+            style: 'position: relative',
+            flex: 1,
+            listeners: {
+                resize: 'refreshTitlePosition',
+                scope: me
+            }
+        });
+        me.rightBox = me.add({
+            xtype: 'container',
+            style: 'position: relative',
+            layout: {
+                type: 'hbox',
+                align: 'center'
+            },
+            listeners: {
+                resize: 'refreshTitlePosition',
+                scope: me
+            }
+        });
+        switch (titleAlign) {
+            case 'left':
+                me.titleComponent = me.leftBox.add({
+                    xtype: 'title',
+                    cls: 'x-title-align-left',
+                    hidden: defaults.hidden
+                });
+                me.refreshTitlePosition = Ext.emptyFn;
+                break;
+            case 'right':
+                me.titleComponent = me.rightBox.add({
+                    xtype: 'title',
+                    cls: 'x-title-align-right',
+                    hidden: defaults.hidden
+                });
+                me.refreshTitlePosition = Ext.emptyFn;
+                break;
+            default:
+                me.titleComponent = me.add({
+                    xtype: 'title',
+                    hidden: defaults.hidden,
+                    centered: true
+                });
+                break;
+        }
+        me.doAdd = me.doBoxAdd;
+        me.remove = me.doBoxRemove;
+        me.doInsert = me.doBoxInsert;
+    },
+    doBoxAdd: function(item) {
+        if (item.config.align == 'right') {
+            this.rightBox.add(item);
+        } else {
+            this.leftBox.add(item);
+        }
+    },
+    doBoxRemove: function(item, destroy) {
+        if (item.config.align == 'right') {
+            this.rightBox.remove(item, destroy);
+        } else {
+            this.leftBox.remove(item, destroy);
+        }
+    },
+    doBoxInsert: function(index, item) {
+        if (item.config.align == 'right') {
+            this.rightBox.insert(index, item);
+        } else {
+            this.leftBox.insert(index, item);
+        }
+    },
+    calculateMaxButtonWidth: function() {
+        var maxButtonWidth = this.getMaxButtonWidth();
+        //check if it is a percentage
+        if (Ext.isString(maxButtonWidth)) {
+            maxButtonWidth = parseInt(maxButtonWidth.replace('%', ''), 10);
+        }
+        maxButtonWidth = Math.round((this.element.getWidth() / 100) * maxButtonWidth);
+        return maxButtonWidth;
+    },
+    refreshTitlePosition: function() {
+        if (this.isDestroyed) {
+            return;
+        }
+        var titleElement = this.titleComponent.renderElement;
+        titleElement.setWidth(null);
+        titleElement.setLeft(null);
+        //set the min/max width of the left button
+        var leftBox = this.leftBox,
+            leftButton = leftBox.down('button'),
+            singleButton = leftBox.getItems().getCount() == 1,
+            leftBoxWidth, maxButtonWidth;
+        if (leftButton && singleButton) {
+            if (leftButton.getWidth() == null) {
+                leftButton.renderElement.setWidth('auto');
+            }
+            leftBoxWidth = leftBox.renderElement.getWidth();
+            maxButtonWidth = this.calculateMaxButtonWidth();
+            if (leftBoxWidth > maxButtonWidth) {
+                leftButton.renderElement.setWidth(maxButtonWidth);
+            }
+        }
+        var spacerBox = this.spacer.renderElement.getPageBox();
+        if (Ext.browser.is.IE) {
+            titleElement.setWidth(spacerBox.width);
+        }
+        var titleBox = titleElement.getPageBox(),
+            widthDiff = titleBox.width - spacerBox.width,
+            titleLeft = titleBox.left,
+            titleRight = titleBox.right,
+            halfWidthDiff, leftDiff, rightDiff;
+        if (widthDiff > 0) {
+            halfWidthDiff = widthDiff / 2;
+            titleLeft += halfWidthDiff;
+            titleRight -= halfWidthDiff;
+            titleElement.setWidth(spacerBox.width);
+        }
+        leftDiff = spacerBox.left - titleLeft;
+        rightDiff = titleRight - spacerBox.right;
+        if (leftDiff > 0) {
+            titleElement.setLeft(leftDiff);
+        } else if (rightDiff > 0) {
+            titleElement.setLeft(-rightDiff);
+        }
+        titleElement.repaint();
+    },
+    // @private
+    updateTitle: function(newTitle) {
+        this.titleComponent.setTitle(newTitle);
+        if (this.isPainted()) {
+            this.refreshTitlePosition();
+        }
+    }
+}, 0, [
+    "titlebar"
+], [
+    "component",
+    "container",
+    "titlebar"
+], {
+    "component": true,
+    "container": true,
+    "titlebar": true
+}, [
+    "widget.titlebar"
+], 0, [
+    Ext,
+    'TitleBar'
+], 0));
 
 /**
  * @author Ed Spencer
@@ -51135,83 +51009,51 @@ Ext.define('Ext.direct.Manager', {
 /**
  * @author Ed Spencer
  *
- * The LocalStorageProxy uses the new HTML5 localStorage API to save {@link Ext.data.Model Model} data locally on the
- * client browser. HTML5 localStorage is a key-value store (e.g. cannot save complex objects like JSON), so
- * LocalStorageProxy automatically serializes and deserializes data when saving and retrieving it.
- *
- * localStorage is extremely useful for saving user-specific information without needing to build server-side
- * infrastructure to support it. Let's imagine we're writing a Twitter search application and want to save the user's
- * searches locally so they can easily perform a saved search again later. We'd start by creating a Search model:
- *
- *     Ext.define('Search', {
- *         extend: 'Ext.data.Model',
- *         config: {
- *             fields: ['id', 'query'],
- *             proxy: {
- *                 type: 'localstorage',
- *                 id  : 'twitter-Searches'
- *             }
- *         }
- *     });
- *
- * Our Search model contains just two fields - id and query - plus a Proxy definition. The only configuration we need to
- * pass to the LocalStorage proxy is an {@link #id}. This is important as it separates the Model data in this Proxy from
- * all others. The localStorage API puts all data into a single shared namespace, so by setting an id we enable
- * LocalStorageProxy to manage the saved Search data.
- *
- * Saving our data into localStorage is easy and would usually be done with a {@link Ext.data.Store Store}:
- *
- *     //our Store automatically picks up the LocalStorageProxy defined on the Search model
- *     var store = Ext.create('Ext.data.Store', {
- *         model: "Search"
- *     });
- *
- *     //loads any existing Search data from localStorage
- *     store.load();
- *
- *     //now add some Searches
- *     store.add({query: 'Sencha Touch'});
- *     store.add({query: 'Ext JS'});
- *
- *     //finally, save our Search data to localStorage
- *     store.sync();
- *
- * The LocalStorageProxy automatically gives our new Searches an id when we call store.sync(). It encodes the Model data
- * and places it into localStorage. We can also save directly to localStorage, bypassing the Store altogether:
- *
- *     var search = Ext.create('Search', {query: 'Sencha Animator'});
- *
- *     //uses the configured LocalStorageProxy to save the new Search to localStorage
- *     search.save();
- *
- * # Limitations
- *
- * If this proxy is used in a browser where local storage is not supported, the constructor will throw an error. A local
- * storage proxy requires a unique ID which is used as a key in which all record data are stored in the local storage
- * object.
+ * Proxy which uses HTML5 session storage as its data storage/retrieval mechanism. If this proxy is used in a browser
+ * where session storage is not supported, the constructor will throw an error. A session storage proxy requires a
+ * unique ID which is used as a key in which all record data are stored in the session storage object.
  *
  * It's important to supply this unique ID as it cannot be reliably determined otherwise. If no id is provided but the
  * attached store has a storeId, the storeId will be used. If neither option is presented the proxy will throw an error.
+ *
+ * Proxies are almost always used with a {@link Ext.data.Store store}:
+ *
+ *     new Ext.data.Store({
+ *         proxy: {
+ *             type: 'sessionstorage',
+ *             id  : 'myProxyKey'
+ *         }
+ *     });
+ *
+ * Alternatively you can instantiate the Proxy directly:
+ *
+ *     new Ext.data.proxy.SessionStorage({
+ *         id  : 'myOtherProxyKey'
+ *     });
+ *
+ * Note that session storage is different to local storage (see {@link Ext.data.proxy.LocalStorage}) - if a browser
+ * session is ended (e.g. by closing the browser) then all data in a SessionStorageProxy are lost. Browser restarts
+ * don't affect the {@link Ext.data.proxy.LocalStorage} - the data are preserved.
  *
  * ###Further Reading
  * [Sencha Touch Data Overview](../../../core_concepts/data/data_package_overview.html)
  * [Sencha Touch Store Guide](../../../core_concepts/data/stores.html)
  * [Sencha Touch Models Guide](../../../core_concepts/data/models.html)
- * [Sencha Touch Proxy Guide](../../../core_concepts/data/proxies.html) 
+ * [Sencha Touch Proxy Guide](../../../core_concepts/data/proxies.html)
  */
-(Ext.cmd.derive('Ext.data.proxy.LocalStorage', Ext.data.proxy.WebStorage, {
-    alternateClassName: 'Ext.data.LocalStorageProxy',
+(Ext.cmd.derive('Ext.data.proxy.SessionStorage', Ext.data.proxy.WebStorage, {
+    alternateClassName: 'Ext.data.SessionStorageProxy',
     //inherit docs
     getStorageObject: function() {
-        return window.localStorage;
+        return window.sessionStorage;
     }
 }, 0, 0, 0, 0, [
-    "proxy.localstorage"
+    "proxy.sessionstorage"
 ], 0, [
     Ext.data.proxy,
-    'LocalStorage',
+    'SessionStorage',
     Ext.data,
-    'LocalStorageProxy'
+    'SessionStorageProxy'
 ], 0));
 
 /**
@@ -56238,373 +56080,6 @@ Ext.define('Ext.direct.Manager', {
     'Camera'
 ], 0));
 
-/**
- * @private
- */
-(Ext.cmd.derive('Ext.device.device.Abstract', Ext.Base, {
-    /**
-     * @event schemeupdate
-     * Event which is fired when your Sencha Native packaged application is opened from another application using a custom URL scheme.
-     * 
-     * This event will only fire if the application was already open (in other words; `onReady` was already fired). This means you should check
-     * if {@link Ext.device.Device#scheme} is set in your Application `launch`/`onReady` method, and perform any needed changes for that URL (if defined).
-     * Then listen to this event for future changed.
-     *
-     * ## Example
-     *
-     *     Ext.application({
-     *         name: 'Sencha',
-     *         requires: ['Ext.device.Device'],
-     *         launch: function() {
-     *             if (Ext.device.Device.scheme) {
-     *                 // the application was opened via another application. Do something:
-     *                 console.log('Applicaton opened via another application: ' + Ext.device.Device.scheme.url);
-     *             }
-     *
-     *             // Listen for future changes
-     *             Ext.device.Device.on('schemeupdate', function(device, scheme) {
-     *                 // the application was launched, closed, and then launched another from another application
-     *                 // this means onReady wont be called again ('cause the application is already running in the 
-     *                 // background) - but this event will be fired
-     *                 console.log('Applicated reopened via another application: ' + scheme.url);
-     *             }, this);
-     *         }
-     *     });
-     *
-     * __Note:__ This currently only works with the Sencha Native Packager. If you attempt to listen to this event when packaged with
-     * PhoneGap or simply in the browser, it will never fire.**
-     * 
-     * @param {Ext.device.Device} this The instance of Ext.device.Device
-     * @param {Object/Boolean} scheme The scheme information, if opened via another application
-     * @param {String} scheme.url The URL that was opened, if this application was opened via another application. Example: `sencha:`
-     * @param {String} scheme.sourceApplication The source application that opened this application. Example: `com.apple.safari`.
-     */
-    /**
-     * @property {String} name
-     * Returns the name of the current device. If the current device does not have a name (for example, in a browser), it will
-     * default to `not available`.
-     *
-     *     alert('Device name: ' + Ext.device.Device.name);
-     */
-    name: 'not available',
-    /**
-     * @property {String} uuid
-     * Returns a unique identifier for the current device. If the current device does not have a unique identifier (for example,
-     * in a browser), it will default to `anonymous`.
-     *
-     *     alert('Device UUID: ' + Ext.device.Device.uuid);
-     */
-    uuid: 'anonymous',
-    /**
-     * @property {String} platform
-     * The current platform the device is running on.
-     *
-     *     alert('Device platform: ' + Ext.device.Device.platform);
-     */
-    platform: Ext.os.name,
-    /**
-     * @property {Object/Boolean} scheme
-     * 
-     */
-    scheme: false,
-    /**
-     * Opens a specified URL. The URL can contain a custom URL Scheme for another app or service:
-     *
-     *     // Safari
-     *     Ext.device.Device.openURL('http://sencha.com');
-     *
-     *     // Telephone
-     *     Ext.device.Device.openURL('tel:6501231234');
-     *
-     *     // SMS with a default number
-     *     Ext.device.Device.openURL('sms:+12345678901');
-     *
-     *     // Email client
-     *     Ext.device.Device.openURL('mailto:rob@sencha.com');
-     *
-     * You can find a full list of available URL schemes here: [http://wiki.akosma.com/IPhone_URL_Schemes](http://wiki.akosma.com/IPhone_URL_Schemes).
-     *
-     * __Note:__ This currently only works with the Sencha Native Packager. Attempting to use this on PhoneGap, iOS Simulator
-     * or the browser will simply result in the current window location changing.**
-     *
-     * If successful, this will close the application (as another one opens).
-     * 
-     * @param {String} url The URL to open
-     */
-    openURL: function(url) {
-        window.location = url;
-    }
-}, 0, 0, 0, 0, 0, [
-    [
-        Ext.mixin.Observable.prototype.mixinId || Ext.mixin.Observable.$className,
-        Ext.mixin.Observable
-    ]
-], [
-    Ext.device.device,
-    'Abstract'
-], 0));
-
-/**
- * @private
- */
-(Ext.cmd.derive('Ext.device.device.Cordova', Ext.device.device.Abstract, {
-    alternateClassName: 'Ext.device.device.PhoneGap',
-    availableListeners: [
-        'pause',
-        'resume',
-        'backbutton',
-        'batterycritical',
-        'batterylow',
-        'batterystatus',
-        'menubutton',
-        'searchbutton',
-        'startcallbutton',
-        'endcallbutton',
-        'volumeupbutton',
-        'volumedownbutton'
-    ],
-    constructor: function() {
-        // We can't get the device details until the device is ready, so lets wait.
-        if (Ext.isReady) {
-            this.onReady();
-        } else {
-            Ext.onReady(this.onReady, this, {
-                single: true
-            });
-        }
-    },
-    /**
-     * @property {String} cordova
-     * Returns the version of Cordova running on the device.
-     *
-     *     alert('Device cordova: ' + Ext.device.Device.cordova);
-     */
-    /**
-     * @property {String} version
-     * Returns the operating system version.
-     *
-     *     alert('Device Version: ' + Ext.device.Device.version);
-     */
-    /**
-     * @property {String} model
-     * Returns the device's model name.
-     *
-     *     alert('Device Model: ' + Ext.device.Device.model);
-     */
-    /**
-     * @event pause
-     * Fires when the application goes into the background
-     */
-    /**
-     * @event resume
-     * Fires when the application goes into the foreground
-     */
-    /**
-     * @event batterycritical
-     * This event that fires when a Cordova application detects the percentage of battery 
-     * has reached the critical battery threshold.
-     */
-    /**
-     * @event batterylow
-     * This event that fires when a Cordova application detects the percentage of battery 
-     * has reached the low battery threshold.
-     */
-    /**
-     * @event batterystatus
-     * This event that fires when a Cordova application detects the percentage of battery 
-     * has changed by at least 1 percent.
-     */
-    /**
-     * @event backbutton
-     * This is an event that fires when the user presses the back button.
-     */
-    /**
-     * @event menubutton
-     * This is an event that fires when the user presses the menu button.
-     */
-    /**
-     * @event searchbutton
-     * This is an event that fires when the user presses the search button.
-     */
-    /**
-     * @event startcallbutton
-     * This is an event that fires when the user presses the start call button.
-     */
-    /**
-     * @event endcallbutton
-     * This is an event that fires when the user presses the end call button.
-     */
-    /**
-     * @event volumeupbutton
-     * This is an event that fires when the user presses the volume up button.
-     */
-    /**
-     * @event volumedownbutton
-     * This is an event that fires when the user presses the volume down button.
-     */
-    onReady: function() {
-        var me = this,
-            device = window.device;
-        me.name = device.name || device.model;
-        me.cordova = device.cordova;
-        me.platform = device.platform || Ext.os.name;
-        me.uuid = device.uuid;
-        me.version = device.version;
-        me.model = device.model;
-    },
-    doAddListener: function(name) {
-        if (!this.addedListeners) {
-            this.addedListeners = [];
-        }
-        if (this.availableListeners.indexOf(name) != -1 && this.addedListeners.indexOf(name) == -1) {
-            // Add the listeners
-            this.addedListeners.push(name);
-            document.addEventListener(name, function() {
-                me.fireEvent(name, me);
-            });
-        }
-        Ext.device.Device.mixins.observable.doAddListener.apply(Ext.device.Device.mixins.observable, arguments);
-    }
-}, 1, 0, 0, 0, 0, 0, [
-    Ext.device.device,
-    'Cordova',
-    Ext.device.device,
-    'PhoneGap'
-], 0));
-
-/**
- * @private
- */
-(Ext.cmd.derive('Ext.device.device.Sencha', Ext.device.device.Abstract, {
-    constructor: function() {
-        Ext.device.device.Abstract.prototype.constructor.apply(this, arguments);
-        this.name = device.name;
-        this.uuid = device.uuid;
-        this.platform = device.platformName || Ext.os.name;
-        this.scheme = Ext.device.Communicator.send({
-            command: 'OpenURL#getScheme',
-            sync: true
-        }) || false;
-        Ext.device.Communicator.send({
-            command: 'OpenURL#watch',
-            callbacks: {
-                callback: function(scheme) {
-                    this.scheme = scheme || false;
-                    this.fireEvent('schemeupdate', this, this.scheme);
-                }
-            },
-            scope: this
-        });
-    },
-    openURL: function(url) {
-        Ext.device.Communicator.send({
-            command: 'OpenURL#open',
-            url: url
-        });
-    }
-}, 1, 0, 0, 0, 0, 0, [
-    Ext.device.device,
-    'Sencha'
-], 0));
-
-/**
- * @private
- */
-(Ext.cmd.derive('Ext.device.device.Simulator', Ext.device.device.Abstract, {}, 0, 0, 0, 0, 0, 0, [
-    Ext.device.device,
-    'Simulator'
-], 0));
-
-/**
- * Provides a cross device way to get information about the device your application is running on. There are 3 different implementations:
- *
- * - Sencha Packager
- * - [Cordova](http://cordova.apache.org/docs/en/2.5.0/cordova_device_device.md.html#Device)
- * - Simulator
- *
- * ## Examples
- *
- * #### Device Information
- *
- * Getting the device information:
- *
- *     Ext.application({
- *         name: 'Sencha',
- *
- *         // Remember that the Ext.device.Device class *must* be required
- *         requires: ['Ext.device.Device'],
- *
- *         launch: function() {
- *             alert([
- *                 'Device name: ' + Ext.device.Device.name,
- *                 'Device platform: ' + Ext.device.Device.platform,
- *                 'Device UUID: ' + Ext.device.Device.uuid
- *             ].join('\n'));
- *         }
- *     });
- *
- * ### Custom Scheme URL
- *
- * Using custom scheme URL to application your application from other applications:
- *
- *     Ext.application({
- *         name: 'Sencha',
- *         requires: ['Ext.device.Device'],
- *         launch: function() {
- *             if (Ext.device.Device.scheme) {
- *                 // the application was opened via another application. Do something:
- *                 alert('Applicaton penned via another application: ' + Ext.device.Device.scheme.url);
- *             }
- *
- *             // Listen for future changes
- *             Ext.device.Device.on('schemeupdate', function(device, scheme) {
- *                 // the application was launched, closed, and then launched another from another application
- *                 // this means onReady wont be called again ('cause the application is already running in the 
- *                 // background) - but this event will be fired
- *                 alert('Applicated reopened via another application: ' + scheme.url);
- *             }, this);
- *         }
- *     });
- *
- * Of course, you must add the custom scheme URL you would like to use when packaging your application.
- * You can do this by setting the `URLScheme` property inside your `package.json` file (Sencha Native Packager configuration file):
- *
- *     {
- *         ...
- *         "URLScheme": "sencha",
- *         ...
- *     }
- *
- * You can change the available URL scheme.
- *
- * You can then test it by packaging and installing the application onto a device/iOS Simulator, opening Safari and typing: `sencha:testing`.
- * The application will launch and it will `alert` the URL you specified.
- *
- * **PLEASE NOTE: This currently only works with the Sencha Native Packager. If you attempt to listen to this event when packaged with
- * PhoneGap or simply in the browser, it will not function.**
- *
- * For more information regarding Native APIs, please review our [Native APIs guide](../../../packaging/native_apis.html).
- *
- * @mixins Ext.device.device.Abstract
- */
-(Ext.cmd.derive('Ext.device.Device', Ext.Base, {
-    singleton: true,
-    constructor: function() {
-        var browserEnv = Ext.browser.is;
-        if (browserEnv.WebView) {
-            if (browserEnv.Cordova) {
-                return Ext.create('Ext.device.device.Cordova');
-            } else if (browserEnv.Sencha) {
-                return Ext.create('Ext.device.device.Sencha');
-            }
-        }
-        return Ext.create('Ext.device.device.Simulator');
-    }
-}, 1, 0, 0, 0, 0, 0, [
-    Ext.device,
-    'Device'
-], 0));
-
 // Using @mixins to include all members of Ext.event.Touch
 // into here to keep documentation simpler
 /**
@@ -60000,6 +59475,2540 @@ Ext.define('Ext.direct.Manager', {
     'Checkbox',
     Ext.form,
     'Checkbox'
+], 0));
+
+/**
+ * @private
+ *
+ * A general {@link Ext.picker.Picker} slot class.  Slots are used to organize multiple scrollable slots into
+ * a single {@link Ext.picker.Picker}.
+ *
+ *     {
+ *         name : 'limit_speed',
+ *         title: 'Speed Limit',
+ *         data : [
+ *             {text: '50 KB/s', value: 50},
+ *             {text: '100 KB/s', value: 100},
+ *             {text: '200 KB/s', value: 200},
+ *             {text: '300 KB/s', value: 300}
+ *         ]
+ *     }
+ *
+ * See the {@link Ext.picker.Picker} documentation on how to use slots.
+ */
+Ext.define('Ext.picker.Slot', {
+    extend: Ext.dataview.DataView,
+    xtype: 'pickerslot',
+    alternateClassName: 'Ext.Picker.Slot',
+    /**
+     * @event slotpick
+     * Fires whenever an slot is picked
+     * @param {Ext.picker.Slot} this
+     * @param {Mixed} value The value of the pick
+     * @param {HTMLElement} node The node element of the pick
+     */
+    isSlot: true,
+    config: {
+        /**
+         * @cfg {String} title The title to use for this slot, or `null` for no title.
+         * @accessor
+         */
+        title: null,
+        /**
+         * @private
+         * @cfg {Boolean} showTitle
+         * @accessor
+         */
+        showTitle: true,
+        /**
+         * @private
+         * @cfg {String} cls The main component class
+         * @accessor
+         */
+        cls: 'x-picker-slot',
+        /**
+         * @cfg {String} name (required) The name of this slot.
+         * @accessor
+         */
+        name: null,
+        /**
+         * @cfg {Number} value The value of this slot
+         * @accessor
+         */
+        value: null,
+        /**
+         * @cfg {Number} flex
+         * @accessor
+         * @private
+         */
+        flex: 1,
+        /**
+         * @cfg {String} align The horizontal alignment of the slot's contents.
+         *
+         * Valid values are: "left", "center", and "right".
+         * @accessor
+         */
+        align: 'left',
+        /**
+         * @cfg {String} displayField The display field in the store.
+         * @accessor
+         */
+        displayField: 'text',
+        /**
+         * @cfg {String} valueField The value field in the store.
+         * @accessor
+         */
+        valueField: 'value',
+        /**
+         * @cfg {String} itemTpl The template to be used in this slot.
+         * If you set this, {@link #displayField} will be ignored.
+         */
+        itemTpl: null,
+        /**
+         * @cfg {Object} scrollable
+         * @accessor
+         * @hide
+         */
+        scrollable: {
+            direction: 'vertical',
+            indicators: false,
+            momentumEasing: {
+                minVelocity: 2
+            },
+            slotSnapEasing: {
+                duration: 100
+            }
+        },
+        /**
+         * @cfg {Boolean} verticallyCenterItems
+         * @private
+         */
+        verticallyCenterItems: true
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Windows'
+            ],
+            title: 'choose an item'
+        }
+    ],
+    // verticallyCenterItems: false
+    constructor: function() {
+        /**
+         * @property selectedIndex
+         * @type Number
+         * The current `selectedIndex` of the picker slot.
+         * @private
+         */
+        this.selectedIndex = 0;
+        /**
+         * @property picker
+         * @type Ext.picker.Picker
+         * A reference to the owner Picker.
+         * @private
+         */
+        Ext.dataview.DataView.prototype.constructor.apply(this, arguments);
+    },
+    /**
+     * Sets the title for this dataview by creating element.
+     * @param {String} title
+     * @return {String}
+     */
+    applyTitle: function(title) {
+        //check if the title isnt defined
+        if (title) {
+            //create a new title element
+            title = Ext.create('Ext.Component', {
+                cls: 'x-picker-slot-title',
+                docked: 'top',
+                html: title
+            });
+        }
+        return title;
+    },
+    updateTitle: function(newTitle, oldTitle) {
+        if (newTitle) {
+            this.add(newTitle);
+            this.setupBar();
+        }
+        if (oldTitle) {
+            this.remove(oldTitle);
+        }
+    },
+    updateShowTitle: function(showTitle) {
+        var title = this.getTitle(),
+            mode = showTitle ? 'show' : 'hide';
+        if (title) {
+            title.on(mode, this.setupBar, this, {
+                single: true,
+                delay: 50
+            });
+            title[showTitle ? 'show' : 'hide']();
+        }
+    },
+    updateDisplayField: function(newDisplayField) {
+        if (!this.config.itemTpl) {
+            this.setItemTpl('<div class="x-picker-item {cls} <tpl if="extra">x-picker-invalid</tpl>">{' + newDisplayField + '}</div>');
+        }
+    },
+    /**
+     * Updates the {@link #align} configuration
+     */
+    updateAlign: function(newAlign, oldAlign) {
+        var element = this.element;
+        element.addCls('x-picker-' + newAlign);
+        element.removeCls('x-picker-' + oldAlign);
+    },
+    /**
+     * Looks at the {@link #data} configuration and turns it into {@link #store}.
+     * @param {Object} data
+     * @return {Object}
+     */
+    applyData: function(data) {
+        var parsedData = [],
+            ln = data && data.length,
+            i, item, obj;
+        if (data && Ext.isArray(data) && ln) {
+            for (i = 0; i < ln; i++) {
+                item = data[i];
+                obj = {};
+                if (Ext.isArray(item)) {
+                    obj[this.valueField] = item[0];
+                    obj[this.displayField] = item[1];
+                } else if (Ext.isString(item)) {
+                    obj[this.valueField] = item;
+                    obj[this.displayField] = item;
+                } else if (Ext.isObject(item)) {
+                    obj = item;
+                }
+                parsedData.push(obj);
+            }
+        }
+        return data;
+    },
+    // @private
+    initialize: function() {
+        Ext.dataview.DataView.prototype.initialize.call(this);
+        var scroller = this.getScrollable().getScroller();
+        this.on({
+            scope: this,
+            painted: 'onPainted',
+            itemtap: 'doItemTap'
+        });
+        this.element.on({
+            scope: this,
+            touchstart: 'onTouchStart',
+            touchend: 'onTouchEnd'
+        });
+        scroller.on({
+            scope: this,
+            scrollend: 'onScrollEnd'
+        });
+    },
+    // @private
+    onPainted: function() {
+        this.setupBar();
+    },
+    /**
+     * Returns an instance of the owner picker.
+     * @return {Object}
+     * @private
+     */
+    getPicker: function() {
+        if (!this.picker) {
+            this.picker = this.getParent();
+        }
+        return this.picker;
+    },
+    // @private
+    setupBar: function() {
+        if (!this.rendered) {
+            //if the component isnt rendered yet, there is no point in calculating the padding just eyt
+            return;
+        }
+        var element = this.element,
+            innerElement = this.innerElement,
+            picker = this.getPicker(),
+            bar = picker.bar,
+            value = this.getValue(),
+            showTitle = this.getShowTitle(),
+            title = this.getTitle(),
+            scrollable = this.getScrollable(),
+            scroller = scrollable.getScroller(),
+            titleHeight = 0,
+            barHeight, padding;
+        barHeight = bar.dom.getBoundingClientRect().height;
+        if (showTitle && title) {
+            titleHeight = title.element.getHeight();
+        }
+        padding = Math.ceil((element.getHeight() - titleHeight - barHeight) / 2);
+        if (this.getVerticallyCenterItems()) {
+            innerElement.setStyle({
+                padding: padding + 'px 0 ' + padding + 'px'
+            });
+        }
+        scroller.refresh();
+        scroller.setSlotSnapSize(barHeight);
+        this.setValue(value);
+    },
+    // @private
+    doItemTap: function(list, index, item, e) {
+        var me = this;
+        me.selectedIndex = index;
+        me.selectedNode = item;
+        me.scrollToItem(item, true);
+    },
+    // @private
+    scrollToItem: function(item, animated) {
+        var y = item.getY(),
+            parentEl = item.parent(),
+            parentY = parentEl.getY(),
+            scrollView = this.getScrollable(),
+            scroller = scrollView.getScroller(),
+            difference;
+        difference = y - parentY;
+        scroller.scrollTo(0, difference, animated);
+    },
+    // @private
+    onTouchStart: function() {
+        this.element.addCls('x-scrolling');
+    },
+    // @private
+    onTouchEnd: function() {
+        this.element.removeCls('x-scrolling');
+    },
+    // @private
+    onScrollEnd: function(scroller, x, y) {
+        var me = this,
+            index = Math.round(y / me.picker.bar.dom.getBoundingClientRect().height),
+            viewItems = me.getViewItems(),
+            item = viewItems[index];
+        if (item) {
+            me.selectedIndex = index;
+            me.selectedNode = item;
+            me.fireEvent('slotpick', me, me.getValue(), me.selectedNode);
+        }
+    },
+    /**
+     * Returns the value of this slot
+     * @private
+     */
+    getValue: function(useDom) {
+        var store = this.getStore(),
+            record, value;
+        if (!store) {
+            return;
+        }
+        if (!this.rendered || !useDom) {
+            return this._value;
+        }
+        //if the value is ever false, that means we do not want to return anything
+        if (this._value === false) {
+            return null;
+        }
+        record = store.getAt(this.selectedIndex);
+        value = record ? record.get(this.getValueField()) : null;
+        return value;
+    },
+    /**
+     * Sets the value of this slot
+     * @private
+     */
+    setValue: function(value) {
+        return this.doSetValue(value);
+    },
+    /**
+     * Sets the value of this slot
+     * @private
+     */
+    setValueAnimated: function(value) {
+        return this.doSetValue(value, true);
+    },
+    doSetValue: function(value, animated) {
+        if (!this.rendered) {
+            //we don't want to call this until the slot has been rendered
+            this._value = value;
+            return;
+        }
+        var store = this.getStore(),
+            viewItems = this.getViewItems(),
+            valueField = this.getValueField(),
+            index, item;
+        index = store.findExact(valueField, value);
+        if (index == -1) {
+            index = 0;
+        }
+        item = Ext.get(viewItems[index]);
+        this.selectedIndex = index;
+        if (item) {
+            this.scrollToItem(item, (animated) ? {
+                duration: 100
+            } : false);
+            this.select(this.selectedIndex);
+        }
+        this._value = value;
+    }
+});
+
+/**
+ * A general picker class. {@link Ext.picker.Slot}s are used to organize multiple scrollable slots into a single picker. {@link #slots} is
+ * the only necessary configuration.
+ *
+ * The {@link #slots} configuration with a few key values:
+ *
+ * - `name`: The name of the slot (will be the key when using {@link #getValues} in this {@link Ext.picker.Picker}).
+ * - `title`: The title of this slot (if {@link #useTitles} is set to `true`).
+ * - `data`/`store`: The data or store to use for this slot.
+ *
+ * Remember, {@link Ext.picker.Slot} class extends from {@link Ext.dataview.DataView}.
+ *
+ * ## Examples
+ *
+ *     @example miniphone preview
+ *     var picker = Ext.create('Ext.Picker', {
+ *         slots: [
+ *             {
+ *                 name : 'limit_speed',
+ *                 title: 'Speed',
+ *                 data : [
+ *                     {text: '50 KB/s', value: 50},
+ *                     {text: '100 KB/s', value: 100},
+ *                     {text: '200 KB/s', value: 200},
+ *                     {text: '300 KB/s', value: 300}
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *     Ext.Viewport.add(picker);
+ *     picker.show();
+ *
+ * You can also customize the top toolbar on the {@link Ext.picker.Picker} by changing the {@link #doneButton} and {@link #cancelButton} configurations:
+ *
+ *     @example miniphone preview
+ *     var picker = Ext.create('Ext.Picker', {
+ *         doneButton: 'I\'m done!',
+ *         cancelButton: false,
+ *         slots: [
+ *             {
+ *                 name : 'limit_speed',
+ *                 title: 'Speed',
+ *                 data : [
+ *                     {text: '50 KB/s', value: 50},
+ *                     {text: '100 KB/s', value: 100},
+ *                     {text: '200 KB/s', value: 200},
+ *                     {text: '300 KB/s', value: 300}
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *     Ext.Viewport.add(picker);
+ *     picker.show();
+ *
+ * Or by passing a custom {@link #toolbar} configuration:
+ *
+ *     @example miniphone preview
+ *     var picker = Ext.create('Ext.Picker', {
+ *         doneButton: false,
+ *         cancelButton: false,
+ *         toolbar: {
+ *             ui: 'light',
+ *             title: 'My Picker!'
+ *         },
+ *         slots: [
+ *             {
+ *                 name : 'limit_speed',
+ *                 title: 'Speed',
+ *                 data : [
+ *                     {text: '50 KB/s', value: 50},
+ *                     {text: '100 KB/s', value: 100},
+ *                     {text: '200 KB/s', value: 200},
+ *                     {text: '300 KB/s', value: 300}
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *     Ext.Viewport.add(picker);
+ *     picker.show();
+ */
+Ext.define('Ext.picker.Picker', {
+    extend: Ext.Sheet,
+    alias: 'widget.picker',
+    alternateClassName: 'Ext.Picker',
+    isPicker: true,
+    /**
+     * @event pick
+     * Fired when a slot has been picked
+     * @param {Ext.Picker} this This Picker.
+     * @param {Object} The values of this picker's slots, in `{name:'value'}` format.
+     * @param {Ext.Picker.Slot} slot An instance of Ext.Picker.Slot that has been picked.
+     */
+    /**
+     * @event change
+     * Fired when the value of this picker has changed the Done button has been pressed.
+     * @param {Ext.picker.Picker} this This Picker.
+     * @param {Object} value The values of this picker's slots, in `{name:'value'}` format.
+     */
+    /**
+     * @event cancel
+     * Fired when the cancel button is tapped and the values are reverted back to
+     * what they were.
+     * @param {Ext.Picker} this This Picker.
+     */
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        baseCls: 'x-picker',
+        /**
+         * @cfg {String/Mixed} doneButton
+         * Can be either:
+         *
+         * - A {String} text to be used on the Done button.
+         * - An {Object} as config for {@link Ext.Button}.
+         * - `false` or `null` to hide it.
+         * @accessor
+         */
+        doneButton: true,
+        /**
+         * @cfg {String/Mixed} cancelButton
+         * Can be either:
+         *
+         * - A {String} text to be used on the Cancel button.
+         * - An {Object} as config for {@link Ext.Button}.
+         * - `false` or `null` to hide it.
+         * @accessor
+         */
+        cancelButton: true,
+        /**
+         * @cfg {Boolean} useTitles
+         * Generate a title header for each individual slot and use
+         * the title configuration of the slot.
+         * @accessor
+         */
+        useTitles: false,
+        /**
+         * @cfg {Array} slots
+         * An array of slot configurations.
+         *
+         * - `name` {String} - Name of the slot
+         * - `data` {Array} - An array of text/value pairs in the format `{text: 'myKey', value: 'myValue'}`
+         * - `title` {String} - Title of the slot. This is used in conjunction with `useTitles: true`.
+         *
+         * @accessor
+         */
+        slots: null,
+        /**
+         * @cfg {String/Number} value The value to initialize the picker with.
+         * @accessor
+         */
+        value: null,
+        /**
+         * @cfg {Number} height
+         * The height of the picker.
+         * @accessor
+         */
+        height: 220,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        layout: {
+            type: 'hbox',
+            align: 'stretch'
+        },
+        /**
+         * @cfg
+         * @hide
+         */
+        centered: false,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        left: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        right: 0,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        bottom: 0,
+        // @private
+        defaultType: 'pickerslot',
+        toolbarPosition: 'top',
+        /**
+         * @cfg {Ext.TitleBar/Ext.Toolbar/Object} toolbar
+         * The toolbar which contains the {@link #doneButton} and {@link #cancelButton} buttons.
+         * You can override this if you wish, and add your own configurations. Just ensure that you take into account
+         * the {@link #doneButton} and {@link #cancelButton} configurations.
+         *
+         * The default xtype is a {@link Ext.TitleBar}:
+         *
+         *     toolbar: {
+         *         items: [
+         *             {
+         *                 xtype: 'button',
+         *                 text: 'Left',
+         *                 align: 'left'
+         *             },
+         *             {
+         *                 xtype: 'button',
+         *                 text: 'Right',
+         *                 align: 'left'
+         *             }
+         *         ]
+         *     }
+         *
+         * Or to use a {@link Ext.Toolbar instead}:
+         *
+         *     toolbar: {
+         *         xtype: 'toolbar',
+         *         items: [
+         *             {
+         *                 xtype: 'button',
+         *                 text: 'Left'
+         *             },
+         *             {
+         *                 xtype: 'button',
+         *                 text: 'Left Two'
+         *             }
+         *         ]
+         *     }
+         *
+         * @accessor
+         */
+        toolbar: {
+            xtype: 'titlebar'
+        }
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Windows'
+            ],
+            height: '100%',
+            toolbarPosition: 'bottom',
+            toolbar: {
+                xtype: 'toolbar',
+                layout: {
+                    type: 'hbox',
+                    pack: 'center'
+                }
+            },
+            doneButton: {
+                iconCls: 'check2',
+                ui: 'round',
+                text: ''
+            },
+            cancelButton: {
+                iconCls: 'delete',
+                ui: 'round',
+                text: ''
+            }
+        },
+        {
+            theme: [
+                'CupertinoClassic'
+            ],
+            toolbar: {
+                ui: 'black'
+            }
+        },
+        {
+            theme: [
+                'MountainView'
+            ],
+            toolbarPosition: 'bottom',
+            toolbar: {
+                defaults: {
+                    flex: 1
+                }
+            }
+        }
+    ],
+    initialize: function() {
+        var me = this,
+            clsPrefix = 'x-',
+            innerElement = this.innerElement;
+        //insert the mask, and the picker bar
+        this.mask = innerElement.createChild({
+            cls: clsPrefix + 'picker-mask'
+        });
+        this.bar = this.mask.createChild({
+            cls: clsPrefix + 'picker-bar'
+        });
+        me.on({
+            scope: this,
+            delegate: 'pickerslot',
+            slotpick: 'onSlotPick'
+        });
+    },
+    /**
+     * @private
+     */
+    applyToolbar: function(config) {
+        if (config === true) {
+            config = {};
+        }
+        Ext.applyIf(config, {
+            docked: this.getToolbarPosition()
+        });
+        return Ext.factory(config, 'Ext.TitleBar', this.getToolbar());
+    },
+    /**
+     * @private
+     */
+    updateToolbar: function(newToolbar, oldToolbar) {
+        if (newToolbar) {
+            this.add(newToolbar);
+        }
+        if (oldToolbar) {
+            this.remove(oldToolbar);
+        }
+    },
+    /**
+     * Updates the {@link #doneButton} configuration. Will change it into a button when appropriate, or just update the text if needed.
+     * @param {Object} config
+     * @return {Object}
+     */
+    applyDoneButton: function(config) {
+        if (config) {
+            if (Ext.isBoolean(config)) {
+                config = {};
+            }
+            if (typeof config == "string") {
+                config = {
+                    text: config
+                };
+            }
+            Ext.applyIf(config, {
+                ui: 'action',
+                align: 'right',
+                text: 'Done'
+            });
+        }
+        return Ext.factory(config, 'Ext.Button', this.getDoneButton());
+    },
+    updateDoneButton: function(newDoneButton, oldDoneButton) {
+        var toolbar = this.getToolbar();
+        if (newDoneButton) {
+            toolbar.add(newDoneButton);
+            newDoneButton.on('tap', this.onDoneButtonTap, this);
+        } else if (oldDoneButton) {
+            toolbar.remove(oldDoneButton);
+        }
+    },
+    /**
+     * Updates the {@link #cancelButton} configuration. Will change it into a button when appropriate, or just update the text if needed.
+     * @param {Object} config
+     * @return {Object}
+     */
+    applyCancelButton: function(config) {
+        if (config) {
+            if (Ext.isBoolean(config)) {
+                config = {};
+            }
+            if (typeof config == "string") {
+                config = {
+                    text: config
+                };
+            }
+            Ext.applyIf(config, {
+                align: 'left',
+                text: 'Cancel'
+            });
+        }
+        return Ext.factory(config, 'Ext.Button', this.getCancelButton());
+    },
+    updateCancelButton: function(newCancelButton, oldCancelButton) {
+        var toolbar = this.getToolbar();
+        if (newCancelButton) {
+            toolbar.add(newCancelButton);
+            newCancelButton.on('tap', this.onCancelButtonTap, this);
+        } else if (oldCancelButton) {
+            toolbar.remove(oldCancelButton);
+        }
+    },
+    /**
+     * @private
+     */
+    updateUseTitles: function(useTitles) {
+        var innerItems = this.getInnerItems(),
+            ln = innerItems.length,
+            cls = 'x-use-titles',
+            i, innerItem;
+        //add a cls onto the picker
+        if (useTitles) {
+            this.addCls(cls);
+        } else {
+            this.removeCls(cls);
+        }
+        //show the time on each of the slots
+        for (i = 0; i < ln; i++) {
+            innerItem = innerItems[i];
+            if (innerItem.isSlot) {
+                innerItem.setShowTitle(useTitles);
+            }
+        }
+    },
+    applySlots: function(slots) {
+        //loop through each of the slots and add a reference to this picker
+        if (slots) {
+            var ln = slots.length,
+                i;
+            for (i = 0; i < ln; i++) {
+                slots[i].picker = this;
+            }
+        }
+        return slots;
+    },
+    /**
+     * Adds any new {@link #slots} to this picker, and removes existing {@link #slots}
+     * @private
+     */
+    updateSlots: function(newSlots) {
+        var bcss = 'x-',
+            innerItems;
+        this.removeAll();
+        if (newSlots) {
+            this.add(newSlots);
+        }
+        innerItems = this.getInnerItems();
+        if (innerItems.length > 0) {
+            innerItems[0].addCls(bcss + 'first');
+            innerItems[innerItems.length - 1].addCls(bcss + 'last');
+        }
+        this.updateUseTitles(this.getUseTitles());
+    },
+    /**
+     * @private
+     * Called when the done button has been tapped.
+     */
+    onDoneButtonTap: function() {
+        var oldValue = this._value,
+            newValue = this.getValue(true);
+        if (newValue != oldValue) {
+            this.fireEvent('change', this, newValue);
+        }
+        this.hide();
+        Ext.util.InputBlocker.unblockInputs();
+    },
+    /**
+     * @private
+     * Called when the cancel button has been tapped.
+     */
+    onCancelButtonTap: function() {
+        this.fireEvent('cancel', this);
+        this.hide();
+        Ext.util.InputBlocker.unblockInputs();
+    },
+    /**
+     * @private
+     * Called when a slot has been picked.
+     */
+    onSlotPick: function(slot) {
+        this.fireEvent('pick', this, this.getValue(true), slot);
+    },
+    show: function() {
+        if (this.getParent() === undefined) {
+            Ext.Viewport.add(this);
+        }
+        Ext.Sheet.prototype.show.apply(this, arguments);
+        if (!this.isHidden()) {
+            this.setValue(this._value);
+        }
+        Ext.util.InputBlocker.blockInputs();
+    },
+    /**
+     * Sets the values of the pickers slots.
+     * @param {Object} values The values in a {name:'value'} format.
+     * @param {Boolean} animated `true` to animate setting the values.
+     * @return {Ext.Picker} this This picker.
+     */
+    setValue: function(values, animated) {
+        var me = this,
+            slots = me.getInnerItems(),
+            ln = slots.length,
+            key, slot, loopSlot, i, value;
+        if (!values) {
+            values = {};
+            for (i = 0; i < ln; i++) {
+                //set the value to false so the slot will return null when getValue is called
+                values[slots[i].config.name] = null;
+            }
+        }
+        for (key in values) {
+            slot = null;
+            value = values[key];
+            for (i = 0; i < slots.length; i++) {
+                loopSlot = slots[i];
+                if (loopSlot.config.name == key) {
+                    slot = loopSlot;
+                    break;
+                }
+            }
+            if (slot) {
+                if (animated) {
+                    slot.setValueAnimated(value);
+                } else {
+                    slot.setValue(value);
+                }
+            }
+        }
+        me._values = me._value = values;
+        return me;
+    },
+    setValueAnimated: function(values) {
+        this.setValue(values, true);
+    },
+    /**
+     * Returns the values of each of the pickers slots
+     * @return {Object} The values of the pickers slots
+     */
+    getValue: function(useDom) {
+        var values = {},
+            items = this.getItems().items,
+            ln = items.length,
+            item, i;
+        if (useDom) {
+            for (i = 0; i < ln; i++) {
+                item = items[i];
+                if (item && item.isSlot) {
+                    values[item.getName()] = item.getValue(useDom);
+                }
+            }
+            this._values = values;
+        }
+        return this._values;
+    },
+    /**
+     * Returns the values of each of the pickers slots.
+     * @return {Object} The values of the pickers slots.
+     */
+    getValues: function() {
+        return this.getValue();
+    },
+    destroy: function() {
+        Ext.Sheet.prototype.destroy.call(this);
+        Ext.destroy(this.mask, this.bar);
+    }
+}, function() {});
+
+/**
+ * Simple Select field wrapper. Example usage:
+ *
+ *     @example
+ *     Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'fieldset',
+ *                 title: 'Select',
+ *                 items: [
+ *                     {
+ *                         xtype: 'selectfield',
+ *                         label: 'Choose one',
+ *                         options: [
+ *                             {text: 'First Option',  value: 'first'},
+ *                             {text: 'Second Option', value: 'second'},
+ *                             {text: 'Third Option',  value: 'third'}
+ *                         ]
+ *                     }
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *
+ * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
+ */
+(Ext.cmd.derive('Ext.field.Select', Ext.field.Text, {
+    alternateClassName: 'Ext.form.Select',
+    /**
+     * @event change
+     * Fires when an option selection has changed
+     * @param {Ext.field.Select} this
+     * @param {Mixed} newValue The new value
+     * @param {Mixed} oldValue The old value
+     */
+    /**
+     * @event focus
+     * Fires when this field receives input focus. This happens both when you tap on the field and when you focus on the field by using
+     * 'next' or 'tab' on a keyboard.
+     *
+     * Please note that this event is not very reliable on Android. For example, if your Select field is second in your form panel,
+     * you cannot use the Next button to get to this select field. This functionality works as expected on iOS.
+     * @param {Ext.field.Select} this This field
+     * @param {Ext.event.Event} e
+     */
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        ui: 'select',
+        /**
+         * @cfg {Boolean} useClearIcon
+         * @hide
+         */
+        /**
+         * @cfg {String/Number} valueField The underlying {@link Ext.data.Field#name data value name} (or numeric Array index) to bind to this
+         * Select control.
+         * @accessor
+         */
+        valueField: 'value',
+        /**
+         * @cfg {String/Number} displayField The underlying {@link Ext.data.Field#name data value name} (or numeric Array index) to bind to this
+         * Select control. This resolved value is the visibly rendered value of the available selection options.
+         * @accessor
+         */
+        displayField: 'text',
+        /**
+         * @cfg {Ext.data.Store/Object/String} store The store to provide selection options data.
+         * Either a Store instance, configuration object or store ID.
+         * @accessor
+         */
+        store: null,
+        /**
+         * @cfg {Array} options An array of select options.
+         *
+         *     [
+         *         {text: 'First Option',  value: 'first'},
+         *         {text: 'Second Option', value: 'second'},
+         *         {text: 'Third Option',  value: 'third'}
+         *     ]
+         *
+         * __Note:__ Option object member names should correspond with defined {@link #valueField valueField} and {@link #displayField displayField} values.
+         * This config will be ignored if a {@link #store store} instance is provided.
+         * @accessor
+         */
+        options: null,
+        /**
+         * @cfg {String} hiddenName Specify a `hiddenName` if you're using the {@link Ext.form.Panel#standardSubmit standardSubmit} option.
+         * This name will be used to post the underlying value of the select to the server.
+         * @accessor
+         */
+        hiddenName: null,
+        /**
+         * @cfg {Object} component
+         * @accessor
+         * @hide
+         */
+        component: {
+            useMask: true
+        },
+        /**
+         * @cfg {Boolean} clearIcon
+         * @hide
+         * @accessor
+         */
+        clearIcon: false,
+        /**
+         * @cfg {String/Boolean} usePicker
+         * `true` if you want this component to always use a {@link Ext.picker.Picker}.
+         * `false` if you want it to use a popup overlay {@link Ext.List}.
+         * `auto` if you want to show a {@link Ext.picker.Picker} only on phones.
+         */
+        usePicker: 'auto',
+        /**
+         * @cfg {Boolean} autoSelect
+         * `true` to auto select the first value in the {@link #store} or {@link #options} when they are changed. Only happens when
+         * the {@link #value} is set to `null`.
+         */
+        autoSelect: true,
+        /**
+         * @cfg {Object} defaultPhonePickerConfig
+         * The default configuration for the picker component when you are on a phone.
+         */
+        defaultPhonePickerConfig: null,
+        /**
+         * @cfg {Object} defaultTabletPickerConfig
+         * The default configuration for the picker component when you are on a tablet.
+         */
+        defaultTabletPickerConfig: null,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        name: 'picker',
+        /**
+         * @cfg {String} pickerSlotAlign
+         * The alignment of text in the picker created by this Select
+         * @private
+         */
+        pickerSlotAlign: 'center'
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Windows'
+            ],
+            pickerSlotAlign: 'left'
+        },
+        {
+            theme: [
+                'Tizen'
+            ],
+            usePicker: false
+        }
+    ],
+    // @private
+    initialize: function() {
+        var me = this,
+            component = me.getComponent();
+        Ext.field.Text.prototype.initialize.call(this);
+        component.on({
+            scope: me,
+            masktap: 'onMaskTap'
+        });
+        component.doMaskTap = Ext.emptyFn;
+        if (Ext.browser.is.AndroidStock2) {
+            component.input.dom.disabled = true;
+        }
+        if (Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103) {
+            this.label.on({
+                scope: me,
+                tap: "onFocus"
+            });
+        }
+    },
+    getElementConfig: function() {
+        if (Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103) {
+            var prefix = 'x-';
+            return {
+                reference: 'element',
+                className: 'x-container',
+                children: [
+                    {
+                        reference: 'innerElement',
+                        cls: prefix + 'component-outer',
+                        children: [
+                            {
+                                reference: 'label',
+                                cls: prefix + 'form-label',
+                                children: [
+                                    {
+                                        reference: 'labelspan',
+                                        tag: 'span'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            };
+        } else {
+            return Ext.field.Text.prototype.getElementConfig.apply(this, arguments);
+        }
+    },
+    /**
+     * @private
+     */
+    updateDefaultPhonePickerConfig: function(newConfig) {
+        var picker = this.picker;
+        if (picker) {
+            picker.setConfig(newConfig);
+        }
+    },
+    /**
+     * @private
+     */
+    updateDefaultTabletPickerConfig: function(newConfig) {
+        var listPanel = this.listPanel;
+        if (listPanel) {
+            listPanel.setConfig(newConfig);
+        }
+    },
+    /**
+     * @private
+     * Checks if the value is `auto`. If it is, it only uses the picker if the current device type
+     * is a phone.
+     */
+    applyUsePicker: function(usePicker) {
+        if (usePicker == "auto") {
+            usePicker = (Ext.os.deviceType == 'Phone');
+        }
+        return Boolean(usePicker);
+    },
+    syncEmptyCls: Ext.emptyFn,
+    /**
+     * @private
+     */
+    applyValue: function(value) {
+        var record = value,
+            index, store;
+        //we call this so that the options configruation gets intiailized, so that a store exists, and we can
+        //find the correct value
+        this.getOptions();
+        store = this.getStore();
+        if ((value != undefined && !value.isModel) && store) {
+            index = store.find(this.getValueField(), value, null, null, null, true);
+            if (index == -1) {
+                index = store.find(this.getDisplayField(), value, null, null, null, true);
+            }
+            record = store.getAt(index);
+        }
+        return record;
+    },
+    updateValue: function(newValue, oldValue) {
+        this.record = newValue;
+        Ext.field.Text.prototype.updateValue.call(this, (newValue && newValue.isModel) ? newValue.get(this.getDisplayField()) : '');
+    },
+    getValue: function() {
+        var record = this.record;
+        return (record && record.isModel) ? record.get(this.getValueField()) : null;
+    },
+    /**
+     * Returns the current selected {@link Ext.data.Model record} instance selected in this field.
+     * @return {Ext.data.Model} the record.
+     */
+    getRecord: function() {
+        return this.record;
+    },
+    // @private
+    getPhonePicker: function() {
+        var config = this.getDefaultPhonePickerConfig();
+        if (!this.picker) {
+            this.picker = Ext.create('Ext.picker.Picker', Ext.apply({
+                slots: [
+                    {
+                        align: this.getPickerSlotAlign(),
+                        name: this.getName(),
+                        valueField: this.getValueField(),
+                        displayField: this.getDisplayField(),
+                        value: this.getValue(),
+                        store: this.getStore()
+                    }
+                ],
+                listeners: {
+                    change: this.onPickerChange,
+                    scope: this
+                }
+            }, config));
+        }
+        return this.picker;
+    },
+    // @private
+    getTabletPicker: function() {
+        var config = this.getDefaultTabletPickerConfig();
+        if (!this.listPanel) {
+            this.listPanel = Ext.create('Ext.Panel', Ext.apply({
+                left: 0,
+                top: 0,
+                modal: true,
+                cls: 'x-select-overlay',
+                layout: 'fit',
+                hideOnMaskTap: true,
+                width: Ext.os.is.Phone ? '14em' : '18em',
+                height: (Ext.os.is.BlackBerry && Ext.os.version.getMajor() === 10) ? '12em' : (Ext.os.is.Phone ? '12.5em' : '22em'),
+                items: {
+                    xtype: 'list',
+                    store: this.getStore(),
+                    itemTpl: '<span class="x-list-label">{' + this.getDisplayField() + ':htmlEncode}</span>',
+                    listeners: {
+                        select: this.onListSelect,
+                        itemtap: this.onListTap,
+                        scope: this
+                    }
+                }
+            }, config));
+        }
+        return this.listPanel;
+    },
+    // @private
+    onMaskTap: function() {
+        this.onFocus();
+        return false;
+    },
+    /**
+     * Shows the picker for the select field, whether that is a {@link Ext.picker.Picker} or a simple
+     * {@link Ext.List list}.
+     */
+    showPicker: function() {
+        var me = this,
+            store = me.getStore(),
+            value = me.getValue();
+        //check if the store is empty, if it is, return
+        if (!store || store.getCount() === 0) {
+            return;
+        }
+        if (me.getReadOnly()) {
+            return;
+        }
+        me.isFocused = true;
+        if (me.getUsePicker()) {
+            var picker = me.getPhonePicker(),
+                name = me.getName(),
+                pickerValue = {};
+            pickerValue[name] = value;
+            picker.setValue(pickerValue);
+            if (!picker.getParent()) {
+                Ext.Viewport.add(picker);
+            }
+            picker.show();
+        } else {
+            var listPanel = me.getTabletPicker(),
+                list = listPanel.down('list'),
+                index, record;
+            if (!listPanel.getParent()) {
+                Ext.Viewport.add(listPanel);
+            }
+            listPanel.showBy(me.getComponent(), null);
+            if (value || me.getAutoSelect()) {
+                store = list.getStore();
+                index = store.find(me.getValueField(), value, null, null, null, true);
+                record = store.getAt(index);
+                if (record) {
+                    list.select(record, null, true);
+                }
+            }
+        }
+    },
+    // @private
+    onListSelect: function(item, record) {
+        var me = this;
+        if (record) {
+            me.setValue(record);
+        }
+    },
+    onListTap: function() {
+        this.listPanel.hide({
+            type: 'fade',
+            out: true,
+            scope: this
+        });
+    },
+    // @private
+    onPickerChange: function(picker, value) {
+        var me = this,
+            newValue = value[me.getName()],
+            store = me.getStore(),
+            index = store.find(me.getValueField(), newValue, null, null, null, true),
+            record = store.getAt(index);
+        me.setValue(record);
+    },
+    onChange: function(component, newValue, oldValue) {
+        var me = this,
+            store = me.getStore(),
+            index = (store) ? store.find(me.getDisplayField(), oldValue, null, null, null, true) : -1,
+            valueField = me.getValueField(),
+            record = (store) ? store.getAt(index) : null;
+        oldValue = (record) ? record.get(valueField) : null;
+        me.fireEvent('change', me, me.getValue(), oldValue);
+    },
+    /**
+     * Updates the underlying `<options>` list with new values.
+     *
+     * @param {Array} newOptions An array of options configurations to insert or append.
+     *
+     *     selectBox.setOptions([
+     *         {text: 'First Option',  value: 'first'},
+     *         {text: 'Second Option', value: 'second'},
+     *         {text: 'Third Option',  value: 'third'}
+     *     ]).setValue('third');
+     *
+     * __Note:__ option object member names should correspond with defined {@link #valueField valueField} and
+     * {@link #displayField displayField} values.
+     *
+     * @return {Ext.field.Select} this
+     */
+    updateOptions: function(newOptions) {
+        var store = this.getStore();
+        if (!store) {
+            this.setStore(true);
+            store = this._store;
+        }
+        if (!newOptions) {
+            store.clearData();
+        } else {
+            store.setData(newOptions);
+            this.onStoreDataChanged(store);
+        }
+        return this;
+    },
+    applyStore: function(store) {
+        if (store === true) {
+            store = Ext.create('Ext.data.Store', {
+                fields: [
+                    this.getValueField(),
+                    this.getDisplayField()
+                ],
+                autoDestroy: true
+            });
+        }
+        if (store) {
+            store = Ext.data.StoreManager.lookup(store);
+            store.on({
+                scope: this,
+                addrecords: 'onStoreDataChanged',
+                removerecords: 'onStoreDataChanged',
+                updaterecord: 'onStoreDataChanged',
+                refresh: 'onStoreDataChanged'
+            });
+        }
+        return store;
+    },
+    updateStore: function(newStore) {
+        if (newStore) {
+            this.onStoreDataChanged(newStore);
+        }
+        if (this.getUsePicker() && this.picker) {
+            this.picker.down('pickerslot').setStore(newStore);
+        } else if (this.listPanel) {
+            this.listPanel.down('dataview').setStore(newStore);
+        }
+    },
+    /**
+     * Called when the internal {@link #store}'s data has changed.
+     */
+    onStoreDataChanged: function(store) {
+        var initialConfig = this.getInitialConfig(),
+            value = this.getValue();
+        if (value || value == 0) {
+            this.updateValue(this.applyValue(value));
+        }
+        if (this.getValue() === null) {
+            if (initialConfig.hasOwnProperty('value')) {
+                this.setValue(initialConfig.value);
+            }
+            if (this.getValue() === null && this.getAutoSelect()) {
+                if (store.getCount() > 0) {
+                    this.setValue(store.getAt(0));
+                }
+            }
+        }
+    },
+    /**
+     * @private
+     */
+    doSetDisabled: function(disabled) {
+        var component = this.getComponent();
+        if (component) {
+            component.setDisabled(disabled);
+        }
+        Ext.Component.prototype.doSetDisabled.apply(this, arguments);
+    },
+    /**
+     * @private
+     */
+    setDisabled: function() {
+        Ext.Component.prototype.setDisabled.apply(this, arguments);
+    },
+    // @private
+    updateLabelWidth: function() {
+        if (Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103) {
+            return;
+        } else {
+            Ext.field.Text.prototype.updateLabelWidth.apply(this, arguments);
+        }
+    },
+    // @private
+    updateLabelAlign: function() {
+        if (Ext.theme.is.Blackberry || Ext.theme.is.Blackberry103) {
+            return;
+        } else {
+            Ext.field.Text.prototype.updateLabelAlign.apply(this, arguments);
+        }
+    },
+    /**
+     * Resets the Select field to the value of the first record in the store.
+     * @return {Ext.field.Select} this
+     * @chainable
+     */
+    reset: function() {
+        var me = this,
+            record;
+        if (me.getAutoSelect()) {
+            var store = me.getStore();
+            record = (me.originalValue) ? me.originalValue : store.getAt(0);
+        } else {
+            var usePicker = me.getUsePicker(),
+                picker = usePicker ? me.picker : me.listPanel;
+            if (picker) {
+                picker = picker.child(usePicker ? 'pickerslot' : 'dataview');
+                picker.deselectAll();
+            }
+            record = null;
+        }
+        me.setValue(record);
+        return me;
+    },
+    onFocus: function(e) {
+        if (this.getDisabled()) {
+            return false;
+        }
+        var component = this.getComponent();
+        this.fireEvent('focus', this, e);
+        if (Ext.os.is.Android4) {
+            component.input.dom.focus();
+        }
+        component.input.dom.blur();
+        this.isFocused = true;
+        this.showPicker();
+    },
+    destroy: function() {
+        Ext.field.Text.prototype.destroy.apply(this, arguments);
+        var store = this.getStore();
+        if (store && store.getAutoDestroy()) {
+            Ext.destroy(store);
+        }
+        Ext.destroy(this.listPanel, this.picker);
+    }
+}, 0, [
+    "selectfield"
+], [
+    "component",
+    "field",
+    "textfield",
+    "selectfield"
+], {
+    "component": true,
+    "field": true,
+    "textfield": true,
+    "selectfield": true
+}, [
+    "widget.selectfield"
+], 0, [
+    Ext.field,
+    'Select',
+    Ext.form,
+    'Select'
+], 0));
+
+/**
+ * A date picker component which shows a Date Picker on the screen. This class extends from {@link Ext.picker.Picker}
+ * and {@link Ext.Sheet} so it is a popup.
+ *
+ * This component has no required configurations.
+ *
+ * ## Examples
+ *
+ *     @example miniphone preview
+ *     var datePicker = Ext.create('Ext.picker.Date');
+ *     Ext.Viewport.add(datePicker);
+ *     datePicker.show();
+ *
+ * You may want to adjust the {@link #yearFrom} and {@link #yearTo} properties:
+ *
+ *     @example miniphone preview
+ *     var datePicker = Ext.create('Ext.picker.Date', {
+ *         yearFrom: 2000,
+ *         yearTo  : 2015
+ *     });
+ *     Ext.Viewport.add(datePicker);
+ *     datePicker.show();
+ *
+ * You can set the value of the {@link Ext.picker.Date} to the current date using `new Date()`:
+ *
+ *     @example miniphone preview
+ *     var datePicker = Ext.create('Ext.picker.Date', {
+ *         value: new Date()
+ *     });
+ *     Ext.Viewport.add(datePicker);
+ *     datePicker.show();
+ *
+ * And you can hide the titles from each of the slots by using the {@link #useTitles} configuration:
+ *
+ *     @example miniphone preview
+ *     var datePicker = Ext.create('Ext.picker.Date', {
+ *         useTitles: false
+ *     });
+ *     Ext.Viewport.add(datePicker);
+ *     datePicker.show();
+ */
+(Ext.cmd.derive('Ext.picker.Date', Ext.picker.Picker, {
+    alternateClassName: 'Ext.DatePicker',
+    /**
+     * @event change
+     * Fired when the value of this picker has changed and the done button is pressed.
+     * @param {Ext.picker.Date} this This Picker
+     * @param {Date} value The date value
+     */
+    config: {
+        /**
+         * @cfg {Number} yearFrom
+         * The start year for the date picker. If {@link #yearFrom} is greater than
+         * {@link #yearTo} then the order of years will be reversed.
+         * @accessor
+         */
+        yearFrom: 1980,
+        /**
+         * @cfg {Number} [yearTo=new Date().getFullYear()]
+         * The last year for the date picker. If {@link #yearFrom} is greater than
+         * {@link #yearTo} then the order of years will be reversed.
+         * @accessor
+         */
+        yearTo: new Date().getFullYear(),
+        /**
+         * @cfg {String} monthText
+         * The label to show for the month column.
+         * @accessor
+         */
+        monthText: 'Month',
+        /**
+         * @cfg {String} dayText
+         * The label to show for the day column.
+         * @accessor
+         */
+        dayText: 'Day',
+        /**
+         * @cfg {String} yearText
+         * The label to show for the year column.
+         * @accessor
+         */
+        yearText: 'Year',
+        /**
+         * @cfg {Array} slotOrder
+         * An array of strings that specifies the order of the slots.
+         * @accessor
+         */
+        slotOrder: [
+            'month',
+            'day',
+            'year'
+        ],
+        /**
+         * @cfg {Object/Date} value
+         * Default value for the field and the internal {@link Ext.picker.Date} component. Accepts an object of 'year',
+         * 'month' and 'day' values, all of which should be numbers, or a {@link Date}.
+         *
+         * Examples:
+         *
+         * - `{year: 1989, day: 1, month: 5}` = 1st May 1989
+         * - `new Date()` = current date
+         * @accessor
+         */
+        /**
+         * @cfg {Array} slots
+         * @hide
+         * @accessor
+         */
+        /**
+         * @cfg {String/Mixed} doneButton
+         * Can be either:
+         *
+         * - A {String} text to be used on the Done button.
+         * - An {Object} as config for {@link Ext.Button}.
+         * - `false` or `null` to hide it.
+         * @accessor
+         */
+        doneButton: true
+    },
+    platformConfig: [
+        {
+            theme: [
+                'Windows'
+            ],
+            doneButton: {
+                iconCls: 'check2',
+                ui: 'round',
+                text: ''
+            }
+        }
+    ],
+    initialize: function() {
+        Ext.picker.Picker.prototype.initialize.call(this);
+        this.on({
+            scope: this,
+            delegate: '> slot',
+            slotpick: this.onSlotPick
+        });
+        this.on({
+            scope: this,
+            show: this.onSlotPick
+        });
+    },
+    setValue: function(value, animated) {
+        if (Ext.isDate(value)) {
+            value = {
+                day: value.getDate(),
+                month: value.getMonth() + 1,
+                year: value.getFullYear()
+            };
+        }
+        (arguments.callee.$previous || Ext.picker.Picker.prototype.setValue).call(this, value, animated);
+        this.onSlotPick();
+    },
+    getValue: function(useDom) {
+        var values = {},
+            items = this.getItems().items,
+            ln = items.length,
+            daysInMonth, day, month, year, item, i;
+        for (i = 0; i < ln; i++) {
+            item = items[i];
+            if (item instanceof Ext.picker.Slot) {
+                values[item.getName()] = item.getValue(useDom);
+            }
+        }
+        //if all the slots return null, we should not return a date
+        if (values.year === null && values.month === null && values.day === null) {
+            return null;
+        }
+        year = Ext.isNumber(values.year) ? values.year : 1;
+        month = Ext.isNumber(values.month) ? values.month : 1;
+        day = Ext.isNumber(values.day) ? values.day : 1;
+        if (month && year && month && day) {
+            daysInMonth = this.getDaysInMonth(month, year);
+        }
+        day = (daysInMonth) ? Math.min(day, daysInMonth) : day;
+        return new Date(year, month - 1, day);
+    },
+    /**
+     * Updates the yearFrom configuration
+     */
+    updateYearFrom: function() {
+        if (this.initialized) {
+            this.createSlots();
+        }
+    },
+    /**
+     * Updates the yearTo configuration
+     */
+    updateYearTo: function() {
+        if (this.initialized) {
+            this.createSlots();
+        }
+    },
+    /**
+     * Updates the monthText configuration
+     */
+    updateMonthText: function(newMonthText, oldMonthText) {
+        var innerItems = this.getInnerItems,
+            ln = innerItems.length,
+            item, i;
+        //loop through each of the current items and set the title on the correct slice
+        if (this.initialized) {
+            for (i = 0; i < ln; i++) {
+                item = innerItems[i];
+                if ((typeof item.title == "string" && item.title == oldMonthText) || (item.title.html == oldMonthText)) {
+                    item.setTitle(newMonthText);
+                }
+            }
+        }
+    },
+    /**
+     * Updates the {@link #dayText} configuration.
+     */
+    updateDayText: function(newDayText, oldDayText) {
+        var innerItems = this.getInnerItems,
+            ln = innerItems.length,
+            item, i;
+        //loop through each of the current items and set the title on the correct slice
+        if (this.initialized) {
+            for (i = 0; i < ln; i++) {
+                item = innerItems[i];
+                if ((typeof item.title == "string" && item.title == oldDayText) || (item.title.html == oldDayText)) {
+                    item.setTitle(newDayText);
+                }
+            }
+        }
+    },
+    /**
+     * Updates the yearText configuration
+     */
+    updateYearText: function(yearText) {
+        var innerItems = this.getInnerItems,
+            ln = innerItems.length,
+            item, i;
+        //loop through each of the current items and set the title on the correct slice
+        if (this.initialized) {
+            for (i = 0; i < ln; i++) {
+                item = innerItems[i];
+                if (item.title == this.yearText) {
+                    item.setTitle(yearText);
+                }
+            }
+        }
+    },
+    // @private
+    constructor: function() {
+        Ext.picker.Picker.prototype.constructor.apply(this, arguments);
+        this.createSlots();
+    },
+    /**
+     * Generates all slots for all years specified by this component, and then sets them on the component
+     * @private
+     */
+    createSlots: function() {
+        var me = this,
+            slotOrder = me.getSlotOrder(),
+            yearsFrom = me.getYearFrom(),
+            yearsTo = me.getYearTo(),
+            years = [],
+            days = [],
+            months = [],
+            reverse = yearsFrom > yearsTo,
+            ln, i, daysInMonth;
+        while (yearsFrom) {
+            years.push({
+                text: yearsFrom,
+                value: yearsFrom
+            });
+            if (yearsFrom === yearsTo) {
+                break;
+            }
+            if (reverse) {
+                yearsFrom--;
+            } else {
+                yearsFrom++;
+            }
+        }
+        daysInMonth = me.getDaysInMonth(1, new Date().getFullYear());
+        for (i = 0; i < daysInMonth; i++) {
+            days.push({
+                text: i + 1,
+                value: i + 1
+            });
+        }
+        for (i = 0 , ln = Ext.Date.monthNames.length; i < ln; i++) {
+            months.push({
+                text: Ext.Date.monthNames[i],
+                value: i + 1
+            });
+        }
+        var slots = [];
+        slotOrder.forEach(function(item) {
+            slots.push(me.createSlot(item, days, months, years));
+        });
+        me.setSlots(slots);
+    },
+    /**
+     * Returns a slot config for a specified date.
+     * @private
+     */
+    createSlot: function(name, days, months, years) {
+        switch (name) {
+            case 'year':
+                return {
+                    name: 'year',
+                    align: 'center',
+                    data: years,
+                    title: this.getYearText(),
+                    flex: 3
+                };
+            case 'month':
+                return {
+                    name: name,
+                    align: 'right',
+                    data: months,
+                    title: this.getMonthText(),
+                    flex: 4
+                };
+            case 'day':
+                return {
+                    name: 'day',
+                    align: 'center',
+                    data: days,
+                    title: this.getDayText(),
+                    flex: 2
+                };
+        }
+    },
+    onSlotPick: function() {
+        var value = this.getValue(true),
+            slot = this.getDaySlot(),
+            year = value.getFullYear(),
+            month = value.getMonth(),
+            days = [],
+            daysInMonth, i;
+        if (!value || !Ext.isDate(value) || !slot) {
+            return;
+        }
+        Ext.picker.Picker.prototype.onSlotPick.apply(this, arguments);
+        //get the new days of the month for this new date
+        daysInMonth = this.getDaysInMonth(month + 1, year);
+        for (i = 0; i < daysInMonth; i++) {
+            days.push({
+                text: i + 1,
+                value: i + 1
+            });
+        }
+        // We don't need to update the slot days unless it has changed
+        if (slot.getStore().getCount() == days.length) {
+            return;
+        }
+        slot.getStore().setData(days);
+        // Now we have the correct amount of days for the day slot, lets update it
+        var store = slot.getStore(),
+            viewItems = slot.getViewItems(),
+            valueField = slot.getValueField(),
+            index, item;
+        index = store.find(valueField, value.getDate());
+        if (index == -1) {
+            return;
+        }
+        item = Ext.get(viewItems[index]);
+        slot.selectedIndex = index;
+        slot.scrollToItem(item);
+        slot.setValue(slot.getValue(true));
+    },
+    getDaySlot: function() {
+        var innerItems = this.getInnerItems(),
+            ln = innerItems.length,
+            i, slot;
+        if (this.daySlot) {
+            return this.daySlot;
+        }
+        for (i = 0; i < ln; i++) {
+            slot = innerItems[i];
+            if (slot.isSlot && slot.getName() == "day") {
+                this.daySlot = slot;
+                return slot;
+            }
+        }
+        return null;
+    },
+    // @private
+    getDaysInMonth: function(month, year) {
+        var daysInMonth = [
+                31,
+                28,
+                31,
+                30,
+                31,
+                30,
+                31,
+                31,
+                30,
+                31,
+                30,
+                31
+            ];
+        return month == 2 && this.isLeapYear(year) ? 29 : daysInMonth[month - 1];
+    },
+    // @private
+    isLeapYear: function(year) {
+        return !!((year & 3) === 0 && (year % 100 || (year % 400 === 0 && year)));
+    },
+    onDoneButtonTap: function() {
+        var oldValue = this._value,
+            newValue = this.getValue(true),
+            testValue = newValue;
+        if (Ext.isDate(newValue)) {
+            testValue = newValue.toDateString();
+        }
+        if (Ext.isDate(oldValue)) {
+            oldValue = oldValue.toDateString();
+        }
+        if (testValue != oldValue) {
+            this.fireEvent('change', this, newValue);
+        }
+        this.hide();
+        Ext.util.InputBlocker.unblockInputs();
+    }
+}, 1, [
+    "datepicker"
+], [
+    "component",
+    "container",
+    "panel",
+    "sheet",
+    "picker",
+    "datepicker"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "sheet": true,
+    "picker": true,
+    "datepicker": true
+}, [
+    "widget.datepicker"
+], 0, [
+    Ext.picker,
+    'Date',
+    Ext,
+    'DatePicker'
+], 0));
+
+/**
+ * This is a specialized field which shows a {@link Ext.picker.Date} when tapped. If it has a predefined value,
+ * or a value is selected in the {@link Ext.picker.Date}, it will be displayed like a normal {@link Ext.field.Text}
+ * (but not selectable/changable).
+ *
+ *     Ext.create('Ext.field.DatePicker', {
+ *         label: 'Birthday',
+ *         value: new Date()
+ *     });
+ *
+ * {@link Ext.field.DatePicker} fields are very simple to implement, and have no required configurations.
+ *
+ * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
+ * 
+ * ## Examples
+ *
+ * It can be very useful to set a default {@link #value} configuration on {@link Ext.field.DatePicker} fields. In
+ * this example, we set the {@link #value} to be the current date. You can also use the {@link #setValue} method to
+ * update the value at any time.
+ *
+ *     @example miniphone preview
+ *     Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'fieldset',
+ *                 items: [
+ *                     {
+ *                         xtype: 'datepickerfield',
+ *                         label: 'Birthday',
+ *                         name: 'birthday',
+ *                         value: new Date()
+ *                     }
+ *                 ]
+ *             },
+ *             {
+ *                 xtype: 'toolbar',
+ *                 docked: 'bottom',
+ *                 items: [
+ *                     { xtype: 'spacer' },
+ *                     {
+ *                         text: 'setValue',
+ *                         handler: function() {
+ *                             var datePickerField = Ext.ComponentQuery.query('datepickerfield')[0];
+ *
+ *                             var randomNumber = function(from, to) {
+ *                                 return Math.floor(Math.random() * (to - from + 1) + from);
+ *                             };
+ *
+ *                             datePickerField.setValue({
+ *                                 month: randomNumber(0, 11),
+ *                                 day  : randomNumber(0, 28),
+ *                                 year : randomNumber(1980, 2011)
+ *                             });
+ *                         }
+ *                     },
+ *                     { xtype: 'spacer' }
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *
+ * When you need to retrieve the date from the {@link Ext.field.DatePicker}, you can either use the {@link #getValue} or
+ * {@link #getFormattedValue} methods:
+ *
+ *     @example preview
+ *     Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'fieldset',
+ *                 items: [
+ *                     {
+ *                         xtype: 'datepickerfield',
+ *                         label: 'Birthday',
+ *                         name: 'birthday',
+ *                         value: new Date()
+ *                     }
+ *                 ]
+ *             },
+ *             {
+ *                 xtype: 'toolbar',
+ *                 docked: 'bottom',
+ *                 items: [
+ *                     {
+ *                         text: 'getValue',
+ *                         handler: function() {
+ *                             var datePickerField = Ext.ComponentQuery.query('datepickerfield')[0];
+ *                             Ext.Msg.alert(null, datePickerField.getValue());
+ *                         }
+ *                     },
+ *                     { xtype: 'spacer' },
+ *                     {
+ *                         text: 'getFormattedValue',
+ *                         handler: function() {
+ *                             var datePickerField = Ext.ComponentQuery.query('datepickerfield')[0];
+ *                             Ext.Msg.alert(null, datePickerField.getFormattedValue());
+ *                         }
+ *                     }
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *
+ *
+ */
+(Ext.cmd.derive('Ext.field.DatePicker', Ext.field.Select, {
+    alternateClassName: 'Ext.form.DatePicker',
+    /**
+     * @event change
+     * Fires when a date is selected
+     * @param {Ext.field.DatePicker} this
+     * @param {Date} newDate The new date
+     * @param {Date} oldDate The old date
+     */
+    config: {
+        ui: 'select',
+        /**
+         * @cfg {Object/Ext.picker.Date} picker
+         * An object that is used when creating the internal {@link Ext.picker.Date} component or a direct instance of {@link Ext.picker.Date}.
+         * @accessor
+         */
+        picker: true,
+        /**
+         * @cfg {Boolean}
+         * @hide
+         * @accessor
+         */
+        clearIcon: false,
+        /**
+         * @cfg {Object/Date} value
+         * Default value for the field and the internal {@link Ext.picker.Date} component. Accepts an object of 'year',
+         * 'month' and 'day' values, all of which should be numbers, or a {@link Date}.
+         *
+         * Example: {year: 1989, day: 1, month: 5} = 1st May 1989 or new Date()
+         * @accessor
+         */
+        /**
+         * @cfg {Boolean} destroyPickerOnHide
+         * Whether or not to destroy the picker widget on hide. This save memory if it's not used frequently,
+         * but increase delay time on the next show due to re-instantiation.
+         * @accessor
+         */
+        destroyPickerOnHide: false,
+        /**
+         * @cfg {String} [dateFormat=Ext.util.Format.defaultDateFormat] The format to be used when displaying the date in this field.
+         * Accepts any valid date format. You can view formats over in the {@link Ext.Date} documentation.
+         */
+        dateFormat: null,
+        /**
+         * @cfg {Object}
+         * @hide
+         */
+        component: {
+            useMask: true
+        }
+    },
+    initialize: function() {
+        var me = this,
+            component = me.getComponent();
+        Ext.field.Select.prototype.initialize.call(this);
+        component.on({
+            scope: me,
+            masktap: 'onMaskTap'
+        });
+        component.doMaskTap = Ext.emptyFn;
+        if (Ext.browser.is.AndroidStock2) {
+            component.input.dom.disabled = true;
+        }
+    },
+    syncEmptyCls: Ext.emptyFn,
+    applyValue: function(value) {
+        if (!Ext.isDate(value) && !Ext.isObject(value)) {
+            return null;
+        }
+        if (Ext.isObject(value)) {
+            return new Date(value.year, value.month - 1, value.day);
+        }
+        return value;
+    },
+    updateValue: function(newValue, oldValue) {
+        var me = this,
+            picker = me._picker;
+        if (picker && picker.isPicker) {
+            picker.setValue(newValue);
+        }
+        // Ext.Date.format expects a Date
+        if (newValue !== null) {
+            me.getComponent().setValue(Ext.Date.format(newValue, me.getDateFormat() || Ext.util.Format.defaultDateFormat));
+        } else {
+            me.getComponent().setValue('');
+        }
+        if (newValue !== oldValue) {
+            me.fireEvent('change', me, newValue, oldValue);
+        }
+    },
+    /**
+     * Updates the date format in the field.
+     * @private
+     */
+    updateDateFormat: function(newDateFormat, oldDateFormat) {
+        var value = this.getValue();
+        if (newDateFormat != oldDateFormat && Ext.isDate(value)) {
+            this.getComponent().setValue(Ext.Date.format(value, newDateFormat || Ext.util.Format.defaultDateFormat));
+        }
+    },
+    /**
+     * Returns the {@link Date} value of this field.
+     * If you wanted a formatted date use the {@link #getFormattedValue} method.
+     * @return {Date} The date selected
+     */
+    getValue: function() {
+        if (this._picker && this._picker instanceof Ext.picker.Date) {
+            return this._picker.getValue();
+        }
+        return this._value;
+    },
+    /**
+     * Returns the value of the field formatted using the specified format. If it is not specified, it will default to
+     * {@link #dateFormat} and then {@link Ext.util.Format#defaultDateFormat}.
+     * @param {String} format The format to be returned.
+     * @return {String} The formatted date.
+     */
+    getFormattedValue: function(format) {
+        var value = this.getValue();
+        return (Ext.isDate(value)) ? Ext.Date.format(value, format || this.getDateFormat() || Ext.util.Format.defaultDateFormat) : value;
+    },
+    applyPicker: function(picker, pickerInstance) {
+        if (pickerInstance && pickerInstance.isPicker) {
+            picker = pickerInstance.setConfig(picker);
+        }
+        return picker;
+    },
+    getPicker: function() {
+        var picker = this._picker,
+            value = this.getValue();
+        if (picker && !picker.isPicker) {
+            picker = Ext.factory(picker, Ext.picker.Date);
+            if (value != null) {
+                picker.setValue(value);
+            }
+        }
+        picker.on({
+            scope: this,
+            change: 'onPickerChange',
+            hide: 'onPickerHide'
+        });
+        this._picker = picker;
+        return picker;
+    },
+    /**
+     * @private
+     * Listener to the tap event of the mask element. Shows the internal DatePicker component when the button has been tapped.
+     */
+    onMaskTap: function() {
+        if (this.getDisabled()) {
+            return false;
+        }
+        this.onFocus();
+        return false;
+    },
+    /**
+     * Called when the picker changes its value.
+     * @param {Ext.picker.Date} picker The date picker.
+     * @param {Object} value The new value from the date picker.
+     * @private
+     */
+    onPickerChange: function(picker, value) {
+        var me = this,
+            oldValue = me.getValue();
+        me.setValue(value);
+        me.fireEvent('select', me, value);
+        me.onChange(me, value, oldValue);
+    },
+    /**
+     * Override this or change event will be fired twice. change event is fired in updateValue
+     * for this field. TOUCH-2861
+     */
+    onChange: Ext.emptyFn,
+    /**
+     * Destroys the picker when it is hidden, if
+     * {@link Ext.field.DatePicker#destroyPickerOnHide destroyPickerOnHide} is set to `true`.
+     * @private
+     */
+    onPickerHide: function() {
+        var me = this,
+            picker = me.getPicker();
+        if (me.getDestroyPickerOnHide() && picker) {
+            picker.destroy();
+            me._picker = me.getInitialConfig().picker || true;
+        }
+    },
+    reset: function() {
+        this.setValue(this.originalValue);
+    },
+    onFocus: function(e) {
+        var component = this.getComponent();
+        this.fireEvent('focus', this, e);
+        if (Ext.os.is.Android4) {
+            component.input.dom.focus();
+        }
+        component.input.dom.blur();
+        if (this.getReadOnly()) {
+            return false;
+        }
+        this.isFocused = true;
+        this.getPicker().show();
+    },
+    // @private
+    destroy: function() {
+        var picker = this._picker;
+        if (picker && picker.isPicker) {
+            picker.destroy();
+        }
+        Ext.field.Select.prototype.destroy.apply(this, arguments);
+    }
+}, 0, [
+    "datepickerfield"
+], [
+    "component",
+    "field",
+    "textfield",
+    "selectfield",
+    "datepickerfield"
+], {
+    "component": true,
+    "field": true,
+    "textfield": true,
+    "selectfield": true,
+    "datepickerfield": true
+}, [
+    "widget.datepickerfield"
+], 0, [
+    Ext.field,
+    'DatePicker',
+    Ext.form,
+    'DatePicker'
+], 0));
+
+/**
+ * @private
+ */
+(Ext.cmd.derive('Ext.field.FileInput', Ext.field.Input, {
+    /**
+     * @event change
+     * Fires just before the field blurs if the field value has changed
+     * @param {Ext.field.Text} this This field
+     * @param {Mixed} newValue The new value
+     * @param {Mixed} oldValue The original value
+     */
+    config: {
+        type: "file",
+        accept: null,
+        capture: null,
+        name: null,
+        multiple: false
+    },
+    /**
+     * @property {Object} Lookup of capture devices to accept types
+     * @private
+     */
+    captureLookup: {
+        video: "camcorder",
+        image: "camera",
+        audio: "microphone"
+    },
+    // @private
+    initialize: function() {
+        var me = this;
+        Ext.field.Input.prototype.initialize.call(this);
+        me.input.on({
+            scope: me,
+            change: 'onInputChange'
+        });
+    },
+    /**
+     * Returns the field data value.
+     * @return {String} value The field value.
+     */
+    getValue: function() {
+        var input = this.input;
+        if (input) {
+            this._value = input.dom.value;
+        }
+        return this._value;
+    },
+    /**
+     * Sets the internal value. Security restrictions prevent setting file values on the input element
+     * @cfg newValue {string} New Value
+     * @returns {String}
+     */
+    setValue: function(newValue) {
+        var oldValue = this._value;
+        this._value = newValue;
+        if (String(this._value) != String(oldValue) && this.initialized) {
+            this.onChange(this, this._value, oldValue);
+        }
+        return this;
+    },
+    /**
+     * Returns the field files.
+     * @return {FileList} List of the files selected.
+     */
+    getFiles: function() {
+        var input = this.input;
+        if (input) {
+            this.$files = input.dom.files;
+        }
+        return this.$files;
+    },
+    // @private
+    onInputChange: function(e) {
+        this.setValue(e.target.value);
+    },
+    /**
+     * Called when the value changes on this input item
+     * @cfg me {Ext.field.FileInput}
+     * @cfg value {String} new Value
+     * @cfg startValue {String} Original Value
+     */
+    onChange: function(me, value, startValue) {
+        this.fireEvent('change', me, value, startValue);
+    },
+    /**
+     * Called when the name being changed
+     * @cfg value   new value
+     * @returns {*}
+     */
+    applyName: function(value) {
+        if (this.getMultiple() && value.substr(-2, 2) !== "[]") {
+            value += "[]";
+        } else if ((!this.getMultiple()) && value.substr(-2, 2) === "[]") {
+            value = value.substr(0, value.length - 2);
+        }
+        return value;
+    },
+    /**
+     * Applies the multiple attribute to the input
+     * @cfg value {boolean}
+     * @returns {boolean}
+     */
+    applyMultiple: function(value) {
+        this.updateFieldAttribute('multiple', value ? '' : null);
+        return value;
+    },
+    /**
+     * Called when the multiple property is updated. The name will automatically be toggled to an array if needed.
+     */
+    updateMultiple: function() {
+        var name = this.getName();
+        if (!Ext.isEmpty(name)) {
+            this.setName(name);
+        }
+    },
+    /*
+     * Updates the accept attribute with the {@link #accept} configuration.
+     * 
+     */
+    applyAccept: function(value) {
+        switch (value) {
+            case "video":
+            case "audio":
+            case "image":
+                value = value + "/*";
+                break;
+        }
+        this.updateFieldAttribute('accept', value);
+    },
+    /**
+     * Updated the capture attribute with the {@ink capture} configuration
+     */
+    applyCapture: function(value) {
+        this.updateFieldAttribute('capture', value);
+        return value;
+    }
+}, 0, [
+    "fileinput"
+], [
+    "component",
+    "input",
+    "fileinput"
+], {
+    "component": true,
+    "input": true,
+    "fileinput": true
+}, [
+    "widget.fileinput"
+], 0, [
+    Ext.field,
+    'FileInput'
+], 0));
+
+/**
+ * Creates an HTML file input field on the page. This is usually used to upload files to remote server. File fields are usually
+ * created inside a form like this:
+ *
+ *     @example
+ *     Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'fieldset',
+ *                 title: 'My Uploader',
+ *                 items: [
+ *                     {
+ *                         xtype: 'filefield',
+ *                         label: "MyPhoto:",
+ *                         name: 'photo',
+ *                         accept: 'image'
+ *                     }
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *
+ * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
+ */
+(Ext.cmd.derive('Ext.field.File', Ext.field.Field, {
+    /**
+     * @event change
+     * Fires when a file has been selected
+     * @param {Ext.field.File} this This field
+     * @param {Mixed} newValue The new value
+     * @param {Mixed} oldValue The original value
+     */
+    config: {
+        component: {
+            xtype: 'fileinput',
+            fastFocus: false
+        }
+    },
+    proxyConfig: {
+        name: null,
+        value: null,
+        files: null,
+        /**
+         * @cfg {Boolean} multiple Allow selection of multiple files
+         *
+         * @accessor
+         */
+        multiple: false,
+        /**
+         * @cfg {String} accept File input accept attribute documented here (http://www.w3schools.com/tags/att_input_accept.asp)
+         * Also can be simple strings -- e.g. audio, video, image
+         *
+         * @accessor
+         */
+        accept: null,
+        /**
+         * @cfg {String} capture File input capture attribute. Accepts values such as "camera", "camcorder", "microphone"
+         *
+         * @accessor
+         */
+        capture: null
+    },
+    // @private
+    isFile: true,
+    // @private
+    initialize: function() {
+        var me = this;
+        Ext.field.Field.prototype.initialize.call(this);
+        me.getComponent().on({
+            scope: this,
+            change: 'onChange'
+        });
+    },
+    onChange: function(me, value, startValue) {
+        me.fireEvent('change', this, value, startValue);
+    }
+}, 0, [
+    "filefield"
+], [
+    "component",
+    "field",
+    "filefield"
+], {
+    "component": true,
+    "field": true,
+    "filefield": true
+}, [
+    "widget.filefield"
+], 0, [
+    Ext.field,
+    'File'
 ], 0));
 
 /**
@@ -63938,6 +65947,7 @@ Ext.define('Ext.direct.Manager', {
  */
 (Ext.cmd.derive('Contact.model.Contact', Ext.data.Model, {
     config: {
+        useCache: false,
         fields: [
             {
                 name: 'businessName',
@@ -63983,9 +65993,6 @@ Ext.define('Ext.direct.Manager', {
             },
             {
                 name: 'websiteDisplayName'
-            },
-            {
-                name: 'distance'
             }
         ]
     }
@@ -64010,6 +66017,7 @@ Ext.define('Ext.direct.Manager', {
  */
 (Ext.cmd.derive('Contact.model.Deal', Ext.data.Model, {
     config: {
+        useCache: false,
         fields: [
             {
                 name: 'customerId'
@@ -64024,6 +66032,7 @@ Ext.define('Ext.direct.Manager', {
                 convert: function(v, rec) {
                     return Ext.Date.format(new Date(v), 'n/j/Y');
                 },
+                dateFormat: 'n/j/Y',
                 name: 'dealStartDate',
                 type: 'date'
             },
@@ -64031,6 +66040,7 @@ Ext.define('Ext.direct.Manager', {
                 convert: function(v, rec) {
                     return Ext.Date.format(new Date(v), 'n/j/Y');
                 },
+                dateFormat: 'n/j/Y',
                 name: 'dealEndDate',
                 type: 'date'
             },
@@ -64038,15 +66048,7 @@ Ext.define('Ext.direct.Manager', {
                 name: 'dealPictureURL'
             },
             {
-                convert: function(v, rec) {
-                    var d = new Date();
-                    d.setDate(d.getDate() + 5);
-                    //test.setDate(Ext.Date.add(date,Ext.Date.DAY,5));
-                    return Ext.Date.format(d, 'n/j/Y');
-                },
-                dateFormat: 'n/j/Y',
-                name: 'todayplusfivedays',
-                type: 'date'
+                name: 'itemName'
             },
             {
                 name: 'businessName'
@@ -64054,29 +66056,30 @@ Ext.define('Ext.direct.Manager', {
             {
                 convert: function(v, rec) {
                     var date = new Date();
-                    return Ext.Date.format(date, 'n/j/Y');
+                    var test = Ext.Date.add(date, Ext.Date.DAY, 3);
+                    return Ext.Date.format(test, 'n/j/Y');
                 },
-                name: 'today',
+                name: 'todayplusthreedays',
                 type: 'date'
             },
             {
-                name: 'dealDescription'
-            },
-            {
-                name: 'itemName'
+                name: 'dealDescription',
+                type: 'string'
             },
             {
                 name: 'dealImageURL'
             }
         ]
     }
-}, 0, 0, 0, 0, 0, 0, [
+}, 0, 0, 0, 0, [
+    "model.deal"
+], 0, [
     Contact.model,
     'Deal'
 ], 0));
 
 /*
- * File: app/model/UserPreferences.js
+ * File: app/model/UserDetails.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -64089,220 +66092,38 @@ Ext.define('Ext.direct.Manager', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.model.UserPreferences', Ext.data.Model, {
+(Ext.cmd.derive('Contact.model.UserDetails', Ext.data.Model, {
     config: {
-        idProperty: '',
         fields: [
             {
-                name: 'customerId',
-                type: 'auto'
+                name: 'customerId'
             },
             {
-                defaultValue: false,
-                name: 'isFavorite',
-                type: 'boolean'
+                name: 'businessName'
+            },
+            {
+                name: 'email'
+            },
+            {
+                name: 'FBLoginName'
+            },
+            {
+                name: 'gender'
+            },
+            {
+                name: 'FBUserId'
+            },
+            {
+                name: 'access_token'
+            },
+            {
+                name: 'DealPictureURL'
             }
         ]
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.model,
-    'UserPreferences'
-], 0));
-
-/*
- * File: app/model/MapMarkerPosition.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.model.MapMarkerPosition', Ext.data.Model, {
-    config: {
-        fields: [
-            {
-                name: 'lat'
-            },
-            {
-                name: 'long'
-            }
-        ]
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.model,
-    'MapMarkerPosition'
-], 0));
-
-/*
- * File: app/model/storesNearBy.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.model.storesNearBy', Ext.data.Model, {
-    config: {
-        useCache: false,
-        fields: [
-            {
-                name: 'customerId',
-                persist: false
-            }
-        ]
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.model,
-    'storesNearBy'
-], 0));
-
-/*
- * File: app/model/UserLocation.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.model.UserLocation', Ext.data.Model, {
-    config: {
-        fields: [
-            {
-                name: 'latitude'
-            },
-            {
-                name: 'longitude'
-            }
-        ]
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.model,
-    'UserLocation'
-], 0));
-
-/*
- * File: app/store/ContactStore.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.store.ContactStore', Ext.data.Store, {
-    config: {
-        autoLoad: true,
-        autoSync: true,
-        data: [
-            {
-                businessName: 'iste',
-                category: 'illo',
-                phoneNumber: '(599) 543-9099',
-                emailAddress: '198 Hovde Trail',
-                address: '304 Monica Crossing',
-                city: 'Officia',
-                state: 'AS',
-                zipcode: 'atque',
-                picture: 'ea',
-                isFavorite: false
-            },
-            {
-                businessName: 'fugit',
-                category: 'et',
-                phoneNumber: '(515) 687-0416',
-                emailAddress: '28 Banding Drive',
-                address: '263 West Point',
-                city: 'Veritatis',
-                state: 'FL',
-                zipcode: 'repellendus',
-                picture: 'recusandae',
-                isFavorite: false
-            },
-            {
-                businessName: 'nisi',
-                category: 'dolorem',
-                phoneNumber: '(883) 506-3306',
-                emailAddress: '47 Elmside Place',
-                address: '263 West Point',
-                city: 'Laboriosam',
-                state: 'WY',
-                zipcode: 'optio',
-                picture: 'et',
-                isFavorite: false
-            },
-            {
-                businessName: 'est',
-                category: 'nulla',
-                phoneNumber: '(827) 412-2582',
-                emailAddress: '70664 Twin Pines Street',
-                address: '296 Reindahl Center',
-                city: 'Aspernatur',
-                state: 'IA',
-                zipcode: 'soluta',
-                picture: 'ullam',
-                isFavorite: true
-            },
-            {
-                businessName: 'provident',
-                category: 'veritatis',
-                phoneNumber: '(673) 355-2351',
-                emailAddress: '47 Elmside Place',
-                address: '28 Banding Drive',
-                city: 'Voluptate',
-                state: 'AR',
-                zipcode: 'eius',
-                picture: 'rerum',
-                isFavorite: true
-            }
-        ],
-        groupDir: 'ASC',
-        groupField: 'category',
-        model: 'Contact.model.Contact',
-        storeId: 'ContactStore',
-        proxy: {
-            type: 'localstorage'
-        },
-        grouper: {
-            groupFn: function(record) {
-                return record.get('businessName')[0];
-            }
-        },
-        sorters: {
-            property: 'businessName'
-        },
-        fields: [
-            {
-                defaultValue: '0 mi',
-                name: 'distance'
-            }
-        ]
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
-    'ContactStore'
+    'UserDetails'
 ], 0));
 
 /*
@@ -64322,25 +66143,40 @@ Ext.define('Ext.direct.Manager', {
 (Ext.cmd.derive('Contact.store.MyJsonPStore', Ext.data.Store, {
     config: {
         autoLoad: true,
+        autoSync: true,
         groupField: 'category',
         model: 'Contact.model.Contact',
         storeId: 'MyJsonPStore',
+        grouper: {
+            groupFn: function(item) {
+                return record.get('category');
+            },
+            sortProperty: ''
+        },
         sorters: {
-            property: 'distance'
+            sorterFn: function(first, second) {}
         },
         proxy: {
             type: 'jsonp',
             url: 'http://services.appsonmobile.com/stores',
             reader: {
                 type: 'json'
+            },
+            writer: {
+                type: 'json',
+                encode: true
             }
         },
-        grouper: {
-            groupFn: function(item) {
-                return record.get('category');
-            },
-            sortProperty: 'category'
-        }
+        listeners: [
+            {
+                fn: 'onJsonpstoreUpdaterecord',
+                event: 'updaterecord'
+            }
+        ]
+    },
+    onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
+        console.log('Updating record');
+        return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
@@ -64368,28 +66204,31 @@ Ext.define('Ext.direct.Manager', {
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
-            simpleSortMode: true,
-            sortParam: '{dealEndDate:DESC}',
             url: 'http://services.appsonmobile.com/deals',
             reader: {
                 type: 'json'
+            },
+            writer: {
+                type: 'json',
+                encode: true
             }
         },
         listeners: [
             {
-                fn: 'onJsonpstoreLoad',
-                event: 'load'
+                fn: 'onJsonstoreAddrecords',
+                event: 'addrecords'
+            },
+            {
+                fn: 'onJsonstoreRemoverecords',
+                event: 'removerecords'
             }
-        ],
-        sorters: {
-            property: 'dealEndDate'
-        }
+        ]
     },
-    onJsonpstoreLoad: function(store, records, successful, operation, eOpts) {
-        //console.log(records);
-        var date = new Date();
-        var today = Ext.Date.format(date, 'n/j/Y');
-        var test = Ext.Date.add(date, Ext.Date.DAY, 3);
+    onJsonstoreAddrecords: function(store, records, eOpts) {
+        store.load();
+    },
+    onJsonstoreRemoverecords: function(store, records, indices, eOpts) {
+        store.load();
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
@@ -64397,7 +66236,7 @@ Ext.define('Ext.direct.Manager', {
 ], 0));
 
 /*
- * File: app/store/UserPreferences.js
+ * File: app/store/UserDetails.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -64410,65 +66249,20 @@ Ext.define('Ext.direct.Manager', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.store.UserPreferences', Ext.data.Store, {
+(Ext.cmd.derive('Contact.store.UserDetails', Ext.data.Store, {
     config: {
         autoLoad: true,
         autoSync: true,
-        clearOnPageLoad: false,
-        model: 'Contact.model.UserPreferences',
+        model: 'Contact.model.UserDetails',
         remoteFilter: true,
-        storeId: 'UserPreferences',
+        storeId: 'UserDetails',
         proxy: {
-            type: 'localstorage',
-            batchActions: false,
-            id: ''
+            type: 'sessionstorage'
         }
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.store,
-    'UserPreferences'
-], 0));
-
-/*
- * File: app/store/MyJsonPStore1.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.store.MyJsonPStore1', Ext.data.Store, {
-    config: {
-        autoLoad: true,
-        groupField: 'category',
-        model: 'Contact.model.Contact',
-        storeId: 'MyJsonPStore1',
-        grouper: {
-            groupFn: function(item) {
-                return record.get('category');
-            },
-            sortProperty: ''
-        },
-        sorters: {
-            sorterFn: function(first, second) {}
-        },
-        proxy: {
-            type: 'jsonp',
-            url: 'http://services.appsonmobile.com/stores',
-            reader: {
-                type: 'json'
-            }
-        }
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
-    'MyJsonPStore1'
+    'UserDetails'
 ], 0));
 
 /*
@@ -64496,7 +66290,7 @@ Ext.define('Ext.direct.Manager', {
 ], 0));
 
 /*
- * File: app/store/MapMarkerPositionStore.js
+ * File: app/view/Login.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -64509,274 +66303,123 @@ Ext.define('Ext.direct.Manager', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.store.MapMarkerPositionStore', Ext.data.Store, {
+(Ext.cmd.derive('Contact.view.Login', Ext.Container, {
     config: {
-        model: 'Contact.model.MapMarkerPosition',
-        storeId: 'MapMarkerPositionStore',
-        proxy: {
-            type: 'localstorage'
-        }
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
-    'MapMarkerPositionStore'
-], 0));
-
-/*
- * File: app/store/calculateDistances.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.store.calculateDistances', Ext.data.Store, {
-    config: {
-        model: 'Contact.model.storesNearBy',
-        storeId: 'calculateDistances'
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
-    'calculateDistances'
-], 0));
-
-/*
- * File: app/store/UserLocation.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.store.UserLocation', Ext.data.Store, {
-    config: {
-        model: 'Contact.model.UserLocation',
-        storeId: 'UserLocation',
-        proxy: {
-            type: 'localstorage'
-        }
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
-    'UserLocation'
-], 0));
-
-/*
- * File: app/view/WelcomeScreen.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.WelcomeScreen', Ext.Panel, {
-    config: {
-        style: 'background:#FFF;color:#00529D!important',
+        id: 'Login',
+        itemId: 'Login',
+        maxHeight: '',
+        style: '',
         styleHtmlContent: true,
-        items: [
-            {
-                xtype: 'textfield',
-                cls: 'searchfield',
-                height: '9vh',
-                id: 'zipcodeLookUp',
-                itemId: 'zipcodeLookUp',
-                left: '18%',
-                padding: '5 5 5 5',
-                style: 'border:1px solid black',
-                top: '27%',
-                width: '60%',
-                clearIcon: false,
-                name: 'zipcodeLookUp',
-                placeHolder: '       Enter Zipcode'
-            },
-            {
-                xtype: 'button',
-                handler: function(button, e) {
-                    var userLocationStore = Ext.getStore('UserLocation');
-                    navigator.geolocation.getCurrentPosition(function showPosition(position) {
-                        latitude = position.coords.latitude;
-                        longitude = position.coords.longitude;
-                        var store = Ext.getStore('MyDealsStore');
-                        var stores = [];
-                        var storesNearBy = Ext.getStore('calculateDistances');
-                        //userLocationStore.removeAt(0);
-                        userLocationStore.add({
-                            'latitude': latitude.toString(),
-                            'longitude': longitude.toString()
-                        });
-                        userLocationStore.sync();
-                        userLocationStore.load();
-                        // Ext.Viewport.getActiveItem().destroy();
-                        var view = Ext.Viewport.add({
-                                xtype: 'Main'
-                            });
-                        Ext.Viewport.setActiveItem(view);
-                        var store1 = Ext.getStore('MyJsonPStore');
-                        store1.load();
-                        store1.clearFilter();
-                        store1.filterBy(function(record) {
-                            var address = record.get('address');
-                            var customerId;
-                            $.getJSON("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + latitude + "," + longitude + "&destinations=" + address + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-                                store.clearFilter();
-                                store.load();
-                                var store1 = Ext.getStore('calculateDistances');
-                                Ext.Array.erase(stores, 0, stores.length);
-                                store1.each(function(record) {
-                                    Ext.Array.include(stores, record.get('customerId'));
-                                });
-                                var rec = userLocationStore.getAllCount();
-                                console.log('Store count' + rec);
-                                console.log(stores.length);
-                                store.filterBy(function(record) {
-                                    return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-                                }, this);
-                                var distance = json.rows[0].elements[0].distance.value;
-                                console.log(record.get('businessName') + distance);
-                                if (distance <= 80468) /*40234*/
-                                {
-                                    storesNearBy.add({
-                                        'customerId': record.get('customerId')
-                                    });
-                                    return true;
-                                } else {
-                                    return false;
-                                }
-                            });
-                        });
-                    }, onError);
-                    function onError() {
-                        Ext.Msg.alert('Location Service is Disabled', 'Allow LocalBuzz To Access Your Location', null, null);
-                    }
-                },
-                height: '9vh',
-                left: '20%',
-                style: 'font-size:5vw;font-family:Arial',
-                top: '1%',
-                ui: 'action',
-                width: '60%',
-                text: 'Use Current Location'
-            },
-            {
-                xtype: 'component',
-                cls: 'contact-name',
-                disabled: true,
-                docked: 'top',
-                height: '',
-                html: '<br><div style="text-align:center;"><h3 style="color:#00529D"><b>Welcome to Local Buzz</h3><br><h5 style="color:#00529D">Find the Latest Buzz around You!</h3></div>',
-                id: 'nameTxt4',
-                itemId: 'nameTxt2',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;color:#00529D!important;',
-                styleHtmlContent: true
-            },
-            {
-                xtype: 'component',
-                cls: 'contact-name',
-                disabled: true,
-                html: '<div  style="text-align:center;"><br><h2 style="color:#00529D">OR</h2><br><br><br></div>',
-                id: 'nameTxt5',
-                itemId: 'nameTxt3',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                styleHtmlContent: true
-            }
-        ],
+        layout: {
+            type: 'card',
+            animation: 'pop'
+        },
         listeners: [
             {
-                fn: 'onZipcodeLookUpAction',
-                event: 'action',
-                delegate: '#zipcodeLookUp'
+                fn: 'onContainerPainted',
+                event: 'painted'
             }
         ]
     },
-    onZipcodeLookUpAction: function(textfield, e, eOpts) {
-        var postalCode = textfield.getValue();
-        console.log(postalCode);
-        var store = Ext.getStore('MyDealsStore');
-        var userLocationStore = Ext.getStore('UserLocation');
-        var stores = [];
-        var latitude;
-        var longitude;
-        var storesNearBy = Ext.getStore('calculateDistances');
-        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + postalCode + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-            latitude = json.results[0].geometry.location.lat;
-            longitude = json.results[0].geometry.location.lng;
-            //userLocationStore.removeAt(0);
-            console.log(latitude, longitude);
-            userLocationStore.add({
-                'latitude': latitude.toString(),
-                'longitude': longitude.toString()
-            });
-            console.log('Store count is : ' + userLocationStore.getAllCount());
-            // Ext.Viewport.getActiveItem().destroy();
-            var view = Ext.Viewport.add({
-                    xtype: 'Main'
-                });
-            Ext.Viewport.setActiveItem(view);
-            var store1 = Ext.getStore('MyJsonPStore');
-            store1.load();
-            store1.clearFilter();
-            store1.filterBy(function(record) {
-                var address = record.get('address');
-                var customerId;
-                $.getJSON("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + latitude + "," + longitude + "&destinations=" + address + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-                    store.clearFilter();
-                    store.load();
-                    var store1 = Ext.getStore('calculateDistances');
-                    Ext.Array.erase(stores, 0, stores.length);
-                    store1.each(function(record) {
-                        Ext.Array.include(stores, record.get('customerId'));
+    onContainerPainted: function(element, eOpts) {
+        // Settings.
+        FacebookInAppBrowser.settings.appId = '900651756709444';
+        FacebookInAppBrowser.settings.redirectUrl = 'http://appsonmobile.com';
+        FacebookInAppBrowser.settings.permissions = 'email';
+        // Optional
+        FacebookInAppBrowser.settings.timeoutDuration = 7500;
+        // Login(accessToken will be stored trough localStorage in 'accessToken');
+        FacebookInAppBrowser.login({
+            send: function() {
+                console.log('login opened');
+            },
+            success: function(access_token) {
+                console.log('done, access token: ' + access_token);
+            },
+            denied: function() {
+                console.log('user denied');
+            },
+            timeout: function() {
+                console.log('a timeout has occurred, probably a bad internet connection');
+            },
+            complete: function(access_token) {
+                console.log('window closed');
+                if (access_token) {
+                    console.log(access_token);
+                } else {
+                    console.log('no access token');
+                }
+            },
+            userInfo: function(userInfo) {
+                if (userInfo) {
+                    var userInf = JSON.stringify(userInfo);
+                    console.log(userInf);
+                    var info = userInf.split("\",\"");
+                    var tmp = info[0].split("\":\"");
+                    var email = tmp[1];
+                    //console.log(email);
+                    tmp = info[1].split("\":\"");
+                    var loginName = tmp[1];
+                    tmp = info[2].split("\":\"");
+                    var gender = tmp[1];
+                    tmp = info[3].split("\":\"");
+                    var userId = tmp[1];
+                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'owner@justdance.com', 0, true, false, false);
+                    //console.log(store.getData());
+                    //store.loadRecord();
+                    //var view = Ext.create('Contact.view.Info');
+                    //view.setRecord(record.getRecord());
+                    //console.log(view.getData());
+                    //Ext.Viewport.setActiveItem(view);
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.removeAll();
+                    storeUserDetails.add({
+                        'customerId': record.get('customerId'),
+                        'email': email,
+                        'businessName': record.get('businessName'),
+                        'DealPictureURL': record.get('pictureURL')
                     });
-                    console.log(stores.length);
-                    store.filterBy(function(record) {
-                        return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-                    }, this);
-                    var distance = json.rows[0].elements[0].distance.value;
-                    console.log(record.get('businessName') + distance);
-                    if (distance <= 80468) {
-                        storesNearBy.add({
-                            'customerId': record.get('customerId')
+                    var view = Ext.Viewport.add({
+                            xtype: 'panel'
                         });
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-            });
+                    //view.getComponent('home').setRecord(record);
+                    Ext.Viewport.getActiveItem().destroy();
+                    Ext.Viewport.setActiveItem(view);
+                } else {
+                    console.log('no user info');
+                }
+            }
         });
+    },
+    initialize: function() {
+        Ext.Container.prototype.initialize.call(this);
+        if (Ext.os.is('Android')) {
+            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+            // add back button listener
+            function onBackKeyDown(e) {
+                navigator.app.exitApp();
+            }
+        }
     }
-}, 0, 0, [
+}, 0, [
+    "Login"
+], [
     "component",
     "container",
-    "panel"
+    "Login"
 ], {
     "component": true,
     "container": true,
-    "panel": true
-}, 0, 0, [
+    "Login": true
+}, [
+    "widget.Login"
+], 0, [
     Contact.view,
-    'WelcomeScreen'
+    'Login'
 ], 0));
 
 /*
- * File: app/view/DealPicture.js
+ * File: app/view/contactinfo.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -64789,28 +66432,15 @@ Ext.define('Ext.direct.Manager', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.DealPicture', Ext.Panel, {
-    alternateClassName: [
-        'dealPicture'
-    ],
+(Ext.cmd.derive('Contact.view.contactinfo', Ext.form.Panel, {
     config: {
-        cls: 'icon-share',
-        fullscreen: true,
-        html: '',
-        id: 'dealPicture',
-        itemId: 'dealPicture',
-        margin: '',
-        padding: '5 5 5 5',
-        style: 'background:#fff;',
-        width: '100%',
-        scrollable: true,
-        tpl: [
-            '<tpl if="dealImageURL">',
-            '<div><img src="{dealImageURL}" style="margin: 0px 5px 0px 5px;height:250px;width:95%;border:none;"/></div>',
-            ' ',
-            '    </tpl>',
-            '    '
-        ],
+        border: 5,
+        id: 'info',
+        itemId: 'info',
+        style: 'background;#fff',
+        styleHtmlContent: true,
+        modal: true,
+        scrollable: false,
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -64820,425 +66450,90 @@ Ext.define('Ext.direct.Manager', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
-                height: '8vh',
+                ui: 'plain',
                 items: [
-                    {
-                        xtype: 'button',
-                        handler: function(button, e) {
-                            Ext.Viewport.getActiveItem().destroy();
-                            Ext.getStore('LocalStore').removeAt(0);
-                            if (Ext.Viewport.getComponent('DealsPanel')) {
-                                Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
-                            } else {
-                                Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('tabbar'));
-                            }
-                        },
-                        centered: false,
-                        cls: 'icon-back-button',
-                        height: '100%',
-                        id: 'dealpictureBackBtn',
-                        itemId: 'dealpictureBackBtn',
-                        style: 'font-family:Arial;',
-                        styleHtmlContent: true,
-                        ui: 'plain',
-                        text: '',
-                        listeners: [
-                            {
-                                fn: function(component, eOpts) {
-                                    if (Ext.os.is('Android')) {
-                                        this.setHidden(true);
-                                    }
-                                },
-                                event: 'initialize',
-                                order: 'after'
-                            }
-                        ]
-                    },
-                    {
-                        xtype: 'button',
-                        cls: 'icon-share',
-                        docked: 'right',
-                        height: '100%',
-                        id: 'share',
-                        itemId: 'share',
-                        margin: '5 10 10 10',
-                        padding: '0 5 25 5',
-                        style: 'font-family:Arial;',
-                        styleHtmlContent: true,
-                        ui: 'plain'
-                    },
-                    {
-                        xtype: 'spacer',
-                        width: 70
-                    },
                     {
                         xtype: 'component',
                         cls: 'contact-name',
                         disabled: true,
-                        height: '',
-                        html: '<b>Business Name</b>',
-                        id: 'nameTxt1',
-                        itemId: 'nameTxt1',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                        width: '65%'
+                        html: '<b>First Name</b>',
+                        id: 'nameTxt',
+                        itemId: 'nameTxt'
+                    },
+                    {
+                        xtype: 'spacer',
+                        height: 11,
+                        width: 18
+                    },
+                    {
+                        xtype: 'button',
+                        docked: 'right',
+                        itemId: 'mybutton10',
+                        style: 'color:#00529D',
+                        ui: 'plain',
+                        iconCls: 'icon-menu'
                     }
                 ]
             },
             {
-                xtype: 'component',
-                cls: 'contact-name',
-                disabled: true,
+                xtype: 'dataview',
                 docked: 'top',
-                height: '250px',
-                id: 'dealimage',
-                itemId: 'dealimage',
-                left: '2%',
-                padding: '10 10 10 10',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0;',
-                top: '1%',
-                width: '95%',
+                height: '40%',
+                id: 'mydataview',
+                itemId: 'mydataview',
+                margin: '5 2 5 2',
+                padding: '',
+                style: 'overflow:hidden',
+                width: '98%',
+                scrollable: false,
+                deferEmptyText: false,
+                itemTpl: [
+                    '<img src = "{pictureURL}" style="height:30%;width:98%;margin-left:5px;margin-top:2px;"/>'
+                ],
+                maxItemCache: 1,
+                store: 'MyJsonPStore',
                 listeners: [
                     {
                         fn: function(element, eOpts) {
-                            var record = Ext.getStore('LocalStore').getAt(0);
-                            if (record.get('dealImageURL')) {
-                                element.addListener('tap', function() {
-                                    console.log('DealImage Tap');
-                                    var view = Ext.Viewport.add({
-                                            xtype: 'DealImage'
-                                        });
-                                    view.setRecord(record);
-                                    view.showBy(Ext.get('dealPicture'));
-                                });
-                            }
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var store = Ext.getStore('MyJsonPStore');
+                            storeUserDetails.each(function(record) {
+                                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            store.clearFilter();
+                            store.load();
+                            store.filter('customerId', customerId);
                         },
                         event: 'painted'
                     }
                 ]
-            },
-            {
-                xtype: 'component',
-                cls: 'contact-name',
-                disabled: true,
-                docked: 'top',
-                height: '250px',
-                hidden: true,
-                id: 'nameTxt3',
-                itemId: 'nameTxt3',
-                margin: '5px 5px 5px 5px',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0:background:#FFF',
-                width: '95%'
-            },
-            {
-                xtype: 'component',
-                cls: 'contact-name',
-                disabled: true,
-                height: '',
-                html: '<p style="font-size:3vw;text-align:center"> Published through Local Buzz',
-                id: 'nameTxt2',
-                itemId: 'nameTxt2',
-                left: '40%',
-                margin: '10 5 5 5',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                top: '51%',
-                width: '65%'
             },
             {
                 xtype: 'textareafield',
                 cls: [
-                    'icon-location1',
-                    'customfield'
+                    'icon-location',
+                    'customfield1'
                 ],
                 disabled: false,
                 docked: 'bottom',
-                height: '9vh',
-                id: 'address1',
-                itemId: 'address1',
-                margin: '0 0 0 5',
-                padding: '10 5 0 5',
-                style: 'font-size:4.2vw;font-family:Arial;brder:none!important',
+                height: '12vh',
+                hidden: false,
+                html: '',
+                itemId: 'address',
+                margin: '0 5 0 5',
+                maxHeight: '',
+                minHeight: '',
+                padding: '10 10 10 10',
+                style: 'font-size:3vw;font-family: arial',
                 styleHtmlContent: true,
-                top: '85%',
-                width: '95%',
                 clearIcon: false,
                 name: 'address',
                 readOnly: true,
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                var queryString = encodeURIComponent(Ext.getCmp('address1').getValue());
-                                var url;
-                                if (Ext.os.is('Android')) {
-                                    url = 'geo:0,0?q=' + queryString;
-                                } else {
-                                    url = 'maps:q=' + queryString;
-                                }
-                                Ext.device.Device.openURL(url);
-                            });
-                        },
-                        event: 'painted'
-                    }
-                ]
-            },
-            {
-                xtype: 'textfield',
-                cls: 'icon-globe1',
-                disabled: false,
-                docked: 'bottom',
-                height: '8vh',
-                hidden: false,
-                id: 'website3',
-                itemId: 'website3',
-                minHeight: '',
-                padding: '0 0 10 10',
-                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw',
-                styleHtmlContent: true,
-                top: '75%',
-                width: '90%',
-                clearIcon: false,
-                name: 'websiteDisplayName',
-                placeHolder: 'Not Listed',
-                readOnly: true,
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                var url = Ext.getCmp('website2').getValue();
-                                window.open(url, '_system', 'location=yes');
-                            });
-                        },
-                        event: 'painted'
-                    }
-                ]
-            },
-            {
-                xtype: 'textfield',
-                cls: 'icon-email1',
-                height: '8vh',
-                id: 'email1',
-                itemId: 'email1',
-                margin: '0 0 0 5',
-                padding: '5 0 0 10',
-                style: 'font-family:Arial;font-size:4.5vw',
-                styleHtmlContent: true,
-                top: '65%',
-                width: '90%',
-                clearIcon: false,
-                inputCls: '',
-                label: '',
-                name: 'emailAddress',
-                readOnly: true,
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                /* cordova.plugins.email.open({
-
-
-                                to:          Ext.getCmp('email').getValue(), // email addresses for TO field
-                                isHtml:    false, // indicats if the body is HTML or plain text
-                                });*/
-                                window.plugins.socialsharing.shareViaEmail(null, // can contain HTML tags, but support on Android is rather limited:  http://stackoverflow.com/questions/15136480/how-to-send-html-content-with-image-through-android-default-email-client
-                                null, [
-                                    Ext.getCmp('email1').getValue()
-                                ], // TO: must be null or an array
-                                null, // CC: must be null or an array
-                                null, // BCC: must be null or an array
-                                null, // FILES: can be null, a string, or an array
-                                null, // called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
-                                null);
-                            });
-                        },
-                        // called when sh*t hits the fan
-                        event: 'painted'
-                    }
-                ]
-            },
-            {
-                xtype: 'textfield',
-                cls: 'icon-phone1',
-                disabled: false,
-                docked: 'bottom',
-                height: '8vh',
-                hidden: false,
-                html: '',
-                id: 'phoneNumber1',
-                itemId: 'phoneNumber1',
-                margin: '0 0 0 5',
-                padding: '0 0 5 10',
-                style: 'font-size:2vw !important',
-                styleHtmlContent: true,
-                top: '56%',
-                width: '90%',
-                clearIcon: false,
-                name: 'phoneNumber',
-                readOnly: true,
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                // console.log(Ext.getCmp('phoneNumber').getValue());
-                                var numberToDial = Ext.getCmp('phoneNumber1').getValue();
-                                window.location = 'tel:' + numberToDial;
-                            });
-                        },
-                        event: 'painted'
-                    }
-                ]
-            },
-            {
-                xtype: 'textfield',
-                cls: 'icon-globe',
-                disabled: false,
-                height: '',
-                hidden: true,
-                id: 'website2',
-                itemId: 'website2',
-                margin: '0 15 0 15',
-                maxHeight: '30%',
-                minHeight: '',
-                styleHtmlContent: true,
-                clearIcon: false,
-                name: 'website',
-                readOnly: true
-            }
-        ],
-        listeners: [
-            {
-                fn: 'onDealPictureShow',
-                event: 'show'
-            }
-        ]
-    },
-    onDealPictureShow: function(component, eOpts) {
-        var record = Ext.getStore('LocalStore').getAt(0);
-        if (record.get('dealImageURL')) {
-            console.log('Showing Deal Image');
-            //this.down('#dealimage').setHtml('<img src="' +record.get('dealImageURL')+ '" style="margin:5px 5px 5px 5px;height:30%;width:100%;border:none;"/><div style="font-size:5vw;color:black">'+record.get('dealDescription')+'</div><div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from'+ record.get('dealStartDate')+' through '+ record.get('dealEndDate')+'</div>');
-            this.down('#nameTxt3').hide();
-        } else {
-            this.down('#dealimage').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
-        }
-    },
-    // this.down('#dealimage').hide();
-    setRecord: function(record) {
-        (arguments.callee.$previous || Ext.Panel.prototype.setRecord).apply(this, arguments);
-        if (record) {
-            var name = record.get('itemName');
-            var businessName = record.get('businessName');
-            this.down('#nameTxt1').setHtml(record.get('businessName'));
-            var store = Ext.getStore('MyJsonPStore');
-            var rec = store.findRecord('businessName', businessName);
-            Ext.getCmp('phoneNumber1').setValue(rec.get('phoneNumber'));
-            Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
-            Ext.getCmp('website2').setValue(rec.get('website'));
-            Ext.getCmp('address1').setValue(rec.get('address'));
-            Ext.getCmp('email1').setValue(rec.get('emailAddress'));
-        }
-    }
-}, 0, [
-    "dealpicture"
-], [
-    "component",
-    "container",
-    "panel",
-    "dealpicture"
-], {
-    "component": true,
-    "container": true,
-    "panel": true,
-    "dealpicture": true
-}, [
-    "widget.dealpicture"
-], 0, [
-    Contact.view,
-    'DealPicture',
-    0,
-    'dealPicture'
-], 0));
-
-/*
- * File: app/view/Info.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.Info', Ext.form.Panel, {
-    config: {
-        disabled: false,
-        height: '100%',
-        id: 'Info',
-        itemId: 'Info',
-        style: 'background-color:#fff;border:2px groove #C0C0C0',
-        ui: 'dark',
-        hideOnMaskTap: false,
-        layout: 'vbox',
-        modal: false,
-        scrollable: false,
-        enableSubmissionForm: false,
-        items: [
-            {
-                xtype: 'toolbar',
-                cls: 'toolbarCls',
-                docked: 'top',
-                items: [
-                    {
-                        xtype: 'button',
-                        cls: 'icon-back-button',
-                        itemId: 'infoBackBtn',
-                        style: 'font-family:Arial;',
-                        styleHtmlContent: true,
-                        ui: 'plain',
-                        listeners: [
-                            {
-                                fn: function(component, eOpts) {
-                                    if (Ext.os.is('Android')) {
-                                        this.setHidden(true);
-                                    }
-                                },
-                                event: 'initialize',
-                                order: 'after'
-                            }
-                        ]
-                    },
-                    {
-                        xtype: 'button',
-                        docked: 'right',
-                        itemId: 'favbutton',
-                        style: 'font-size:6vw',
-                        ui: 'plain'
-                    },
-                    {
-                        xtype: 'component',
-                        cls: 'contact-name',
-                        disabled: true,
-                        height: '',
-                        html: '<b>Business Name</b>',
-                        id: 'nameTxt',
-                        itemId: 'nameTxt',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                        width: '65%'
-                    }
-                ]
-            },
-            {
-                xtype: 'component',
-                disabled: true,
-                docked: 'top',
-                height: '320px',
-                id: 'storeImage',
-                itemId: 'storeImage',
-                left: '2%',
-                width: '100%'
+                maxRows: 2
             },
             {
                 xtype: 'textfield',
@@ -65248,31 +66543,15 @@ Ext.define('Ext.direct.Manager', {
                 ],
                 disabled: false,
                 docked: 'bottom',
-                height: '10vh',
                 hidden: false,
-                id: 'website1',
-                itemId: 'website1',
+                itemId: 'websiteDisplayName',
                 margin: '0 5 0 5',
-                minHeight: '',
-                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw',
+                style: 'font-size:5vw;font-family: arial',
                 styleHtmlContent: true,
-                top: '73%',
-                width: '95%',
                 clearIcon: false,
                 name: 'websiteDisplayName',
                 placeHolder: 'Not Listed',
-                readOnly: true,
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                var url = Ext.getCmp('website').getValue();
-                                window.open(url, '_system', 'location=yes');
-                            });
-                        },
-                        event: 'painted'
-                    }
-                ]
+                readOnly: true
             },
             {
                 xtype: 'textfield',
@@ -65280,44 +66559,18 @@ Ext.define('Ext.direct.Manager', {
                     'icon-email',
                     'customfield2'
                 ],
+                disabled: false,
                 docked: 'bottom',
-                height: '10vh',
-                id: 'email',
+                hidden: false,
                 itemId: 'email',
                 margin: '0 5 0 5',
-                style: 'font-size:4.5vw;font-family: arial',
+                minWidth: '',
+                style: 'font-size:5vw;font-family: arial',
                 styleHtmlContent: true,
-                top: '63%',
-                width: '95%',
                 clearIcon: false,
                 label: '',
                 name: 'emailAddress',
-                readOnly: true,
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                /* cordova.plugins.email.open({
-
-
-                                to:          Ext.getCmp('email').getValue(), // email addresses for TO field
-                                isHtml:    false, // indicats if the body is HTML or plain text
-                                });*/
-                                window.plugins.socialsharing.shareViaEmail(null, // can contain HTML tags, but support on Android is rather limited:  http://stackoverflow.com/questions/15136480/how-to-send-html-content-with-image-through-android-default-email-client
-                                null, [
-                                    Ext.getCmp('email').getValue()
-                                ], // TO: must be null or an array
-                                null, // CC: must be null or an array
-                                null, // BCC: must be null or an array
-                                null, // FILES: can be null, a string, or an array
-                                null, // called when sharing worked, but also when the user cancelled sharing via email (I've found no way to detect the difference)
-                                null);
-                            });
-                        },
-                        // called when sh*t hits the fan
-                        event: 'painted'
-                    }
-                ]
+                readOnly: true
             },
             {
                 xtype: 'textfield',
@@ -65327,209 +66580,208 @@ Ext.define('Ext.direct.Manager', {
                 ],
                 disabled: false,
                 docked: 'bottom',
-                height: '10vh',
                 hidden: false,
-                html: '',
-                id: 'phoneNumber',
                 itemId: 'phoneNumber',
                 margin: '0 5 0 5',
-                padding: '15 10 10 10',
+                minWidth: '',
                 style: 'font-size:4.5vw;font-family: arial',
                 styleHtmlContent: true,
-                top: '53%',
-                width: '95%',
                 clearIcon: false,
                 name: 'phoneNumber',
-                readOnly: true,
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                // console.log(Ext.getCmp('phoneNumber').getValue());
-                                var numberToDial = Ext.getCmp('phoneNumber').getValue();
-                                window.location = 'tel:' + numberToDial;
-                            });
-                        },
-                        event: 'painted'
-                    }
-                ]
+                readOnly: true
             },
             {
                 xtype: 'textfield',
-                cls: 'icon-globe',
                 disabled: false,
                 height: '',
                 hidden: true,
-                id: 'website',
-                itemId: 'website',
-                margin: '0 15 0 15',
-                maxHeight: '30%',
-                minHeight: '',
-                styleHtmlContent: true,
+                itemId: 'phoneNumber1',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
                 clearIcon: false,
-                name: 'website',
+                name: 'city',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber2',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'state',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber3',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'zipcode',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber4',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'pictureURL',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber5',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'customerId',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber6',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'category',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                disabled: false,
+                height: '',
+                hidden: true,
+                itemId: 'phoneNumber7',
+                margin: '',
+                minWidth: '',
+                padding: '10 10 10 10',
+                clearIcon: false,
+                name: 'businessName',
                 readOnly: true
             },
             {
                 xtype: 'button',
-                handler: function(button, e) {
-                    var store = Ext.getStore('MyDealsStore');
-                    var date = new Date();
-                    var today = Ext.Date.format(date, 'n/j/Y');
-                    //var test = Ext.Date.add(date,Ext.Date.DAY,0);
-                    //var today = Ext.Date.format(test,'n/j/Y');
-                    //store.clearFilter();
-                    store.load();
-                    /*store.each(function(rec)
-                    {
-
-
-                    //console.log('Deal End Date: ' + rec.get('dealEndDate'));
-                    //console.log('Tdays date is : ' + today);
-
-                    if(rec.get('dealEndDate') < today) {
-
-                        console.log(rec.get('dealName'));
-                        rec.set('dealStatus','Expired');
-
-
-
-                    }
-
-
-
-                });*/
-                    //store.filter('dealStatus','Active');
-                    var view = Ext.Viewport.add({
-                            xtype: 'DealsPanel'
-                        });
-                    Ext.Viewport.setActiveItem(view);
-                },
-                docked: 'top',
-                height: '7%',
-                margin: '0 5 0 15',
-                style: 'font-family:Arial;font-size:5vw',
-                top: '45%',
-                ui: 'confirm',
-                width: '90%',
-                text: 'Get The Latest Buzz!'
-            },
-            {
-                xtype: 'textareafield',
-                cls: [
-                    'icon-location1',
-                    'customfield'
-                ],
-                disabled: false,
-                docked: 'bottom',
-                height: '9vh',
-                id: 'address',
-                itemId: 'address',
-                margin: '0 0 0 5',
-                padding: '10 5 0 5',
-                style: 'font-size:4.2vw;font-family:Arial;brder:none!important',
+                hidden: true,
+                itemId: 'editButton',
+                margin: '5 5 5 5',
+                style: 'color:#00529D;font-size:6vw;',
                 styleHtmlContent: true,
-                top: '85%',
-                width: '95%',
-                clearIcon: false,
-                name: 'address',
-                readOnly: true,
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                var queryString = encodeURIComponent(Ext.getCmp('address').getValue());
-                                var url;
-                                if (Ext.os.is('Android')) {
-                                    url = 'geo:0,0?q=' + queryString;
-                                } else {
-                                    url = 'maps:q=' + queryString;
-                                }
-                                Ext.device.Device.openURL(url);
-                            });
-                        },
-                        event: 'painted'
-                    }
-                ]
+                ui: 'plain',
+                iconCls: 'compose'
             }
         ],
         listeners: [
             {
-                fn: 'onFavbuttonTap',
+                fn: 'onMybutton10Tap',
                 event: 'tap',
-                delegate: '#favbutton'
+                delegate: '#mybutton10'
+            },
+            {
+                fn: 'onInfoPainted',
+                event: 'painted'
             }
         ]
     },
-    onFavbuttonTap: function(button, e, eOpts) {
-        var store = Ext.getStore('UserPreferences');
-        //store.clearFilter();
-        var pressingCls = 'x-button-pressed';
-        button.element.toggleCls(pressingCls);
-        var isPressed = button.element.hasCls(pressingCls);
-        var record = this.getRecord();
-        var customerId = record.get('customerId');
-        store.add({
-            'customerId': customerId,
-            'isFavorite': isPressed
-        });
-        if (isPressed === true) {
-            button.setCls('fill-star');
-        } else // localStorage.setItem('customerId',record.get('customerId'));
-        // localStorage.setItem('isFavorite', isPressed);
-        // store.add({'customerId':customerId,'isFavorite':isPressed});
-        //  store.sync();
-        {
-            button.setCls('empty-star');
-            // localStorage.removeItem('customerId');
-            // localStorage.removeItem('isFavorite
-            store.findRecord('customerId', customerId).destroy();
-            store.sync();
+    onMybutton10Tap: function(button, e, eOpts) {
+        if (Ext.getCmp('menu').isHidden()) {
+            Ext.Viewport.showMenu('right');
+        } else {
+            Ext.Viewport.hideMenu('right');
         }
-        //console.log(customerId + isPressed);
-        record.set('isFavorite', isPressed);
-        store.sync();
+    },
+    onInfoPainted: function(element, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        var date = new Date();
+        var today = Ext.Date.format(date, 'n/j/Y');
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+        this.setRecord(record);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
             var name = record.get('businessName');
-            var isFavorite = record.get('isFavorite');
             var customerId = record.get('customerId');
-            var store = Ext.getStore('UserPreferences');
-            if (store.getAllCount() !== 0) {
-                store.each(function(rec) {
-                    if (rec.get('customerId') == customerId) {
-                        isFavorite = rec.get('isFavorite');
-                    }
-                });
-            }
-            //console.log(customerId + isFavorite );
             this.down('#nameTxt').setHtml(name);
-            this.down('#storeImage').setHtml('<img src = "' + record.get('pictureURL') + '" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>');
-            // console.log(store.getData());
-            if (isFavorite === true) {
-                this.down('#favbutton').setCls('fill-star');
-            } else //store.setData({'isFavorite':isFavorite});
-            {
-                this.down('#favbutton').setCls('empty-star');
-            }
-            // this.down('#favoriteview')[isFavorite ? 'addCls' : 'removeCls']('x-button-pressed');
-            this.down('#favbutton')[isFavorite ? 'addCls' : 'removeCls']('x-button-pressed');
         }
-        //this.down('contactpic').setData(record.data);
-        /* var ds = Ext.StoreManager.lookup('MyDealsStore');
-            ds.clearFilter() ;
-            ds.filter('customerId', customerId);
-            this.down('listofdeals').setData(ds.getData()) ;*/
-        /*dealsData  = ds.getData().getAt(0);
-            var dealName = 'No Deals';
-            if(dealsData) {
-                 dealName = dealsData.get('dealName');
-            }*/
-        var ds = Ext.StoreManager.lookup('MyDealsStore');
-        ds.clearFilter();
-        ds.filter('customerId', customerId);
+    },
+    //this.down('contactpic').setData(record.data);
+    initialize: function() {
+        Ext.form.Panel.prototype.initialize.call(this);
+        var menu = Ext.create('Ext.Menu', {
+                id: 'menu',
+                items: [
+                    {
+                        iconCls: 'icon-edit',
+                        handler: function() {
+                            Ext.Viewport.hideMenu('right');
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var businessName;
+                            storeUserDetails.each(function(record) {
+                                console.log('StoreUserDetails : ' + record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            var form = Ext.Viewport.add({
+                                    xtype: 'contactform'
+                                });
+                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                            Ext.Viewport.setActiveItem(form);
+                            form.setRecord(record);
+                        }
+                    },
+                    {
+                        iconCls: 'icon-signout',
+                        handler: function() {
+                            Ext.Viewport.hideMenu('right');
+                            Ext.Msg.confirm('Logout', 'Are you sure you want to Logout?', function(btn) {
+                                if (btn == 'yes') {
+                                    FacebookInAppBrowser.logout(function() {
+                                        window.localStorage.setItem('facebookAccessToken', null);
+                                        location.reload();
+                                        navigator.app.exitApp();
+                                    });
+                                }
+                            });
+                        }
+                    }
+                ]
+            });
+        Ext.Viewport.setMenu(menu, {
+            side: 'right',
+            reveal: true
+        });
     }
 }, 0, [
     "contactinfo"
@@ -65549,53 +66801,7 @@ Ext.define('Ext.direct.Manager', {
     "widget.contactinfo"
 ], 0, [
     Contact.view,
-    'Info'
-], 0));
-
-/*
- * File: app/view/List.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.List', Ext.dataview.List, {
-    config: {
-        disableSelection: true,
-        emptyText: '<h4 class="emptyText">Find Stores Registed With Local Buzz Here!</h4>',
-        store: 'MyJsonPStore',
-        grouped: true,
-        itemTpl: [
-            '<div style="font-family:Arial;font-size:5vw">{businessName}</div>',
-            ''
-        ]
-    }
-}, 0, [
-    "contactlist"
-], [
-    "component",
-    "container",
-    "dataview",
-    "list",
-    "contactlist"
-], {
-    "component": true,
-    "container": true,
-    "dataview": true,
-    "list": true,
-    "contactlist": true
-}, [
-    "widget.contactlist"
-], 0, [
-    Contact.view,
-    'List'
+    'contactinfo'
 ], 0));
 
 /*
@@ -65614,115 +66820,30 @@ Ext.define('Ext.direct.Manager', {
  */
 (Ext.cmd.derive('Contact.view.ListOfDeals', Ext.dataview.List, {
     config: {
+        cls: 'customlist',
         height: '100%',
-        html: '',
-        id: 'listofdeals',
-        itemId: 'listofdeals',
-        style: '',
-        styleHtmlContent: true,
+        id: 'ListOfDeals',
+        itemId: 'ListOfDeals',
+        autoDestroy: false,
         allowDeselect: true,
-        emptyText: '<h4 class="emptyText">No Active Buzz At This TIme.</h4>',
+        deselectOnContainerClick: false,
+        mode: 'MULTI',
+        deferEmptyText: false,
+        emptyText: 'Create Buzz!',
+        itemCls: 'list-item',
         store: 'MyDealsStore',
-        onItemDisclosure: false,
+        pinHeaders: false,
+        preventSelectionOnDisclose: false,
+        refreshHeightOnUpdate: false,
         useSimpleItems: false,
         itemTpl: [
             '',
             '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '<div style="margin:5px 5px 5px 0px;font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}</div>',
-            '<div style="font-size:3.5vw;margin:5px 5px 5px 0px;font-family:Arial">{dealDescription}</div>',
-            '<tpl if= "dealEndDate &lt;= today"> ',
-            ' <div class= "expiringDate" >Valid {dealStartDate} to {dealEndDate}</div>',
-            '  <tpl else>',
-            '        <div class= "dateValidity" >Valid {dealStartDate} to {dealEndDate}</div></tpl>',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
+            '<div style="font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}<button type="button" id="delete" class="delete_button" style="float:right">#<button type="button" id="edit" class="delete_button" style="float:right">p</div>',
+            '<tpl if="dealEndDate &lt; todayplusthreedays ">',
+            '<div class= expiringDate >Valid {dealStartDate} to {dealEndDate}</div>',
+            '<tpl else>\t',
+            '<div class= dateValidity >Valid {dealStartDate} to {dealEndDate}</div></tpl>',
             ''
         ]
     }
@@ -65748,6 +66869,312 @@ Ext.define('Ext.direct.Manager', {
 ], 0));
 
 /*
+ * File: app/view/contactform.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.contactform', Ext.form.Panel, {
+    config: {
+        html: '',
+        id: 'formpanel',
+        itemId: 'formpanel',
+        style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
+        modal: true,
+        scrollable: false,
+        multipartDetection: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'toolbar',
+                cls: 'toolbarCls',
+                docked: 'top',
+                style: 'border-top:none',
+                ui: 'plain',
+                autoDestroy: false,
+                items: [
+                    {
+                        xtype: 'button',
+                        itemId: 'cancelButton',
+                        margin: '0 0 0 10',
+                        styleHtmlContent: true,
+                        ui: 'decline',
+                        width: '30%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'spacer'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var form = this.up('contactform');
+                            var store = Ext.getStore('MyJsonPStore');
+                            var record = form.getRecord();
+                            var customerId = form.getRecord().get('customerId');
+                            record.beginEdit(true, record.getChanges());
+                            form.updateRecord(record);
+                            record.endEdit(true, record.getChanges());
+                            record.commit();
+                            store.sync();
+                            store.load();
+                            form.submit({
+                                url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
+                                success: function(form, action) {
+                                    Ext.Msg.alert('Success', action.msg);
+                                    form.destroy();
+                                },
+                                failure: function(form, action) {
+                                    store.load();
+                                    Ext.Msg.alert('Failure', action.msg);
+                                    form.destroy();
+                                }
+                            });
+                        },
+                        cls: 'button',
+                        itemId: 'saveContactButton',
+                        margin: '0 10 0 0',
+                        styleHtmlContent: true,
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Save'
+                    }
+                ]
+            },
+            {
+                xtype: 'dataview',
+                docked: 'top',
+                height: '40%',
+                itemId: 'mydataview1',
+                margin: '5 5 5 5',
+                padding: '',
+                style: 'overflow:hidden',
+                width: '98%',
+                scrollable: false,
+                disableSelection: false,
+                deferEmptyText: false,
+                itemTpl: [
+                    '<img src = "{pictureURL}" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>'
+                ],
+                scrollToTopOnRefresh: false,
+                store: 'MyJsonPStore',
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var store = Ext.getStore('MyJsonPStore');
+                            storeUserDetails.each(function(record) {
+                                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
+                            store.clearFilter();
+                            store.load();
+                            store.filter('customerId', customerId);
+                            element.repaint();
+                        },
+                        event: 'painted'
+                    }
+                ]
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.load();
+                    var customerId;
+                    var businessName;
+                    storeUserDetails.each(function(record) {
+                        console.log('StoreUserDetails : ' + record.get('customerId'));
+                        customerId = record.get('customerId');
+                        businessName = record.get('businessName');
+                    });
+                    var view = Ext.Viewport.add({
+                            xtype: 'ChangeContactPicForm'
+                        });
+                    var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                    view.setRecord(record);
+                    view.showBy(button);
+                },
+                flex: 1,
+                docked: 'top',
+                id: 'changePicButton',
+                left: '0px',
+                margin: '5 5 5 5',
+                style: 'opacity:0.5;position:absolute',
+                top: '-10px',
+                ui: 'plain',
+                width: '20%',
+                iconCls: 'add'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                id: 'businessName',
+                itemId: 'businessName',
+                margin: '30 15 2 15',
+                styleHtmlContent: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                cls: [
+                    'icon-phone',
+                    'customfield'
+                ],
+                id: 'phoneNumber',
+                itemId: 'phoneNumber',
+                margin: '0 15 2 15',
+                styleHtmlContent: true,
+                name: 'phoneNumber'
+            },
+            {
+                xtype: 'textareafield',
+                cls: [
+                    'customfield',
+                    'icon-location'
+                ],
+                height: '20%',
+                id: 'address',
+                itemId: 'address',
+                margin: '0 15 0 15',
+                styleHtmlContent: true,
+                name: 'address',
+                required: true
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'customerId',
+                itemId: 'customerId',
+                name: 'customerId'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                itemId: '',
+                name: 'category'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'emailAddress'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'city'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'state'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'zipcode'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'pictureURL'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '20%',
+                hidden: true,
+                html: '',
+                id: 'website',
+                itemId: 'website',
+                style: 'font-size:4vw',
+                label: '',
+                labelAlign: 'top',
+                labelWidth: '',
+                labelWrap: true,
+                name: 'website',
+                required: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '20%',
+                hidden: true,
+                html: '',
+                id: 'websiteDisplayName',
+                itemId: 'websiteDisplayName',
+                style: 'font-size:4vw',
+                label: '',
+                labelAlign: 'top',
+                labelWidth: '',
+                labelWrap: true,
+                name: 'websiteDisplayName',
+                required: true
+            }
+        ]
+    },
+    getValidationErrors: function() {
+        var errors = [];
+        var reqFields = this.query('field[required=true]');
+        var i = 0,
+            ln = reqFields.length,
+            field;
+        for (; i < ln; i++) {
+            field = reqFields[i];
+            if (!field.getValue()) {
+                errors.push(field.getLabel() + ' must be completed.');
+            }
+        }
+        console.dir(errors);
+        return errors;
+    },
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            this.down('#businessName').setValue(record.data.businessName);
+            this.down('#phoneNumber').setValue(record.data.phoneNumber);
+            this.down('#address').setValue(record.data.address);
+        }
+    }
+}, 0, [
+    "contactform"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "contactform"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "contactform": true
+}, [
+    "widget.contactform"
+], 0, [
+    Contact.view,
+    'contactform'
+], 0));
+//this.child('contactpic').setData(record.data);
+
+/*
  * File: app/controller/Contacts.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
@@ -65766,8 +67193,8 @@ Ext.define('Ext.direct.Manager', {
         stores: [
             'MyJsonPStore',
             'MyDealsStore',
-            'MyJsonPStore1',
-            'UserPreferences'
+            'UserDetails',
+            'LocalStore'
         ],
         refs: {
             contactinfo: {
@@ -65792,108 +67219,69 @@ Ext.define('Ext.direct.Manager', {
             },
             phoneNumber: 'textfield#phoneNumber',
             address: 'textfield#address',
-            favoriteview: 'dataview#favoriteview',
+            editButton: 'button#editButton',
+            dealsPanel: 'panel#dealsPanel',
+            contactform: {
+                autoCreate: true,
+                selector: 'contactform',
+                xtype: 'contactform'
+            },
+            formCancelButton: 'button#formCancelButton',
+            saveContactButton: 'button#saveContactButton',
+            backFromDealsPanelButton: 'button#backFromDealsPanelButton',
+            uploadDealBtn: 'button#uploadDealBtn',
             share: 'button#share',
-            favorites: 'container#Favorites',
-            dealBackBtn1: 'button#dealBackBtn1'
+            changePicture: 'button#changePicture',
+            manageDeals: 'button#manageDeals',
+            panel: 'panel#panel',
+            dealBackBtn: 'button#dealBackBtn',
+            share: 'button#share',
+            buzzometer: 'formpanel#buzzometer'
         },
         control: {
-            "dataview": {
-                itemtap: 'onContactItemTap'
-            },
-            "button#infoBackBtn": {
-                tap: 'onInfoBackBtnTapHome'
-            },
             "contactpic": {
                 change: 'onContactPickerChange'
             },
             "list": {
                 activate: 'onListActivate'
             },
-            "listofdeals": {
-                itemtap: 'onListOfDealsItemTap'
-            },
             "button#dealBackBtn": {
                 tap: 'onDealBackBtnTap'
             },
-            "container#Favorites": {
-                activate: 'onFavoritesActivate'
+            "listofdeals": {
+                itemtap: 'onListOfDealsItemTap'
+            },
+            "button#editButton": {
+                tap: 'onEditButtonTap'
+            },
+            "button#saveContactButton": {
+                tap: 'onSaveContactButtonTap'
+            },
+            "button#cancelButton": {
+                tap: 'onCancelButtonTap'
+            },
+            "button#BackFromDealsPanel": {
+                tap: 'onBackFromDealsPanelTap'
+            },
+            "button#UploadDeal": {
+                tap: 'onUploadDealTap'
             },
             "button#share": {
                 tap: 'onShareTap'
             },
-            "button#dealBackBtn1": {
-                tap: 'onDealBackBtn1Tap'
+            "button#manageDeals": {
+                tap: 'onManageDealsTap'
+            },
+            "formpanel#buzzometer": {
+                activate: 'onBuzzometerActivate'
             }
         }
     },
-    onContactItemTap: function(dataview, index, target, record, e, eOpts) {
-        var info = this.getContactinfo();
-        info.setRecord(record);
-        Ext.Viewport.add(info);
-        Ext.Viewport.setActiveItem(info);
-        //console.log(info);
-        var storeName = Ext.getStore('MyJsonPStore');
-        var store = Ext.getStore('MyDealsStore');
-        store.clearFilter();
-        storeName.clearFilter();
-        store.load();
-        store.filter('customerId', record.get('customerId'));
-        storeName.filter('customerId', record.get('customerId'));
-        store.filter('dealStatus', 'Active');
-    },
-    onInfoBackBtnTapHome: function(button, e, eOpts) {
-        var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter();
-        var store = Ext.StoreManager.lookup('MyDealsStore');
-        store.clearFilter();
-        //Ext.Viewport.setActiveItem(0);
-        Ext.Viewport.getActiveItem().destroy();
-        Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('tabbar'));
-    },
-    /*var store = Ext.getStore('UserPreferences');
-
-                        var records= [];
-
-
-
-
-
-                        var ds = Ext.getStore('MyJsonPStore1');
-                        ds.clearFilter();
-                       //store.clearFilter();
-
-
-
-                       store.each(function(rec)
-                        {
-
-
-
-                                if(rec.get('isFavorite')===true) {
-
-                                    records.push(rec.get('customerId'));
-
-
-                                }
-                            else {
-                                Ext.Array.remove(records,rec.get('customerId'));
-                            }
-
-
-
-                        });
-
-
-                        ds.filterBy(function(record){
-                            return Ext.Array.indexOf(records, record.get('customerId')) !== -1;
-
-                                                              }, this);*/
     onContactPickerChange: function(picker, value, eOpts) {
         var currentForm = Ext.Viewport.getActiveItem();
         var record = currentForm.getRecord();
         if (record) {
-            record.set('picture', value);
+            record.set('pictureURL', value);
             record.commit();
             currentForm.setRecord(record);
         }
@@ -65902,131 +67290,172 @@ Ext.define('Ext.direct.Manager', {
         var ds = Ext.StoreManager.lookup('MyJsonPStore');
         ds.clearFilter();
     },
-    onListOfDealsItemTap: function(dataview, index, target, record, e, eOpts) {
-        //var pic = this.getDealpicture();
-        /*console.log("Data View is: ") ;
-        console.log(dataview) ;
-        console.log("Index is: " + index) ;
-        console.log("Target is: ") ;
-        console.log(target) ;
-        console.log("Event is: ") ;
-        console.log(e) ;
-        console.log("Event Options is: ") ;
-        console.log(eOpts) ;*/
-        //
-        //_gaq.push(['_trackEvent', 'Images', 'Click', 'Deal Picture', 0]);
-        //analytics.trackEvent(record.get('customerId'), 'DealClick', record.get('dealName'));
-        var showPosition;
-        if (navigator.geolocation) {
-            //if you have the geolocation, run the showPosition function
-            navigator.geolocation.getCurrentPosition(function showPosition(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
-                console.log('Inside Analytics module: ' + latitude + "," + longitude);
-                // api call for postal code and track event
-                $.getJSON("http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + latitude + "&lng=" + longitude + "&username=1234_5678", function(json) {
-                    //analytics.trackEvent(record.get('dealName'),DealClick', json.postalCodes[0].postalCode);
-                    //analytics.addCustomDimension('1', record.get('customerId'));
-                    analytics.trackEvent(record.get('dealName'), json.postalCodes[0].postalCode, record.get('customerId'));
-                });
-            });
-        } else {
-            //geolocation not happening
-            console.log("Gelocation not working");
-            analytics.trackEvent(record.get('dealName'), 'DealClick', 'Unknown');
-        }
-        Ext.getStore('LocalStore').add(record);
-        var pic = Ext.Viewport.add({
-                xtype: 'dealpicture'
-            });
-        pic.setRecord(record);
-        Ext.Viewport.setActiveItem(pic);
-    },
     onDealBackBtnTap: function(button, e, eOpts) {
-        /*var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter() ;
-        var dealRecord = this.getContactinfo().getRecord() ;
+        Ext.getStore('LocalStore').removeAt(0);
+        Ext.Viewport.getActiveItem().destroy();
+    },
+    onListOfDealsItemTap: function(dataview, index, target, record, e, eOpts) {
+        var recordsToDelete = [];
+        var itemNames = [];
+        var i = 0;
+        if (e.target.type === 'button') {
+            if (e.target.id === 'delete') {
+                var store = Ext.getStore('MyDealsStore');
+                var record = store.getAt(index);
+                var dealName = record.get('dealName');
+                Ext.Msg.confirm('Delete ' + dealName + '?', null, function(btnText) {
+                    if (btnText === 'yes') {
+                        var itemName = record.get('itemName');
+                        var req = Ext.Ajax.request({
+                                method: 'POST',
+                                url: 'http://services.appsonmobile.com/deals/' + itemName,
+                                success: function(form, action) {
+                                    Ext.Msg.alert('Success', action.msg);
+                                    //console.log(action.msg);
+                                    var dealsStore = Ext.getStore('MyDealsStore');
+                                    dealsStore.load();
+                                },
+                                failure: function(form, action) {
+                                    Ext.Msg.alert('Failure', action.msg);
+                                }
+                            });
+                    }
+                }, //console.log(action.msg);
+                this);
+            } else {
+                var store = Ext.getStore('MyDealsStore');
+                var record = store.getAt(index);
+                var view = Ext.Viewport.add({
+                        xtype: 'UpdateDealForm'
+                    });
+                view.setRecord(record);
+                Ext.Viewport.setActiveItem(view);
+            }
+        } else {
+            Ext.Viewport.add({
+                xtype: 'DealsPanel'
+            });
+            var store = Ext.getStore('MyDealsStore');
+            var record = store.getAt(index);
+            Ext.getStore('LocalStore').add(record);
+            var view = Ext.Viewport.add({
+                    xtype: 'dealPicture'
+                });
+            view.setRecord(record);
+            Ext.Viewport.setActiveItem(view);
+        }
+    },
+    onEditButtonTap: function(button, e, eOpts) {
+        var form = this.getContactform();
+        var info = this.getContactinfo().getRecord();
+        Ext.Viewport.setActiveItem(form);
+        form.setRecord(info);
+    },
+    onSaveContactButtonTap: function(button, e, eOpts) {},
+    //var btn = Ext.get('changePicButton');
+    //btn.hide();
+    /*var form = this.getContactform();
+		var errors = form.getValidationErrors();
+		console.log('On Save Button Tap');
+
+
+
+		if (errors.length) {
+			Ext.Msg.alert('Error', errors.join('<br/>'));
+		} else {
+			var values = form.getValues();
+			var record = form.getRecord();
+			//console.log('Record is :' + record.getData());
+
+
+			//var valueContactPic = form.getAt(2).getValue();
+			var valueBusinessName = form.getAt(3).getValue();
+			var valuePhoneNumber = form.getAt(4).getValue();
+			var valueAddress = form.getAt(5).getValue();
+			var valueCategory = form.getAt(7).getValue();
+			var valueCustomerId = form.getAt(6).getValue();
+			var valueEmailAddress = form.getAt(8).getValue();
+			var valueCity = form.getAt(9).getValue();
+			var valuePicture = form.getAt(12).getValue();
+			var valueState = form.getAt(10).getValue();
+			var valueZipcode = form.getAt(11).getValue();
+
+
+
+
+			if (record) {
+
+
+
+				record.setData(values);
+				record.set('businessName',valueBusinessName);
+				record.set('phoneNumber',valuePhoneNumber);
+		        record.set('address',valueAddress);
+
+
+				record.set('category',valueCategory);
+				record.set('customerId',valueCustomerId);
+		        record.set('emailAddress',valueEmailAddress);
+
+				record.set('picture',valuePicture);
+				record.set('city',valueCity);
+				record.set('state',valueState);
+		        record.set('zipcode',valueZipcode);
+
+
+
+
+				record.commit();
+
+				if (form.referrer.setRecord) {
+
+
+					form.referrer.setRecord(record);
+				}
+			} else {
+				//Ext.StoreManager.lookup('MyJsonPStore').add(values);
+			}
+			Ext.Viewport.setActiveItem(form.referrer);
+			delete form.referrer;
+		}
+
+
+		*/
+    onCancelButtonTap: function(button, e, eOpts) {
+        var form = this.getContactform();
+        form.destroy();
+    },
+    onBackFromDealsPanelTap: function(button, e, eOpts) {
+        var ds = Ext.StoreManager.lookup('MyJsonPStore');
+        ds.clearFilter();
+        var dealRecord = this.getContactinfo().getRecord();
         //console.log("Deal Record is:") ;
         //console.log(dealRecord) ;
         var customerId = dealRecord.get('customerId');
         //console.log("Customer Id is " + customerId) ;
         ds.filter('customerId', customerId);
-
-        var customerData = ds.getData().getAt(0) ;
+        var customerData = ds.getData().getAt(0);
         //console.log("Customer Data is:") ;
         //console.log(customerData) ;
-
-        var info = this.getContactinfo();
-        info.setRecord(customerData);
-        ds.clearFilter() ;
-        Ext.Viewport.setActiveItem(info);
-
-        /*var store = Ext.StoreManager.lookup('MyDealsStore');
-        store.filter('customerId', customerId);
-        store.filter('dealStatus', 'Active');
-
-        //Ext.Viewport.setActiveItem('contactinfo') ;*/
-        Ext.Viewport.getActiveItem().destroy();
-        var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter();
-        var dealRecord = this.getContactinfo().getRecord();
-        var customerId = dealRecord.get('customerId');
-        ds.filter('customerId', customerId);
-        var customerData = ds.getData().getAt(0);
         var info = this.getContactinfo();
         info.setRecord(customerData);
         ds.clearFilter();
+        var view = Ext.Viewport.getActiveItem().destroy();
         Ext.Viewport.setActiveItem(info);
-        var store = Ext.StoreManager.lookup('MyDealsStore');
-        //store.clearFilter();
-        store.load();
     },
-    onFavoritesActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var store = Ext.getStore('UserPreferences');
-        var records = [];
-        var ds = Ext.getStore('MyJsonPStore');
-        ds.clearFilter();
-        //store.clearFilter();
-        store.each(function(rec) {
-            if (rec.get('isFavorite') === true) {
-                records.push(rec.get('customerId'));
-            } else {
-                Ext.Array.remove(records, rec.get('customerId'));
-            }
-        });
-        ds.filterBy(function(record) {
-            return Ext.Array.indexOf(records, record.get('customerId')) !== -1;
-        }, this);
+    onUploadDealTap: function(button, e, eOpts) {
+        var view = Ext.Viewport.add({
+                xtype: 'CreateBuzzOption'
+            });
+        Ext.Viewport.setActiveItem(view);
     },
+    //view.showBy(button);
     onShareTap: function(button, e, eOpts) {
-        //var picture = button.getParent().getParent().getRecord().get('dealPictureURL');
         var record = Ext.getStore('LocalStore').getAt(0);
-        //console.log(businessName.customerId);
-        Ext.getCmp('dealpictureBackBtn').hide();
-        Ext.get('share').hide();
-        var pic = Ext.getCmp('dealPicture');
-        //vat txt = '<div><img src="{dealPictureURL}" style="margin:5px 5px 5px 5px;height:160;width:100%;" /></div> +<div style="font-size:6vw;color:green">{dealName}</div>+<div style="font-size:5vw;color:black">{dealDescription}</div>+<div style="font-size:3vw;color:red;margin:5px 5px 5px 5px;">Valid from {dealStartDate} through {dealEndDate}</div>';
-        //window.plugins.socialsharing.share('Hi!Check out the latest deal from ' + record.get('businessName')+'\n'+record.get('dealName') + '\n' +record.get('dealDescription')+ '\nValid through' +record.get('dealEndDate'),null,record.get('dealDescription'),null );
-        //window.plugins.socialsharing.shareViaWhatsApp('Hi!Check out the latest deal from ' + record.get('businessName')+'\n'+record.get('dealName') + '\n' +record.get('dealDescription')+ '\nValid through' +record.get('dealEndDate'),null,null,record.get('dealPicture'),null);
-        /*window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-        function gotFS(fileSystem) {
-                fileSystem.root.getFile("test.png", {create: true, exclusive: false}, gotFileEntry, fail);
-            }
-
-            function gotFileEntry(fileEntry) {
-                fileEntry.createWriter(gotFileWriter, fail);
-            }
-
-            function gotFileWriter(writer) {
-                Ext.Msg.alert('FILE',record.get('dealPictureURL'),null,null);
-                writer.write(record.get('dealPictureURL'));
-            }
-
-            function fail(error) {
-                console.log(error.code);
-                Ext.Msg.alert('ERROR',null,null,null);
-            }*/
-        Ext.getCmp('dealpictureBackBtn').hide();
+        //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
+        //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
+        //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
+        Ext.getCmp('dealBackBtn').hide();
         Ext.get('share').hide();
         if (Ext.os.is('Android')) {
             navigator.screenshot.URI(function(error, res) {
@@ -66039,7 +67468,7 @@ Ext.define('Ext.direct.Manager', {
                 }
             }, 50);
             Ext.get('share').show();
-            var view = Ext.Viewport.getComponent('DealPicture');
+            var view = Ext.Viewport.getComponent('dealPicture');
             view.setRecord(record);
             Ext.Viewport.setActiveItem(view);
         } else {
@@ -66049,29 +67478,44 @@ Ext.define('Ext.direct.Manager', {
                 } else {
                     //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
                     window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
-                    Ext.getCmp('dealpictureBackBtn').show();
+                    Ext.getCmp('dealBackBtn').show();
                     Ext.get('share').show();
                 }
             }, 'jpg', 50, 'myScreenShot');
         }
     },
-    //window.plugins.socialsharing.share('Hi! Check out the Latest Buzz from '+record.get('businessName')+'\n'+record.get('dealName')+'\n'+  record.get('dealDescription')+'\nValid Through '+ record.get('dealEndDate'),null,null,null);
-    onDealBackBtn1Tap: function(button, e, eOpts) {
-        Ext.Viewport.getActiveItem().destroy();
-        Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('tabbar'));
-        /*var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter() ;
-        var dealRecord = this.getContactinfo().getRecord() ;
-        var customerId = dealRecord.get('customerId');
-        ds.filter('customerId', customerId);
-        var customerData = ds.getData().getAt(0) ;
-        var info = this.getContactinfo();
-        info.setRecord(customerData);
-        ds.clearFilter() ;
-        Ext.Viewport.setActiveItem(info);*/
-        var store = Ext.StoreManager.lookup('MyDealsStore');
-        //store.clearFilter();
+    onManageDealsTap: function(button, e, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+        });
+        var store = Ext.getStore('MyDealsStore');
         store.load();
+        store.clearFilter();
+        //console.log('Fitering for customerId: ' + customerId);
+        store.filter('customerId', customerId);
+        var view;
+        view = Ext.Viewport.add({
+            xtype: 'DealsPanel'
+        });
+        Ext.Viewport.setActiveItem(view);
+    },
+    onBuzzometerActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        document.getElementById('buzzometer').submit({
+            url: 'http://services.appsonmobile.com/analytics/04',
+            method: 'GET',
+            waitMsg: 'Please Wait...',
+            timeout: 5000,
+            success: function(form, action) {
+                console.log('Success');
+            },
+            failure: function(form, action) {
+                console.log('Failure');
+            }
+        });
     }
 }, 0, 0, 0, 0, 0, 0, [
     Contact.controller,
@@ -66079,7 +67523,7 @@ Ext.define('Ext.direct.Manager', {
 ], 0));
 
 /*
- * File: app/view/Picture.js
+ * File: app/view/DealPicture.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -66092,342 +67536,103 @@ Ext.define('Ext.direct.Manager', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.Picture', Ext.Container, {
+(Ext.cmd.derive('Contact.view.DealPicture', Ext.Panel, {
     config: {
-        overflow: 'hidden',
-        height: '100%',
-        margin: '5 5 5 5',
-        padding: '5 5 5 5',
-        style: 'overflow: hidden;background:#fff;',
-        styleHtmlContent: true,
-        ui: '',
-        scrollable: false,
+        fullscreen: true,
+        id: 'dealPicture',
+        itemId: 'dealPicture',
+        style: 'background:#fff',
+        width: '100%',
+        autoDestroy: false,
         tpl: [
-            '<img src= "{pictureURL}" style="height:50%;width:100%;border:1px groove #C0C0C0;"/>'
+            '<tpl if="dealImageURL">',
+            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:250px;width:95%;border:none;"/></div>',
+            '                            ',
+            '\t\t\t\t</tpl>\t\t',
+            '',
+            '\t\t\t',
+            '\t\t\t\t'
         ],
         layout: {
             type: 'vbox',
             align: 'stretchmax'
-        }
-    }
-}, 0, [
-    "contactpic"
-], [
-    "component",
-    "container",
-    "contactpic"
-], {
-    "component": true,
-    "container": true,
-    "contactpic": true
-}, [
-    "widget.contactpic"
-], 0, [
-    Contact.view,
-    'Picture'
-], 0));
-
-/*
- * File: app/view/LatestBuzz.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.LatestBuzz', Ext.dataview.DataView, {
-    config: {
-        height: '100%',
-        html: '',
-        id: 'latestbuzz1',
-        itemId: 'latestbuzz',
-        padding: '5 5 5 5',
-        style: 'background:#FFF',
-        styleHtmlContent: true,
-        allowDeselect: true,
-        emptyText: '<h4 class="emptyText">No Active Buzz At This TIme.</h4>',
-        store: 'MyDealsStore',
-        itemTpl: [
-            '',
-            '<div><img src="{dealPictureURL}" height="160px" width="100%" style="border:2px ridge #c0c0c0;"></div>',
-            '<div style="margin:5px 5px 5px 5px;font-size:6vw;color:#00529D">{businessName}</div>                                                                              ',
-            '',
-            '<div style="font-size:5vw;color:green;margin:5px 5px 5px 5px;">{dealName}</div>',
-            '   ',
-            '<!--<div style="font-size:3vw;font-family:Arial;">{dealPictureURL}</div> -->',
-            '<tpl if="dealEndDate &lt; todayplusfivedays">',
-            '    <div style="font-size:2.8vw;color:grey;margin:5px 5px 5px 5px;">Valid through {dealEndDate}</div>',
-            '    <tpl else>',
-            '        <div style="font-size:2.8vw;color:grey;margin:5px 5px 5px 5px;">Valid through {dealEndDate}</div>',
-            '    </tpl>',
-            '    <br>',
-            '',
-            '    '
-        ],
-        listeners: [
-            {
-                fn: 'onLatestbuzzItemTap',
-                event: 'itemtap'
-            },
-            {
-                fn: 'onLatestbuzzPainted',
-                event: 'painted'
-            }
-        ]
-    },
-    onLatestbuzzItemTap: function(dataview, index, target, record, e, eOpts) {
-        if (e.target === 'favDealBtn') {
-            Ext.get('favDealBtn').setHtml('New Value');
-        }
-        var pic = Ext.Viewport.add({
-                xtype: 'dealpicture'
-            });
-        /*console.log("Data View is: ") ;
-        console.log(dataview) ;
-        console.log("Index is: " + index) ;
-        console.log("Target is: ") ;
-        console.log(target) ;
-        console.log("Event is: ") ;
-        console.log(e) ;
-        console.log("Event Options is: ") ;
-        console.log(eOpts) ;*/
-        pic.setRecord(record);
-        Ext.getStore('LocalStore').add(record);
-        //Ext.Viewport.add(pic);
-        Ext.Viewport.setActiveItem(pic);
-        //_gaq.push(['_trackEvent', 'Images', 'Click', 'Deal Picture', 0]);
-        //analytics.trackEvent(record.get('customerId'), 'DealClick', record.get('dealName'));
-        var showPosition;
-        if (navigator.geolocation) {
-            //if you have the geolocation, run the showPosition function
-            navigator.geolocation.getCurrentPosition(function showPosition(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
-                console.log('LatestBuzz View Analytics' + latitude + "," + longitude);
-                // api call for postal code and track event
-                $.getJSON("http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + latitude + "&lng=" + longitude + "&username=1234_5678", function(json) {
-                    //analytics.trackEvent(record.get('dealName'),DealClick', json.postalCodes[0].postalCode);
-                    //analytics.addCustomDimension('1', record.get('customerId'));
-                    analytics.trackEvent(record.get('dealName'), json.postalCodes[0].postalCode, record.get('customerId'));
-                });
-            });
-        } else {
-            //geolocation not happening
-            console.log("Gelocation not working");
-            analytics.trackEvent(record.get('dealName'), 'DealClick', 'Unknown');
-        }
-    },
-    onLatestbuzzPainted: function(element, eOpts) {
-        var store = Ext.getStore('MyDealsStore');
-        store.clearFilter();
-        store.load();
-        var store1 = Ext.getStore('calculateDistances');
-        var stores = [];
-        store1.each(function(record) {
-            Ext.Array.include(stores, record.get('customerId'));
-        });
-        console.log(stores.length);
-        store.filterBy(function(record) {
-            return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-        }, this);
-    }
-}, 0, [
-    "latestbuzz"
-], [
-    "component",
-    "container",
-    "dataview",
-    "latestbuzz"
-], {
-    "component": true,
-    "container": true,
-    "dataview": true,
-    "latestbuzz": true
-}, [
-    "widget.latestbuzz"
-], 0, [
-    Contact.view,
-    'LatestBuzz'
-], 0));
-
-/*
- * File: app/view/FavoriteView.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.FavoriteView', Ext.dataview.DataView, {
-    config: {
-        itemId: 'favoriteview',
-        style: 'background:#fff;',
-        emptyText: '<h4 class="emptyText">You can see the the Latest Buzz from your <br>Favorite Business here!</h4>',
-        inline: true,
-        store: 'MyJsonPStore',
-        itemTpl: [
-            '<div style= "margin:5px 5px 5px 5px;padding:5px 5px 5px 5px;border:2px groove #C0C0C0"><img src="{pictureURL:empty(\'resources/img/defaultContactPic.png\')}" width="100"  /></div>',
-            '<div style="width:120px;color:black;font-size:2.8vw;text-align:center; ">{businessName}</div>',
-            '',
-            '',
-            ''
-        ]
-    }
-}, 0, [
-    "favoriteview"
-], [
-    "component",
-    "container",
-    "dataview",
-    "favoriteview"
-], {
-    "component": true,
-    "container": true,
-    "dataview": true,
-    "favoriteview": true
-}, [
-    "widget.favoriteview"
-], 0, [
-    Contact.view,
-    'FavoriteView'
-], 0));
-
-/*
- * File: app/view/Main.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.Main', Ext.tab.Panel, {
-    config: {
-        cls: 'toolbar-icon-color',
-        height: '100%',
-        id: 'tabbar',
-        itemId: 'tabbar',
-        minHeight: '',
-        style: '',
-        modal: true,
-        layout: {
-            type: 'card',
-            animation: 'slide',
-            'animation.direction': 'right'
         },
         items: [
             {
-                xtype: 'container',
-                title: 'Latest Buzz',
-                iconCls: 'icon-localbuzzicon',
-                id: 'LatestBuzz',
-                itemId: 'LatestBuzz',
-                ui: 'dark',
-                layout: 'vbox',
-                modal: true,
+                xtype: 'toolbar',
+                cls: 'toolbarCls',
+                docked: 'top',
+                height: '8vh',
+                ui: 'plain',
+                width: '100%',
+                scrollable: false,
+                layout: {
+                    type: 'hbox',
+                    align: 'center'
+                },
                 items: [
                     {
-                        xtype: 'toolbar',
-                        cls: 'toolbarCls',
-                        docked: 'top',
-                        html: '<h1 style=" color:#00529D;font-size:8vw;text-align:center;padding-top:10px">Local Buzz</h1>'
+                        xtype: 'button',
+                        cls: 'icon-back-button',
+                        docked: 'left',
+                        height: '100%',
+                        id: 'dealBackBtn',
+                        itemId: 'dealBackBtn',
+                        margin: '10 0 0 0',
+                        style: 'font-size:8vw',
+                        styleHtmlContent: true,
+                        ui: 'plain'
                     },
                     {
-                        xtype: 'latestbuzz'
+                        xtype: 'button',
+                        cls: 'icon-share',
+                        docked: 'right',
+                        id: 'share',
+                        itemId: 'share',
+                        minHeight: '100%',
+                        style: 'border:none;font-size:7vw',
+                        ui: 'plain',
+                        iconAlign: 'center',
+                        text: ''
+                    },
+                    {
+                        xtype: 'component',
+                        cls: 'contact-name',
+                        disabled: true,
+                        height: '100%',
+                        html: '<b>Business Name</b>',
+                        id: 'nameTxt1',
+                        itemId: 'nameTxt1',
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw;text-align:center',
+                        width: '100%'
                     }
                 ]
             },
             {
-                xtype: 'container',
-                title: 'Search',
-                iconCls: 'icon-search',
-                id: 'SearchBusiness',
-                itemId: 'SearchBusiness',
-                style: '',
-                ui: 'dark',
-                layout: 'hbox',
-                modal: true,
-                items: [
+                xtype: 'component',
+                cls: 'contact-name',
+                disabled: true,
+                height: '250px',
+                id: 'dealimage',
+                itemId: 'dealimage',
+                left: '2%',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0',
+                top: '1%',
+                width: '95%',
+                listeners: [
                     {
-                        xtype: 'contactlist',
-                        margin: '1 1 1 1',
-                        modal: true,
-                        flex: 1
-                    },
-                    {
-                        xtype: 'toolbar',
-                        cls: 'toolbarCls',
-                        docked: 'top',
-                        items: [
-                            {
-                                xtype: 'spacer',
-                                flex: 0.25,
-                                width: 5
-                            },
-                            {
-                                xtype: 'textfield',
-                                flex: 4,
-                                cls: 'searchfield',
-                                height: '10vh',
-                                id: 'searchfield',
-                                itemId: 'searchfield',
-                                margin: '5 15 5 5',
-                                style: ' padding: 0.2em;',
-                                styleHtmlContent: true,
-                                clearIcon: false,
-                                name: 'searchfield',
-                                autoComplete: true,
-                                autoCorrect: false,
-                                placeHolder: 'Search Business',
-                                listeners: [
-                                    {
-                                        fn: function(element, eOpts) {
-                                            Ext.getCmp('searchfield').setValue("");
-                                            document.getElementById('searchfield').blur();
-                                        },
-                                        event: 'painted'
-                                    }
-                                ]
+                        fn: function(element, eOpts) {
+                            var record = Ext.getStore('LocalStore').getAt(0);
+                            if (record.get('dealImageURL')) {
+                                element.addListener('tap', function() {
+                                    console.log('DealImage Tap');
+                                    var view = Ext.Viewport.add({
+                                            xtype: 'DealImage'
+                                        });
+                                    view.setRecord(record);
+                                    view.showBy(Ext.get('dealPicture'));
+                                });
                             }
-                        ]
-                    }
-                ],
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            Ext.getStore('MyJsonPStore').clearFilter();
-                            Ext.getStore('MyDealsStore').clearFilter();
-                            var storeName = Ext.getStore('MyJsonPStore').load();
-                            var store = Ext.getStore('MyDealsStore');
-                            store.clearFilter();
-                            store.load();
-                            var store1 = Ext.getStore('calculateDistances');
-                            var stores = [];
-                            store1.each(function(record) {
-                                //stores.push(record.get('customerId'));
-                                Ext.Array.include(stores, record.get('customerId'));
-                            });
-                            console.log(stores.length);
-                            storeName.filterBy(function(record) {
-                                return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-                            }, this);
                         },
                         event: 'painted'
                     }
@@ -66435,708 +67640,177 @@ Ext.define('Ext.direct.Manager', {
             },
             {
                 xtype: 'container',
-                title: 'Favorites',
-                iconCls: 'icon-star-favorite',
-                height: '100%',
-                itemId: 'Favorites',
-                margin: '1 1 1 1',
-                modal: false,
-                items: [
-                    {
-                        xtype: 'favoriteview',
-                        docked: 'top',
-                        height: '100%',
-                        minHeight: '100%'
-                    }
-                ],
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            var store = Ext.getStore('UserPreferences');
-                            var records = [];
-                            var ds = Ext.getStore('MyJsonPStore');
-                            ds.clearFilter();
-                            store.each(function(rec) {
-                                if (rec.get('isFavorite') === true) {
-                                    records.push(rec.get('customerId'));
-                                } else {
-                                    Ext.Array.remove(records, rec.get('customerId'));
-                                }
-                            });
-                            ds.filterBy(function(record) {
-                                return Ext.Array.indexOf(records, record.get('customerId')) !== -1;
-                            }, this);
-                        },
-                        event: 'painted'
-                    }
-                ]
+                cls: 'contact-name',
+                disabled: true,
+                html: '<p style="font-size:3vw;text-align:center">       Published through Local Buzz',
+                id: 'nameTxt2',
+                itemId: 'nameTxt2',
+                left: '40%',
+                margin: '10 5 5 5',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '52%',
+                width: '65%'
             },
             {
                 xtype: 'container',
-                title: 'Buzz Near Me',
-                iconCls: 'icon-buzz',
-                height: '100%',
+                cls: 'contact-name',
+                disabled: true,
+                height: '250px',
+                hidden: true,
+                id: 'nameTxt3',
+                itemId: 'nameTxt3',
+                margin: '5 5 5 5',
+                style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:#FFF',
+                styleHtmlContent: true,
+                width: '95%'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-phone1',
+                docked: 'bottom',
+                height: '8vh',
+                id: 'phoneNumber1',
+                itemId: 'phoneNumber1',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'font-size:2vw !important',
+                styleHtmlContent: true,
+                top: '57%',
+                width: '90%',
+                clearIcon: false,
+                name: 'phoneNumber',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-globe1',
+                docked: 'bottom',
+                height: '8vh',
+                id: 'website3',
+                itemId: 'website3',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
+                styleHtmlContent: true,
+                top: '76%',
+                width: '90%',
+                clearIcon: false,
+                name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-email1',
+                docked: 'bottom',
+                height: '8vh',
                 hidden: false,
-                id: 'BuzzNearMe',
-                itemId: 'BuzzNearMe',
-                margin: '1 1 1 1',
-                padding: '',
-                modal: false,
-                items: [
-                    {
-                        xtype: 'map',
-                        height: '100%',
-                        hidden: false,
-                        id: 'mymap',
-                        itemId: 'mymap',
-                        styleHtmlContent: true,
-                        mapOptions: {
-                            disableDefaultUI: true,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP,
-                            zoom: 11
-                        }
-                    },
-                    {
-                        xtype: 'textareafield',
-                        centered: false,
-                        height: '100%',
-                        hidden: true,
-                        html: '<h4 class="emptyText">Uh-Oh! Location service is disabled.<br> To access the Latest Buzz near you,<br> allow Local Buzz to access your location in App Settings <br> OR <br>Enter your zipcode in the box provided.</h4>',
-                        id: 'locationOffText',
-                        itemId: 'locationOffText',
-                        styleHtmlContent: true,
-                        width: '100%',
-                        clearIcon: false,
-                        name: 'locationOffText',
-                        autoCapitalize: true,
-                        readOnly: true
-                    },
-                    {
-                        xtype: 'textfield',
-                        cls: 'searchfield',
-                        docked: 'top',
-                        hidden: true,
-                        id: 'lookUpZipcode',
-                        itemId: 'lookUpZipcode',
-                        style: ' padding: 0.2em;',
-                        styleHtmlContent: true,
-                        clearIcon: false,
-                        name: 'lookUpZipcode',
-                        placeHolder: 'Enter zipcode to get the Latest Buzz'
-                    }
-                ]
+                id: 'email1',
+                itemId: 'email1',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
+                styleHtmlContent: true,
+                top: '66%',
+                width: '90%',
+                clearIcon: false,
+                name: 'emailAddress',
+                placeHolder: 'Not Listed',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-phone1',
+                docked: 'bottom',
+                hidden: true,
+                id: 'website2',
+                itemId: 'website2',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'font-size:2vw !important',
+                styleHtmlContent: true,
+                top: '65%',
+                width: '90%',
+                clearIcon: false,
+                name: 'website',
+                readOnly: true
+            },
+            {
+                xtype: 'textareafield',
+                cls: [
+                    'icon-location1',
+                    'customfield1'
+                ],
+                height: '9vh',
+                id: 'address1',
+                itemId: 'address1',
+                margin: '0 0 0 5',
+                style: 'font-size:4.2vw;font-family:Arial;',
+                styleHtmlContent: true,
+                top: '86%',
+                width: '95%',
+                clearIcon: false,
+                name: 'address',
+                readOnly: true
             }
         ],
-        tabBar: {
-            cls: 'tabBarCls',
-            docked: 'bottom',
-            height: '8%',
-            id: 'mytabbar',
-            itemId: 'mytabbar',
-            padding: '2 10 0 10',
-            style: 'font-size:4vw;border-top:1px solid #eee;background:white;',
-            ui: 'plain',
-            modal: false,
-            activeTab: 0,
-            layout: {
-                type: 'hbox',
-                align: 'start',
-                pack: 'justify'
-            }
-        },
         listeners: [
             {
-                fn: 'onLatestBuzzActivate',
-                event: 'activate',
-                delegate: '#LatestBuzz'
+                fn: 'onDealPictureInitialize',
+                event: 'initialize'
             },
             {
-                fn: 'onSearchfieldKeyup',
-                event: 'keyup',
-                delegate: '#searchfield'
-            },
-            {
-                fn: 'onSearchBusinessActivate',
-                event: 'activate',
-                delegate: '#SearchBusiness'
-            },
-            {
-                fn: 'onMyMapRender',
-                event: 'maprender',
-                delegate: '#mymap'
-            },
-            {
-                fn: 'onBuzzNearMeActivate',
-                event: 'activate',
-                delegate: '#BuzzNearMe'
-            },
-            {
-                fn: 'onBuzzNearMeDeactivate',
-                event: 'deactivate',
-                delegate: '#BuzzNearMe'
+                fn: 'onDealPictureShow',
+                event: 'show'
             }
         ]
     },
-    onLatestBuzzActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var store = Ext.getStore('MyDealsStore');
-        store.clearFilter();
-        store.load();
-        var store1 = Ext.getStore('calculateDistances');
-        var stores = [];
-        store1.each(function(record) {
-            //stores.push(record.get('customerId'));
-            Ext.Array.include(stores, record.get('customerId'));
-        });
-        store.filterBy(function(record) {
-            return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-        }, this);
-    },
-    onSearchfieldKeyup: function(textfield, e, eOpts) {
-        var search = textfield.getValue();
-        var store = Ext.getStore('MyJsonPStore');
-        store.clearFilter();
-        store.filter('businessName', search);
-    },
-    onSearchBusinessActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        document.getElementById('searchfield').blur();
-        Ext.getStore('MyDealsStore').clearFilter();
-        var store = Ext.getStore('MyJsonPStore');
-        store.clearFilter();
-        var store1 = Ext.getStore('calculateDistances');
-        var stores = [];
-        store1.each(function(record) {
-            //stores.push(record.get('customerId'));
-            Ext.Array.include(stores, record.get('customerId'));
-        });
-        store.filterBy(function(record) {
-            return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-        }, this);
-    },
-    onMyMapRender: function(map, gmap, eOpts) {
-        var lat, long;
-        var infoWindow;
-        var latitude, longitude;
-        /* Ext.getCmp('mymap').setMapCenter({
-                            latitude: latitude,
-                            longitude: longitude
-                        });*/
-        /*navigator.geolocation.getCurrentPosition(function showPosition(position) {
-                    Ext.getCmp('mymap').show();
-                    Ext.getCmp('lookUpZipcode').hide();
-                    Ext.getCmp('locationOffText').hide();
-                    latitude = position.coords.latitude;
-                    longitude = position.coords.longitude;
-
-
-                },onError);
-
-                function onError(error){
-                    Ext.getCmp('locationOffText').show();
-                    Ext.getCmp('lookUpZipcode').show();
-                    Ext.getCmp('mymap').hide();
-
-                Ext.getCmp('lookUpZipcode').addListener('action',function(){
-
-                var postalCode = Ext.getCmp('lookUpZipcode').getValue();
-                Ext.getCmp('mymap').show();
-                Ext.getCmp('lookUpZipcode').hide();
-                Ext.getCmp('locationOffText').hide();
-                 console.log(postalCode);
-
-                $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address="+ postalCode +"&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM",
-
-                              function(json){
-                                  lat = json.results[0].geometry.location.lat;
-                                  long = json.results[0].geometry.location.lng;
-
-                Ext.getCmp('mymap').setMapCenter({latitude: lat ,longitude: long});
-
-                    });
-                    });
-
-
-
-                        }*/
-        map.mapTypeControl = false;
-        var postalCode = Ext.getCmp('zipcodeLookUp').getValue();
-        console.log(postalCode);
-        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + postalCode + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-            lat = json.results[0].geometry.location.lat;
-            long = json.results[0].geometry.location.lng;
-            Ext.getCmp('mymap').setMapCenter({
-                latitude: lat,
-                longitude: long
-            });
-        });
-        var store = Ext.getStore('MyJsonPStore');
-        store.clearFilter();
-        var store1 = Ext.getStore('calculateDistances');
-        var stores = [];
-        store1.each(function(record) {
-            //stores.push(record.get('customerId'));
-            Ext.Array.include(stores, record.get('customerId'));
-        });
-        console.log(stores.length);
-        store.filterBy(function(record) {
-            return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-        }, this);
-        if (store.getCount() === 0) {
-            Ext.Msg.alert('No Buzz Found', 'Please Check Back Later', null, null);
-        }
-        store.clearFilter();
-        var mapMarkerPositionStore = Ext.getStore('MapMarkerPositionStore');
-        var check_if_markers_visible = false;
-        store.each(function(record) {
-            var address = record.get('address');
-            $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-                lat = json.results[0].geometry.location.lat;
-                long = json.results[0].geometry.location.lng;
-                //console.log(lat,long);
-                var m = new google.maps.LatLng(lat, long);
-                //businessName = record.get('businessName');
-                addMarker(record.get('category'), record.get('businessName'), m, record);
-                mapMarkerPositionStore.add({
-                    'lat': lat,
-                    'long': long
-                });
-            });
-        });
-        /* $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + postalCode + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-                        lat = json.results[0].geometry.location.lat;
-                        long = json.results[0].geometry.location.lng;
-                        Ext.getCmp('mymap').setMapCenter({
-                            latitude: lat,
-                            longitude: long
-                        });
-                        var southWest = json.results[0].geometry.viewport.southwest;
-                        var northEast = json.results[0].geometry.viewport.northeast;
-                        var bounds = new google.maps.LatLngBounds(southWest, northEast);
-                        var check_if_markers_visible = false;
-                        mapMarkerPositionStore.each(function(rec) {
-                            var pos = new google.maps.LatLng(rec.get('lat'), rec.get('long'));
-                            console.log(rec.get('lat'), rec.get('long'));
-                            if (bounds.contains(pos)) {
-                                check_if_markers_visible = true;
-                            }
-                        });
-                        if (mapMarkerPositionStore.getAllCount() !== 0) {
-                            console.log(check_if_markers_visible);
-                            if (check_if_markers_visible === false) {
-                                Ext.Msg.alert('No Buzz Found', 'Please Check Back Later', null, null);
-                            }
-                        }
-                    });*/
-        var icons = {
-                "0": {
-                    icon: 'resources/img/car.png'
-                },
-                /*{
-                                        path: fontawesome.markers.CAR,
-                                        scale: 0.4,
-                                        strokeWeight: 0.2,
-                                        strokeColor: 'black',
-                                        strokeOpacity: 1,
-                                        fillColor: '#1985d0',
-                                        fillOpacity: 1
-                                    }*/
-                "1": {
-                    icon: 'resources/img/supermarket.png'
-                },
-                /*{
-                                        path: fontawesome.markers.SHOPPING_CART,
-                                        scale: 0.4,
-                                        strokeWeight: 0.2,
-                                        strokeColor: 'black',
-                                        strokeOpacity: 1,
-                                        fillColor: '#1985d0',
-                                        fillOpacity: 1
-                                    }*/
-                "2": {
-                    icon: 'resources/img/museum_art.png'
-                },
-                /*{
-                                        path: fontawesome.markers.BULLSEYE,
-                                        scale: 0.4,
-                                        strokeWeight: 0.2,
-                                        strokeColor: 'black',
-                                        strokeOpacity: 1,
-                                        fillColor: '#1985d0',
-                                        fillOpacity: 1
-                                    }*/
-                "3": {
-                    icon: 'resources/img/dance_class.png'
-                },
-                /*{
-                                        path: fontawesome.markers.CHILD,
-                                        scale: 0.4,
-                                        strokeWeight: 0.2,
-                                        strokeColor: 'black',
-                                        strokeOpacity: 1,
-                                        fillColor: '#1985d0',
-                                        fillOpacity: 1
-                                    }*/
-                "4": {
-                    icon: 'resources/img/barber.png'
-                },
-                "5": {
-                    icon: 'resources/img/restaurant.png'
-                },
-                "6": {
-                    icon: 'resources/img/flag-export.png'
-                }
-            };
-        /*{
-                                        path: fontawesome.markers.SCISSORS,
-                                        scale: 0.4,
-                                        strokeWeight: 0.2,
-                                        strokeColor: 'black',
-                                        strokeOpacity: 1,
-                                        fillColor: '#1985d0',
-                                        fillOpacity: 1
-                                    }*/
-        function addMarker(feature, businessName, m, record) {
-            var ds = Ext.getStore('MyDealsStore');
-            ds.clearFilter();
-            ds.filter('customerId', record.get('customerId'));
-            ds.load();
-            ds.filter('dealStatus', 'Active');
-            var count = ds.getCount();
-            var category;
-            if (feature === 'Automotives') {
-                category = 0;
-            } else if (feature === 'Grocery') {
-                category = 1;
-            } else if (feature === 'Art & Crafts') {
-                category = 2;
-            } else if (feature === 'Performing Arts') {
-                category = 3;
-            } else if (feature === 'Salon & Spa') {
-                category = 4;
-            } else if (feature === 'Restaurant') {
-                category = 5;
-            } else {
-                category = 6;
-            }
-            /* var marker = new MarkerWithLabel ({
-                            position: m,
-                            map: gmap,
-                            draggable: false,
-                            animation: google.maps.Animation.DROP,
-                            icon: icons[category].icon,
-                            labelContent: count.toString(),
-                            labelAnchor: new google.maps.Point(-10, 50),
-                            labelClass: "labels",
-                            labelStyle: {opacity: 1.0}
-
-
-
-                        });*/
-            var marker = new google.maps.Marker({
-                    position: m,
-                    map: gmap,
-                    icon: icons[category].icon
-                });
-            var content = '<h4 id ="businessname">' + businessName + '</h4><div><label id="labelStore" style="color:green;font-size:4vw;text-decoration:underline">' + count + ' Active Buzz</label></div>';
-            addInfoWindow(marker, content, record, businessName);
-        }
-        function addInfoWindow(marker, content, record, businessName) {
-            /*infoWindow = new google.maps.InfoWindow({
-                        content: content
-
-
-                    });*/
-            google.maps.event.addListener(marker, 'mousedown', function() {
-                if (infoWindow) {
-                    infoWindow.close();
-                }
-                infoWindow = new google.maps.InfoWindow({
-                    content: content
-                });
-                infoWindow.open(gmap, marker);
-                infoWindow.setContent(content);
-                console.log('Marker clicked ' + record.get('customerId'));
-                google.maps.event.addListener(infoWindow, 'domready', function() {
-                    document.getElementById('labelStore').addEventListener('mousedown', function() {
-                        /* console.log('Label Clicked ' + businessName);
-
-                               var store = Ext.getStore('MyDealsStore');
-                               store.clearFilter();
-                               store.load();
-
-                                store.filter('businessName',businessName);
-
-                                if(Ext.Viewport.getComponent('DealsPanel1')){
-                                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel1'));if(Ext.Viewport.getComponent('Info')){
-                                    }
-                                    else {
-                                    var view = Ext.Viewport.add({xtype:'DealsPanel1'});
-                                    Ext.Viewport.setActiveItem(view);
-                                    }
-
-                                    }*/
-                        var view;
-                        if (Ext.Viewport.getComponent('Info')) {
-                            view = Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('Info'));
-                            view.setRecord(record);
-                        } else {
-                            view = Ext.Viewport.add({
-                                xtype: 'contactinfo'
-                            });
-                            view.setRecord(record);
-                            Ext.Viewport.setActiveItem(view);
-                        }
-                    });
-                    /* document.getElementById('labelStoreInfo').addEventListener('mousedown',function() {
-
-
-                                console.log('Label Clicked ' + businessName);
-
-                               var store = Ext.getStore('MyJsonPStore');
-                               store.clearFilter();
-                               //store.load();
-
-                                //store.filter('businessName',businessName);
-                                var record = store.findRecord('businessName',businessName);
-
-                                    var view;
-                                    if(Ext.Viewport.getComponent('Info')){
-                                    view = Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('Info'));
-                                        view.setRecord(record);
-                                    }
-                                else {
-
-                                view = Ext.Viewport.add({xtype:'contactinfo'});
-                                view.setRecord(record);
-                                Ext.Viewport.setActiveItem(view);
-
-                                }
-
-                            });*/
-                    google.maps.event.addListener(gmap, 'click', function() {
-                        if (infoWindow) {
-                            infoWindow.close();
-                        }
-                    });
-                });
-            });
+    onDealPictureInitialize: function(component, eOpts) {
+        if (Ext.os.is('Android')) {
+            Ext.getCmp('dealBackBtn').hide();
         }
     },
-    //   Ext.getCmp('BuzzNearMe').fireEvent('activate', this);
-    onBuzzNearMeActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        Ext.getStore('MyJsonPStore').clearFilter();
-        Ext.getStore('MyJsonPStore').load();
-        var mapMarkerPositionStore = Ext.getStore('MapMarkerPositionStore');
-        if (Ext.getCmp('zipcodeLookUp').getValue() !== '') {
-            var store = Ext.getStore('MyJsonPStore');
-            store.clearFilter();
-            var store1 = Ext.getStore('calculateDistances');
-            var stores = [];
-            store1.each(function(record) {
-                //stores.push(record.get('customerId'));
-                Ext.Array.include(stores, record.get('customerId'));
-            });
-            store.filterBy(function(record) {
-                return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-            }, this);
-            if (store.getCount() === 0) {
-                Ext.Msg.alert('No Buzz Found', 'Please Check Back Later', null, null);
-            }
-        } else /* Ext.getStore('MyJsonPStore').clearFilter();
-                    Ext.getStore('MyJsonPStore').load();
-                    var postalCode = Ext.getCmp('zipcodeLookUp').getValue();
-                    console.log('Getting markers for map now');
-
-                   // Ext.getCmp('mymap').show();
-                    //Ext.getCmp('lookUpZipcode').hide();
-                    //Ext.getCmp('locationOffText').hide();
-                    console.log(postalCode);
-                    $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + postalCode + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-                        lat = json.results[0].geometry.location.lat;
-                        long = json.results[0].geometry.location.lng;
-                       /* Ext.getCmp('mymap').setMapCenter({
-                            latitude: lat,
-                            longitude: long
-                        });*/
-        /*  var southWest = json.results[0].geometry.viewport.southwest;
-                        var northEast = json.results[0].geometry.viewport.northeast;
-                        var bounds = new google.maps.LatLngBounds(southWest, northEast);
-                        var check_if_markers_visible = false;
-                        mapMarkerPositionStore.each(function(rec) {
-                            var pos = new google.maps.LatLng(rec.get('lat'), rec.get('long'));
-                            console.log(rec.get('lat'), rec.get('long'));
-                            if (bounds.contains(pos)) {
-                                check_if_markers_visible = true;
-                            }
-                        });
-                        if (mapMarkerPositionStore.getAllCount() !== 0) {
-                            console.log(check_if_markers_visible);
-                            if (check_if_markers_visible === false) {
-                                Ext.Msg.alert('No Buzz Found', 'Please Check Back Later', null, null);
-                            }
-                        }
-                    });*/
+    onDealPictureShow: function(component, eOpts) {
+        var record = Ext.getStore('LocalStore').getAt(0);
+        if (record.get('dealImageURL')) {} else //this.down('#nameTxt3').hide();
         {
-            navigator.geolocation.getCurrentPosition(function showPosition(position) {
-                // Ext.getCmp('mymap').show();
-                //Ext.getCmp('lookUpZipcode').hide();
-                //Ext.getCmp('locationOffText').hide();
-                latitude = position.coords.latitude;
-                longitude = position.coords.longitude;
-                Ext.getCmp('mymap').setMapCenter({
-                    latitude: latitude,
-                    longitude: longitude
-                });
-                /*  $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-                        var southWest = json.results[0].geometry.viewport.southwest;
-                        var northEast = json.results[0].geometry.viewport.northeast;
-                        var bounds = new google.maps.LatLngBounds(southWest, northEast);
-                        var check_if_markers_visible = false;
-                        mapMarkerPositionStore.each(function(rec) {
-                            var pos = new google.maps.LatLng(rec.get('lat'), rec.get('long'));
-                            console.log(rec.get('lat'), rec.get('long'));
-                            if (bounds.contains(pos)) {
-                                check_if_markers_visible = true;
-                            }
-                        });
-                        if (mapMarkerPositionStore.getAllCount() !== 0) {
-                            console.log(check_if_markers_visible);
-                            if (check_if_markers_visible === false) {
-                                Ext.Msg.alert('No Buzz Found', 'Please Check Back Later', null, null);
-                            }
-                        }
-                    });*/
-                var store = Ext.getStore('MyJsonPStore');
-                store.clearFilter();
-                var store1 = Ext.getStore('calculateDistances');
-                var stores = [];
-                store1.each(function(record) {
-                    //stores.push(record.get('customerId'));
-                    Ext.Array.include(stores, record.get('customerId'));
-                });
-                store.filterBy(function(record) {
-                    return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-                }, this);
-                if (store.getCount() === 0) {
-                    Ext.Msg.alert('No Buzz Found', 'Please Check Back Later', null, null);
-                }
-            });
+            this.down('#dealimage').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;color:#00529D;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:#00529D;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;color:#00529D;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
         }
     },
-    /* function onError(error) {
-                    if (Ext.getCmp('zipcodeLookUp').getValue() !== '') {
-                        //Ext.getCmp('mymap').hide();
-                       // Ext.getCmp('locationOffText').show();
-                       // Ext.getCmp('lookUpZipcode').show();
-                        Ext.getStore('MyJsonPStore').clearFilter();
-                        Ext.getStore('MyJsonPStore').load();
-                        var postalCode = Ext.getCmp('zipcodeLookUp').getValue();
-                       // Ext.getCmp('mymap').show();
-                        //Ext.getCmp('lookUpZipcode').hide();
-                        //Ext.getCmp('locationOffText').hide();
-                        console.log(postalCode);
-
-                         var store = Ext.getStore('MyJsonPStore');
-
-
-        store.clearFilter();
-
-
-
-        var store1 = Ext.getStore('calculateDistances');
-
-        var stores = [];
-
-
-
-        store1.each(function(record){
-            //stores.push(record.get('customerId'));
-            Ext.Array.include(stores,record.get('customerId'));
-
-
-        });
-        console.log(stores.length);
-
-        store.filterBy(function(record){
-            return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-
-        }, this);
-
-
-             if(store.getCount()===0){
-               Ext.Msg.alert('No Buzz Found', 'Please Check Back Later', null, null);
-             }
-               store.clearFilter();
-                var mapMarkerPositionStore = Ext.getStore('MapMarkerPositionStore');
-                var check_if_markers_visible = false;
-                store.each(function(record) {
-                    var address = record.get('address');
-                    $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-                        lat = json.results[0].geometry.location.lat;
-                        long = json.results[0].geometry.location.lng;
-                        //console.log(lat,long);
-                        var m = new google.maps.LatLng(lat, long);
-                        //businessName = record.get('businessName');
-                        addMarker(record.get('category'), record.get('businessName'), m, record);
-                        mapMarkerPositionStore.add({
-                            'lat': lat,
-                            'long': long
-                        });
-                    });
-                });
-
-
-
-
-                        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?address=" + postalCode + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM", function(json) {
-                            lat = json.results[0].geometry.location.lat;
-                            long = json.results[0].geometry.location.lng;
-                            Ext.getCmp('mymap').setMapCenter({
-                                latitude: lat,
-                                longitude: long
-                            });
-                            var southWest = json.results[0].geometry.viewport.southwest;
-                            var northEast = json.results[0].geometry.viewport.northeast;
-                            var bounds = new google.maps.LatLngBounds(southWest, northEast);
-                            var check_if_markers_visible = false;
-                            mapMarkerPositionStore.each(function(rec) {
-                                var pos = new google.maps.LatLng(rec.get('lat'), rec.get('long'));
-                                console.log(rec.get('lat'), rec.get('long'));
-                                if (bounds.contains(pos)) {
-                                    check_if_markers_visible = true;
-                                }
-                            });
-                            if (mapMarkerPositionStore.getAllCount() !== 0) {
-                                console.log(check_if_markers_visible);
-                                if (check_if_markers_visible === false) {
-                                    Ext.Msg.alert('No Buzz Found', 'Please Check Back Later', null, null);
-                                }
-                            }
-                        });
-                    }
-                }*/
-    onBuzzNearMeDeactivate: function(oldActiveItem, container, newActiveItem, eOpts) {}
+    // this.down('#dealimage').hide();
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            var name = record.get('itemName');
+            var businessName = record.get('businessName');
+            this.down('#nameTxt1').setHtml(record.get('businessName'));
+            var store = Ext.getStore('MyJsonPStore');
+            var rec = store.findRecord('businessName', businessName);
+            Ext.getCmp('phoneNumber1').setValue(rec.get('phoneNumber'));
+            Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
+            Ext.getCmp('website2').setValue(rec.get('website'));
+            Ext.getCmp('address1').setValue(rec.get('address'));
+            Ext.getCmp('email1').setValue(rec.get('emailAddress'));
+        }
+    }
 }, 0, [
-    "Main"
+    "dealPicture"
 ], [
     "component",
     "container",
-    "tabpanel",
-    "Main"
+    "panel",
+    "dealPicture"
 ], {
     "component": true,
     "container": true,
-    "tabpanel": true,
-    "Main": true
+    "panel": true,
+    "dealPicture": true
 }, [
-    "widget.Main"
+    "widget.dealPicture"
 ], 0, [
     Contact.view,
-    'Main'
+    'DealPicture'
 ], 0));
-/* Ext.getCmp('mymap').hide();
-            Ext.getCmp('locationOffText').show();
-            Ext.getCmp('lookUpZipcode').show();
-            Ext.getCmp('lookUpZipcode').setValue('');*/
 
 /*
  * File: app/view/DealsPanel.js
@@ -67152,65 +67826,60 @@ Ext.define('Ext.direct.Manager', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.DealsPanel', Ext.Panel, {
+(Ext.cmd.derive('Contact.view.DealsPanel', Ext.form.Panel, {
     config: {
-        height: '100%',
-        id: 'DealsPanel',
-        itemId: 'DealsPanel',
+        baseCls: 'x-list',
+        id: 'dealsPanel',
+        itemId: 'dealsPanel',
+        minHeight: '80%',
         padding: '5 5 5 5',
-        style: 'background:#fff',
-        scrollable: false,
-        layout: {
-            type: 'vbox',
-            align: 'stretchmax',
-            pack: 'center'
-        },
+        style: 'border:1px inset;',
+        styleHtmlContent: true,
+        url: '',
         items: [
             {
-                xtype: 'toolbar',
-                cls: 'toolbarCls',
+                xtype: 'listofdeals',
                 docked: 'top',
-                items: [
-                    {
-                        xtype: 'button',
-                        cls: 'icon-back-button',
-                        height: '100%',
-                        itemId: 'dealBackBtn',
-                        style: 'font-family:Arial;',
-                        styleHtmlContent: true,
-                        ui: 'plain',
-                        text: 'Back',
-                        listeners: [
-                            {
-                                fn: function(component, eOpts) {
-                                    if (Ext.os.is('Android')) {
-                                        this.setHidden(true);
-                                    }
-                                },
-                                event: 'initialize',
-                                order: 'after'
-                            }
-                        ]
-                    }
-                ]
+                height: '90%',
+                itemId: 'listofdeals',
+                width: '100%'
             },
             {
-                xtype: 'listofdeals',
-                height: '90%',
-                minHeight: '90%',
-                flex: 1
+                xtype: 'button',
+                docked: 'bottom',
+                height: '7%',
+                id: 'UploadDeal',
+                itemId: 'UploadDeal',
+                margin: '5 5 5 5',
+                style: 'font-size:5vw',
+                ui: 'confirm',
+                width: '',
+                text: 'Create Buzz'
             }
         ],
         listeners: [
             {
-                fn: 'onPanelActivate',
+                fn: 'onDealsPanelActivate',
                 event: 'activate'
             }
         ]
     },
-    onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        var date = new Date();
+        var today = Ext.Date.format(date, 'n/j/Y');
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        console.log(customerId);
         var store = Ext.getStore('MyDealsStore');
-        store.load();
+        store.clearFilter();
+        store.filter('customerId', customerId);
     }
 }, 0, [
     "DealsPanel"
@@ -67218,11 +67887,13 @@ Ext.define('Ext.direct.Manager', {
     "component",
     "container",
     "panel",
+    "formpanel",
     "DealsPanel"
 ], {
     "component": true,
     "container": true,
     "panel": true,
+    "formpanel": true,
     "DealsPanel": true
 }, [
     "widget.DealsPanel"
@@ -67230,43 +67901,9 @@ Ext.define('Ext.direct.Manager', {
     Contact.view,
     'DealsPanel'
 ], 0));
-//Ext.Viewport.getActiveItem().destroy();
-//store.filter('dealStatus','Active');
-//var date = new Date();
-//var today = Ext.Date.format(date,'n/j/Y');
-//var test = Ext.Date.add(date,Ext.Date.DAY,0);
-/*var today = Ext.Date.format(test,'n/j/Y');
-
-
-        Ext.Viewport.add(newActiveItem);
-
-        store.each(function(rec)
-                   {
-
-
-                       //console.log('Deal End Date: ' + rec.get('dealEndDate'));
-                       //console.log('Tdays date is : ' + today);
-
-                       if(rec.get('dealEndDate') < today) {
-
-                           console.log(rec.get('dealName'));
-                           rec.set('dealStatus','Expired');
-
-
-
-
-                       }
-
-
-
-                   });
-
-
-
-        //store.clearFilter();*/
 
 /*
- * File: app/view/DealsPanel1.js
+ * File: app/view/ChangeContactPicForm.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -67279,13 +67916,1560 @@ Ext.define('Ext.direct.Manager', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.DealsPanel1', Ext.Panel, {
+(Ext.cmd.derive('Contact.view.ChangeContactPicForm', Ext.form.Panel, {
+    config: {
+        centered: true,
+        height: '40%',
+        id: 'ChangeContactPicForm',
+        itemId: 'ChangeContactPicForm',
+        style: 'background;#fff;border:3px groove #1985d0',
+        styleHtmlContent: true,
+        width: '80%',
+        hideOnMaskTap: true,
+        modal: true,
+        scrollable: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax',
+            pack: 'end'
+        },
+        items: [
+            {
+                xtype: 'filefield',
+                cls: 'customfield1',
+                itemId: 'myfilefield1',
+                margin: '5 5 5 5',
+                styleHtmlContent: true,
+                width: 214,
+                clearIcon: false,
+                label: '',
+                labelWrap: true,
+                name: 'fileUpload',
+                capture: 'camera'
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    var form = this.up('ChangeContactPicForm');
+                    var record = form.getRecord();
+                    var customerId = form.getRecord().get('customerId');
+                    var store = Ext.getStore('MyJsonPStore');
+                    form.submit({
+                        url: 'http://services.appsonmobile.com/stores/' + customerId,
+                        xhr2: true,
+                        cache: false,
+                        waitMsg: 'Please Wait...',
+                        success: function(form, action) {
+                            var view = Ext.Viewport.getActiveItem();
+                            record.setDirty();
+                            record.beginEdit(true, record.getChanges());
+                            form.updateRecord(record);
+                            record.endEdit(true, record.getChanges());
+                            record.commit();
+                            store.sync();
+                            store.load();
+                            Ext.Msg.alert('Success', action.msg);
+                            form.destroy();
+                            view.setRecord(record);
+                        },
+                        failure: function(form, action) {
+                            store.load();
+                            Ext.Msg.alert('Failure', action.msg);
+                            form.destroy();
+                        }
+                    });
+                },
+                bottom: 30,
+                centered: false,
+                cls: 'button',
+                height: '23%',
+                left: '25%',
+                margin: '',
+                style: 'font-size:5vw!important',
+                styleHtmlContent: true,
+                ui: 'action',
+                width: 128,
+                iconAlign: 'center',
+                text: 'Submit'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'customerId'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'category'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'phoneNumber'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'address'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'emailAddress'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'zipcode'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'state'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'city'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'pictureURL'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'website'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'websiteDisplayName'
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onChangeContactPicFormHiddenChange',
+                event: 'hiddenchange'
+            }
+        ]
+    },
+    onChangeContactPicFormHiddenChange: function(component, value, oldValue, eOpts) {
+        if (component.isHidden() === true && oldValue !== null) {
+            component.destroy();
+        }
+    }
+}, 0, [
+    "ChangeContactPicForm"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "ChangeContactPicForm"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "ChangeContactPicForm": true
+}, [
+    "widget.ChangeContactPicForm"
+], 0, [
+    Contact.view,
+    'ChangeContactPicForm'
+], 0));
+
+/*
+ * File: app/view/panel.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.panel', Ext.tab.Panel, {
+    config: {
+        id: 'panel',
+        itemId: 'panel',
+        items: [
+            {
+                xtype: 'container',
+                title: 'Home',
+                iconCls: 'icon-home',
+                height: '',
+                id: 'home',
+                itemId: 'home',
+                items: [
+                    {
+                        xtype: 'contactinfo',
+                        height: '100%'
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                title: 'Manage Buzz',
+                iconCls: 'icon-plane',
+                items: [
+                    {
+                        xtype: 'DealsPanel',
+                        height: '100%'
+                    }
+                ]
+            },
+            {
+                xtype: 'tabpanel',
+                title: 'BuzzOMeter',
+                iconCls: 'icon-buzzometer',
+                id: 'buzzometer',
+                itemId: 'buzzometer',
+                style: 'font-size:5vw',
+                styleHtmlContent: true,
+                items: [
+                    {
+                        xtype: 'container',
+                        title: 'Buzz Popularity',
+                        height: '100%',
+                        html: '<div id="chart1"></div>',
+                        itemId: 'mypanel',
+                        styleHtmlContent: true,
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    var storeUserDetails = Ext.getStore('UserDetails');
+                                    storeUserDetails.load();
+                                    var customerId;
+                                    var businessName;
+                                    storeUserDetails.each(function(record) {
+                                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                        customerId = record.get('customerId');
+                                        businessName = record.get('businessName');
+                                    });
+                                    // Set a callback to run when the Google Visualization API is loaded.
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                        //Bar Chart
+                                        var dataBarChart = new google.visualization.DataTable();
+                                        var dealName = [];
+                                        var numberOfClicks = [];
+                                        dataBarChart.addColumn('string', 'dealName');
+                                        dataBarChart.addColumn('number', 'Number Of Clicks');
+                                        $.getJSON('http://services.appsonmobile.com/analytics_buzz_popularity/v3/' + customerId, function(json) {
+                                            for (var i = 0,
+                                                j = i; i < json.totalResults; i++ , j++) {
+                                                dealData = json.rows[i].toString();
+                                                tmp = dealData.split(",");
+                                                dealName[j] = tmp[0];
+                                                numberOfClicks[j] = parseInt(tmp[1], 10);
+                                            }
+                                            for (j = 0; j < dealName.length; j++) {
+                                                dataBarChart.addRow([
+                                                    dealName[j],
+                                                    numberOfClicks[j]
+                                                ]);
+                                            }
+                                            // Set chart options
+                                            var optionsBarChart = {
+                                                    vAxis: {
+                                                        title: 'Number of Views',
+                                                        titleTextStyle: {
+                                                            color: '#00529D',
+                                                            fontSize: 16
+                                                        },
+                                                        minValue: 0,
+                                                        gridlines: {
+                                                            count: -1
+                                                        }
+                                                    },
+                                                    hAxis: {
+                                                        title: 'Buzz Name',
+                                                        titleTextStyle: {
+                                                            color: '#00529D',
+                                                            fontSize: 16
+                                                        }
+                                                    },
+                                                    legend: 'none',
+                                                    height: '400',
+                                                    orientation: 'horizontal',
+                                                    bar: {
+                                                        groupWidth: 20
+                                                    }
+                                                };
+                                            // Instantiate and draw our chart, passing in some options.
+                                            var chartBar = new google.visualization.BarChart(document.getElementById('chart1'));
+                                            chartBar.draw(dataBarChart, optionsBarChart);
+                                        });
+                                    }
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    },
+                    {
+                        xtype: 'container',
+                        title: 'User Location',
+                        height: '100%',
+                        html: '<div id="chart2"></div>',
+                        itemId: 'mypanel1',
+                        styleHtmlContent: true,
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    var storeUserDetails = Ext.getStore('UserDetails');
+                                    storeUserDetails.load();
+                                    var customerId;
+                                    var businessName;
+                                    storeUserDetails.each(function(record) {
+                                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                                        customerId = record.get('customerId');
+                                        businessName = record.get('businessName');
+                                    });
+                                    var dealName = [];
+                                    // Set a callback to run when the Google Visualization API is loaded.
+                                    google.charts.setOnLoadCallback(drawChart);
+                                    function drawChart() {
+                                        // Create the data table.
+                                        var data = new google.visualization.DataTable();
+                                        var zipcode = [];
+                                        var numberOfHits = [];
+                                        //data.addColumn('string', 'dealName');
+                                        data.addColumn('string', 'zipcode');
+                                        data.addColumn('number', 'Number Of Hits');
+                                        $.getJSON('http://services.appsonmobile.com/analytics_user_location/v3/' + customerId, function(json) {
+                                            for (var i = 0,
+                                                j = i; i < json.totalResults; i++ , j++) {
+                                                dealData = json.rows[i].toString();
+                                                tmp = dealData.split(",");
+                                                zipcode[j] = tmp[0];
+                                                numberOfHits[j] = parseInt(tmp[1], 10);
+                                            }
+                                            for (j = 0; j < zipcode.length; j++) {
+                                                data.addRow([
+                                                    zipcode[j],
+                                                    numberOfHits[j]
+                                                ]);
+                                            }
+                                            // Set chart options
+                                            var options = {
+                                                    'pieHole': 0.4,
+                                                    'pieSliceTextStyle': {
+                                                        color: 'black'
+                                                    },
+                                                    height: '600',
+                                                    width: '375',
+                                                    legend: 'top'
+                                                };
+                                            // Instantiate and draw our chart, passing in some options.
+                                            var chart = new google.visualization.PieChart(document.getElementById('chart2'));
+                                            chart.draw(data, options);
+                                        });
+                                    }
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        tabBar: {
+            docked: 'bottom',
+            height: '8%',
+            padding: '35 40 0 40',
+            style: 'color:#c0c0c0;background:#FFF;font-size:4vw',
+            ui: 'plain',
+            layout: {
+                type: 'hbox',
+                align: 'end',
+                pack: 'justify'
+            }
+        }
+    }
+}, 0, [
+    "panel"
+], [
+    "component",
+    "container",
+    "tabpanel",
+    "panel"
+], {
+    "component": true,
+    "container": true,
+    "tabpanel": true,
+    "panel": true
+}, [
+    "widget.panel"
+], 0, [
+    Contact.view,
+    'panel'
+], 0));
+
+/*
+ * File: app/view/Terms.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.Terms', Ext.Panel, {
+    config: {
+        centered: true,
+        height: '50%',
+        hidden: true,
+        id: 'Terms',
+        itemId: 'Terms',
+        margin: '0 5 5 5',
+        style: 'background;#fff;border:3px groove #1985d0',
+        width: '95%',
+        hideOnMaskTap: true,
+        items: [
+            {
+                xtype: 'textfield',
+                disabled: false,
+                html: 'Terms and conditions here',
+                itemId: 'mytextfield38',
+                readOnly: true
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    this.up('Terms').destroy();
+                },
+                docked: 'bottom',
+                left: '30%',
+                style: 'background:#00529D;color:white',
+                top: '80%',
+                ui: 'plain',
+                width: '40%',
+                text: 'Close'
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onTermsHiddenChange',
+                event: 'hiddenchange'
+            }
+        ]
+    },
+    onTermsHiddenChange: function(component, value, oldValue, eOpts) {
+        if (component.isHidden() === true && oldValue !== null) {
+            component.destroy();
+        }
+    }
+}, 0, [
+    "Terms"
+], [
+    "component",
+    "container",
+    "panel",
+    "Terms"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "Terms": true
+}, [
+    "widget.Terms"
+], 0, [
+    Contact.view,
+    'Terms'
+], 0));
+
+/*
+ * File: app/view/UpdateDealForm.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.UpdateDealForm', Ext.form.Panel, {
+    config: {
+        html: '',
+        id: 'formpanel1',
+        itemId: 'formpanel',
+        style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
+        modal: true,
+        scrollable: false,
+        multipartDetection: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: true,
+                id: 'businessName1',
+                itemId: 'businessName',
+                margin: '30 15 2 15',
+                styleHtmlContent: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'customerId1',
+                itemId: 'customerId',
+                name: 'customerId'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                disabled: false,
+                id: 'DealName',
+                itemId: 'DealName',
+                margin: '5 5 5 5 ',
+                padding: '',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Name',
+                labelWidth: '35%',
+                name: 'DealName',
+                readOnly: true
+            },
+            {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                id: 'DealStatus',
+                itemId: 'DealStatus',
+                margin: '5 5 5 5 ',
+                maxHeight: '',
+                style: '',
+                styleHtmlContent: true,
+                label: 'Status',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStatus',
+                value: 'Active',
+                placeHolder: 'Active',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Active',
+                        value: 'Active'
+                    },
+                    {
+                        text: 'Expired',
+                        value: 'Expired'
+                    }
+                ]
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                id: 'DealDescription',
+                itemId: 'DealDescription',
+                margin: '5 5 5 5 ',
+                padding: '',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                disabled: false,
+                hidden: true,
+                id: 'DealImageURL',
+                itemId: 'DealImageURL',
+                margin: '5 5 5 5 ',
+                padding: '',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                labelWidth: '35%',
+                name: 'DealImageURL',
+                readOnly: true
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealStartDate1',
+                itemId: 'DealStartDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'Start Date',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStartDate',
+                value: {
+                    day: new Date().getDate(),
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                autoSelect: false,
+                options: {
+                    minDate: new Date()
+                },
+                usePicker: true,
+                dateFormat: 'm/d/Y',
+                picker: {
+                    itemId: 'mydatepicker3',
+                    style: '',
+                    scrollable: false,
+                    stretchX: false,
+                    stretchY: false,
+                    yearFrom: 2016
+                }
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealEndDate1',
+                itemId: 'DealEndDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'End Date',
+                labelWidth: '35%',
+                name: 'DealEndDate',
+                value: {
+                    day: new Date().getDate() + 1,
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                usePicker: true,
+                picker: {
+                    styleHtmlContent: true,
+                    yearFrom: 2016
+                }
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'itemName',
+                itemId: 'itemName',
+                name: 'itemName'
+            },
+            {
+                xtype: 'container',
+                left: '',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 10',
+                        padding: '5 30 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        Ext.Viewport.add({
+                                            xtype: 'Terms'
+                                        }).show();
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                height: 140,
+                margin: '10 10 10 10 10',
+                styleHtmlContent: true,
+                layout: 'fit',
+                scrollable: false,
+                items: [
+                    {
+                        xtype: 'spacer',
+                        maxWidth: '',
+                        minWidth: ''
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getActiveItem().destroy();
+                        },
+                        height: '20%',
+                        style: 'font-size:5vw!important',
+                        styleHtmlContent: true,
+                        ui: 'decline',
+                        width: '40%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var form = this.up('UpdateDealForm');
+                            var itemName = form.getAt(8).getValue();
+                            var endDate = form.getAt(7).getValue();
+                            var dealName = form.getAt(0).getValue();
+                            var date = new Date();
+                            if (dealName) {
+                                if (endDate >= date) {
+                                    if (document.getElementById('chkbx').checked) {
+                                        form.submit({
+                                            url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                            success: function(form, action) {
+                                                Ext.Msg.alert('Success', action.msg);
+                                                form.destroy();
+                                            },
+                                            failure: function(form, action) {
+                                                store.load();
+                                                Ext.Msg.alert('Failure', action.msg);
+                                                form.destroy();
+                                            }
+                                        });
+                                    } else {
+                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    }
+                                } else {
+                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                }
+                            } else {
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
+                            }
+                        },
+                        docked: 'right',
+                        height: '20%',
+                        itemId: 'submit',
+                        style: 'font:size:4vw',
+                        styleHtmlContent: true,
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Submit'
+                    }
+                ]
+            }
+        ]
+    },
+    getValidationErrors: function() {
+        var errors = [];
+        var reqFields = this.query('field[required=true]');
+        var i = 0,
+            ln = reqFields.length,
+            field;
+        for (; i < ln; i++) {
+            field = reqFields[i];
+            if (!field.getValue()) {
+                errors.push(field.getLabel() + ' must be completed.');
+            }
+        }
+        console.dir(errors);
+        return errors;
+    },
+    setRecord: function(record) {
+        (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        if (record) {
+            this.down('#DealName').setValue(record.data.dealName);
+            this.down('#DealStatus').setValue(record.data.dealStatus);
+            this.down('#DealDescription').setValue(record.data.dealDescription);
+            this.down('#DealImageURL').setValue(record.data.dealImageURL);
+        }
+    }
+}, 0, [
+    "UpdateDealForm"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "UpdateDealForm"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "UpdateDealForm": true
+}, [
+    "widget.UpdateDealForm"
+], 0, [
+    Contact.view,
+    'UpdateDealForm'
+], 0));
+//this.child('contactpic').setData(record.data);
+//this.down('#DealStartDate').setValue(record.data.dealStartDate);
+//this.down('#DealEndDate').setValue(record.data.dealEndDate);
+
+/*
+ * File: app/view/UploadDealNoImageForm.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.UploadDealNoImageForm', Ext.form.Panel, {
+    config: {
+        html: '',
+        id: 'formpanel2',
+        itemId: 'formpanel',
+        style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
+        modal: true,
+        scrollable: false,
+        multipartDetection: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: false,
+                id: 'businessName2',
+                itemId: 'businessName',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                label: 'Name',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealName'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: true,
+                id: 'businessName3',
+                itemId: 'businessName1',
+                margin: '30 15 2 15',
+                styleHtmlContent: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'customerId2',
+                itemId: 'customerId',
+                name: 'customerId'
+            },
+            {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                id: 'DealStatus1',
+                itemId: 'DealStatus',
+                margin: '5 5 5 5 ',
+                maxHeight: '',
+                style: '',
+                styleHtmlContent: true,
+                label: 'Status',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStatus',
+                value: 'Active',
+                placeHolder: 'Active',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Active',
+                        value: 'Active'
+                    },
+                    {
+                        text: 'Expired',
+                        value: 'Expired'
+                    }
+                ]
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                id: 'DealDescription1',
+                itemId: 'DealDescription',
+                margin: '5 5 5 5 ',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealStartDate2',
+                itemId: 'DealStartDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'Start Date',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStartDate',
+                value: {
+                    day: new Date().getDate(),
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                autoSelect: false,
+                options: {
+                    minDate: new Date()
+                },
+                usePicker: true,
+                component: {
+                    useMask: true,
+                    minValue: new Date()
+                },
+                dateFormat: 'm/d/Y',
+                picker: {
+                    itemId: 'mydatepicker3',
+                    style: '',
+                    scrollable: false,
+                    stretchX: false,
+                    stretchY: false,
+                    useTitles: true,
+                    yearFrom: 2016
+                }
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealEndDate2',
+                itemId: 'DealEndDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'End Date',
+                labelWidth: '35%',
+                name: 'DealEndDate',
+                value: {
+                    day: new Date().getDate() + 1,
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                usePicker: true,
+                picker: {
+                    useTitles: true,
+                    yearFrom: 2016
+                }
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'DealPictureURL1',
+                itemId: 'DealPictureURL',
+                name: 'DealPictureURL'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'DealImageURL2',
+                itemId: 'DealImageURL2',
+                name: 'DealImageURL'
+            },
+            {
+                xtype: 'container',
+                left: '',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 10',
+                        padding: '5 30 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        Ext.Viewport.add({
+                                            xtype: 'Terms'
+                                        }).show();
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                height: 140,
+                margin: '10 10 10 10 10',
+                styleHtmlContent: true,
+                layout: 'fit',
+                scrollable: false,
+                items: [
+                    {
+                        xtype: 'spacer',
+                        maxWidth: '',
+                        minWidth: ''
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getActiveItem().destroy();
+                        },
+                        height: '20%',
+                        style: 'font-size:5vw!important',
+                        styleHtmlContent: true,
+                        ui: 'decline',
+                        width: '40%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var form = this.up('UploadDealNoImageForm');
+                            var date = new Date();
+                            var dealName = form.getAt(0).getValue();
+                            var startDate = form.getAt(5).getValue();
+                            var endDate = form.getAt(6).getValue();
+                            if (dealName) {
+                                if (endDate >= date) {
+                                    if (document.getElementById('chkbx').checked) {
+                                        form.submit({
+                                            url: 'http://services.appsonmobile.com/createNewDeal',
+                                            success: function(form, action) {
+                                                Ext.getStore('MyDealsStore').load();
+                                                Ext.Msg.alert('Success!', action.msg);
+                                                form.destroy();
+                                            },
+                                            failure: function(form, action) {
+                                                store.load();
+                                                Ext.Msg.alert('Failure', action.msg);
+                                                form.destroy();
+                                            }
+                                        });
+                                    } else {
+                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    }
+                                } else {
+                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                }
+                            } else {
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
+                            }
+                        },
+                        docked: 'right',
+                        height: '20%',
+                        itemId: 'submit',
+                        style: 'font:size:4vw',
+                        styleHtmlContent: true,
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Submit'
+                    }
+                ]
+            }
+        ]
+    },
+    getValidationErrors: function() {
+        var errors = [];
+        var reqFields = this.query('field[required=true]');
+        var i = 0,
+            ln = reqFields.length,
+            field;
+        for (; i < ln; i++) {
+            field = reqFields[i];
+            if (!field.getValue()) {
+                errors.push(field.getLabel() + ' must be completed.');
+            }
+        }
+        console.dir(errors);
+        return errors;
+    }
+}, 0, [
+    "UploadDealNoImageForm"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "UploadDealNoImageForm"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "UploadDealNoImageForm": true
+}, [
+    "widget.UploadDealNoImageForm"
+], 0, [
+    Contact.view,
+    'UploadDealNoImageForm'
+], 0));
+
+/*
+ * File: app/view/UploadDealWithImageForm.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.UploadDealWithImageForm', Ext.form.Panel, {
+    config: {
+        html: '',
+        id: 'formpanel3',
+        itemId: 'formpanel',
+        padding: '0 0 35 0',
+        style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
+        modal: true,
+        scrollable: true,
+        multipartDetection: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                hidden: false,
+                id: 'businessName4',
+                itemId: 'businessName',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                label: 'Name',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealName'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: true,
+                id: 'businessName5',
+                itemId: 'businessName1',
+                margin: '30 15 2 15',
+                styleHtmlContent: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'customerId3',
+                itemId: 'customerId',
+                name: 'customerId'
+            },
+            {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                id: 'DealStatus2',
+                itemId: 'DealStatus',
+                margin: '5 5 5 5 ',
+                maxHeight: '',
+                style: '',
+                styleHtmlContent: true,
+                label: 'Status',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStatus',
+                value: 'Active',
+                placeHolder: 'Active',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Active',
+                        value: 'Active'
+                    },
+                    {
+                        text: 'Expired',
+                        value: 'Expired'
+                    }
+                ]
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                id: 'DealDescription2',
+                itemId: 'DealDescription',
+                margin: '5 5 5 5 ',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealStartDate3',
+                itemId: 'DealStartDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'Start Date',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStartDate',
+                value: {
+                    day: new Date().getDate(),
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                autoSelect: false,
+                usePicker: true,
+                component: {
+                    useMask: true,
+                    minValue: new Date()
+                },
+                dateFormat: 'm/d/Y',
+                picker: {
+                    id: 'startDatepicker',
+                    itemId: 'mydatepicker3',
+                    style: '',
+                    scrollable: false,
+                    stretchX: false,
+                    stretchY: false,
+                    useTitles: true,
+                    value: {
+                        year: 2016,
+                        month: 7,
+                        day: 16
+                    },
+                    yearFrom: 2016,
+                    yearTo: 2017
+                }
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                id: 'DealEndDate3',
+                itemId: 'DealEndDate',
+                margin: '5 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'End Date',
+                labelWidth: '35%',
+                name: 'DealEndDate',
+                value: {
+                    day: new Date().getDate() + 1,
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                options: {
+                    minValue: new Date()
+                },
+                usePicker: true,
+                component: {
+                    useMask: true
+                },
+                picker: {
+                    itemId: 'mydatepicker3',
+                    useTitles: true,
+                    yearFrom: 2016,
+                    yearTo: 2017
+                }
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'DealPictureURL2',
+                itemId: 'DealPictureURL',
+                name: 'DealPictureURL'
+            },
+            {
+                xtype: 'filefield',
+                cls: 'customfield',
+                itemId: 'myfilefield2',
+                margin: '5 5 0 5',
+                styleHtmlContent: true,
+                width: '97%',
+                clearIcon: false,
+                label: 'Add Image',
+                labelWidth: '29%',
+                labelWrap: true,
+                name: 'fileUpload',
+                capture: 'camera'
+            },
+            {
+                xtype: 'container',
+                left: '',
+                margin: '0 0 10 0',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'container',
+                        docked: 'top',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 10',
+                        padding: '5 30 5 0',
+                        style: 'vertical-align: middle!important;',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        Ext.Viewport.add({
+                                            xtype: 'Terms'
+                                        }).show();
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                height: 140,
+                margin: '0 10 50 10',
+                padding: '5 5 5 5',
+                styleHtmlContent: true,
+                layout: 'fit',
+                scrollable: false,
+                items: [
+                    {
+                        xtype: 'spacer',
+                        maxWidth: '',
+                        minWidth: ''
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getActiveItem().destroy();
+                        },
+                        height: '20%',
+                        style: 'font-size:5vw!important',
+                        styleHtmlContent: true,
+                        ui: 'decline',
+                        width: '40%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var form = this.up('UploadDealWithImageForm');
+                            var date = new Date();
+                            //var dealName = form.getAt(0).getValue();
+                            var startDate = form.getAt(5).getValue();
+                            var endDate = form.getAt(6).getValue();
+                            var file = form.getAt(8).getValue();
+                            var dealName = form.getAt(0).getValue();
+                            if (dealName) {
+                                if (file) {
+                                    if (endDate >= date) {
+                                        if (document.getElementById('chkbx').checked) {
+                                            form.submit({
+                                                url: 'http://services.appsonmobile.com/uploadS3/',
+                                                xhr2: true,
+                                                cache: false,
+                                                waitMsg: 'Please Wait...',
+                                                success: function(form, action) {
+                                                    Ext.Msg.alert('Success', action.msg);
+                                                    Ext.getStore('MyDealsStore').load();
+                                                    form.destroy();
+                                                },
+                                                failure: function(form, action) {
+                                                    Ext.Msg.alert('Failure', action.msg);
+                                                    Ext.getStore('MyDealsStore').load();
+                                                    form.destroy();
+                                                }
+                                            });
+                                        } else {
+                                            Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                        }
+                                    } else {
+                                        Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                    }
+                                } else {
+                                    Ext.Msg.alert('Error!', 'No Image to upload ', null, null);
+                                }
+                            } else {
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
+                            }
+                        },
+                        docked: 'right',
+                        height: '20%',
+                        itemId: 'submit',
+                        style: 'font:size:4vw',
+                        styleHtmlContent: true,
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Submit'
+                    }
+                ]
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onMydatepicker3Pick',
+                event: 'pick',
+                delegate: '#mydatepicker3'
+            }
+        ]
+    },
+    onMydatepicker3Pick: function(picker, value, slot, eOpts) {
+        var today = new Date();
+        if (value < today) {
+            picker.setValue(today);
+        }
+    },
+    getValidationErrors: function() {
+        var errors = [];
+        var reqFields = this.query('field[required=true]');
+        var i = 0,
+            ln = reqFields.length,
+            field;
+        for (; i < ln; i++) {
+            field = reqFields[i];
+            if (!field.getValue()) {
+                errors.push(field.getLabel() + ' must be completed.');
+            }
+        }
+        console.dir(errors);
+        return errors;
+    }
+}, 0, [
+    "UploadDealWithImageForm"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "UploadDealWithImageForm"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "UploadDealWithImageForm": true
+}, [
+    "widget.UploadDealWithImageForm"
+], 0, [
+    Contact.view,
+    'UploadDealWithImageForm'
+], 0));
+
+/*
+ * File: app/view/CreateBuzzOption.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.CreateBuzzOption', Ext.ActionSheet, {
     config: {
         height: '100%',
-        id: 'DealsPanel1',
-        itemId: 'DealsPanel1',
-        padding: '5 5 5 5',
-        style: 'background:#fff',
+        id: 'CreateBuzzOption',
+        itemId: 'CreateBuzzOption',
+        style: 'background:white',
+        styleHtmlContent: true,
         scrollable: false,
         layout: {
             type: 'vbox',
@@ -67294,103 +69478,85 @@ Ext.define('Ext.direct.Manager', {
         },
         items: [
             {
-                xtype: 'toolbar',
-                cls: 'toolbarCls',
-                docked: 'top',
-                items: [
-                    {
-                        xtype: 'button',
-                        cls: 'icon-back-button',
-                        height: '100%',
-                        itemId: 'dealBackBtn1',
-                        style: 'font-family:Arial;',
-                        styleHtmlContent: true,
-                        ui: 'plain',
-                        text: 'Back',
-                        listeners: [
-                            {
-                                fn: function(component, eOpts) {
-                                    if (Ext.os.is('Android')) {
-                                        this.setHidden(true);
-                                    }
-                                },
-                                event: 'initialize',
-                                order: 'after'
-                            }
-                        ]
-                    }
-                ]
+                xtype: 'button',
+                handler: function(button, e) {
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.load();
+                    var customerId;
+                    var businessName;
+                    var DealPictureURL;
+                    Ext.Viewport.getActiveItem().destroy();
+                    var view = Ext.Viewport.add({
+                            xtype: 'UploadDealWithImageForm'
+                        });
+                    storeUserDetails.each(function(record) {
+                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                        customerId = record.get('customerId');
+                        businessName = record.get('businessName');
+                        DealPictureURL = record.get('DealPictureURL');
+                        view.setRecord(record);
+                    });
+                    //view.showBy(button);
+                    var frame = document.createElement('iframe');
+                    //Ext.Viewport.getActiveItem().destroy();
+                    Ext.Viewport.setActiveItem(view);
+                },
+                margin: '10 10 20 10',
+                ui: 'action',
+                text: 'Create Buzz With Image'
             },
             {
-                xtype: 'listofdeals',
-                height: '90%',
-                minHeight: '90%',
-                flex: 1
-            }
-        ],
-        listeners: [
-            {
-                fn: 'onPanelActivate',
-                event: 'activate'
+                xtype: 'button',
+                handler: function(button, e) {
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.load();
+                    var customerId;
+                    var businessName;
+                    var DealPictureURL;
+                    Ext.Viewport.getActiveItem().destroy();
+                    var view = Ext.Viewport.add({
+                            xtype: 'UploadDealNoImageForm'
+                        });
+                    storeUserDetails.each(function(record) {
+                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                        customerId = record.get('customerId');
+                        businessName = record.get('businessName');
+                        DealPictureURL = record.get('DealPictureURL');
+                        view.setRecord(record);
+                    });
+                    //view.showBy(button);
+                    var frame = document.createElement('iframe');
+                    //Ext.Viewport.getActiveItem().destroy();
+                    Ext.Viewport.setActiveItem(view);
+                },
+                margin: '20 10 10 10',
+                ui: 'action',
+                text: 'Create Buzz No Image'
             }
         ]
-    },
-    onPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var store = Ext.getStore('MyDealsStore');
-        store.load();
     }
 }, 0, [
-    "DealsPanel1"
+    "CreateBuzzOption"
 ], [
     "component",
     "container",
     "panel",
-    "DealsPanel1"
+    "sheet",
+    "actionsheet",
+    "CreateBuzzOption"
 ], {
     "component": true,
     "container": true,
     "panel": true,
-    "DealsPanel1": true
+    "sheet": true,
+    "actionsheet": true,
+    "CreateBuzzOption": true
 }, [
-    "widget.DealsPanel1"
+    "widget.CreateBuzzOption"
 ], 0, [
     Contact.view,
-    'DealsPanel1'
+    'CreateBuzzOption'
 ], 0));
-//Ext.Viewport.getActiveItem().destroy();
-//store.filter('dealStatus','Active');
-//var date = new Date();
-//var today = Ext.Date.format(date,'n/j/Y');
-//var test = Ext.Date.add(date,Ext.Date.DAY,0);
-/*var today = Ext.Date.format(test,'n/j/Y');
-
-
-        Ext.Viewport.add(newActiveItem);
-
-        store.each(function(rec)
-                   {
-
-
-                       //console.log('Deal End Date: ' + rec.get('dealEndDate'));
-                       //console.log('Tdays date is : ' + today);
-
-                       if(rec.get('dealEndDate') < today) {
-
-                           console.log(rec.get('dealName'));
-                           rec.set('dealStatus','Expired');
-
-
-
-
-                       }
-
-
-
-                   });
-
-
-
-        //store.clearFilter();*/
 
 /*
  * File: app/view/DealImage.js
@@ -67408,22 +69574,21 @@ Ext.define('Ext.direct.Manager', {
  */
 (Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
     config: {
-        height: '70%',
+        height: '80%',
         id: 'DealImage',
         itemId: 'DealImage',
-        margin: '10 10 10 0',
         style: 'background:#FFF;border:1px solid #00529D',
         width: '95%',
         scrollable: true,
         tpl: [
-            '<div id="wrapper">',
-            '<tpl if="dealImageURL">',
-            '<div id="scroller"><img src="{dealImageURL}" style="height:100%;width:100%;"/></div>',
-            '',
-            ' ',
-            '    </tpl>',
-            ' </div>   ',
-            ''
+            '<div id="wrapper" style="margin:0px 0px 0px 0px;height:100%;width:100%">',
+            '\t',
+            '\t<tpl if="dealImageURL">',
+            '\t<div id="scroller"><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:100%;width:100%"/></div>',
+            '                            ',
+            '\t\t</tpl>',
+            '\t\t',
+            '\t</div>'
         ],
         layout: {
             type: 'vbox',
@@ -67432,22 +69597,21 @@ Ext.define('Ext.direct.Manager', {
         items: [
             {
                 xtype: 'toolbar',
+                cls: 'toolbarCls',
                 docked: 'top',
-                style: 'background:#FFF;border:none',
-                ui: 'plain',
+                height: '8vh',
                 items: [
                     {
                         xtype: 'button',
                         handler: function(button, e) {
-                            //Ext.get('DealImage').destroy();
                             Ext.Viewport.getComponent('DealImage').destroy();
                         },
+                        cls: 'icon-close',
                         docked: 'right',
                         id: 'close',
                         itemId: 'close',
-                        style: 'color:#00529D;font-size:5vw',
-                        ui: 'plain',
-                        iconCls: 'delete'
+                        padding: '10 10 10 10',
+                        ui: 'plain'
                     }
                 ]
             }
@@ -67504,60 +69668,52 @@ Ext.define('Ext.direct.Manager', {
 // @require @packageOverrides
 Ext.Loader.setConfig({});
 Ext.application({
-    flagCurrentLocation: false,
     models: [
         'Contact',
         'Deal',
-        'UserPreferences',
-        'MapMarkerPosition',
-        'storesNearBy',
-        'UserLocation'
+        'UserDetails'
     ],
     stores: [
-        'ContactStore',
         'MyJsonPStore',
         'MyDealsStore',
-        'UserPreferences',
-        'MyJsonPStore1',
-        'LocalStore',
-        'MapMarkerPositionStore',
-        'calculateDistances',
-        'UserLocation'
+        'UserDetails',
+        'LocalStore'
     ],
     views: [
-        'Picture',
-        'List',
+        'contactform',
         'DealPicture',
         'ListOfDeals',
-        'Main',
-        'FavoriteView',
         'DealsPanel',
-        'DealsPanel1',
-        'WelcomeScreen',
-        'LatestBuzz',
-        'DealImage',
-        'Info'
+        'Login',
+        'ChangeContactPicForm',
+        'contactinfo',
+        'panel',
+        'Terms',
+        'UpdateDealForm',
+        'UploadDealNoImageForm',
+        'UploadDealWithImageForm',
+        'CreateBuzzOption',
+        'DealImage'
     ],
     controllers: [
         'Contacts'
     ],
     icon: 'icon.png',
     name: 'Contact',
+    startupImage: 'icon.png',
     launch: function() {
-        var postalCode;
-        var store = Ext.getStore('MyDealsStore');
-        store.clearFilter();
-        store.load();
         Ext.util.Format.empty = function(value, defaultValue) {
             return !Ext.isEmpty(value) ? value : defaultValue;
         };
         Ext.util.Format.undef = function(value, defaultValue) {
             return Ext.isDefined(value) ? value : defaultValue;
         };
-        var storesNearBy = Ext.getStore('calculateDistances');
-        for (var i = 0; i < storesNearBy.getAllCount(); i++) {
-            storesNearBy.removeAt(i);
-        }
+        //Load google charts
+        google.charts.load('current', {
+            'packages': [
+                'corechart'
+            ]
+        });
         if (Ext.os.is('Android')) {
             var BackButtonPanel;
             var exitApp = false;
@@ -67579,45 +69735,50 @@ Ext.application({
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
-                if (Ext.Viewport.getActiveItem().xtype === 'Main') {
-                    if (exitApp) {
-                        clearInterval(intval);
+                console.log('Back Button pressed');
+                console.log(Ext.Viewport.getActiveItem().xtype);
+                navigator.notification.confirm('Are you certain you want to close the app?', // message
+                function(index) {
+                    if (index == 1) {
+                        //look at the docs for this part
                         navigator.app.exitApp();
-                    } else {
-                        exitApp = true;
-                        Ext.Viewport.add(BackButtonPanel);
-                        BackButtonPanel.show();
-                        setTimeout(function() {
-                            BackButtonPanel.hide();
-                        }, 3000);
                     }
-                } else if (Ext.Viewport.getActiveItem().getItemId() === 'Info') {
+                }, // callback to invoke with index of button pressed
+                'Exit', // title
+                'Yes,No');
+                // buttonLabels
+                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
+                    /* if (exitApp) {
+
+						console.log('Exiting app');
+
+		                clearInterval(intval);
+
+		                navigator.app.exitApp();
+		            }
+		            else {
+						console.log('First time Back Button pressed');
+		                exitApp = true;
+		                Ext.Viewport.add(BackButtonPanel);
+		                BackButtonPanel.show();
+
+		                setTimeout(function () {BackButtonPanel.hide();}, 3000);
+
+		            }*/
+                    navigator.notification.confirm('Are you certain you want to close the app?', // message
+                    function(index) {
+                        if (index == 1) {
+                            //look at the docs for this part
+                            navigator.app.exitApp();
+                        }
+                    }, // callback to invoke with index of button pressed
+                    'Exit', // title
+                    'Yes,No');
+                }
+                // buttonLabels
+                else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('tabbar'));
-                    var ds = Ext.StoreManager.lookup('MyJsonPStore');
-                    ds.clearFilter();
-                    var store = Ext.StoreManager.lookup('MyDealsStore');
-                    store.clearFilter();
-                } else if (Ext.Viewport.getActiveItem().getItemId() === 'DealsPanel') {
-                    Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(2);
-                    var store1 = Ext.StoreManager.lookup('MyDealsStore');
-                    //store.clearFilter();
-                    store1.load();
-                } else if (Ext.Viewport.getActiveItem().getItemId() === 'DealsPanel1') {
-                    console.log('DealsPanel1');
-                    Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('tabbar'));
-                } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
-                    Ext.Viewport.getActiveItem().destroy();
-                    if (Ext.Viewport.getComponent('DealsPanel')) {
-                        Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
-                    } else if (Ext.Viewport.getComponent('DealsPanel')) {
-                        Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel1'));
-                    } else  {
-                        Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('tabbar'));
-                    }
-                    
+                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                 }
             }
         }
@@ -67625,88 +69786,88 @@ Ext.application({
         function onResume(e) {}
         //Ext.Msg.alert('Resume',null,null,null);
         /* var store = Ext.getStore('MyDealsStore');
-            store.load();
-            navigator.geolocation.getCurrentPosition(function showPosition(position) {
-                Ext.getCmp('mymap').show();
-                Ext.getCmp('locationOffText').hide();
-                Ext.getCmp('lookUpZipcode').hide();
-                 var store1 = Ext.getStore('MyJsonPStore');
-                    store1.load();
-                    store1.clearFilter();
-                    store1.filterBy(function(record) {
-                        var address = record.get('address');
-                        var customerId;
-                        $.getJSON("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + latitude + "," + longitude + "&destinations=" + address + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM",
-                           function(json) {
-                               if(task){
+		    store.load();
+		    navigator.geolocation.getCurrentPosition(function showPosition(position) {
+		        Ext.getCmp('mymap').show();
+		        Ext.getCmp('locationOffText').hide();
+		        Ext.getCmp('lookUpZipcode').hide();
+		         var store1 = Ext.getStore('MyJsonPStore');
+		            store1.load();
+		            store1.clearFilter();
+		            store1.filterBy(function(record) {
+		                var address = record.get('address');
+		                var customerId;
+		                $.getJSON("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + latitude + "," + longitude + "&destinations=" + address + "&key=AIzaSyDHFtBdpwHNSJ2Pu0HpRK1ce5uHCSGHKXM",
+		                   function(json) {
+		                       if(task){
 
-                                task.cancel();
-                                store.clearFilter();
-                                store.load();
+		                        task.cancel();
+		                        store.clearFilter();
+		                        store.load();
 
-                                var store1 = Ext.getStore('calculateDistances');
+		                        var store1 = Ext.getStore('calculateDistances');
 
-                                var stores = [];
+		                        var stores = [];
 
-                              store1.each(function(record){
-                              // stores.push(record.get('customerId'));
-                                  Ext.Array.include(stores,record.get('customerId'));
-
-
-        });
-        console.log(stores.length);
-
-        store.filterBy(function(record){
-            return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
-
-        }, this);
+		                      store1.each(function(record){
+		                      // stores.push(record.get('customerId'));
+		                          Ext.Array.include(stores,record.get('customerId'));
 
 
+		});
+		console.log(stores.length);
+
+		store.filterBy(function(record){
+		    return Ext.Array.indexOf(stores, record.get('customerId')) !== -1;
+
+		}, this);
 
 
 
-                               }
-                            var distance = json.rows[0].elements[0].distance.value;
-                            if (distance <= 40234) {
-                                storesNearBy.add({'customerId':record.get('customerId')});
-
-                                return true;
-
-                            } else {
-                                return false;
-
-                            }
 
 
+		                       }
+		                    var distance = json.rows[0].elements[0].distance.value;
+		                    if (distance <= 40234) {
+		                        storesNearBy.add({'customerId':record.get('customerId')});
 
-                                              });
-                    });
+		                        return true;
+
+		                    } else {
+		                        return false;
+
+		                    }
 
 
 
-        var task = Ext.create('Ext.util.DelayedTask', function() {
-            Ext.Viewport.mask({ xtype: 'loadmask',
-                               message: "Loading Latest Buzz.." });
-        }, this);
-        },onError);
+		                                      });
+		            });
 
 
 
-            function onError(error){
+		var task = Ext.create('Ext.util.DelayedTask', function() {
+		    Ext.Viewport.mask({ xtype: 'loadmask',
+		                       message: "Loading Latest Buzz.." });
+		}, this);
+		},onError);
 
-                Ext.getCmp('mymap').hide();
-                Ext.getCmp('locationOffText').show();
-                Ext.getCmp('lookUpZipcode').show();
+
+
+		    function onError(error){
+
+		        Ext.getCmp('mymap').hide();
+		        Ext.getCmp('locationOffText').show();
+		        Ext.getCmp('lookUpZipcode').show();
 
 
 
-            }*/
-        Ext.create('Contact.view.WelcomeScreen', {
+		    }*/
+        Ext.create('Contact.view.Login', {
             fullscreen: true
         });
     }
 });
 
 // @tag full-page
-// @require H:\Apps\Sencha Architect Apps\AnroidBackButton\app.js
+// @require H:\Apps\Sencha Architect Apps\LocalBuzzBusinessApp\app.js
 
