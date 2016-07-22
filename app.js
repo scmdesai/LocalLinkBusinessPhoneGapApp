@@ -69731,7 +69731,7 @@ Ext.application({
             BackButtonPanel.setCls('backButtonPanel');
             var intval = setInterval(function() {
                     exitApp = false;
-                }, 3000);
+                }, 30000);
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), true);
             // add back button listener
             function onBackKeyDown(e) {
@@ -69745,9 +69745,10 @@ Ext.application({
                         exitApp = true;
                         Ext.Viewport.add(BackButtonPanel);
                         BackButtonPanel.show();
+                        clearInterval(intval);
                         setTimeout(function() {
                             BackButtonPanel.hide();
-                        }, 3000);
+                        }, 30000);
                     }
                 } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
