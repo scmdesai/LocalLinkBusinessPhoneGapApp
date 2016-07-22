@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.appsonmobile.localbuzz" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.appsonmobile.localbuzzforbusiness" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>LocalBuzz For Business</name>
     <description>
         LocalBuzz App For Business
@@ -9,7 +9,7 @@
     </author>
     <content src="index.html" />
 	<!-- End Amazon Mobile Analytics  -->
-	<preference name='phonegap-version' value='cli-5.1.1' />
+	
 	<preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="10000" />
     <preference name="permissions" value="none" />
@@ -60,15 +60,7 @@
 	<gap:plugin name="cordova-plugin-statusbar" source="npm" />
 	
 	
-	<!-- Plugin Added for Push Notification -->
-	<gap:plugin name="phonegap-plugin-push" source="npm" version="1.5.3" />
-	<!-- Plugin Added for Google Analytics -->
-	<gap:plugin name="cordova-plugin-google-analytics"  source="npm" version="0.8.1"/>
-	<!-- End Google Analytics -->
 	
-	<!-- Plugin Added for Geolocation -->
-	<gap:plugin name="cordova-plugin-geolocation"  source="npm" version="1.0.1"/>
-	<!-- End Geolocation -->
 	<!--social sharing -->
 	<gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
 	
