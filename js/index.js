@@ -50,6 +50,12 @@ var app = {
 		console.log("Device is ready");
 		
 		
+		document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+		
+		function onBackKeyDown(e) {
+		console.log('Back Button pressed Index.js');
+		}
+		
 		//this.receivedEvent('deviceready');
 		
 		//StatusBar Overlay set to false
