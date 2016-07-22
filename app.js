@@ -69739,8 +69739,8 @@ Ext.application({
                     if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
-                        navigator.app.exitApp();
-                    } else {
+                    } else // navigator.app.exitApp();
+                    {
                         console.log('First time Back Button pressed');
                         exitApp = true;
                         Ext.Viewport.add(BackButtonPanel);
