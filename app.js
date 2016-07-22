@@ -69715,40 +69715,32 @@ Ext.application({
             ]
         });
         if (Ext.os.is('Android')) {
-            var BackButtonPanel;
-            var exitApp = false;
-            BackButtonPanel = Ext.create('Ext.Panel', {
-                // fullscreen: true,
-                html: 'Tap on Back Button Again To Exit',
-                id: 'BackButtonPanel',
-                itemId: 'BackButtonPanel',
-                baseCls: 'x-box'
-            });
-            BackButtonPanel.setBottom('100px');
-            BackButtonPanel.setLeft('170px');
-            BackButtonPanel.setHeight('50px');
-            BackButtonPanel.setWidth('100%');
-            BackButtonPanel.setCls('backButtonPanel');
-            var intval = setInterval(function() {
-                    exitApp = false;
-                }, 3000);
+            /* var BackButtonPanel;
+		    var exitApp = false;
+		    BackButtonPanel = Ext.create('Ext.Panel', {
+		        // fullscreen: true,
+		        html: 'Tap on Back Button Again To Exit',
+		        id:'BackButtonPanel',
+		        itemId:'BackButtonPanel',
+		        baseCls: 'x-box'
+
+
+		    });
+		    BackButtonPanel.setBottom('100px');
+		    BackButtonPanel.setLeft('170px');
+
+		    BackButtonPanel.setHeight('50px');
+		    BackButtonPanel.setWidth('100%');
+		    BackButtonPanel.setCls('backButtonPanel');
+		    var intval = setInterval(function () { exitApp = false; }, 3000);*/
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
-            function onBackKeyDown(e) {
-                console.log('Back Button pressed');
-                console.log(Ext.Viewport.getActiveItem().xtype);
-                navigator.notification.confirm('Are you certain you want to close the app?', // message
-                function(index) {
-                    if (index == 1) {
-                        //look at the docs for this part
-                        navigator.app.exitApp();
-                    }
-                }, // callback to invoke with index of button pressed
-                'Exit', // title
-                'Yes,No');
-                // buttonLabels
-                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
-                    /* if (exitApp) {
+            function onBackKeyDown(e) {}
+        }
+        /*if(Ext.Viewport.getActiveItem().xtype==='panel'){
+
+
+		           /* if (exitApp) {
 
 						console.log('Exiting app');
 
@@ -69764,24 +69756,34 @@ Ext.application({
 
 		                setTimeout(function () {BackButtonPanel.hide();}, 3000);
 
-		            }*/
-                    navigator.notification.confirm('Are you certain you want to close the app?', // message
-                    function(index) {
-                        if (index == 1) {
-                            //look at the docs for this part
-                            navigator.app.exitApp();
-                        }
-                    }, // callback to invoke with index of button pressed
-                    'Exit', // title
-                    'Yes,No');
-                }
-                // buttonLabels
-                else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
-                    Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
-                }
-            }
-        }
+		            }
+
+
+
+					 navigator.notification.confirm(
+		            'Are you certain you want to close the app?',  // message
+		            function( index ){
+		                if( index == 1 ){//look at the docs for this part
+		                    navigator.app.exitApp();
+		                }
+		            },              // callback to invoke with index of button pressed
+		            'Exit',            // title
+		            'Yes,No'          // buttonLabels
+		        );
+				}
+
+
+		        else if(Ext.Viewport.getActiveItem().getItemId()==='dealPicture'){
+
+
+		            Ext.Viewport.getActiveItem().destroy();
+
+		                Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
+
+
+				}
+
+		*/
         document.addEventListener("resume", Ext.bind(onResume, this), false);
         function onResume(e) {}
         //Ext.Msg.alert('Resume',null,null,null);
