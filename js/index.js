@@ -76,6 +76,7 @@ var app = {
 		
 		function onBackKeyDown(e) {
 		console.log('Back Button pressed Index.js');
+		return false;
 		 if (exitApp) {
 
 				console.log('Exiting app');
