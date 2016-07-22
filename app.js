@@ -69733,11 +69733,9 @@ Ext.application({
 		    BackButtonPanel.setWidth('100%');
 		    BackButtonPanel.setCls('backButtonPanel');
 		    var intval = setInterval(function () { exitApp = false; }, 3000);*/
-            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), true);
             // add back button listener
-            function onBackKeyDown(e) {
-                e.stopPropagation();
-            }
+            function onBackKeyDown(e) {}
         }
         /*if(Ext.Viewport.getActiveItem().xtype==='panel'){
 
