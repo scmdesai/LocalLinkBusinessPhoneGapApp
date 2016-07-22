@@ -66364,7 +66364,7 @@ Ext.define('Ext.picker.Picker', {
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'sterling@sterling.com', 0, true, false, false);
+                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', 'owner@justdance.com', 0, true, false, false);
                     //console.log(store.getData());
                     //store.loadRecord();
                     //var view = Ext.create('Contact.view.Info');
@@ -66478,18 +66478,19 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'dataview',
                 docked: 'top',
-                height: '30%',
+                height: '40%',
                 id: 'mydataview',
                 itemId: 'mydataview',
-                margin: '5 5 5 5',
+                margin: '5 2 5 2',
                 padding: '',
                 style: 'overflow:hidden',
                 width: '98%',
                 scrollable: false,
                 deferEmptyText: false,
                 itemTpl: [
-                    '<img src = "{pictureURL}" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>'
+                    '<img src = "{pictureURL}" style="height:30%;width:98%;margin-left:5px;margin-top:2px;"/>'
                 ],
+                maxItemCache: 1,
                 store: 'MyJsonPStore',
                 listeners: [
                     {
@@ -66512,34 +66513,60 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'textfield',
+                xtype: 'textareafield',
                 cls: [
-                    'icon-phone',
+                    'icon-location',
                     'customfield1'
                 ],
                 disabled: false,
-                height: '',
+                docked: 'bottom',
+                height: '12vh',
                 hidden: false,
-                itemId: 'phoneNumber',
-                margin: '',
-                minWidth: '',
+                html: '',
+                itemId: 'address',
+                margin: '0 5 0 5',
+                maxHeight: '',
+                minHeight: '',
                 padding: '10 10 10 10',
+                style: 'font-size:3vw;font-family: arial',
+                styleHtmlContent: true,
                 clearIcon: false,
-                name: 'phoneNumber',
+                name: 'address',
+                readOnly: true,
+                maxRows: 2
+            },
+            {
+                xtype: 'textfield',
+                cls: [
+                    'icon-globe',
+                    'customfield2'
+                ],
+                disabled: false,
+                docked: 'bottom',
+                hidden: false,
+                itemId: 'websiteDisplayName',
+                margin: '0 5 0 5',
+                style: 'font-size:5vw;font-family: arial',
+                styleHtmlContent: true,
+                clearIcon: false,
+                name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
                 xtype: 'textfield',
                 cls: [
                     'icon-email',
-                    'customfield1'
+                    'customfield2'
                 ],
                 disabled: false,
-                height: '',
+                docked: 'bottom',
                 hidden: false,
                 itemId: 'email',
+                margin: '0 5 0 5',
                 minWidth: '',
-                padding: '10 10 10 10',
+                style: 'font-size:5vw;font-family: arial',
+                styleHtmlContent: true,
                 clearIcon: false,
                 label: '',
                 name: 'emailAddress',
@@ -66548,39 +66575,20 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: [
-                    'icon-globe',
-                    'customfield1'
+                    'icon-phone',
+                    'customfield2'
                 ],
                 disabled: false,
-                height: '',
+                docked: 'bottom',
                 hidden: false,
-                itemId: 'websiteDisplayName',
-                padding: '10 10 10 10',
-                style: 'font-size:2px !important',
+                itemId: 'phoneNumber',
+                margin: '0 5 0 5',
+                minWidth: '',
+                style: 'font-size:4.5vw;font-family: arial',
+                styleHtmlContent: true,
                 clearIcon: false,
-                name: 'websiteDisplayName',
+                name: 'phoneNumber',
                 readOnly: true
-            },
-            {
-                xtype: 'textareafield',
-                baseCls: '',
-                cls: [
-                    'icon-location',
-                    'customfield1'
-                ],
-                disabled: false,
-                height: '12vh',
-                hidden: false,
-                html: '',
-                itemId: 'address',
-                maxHeight: '',
-                minHeight: '',
-                padding: '10 10 10 10',
-                style: '\'font-size:3.5vw;font-family: arial\'',
-                clearIcon: false,
-                name: 'address',
-                readOnly: true,
-                maxRows: 2
             },
             {
                 xtype: 'textfield',
@@ -66757,7 +66765,7 @@ Ext.define('Ext.picker.Picker', {
                         iconCls: 'icon-signout',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
-                            Ext.Msg.confirm('Logout', 'Are You Sure You Want To Logout?', function(btn) {
+                            Ext.Msg.confirm('Logout', 'Are you sure you want to Logout?', function(btn) {
                                 if (btn == 'yes') {
                                     FacebookInAppBrowser.logout(function() {
                                         window.localStorage.setItem('facebookAccessToken', null);
@@ -66812,17 +66820,17 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.ListOfDeals', Ext.dataview.List, {
     config: {
+        cls: 'customlist',
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
-        style: '',
-        styleHtmlContent: true,
         autoDestroy: false,
         allowDeselect: true,
         deselectOnContainerClick: false,
         mode: 'MULTI',
         deferEmptyText: false,
         emptyText: 'Create Buzz!',
+        itemCls: 'list-item',
         store: 'MyDealsStore',
         pinHeaders: false,
         preventSelectionOnDisclose: false,
@@ -66949,7 +66957,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'dataview',
                 docked: 'top',
-                height: '30%',
+                height: '40%',
                 itemId: 'mydataview1',
                 margin: '5 5 5 5',
                 padding: '',
@@ -67017,7 +67025,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
-                height: '15%',
                 id: 'businessName',
                 itemId: 'businessName',
                 margin: '30 15 2 15',
@@ -67447,7 +67454,35 @@ Ext.define('Ext.picker.Picker', {
         var record = Ext.getStore('LocalStore').getAt(0);
         //var record = Ext.getStore('MyDealsStore').findRecord('itemName',itemName,0,0,true,false,false);
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
-        window.plugins.socialsharing.share(null, null, record.get('dealPictureURL'), null);
+        //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
+        Ext.getCmp('dealBackBtn').hide();
+        Ext.get('share').hide();
+        if (Ext.os.is('Android')) {
+            navigator.screenshot.URI(function(error, res) {
+                if (error) {
+                    console.error(error);
+                } else {
+                    //html = '<img style="width:100%;" src="'+res.URI+'">';
+                    //document.body.innerHTML = html;
+                    window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.URI, null);
+                }
+            }, 50);
+            Ext.get('share').show();
+            var view = Ext.Viewport.getComponent('dealPicture');
+            view.setRecord(record);
+            Ext.Viewport.setActiveItem(view);
+        } else {
+            navigator.screenshot.save(function(error, res) {
+                if (error) {
+                    console.error(error);
+                } else {
+                    //Ext.Msg.alert(res.filePath,null,null,null); //should be path/to/myScreenshot.jpg
+                    window.plugins.socialsharing.share(null, 'Hi! Check out the Latest Buzz from LocalBuzz', res.filePath, null);
+                    Ext.getCmp('dealBackBtn').show();
+                    Ext.get('share').show();
+                }
+            }, 'jpg', 50, 'myScreenShot');
+        }
     },
     onManageDealsTap: function(button, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
@@ -67504,18 +67539,14 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.DealPicture', Ext.Panel, {
     config: {
         fullscreen: true,
-        height: '100%',
         id: 'dealPicture',
         itemId: 'dealPicture',
-        margin: '',
-        style: 'overflow: hidden;background:#fff',
-        styleHtmlContent: true,
+        style: 'background:#fff',
         width: '100%',
         autoDestroy: false,
-        scrollable: true,
         tpl: [
             '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:30%;width:95%;border:none;"/></div>',
+            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:250px;width:95%;border:none;"/></div>',
             '                            ',
             '\t\t\t\t</tpl>\t\t',
             '',
@@ -67531,26 +67562,32 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
+                height: '8vh',
                 ui: 'plain',
                 width: '100%',
                 scrollable: false,
                 layout: {
                     type: 'hbox',
-                    align: 'stretchmax'
+                    align: 'center'
                 },
                 items: [
                     {
                         xtype: 'button',
                         cls: 'icon-back-button',
+                        docked: 'left',
+                        height: '100%',
                         id: 'dealBackBtn',
                         itemId: 'dealBackBtn',
+                        margin: '10 0 0 0',
                         style: 'font-size:8vw',
+                        styleHtmlContent: true,
                         ui: 'plain'
                     },
                     {
                         xtype: 'button',
                         cls: 'icon-share',
                         docked: 'right',
+                        id: 'share',
                         itemId: 'share',
                         minHeight: '100%',
                         style: 'border:none;font-size:7vw',
@@ -67559,14 +67596,45 @@ Ext.define('Ext.picker.Picker', {
                         text: ''
                     },
                     {
-                        xtype: 'container',
+                        xtype: 'component',
                         cls: 'contact-name',
                         disabled: true,
+                        height: '100%',
                         html: '<b>Business Name</b>',
                         id: 'nameTxt1',
                         itemId: 'nameTxt1',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                        width: '65%'
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw;text-align:center',
+                        width: '100%'
+                    }
+                ]
+            },
+            {
+                xtype: 'component',
+                cls: 'contact-name',
+                disabled: true,
+                height: '250px',
+                id: 'dealimage',
+                itemId: 'dealimage',
+                left: '2%',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0',
+                top: '1%',
+                width: '95%',
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var record = Ext.getStore('LocalStore').getAt(0);
+                            if (record.get('dealImageURL')) {
+                                element.addListener('tap', function() {
+                                    console.log('DealImage Tap');
+                                    var view = Ext.Viewport.add({
+                                            xtype: 'DealImage'
+                                        });
+                                    view.setRecord(record);
+                                    view.showBy(Ext.get('dealPicture'));
+                                });
+                            }
+                        },
+                        event: 'painted'
                     }
                 ]
             },
@@ -67574,27 +67642,25 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 cls: 'contact-name',
                 disabled: true,
-                docked: 'bottom',
-                html: '<p style="font-size:3vw;text-align:center">       Get all the latest buzz only on Local Buzz',
+                html: '<p style="font-size:3vw;text-align:center">       Published through Local Buzz',
                 id: 'nameTxt2',
                 itemId: 'nameTxt2',
+                left: '40%',
+                margin: '10 5 5 5',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '52%',
                 width: '65%'
             },
             {
                 xtype: 'container',
-                id: 'dealimage',
-                itemId: 'dealimage',
-                top: '40%'
-            },
-            {
-                xtype: 'container',
+                cls: 'contact-name',
                 disabled: true,
                 height: '250px',
+                hidden: true,
                 id: 'nameTxt3',
                 itemId: 'nameTxt3',
                 margin: '5 5 5 5',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0:background:#C0D9D9',
+                style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:#FFF',
                 styleHtmlContent: true,
                 width: '95%'
             },
@@ -67609,7 +67675,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 10 10',
                 style: 'font-size:2vw !important',
                 styleHtmlContent: true,
-                top: '65%',
+                top: '57%',
                 width: '90%',
                 clearIcon: false,
                 name: 'phoneNumber',
@@ -67626,10 +67692,30 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 10 10',
                 style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
                 styleHtmlContent: true,
-                top: '77%',
+                top: '76%',
                 width: '90%',
                 clearIcon: false,
                 name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-email1',
+                docked: 'bottom',
+                height: '8vh',
+                hidden: false,
+                id: 'email1',
+                itemId: 'email1',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
+                styleHtmlContent: true,
+                top: '66%',
+                width: '90%',
+                clearIcon: false,
+                name: 'emailAddress',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
@@ -67661,9 +67747,11 @@ Ext.define('Ext.picker.Picker', {
                 margin: '0 0 0 5',
                 style: 'font-size:4.2vw;font-family:Arial;',
                 styleHtmlContent: true,
-                top: '88%',
+                top: '86%',
                 width: '95%',
-                name: 'address'
+                clearIcon: false,
+                name: 'address',
+                readOnly: true
             }
         ],
         listeners: [
@@ -67684,13 +67772,12 @@ Ext.define('Ext.picker.Picker', {
     },
     onDealPictureShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
-        if (record.get('dealImageURL')) {
-            this.down('#nameTxt3').hide();
-        } else {
-            this.down('#nameTxt3').setHtml('<br><div style="font-size:6vw;color:green">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:black">' + record.get('dealDescription') + '</div><br><br><div style="font-size:3vw;color:grey;margin:5px 5px 5px 5px;">Valid from' + record.get('dealStartDate') + ' through ' + record.get('dealEndDate') + '</div>');
-            this.down('#dealimage').hide();
+        if (record.get('dealImageURL')) {} else //this.down('#nameTxt3').hide();
+        {
+            this.down('#dealimage').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;color:#00529D;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:#00529D;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;color:#00529D;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
         }
     },
+    // this.down('#dealimage').hide();
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
@@ -67703,6 +67790,7 @@ Ext.define('Ext.picker.Picker', {
             Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
             Ext.getCmp('website2').setValue(rec.get('website'));
             Ext.getCmp('address1').setValue(rec.get('address'));
+            Ext.getCmp('email1').setValue(rec.get('emailAddress'));
         }
     }
 }, 0, [
@@ -68034,7 +68122,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 title: 'Manage Buzz',
-                iconCls: 'icon-bubbles',
+                iconCls: 'icon-plane',
                 items: [
                     {
                         xtype: 'DealsPanel',
@@ -68199,7 +68287,7 @@ Ext.define('Ext.picker.Picker', {
         ],
         tabBar: {
             docked: 'bottom',
-            height: '9%',
+            height: '8%',
             padding: '35 40 0 40',
             style: 'color:#c0c0c0;background:#FFF;font-size:4vw',
             ui: 'plain',
@@ -68569,26 +68657,31 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('UpdateDealForm');
                             var itemName = form.getAt(8).getValue();
                             var endDate = form.getAt(7).getValue();
+                            var dealName = form.getAt(0).getValue();
                             var date = new Date();
-                            if (endDate >= date) {
-                                if (document.getElementById('chkbx').checked) {
-                                    form.submit({
-                                        url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
-                                        success: function(form, action) {
-                                            Ext.Msg.alert('Success', action.msg);
-                                            form.destroy();
-                                        },
-                                        failure: function(form, action) {
-                                            store.load();
-                                            Ext.Msg.alert('Failure', action.msg);
-                                            form.destroy();
-                                        }
-                                    });
+                            if (dealName) {
+                                if (endDate >= date) {
+                                    if (document.getElementById('chkbx').checked) {
+                                        form.submit({
+                                            url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                            success: function(form, action) {
+                                                Ext.Msg.alert('Success', action.msg);
+                                                form.destroy();
+                                            },
+                                            failure: function(form, action) {
+                                                store.load();
+                                                Ext.Msg.alert('Failure', action.msg);
+                                                form.destroy();
+                                            }
+                                        });
+                                    } else {
+                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    }
                                 } else {
-                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
                             }
                         },
                         docked: 'right',
@@ -68649,6 +68742,8 @@ Ext.define('Ext.picker.Picker', {
     'UpdateDealForm'
 ], 0));
 //this.child('contactpic').setData(record.data);
+//this.down('#DealStartDate').setValue(record.data.dealStartDate);
+//this.down('#DealEndDate').setValue(record.data.dealEndDate);
 
 /*
  * File: app/view/UploadDealNoImageForm.js
@@ -68902,29 +68997,33 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UploadDealNoImageForm');
                             var date = new Date();
-                            //var dealName = form.getAt(0).getValue();
+                            var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(5).getValue();
                             var endDate = form.getAt(6).getValue();
-                            if (endDate >= date) {
-                                if (document.getElementById('chkbx').checked) {
-                                    form.submit({
-                                        url: 'http://services.appsonmobile.com/createNewDeal',
-                                        success: function(form, action) {
-                                            Ext.getStore('MyDealsStore').load();
-                                            Ext.Msg.alert('Success!', action.msg);
-                                            form.destroy();
-                                        },
-                                        failure: function(form, action) {
-                                            store.load();
-                                            Ext.Msg.alert('Failure', action.msg);
-                                            form.destroy();
-                                        }
-                                    });
+                            if (dealName) {
+                                if (endDate >= date) {
+                                    if (document.getElementById('chkbx').checked) {
+                                        form.submit({
+                                            url: 'http://services.appsonmobile.com/createNewDeal',
+                                            success: function(form, action) {
+                                                Ext.getStore('MyDealsStore').load();
+                                                Ext.Msg.alert('Success!', action.msg);
+                                                form.destroy();
+                                            },
+                                            failure: function(form, action) {
+                                                store.load();
+                                                Ext.Msg.alert('Failure', action.msg);
+                                                form.destroy();
+                                            }
+                                        });
+                                    } else {
+                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    }
                                 } else {
-                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
                             }
                         },
                         docked: 'right',
@@ -68995,11 +69094,12 @@ Ext.define('Ext.picker.Picker', {
         html: '',
         id: 'formpanel3',
         itemId: 'formpanel',
+        padding: '0 0 35 0',
         style: 'background:white',
         ui: 'light',
         autoDestroy: false,
         modal: true,
-        scrollable: false,
+        scrollable: true,
         multipartDetection: false,
         layout: {
             type: 'vbox',
@@ -69009,7 +69109,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
-                height: '15%',
                 hidden: false,
                 id: 'businessName4',
                 itemId: 'businessName',
@@ -69101,9 +69200,6 @@ Ext.define('Ext.picker.Picker', {
                 },
                 placeHolder: 'mm/dd/yyyy',
                 autoSelect: false,
-                options: {
-                    minDate: new Date()
-                },
                 usePicker: true,
                 component: {
                     useMask: true,
@@ -69111,13 +69207,20 @@ Ext.define('Ext.picker.Picker', {
                 },
                 dateFormat: 'm/d/Y',
                 picker: {
+                    id: 'startDatepicker',
                     itemId: 'mydatepicker3',
                     style: '',
                     scrollable: false,
                     stretchX: false,
                     stretchY: false,
                     useTitles: true,
-                    yearFrom: 2016
+                    value: {
+                        year: 2016,
+                        month: 7,
+                        day: 16
+                    },
+                    yearFrom: 2016,
+                    yearTo: 2017
                 }
             },
             {
@@ -69140,10 +69243,18 @@ Ext.define('Ext.picker.Picker', {
                     year: new Date().getFullYear()
                 },
                 placeHolder: 'mm/dd/yyyy',
+                options: {
+                    minValue: new Date()
+                },
                 usePicker: true,
+                component: {
+                    useMask: true
+                },
                 picker: {
+                    itemId: 'mydatepicker3',
                     useTitles: true,
-                    yearFrom: 2016
+                    yearFrom: 2016,
+                    yearTo: 2017
                 }
             },
             {
@@ -69157,7 +69268,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'filefield',
                 cls: 'customfield',
                 itemId: 'myfilefield2',
-                margin: '5 5 5 5',
+                margin: '5 5 0 5',
                 styleHtmlContent: true,
                 width: '97%',
                 clearIcon: false,
@@ -69170,11 +69281,12 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
+                margin: '0 0 10 0',
                 layout: 'hbox',
                 items: [
                     {
                         xtype: 'container',
-                        docked: 'left',
+                        docked: 'top',
                         html: '<input type="checkbox" name="chkbx" id="chkbx">',
                         left: '40%',
                         margin: '5 5 5 15',
@@ -69188,6 +69300,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'mycontainer5',
                         margin: '5 5 5 10',
                         padding: '5 30 5 0',
+                        style: 'vertical-align: middle!important;',
                         styleHtmlContent: true,
                         layout: 'hbox',
                         listeners: [
@@ -69208,7 +69321,8 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 height: 140,
-                margin: '10 10 10 10 10',
+                margin: '0 10 50 10',
+                padding: '5 5 5 5',
                 styleHtmlContent: true,
                 layout: 'fit',
                 scrollable: false,
@@ -69238,29 +69352,39 @@ Ext.define('Ext.picker.Picker', {
                             //var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(5).getValue();
                             var endDate = form.getAt(6).getValue();
-                            if (endDate >= date) {
-                                if (document.getElementById('chkbx').checked) {
-                                    form.submit({
-                                        url: 'http://services.appsonmobile.com/uploadS3/',
-                                        xhr2: true,
-                                        cache: false,
-                                        waitMsg: 'Please Wait...',
-                                        success: function(form, action) {
-                                            Ext.Msg.alert('Success', action.msg);
-                                            Ext.getStore('MyDealsStore').load();
-                                            form.destroy();
-                                        },
-                                        failure: function(form, action) {
-                                            Ext.Msg.alert('Failure', action.msg);
-                                            Ext.getStore('MyDealsStore').load();
-                                            form.destroy();
+                            var file = form.getAt(8).getValue();
+                            var dealName = form.getAt(0).getValue();
+                            if (dealName) {
+                                if (file) {
+                                    if (endDate >= date) {
+                                        if (document.getElementById('chkbx').checked) {
+                                            form.submit({
+                                                url: 'http://services.appsonmobile.com/uploadS3/',
+                                                xhr2: true,
+                                                cache: false,
+                                                waitMsg: 'Please Wait...',
+                                                success: function(form, action) {
+                                                    Ext.Msg.alert('Success', action.msg);
+                                                    Ext.getStore('MyDealsStore').load();
+                                                    form.destroy();
+                                                },
+                                                failure: function(form, action) {
+                                                    Ext.Msg.alert('Failure', action.msg);
+                                                    Ext.getStore('MyDealsStore').load();
+                                                    form.destroy();
+                                                }
+                                            });
+                                        } else {
+                                            Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
                                         }
-                                    });
+                                    } else {
+                                        Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                    }
                                 } else {
-                                    Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                    Ext.Msg.alert('Error!', 'No Image to upload ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
                             }
                         },
                         docked: 'right',
@@ -69274,7 +69398,20 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             }
+        ],
+        listeners: [
+            {
+                fn: 'onMydatepicker3Pick',
+                event: 'pick',
+                delegate: '#mydatepicker3'
+            }
         ]
+    },
+    onMydatepicker3Pick: function(picker, value, slot, eOpts) {
+        var today = new Date();
+        if (value < today) {
+            picker.setValue(today);
+        }
     },
     getValidationErrors: function() {
         var errors = [];
@@ -69313,124 +69450,6 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /*
- * File: app/view/DealImage.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.DealImage', Ext.form.Panel, {
-    config: {
-        centered: true,
-        height: '60%',
-        id: 'DealImage',
-        itemId: 'DealImage',
-        left: '10%',
-        margin: '0 10 0 0',
-        style: 'background;#fff;border:3px groove #1985d0',
-        styleHtmlContent: true,
-        top: '25%',
-        width: '80%',
-        hideOnMaskTap: true,
-        modal: true,
-        scrollable: false,
-        layout: {
-            type: 'vbox',
-            align: 'start'
-        },
-        items: [
-            {
-                xtype: 'toolbar',
-                cls: 'toolbarCls',
-                docked: 'top',
-                height: '1%',
-                ui: 'plain',
-                width: '100%',
-                scrollable: false,
-                layout: {
-                    type: 'hbox',
-                    align: 'stretchmax'
-                },
-                items: [
-                    {
-                        xtype: 'button',
-                        cls: 'icon-share',
-                        docked: 'right',
-                        itemId: 'share',
-                        minHeight: '100%',
-                        style: 'border:none;font-size:7vw',
-                        ui: 'plain',
-                        iconAlign: 'center',
-                        text: ''
-                    },
-                    {
-                        xtype: 'button',
-                        handler: function(button, e) {
-                            Ext.getCmp('DealImage').destroy();
-                        },
-                        ui: 'plain',
-                        iconCls: 'icon-close'
-                    }
-                ]
-            },
-            {
-                xtype: 'container',
-                docked: 'top',
-                height: '100%',
-                id: 'dealimage1',
-                itemId: 'dealimage1',
-                layout: 'hbox'
-            }
-        ],
-        listeners: [
-            {
-                fn: 'onDealImageHiddenChange',
-                event: 'hiddenchange'
-            },
-            {
-                fn: 'onDealImageShow',
-                event: 'show'
-            }
-        ]
-    },
-    onDealImageHiddenChange: function(component, value, oldValue, eOpts) {
-        if (component.isHidden() === true && oldValue !== null) {
-            component.destroy();
-        }
-    },
-    onDealImageShow: function(component, eOpts) {
-        var record = Ext.getStore('LocalStore').getAt(0);
-        this.down('#dealimage1').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin:5px 5px 5px 5px;height:100%;width:100%;border:none;"/>');
-    }
-}, 0, [
-    "DealImage"
-], [
-    "component",
-    "container",
-    "panel",
-    "formpanel",
-    "DealImage"
-], {
-    "component": true,
-    "container": true,
-    "panel": true,
-    "formpanel": true,
-    "DealImage": true
-}, [
-    "widget.DealImage"
-], 0, [
-    Contact.view,
-    'DealImage'
-], 0));
-
-/*
  * File: app/view/CreateBuzzOption.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
@@ -69446,9 +69465,17 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('Contact.view.CreateBuzzOption', Ext.ActionSheet, {
     config: {
+        height: '100%',
         id: 'CreateBuzzOption',
         itemId: 'CreateBuzzOption',
+        style: 'background:white',
         styleHtmlContent: true,
+        scrollable: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax',
+            pack: 'center'
+        },
         items: [
             {
                 xtype: 'button',
@@ -69474,6 +69501,8 @@ Ext.define('Ext.picker.Picker', {
                     //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
+                margin: '10 10 20 10',
+                ui: 'action',
                 text: 'Create Buzz With Image'
             },
             {
@@ -69500,6 +69529,8 @@ Ext.define('Ext.picker.Picker', {
                     //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
+                margin: '20 10 10 10',
+                ui: 'action',
                 text: 'Create Buzz No Image'
             }
         ]
@@ -69525,6 +69556,99 @@ Ext.define('Ext.picker.Picker', {
 ], 0, [
     Contact.view,
     'CreateBuzzOption'
+], 0));
+
+/*
+ * File: app/view/DealImage.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
+    config: {
+        height: '80%',
+        id: 'DealImage',
+        itemId: 'DealImage',
+        style: 'background:#FFF;border:1px solid #00529D',
+        width: '95%',
+        scrollable: true,
+        tpl: [
+            '<div id="wrapper" style="margin:0px 0px 0px 0px;height:100%;width:100%">',
+            '\t',
+            '\t<tpl if="dealImageURL">',
+            '\t<div id="scroller"><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:100%;width:100%"/></div>',
+            '                            ',
+            '\t\t</tpl>',
+            '\t\t',
+            '\t</div>'
+        ],
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'toolbar',
+                cls: 'toolbarCls',
+                docked: 'top',
+                height: '8vh',
+                items: [
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getComponent('DealImage').destroy();
+                        },
+                        cls: 'icon-close',
+                        docked: 'right',
+                        id: 'close',
+                        itemId: 'close',
+                        padding: '10 10 10 10',
+                        ui: 'plain'
+                    }
+                ]
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onDealImageShow',
+                event: 'show'
+            }
+        ]
+    },
+    onDealImageShow: function(component, eOpts) {
+        var myScroll = new IScroll('#wrapper', {
+                zoom: true,
+                scrollX: true,
+                scrollY: true,
+                mouseWheel: true,
+                wheelAction: 'zoom'
+            });
+    }
+}, 0, [
+    "DealImage"
+], [
+    "component",
+    "container",
+    "panel",
+    "DealImage"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "DealImage": true
+}, [
+    "widget.DealImage"
+], 0, [
+    Contact.view,
+    'DealImage'
 ], 0));
 
 /*
@@ -69568,8 +69692,8 @@ Ext.application({
         'UpdateDealForm',
         'UploadDealNoImageForm',
         'UploadDealWithImageForm',
-        'DealImage',
-        'CreateBuzzOption'
+        'CreateBuzzOption',
+        'DealImage'
     ],
     controllers: [
         'Contacts'
@@ -69591,44 +69715,75 @@ Ext.application({
             ]
         });
         if (Ext.os.is('Android')) {
-            var BackButtonPanel;
-            var exitApp = false;
-            BackButtonPanel = Ext.create('Ext.Panel', {
-                // fullscreen: true,
-                html: 'Tap on Back Button Again To Exit',
-                id: 'BackButtonPanel',
-                itemId: 'BackButtonPanel',
-                baseCls: 'x-box'
-            });
-            BackButtonPanel.setBottom('100px');
-            BackButtonPanel.setLeft('170px');
-            BackButtonPanel.setHeight('50px');
-            BackButtonPanel.setWidth('100%');
-            BackButtonPanel.setCls('backButtonPanel');
-            var intval = setInterval(function() {
-                    exitApp = false;
-                }, 3000);
-            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+            /* var BackButtonPanel;
+		    var exitApp = false;
+		    BackButtonPanel = Ext.create('Ext.Panel', {
+		        // fullscreen: true,
+		        html: 'Tap on Back Button Again To Exit',
+		        id:'BackButtonPanel',
+		        itemId:'BackButtonPanel',
+		        baseCls: 'x-box'
+
+
+		    });
+		    BackButtonPanel.setBottom('100px');
+		    BackButtonPanel.setLeft('170px');
+
+		    BackButtonPanel.setHeight('50px');
+		    BackButtonPanel.setWidth('100%');
+		    BackButtonPanel.setCls('backButtonPanel');
+		    var intval = setInterval(function () { exitApp = false; }, 3000);*/
+            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), true);
             // add back button listener
-            function onBackKeyDown(e) {
-                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
-                    if (exitApp) {
-                        clearInterval(intval);
-                        navigator.app.exitApp();
-                    } else {
-                        exitApp = true;
-                        Ext.Viewport.add(BackButtonPanel);
-                        BackButtonPanel.show();
-                        setTimeout(function() {
-                            BackButtonPanel.hide();
-                        }, 3000);
-                    }
-                } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
-                    Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
-                }
-            }
+            function onBackKeyDown(e) {}
         }
+        /*if(Ext.Viewport.getActiveItem().xtype==='panel'){
+
+
+		           /* if (exitApp) {
+
+						console.log('Exiting app');
+
+		                clearInterval(intval);
+
+		                navigator.app.exitApp();
+		            }
+		            else {
+						console.log('First time Back Button pressed');
+		                exitApp = true;
+		                Ext.Viewport.add(BackButtonPanel);
+		                BackButtonPanel.show();
+
+		                setTimeout(function () {BackButtonPanel.hide();}, 3000);
+
+		            }
+
+
+
+					 navigator.notification.confirm(
+		            'Are you certain you want to close the app?',  // message
+		            function( index ){
+		                if( index == 1 ){//look at the docs for this part
+		                    navigator.app.exitApp();
+		                }
+		            },              // callback to invoke with index of button pressed
+		            'Exit',            // title
+		            'Yes,No'          // buttonLabels
+		        );
+				}
+
+
+		        else if(Ext.Viewport.getActiveItem().getItemId()==='dealPicture'){
+
+
+		            Ext.Viewport.getActiveItem().destroy();
+
+		                Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
+
+
+				}
+
+		*/
         document.addEventListener("resume", Ext.bind(onResume, this), false);
         function onResume(e) {}
         //Ext.Msg.alert('Resume',null,null,null);
