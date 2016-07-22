@@ -79,7 +79,7 @@ var app = {
 		
 		function onBackKeyDown() {
 		console.log('Back Button pressed Index.js');
-		document.removeEventListener("backbutton", onBackKeyDown, false);
+		window.setTimeout(function () {alert("hi")}, 3000);
 		}
 		
 		//this.receivedEvent('deviceready');
