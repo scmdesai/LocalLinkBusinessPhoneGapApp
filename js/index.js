@@ -49,38 +49,7 @@ var app = {
     onDeviceReady: function() {
 		console.log("Device is ready");
 		
-		if (Ext.os.is('Android')) {
-
-
-
-    var BackButtonPanel;
-    var exitApp = false;
-    BackButtonPanel = Ext.create('Ext.Panel', {
-        // fullscreen: true,
-        html: 'Tap on Back Button Again To Exit',
-        id:'BackButtonPanel',
-        itemId:'BackButtonPanel',
-        baseCls: 'x-box'
-
-
-    });
-    BackButtonPanel.setBottom('100px');
-    BackButtonPanel.setLeft('170px');
-
-    BackButtonPanel.setHeight('50px');
-    BackButtonPanel.setWidth('100%');
-    BackButtonPanel.setCls('backButtonPanel');
-    var intval = setInterval(function () { exitApp = false; }, 3000);
 		
-		document.addEventListener("backbutton", onBackKeyDown, false);
-		
-		
-		}
-		
-		function onBackKeyDown() {
-		console.log('Back Button pressed Index.js');
-		window.setTimeout(function () {BackButtonPanel.show();}, 3000);
-		}
 		
 		//this.receivedEvent('deviceready');
 		
