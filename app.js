@@ -69716,7 +69716,7 @@ Ext.application({
         });
         if (Ext.os.is('Android')) {
             var BackButtonPanel;
-            // var exitApp = false;
+            var exitApp = false;
             BackButtonPanel = Ext.create('Ext.Panel', {
                 // fullscreen: true,
                 html: 'Tap on Back Button Again To Exit',
@@ -69736,7 +69736,7 @@ Ext.application({
             // add back button listener
             function onBackKeyDown(e) {
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
-                    if (exitApp === 'true') {
+                    if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
                         navigator.app.exitApp();
