@@ -68975,7 +68975,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
                         },
-                        height: '20%',
+                        height: '7vh',
                         style: 'font-size:5vw!important',
                         styleHtmlContent: true,
                         ui: 'decline',
@@ -69017,7 +69017,7 @@ Ext.define('Ext.picker.Picker', {
                             }
                         },
                         docked: 'right',
-                        height: '20%',
+                        height: '7vh',
                         itemId: 'submit',
                         style: 'font:size:4vw',
                         styleHtmlContent: true,
@@ -69327,7 +69327,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
                         },
-                        height: '20%',
+                        height: '7vh',
                         style: 'font-size:5vw!important',
                         styleHtmlContent: true,
                         ui: 'decline',
@@ -69378,7 +69378,7 @@ Ext.define('Ext.picker.Picker', {
                             }
                         },
                         docked: 'right',
-                        height: '20%',
+                        height: '7vh',
                         itemId: 'submit',
                         style: 'font:size:4vw',
                         styleHtmlContent: true,
@@ -69491,6 +69491,7 @@ Ext.define('Ext.picker.Picker', {
                     //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
+                height: '7vh',
                 margin: '10 10 20 10',
                 ui: 'action',
                 text: 'Create Buzz With Image'
@@ -69519,6 +69520,7 @@ Ext.define('Ext.picker.Picker', {
                     //Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(view);
                 },
+                height: '7vh',
                 margin: '20 10 10 10',
                 ui: 'action',
                 text: 'Create Buzz No Image'
