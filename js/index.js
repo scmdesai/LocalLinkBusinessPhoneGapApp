@@ -52,7 +52,7 @@ var app = {
     onDeviceReady: function() {
 		console.log("Device is ready");
 		
-		deviceReady = true;
+		//deviceReady = true;
 	   document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
 	   
 	   function onBackKeyDown(e) {
