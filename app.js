@@ -66396,9 +66396,7 @@ Ext.define('Ext.picker.Picker', {
         if (Ext.os.is('Android')) {
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
-            function onBackKeyDown(e) {
-                navigator.app.exitApp();
-            }
+            function onBackKeyDown(e) {}
         }
     }
 }, 0, [
@@ -66417,6 +66415,7 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'Login'
 ], 0));
+//  navigator.app.exitApp();
 
 /*
  * File: app/view/contactinfo.js
