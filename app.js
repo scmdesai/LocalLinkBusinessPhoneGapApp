@@ -68977,7 +68977,6 @@ Ext.define('Ext.picker.Picker', {
                         },
                         height: '7vh',
                         style: 'font-size:5vw!important',
-                        styleHtmlContent: true,
                         ui: 'decline',
                         width: '40%',
                         text: 'Cancel'
@@ -69019,8 +69018,7 @@ Ext.define('Ext.picker.Picker', {
                         docked: 'right',
                         height: '7vh',
                         itemId: 'submit',
-                        style: 'font:size:4vw',
-                        styleHtmlContent: true,
+                        style: 'font-size:5vw!important',
                         ui: 'confirm',
                         width: '30%',
                         text: 'Submit'
@@ -69271,6 +69269,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
+                margin: '0 0 5 0',
                 layout: 'hbox',
                 items: [
                     {
@@ -69328,7 +69327,6 @@ Ext.define('Ext.picker.Picker', {
                         height: '7vh',
                         margin: '0 0 5 0',
                         style: 'font-size:5vw!important',
-                        styleHtmlContent: true,
                         ui: 'decline',
                         width: '40%',
                         text: 'Cancel'
@@ -69380,8 +69378,7 @@ Ext.define('Ext.picker.Picker', {
                         height: '7vh',
                         itemId: 'submit',
                         margin: '0 0 5 0',
-                        style: 'font:size:4vw',
-                        styleHtmlContent: true,
+                        style: 'font-size:5vw!important',
                         ui: 'confirm',
                         width: '30%',
                         text: 'Submit'
