@@ -69271,15 +69271,18 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
-                margin: '0 0 10 0',
+                margin: '0 0 5 0',
                 layout: 'hbox',
                 items: [
                     {
                         xtype: 'container',
                         docked: 'top',
-                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        height: '',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx"/>',
                         left: '40%',
                         margin: '5 5 5 15',
+                        padding: '',
+                        style: 'zoom:1.3',
                         top: '50%'
                     },
                     {
@@ -69288,9 +69291,9 @@ Ext.define('Ext.picker.Picker', {
                         height: '40px',
                         html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
-                        margin: '5 5 5 10',
-                        padding: '5 30 5 0',
-                        style: 'vertical-align: middle!important;',
+                        margin: '35 5 5 10',
+                        padding: '5 30 0 0',
+                        style: 'vertical-align: middle!important;font-size:3vw',
                         styleHtmlContent: true,
                         layout: 'hbox',
                         listeners: [
@@ -69328,6 +69331,7 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.getActiveItem().destroy();
                         },
                         height: '7vh',
+                        margin: '0 0 5 0',
                         style: 'font-size:5vw!important',
                         styleHtmlContent: true,
                         ui: 'decline',
@@ -69380,6 +69384,7 @@ Ext.define('Ext.picker.Picker', {
                         docked: 'right',
                         height: '7vh',
                         itemId: 'submit',
+                        margin: '0 0 5 0',
                         style: 'font:size:4vw',
                         styleHtmlContent: true,
                         ui: 'confirm',
@@ -69493,6 +69498,7 @@ Ext.define('Ext.picker.Picker', {
                 },
                 height: '7vh',
                 margin: '10 10 20 10',
+                style: 'font-size:5vw',
                 ui: 'action',
                 text: 'Create Buzz With Image'
             },
@@ -69522,6 +69528,7 @@ Ext.define('Ext.picker.Picker', {
                 },
                 height: '7vh',
                 margin: '20 10 10 10',
+                style: 'font-size:5vw',
                 ui: 'action',
                 text: 'Create Buzz No Image'
             }
