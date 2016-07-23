@@ -69271,33 +69271,26 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
-                margin: '0 0 5 0',
-                padding: '',
                 layout: 'hbox',
                 items: [
                     {
                         xtype: 'container',
-                        flex: 1,
                         docked: 'left',
-                        html: '<br><input type="checkbox" name="chkbx" id="chkbx" style="top:50px;"/>',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
                         left: '40%',
-                        styleHtmlContent: true,
-                        layout: 'hbox'
+                        margin: '5 5 5 15',
+                        top: '50%'
                     },
                     {
                         xtype: 'container',
-                        flex: 10,
                         docked: 'right',
-                        html: '<a id="terms" style="font-size:2.5vw;vertical-align:middle" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
-                        margin: '35 5 5 10',
-                        padding: '0 30 20 0',
-                        style: 'vertical-align: middle!important;font-size:3vw',
+                        margin: '5 5 5 10',
+                        padding: '5 30 5 0',
                         styleHtmlContent: true,
-                        layout: {
-                            type: 'hbox',
-                            align: 'stretchmax'
-                        },
+                        layout: 'hbox',
                         listeners: [
                             {
                                 fn: function(element, eOpts) {
