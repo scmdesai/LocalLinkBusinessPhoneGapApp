@@ -18,7 +18,7 @@
  */
 var app = {
     // Application Constructor
-	var deviceReady = false;
+	
 
     initialize: function() {
         this.bindEvents();
@@ -52,13 +52,7 @@ var app = {
     onDeviceReady: function() {
 		console.log("Device is ready");
 		
-		//deviceReady = true;
-	   document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
-	   
-	   function onBackKeyDown(e) {
-		console.log('Exiting app');
-
-	   }
+		
 		
 		//this.receivedEvent('deviceready');
 		

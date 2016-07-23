@@ -66390,14 +66390,6 @@ Ext.define('Ext.picker.Picker', {
                 }
             }
         });
-    },
-    initialize: function() {
-        Ext.Container.prototype.initialize.call(this);
-        if (Ext.os.is('Android')) {
-            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
-            // add back button listener
-            function onBackKeyDown(e) {}
-        }
     }
 }, 0, [
     "Login"
@@ -66415,7 +66407,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'Login'
 ], 0));
-//  navigator.app.exitApp();
 
 /*
  * File: app/view/contactinfo.js
@@ -69727,56 +69718,37 @@ Ext.application({
                 'corechart'
             ]
         });
-        if (Ext.os.is('Android')) {}
-        /*  var intval = setInterval(function () { exitApp = false; }, 30000);
-		    document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);  // add back button listener
-
-		    function onBackKeyDown(e) {
-
-
-
-
-		        if(Ext.Viewport.getActiveItem().xtype==='panel'){
-
-
-					 BackButtonPanel.show();
-					setTimeout(function () {BackButtonPanel.hide();}, 30000);
-
-		            if (exitApp) {
-
-						console.log('Exiting app');
-
-		                clearInterval(intval);
-
-		               navigator.app.exitApp();
-		            }
-		            else {
-						console.log('First time Back Button pressed');
-		                exitApp = true;
-		                Ext.Viewport.add(BackButtonPanel);
-		                BackButtonPanel.show();
-
-		               setTimeout(function () {BackButtonPanel.hide();}, 30000);
-
-		            }
-
-
-
-				}
-
-		        else if(Ext.Viewport.getActiveItem().getItemId()==='dealPicture'){
-
-
-		            Ext.Viewport.getActiveItem().destroy();
-
-		             Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
-
-
-				}
-
-
-
-		}*/
+        if (Ext.os.is('Android')) {
+            var intval = setInterval(function() {
+                    exitApp = false;
+                }, 30000);
+            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+            // add back button listener
+            function onBackKeyDown(e) {
+                if (Ext.Viewport.getActiveItem().xtype === 'panel') {
+                    BackButtonPanel.show();
+                    setTimeout(function() {
+                        BackButtonPanel.hide();
+                    }, 30000);
+                    if (exitApp) {
+                        console.log('Exiting app');
+                        clearInterval(intval);
+                        navigator.app.exitApp();
+                    } else {
+                        console.log('First time Back Button pressed');
+                        exitApp = true;
+                        Ext.Viewport.add(BackButtonPanel);
+                        BackButtonPanel.show();
+                        setTimeout(function() {
+                            BackButtonPanel.hide();
+                        }, 30000);
+                    }
+                } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
+                    Ext.Viewport.getActiveItem().destroy();
+                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
+                }
+            }
+        }
         document.addEventListener("resume", Ext.bind(onResume, this), false);
         function onResume(e) {}
         //Ext.Msg.alert('Resume',null,null,null);
