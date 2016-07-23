@@ -69272,30 +69272,32 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 left: '',
                 margin: '0 0 5 0',
+                padding: '',
                 layout: 'hbox',
                 items: [
                     {
                         xtype: 'container',
-                        docked: 'top',
-                        height: '',
-                        html: '<input type="checkbox" name="chkbx" id="chkbx"/>',
+                        flex: 1,
+                        docked: 'left',
+                        html: '<br><input type="checkbox" name="chkbx" id="chkbx" style="top:50px;"/>',
                         left: '40%',
-                        margin: '5 5 5 15',
-                        padding: '',
-                        style: 'zoom:1.3',
-                        top: '50%'
+                        styleHtmlContent: true,
+                        layout: 'hbox'
                     },
                     {
                         xtype: 'container',
+                        flex: 10,
                         docked: 'right',
-                        height: '40px',
-                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        html: '<a id="terms" style="font-size:2.5vw;vertical-align:middle" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
                         margin: '35 5 5 10',
-                        padding: '5 30 0 0',
+                        padding: '0 30 20 0',
                         style: 'vertical-align: middle!important;font-size:3vw',
                         styleHtmlContent: true,
-                        layout: 'hbox',
+                        layout: {
+                            type: 'hbox',
+                            align: 'stretchmax'
+                        },
                         listeners: [
                             {
                                 fn: function(element, eOpts) {
