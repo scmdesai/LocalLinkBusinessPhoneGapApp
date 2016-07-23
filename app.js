@@ -69708,6 +69708,20 @@ Ext.application({
         Ext.util.Format.undef = function(value, defaultValue) {
             return Ext.isDefined(value) ? value : defaultValue;
         };
+        var BackButtonPanel;
+        var exitApp = false;
+        BackButtonPanel = Ext.create('Ext.Panel', {
+            // fullscreen: true,
+            html: 'Tap on Back Button Again To Exit',
+            id: 'BackButtonPanel',
+            itemId: 'BackButtonPanel',
+            baseCls: 'x-box'
+        });
+        BackButtonPanel.setBottom('100px');
+        BackButtonPanel.setLeft('170px');
+        BackButtonPanel.setHeight('50px');
+        BackButtonPanel.setWidth('100%');
+        BackButtonPanel.setCls('backButtonPanel');
         //Load google charts
         google.charts.load('current', {
             'packages': [
@@ -69715,37 +69729,22 @@ Ext.application({
             ]
         });
         if (Ext.os.is('Android')) {
-            var BackButtonPanel;
-            var exitApp = false;
-            BackButtonPanel = Ext.create('Ext.Panel', {
-                // fullscreen: true,
-                html: 'Tap on Back Button Again To Exit',
-                id: 'BackButtonPanel',
-                itemId: 'BackButtonPanel',
-                baseCls: 'x-box'
-            });
-            BackButtonPanel.setBottom('100px');
-            BackButtonPanel.setLeft('170px');
-            BackButtonPanel.setHeight('50px');
-            BackButtonPanel.setWidth('100%');
-            BackButtonPanel.setCls('backButtonPanel');
             var intval = setInterval(function() {
                     exitApp = false;
                 }, 30000);
-            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), true);
+            document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
                 if (Ext.Viewport.getActiveItem().xtype === 'panel') {
                     if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
-                    } else // navigator.app.exitApp();
-                    {
+                        navigator.app.exitApp();
+                    } else {
                         console.log('First time Back Button pressed');
                         exitApp = true;
                         Ext.Viewport.add(BackButtonPanel);
                         BackButtonPanel.show();
-                        clearInterval(intval);
                         setTimeout(function() {
                             BackButtonPanel.hide();
                         }, 30000);
