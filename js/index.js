@@ -18,7 +18,8 @@
  */
 var app = {
     // Application Constructor
-	
+	var deviceReady = false;
+
     initialize: function() {
         this.bindEvents();
     },
@@ -28,6 +29,14 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+	   deviceReady = true;
+	   document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+	   
+	   function onBackKeyDown(e) {
+		console.log('Exiting app');
+
+	   }
+
 		/*document.addEventListener('deviceready', function() {
     try {
         FB.init({
