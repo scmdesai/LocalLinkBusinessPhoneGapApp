@@ -29,13 +29,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-	   deviceReady = true;
-	   document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
 	   
-	   function onBackKeyDown(e) {
-		console.log('Exiting app');
-
-	   }
 
 		/*document.addEventListener('deviceready', function() {
     try {
@@ -58,7 +52,13 @@ var app = {
     onDeviceReady: function() {
 		console.log("Device is ready");
 		
-		
+		deviceReady = true;
+	   document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
+	   
+	   function onBackKeyDown(e) {
+		console.log('Exiting app');
+
+	   }
 		
 		//this.receivedEvent('deviceready');
 		
