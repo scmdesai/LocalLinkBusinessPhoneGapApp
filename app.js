@@ -66829,7 +66829,7 @@ Ext.define('Ext.picker.Picker', {
         itemTpl: [
             '',
             '',
-            '<div style="font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}<button type="button" id="delete" class="delete_button" style="float:right">#<button type="button" id="edit" class="delete_button" style="float:right">p</div>',
+            '<div style="font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}<button type="button" id="delete" class="delete_button" style="float:right;padding:0px 15px 0px 15px;">#<button type="button" id="edit" class="delete_button" style="float:right">p</div>',
             '<tpl if="dealEndDate &lt; todayplusthreedays ">',
             '<div class= expiringDate >Valid {dealStartDate} to {dealEndDate}</div>',
             '<tpl else>\t',
@@ -66892,6 +66892,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
+                height: '12vh',
                 style: 'border-top:none',
                 ui: 'plain',
                 autoDestroy: false,
@@ -66899,8 +66900,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         itemId: 'cancelButton',
-                        margin: '0 0 0 10',
-                        styleHtmlContent: true,
+                        margin: '10 0 10 10',
                         ui: 'decline',
                         width: '30%',
                         text: 'Cancel'
@@ -66936,8 +66936,7 @@ Ext.define('Ext.picker.Picker', {
                         },
                         cls: 'button',
                         itemId: 'saveContactButton',
-                        margin: '0 10 0 0',
-                        styleHtmlContent: true,
+                        margin: '10 10 10 0',
                         ui: 'confirm',
                         width: '30%',
                         text: 'Save'
@@ -66959,6 +66958,7 @@ Ext.define('Ext.picker.Picker', {
                 itemTpl: [
                     '<img src = "{pictureURL}" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>'
                 ],
+                maxItemCache: 1,
                 scrollToTopOnRefresh: false,
                 store: 'MyJsonPStore',
                 listeners: [
@@ -68326,20 +68326,20 @@ Ext.define('Ext.picker.Picker', {
         centered: true,
         height: '50%',
         hidden: true,
+        html: '<br><br><a href="http://www.appsonmobile.com/index.php/terms-and-conditions/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms and Conditions here</a>',
         id: 'Terms',
         itemId: 'Terms',
         margin: '0 5 5 5',
         style: 'background;#fff;border:3px groove #1985d0',
         width: '95%',
         hideOnMaskTap: true,
-        items: [
+        listeners: [
             {
-                xtype: 'textfield',
-                disabled: false,
-                html: 'Terms and conditions here',
-                itemId: 'mytextfield38',
-                readOnly: true
-            },
+                fn: 'onTermsHiddenChange',
+                event: 'hiddenchange'
+            }
+        ],
+        items: [
             {
                 xtype: 'button',
                 handler: function(button, e) {
@@ -68352,12 +68352,6 @@ Ext.define('Ext.picker.Picker', {
                 ui: 'plain',
                 width: '40%',
                 text: 'Close'
-            }
-        ],
-        listeners: [
-            {
-                fn: 'onTermsHiddenChange',
-                event: 'hiddenchange'
             }
         ]
     },
@@ -68478,38 +68472,6 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'textfield',
-                cls: 'customfield',
-                id: 'DealDescription',
-                itemId: 'DealDescription',
-                margin: '5 5 5 5 ',
-                padding: '',
-                style: 'border:1px solid #C0C0C0!important',
-                styleHtmlContent: true,
-                width: '',
-                clearIcon: false,
-                label: 'Description',
-                labelWidth: '35%',
-                name: 'DealDescription'
-            },
-            {
-                xtype: 'textfield',
-                cls: 'customfield',
-                disabled: false,
-                hidden: true,
-                id: 'DealImageURL',
-                itemId: 'DealImageURL',
-                margin: '5 5 5 5 ',
-                padding: '',
-                style: 'border:1px solid #C0C0C0!important',
-                styleHtmlContent: true,
-                width: '',
-                clearIcon: false,
-                labelWidth: '35%',
-                name: 'DealImageURL',
-                readOnly: true
-            },
-            {
                 xtype: 'datepickerfield',
                 cls: [
                     'customfield',
@@ -68518,7 +68480,6 @@ Ext.define('Ext.picker.Picker', {
                 id: 'DealStartDate1',
                 itemId: 'DealStartDate',
                 margin: '5 5 5 5 ',
-                styleHtmlContent: true,
                 width: '97%',
                 label: 'Start Date',
                 labelWidth: '35%',
@@ -68554,7 +68515,6 @@ Ext.define('Ext.picker.Picker', {
                 id: 'DealEndDate1',
                 itemId: 'DealEndDate',
                 margin: '5 5 5 5 ',
-                styleHtmlContent: true,
                 width: '97%',
                 label: 'End Date',
                 labelWidth: '35%',
@@ -68570,6 +68530,39 @@ Ext.define('Ext.picker.Picker', {
                     styleHtmlContent: true,
                     yearFrom: 2016
                 }
+            },
+            {
+                xtype: 'textareafield',
+                cls: 'customfield',
+                height: '100%',
+                id: 'DealDescription',
+                itemId: 'DealDescription',
+                margin: '5 5 5 5 ',
+                padding: '',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                disabled: false,
+                hidden: true,
+                id: 'DealImageURL',
+                itemId: 'DealImageURL',
+                margin: '5 5 5 5 ',
+                padding: '',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                labelWidth: '35%',
+                name: 'DealImageURL',
+                readOnly: true
             },
             {
                 xtype: 'textfield',
@@ -68634,9 +68627,8 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
                         },
-                        height: '20%',
+                        height: '7vh',
                         style: 'font-size:5vw!important',
-                        styleHtmlContent: true,
                         ui: 'decline',
                         width: '40%',
                         text: 'Cancel'
@@ -68646,7 +68638,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UpdateDealForm');
                             var itemName = form.getAt(8).getValue();
-                            var endDate = form.getAt(7).getValue();
+                            var endDate = form.getAt(5).getValue();
                             var dealName = form.getAt(0).getValue();
                             var date = new Date();
                             if (dealName) {
@@ -68675,10 +68667,9 @@ Ext.define('Ext.picker.Picker', {
                             }
                         },
                         docked: 'right',
-                        height: '20%',
+                        height: '7vh',
                         itemId: 'submit',
                         style: 'font:size:4vw',
-                        styleHtmlContent: true,
                         ui: 'confirm',
                         width: '30%',
                         text: 'Submit'
@@ -68825,20 +68816,6 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'textfield',
-                cls: 'customfield',
-                id: 'DealDescription1',
-                itemId: 'DealDescription',
-                margin: '5 5 5 5 ',
-                style: 'border:1px solid #C0C0C0!important',
-                styleHtmlContent: true,
-                width: '',
-                clearIcon: false,
-                label: 'Description',
-                labelWidth: '35%',
-                name: 'DealDescription'
-            },
-            {
                 xtype: 'datepickerfield',
                 cls: [
                     'customfield',
@@ -68904,6 +68881,21 @@ Ext.define('Ext.picker.Picker', {
                     useTitles: true,
                     yearFrom: 2016
                 }
+            },
+            {
+                xtype: 'textareafield',
+                cls: 'customfield',
+                height: '100%',
+                id: 'DealDescription1',
+                itemId: 'DealDescription',
+                margin: '5 5 5 5 ',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
             },
             {
                 xtype: 'textfield',
@@ -68987,8 +68979,8 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('UploadDealNoImageForm');
                             var date = new Date();
                             var dealName = form.getAt(0).getValue();
-                            var startDate = form.getAt(5).getValue();
-                            var endDate = form.getAt(6).getValue();
+                            var startDate = form.getAt(4).getValue();
+                            var endDate = form.getAt(5).getValue();
                             if (dealName) {
                                 if (endDate >= date) {
                                     if (document.getElementById('chkbx').checked) {
@@ -69153,20 +69145,6 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'textfield',
-                cls: 'customfield',
-                id: 'DealDescription2',
-                itemId: 'DealDescription',
-                margin: '5 5 5 5 ',
-                style: 'border:1px solid #C0C0C0!important',
-                styleHtmlContent: true,
-                width: '',
-                clearIcon: false,
-                label: 'Description',
-                labelWidth: '35%',
-                name: 'DealDescription'
-            },
-            {
                 xtype: 'datepickerfield',
                 cls: [
                     'customfield',
@@ -69253,6 +69231,21 @@ Ext.define('Ext.picker.Picker', {
                 name: 'DealPictureURL'
             },
             {
+                xtype: 'textareafield',
+                cls: 'customfield',
+                height: '100%',
+                id: 'DealDescription2',
+                itemId: 'DealDescription',
+                margin: '5 5 5 5 ',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
                 xtype: 'filefield',
                 cls: 'customfield',
                 itemId: 'myfilefield2',
@@ -69337,8 +69330,8 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('UploadDealWithImageForm');
                             var date = new Date();
                             //var dealName = form.getAt(0).getValue();
-                            var startDate = form.getAt(5).getValue();
-                            var endDate = form.getAt(6).getValue();
+                            var startDate = form.getAt(4).getValue();
+                            var endDate = form.getAt(5).getValue();
                             var file = form.getAt(8).getValue();
                             var dealName = form.getAt(0).getValue();
                             if (dealName) {
@@ -69703,14 +69696,14 @@ Ext.application({
         var exitApp = false;
         BackButtonPanel = Ext.create('Ext.Panel', {
             // fullscreen: true,
-            html: 'Tap on Back Button Again To Exit',
+            html: 'Press again to exit',
             id: 'BackButtonPanel',
             itemId: 'BackButtonPanel',
             baseCls: 'x-box'
         });
-        BackButtonPanel.setBottom('100px');
-        BackButtonPanel.setLeft('170px');
-        BackButtonPanel.setHeight('50px');
+        BackButtonPanel.setBottom('10%');
+        BackButtonPanel.setLeft('35%');
+        //BackButtonPanel.setHeight('50px');
         BackButtonPanel.setWidth('100%');
         BackButtonPanel.setCls('backButtonPanel');
         //Load google charts
@@ -69722,7 +69715,7 @@ Ext.application({
         if (Ext.os.is('Android')) {
             var intval = setInterval(function() {
                     exitApp = false;
-                }, 30000);
+                }, 3000);
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
@@ -69730,7 +69723,7 @@ Ext.application({
                     BackButtonPanel.show();
                     setTimeout(function() {
                         BackButtonPanel.hide();
-                    }, 30000);
+                    }, 3000);
                     if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
@@ -69742,7 +69735,7 @@ Ext.application({
                         BackButtonPanel.show();
                         setTimeout(function() {
                             BackButtonPanel.hide();
-                        }, 30000);
+                        }, 3000);
                     }
                 } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
