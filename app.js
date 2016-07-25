@@ -67602,7 +67602,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'component',
                 cls: 'contact-name',
                 disabled: true,
-                height: '250px',
+                height: '40vh',
                 id: 'dealimage',
                 itemId: 'dealimage',
                 left: '2%',
@@ -67645,14 +67645,15 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 cls: 'contact-name',
                 disabled: true,
-                height: '250px',
-                hidden: true,
+                hidden: false,
+                html: '<p style="font-size:2.3vw;"> Click on picture to enlarge</p>',
                 id: 'nameTxt3',
                 itemId: 'nameTxt3',
-                margin: '5 5 5 5',
-                style: 'word-wrap:break-word;font-family:Arial;color:#00529D;font-size:6vw;border:2px dotted #c0c0c0:background:#FFF',
-                styleHtmlContent: true,
-                width: '95%'
+                left: '40%',
+                margin: '10 5 5 5',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '43%',
+                width: '65%'
             },
             {
                 xtype: 'textfield',
@@ -67762,12 +67763,14 @@ Ext.define('Ext.picker.Picker', {
     },
     onDealPictureShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
-        if (record.get('dealImageURL')) {} else //this.down('#nameTxt3').hide();
-        {
-            this.down('#dealimage').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;color:#00529D;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;color:#00529D;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;color:#00529D;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
+        if (record.get('dealImageURL')) {
+            this.down('#dealimage').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin: 0px 5px 0px 5px;height:40vh;width:95%;border:none;"/>');
+            this.down('#nameTxt3').show();
+        } else {
+            this.down('#dealimage').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;margin:5px 5px 5px 5px;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
+            this.down('#nameTxt3').hide();
         }
     },
-    // this.down('#dealimage').hide();
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
@@ -68324,41 +68327,58 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.view.Terms', Ext.Panel, {
     config: {
         centered: true,
-        height: '50%',
+        height: '100%',
         hidden: true,
-        html: '<br><br><a href="http://www.appsonmobile.com/index.php/terms-and-conditions/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Terms and Conditions here</a>',
         id: 'Terms',
         itemId: 'Terms',
         margin: '0 5 5 5',
-        style: 'background;#fff;border:3px groove #1985d0',
+        style: 'background:white',
         width: '95%',
         hideOnMaskTap: true,
-        listeners: [
-            {
-                fn: 'onTermsHiddenChange',
-                event: 'hiddenchange'
-            }
-        ],
+        scrollable: 'both',
         items: [
             {
-                xtype: 'button',
-                handler: function(button, e) {
-                    this.up('Terms').destroy();
-                },
-                docked: 'bottom',
-                left: '30%',
-                style: 'background:#00529D;color:white',
-                top: '80%',
+                xtype: 'toolbar',
+                cls: 'toolbarCls',
+                docked: 'top',
+                height: '9vh',
                 ui: 'plain',
-                width: '40%',
-                text: 'Close'
+                items: [
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            this.up('Terms').destroy();
+                        },
+                        docked: 'right',
+                        style: 'color:#00529D',
+                        ui: 'plain',
+                        iconAlign: 'center',
+                        iconCls: 'delete'
+                    }
+                ]
+            },
+            {
+                xtype: 'component',
+                cls: 'contact-name',
+                disabled: true,
+                height: '100%',
+                id: 'dealimage1',
+                itemId: 'dealimage1',
+                left: '2%',
+                styleHtmlContent: true,
+                top: '1%'
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onTermsShow',
+                event: 'show'
             }
         ]
     },
-    onTermsHiddenChange: function(component, value, oldValue, eOpts) {
-        if (component.isHidden() === true && oldValue !== null) {
-            component.destroy();
-        }
+    onTermsShow: function(component, eOpts) {
+        var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
+        window.open(url, '_system', 'location=yes');
     }
 }, 0, [
     "Terms"
