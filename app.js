@@ -69703,7 +69703,7 @@ Ext.application({
         var exitApp = false;
         BackButtonPanel = Ext.create('Ext.Panel', {
             // fullscreen: true,
-            html: 'Tap on Back Button Again To Exit',
+            html: 'Press again to exit',
             id: 'BackButtonPanel',
             itemId: 'BackButtonPanel',
             baseCls: 'x-box'
@@ -69722,7 +69722,7 @@ Ext.application({
         if (Ext.os.is('Android')) {
             var intval = setInterval(function() {
                     exitApp = false;
-                }, 30000);
+                }, 3000);
             document.addEventListener("backbutton", Ext.bind(onBackKeyDown, this), false);
             // add back button listener
             function onBackKeyDown(e) {
@@ -69730,7 +69730,7 @@ Ext.application({
                     BackButtonPanel.show();
                     setTimeout(function() {
                         BackButtonPanel.hide();
-                    }, 30000);
+                    }, 3000);
                     if (exitApp) {
                         console.log('Exiting app');
                         clearInterval(intval);
@@ -69742,7 +69742,7 @@ Ext.application({
                         BackButtonPanel.show();
                         setTimeout(function() {
                             BackButtonPanel.hide();
-                        }, 30000);
+                        }, 3000);
                     }
                 } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
