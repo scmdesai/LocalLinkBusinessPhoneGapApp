@@ -69708,9 +69708,9 @@ Ext.application({
             itemId: 'BackButtonPanel',
             baseCls: 'x-box'
         });
-        BackButtonPanel.setBottom('10%');
-        BackButtonPanel.setLeft('35%');
-        //BackButtonPanel.setHeight('50px');
+        BackButtonPanel.setBottom('100px');
+        BackButtonPanel.setLeft('170px');
+        BackButtonPanel.setHeight('50px');
         BackButtonPanel.setWidth('100%');
         BackButtonPanel.setCls('backButtonPanel');
         //Load google charts
