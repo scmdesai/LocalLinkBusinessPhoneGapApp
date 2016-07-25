@@ -67534,15 +67534,6 @@ Ext.define('Ext.picker.Picker', {
         style: 'background:#fff',
         width: '100%',
         autoDestroy: false,
-        tpl: [
-            '<tpl if="dealImageURL">',
-            '\t<div><img src="{dealImageURL}" style="margin:5px 5px 5px 5px;height:250px;width:95%;border:none;"/></div>',
-            '                            ',
-            '\t\t\t\t</tpl>\t\t',
-            '',
-            '\t\t\t',
-            '\t\t\t\t'
-        ],
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -68958,9 +68949,9 @@ Ext.define('Ext.picker.Picker', {
                             {
                                 fn: function(element, eOpts) {
                                     element.addListener('tap', function() {
-                                        Ext.Viewport.add({
-                                            xtype: 'Terms'
-                                        }).show();
+                                        //Ext.Viewport.add({xtype:'Terms'}).show();
+                                        var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
+                                        window.open(url, '_system', 'location=yes');
                                     });
                                 },
                                 event: 'painted'
@@ -69307,9 +69298,9 @@ Ext.define('Ext.picker.Picker', {
                             {
                                 fn: function(element, eOpts) {
                                     element.addListener('tap', function() {
-                                        Ext.Viewport.add({
-                                            xtype: 'Terms'
-                                        }).show();
+                                        //Ext.Viewport.add({xtype:'Terms'}).show();
+                                        var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
+                                        window.open(url, '_system', 'location=yes');
                                     });
                                 },
                                 event: 'painted'
