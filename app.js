@@ -66829,7 +66829,7 @@ Ext.define('Ext.picker.Picker', {
         itemTpl: [
             '',
             '',
-            '<div style="font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}<button type="button" id="delete" class="delete_button" style="float:right;padding:0px 15px 0px 15px;">#<button type="button" id="edit" class="delete_button" style="float:right">p</div>',
+            '<div style="font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}<button type="button" id="delete" class="delete_button" style="float:right">#<button type="button" id="edit" class="delete_button" style="float:right">p</div>',
             '<tpl if="dealEndDate &lt; todayplusthreedays ">',
             '<div class= expiringDate >Valid {dealStartDate} to {dealEndDate}</div>',
             '<tpl else>\t',
@@ -66898,9 +66898,9 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'button',
-                        height: '7vh',
                         itemId: 'cancelButton',
                         margin: '0 0 0 10',
+                        styleHtmlContent: true,
                         ui: 'decline',
                         width: '30%',
                         text: 'Cancel'
@@ -66935,9 +66935,9 @@ Ext.define('Ext.picker.Picker', {
                             });
                         },
                         cls: 'button',
-                        height: '7vh',
                         itemId: 'saveContactButton',
                         margin: '0 10 0 0',
+                        styleHtmlContent: true,
                         ui: 'confirm',
                         width: '30%',
                         text: 'Save'
@@ -66959,7 +66959,6 @@ Ext.define('Ext.picker.Picker', {
                 itemTpl: [
                     '<img src = "{pictureURL}" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>'
                 ],
-                maxItemCache: 1,
                 scrollToTopOnRefresh: false,
                 store: 'MyJsonPStore',
                 listeners: [
@@ -68635,8 +68634,9 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
                         },
-                        height: '7vh',
+                        height: '20%',
                         style: 'font-size:5vw!important',
+                        styleHtmlContent: true,
                         ui: 'decline',
                         width: '40%',
                         text: 'Cancel'
@@ -68675,9 +68675,10 @@ Ext.define('Ext.picker.Picker', {
                             }
                         },
                         docked: 'right',
-                        height: '7vh',
+                        height: '20%',
                         itemId: 'submit',
                         style: 'font:size:4vw',
+                        styleHtmlContent: true,
                         ui: 'confirm',
                         width: '30%',
                         text: 'Submit'
