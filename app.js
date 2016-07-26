@@ -67938,7 +67938,7 @@ Ext.define('Ext.picker.Picker', {
                     var record = form.getRecord();
                     var customerId = form.getRecord().get('customerId');
                     var store = Ext.getStore('MyJsonPStore');
-                    var file = form.getAt(0);
+                    var file = form.getAt(0).getValue();
                     if (file) {
                         form.submit({
                             url: 'http://services.appsonmobile.com/stores/' + customerId,
