@@ -67938,30 +67938,35 @@ Ext.define('Ext.picker.Picker', {
                     var record = form.getRecord();
                     var customerId = form.getRecord().get('customerId');
                     var store = Ext.getStore('MyJsonPStore');
-                    form.submit({
-                        url: 'http://services.appsonmobile.com/stores/' + customerId,
-                        xhr2: true,
-                        cache: false,
-                        waitMsg: 'Please Wait...',
-                        success: function(form, action) {
-                            var view = Ext.Viewport.getActiveItem();
-                            record.setDirty();
-                            record.beginEdit(true, record.getChanges());
-                            form.updateRecord(record);
-                            record.endEdit(true, record.getChanges());
-                            record.commit();
-                            store.sync();
-                            store.load();
-                            Ext.Msg.alert('Success', action.msg);
-                            form.destroy();
-                            view.setRecord(record);
-                        },
-                        failure: function(form, action) {
-                            store.load();
-                            Ext.Msg.alert('Failure', action.msg);
-                            form.destroy();
-                        }
-                    });
+                    var file = form.getAt(0);
+                    if (file) {
+                        form.submit({
+                            url: 'http://services.appsonmobile.com/stores/' + customerId,
+                            xhr2: true,
+                            cache: false,
+                            waitMsg: 'Please Wait...',
+                            success: function(form, action) {
+                                var view = Ext.Viewport.getActiveItem();
+                                record.setDirty();
+                                record.beginEdit(true, record.getChanges());
+                                form.updateRecord(record);
+                                record.endEdit(true, record.getChanges());
+                                record.commit();
+                                store.sync();
+                                store.load();
+                                Ext.Msg.alert('Success', action.msg);
+                                form.destroy();
+                                view.setRecord(record);
+                            },
+                            failure: function(form, action) {
+                                store.load();
+                                Ext.Msg.alert('Failure', action.msg);
+                                form.destroy();
+                            }
+                        });
+                    } else {
+                        Ext.Msg.alert('Error!', 'No Image to upload ', null, null);
+                    }
                 },
                 bottom: 30,
                 centered: false,
