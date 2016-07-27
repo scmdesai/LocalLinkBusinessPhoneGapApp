@@ -67633,7 +67633,7 @@ Ext.define('Ext.picker.Picker', {
                 left: '40%',
                 margin: '10 5 5 5',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
-                top: '52%',
+                top: '51%',
                 width: '65%'
             },
             {
@@ -67661,7 +67661,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 10 10',
                 style: 'font-size:2vw !important',
                 styleHtmlContent: true,
-                top: '57%',
+                top: '56%',
                 width: '90%',
                 clearIcon: false,
                 name: 'phoneNumber',
