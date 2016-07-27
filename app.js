@@ -66371,10 +66371,6 @@ Ext.define('Ext.picker.Picker', {
                     //view.setRecord(record.getRecord());
                     //console.log(view.getData());
                     //Ext.Viewport.setActiveItem(view);
-                    if (!record) {
-                        Ext.Msg.alert('User not found', null, null, null);
-                        navigator.app.exitApp();
-                    }
                     var storeUserDetails = Ext.getStore('UserDetails');
                     storeUserDetails.removeAll();
                     storeUserDetails.add({
