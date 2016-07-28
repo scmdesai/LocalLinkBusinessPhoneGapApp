@@ -66526,6 +66526,7 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlContent: true,
                 clearIcon: false,
                 name: 'address',
+                placeHolder: 'Not Listed',
                 readOnly: true,
                 maxRows: 2
             },
@@ -66564,6 +66565,7 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 label: '',
                 name: 'emailAddress',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
@@ -66582,6 +66584,7 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlContent: true,
                 clearIcon: false,
                 name: 'phoneNumber',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
@@ -66595,6 +66598,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '10 10 10 10',
                 clearIcon: false,
                 name: 'city',
+                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
@@ -67023,7 +67027,8 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'businessName',
                 margin: '30 15 2 15',
                 styleHtmlContent: true,
-                name: 'businessName'
+                name: 'businessName',
+                placeHolder: 'Not Listed'
             },
             {
                 xtype: 'textfield',
@@ -67035,7 +67040,8 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'phoneNumber',
                 margin: '0 15 2 15',
                 styleHtmlContent: true,
-                name: 'phoneNumber'
+                name: 'phoneNumber',
+                placeHolder: 'Not Listed'
             },
             {
                 xtype: 'textareafield',
@@ -67049,7 +67055,8 @@ Ext.define('Ext.picker.Picker', {
                 margin: '0 15 0 15',
                 styleHtmlContent: true,
                 name: 'address',
-                required: true
+                required: true,
+                placeHolder: 'Not Listed'
             },
             {
                 xtype: 'textfield',
