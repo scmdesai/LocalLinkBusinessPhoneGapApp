@@ -66158,7 +66158,7 @@ Ext.define('Ext.picker.Picker', {
         },
         proxy: {
             type: 'jsonp',
-            url: 'http://services.appsonmobile.com/stores',
+            url: 'http://services.appsonmobile.com/demoStores',
             reader: {
                 type: 'json'
             },
@@ -66204,7 +66204,7 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
-            url: 'http://services.appsonmobile.com/deals',
+            url: 'http://services.appsonmobile.com/demoDeals',
             reader: {
                 type: 'json'
             },
