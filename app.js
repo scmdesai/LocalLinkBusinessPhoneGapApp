@@ -69513,6 +69513,7 @@ Ext.define('Ext.picker.Picker', {
                         id: 'close',
                         itemId: 'close',
                         padding: '10 10 10 10',
+                        style: 'color:#00529D;font-size:5vw',
                         ui: 'plain'
                     }
                 ]
