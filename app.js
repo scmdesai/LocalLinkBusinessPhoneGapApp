@@ -67861,14 +67861,11 @@ Ext.define('Ext.picker.Picker', {
         storeUserDetails.load();
         var customerId;
         var businessName;
-        var date = new Date();
-        var today = Ext.Date.format(date, 'n/j/Y');
         storeUserDetails.each(function(record) {
             //console.log('StoreUserDetails : ' +record.get('customerId'));
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
-        console.log(customerId);
         var store = Ext.getStore('MyDealsStore');
         store.clearFilter();
         store.filter('customerId', customerId);
@@ -68635,10 +68632,15 @@ Ext.define('Ext.picker.Picker', {
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
+            var startDate = Ext.Date.format(record.data.dealStartDate, 'n/j/Y');
+            var endDate = Ext.Date.format(record.data.dealEndDate, 'n/j/Y');
             this.down('#DealName').setValue(record.data.dealName);
             this.down('#DealStatus').setValue(record.data.dealStatus);
             this.down('#DealDescription').setValue(record.data.dealDescription);
             this.down('#DealImageURL').setValue(record.data.dealImageURL);
+            //this.child('contactpic').setData(record.data);
+            this.down('#DealStartDate').setValue(startDate);
+            this.down('#DealEndDate').setValue(endDate);
         }
     }
 }, 0, [
@@ -68661,9 +68663,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'UpdateDealForm'
 ], 0));
-//this.child('contactpic').setData(record.data);
-//this.down('#DealStartDate').setValue(record.data.dealStartDate);
-//this.down('#DealEndDate').setValue(record.data.dealEndDate);
 
 /*
  * File: app/view/UploadDealNoImageForm.js
