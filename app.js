@@ -66525,7 +66525,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: [
-                    'icon-email',
+                    'icon-email1',
                     'customfield2'
                 ],
                 disabled: false,
