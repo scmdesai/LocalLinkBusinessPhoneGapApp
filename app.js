@@ -69670,7 +69670,6 @@ Ext.application({
                 } else if (Ext.Viewport.getActiveItem().getItemId() === 'dealPicture') {
                     Ext.Viewport.getActiveItem().destroy();
                     Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
-                    Ext.getStore('LocalStore').removeAt(0);
                 }
             }
         }
