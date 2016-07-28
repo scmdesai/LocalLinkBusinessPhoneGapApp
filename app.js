@@ -68636,9 +68636,6 @@ Ext.define('Ext.picker.Picker', {
             this.down('#DealStatus').setValue(record.data.dealStatus);
             this.down('#DealDescription').setValue(record.data.dealDescription);
             this.down('#DealImageURL').setValue(record.data.dealImageURL);
-            //this.child('contactpic').setData(record.data);
-            this.down('#DealStartDate').setValue(record.data.dealStartDate);
-            this.down('#DealEndDate').setValue(record.data.dealEndDate);
         }
     }
 }, 0, [
@@ -68661,6 +68658,9 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'UpdateDealForm'
 ], 0));
+//this.child('contactpic').setData(record.data);
+//this.down('#DealStartDate').setValue(record.data.dealStartDate);
+//this.down('#DealEndDate').setValue(record.data.dealEndDate);
 
 /*
  * File: app/view/UploadDealNoImageForm.js
