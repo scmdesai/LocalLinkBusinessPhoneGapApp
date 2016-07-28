@@ -66926,7 +66926,7 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             form.submit({
-                                url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
+                                url: 'http://services.appsonmobile.com/demoupdateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
@@ -68576,7 +68576,7 @@ Ext.define('Ext.picker.Picker', {
                                 if (endDate >= date) {
                                     if (document.getElementById('chkbx').checked) {
                                         form.submit({
-                                            url: 'http://services.appsonmobile.com/demodeals/editDeal/' + itemName,
+                                            url: 'http://services.appsonmobile.com/deals/demoeditDeal/' + itemName,
                                             success: function(form, action) {
                                                 Ext.Msg.alert('Success', action.msg);
                                                 form.destroy();
