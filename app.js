@@ -66158,7 +66158,7 @@ Ext.define('Ext.picker.Picker', {
         },
         proxy: {
             type: 'jsonp',
-            url: 'http://services.appsonmobile.com/demoStores',
+            url: 'http://services.appsonmobile.com/stores',
             reader: {
                 type: 'json'
             },
@@ -66204,7 +66204,7 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
-            url: 'http://services.appsonmobile.com/demoDeals',
+            url: 'http://services.appsonmobile.com/deals',
             reader: {
                 type: 'json'
             },
@@ -66926,7 +66926,7 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             form.submit({
-                                url: 'http://services.appsonmobile.com/demoupdateStoreInfo/' + customerId,
+                                url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
@@ -67302,7 +67302,7 @@ Ext.define('Ext.picker.Picker', {
                         var itemName = record.get('itemName');
                         var req = Ext.Ajax.request({
                                 method: 'POST',
-                                url: 'http://services.appsonmobile.com/demodeals/' + itemName,
+                                url: 'http://services.appsonmobile.com/deals/' + itemName,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     //console.log(action.msg);
@@ -67945,7 +67945,7 @@ Ext.define('Ext.picker.Picker', {
                     var file = form.getAt(0).getValue();
                     if (file) {
                         form.submit({
-                            url: 'http://services.appsonmobile.com/demoStores/' + customerId,
+                            url: 'http://services.appsonmobile.com/stores/' + customerId,
                             xhr2: true,
                             cache: false,
                             waitMsg: 'Please Wait...',
@@ -68576,7 +68576,7 @@ Ext.define('Ext.picker.Picker', {
                                 if (endDate >= date) {
                                     if (document.getElementById('chkbx').checked) {
                                         form.submit({
-                                            url: 'http://services.appsonmobile.com/deals/demoeditDeal/' + itemName,
+                                            url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
                                             success: function(form, action) {
                                                 Ext.Msg.alert('Success', action.msg);
                                                 form.destroy();
@@ -68916,7 +68916,7 @@ Ext.define('Ext.picker.Picker', {
                                 if (endDate >= date) {
                                     if (document.getElementById('chkbx').checked) {
                                         form.submit({
-                                            url: 'http://services.appsonmobile.com/democreateNewDeal',
+                                            url: 'http://services.appsonmobile.com/createNewDeal',
                                             success: function(form, action) {
                                                 Ext.getStore('MyDealsStore').load();
                                                 Ext.Msg.alert('Success!', action.msg);
@@ -69270,7 +69270,7 @@ Ext.define('Ext.picker.Picker', {
                                     if (endDate >= date) {
                                         if (document.getElementById('chkbx').checked) {
                                             form.submit({
-                                                url: 'http://services.appsonmobile.com/demouploadS3/',
+                                                url: 'http://services.appsonmobile.com/uploadS3/',
                                                 xhr2: true,
                                                 cache: false,
                                                 waitMsg: 'Please Wait...',
