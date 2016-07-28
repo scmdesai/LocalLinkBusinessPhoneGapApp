@@ -67849,6 +67849,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onDealsPanelActivate',
                 event: 'activate'
+            },
+            {
+                fn: 'onDealsPanelPainted',
+                event: 'painted'
             }
         ]
     },
@@ -67868,6 +67872,10 @@ Ext.define('Ext.picker.Picker', {
         var store = Ext.getStore('MyDealsStore');
         store.clearFilter();
         store.filter('customerId', customerId);
+    },
+    onDealsPanelPainted: function(element, eOpts) {
+        var store = Ext.getStore('MyDealsStore');
+        store.load();
     }
 }, 0, [
     "DealsPanel"
