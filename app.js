@@ -66472,7 +66472,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'dataview',
                 docked: 'top',
-                height: '40%',
+                height: '40vh',
                 id: 'mydataview',
                 itemId: 'mydataview',
                 margin: '5 2 5 2',
