@@ -66470,41 +66470,13 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'dataview',
+                xtype: 'component',
+                cls: 'contact-name',
+                disabled: true,
                 docked: 'top',
                 height: '40vh',
-                id: 'mydataview',
-                itemId: 'mydataview',
-                margin: '5 2 5 2',
-                padding: '',
-                style: 'overflow:hidden',
-                width: '98%',
-                scrollable: false,
-                deferEmptyText: false,
-                itemTpl: [
-                    '<img src = "{pictureURL}" style="height:30%;width:98%;margin-left:5px;margin-top:2px;"/>'
-                ],
-                maxItemCache: 1,
-                store: 'MyJsonPStore',
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            var storeUserDetails = Ext.getStore('UserDetails');
-                            storeUserDetails.load();
-                            var customerId;
-                            var store = Ext.getStore('MyJsonPStore');
-                            storeUserDetails.each(function(record) {
-                                //console.log('StoreUserDetails : ' +record.get('customerId'));
-                                customerId = record.get('customerId');
-                                businessName = record.get('businessName');
-                            });
-                            store.clearFilter();
-                            store.load();
-                            store.filter('customerId', customerId);
-                        },
-                        event: 'painted'
-                    }
-                ]
+                id: 'storeImage',
+                itemId: 'storeImage'
             },
             {
                 xtype: 'textareafield',
@@ -66730,9 +66702,10 @@ Ext.define('Ext.picker.Picker', {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
+            //this.down('contactpic').setData(record.data);
+            this.down('#storeImage').setHtml('<img src = "' + record.get('pictureURL') + '" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>');
         }
     },
-    //this.down('contactpic').setData(record.data);
     initialize: function() {
         Ext.form.Panel.prototype.initialize.call(this);
         var menu = Ext.create('Ext.Menu', {
