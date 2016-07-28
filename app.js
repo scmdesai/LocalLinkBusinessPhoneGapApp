@@ -66880,6 +66880,7 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         xtype: 'button',
+                        height: '8vh',
                         itemId: 'cancelButton',
                         margin: '10 0 10 10',
                         ui: 'decline',
@@ -66916,6 +66917,7 @@ Ext.define('Ext.picker.Picker', {
                             });
                         },
                         cls: 'button',
+                        height: '8vh',
                         itemId: 'saveContactButton',
                         margin: '10 10 10 0',
                         ui: 'confirm',
