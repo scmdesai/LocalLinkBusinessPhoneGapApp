@@ -66930,7 +66930,7 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             form.submit({
-                                url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
+                                url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     form.destroy();
@@ -67309,7 +67309,7 @@ Ext.define('Ext.picker.Picker', {
                         var itemName = record.get('itemName');
                         var req = Ext.Ajax.request({
                                 method: 'POST',
-                                url: 'http://services.appsonmobile.com/deals/' + itemName,
+                                url: 'http://services.appsonmobile.com/demoDeals/' + itemName,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     //console.log(action.msg);
@@ -67957,7 +67957,7 @@ Ext.define('Ext.picker.Picker', {
                     var file = form.getAt(0).getValue();
                     if (file) {
                         form.submit({
-                            url: 'http://services.appsonmobile.com/stores/' + customerId,
+                            url: 'http://services.appsonmobile.com/demoStores/' + customerId,
                             xhr2: true,
                             cache: false,
                             waitMsg: 'Please Wait...',
@@ -68588,7 +68588,7 @@ Ext.define('Ext.picker.Picker', {
                                 if (endDate >= date) {
                                     if (document.getElementById('chkbx').checked) {
                                         form.submit({
-                                            url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                            url: 'http://services.appsonmobile.com/demoDeals/editDeal/' + itemName,
                                             success: function(form, action) {
                                                 Ext.Msg.alert('Success', action.msg);
                                                 form.destroy();
@@ -68928,7 +68928,7 @@ Ext.define('Ext.picker.Picker', {
                                 if (endDate >= date) {
                                     if (document.getElementById('chkbx').checked) {
                                         form.submit({
-                                            url: 'http://services.appsonmobile.com/createNewDeal',
+                                            url: 'http://services.appsonmobile.com/democreateNewDeal',
                                             success: function(form, action) {
                                                 Ext.getStore('MyDealsStore').load();
                                                 Ext.Msg.alert('Success!', action.msg);
@@ -69282,7 +69282,7 @@ Ext.define('Ext.picker.Picker', {
                                     if (endDate >= date) {
                                         if (document.getElementById('chkbx').checked) {
                                             form.submit({
-                                                url: 'http://services.appsonmobile.com/uploadS3/',
+                                                url: 'http://services.appsonmobile.com/demouploadS3/',
                                                 xhr2: true,
                                                 cache: false,
                                                 waitMsg: 'Please Wait...',
