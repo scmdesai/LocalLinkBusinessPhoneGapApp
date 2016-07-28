@@ -68632,15 +68632,13 @@ Ext.define('Ext.picker.Picker', {
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         if (record) {
-            var startDate = Ext.Date.format(record.data.dealStartDate, 'n/j/Y');
-            var endDate = Ext.Date.format(record.data.dealEndDate, 'n/j/Y');
             this.down('#DealName').setValue(record.data.dealName);
             this.down('#DealStatus').setValue(record.data.dealStatus);
             this.down('#DealDescription').setValue(record.data.dealDescription);
             this.down('#DealImageURL').setValue(record.data.dealImageURL);
             //this.child('contactpic').setData(record.data);
-            this.down('#DealStartDate').setValue(startDate);
-            this.down('#DealEndDate').setValue(endDate);
+            this.down('#DealStartDate').setValue(record.data.dealStartDate);
+            this.down('#DealEndDate').setValue(record.data.dealEndDate);
         }
     }
 }, 0, [
