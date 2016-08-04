@@ -66709,7 +66709,7 @@ Ext.define('Ext.picker.Picker', {
             var customerId = record.get('customerId');
             this.down('#nameTxt').setHtml(name);
             //this.down('contactpic').setData(record.data);
-            this.down('#storeImage').setHtml('<img src = "' + record.get('pictureURL') + '" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>');
+            this.down('#storeImage').setHtml('<img src = "' + record.get('pictureURL') + '" style="height:40vh;width:95%;margin-left:5px;margin-top:2px;"/>');
         }
     },
     initialize: function() {
@@ -66935,7 +66935,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'dataview',
                 docked: 'top',
-                height: '40%',
+                height: '40vh',
                 itemId: 'mydataview1',
                 margin: '5 5 5 5',
                 padding: '',
@@ -66945,7 +66945,7 @@ Ext.define('Ext.picker.Picker', {
                 disableSelection: false,
                 deferEmptyText: false,
                 itemTpl: [
-                    '<img src = "{pictureURL}" style="height:100%;width:95%;margin-left:5px;margin-top:2px;"/>'
+                    '<img src = "{pictureURL}" style="height:40vh;width:95%;margin-left:5px;margin-top:2px;"/>'
                 ],
                 maxItemCache: 1,
                 scrollToTopOnRefresh: false,
@@ -66990,13 +66990,12 @@ Ext.define('Ext.picker.Picker', {
                     view.setRecord(record);
                     view.showBy(button);
                 },
-                flex: 1,
-                docked: 'top',
+                height: '20%',
                 id: 'changePicButton',
                 left: '0px',
                 margin: '5 5 5 5',
                 style: 'opacity:0.5;position:absolute',
-                top: '-10px',
+                top: '-1%',
                 ui: 'plain',
                 width: '20%',
                 iconCls: 'add'
@@ -67004,6 +67003,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
+                hidden: true,
                 id: 'businessName',
                 itemId: 'businessName',
                 margin: '30 15 2 15',
@@ -67017,10 +67017,14 @@ Ext.define('Ext.picker.Picker', {
                     'icon-phone',
                     'customfield'
                 ],
+                height: '10vh',
                 id: 'phoneNumber',
                 itemId: 'phoneNumber',
                 margin: '0 15 2 15',
+                padding: '0 0 5 5',
                 styleHtmlContent: true,
+                top: '25%',
+                width: '95%',
                 name: 'phoneNumber',
                 placeHolder: 'Not Listed'
             },
@@ -67030,11 +67034,14 @@ Ext.define('Ext.picker.Picker', {
                     'customfield',
                     'icon-location'
                 ],
-                height: '20%',
                 id: 'address',
                 itemId: 'address',
                 margin: '0 15 0 15',
+                minHeight: '10vh',
+                padding: '0 0 5 5',
                 styleHtmlContent: true,
+                top: '60%',
+                width: '95%',
                 name: 'address',
                 required: true,
                 placeHolder: 'Not Listed'
@@ -67108,6 +67115,29 @@ Ext.define('Ext.picker.Picker', {
                 labelWrap: true,
                 name: 'websiteDisplayName',
                 required: true
+            },
+            {
+                xtype: 'container',
+                docked: 'bottom',
+                height: '40px',
+                html: '<p id="terms" style="font-size:2.5vw;" >To change the business name or website info, please <a>Contact Us</a> </p>',
+                itemId: 'mycontainer6',
+                margin: '5 5 5 10',
+                padding: '5 30 5 0',
+                styleHtmlContent: true,
+                layout: 'hbox',
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            element.addListener('tap', function() {
+                                //Ext.Viewport.add({xtype:'Terms'}).show();
+                                var url = "http://www.appsonmobile.com/index.php/contact-us/";
+                                window.open(url, '_system', 'location=yes');
+                            });
+                        },
+                        event: 'painted'
+                    }
+                ]
             }
         ]
     },
@@ -67962,7 +67992,7 @@ Ext.define('Ext.picker.Picker', {
                             }
                         });
                     } else {
-                        Ext.Msg.alert('Error!', 'No Image to upload ', null, null);
+                        Ext.Msg.alert('Error!', 'No image to upload ', null, null);
                     }
                 },
                 bottom: 30,
@@ -68512,7 +68542,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'container',
                         docked: 'right',
                         height: '40px',
-                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
                         margin: '5 5 5 10',
                         padding: '5 30 5 0',
@@ -68581,13 +68611,13 @@ Ext.define('Ext.picker.Picker', {
                                             }
                                         });
                                     } else {
-                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                        Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
                                     }
                                 } else {
                                     Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz name field is empty', null, null);
                             }
                         },
                         docked: 'right',
@@ -68852,7 +68882,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'container',
                         docked: 'right',
                         height: '40px',
-                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
                         margin: '5 5 5 10',
                         padding: '5 30 5 0',
@@ -68922,13 +68952,13 @@ Ext.define('Ext.picker.Picker', {
                                             }
                                         });
                                     } else {
-                                        Ext.Msg.alert(null, 'You must Agree to Terms & Conditions', null, null);
+                                        Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
                                     }
                                 } else {
                                     Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz name field is empty', null, null);
                             }
                         },
                         docked: 'right',
@@ -69201,7 +69231,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'container',
                         docked: 'right',
                         height: '40px',
-                        html: '<a id="terms" style="font-size:2.5vw;" > I Agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
                         margin: '5 5 5 10',
                         padding: '5 30 5 0',
@@ -69285,10 +69315,10 @@ Ext.define('Ext.picker.Picker', {
                                         Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
                                     }
                                 } else {
-                                    Ext.Msg.alert('Error!', 'No Image to upload ', null, null);
+                                    Ext.Msg.alert('Error!', 'No image to upload ', null, null);
                                 }
                             } else {
-                                Ext.Msg.alert('Error!', 'Buzz Name field is empty', null, null);
+                                Ext.Msg.alert('Error!', 'Buzz name field is empty', null, null);
                             }
                         },
                         docked: 'right',
