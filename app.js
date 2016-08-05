@@ -66935,45 +66935,6 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
-                xtype: 'dataview',
-                docked: 'top',
-                height: '40vh',
-                itemId: 'mydataview1',
-                margin: '5 5 5 5',
-                padding: '',
-                style: 'overflow:hidden',
-                width: '98%',
-                scrollable: false,
-                disableSelection: false,
-                deferEmptyText: false,
-                itemTpl: [
-                    '<img src = "{pictureURL}" style="height:40vh;width:95%;margin-left:5px;margin-top:2px;"/>'
-                ],
-                maxItemCache: 1,
-                scrollToTopOnRefresh: false,
-                store: 'MyJsonPStore',
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            var storeUserDetails = Ext.getStore('UserDetails');
-                            storeUserDetails.load();
-                            var customerId;
-                            var store = Ext.getStore('MyJsonPStore');
-                            storeUserDetails.each(function(record) {
-                                //console.log('StoreUserDetails : ' +record.get('customerId'));
-                                customerId = record.get('customerId');
-                                businessName = record.get('businessName');
-                            });
-                            store.clearFilter();
-                            store.load();
-                            store.filter('customerId', customerId);
-                            element.repaint();
-                        },
-                        event: 'painted'
-                    }
-                ]
-            },
-            {
                 xtype: 'button',
                 handler: function(button, e) {
                     var storeUserDetails = Ext.getStore('UserDetails');
@@ -67140,6 +67101,15 @@ Ext.define('Ext.picker.Picker', {
                         event: 'painted'
                     }
                 ]
+            },
+            {
+                xtype: 'component',
+                cls: 'contact-name',
+                disabled: true,
+                docked: 'top',
+                height: '40vh',
+                id: 'storeImage1',
+                itemId: 'storeImage1'
             }
         ]
     },
@@ -67164,6 +67134,8 @@ Ext.define('Ext.picker.Picker', {
             this.down('#businessName').setValue(record.data.businessName);
             this.down('#phoneNumber').setValue(record.data.phoneNumber);
             this.down('#address').setValue(record.data.address);
+            //this.child('contactpic').setData(record.data);
+            this.down('#storeImage1').setHtml('<img src = "' + record.get('pictureURL') + '" style="height:40vh;width:95%;margin-left:5px;margin-top:2px;"/>');
         }
     }
 }, 0, [
@@ -67186,7 +67158,6 @@ Ext.define('Ext.picker.Picker', {
     Contact.view,
     'contactform'
 ], 0));
-//this.child('contactpic').setData(record.data);
 
 /*
  * File: app/controller/Contacts.js
