@@ -69214,6 +69214,7 @@ Ext.define('Ext.picker.Picker', {
                 labelWidth: '29%',
                 labelWrap: true,
                 name: 'fileUpload',
+                accept: 'image',
                 capture: 'camera'
             },
             {
