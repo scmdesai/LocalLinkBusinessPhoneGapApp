@@ -66158,6 +66158,7 @@ Ext.define('Ext.picker.Picker', {
         },
         proxy: {
             type: 'jsonp',
+            timeout: 300000,
             url: 'http://services.appsonmobile.com/demoStores',
             reader: {
                 type: 'json'
@@ -66204,6 +66205,7 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
+            timeout: 300000,
             url: 'http://services.appsonmobile.com/demoDeals',
             reader: {
                 type: 'json'
@@ -67956,6 +67958,7 @@ Ext.define('Ext.picker.Picker', {
                 label: '',
                 labelWrap: true,
                 name: 'fileUpload',
+                accept: 'image',
                 capture: 'camera'
             },
             {
