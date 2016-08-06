@@ -66326,7 +66326,7 @@ Ext.define('Ext.picker.Picker', {
     onContainerPainted: function(element, eOpts) {
         // Settings.
         FacebookInAppBrowser.settings.appId = '900651756709444';
-        FacebookInAppBrowser.settings.redirectUrl = 'http://appsonmobile.com';
+        FacebookInAppBrowser.settings.redirectUrl = 'http://www.appsonmobile.com';
         FacebookInAppBrowser.settings.permissions = 'email';
         // Optional
         FacebookInAppBrowser.settings.timeoutDuration = 7500;
@@ -66366,7 +66366,7 @@ Ext.define('Ext.picker.Picker', {
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    var record = Ext.getStore('MyJsonPStore').findRecord('emailAddress', email, 0, true, false, false);
+                    var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
                     //console.log(store.getData());
                     //store.loadRecord();
                     //var view = Ext.create('Contact.view.Info');
@@ -66744,7 +66744,7 @@ Ext.define('Ext.picker.Picker', {
                         iconCls: 'icon-signout',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
-                            Ext.Msg.confirm('Logout', 'Are you sure you want to Logout?', function(btn) {
+                            Ext.Msg.confirm('Logout', 'Are you sure you want to logout?', function(btn) {
                                 if (btn == 'yes') {
                                     FacebookInAppBrowser.logout(function() {
                                         window.localStorage.setItem('facebookAccessToken', null);
