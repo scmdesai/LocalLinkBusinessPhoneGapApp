@@ -67000,6 +67000,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'address',
                 itemId: 'address',
                 margin: '0 15 0 15',
+                maxHeight: '15vh',
                 minHeight: '10vh',
                 padding: '0 0 5 5',
                 styleHtmlContent: true,
