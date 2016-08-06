@@ -66567,7 +66567,7 @@ Ext.define('Ext.picker.Picker', {
                 disabled: false,
                 docked: 'bottom',
                 height: '1vh',
-                hidden: false,
+                hidden: true,
                 itemId: 'email1',
                 margin: '0 5 0 5',
                 padding: '0 0 5 5',
