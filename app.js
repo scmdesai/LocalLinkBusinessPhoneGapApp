@@ -65966,6 +65966,10 @@ Ext.define('Ext.picker.Picker', {
                 type: 'string'
             },
             {
+                name: 'loginEmail',
+                type: 'string'
+            },
+            {
                 name: 'address',
                 type: 'string'
             },
@@ -65993,6 +65997,14 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'websiteDisplayName'
+            }
+        ],
+        validations: [
+            {
+                type: 'format',
+                field: 'phoneNumber',
+                matcher: '/^([0-9]{3}[-]?){1,2}([0-9]{4})$/',
+                message: 'Your Phone Number is invalid'
             }
         ]
     }
@@ -66564,7 +66576,6 @@ Ext.define('Ext.picker.Picker', {
                 width: '95%',
                 clearIcon: false,
                 name: 'phoneNumber',
-                placeHolder: 'Not Listed',
                 readOnly: true
             },
             {
