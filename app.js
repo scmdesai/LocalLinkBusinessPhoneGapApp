@@ -66561,6 +66561,28 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: [
+                    'icon-email1',
+                    'customfield2'
+                ],
+                disabled: false,
+                docked: 'bottom',
+                height: '1vh',
+                hidden: false,
+                itemId: 'email1',
+                margin: '0 5 0 5',
+                padding: '0 0 5 5',
+                style: 'font-size:5vw;font-family: arial',
+                styleHtmlContent: true,
+                width: '95%',
+                clearIcon: false,
+                label: '',
+                name: 'loginEmail',
+                placeHolder: 'Not Listed',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: [
                     'icon-phone1',
                     'customfield2'
                 ],
@@ -67038,6 +67060,11 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'textfield',
                 hidden: true,
                 name: 'emailAddress'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                name: 'loginEmail'
             },
             {
                 xtype: 'textfield',
