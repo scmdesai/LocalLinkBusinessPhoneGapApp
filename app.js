@@ -67013,6 +67013,11 @@ Ext.define('Ext.picker.Picker', {
                 styleHtmlContent: true,
                 top: '25%',
                 width: '95%',
+                component: {
+                    xtype: 'input',
+                    type: 'tel',
+                    fastFocus: true
+                },
                 name: 'phoneNumber',
                 placeHolder: 'Not Listed'
             },
