@@ -66944,9 +66944,7 @@ Ext.define('Ext.picker.Picker', {
                                     store.load();
                                     form.destroy({
                                         success: function() {
-                                            var info = this.getContactinfo();
-                                            Ext.Viewport.setActiveItem(info);
-                                            info.setRecord(record);
+                                            Ext.Viewport.getComponent('info').setRecord(record);
                                         }
                                     });
                                 },
