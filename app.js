@@ -66180,6 +66180,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
         console.log('Updating record');
+        Ext.getCmp('phoneNumber2').setRecord(record);
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66582,6 +66583,7 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'bottom',
                 height: '1vh',
                 hidden: false,
+                id: 'phoneNumber2',
                 itemId: 'phoneNumber',
                 margin: '0 5 0 5',
                 padding: '0 0 5 5',
@@ -67156,10 +67158,6 @@ Ext.define('Ext.picker.Picker', {
                 fn: 'onPhoneNumberKeyup',
                 event: 'keyup',
                 delegate: '#phoneNumber'
-            },
-            {
-                fn: 'onInfoPainted',
-                event: 'painted'
             }
         ]
     },
@@ -67174,9 +67172,6 @@ Ext.define('Ext.picker.Picker', {
         if (len === 8) {
             textfield.setValue(textfield.getValue().substr(0, 7));
         }
-    },
-    onInfoPainted: function(element, eOpts) {
-        element.repaint();
     },
     getValidationErrors: function() {
         var errors = [];
