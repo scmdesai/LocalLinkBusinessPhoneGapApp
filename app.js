@@ -66525,6 +66525,7 @@ Ext.define('Ext.picker.Picker', {
                 padding: '0 0 5 5',
                 style: 'font-size:5vw;font-family: arial',
                 styleHtmlContent: true,
+                width: '95%',
                 clearIcon: false,
                 name: 'websiteDisplayName',
                 placeHolder: 'Not Listed',
@@ -66706,11 +66707,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onInfoPainted',
                 event: 'painted'
-            },
-            {
-                fn: 'onFormpanelSubmit',
-                event: 'submit',
-                order: 'after'
             }
         ]
     },
@@ -66735,10 +66731,6 @@ Ext.define('Ext.picker.Picker', {
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         this.setRecord(record);
-    },
-    onFormpanelSubmit: function(formpanel, result, e, eOpts) {
-        var store = Ext.getStore('MyJsonPStore');
-        store.load();
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -67167,11 +67159,20 @@ Ext.define('Ext.picker.Picker', {
                 fn: 'onPhoneNumberFocus',
                 event: 'focus',
                 delegate: '#phoneNumber'
+            },
+            {
+                fn: 'onFormpanelDestroy',
+                event: 'destroy'
             }
         ]
     },
     onPhoneNumberFocus: function(textfield, e, eOpts) {
         textfield.setValue('');
+    },
+    onFormpanelDestroy: function(eOpts) {
+        var store = Ext.getStore('MyJsonPStore');
+        store.sync();
+        store.load();
     },
     getValidationErrors: function() {
         var errors = [];
