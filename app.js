@@ -68177,7 +68177,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 title: 'Manage Buzz',
-                iconCls: 'icon-plane',
+                iconCls: 'icon-localbuzzicon_latest',
                 items: [
                     {
                         xtype: 'DealsPanel',
