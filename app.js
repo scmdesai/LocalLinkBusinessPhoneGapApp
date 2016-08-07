@@ -67156,6 +67156,11 @@ Ext.define('Ext.picker.Picker', {
                 fn: 'onPhoneNumberKeyup',
                 event: 'keyup',
                 delegate: '#phoneNumber'
+            },
+            {
+                fn: 'onPhoneNumberFocus',
+                event: 'focus',
+                delegate: '#phoneNumber'
             }
         ]
     },
@@ -67169,6 +67174,11 @@ Ext.define('Ext.picker.Picker', {
         }
         if (len === 8) {
             textfield.setValue(textfield.getValue().substr(0, 7));
+        }
+    },
+    onPhoneNumberFocus: function(textfield, e, eOpts) {
+        if (len === 3 || len === 7) {
+            textfield.setValue(textfield.getValue() + '-');
         }
     },
     getValidationErrors: function() {
