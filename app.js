@@ -66939,7 +66939,7 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            var tel = form.getAt(1).getValue();
+                            var tel = record.get('phoneNumber');
                             if (tel.length > 10) {
                                 Ext.Msg.alert("Invalid phone number", null, null, null);
                             } else {
