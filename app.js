@@ -66939,22 +66939,18 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            if (tel.length < 10) {
-                                Ext.Msg.alert("Invalid phone number", null, null, null);
-                            } else {
-                                form.submit({
-                                    url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
-                                    success: function(form, action) {
-                                        Ext.Msg.alert('Success', action.msg);
-                                        form.destroy();
-                                    },
-                                    failure: function(form, action) {
-                                        store.load();
-                                        Ext.Msg.alert('Failure', action.msg);
-                                        form.destroy();
-                                    }
-                                });
-                            }
+                            form.submit({
+                                url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
+                                success: function(form, action) {
+                                    Ext.Msg.alert('Success', action.msg);
+                                    form.destroy();
+                                },
+                                failure: function(form, action) {
+                                    store.load();
+                                    Ext.Msg.alert('Failure', action.msg);
+                                    form.destroy();
+                                }
+                            });
                         },
                         cls: 'button',
                         height: '8vh',
