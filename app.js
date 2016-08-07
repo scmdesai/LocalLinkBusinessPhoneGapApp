@@ -67023,8 +67023,7 @@ Ext.define('Ext.picker.Picker', {
                 component: {
                     xtype: 'input',
                     type: 'tel',
-                    fastFocus: true,
-                    regex: /[0-9.]/
+                    fastFocus: true
                 },
                 name: 'phoneNumber',
                 maxLength: 10,
@@ -67156,7 +67155,18 @@ Ext.define('Ext.picker.Picker', {
                 id: 'storeImage1',
                 itemId: 'storeImage1'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onPhoneNumberMouseDown',
+                single: true,
+                event: 'mousedown',
+                delegate: '#phoneNumber'
+            }
         ]
+    },
+    onPhoneNumberMouseDown: function(textfield, e, eOpts) {
+        textfield.setValue('');
     },
     getValidationErrors: function() {
         var errors = [];
