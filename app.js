@@ -68354,6 +68354,16 @@ Ext.define('Ext.picker.Picker', {
             listeners: [
                 {
                     fn: function(element, eOpts) {
+                        var storeUserDetails = Ext.getStore('UserDetails');
+                        storeUserDetails.load();
+                        var customerId;
+                        var businessName;
+                        storeUserDetails.each(function(record) {
+                            //console.log('StoreUserDetails : ' +record.get('customerId'));
+                            customerId = record.get('customerId');
+                            businessName = record.get('businessName');
+                        });
+                        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
                         Ext.Viewport.getComponent('info').setRecord(record);
                     },
                     event: 'painted'
