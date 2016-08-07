@@ -66942,10 +66942,8 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     store.sync();
                                     store.load();
-                                    Ext.Viewport.getComponent('info').setRecord(record);
-                                    Ext.Viewport.getComponent('formpanel').destroy();
+                                    form.destroy();
                                 },
-                                //form.destroy();
                                 failure: function(form, action) {
                                     store.load();
                                     Ext.Msg.alert('Failure', action.msg);
@@ -68344,6 +68342,7 @@ Ext.define('Ext.picker.Picker', {
         tabBar: {
             docked: 'bottom',
             height: '8%',
+            itemId: 'mytabbar1',
             padding: '35 40 0 40',
             style: 'color:#c0c0c0;background:#FFF;font-size:4vw',
             ui: 'plain',
@@ -68351,7 +68350,15 @@ Ext.define('Ext.picker.Picker', {
                 type: 'hbox',
                 align: 'end',
                 pack: 'justify'
-            }
+            },
+            listeners: [
+                {
+                    fn: function(element, eOpts) {
+                        Ext.Viewport.getComponent('info').setRecord(record);
+                    },
+                    event: 'painted'
+                }
+            ]
         }
     }
 }, 0, [
