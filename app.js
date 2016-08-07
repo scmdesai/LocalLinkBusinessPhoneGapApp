@@ -65958,6 +65958,9 @@ Ext.define('Ext.picker.Picker', {
                 type: 'string'
             },
             {
+                convert: function(v, rec) {
+                    return (v.substr(0, 3) + '-' + v.substr(3, 3) + '-' + v.substr(6, 4));
+                },
                 name: 'phoneNumber',
                 type: 'string'
             },
@@ -66938,7 +66941,6 @@ Ext.define('Ext.picker.Picker', {
                             store.load();
                             var phoneNumber = form.getAt(1).getValue();
                             var tel = phoneNumber.substr(0, 3) + '-' + phoneNumber.substr(3, 3) + '-' + phoneNumber.substr(6, 4);
-                            form.getAt(1).setValue(tel);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
                                 success: function(form, action) {
