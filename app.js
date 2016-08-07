@@ -67163,7 +67163,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onFormpanelDestroy',
                 event: 'destroy',
-                order: 'after'
+                order: 'before'
             }
         ]
     },
