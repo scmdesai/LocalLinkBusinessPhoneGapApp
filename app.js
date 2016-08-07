@@ -66718,8 +66718,6 @@ Ext.define('Ext.picker.Picker', {
         }
     },
     onInfoPainted: function(element, eOpts) {
-        var store = Ext.getStore('MyJsonPStore');
-        store.load();
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
         var customerId;
@@ -68155,6 +68153,22 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'contactinfo',
                         height: '100%'
+                    }
+                ],
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var store = Ext.getStore('MyJsonPStore');
+                            store.load();
+                        },
+                        event: 'painted'
+                    },
+                    {
+                        fn: function(element, eOpts) {
+                            var store = Ext.getStore('MyJsonPStore');
+                            store.load();
+                        },
+                        event: 'painted'
                     }
                 ]
             },
