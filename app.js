@@ -66943,7 +66943,7 @@ Ext.define('Ext.picker.Picker', {
                                     store.sync();
                                     store.load();
                                     form.destroy();
-                                    Ext.Viewport.getComponent('info').setRecord(record);
+                                    Ext.get('info').repaint();
                                 },
                                 failure: function(form, action) {
                                     store.load();
