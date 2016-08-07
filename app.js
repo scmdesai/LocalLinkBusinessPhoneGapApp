@@ -66940,7 +66940,7 @@ Ext.define('Ext.picker.Picker', {
                             store.sync();
                             store.load();
                             var tel = record.get('phoneNumber');
-                            if (tel.length > 10 || tel.length < 10) {
+                            if (tel.length < 10) {
                                 Ext.Msg.alert("Invalid phone number", null, null, null);
                             } else {
                                 form.submit({
@@ -67027,7 +67027,7 @@ Ext.define('Ext.picker.Picker', {
                     fastFocus: true
                 },
                 name: 'phoneNumber',
-                maxLength: 12,
+                maxLength: 10,
                 placeHolder: 'Not Listed'
             },
             {
