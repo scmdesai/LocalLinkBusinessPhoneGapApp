@@ -66709,8 +66709,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 fn: 'onFormpanelSubmit',
-                event: 'submit',
-                order: 'after'
+                event: 'submit'
             }
         ]
     },
