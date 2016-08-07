@@ -67157,7 +67157,7 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onPhoneNumberChange: function(textfield, newValue, oldValue, eOpts) {
-        var phoneNumber = textfield.getValue();
+        var phoneNumber = newValue.getValue();
         textfield.setValue(phoneNumber.substr(0, 3) + '-' + phoneNumber.substr(3, 3) + '-' + phoneNumber.substr(6, 4));
     },
     getValidationErrors: function() {
