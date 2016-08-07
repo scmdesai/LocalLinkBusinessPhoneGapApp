@@ -67159,7 +67159,6 @@ Ext.define('Ext.picker.Picker', {
         listeners: [
             {
                 fn: 'onPhoneNumberFocus',
-                single: true,
                 event: 'focus',
                 delegate: '#phoneNumber'
             }
