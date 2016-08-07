@@ -66707,10 +66707,6 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onInfoPainted',
                 event: 'painted'
-            },
-            {
-                fn: 'onInfoHiddenChange',
-                event: 'hiddenchange'
             }
         ]
     },
@@ -66722,6 +66718,8 @@ Ext.define('Ext.picker.Picker', {
         }
     },
     onInfoPainted: function(element, eOpts) {
+        var store = Ext.getStore('MyJsonPStore');
+        store.load();
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
         var customerId;
@@ -66735,11 +66733,6 @@ Ext.define('Ext.picker.Picker', {
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         this.setRecord(record);
-    },
-    onInfoHiddenChange: function(component, value, oldValue, eOpts) {
-        if (component.isHidden() === true && oldValue !== null) {
-            Ext.getStore('MyJsonPStore').load();
-        }
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
