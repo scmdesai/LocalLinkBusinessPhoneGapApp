@@ -67026,7 +67026,9 @@ Ext.define('Ext.picker.Picker', {
                     type: 'tel',
                     fastFocus: true
                 },
-                name: 'phoneNumber'
+                name: 'phoneNumber',
+                maxLength: 12,
+                placeHolder: 'Not Listed'
             },
             {
                 xtype: 'textareafield',
@@ -67154,17 +67156,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'storeImage1',
                 itemId: 'storeImage1'
             }
-        ],
-        listeners: [
-            {
-                fn: 'onPhoneNumberFocus',
-                event: 'focus',
-                delegate: '#phoneNumber'
-            }
         ]
-    },
-    onPhoneNumberFocus: function(textfield, e, eOpts) {
-        textfield.setValue('');
     },
     getValidationErrors: function() {
         var errors = [];
