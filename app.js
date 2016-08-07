@@ -65958,9 +65958,8 @@ Ext.define('Ext.picker.Picker', {
                 type: 'string'
             },
             {
-                convert: function(v, rec) {
-                    return (v.substr(0, 3) + '-' + v.substr(3, 3) + '-' + v.substr(6, 4));
-                },
+                convert: function(v, rec) {},
+                //return(v.substr(0,3)+'-'+v.substr(3,3)+'-'+v.substr(6,4));
                 name: 'phoneNumber',
                 type: 'string'
             },
@@ -67024,7 +67023,7 @@ Ext.define('Ext.picker.Picker', {
                     fastFocus: true
                 },
                 name: 'phoneNumber',
-                maxLength: 10,
+                maxLength: 12,
                 placeHolder: 'Not Listed'
             },
             {
