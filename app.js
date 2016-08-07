@@ -68006,7 +68006,7 @@ Ext.define('Ext.picker.Picker', {
                             cache: false,
                             waitMsg: 'Please Wait...',
                             success: function(form, action) {
-                                var view = Ext.Viewport.getActiveItem();
+                                //var view = Ext.Viewport.getActiveItem();
                                 record.setDirty();
                                 record.beginEdit(true, record.getChanges());
                                 form.updateRecord(record);
@@ -68015,9 +68015,10 @@ Ext.define('Ext.picker.Picker', {
                                 store.sync();
                                 store.load();
                                 Ext.Msg.alert('Success', action.msg);
+                                Ext.Viewport.getComponent('formpanel').setRecord(record);
                                 form.destroy();
-                                view.setRecord(record);
                             },
+                            //view.setRecord(record);
                             failure: function(form, action) {
                                 store.load();
                                 Ext.Msg.alert('Failure', action.msg);
