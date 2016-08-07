@@ -66942,8 +66942,8 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     store.sync();
                                     store.load();
-                                    form.destroy();
                                     Ext.get('info').repaint();
+                                    form.destroy();
                                 },
                                 failure: function(form, action) {
                                     store.load();
