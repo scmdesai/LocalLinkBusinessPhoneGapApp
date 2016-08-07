@@ -66936,13 +66936,13 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
+                            Ext.Viewport.getComponent('info').setRecord(record);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     store.sync();
                                     store.load();
-                                    Ext.Viewport.getComponent('info').setRecord(record);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
