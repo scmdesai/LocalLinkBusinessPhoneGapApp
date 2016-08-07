@@ -66180,7 +66180,6 @@ Ext.define('Ext.picker.Picker', {
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
         console.log('Updating record');
-        Ext.getCmp('phoneNumber2').setRecord(record);
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66941,7 +66940,7 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg);
+                                    Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
                                     store.sync();
                                     store.load();
                                     form.destroy();
