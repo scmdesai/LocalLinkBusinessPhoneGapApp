@@ -67153,7 +67153,20 @@ Ext.define('Ext.picker.Picker', {
                 id: 'storeImage1',
                 itemId: 'storeImage1'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onPhoneNumberKeyup',
+                event: 'keyup',
+                delegate: '#phoneNumber'
+            }
         ]
+    },
+    onPhoneNumberKeyup: function(textfield, e, eOpts) {
+        var len = textfield.getValue().length;
+        if (len === 3 || len === 6) {
+            textfield.setValue(textfield.getValue() + '-');
+        }
     },
     getValidationErrors: function() {
         var errors = [];
@@ -68153,22 +68166,6 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'contactinfo',
                         height: '100%'
-                    }
-                ],
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            var store = Ext.getStore('MyJsonPStore');
-                            store.load();
-                        },
-                        event: 'painted'
-                    },
-                    {
-                        fn: function(element, eOpts) {
-                            var store = Ext.getStore('MyJsonPStore');
-                            store.load();
-                        },
-                        event: 'painted'
                     }
                 ]
             },
