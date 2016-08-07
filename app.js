@@ -66939,18 +66939,23 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            form.submit({
-                                url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
-                                success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg);
-                                    form.destroy();
-                                },
-                                failure: function(form, action) {
-                                    store.load();
-                                    Ext.Msg.alert('Failure', action.msg);
-                                    form.destroy();
-                                }
-                            });
+                            var tel = form.getAt(1).getValue();
+                            if (tel.length > 10) {
+                                Ext.Msg.alert("Invalid phone number", null, null, null);
+                            } else {
+                                form.submit({
+                                    url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
+                                    success: function(form, action) {
+                                        Ext.Msg.alert('Success', action.msg);
+                                        form.destroy();
+                                    },
+                                    failure: function(form, action) {
+                                        store.load();
+                                        Ext.Msg.alert('Failure', action.msg);
+                                        form.destroy();
+                                    }
+                                });
+                            }
                         },
                         cls: 'button',
                         height: '8vh',
@@ -67003,7 +67008,7 @@ Ext.define('Ext.picker.Picker', {
                 placeHolder: 'Not Listed'
             },
             {
-                xtype: 'textareafield',
+                xtype: 'textfield',
                 cls: [
                     'icon-phone',
                     'customfield'
