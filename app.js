@@ -66939,8 +66939,6 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            var tel = record.get('phoneNumber');
-                            Ext.Msg.alert('Phone Number ', tel.length, null, null);
                             if (tel.length < 10) {
                                 Ext.Msg.alert("Invalid phone number", null, null, null);
                             } else {
@@ -67025,7 +67023,8 @@ Ext.define('Ext.picker.Picker', {
                 component: {
                     xtype: 'input',
                     type: 'tel',
-                    fastFocus: true
+                    fastFocus: true,
+                    regex: /[0-9.]/
                 },
                 name: 'phoneNumber',
                 maxLength: 10,
