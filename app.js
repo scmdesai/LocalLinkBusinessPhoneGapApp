@@ -66150,7 +66150,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('Contact.store.MyJsonPStore', Ext.data.Store, {
     config: {
         autoLoad: true,
-        autoSync: true,
         groupField: 'category',
         model: 'Contact.model.Contact',
         storeId: 'MyJsonPStore',
