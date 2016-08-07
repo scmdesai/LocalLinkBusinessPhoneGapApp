@@ -67149,14 +67149,14 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onPhoneNumberUpdatedata',
-                event: 'updatedata',
+                fn: 'onPhoneNumberChange',
+                event: 'change',
                 order: 'after',
                 delegate: '#phoneNumber'
             }
         ]
     },
-    onPhoneNumberUpdatedata: function(component, newData, eOpts) {
+    onPhoneNumberChange: function(textfield, newValue, oldValue, eOpts) {
         var phoneNumber = textfield.getValue();
         textfield.setValue(phoneNumber.substr(0, 3) + '-' + phoneNumber.substr(3, 3) + '-' + phoneNumber.substr(6, 4));
     },
