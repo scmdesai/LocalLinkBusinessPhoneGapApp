@@ -66709,7 +66709,8 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 fn: 'onFormpanelSubmit',
-                event: 'submit'
+                event: 'submit',
+                order: 'after'
             }
         ]
     },
@@ -66736,19 +66737,8 @@ Ext.define('Ext.picker.Picker', {
         this.setRecord(record);
     },
     onFormpanelSubmit: function(formpanel, result, e, eOpts) {
-        var storeUserDetails = Ext.getStore('UserDetails');
-        storeUserDetails.load();
-        var customerId;
-        var businessName;
-        var date = new Date();
-        var today = Ext.Date.format(date, 'n/j/Y');
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-        });
-        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
-        this.setRecord(record);
+        var store = Ext.getStore('MyJsonPStore');
+        store.load();
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
