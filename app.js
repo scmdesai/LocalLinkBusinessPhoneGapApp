@@ -66704,6 +66704,14 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onInfoPainted',
                 event: 'painted'
+            },
+            {
+                fn: 'onInfoShow',
+                event: 'show'
+            },
+            {
+                fn: 'onInfoHiddenChange',
+                event: 'hiddenchange'
             }
         ]
     },
@@ -66728,6 +66736,12 @@ Ext.define('Ext.picker.Picker', {
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         this.setRecord(record);
+    },
+    onInfoShow: function(component, eOpts) {
+        console.log('Showing info page');
+    },
+    onInfoHiddenChange: function(component, value, oldValue, eOpts) {
+        console.log('Hidden change');
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
