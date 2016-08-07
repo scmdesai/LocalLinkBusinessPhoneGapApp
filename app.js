@@ -66180,7 +66180,6 @@ Ext.define('Ext.picker.Picker', {
     },
     onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
         console.log('Updating record');
-        store.load();
         return record;
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66943,6 +66942,7 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     store.sync();
                                     store.load();
+                                    Ext.getCmp('info').setRecord(record);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
