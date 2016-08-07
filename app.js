@@ -66939,8 +66939,6 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
-                            var phoneNumber = form.getAt(1).getValue();
-                            var tel = phoneNumber.substr(0, 3) + '-' + phoneNumber.substr(3, 3) + '-' + phoneNumber.substr(6, 4);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
                                 success: function(form, action) {
