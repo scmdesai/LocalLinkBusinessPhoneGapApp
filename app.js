@@ -66707,6 +66707,10 @@ Ext.define('Ext.picker.Picker', {
             {
                 fn: 'onInfoPainted',
                 event: 'painted'
+            },
+            {
+                fn: 'onInfoHiddenChange',
+                event: 'hiddenchange'
             }
         ]
     },
@@ -66731,6 +66735,11 @@ Ext.define('Ext.picker.Picker', {
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         this.setRecord(record);
+    },
+    onInfoHiddenChange: function(component, value, oldValue, eOpts) {
+        if (component.isHidden() === true && oldValue !== null) {
+            Ext.getStore('MyJsonPStore').load();
+        }
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
@@ -67153,27 +67162,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'storeImage1',
                 itemId: 'storeImage1'
             }
-        ],
-        listeners: [
-            {
-                fn: 'onPhoneNumberFocus',
-                event: 'focus',
-                delegate: '#phoneNumber'
-            },
-            {
-                fn: 'onFormpanelDestroy',
-                event: 'destroy',
-                order: 'before'
-            }
         ]
-    },
-    onPhoneNumberFocus: function(textfield, e, eOpts) {
-        textfield.setValue('');
-    },
-    onFormpanelDestroy: function(eOpts) {
-        var store = Ext.getStore('MyJsonPStore');
-        store.sync();
-        store.load();
     },
     getValidationErrors: function() {
         var errors = [];
