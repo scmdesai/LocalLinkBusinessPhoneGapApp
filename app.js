@@ -66708,8 +66708,9 @@ Ext.define('Ext.picker.Picker', {
                 event: 'painted'
             },
             {
-                fn: 'onInfoUpdatedata',
-                event: 'updatedata'
+                fn: 'onFormpanelSubmit',
+                event: 'submit',
+                order: 'after'
             }
         ]
     },
@@ -66735,7 +66736,7 @@ Ext.define('Ext.picker.Picker', {
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         this.setRecord(record);
     },
-    onInfoUpdatedata: function(component, newData, eOpts) {
+    onFormpanelSubmit: function(formpanel, result, e, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
         var customerId;
