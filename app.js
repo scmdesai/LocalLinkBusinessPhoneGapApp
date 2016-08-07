@@ -68014,7 +68014,7 @@ Ext.define('Ext.picker.Picker', {
                                 record.commit();
                                 store.sync();
                                 store.load();
-                                Ext.Msg.alert('Success', action.msg);
+                                Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
                                 Ext.Viewport.getComponent('formpanel').setRecord(record);
                                 form.destroy();
                             },
