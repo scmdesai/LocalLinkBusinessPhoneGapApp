@@ -66942,9 +66942,10 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     store.sync();
                                     store.load();
-                                    Ext.getCmp('info').fireEvent('paint');
-                                    form.destroy();
+                                    Ext.Viewport.getComponent('info').setRecord(record);
+                                    Ext.Viewport.getActiveItem().destroy();
                                 },
+                                //form.destroy();
                                 failure: function(form, action) {
                                     store.load();
                                     Ext.Msg.alert('Failure', action.msg);
