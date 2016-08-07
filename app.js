@@ -67163,7 +67163,8 @@ Ext.define('Ext.picker.Picker', {
         var len = textfield.getValue().length;
         if (len === 3 || len === 7) {
             textfield.setValue(textfield.getValue() + '-');
-        } else if (len === 4 || len === 8) {
+        }
+        if (len === 4 || len === 8) {
             textfield.setValue(textfield.getValue().substr(0, len - 1));
         }
     },
