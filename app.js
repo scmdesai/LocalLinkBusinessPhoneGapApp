@@ -66942,10 +66942,10 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     store.sync();
                                     store.load();
+                                    form.destroy();
                                     var info = this.getContactinfo();
                                     Ext.Viewport.setActiveItem(info);
                                     info.setRecord(record);
-                                    form.destroy();
                                 },
                                 failure: function(form, action) {
                                     store.load();
