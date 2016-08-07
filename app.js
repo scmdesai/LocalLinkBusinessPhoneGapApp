@@ -66942,6 +66942,9 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     store.sync();
                                     store.load();
+                                    var info = this.getContactinfo();
+                                    Ext.Viewport.setActiveItem(info);
+                                    info.setRecord(record);
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
@@ -68350,25 +68353,7 @@ Ext.define('Ext.picker.Picker', {
                 type: 'hbox',
                 align: 'end',
                 pack: 'justify'
-            },
-            listeners: [
-                {
-                    fn: function(element, eOpts) {
-                        var storeUserDetails = Ext.getStore('UserDetails');
-                        storeUserDetails.load();
-                        var customerId;
-                        var businessName;
-                        storeUserDetails.each(function(record) {
-                            //console.log('StoreUserDetails : ' +record.get('customerId'));
-                            customerId = record.get('customerId');
-                            businessName = record.get('businessName');
-                        });
-                        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
-                        Ext.Viewport.getComponent('info').setRecord(record);
-                    },
-                    event: 'painted'
-                }
-            ]
+            }
         }
     }
 }, 0, [
