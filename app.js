@@ -66936,6 +66936,9 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
+                            var phoneNumber = form.getAt(1).getValue();
+                            var tel = phoneNumber.substr(0, 3) + '-' + phoneNumber.substr(3, 3) + '-' + phoneNumber.substr(6, 4);
+                            form.getAt(1).setValue(tel);
                             form.submit({
                                 url: 'http://services.appsonmobile.com/demoUpdateStoreInfo/' + customerId,
                                 success: function(form, action) {
@@ -67146,19 +67149,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'storeImage1',
                 itemId: 'storeImage1'
             }
-        ],
-        listeners: [
-            {
-                fn: 'onPhoneNumberChange',
-                event: 'change',
-                order: 'after',
-                delegate: '#phoneNumber'
-            }
         ]
-    },
-    onPhoneNumberChange: function(textfield, newValue, oldValue, eOpts) {
-        var phoneNumber = newValue.getValue();
-        textfield.setValue(phoneNumber.substr(0, 3) + '-' + phoneNumber.substr(3, 3) + '-' + phoneNumber.substr(6, 4));
     },
     getValidationErrors: function() {
         var errors = [];
