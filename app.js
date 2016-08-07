@@ -67158,14 +67158,14 @@ Ext.define('Ext.picker.Picker', {
         ],
         listeners: [
             {
-                fn: 'onPhoneNumberMouseDown',
+                fn: 'onPhoneNumberFocus',
                 single: true,
-                event: 'mousedown',
+                event: 'focus',
                 delegate: '#phoneNumber'
             }
         ]
     },
-    onPhoneNumberMouseDown: function(textfield, e, eOpts) {
+    onPhoneNumberFocus: function(textfield, e, eOpts) {
         textfield.setValue('');
     },
     getValidationErrors: function() {
