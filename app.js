@@ -66942,6 +66942,7 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     store.sync();
                                     store.load();
+                                    Ext.getCmp('info').fireEvent('paint');
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
@@ -67156,11 +67157,6 @@ Ext.define('Ext.picker.Picker', {
                 fn: 'onPhoneNumberKeyup',
                 event: 'keyup',
                 delegate: '#phoneNumber'
-            },
-            {
-                fn: 'onFormpanelDestroy',
-                event: 'destroy',
-                order: 'before'
             }
         ]
     },
@@ -67175,10 +67171,6 @@ Ext.define('Ext.picker.Picker', {
         if (len === 8) {
             textfield.setValue(textfield.getValue().substr(0, 7));
         }
-    },
-    onFormpanelDestroy: function(eOpts) {
-        var record = this.getRecord();
-        Ext.Viewport.getComponent('info').setRecord(record);
     },
     getValidationErrors: function() {
         var errors = [];
