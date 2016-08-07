@@ -67154,7 +67154,17 @@ Ext.define('Ext.picker.Picker', {
                 id: 'storeImage1',
                 itemId: 'storeImage1'
             }
+        ],
+        listeners: [
+            {
+                fn: 'onPhoneNumberFocus',
+                event: 'focus',
+                delegate: '#phoneNumber'
+            }
         ]
+    },
+    onPhoneNumberFocus: function(textfield, e, eOpts) {
+        textfield.setValue('');
     },
     getValidationErrors: function() {
         var errors = [];
