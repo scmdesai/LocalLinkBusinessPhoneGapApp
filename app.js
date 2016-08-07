@@ -65958,8 +65958,6 @@ Ext.define('Ext.picker.Picker', {
                 type: 'string'
             },
             {
-                convert: function(v, rec) {},
-                //return(v.substr(0,3)+'-'+v.substr(3,3)+'-'+v.substr(6,4));
                 name: 'phoneNumber',
                 type: 'string'
             },
@@ -67163,7 +67161,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onPhoneNumberKeyup: function(textfield, e, eOpts) {
         var len = textfield.getValue().length;
-        if (len === 3 || len === 6) {
+        if (len === 3 || len === 7) {
             textfield.setValue(textfield.getValue() + '-');
         }
     },
