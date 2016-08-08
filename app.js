@@ -66928,6 +66928,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var form = this.up('contactform');
+                            console.log('Enter Submitting form');
                             var store = Ext.getStore('MyJsonPStore');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
@@ -66937,6 +66938,7 @@ Ext.define('Ext.picker.Picker', {
                             record.commit();
                             store.sync();
                             store.load();
+                            console.log('Submitting form');
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
