@@ -66930,9 +66930,9 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('contactform');
                             console.log('Enter Submitting form');
                             var store = Ext.getStore('MyJsonPStore');
-                            /*var record = form.getRecord();
-							var customerId = form.getRecord().get('customerId');
-							record.beginEdit(true, record.getChanges());
+                            var record = form.getRecord();
+                            var customerId = form.getRecord().get('customerId');
+                            /*record.beginEdit(true, record.getChanges());
 							form.updateRecord(record);
 							record.endEdit(true, record.getChanges());
 							record.commit();
