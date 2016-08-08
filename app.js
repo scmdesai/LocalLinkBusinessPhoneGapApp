@@ -68007,11 +68007,16 @@ Ext.define('Ext.picker.Picker', {
                             waitMsg: 'Please Wait...',
                             success: function(form, action) {
                                 //var view = Ext.Viewport.getActiveItem();
-                                record.setDirty();
-                                record.beginEdit(true, record.getChanges());
-                                form.updateRecord(record);
-                                record.endEdit(true, record.getChanges());
-                                record.commit();
+                                /*record.setDirty();
+
+								record.beginEdit(true,record.getChanges());
+
+								form.updateRecord(record);
+
+								record.endEdit(true,record.getChanges());
+
+
+								record.commit();*/
                                 store.sync();
                                 store.load();
                                 Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
