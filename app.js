@@ -1,8 +1,3 @@
-var Contact = Contact || {};
-if (!Contact.controller) Contact.controller = {};
-if (!Contact.model) Contact.model = {};
-if (!Contact.store) Contact.store = {};
-if (!Contact.view) Contact.view = {};
 var Ext = Ext || {};
 if (!Ext.Picker) Ext.Picker = {};
 if (!Ext.app) Ext.app = {};
@@ -47,6 +42,11 @@ if (!Ext.util.paintmonitor) Ext.util.paintmonitor = {};
 if (!Ext.util.sizemonitor) Ext.util.sizemonitor = {};
 if (!Ext.util.translatable) Ext.util.translatable = {};
 if (!Ext.viewport) Ext.viewport = {};
+var LocalBuzzMerchant = LocalBuzzMerchant || {};
+if (!LocalBuzzMerchant.controller) LocalBuzzMerchant.controller = {};
+if (!LocalBuzzMerchant.model) LocalBuzzMerchant.model = {};
+if (!LocalBuzzMerchant.store) LocalBuzzMerchant.store = {};
+if (!LocalBuzzMerchant.view) LocalBuzzMerchant.view = {};
 /* 
  * Helper code for compiler optimization
  */
@@ -61765,6 +61765,85 @@ Ext.define('Ext.picker.Picker', {
 ], 0));
 
 /**
+ * The Email field creates an HTML5 email input and is usually created inside a form. Because it creates an HTML email
+ * input field, most browsers will show a specialized virtual keyboard for email address input. Aside from that, the
+ * email field is just a normal text field. Here's an example of how to use it in a form:
+ *
+ *     @example
+ *     Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'fieldset',
+ *                 title: 'Register',
+ *                 items: [
+ *                     {
+ *                         xtype: 'emailfield',
+ *                         label: 'Email',
+ *                         name: 'email'
+ *                     },
+ *                     {
+ *                         xtype: 'passwordfield',
+ *                         label: 'Password',
+ *                         name: 'password'
+ *                     }
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *
+ * Or on its own, outside of a form:
+ *
+ *     Ext.create('Ext.field.Email', {
+ *         label: 'Email address',
+ *         value: 'prefilled@email.com'
+ *     });
+ *
+ * Because email field inherits from {@link Ext.field.Text textfield} it gains all of the functionality that text fields
+ * provide, including getting and setting the value at runtime, validations and various events that are fired as the
+ * user interacts with the component. Check out the {@link Ext.field.Text} docs to see the additional functionality
+ * available.
+ *
+ * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
+ */
+(Ext.cmd.derive('Ext.field.Email', Ext.field.Text, {
+    alternateClassName: 'Ext.form.Email',
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        component: {
+            type: 'email'
+        },
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        autoCapitalize: false
+    }
+}, 0, [
+    "emailfield"
+], [
+    "component",
+    "field",
+    "textfield",
+    "emailfield"
+], {
+    "component": true,
+    "field": true,
+    "textfield": true,
+    "emailfield": true
+}, [
+    "widget.emailfield"
+], 0, [
+    Ext.field,
+    'Email',
+    Ext.form,
+    'Email'
+], 0));
+
+/**
  * @private
  */
 (Ext.cmd.derive('Ext.field.FileInput', Ext.field.Input, {
@@ -62009,6 +62088,80 @@ Ext.define('Ext.picker.Picker', {
 ], 0, [
     Ext.field,
     'File'
+], 0));
+
+/**
+ * The urlfield creates an HTML5 url input and is usually created inside a form. Because it creates an HTML url input
+ * field, most browsers will show a specialized virtual keyboard for web address input. Aside from that, the urlfield
+ * is just a normal text field. Here's an example of how to use it in a form:
+ *
+ *     @example
+ *     Ext.create('Ext.form.Panel', {
+ *         fullscreen: true,
+ *         items: [
+ *             {
+ *                 xtype: 'fieldset',
+ *                 title: 'Add Bookmark',
+ *                 items: [
+ *                     {
+ *                         xtype: 'urlfield',
+ *                         label: 'Url',
+ *                         name: 'url'
+ *                     }
+ *                 ]
+ *             }
+ *         ]
+ *     });
+ *
+ * Or on its own, outside of a form:
+ *
+ *     Ext.create('Ext.field.Url', {
+ *         label: 'Web address',
+ *         value: 'http://sencha.com'
+ *     });
+ *
+ * Because url field inherits from {@link Ext.field.Text textfield} it gains all of the functionality that text fields
+ * provide, including getting and setting the value at runtime, validations and various events that are fired as the
+ * user interacts with the component. Check out the {@link Ext.field.Text} docs to see the additional functionality
+ * available.
+ *
+ * For more information regarding forms and fields, please review [Using Forms in Sencha Touch Guide](../../../components/forms.html)
+ */
+(Ext.cmd.derive('Ext.field.Url', Ext.field.Text, {
+    alternateClassName: 'Ext.form.Url',
+    config: {
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        autoCapitalize: false,
+        /**
+         * @cfg
+         * @inheritdoc
+         */
+        component: {
+            type: 'url'
+        }
+    }
+}, 0, [
+    "urlfield"
+], [
+    "component",
+    "field",
+    "textfield",
+    "urlfield"
+], {
+    "component": true,
+    "field": true,
+    "textfield": true,
+    "urlfield": true
+}, [
+    "widget.urlfield"
+], 0, [
+    Ext.field,
+    'Url',
+    Ext.form,
+    'Url'
 ], 0));
 
 /**
@@ -65945,7 +66098,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.model.Contact', Ext.data.Model, {
+(Ext.cmd.derive('LocalBuzzMerchant.model.Contact', Ext.data.Model, {
     config: {
         useCache: false,
         fields: [
@@ -65997,11 +66150,23 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'websiteDisplayName'
+            },
+            {
+                name: 'signupStatus'
+            },
+            {
+                name: 'startDate'
+            },
+            {
+                name: 'planType'
+            },
+            {
+                name: 'endDate'
             }
         ]
     }
 }, 0, 0, 0, 0, 0, 0, [
-    Contact.model,
+    LocalBuzzMerchant.model,
     'Contact'
 ], 0));
 
@@ -66019,7 +66184,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.model.Deal', Ext.data.Model, {
+(Ext.cmd.derive('LocalBuzzMerchant.model.Deal', Ext.data.Model, {
     config: {
         useCache: false,
         fields: [
@@ -66078,7 +66243,7 @@ Ext.define('Ext.picker.Picker', {
 }, 0, 0, 0, 0, [
     "model.deal"
 ], 0, [
-    Contact.model,
+    LocalBuzzMerchant.model,
     'Deal'
 ], 0));
 
@@ -66096,7 +66261,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.model.UserDetails', Ext.data.Model, {
+(Ext.cmd.derive('LocalBuzzMerchant.model.UserDetails', Ext.data.Model, {
     config: {
         fields: [
             {
@@ -66126,65 +66291,8 @@ Ext.define('Ext.picker.Picker', {
         ]
     }
 }, 0, 0, 0, 0, 0, 0, [
-    Contact.model,
+    LocalBuzzMerchant.model,
     'UserDetails'
-], 0));
-
-/*
- * File: app/store/MyJsonPStore.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.store.MyJsonPStore', Ext.data.Store, {
-    config: {
-        autoLoad: true,
-        groupField: 'category',
-        model: 'Contact.model.Contact',
-        storeId: 'MyJsonPStore',
-        grouper: {
-            groupFn: function(item) {
-                return record.get('category');
-            },
-            sortProperty: ''
-        },
-        sorters: {
-            sorterFn: function(first, second) {}
-        },
-        proxy: {
-            type: 'jsonp',
-            timeout: 300000,
-            url: 'http://services.appsonmobile.com/stores',
-            reader: {
-                type: 'json'
-            },
-            writer: {
-                type: 'json',
-                encode: true
-            }
-        },
-        listeners: [
-            {
-                fn: 'onJsonpstoreUpdaterecord',
-                event: 'updaterecord'
-            }
-        ]
-    },
-    onJsonpstoreUpdaterecord: function(store, record, newIndex, oldIndex, modifiedFieldNames, modifiedValues, eOpts) {
-        console.log('Updating record');
-        return record;
-    }
-}, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
-    'MyJsonPStore'
 ], 0));
 
 /*
@@ -66201,10 +66309,10 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.store.MyDealsStore', Ext.data.Store, {
+(Ext.cmd.derive('LocalBuzzMerchant.store.MyDealsStore', Ext.data.Store, {
     config: {
         autoLoad: true,
-        model: 'Contact.model.Deal',
+        model: 'LocalBuzzMerchant.model.Deal',
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
@@ -66229,14 +66337,12 @@ Ext.define('Ext.picker.Picker', {
             }
         ]
     },
-    onJsonstoreAddrecords: function(store, records, eOpts) {
-        store.load();
-    },
+    onJsonstoreAddrecords: function(store, records, eOpts) {},
     onJsonstoreRemoverecords: function(store, records, indices, eOpts) {
         store.load();
     }
 }, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
+    LocalBuzzMerchant.store,
     'MyDealsStore'
 ], 0));
 
@@ -66254,11 +66360,11 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.store.UserDetails', Ext.data.Store, {
+(Ext.cmd.derive('LocalBuzzMerchant.store.UserDetails', Ext.data.Store, {
     config: {
         autoLoad: true,
         autoSync: true,
-        model: 'Contact.model.UserDetails',
+        model: 'LocalBuzzMerchant.model.UserDetails',
         remoteFilter: true,
         storeId: 'UserDetails',
         proxy: {
@@ -66266,7 +66372,7 @@ Ext.define('Ext.picker.Picker', {
         }
     }
 }, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
+    LocalBuzzMerchant.store,
     'UserDetails'
 ], 0));
 
@@ -66284,18 +66390,18 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.store.LocalStore', Ext.data.Store, {
+(Ext.cmd.derive('LocalBuzzMerchant.store.LocalStore', Ext.data.Store, {
     config: {
-        model: 'Contact.model.Deal',
+        model: 'LocalBuzzMerchant.model.Deal',
         storeId: 'LocalStore'
     }
 }, 0, 0, 0, 0, 0, 0, [
-    Contact.store,
+    LocalBuzzMerchant.store,
     'LocalStore'
 ], 0));
 
 /*
- * File: app/view/Login.js
+ * File: app/store/MyJsonPStore.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -66308,113 +66414,158 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.Login', Ext.Container, {
+(Ext.cmd.derive('LocalBuzzMerchant.store.MyJsonPStore', Ext.data.Store, {
     config: {
-        id: 'Login',
-        itemId: 'Login',
-        maxHeight: '',
-        style: '',
-        styleHtmlContent: true,
-        layout: {
-            type: 'card',
-            animation: 'pop'
+        autoLoad: true,
+        model: 'LocalBuzzMerchant.model.Contact',
+        storeId: 'MyJsonPStore',
+        proxy: {
+            type: 'jsonp',
+            url: 'http://services.appsonmobile.com/stores',
+            reader: {
+                type: 'json'
+            }
         },
+        sorters: {
+            sorterFn: function(first, second) {}
+        },
+        grouper: {
+            groupFn: function(item) {
+                return record.get('category');
+            },
+            sortProperty: ''
+        }
+    }
+}, 0, 0, 0, 0, [
+    "store.MyJsonPStore"
+], 0, [
+    LocalBuzzMerchant.store,
+    'MyJsonPStore'
+], 0));
+
+/*
+ * File: app/view/WelcomeScreen.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('LocalBuzzMerchant.view.WelcomeScreen', Ext.Panel, {
+    config: {
+        hidden: false,
+        hideAnimation: 'flip',
+        id: 'WelcomeScreen',
+        itemId: 'WelcomeScreen',
+        items: [
+            {
+                xtype: 'component',
+                docked: 'top',
+                hidden: false,
+                html: '<br><div style="text-align:center;"><h3 style="color:#00529D"><b>Welcome to <br><br>Local Buzz For Merchants</h3></div>',
+                id: 'text1',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw'
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    Ext.Viewport.getActiveItem().destroy();
+                    var view = Ext.Viewport.add({
+                            xtype: 'Login'
+                        });
+                    Ext.Viewport.setActiveItem(view);
+                },
+                height: '9vh',
+                hidden: false,
+                left: '20%',
+                margin: '50 0 0 0',
+                style: 'font-size:5vw;font-family:Arial',
+                ui: 'action',
+                width: '60%',
+                text: 'Login'
+            },
+            {
+                xtype: 'component',
+                hidden: false,
+                html: '<h1 style="color:#00529D;font-size:8vw"><b> OR </b></h1>',
+                id: 'text2',
+                left: '45%',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '30%'
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    var view = Ext.Viewport.add({
+                            xtype: 'CreateNewStore'
+                        });
+                    Ext.Viewport.setActiveItem(view);
+                },
+                height: '9vh',
+                hidden: false,
+                id: 'SignUp',
+                left: '20%',
+                style: 'font-size:5vw;font-family:Arial',
+                top: '50%',
+                ui: 'action',
+                width: '60%',
+                text: 'Sign Up'
+            },
+            {
+                xtype: 'component',
+                hidden: false,
+                html: '<h6 style="color:#00529D;font-size:4vw">Free 90 days, No obligation trial!</h6>',
+                id: 'text3',
+                left: '20%',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '65%'
+            }
+        ],
         listeners: [
             {
-                fn: 'onContainerPainted',
-                event: 'painted'
+                fn: 'onWelcomeScreenInitialize',
+                event: 'initialize'
             }
         ]
     },
-    onContainerPainted: function(element, eOpts) {
-        // Settings.
+    onWelcomeScreenInitialize: function(component, eOpts) {
         FacebookInAppBrowser.settings.appId = '900651756709444';
         FacebookInAppBrowser.settings.redirectUrl = 'http://www.appsonmobile.com';
         FacebookInAppBrowser.settings.permissions = 'email';
         // Optional
         FacebookInAppBrowser.settings.timeoutDuration = 7500;
-        // Login(accessToken will be stored trough localStorage in 'accessToken');
-        FacebookInAppBrowser.login({
-            send: function() {
-                console.log('login opened');
-            },
-            success: function(access_token) {
-                console.log('done, access token: ' + access_token);
-            },
-            denied: function() {
-                console.log('user denied');
-            },
-            timeout: function() {
-                console.log('a timeout has occurred, probably a bad internet connection');
-            },
-            complete: function(access_token) {
-                console.log('window closed');
-                if (access_token) {
-                    console.log(access_token);
-                } else {
-                    console.log('no access token');
-                }
-            },
-            userInfo: function(userInfo) {
-                if (userInfo) {
-                    var userInf = JSON.stringify(userInfo);
-                    console.log(userInf);
-                    var info = userInf.split("\",\"");
-                    var tmp = info[0].split("\":\"");
-                    var email = tmp[1];
-                    //console.log(email);
-                    tmp = info[1].split("\":\"");
-                    var loginName = tmp[1];
-                    tmp = info[2].split("\":\"");
-                    var gender = tmp[1];
-                    tmp = info[3].split("\":\"");
-                    var userId = tmp[1];
-                    var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
-                    //console.log(store.getData());
-                    //store.loadRecord();
-                    //var view = Ext.create('Contact.view.Info');
-                    //view.setRecord(record.getRecord());
-                    //console.log(view.getData());
-                    //Ext.Viewport.setActiveItem(view);
-                    if (!record) {
-                        Ext.Msg.alert('User not found', null, null, null);
-                        navigator.app.exitApp();
-                    }
-                    var storeUserDetails = Ext.getStore('UserDetails');
-                    storeUserDetails.removeAll();
-                    storeUserDetails.add({
-                        'customerId': record.get('customerId'),
-                        'email': email,
-                        'businessName': record.get('businessName'),
-                        'DealPictureURL': record.get('pictureURL')
+        FacebookInAppBrowser.getInfo(function(response) {
+            if (response) {
+                var view = Ext.Viewport.add({
+                        xtype: 'Login'
                     });
-                    var view = Ext.Viewport.add({
-                            xtype: 'panel'
-                        });
-                    //view.getComponent('home').setRecord(record);
-                    Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(view);
-                } else {
-                    console.log('no user info');
-                }
+                Ext.Viewport.setActiveItem(view);
             }
         });
     }
 }, 0, [
-    "Login"
+    "WelcomeScreen"
 ], [
     "component",
     "container",
-    "Login"
+    "panel",
+    "WelcomeScreen"
 ], {
     "component": true,
     "container": true,
-    "Login": true
+    "panel": true,
+    "WelcomeScreen": true
 }, [
-    "widget.Login"
+    "widget.WelcomeScreen"
 ], 0, [
-    Contact.view,
-    'Login'
+    LocalBuzzMerchant.view,
+    'WelcomeScreen'
 ], 0));
 
 /*
@@ -66431,7 +66582,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.contactinfo', Ext.form.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.contactinfo', Ext.form.Panel, {
     config: {
         border: 5,
         id: 'info',
@@ -66732,6 +66883,7 @@ Ext.define('Ext.picker.Picker', {
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
+        console.log('Set Record of info page');
         if (record) {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
@@ -66775,7 +66927,6 @@ Ext.define('Ext.picker.Picker', {
                                     FacebookInAppBrowser.logout(function() {
                                         window.localStorage.setItem('facebookAccessToken', null);
                                         location.reload();
-                                        navigator.app.exitApp();
                                     });
                                 }
                             });
@@ -66783,6 +66934,7 @@ Ext.define('Ext.picker.Picker', {
                     }
                 ]
             });
+        //navigator.app.exitApp();
         Ext.Viewport.setMenu(menu, {
             side: 'right',
             reveal: true
@@ -66805,7 +66957,7 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.contactinfo"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'contactinfo'
 ], 0));
 
@@ -66823,7 +66975,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.ListOfDeals', Ext.dataview.List, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.ListOfDeals', Ext.dataview.List, {
     config: {
         cls: 'customlist',
         height: '100%',
@@ -66869,7 +67021,7 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.listofdeals"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'ListOfDeals'
 ], 0));
 
@@ -66887,7 +67039,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.contactform', Ext.form.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.contactform', Ext.form.Panel, {
     config: {
         html: '',
         id: 'formpanel',
@@ -67214,12 +67366,12 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.contactform"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'contactform'
 ], 0));
 
 /*
- * File: app/controller/Contacts.js
+ * File: app/controller/LocalBuzzMerchant.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -67232,7 +67384,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.controller.Contacts', Ext.app.Controller, {
+(Ext.cmd.derive('LocalBuzzMerchant.controller.LocalBuzzMerchant', Ext.app.Controller, {
     config: {
         stores: [
             'MyJsonPStore',
@@ -67356,16 +67508,30 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     //console.log(action.msg);
-                                    var dealsStore = Ext.getStore('MyDealsStore');
+                                    var store = Ext.getStore('MyDealsStore');
+                                    store.load();
+                                    var count = store.getCount() - 1;
+                                    if (count >= 5) {
+                                        Ext.getCmp('UploadDeal').disable();
+                                    } else {
+                                        Ext.getCmp('UploadDeal').enable();
+                                    }
                                     dealsStore.load();
                                 },
                                 failure: function(form, action) {
                                     Ext.Msg.alert('Failure', action.msg);
+                                    //console.log(action.msg);
+                                    var store = Ext.getStore('MyDealsStore');
+                                    store.load();
+                                    if (store.getCount() >= 5) {
+                                        Ext.getCmp('UploadDeal').disable();
+                                    } else {
+                                        Ext.getCmp('UploadDeal').enable();
+                                    }
                                 }
                             });
                     }
-                }, //console.log(action.msg);
-                this);
+                }, this);
             } else {
                 var store = Ext.getStore('MyDealsStore');
                 var record = store.getAt(index);
@@ -67489,7 +67655,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onUploadDealTap: function(button, e, eOpts) {
         var view = Ext.Viewport.add({
-                xtype: 'CreateBuzzOption'
+                xtype: 'CreateNewBuzzOption'
             });
         Ext.Viewport.setActiveItem(view);
     },
@@ -67562,8 +67728,8 @@ Ext.define('Ext.picker.Picker', {
         });
     }
 }, 0, 0, 0, 0, 0, 0, [
-    Contact.controller,
-    'Contacts'
+    LocalBuzzMerchant.controller,
+    'LocalBuzzMerchant'
 ], 0));
 
 /*
@@ -67580,7 +67746,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.DealPicture', Ext.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.DealPicture', Ext.Panel, {
     config: {
         fullscreen: true,
         id: 'dealPicture',
@@ -67846,7 +68012,7 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.dealPicture"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'DealPicture'
 ], 0));
 
@@ -67864,7 +68030,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.DealsPanel', Ext.form.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.DealsPanel', Ext.form.Panel, {
     config: {
         baseCls: 'x-list',
         id: 'dealsPanel',
@@ -67883,12 +68049,17 @@ Ext.define('Ext.picker.Picker', {
                 width: '100%'
             },
             {
+                xtype: 'component',
+                docked: 'bottom',
+                html: '<p style="font-size:2.5vw;text-align:center" > As per our Fair Use Policy,there cannot be more than 5 Active Buzz per account </p>'
+            },
+            {
                 xtype: 'button',
                 docked: 'bottom',
-                height: '7%',
+                height: '7vh',
                 id: 'UploadDeal',
                 itemId: 'UploadDeal',
-                margin: '5 5 5 5',
+                margin: '0 5 0 5',
                 style: 'font-size:5vw',
                 ui: 'confirm',
                 width: '',
@@ -67923,6 +68094,26 @@ Ext.define('Ext.picker.Picker', {
     onDealsPanelPainted: function(element, eOpts) {
         var store = Ext.getStore('MyDealsStore');
         store.load();
+    },
+    initialize: function() {
+        Ext.form.Panel.prototype.initialize.call(this);
+        var storeUserDetails = Ext.getStore('UserDetails');
+        storeUserDetails.load();
+        var customerId;
+        var businessName;
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var store = Ext.getStore('MyDealsStore');
+        store.clearFilter();
+        store.filter('customerId', customerId);
+        if (store.getCount() >= 5) {
+            Ext.getCmp('UploadDeal').disable();
+        } else {
+            Ext.getCmp('UploadDeal').enable();
+        }
     }
 }, 0, [
     "DealsPanel"
@@ -67941,8 +68132,171 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.DealsPanel"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'DealsPanel'
+], 0));
+
+/*
+ * File: app/view/Login.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('LocalBuzzMerchant.view.Login', Ext.Container, {
+    config: {
+        hidden: false,
+        id: 'Login',
+        itemId: 'Login',
+        maxHeight: '',
+        style: '',
+        styleHtmlContent: true,
+        layout: {
+            type: 'card',
+            animation: 'pop'
+        },
+        listeners: [
+            {
+                fn: 'onContainerPainted',
+                event: 'painted'
+            }
+        ]
+    },
+    onContainerPainted: function(element, eOpts) {
+        // Settings.
+        FacebookInAppBrowser.settings.appId = '900651756709444';
+        FacebookInAppBrowser.settings.redirectUrl = 'http://www.appsonmobile.com';
+        FacebookInAppBrowser.settings.permissions = 'email';
+        // Optional
+        FacebookInAppBrowser.settings.timeoutDuration = 7500;
+        // Login(accessToken will be stored trough localStorage in 'accessToken');
+        FacebookInAppBrowser.login({
+            send: function() {
+                console.log('login opened');
+            },
+            success: function(access_token) {
+                console.log('done, access token: ' + access_token);
+                Ext.Viewport.getComponent('WelcomeScreen').destroy();
+            },
+            denied: function() {
+                console.log('user denied');
+            },
+            timeout: function() {
+                console.log('a timeout has occurred, probably a bad internet connection');
+            },
+            complete: function(access_token) {
+                console.log('window closed');
+                if (access_token) {
+                    console.log(access_token);
+                } else {
+                    console.log('no access token');
+                }
+            },
+            userInfo: function(userInfo) {
+                if (userInfo) {
+                    var userInf = JSON.stringify(userInfo);
+                    console.log(userInf);
+                    var info = userInf.split("\",\"");
+                    var tmp = info[0].split("\":\"");
+                    var email = tmp[1];
+                    tmp = info[1].split("\":\"");
+                    var loginName = tmp[1];
+                    tmp = info[2].split("\":\"");
+                    var gender = tmp[1];
+                    tmp = info[3].split("\":\"");
+                    var userId = tmp[1];
+                    var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
+                    if (!record) {
+                        Ext.Msg.alert('Business not registered', "Register business or contact us at info@appsonmobile.com", function() {
+                            FacebookInAppBrowser.logout(function() {
+                                window.localStorage.setItem('facebookAccessToken', null);
+                                location.reload();
+                            });
+                        }, null);
+                    } else {
+                        var endDate = new Date(record.get('endDate'));
+                        var today = new Date();
+                        var storeUserDetails = Ext.getStore('UserDetails');
+                        storeUserDetails.removeAll();
+                        if (record.get('signupStatus') === "Approved") {
+                            if ((record.get('planType') === "Free" && endDate >= today) || record.get('planType') === "Paid") {
+                                storeUserDetails.add({
+                                    'customerId': record.get('customerId'),
+                                    'email': email,
+                                    'businessName': record.get('businessName'),
+                                    'DealPictureURL': record.get('pictureURL')
+                                });
+                                var view = Ext.Viewport.add({
+                                        xtype: 'panel'
+                                    });
+                                Ext.Viewport.getActiveItem().destroy();
+                                Ext.Viewport.setActiveItem(view);
+                            } else {
+                                Ext.Msg.alert('Your trial period has ended', "Please contact us at info@appsonmobile.com for continued access to your account ", function() {
+                                    FacebookInAppBrowser.logout(function() {
+                                        window.localStorage.setItem('facebookAccessToken', null);
+                                        location.reload();
+                                    });
+                                }, null);
+                            }
+                        } else if (record.get('signupStatus') === 'Pending') {
+                            Ext.Msg.alert('Pending approval', "Please check back later", function() {
+                                FacebookInAppBrowser.logout(function() {
+                                    window.localStorage.setItem('facebookAccessToken', null);
+                                    location.reload();
+                                });
+                            }, null);
+                        } else if (record.get('signupStatus') === 'Denied') {
+                            Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
+                                FacebookInAppBrowser.logout(function() {
+                                    window.localStorage.setItem('facebookAccessToken', null);
+                                    location.reload();
+                                });
+                            }, null);
+                        } else if (record.get('signupStatus') === 'Cancelled') {
+                            Ext.Msg.alert('Our records show that you have cancelled your subscription', "Please contact us at info@appsonmobile.com if you would like to activate your account", function() {
+                                FacebookInAppBrowser.logout(function() {
+                                    window.localStorage.setItem('facebookAccessToken', null);
+                                    location.reload();
+                                });
+                            }, null);
+                        } else {
+                            Ext.Msg.alert('Cannot find your account', "Please contact us at info@appsonmobile.com", function() {
+                                FacebookInAppBrowser.logout(function() {
+                                    window.localStorage.setItem('facebookAccessToken', null);
+                                    location.reload();
+                                });
+                            }, null);
+                        }
+                    }
+                } else {
+                    console.log('no user info');
+                }
+            }
+        });
+    }
+}, 0, [
+    "Login"
+], [
+    "component",
+    "container",
+    "Login"
+], {
+    "component": true,
+    "container": true,
+    "Login": true
+}, [
+    "widget.Login"
+], 0, [
+    LocalBuzzMerchant.view,
+    'Login'
 ], 0));
 
 /*
@@ -67959,7 +68313,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.ChangeContactPicForm', Ext.form.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.ChangeContactPicForm', Ext.form.Panel, {
     config: {
         centered: true,
         height: '40%',
@@ -68142,7 +68496,7 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.ChangeContactPicForm"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'ChangeContactPicForm'
 ], 0));
 
@@ -68160,10 +68514,14 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.panel', Ext.tab.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.panel', Ext.tab.Panel, {
     config: {
         id: 'panel',
         itemId: 'panel',
+        layout: {
+            type: 'card',
+            animation: false
+        },
         items: [
             {
                 xtype: 'container',
@@ -68376,7 +68734,7 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.panel"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'panel'
 ], 0));
 
@@ -68394,7 +68752,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.UpdateDealForm', Ext.form.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.UpdateDealForm', Ext.form.Panel, {
     config: {
         html: '',
         id: 'formpanel1',
@@ -68436,7 +68794,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealName',
                 margin: '5 5 5 5 ',
                 padding: '',
-                style: 'border:1px solid #C0C0C0!important',
+                style: 'border:1px solid #C0C0C0!important:color: #d3d3d3!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
@@ -68639,26 +68997,32 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var form = this.up('UpdateDealForm');
                             var itemName = form.getAt(8).getValue();
+                            var startDate = form.getAt(4).getValue();
                             var endDate = form.getAt(5).getValue();
                             var dealName = form.getAt(0).getValue();
                             var date = new Date();
+                            console.log(startDate);
                             if (dealName) {
                                 if (endDate >= date) {
-                                    if (document.getElementById('chkbx').checked) {
-                                        form.submit({
-                                            url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
-                                            success: function(form, action) {
-                                                Ext.Msg.alert('Success', action.msg);
-                                                form.destroy();
-                                            },
-                                            failure: function(form, action) {
-                                                store.load();
-                                                Ext.Msg.alert('Failure', action.msg);
-                                                form.destroy();
-                                            }
-                                        });
+                                    if (endDate >= startDate) {
+                                        if (document.getElementById('chkbx').checked) {
+                                            form.submit({
+                                                url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                                success: function(form, action) {
+                                                    Ext.Msg.alert('Success', action.msg);
+                                                    form.destroy();
+                                                },
+                                                failure: function(form, action) {
+                                                    store.load();
+                                                    Ext.Msg.alert('Failure', action.msg);
+                                                    form.destroy();
+                                                }
+                                            });
+                                        } else {
+                                            Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                        }
                                     } else {
-                                        Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                        Ext.Msg.alert('Error!', 'Buzz start date cannot be after end date', null, null);
                                     }
                                 } else {
                                     Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
@@ -68701,6 +69065,13 @@ Ext.define('Ext.picker.Picker', {
             this.down('#DealStatus').setValue(record.data.dealStatus);
             this.down('#DealDescription').setValue(record.data.dealDescription);
             this.down('#DealImageURL').setValue(record.data.dealImageURL);
+            //this.child('contactpic').setData(record.data);
+            //this.down('#DealStartDate').setValue(record.data.dealStartDate);
+            //this.down('#DealEndDate').setValue(record.data.dealEndDate);
+            var startDate = Ext.Date.parse(record.data.dealStartDate, 'n/j/Y');
+            var endDate = Ext.Date.parse(record.data.dealEndDate, 'n/j/Y');
+            this.down('#DealStartDate').setValue(startDate);
+            this.down('#DealEndDate').setValue(endDate);
         }
     }
 }, 0, [
@@ -68720,15 +69091,12 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.UpdateDealForm"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'UpdateDealForm'
 ], 0));
-//this.child('contactpic').setData(record.data);
-//this.down('#DealStartDate').setValue(record.data.dealStartDate);
-//this.down('#DealEndDate').setValue(record.data.dealEndDate);
 
 /*
- * File: app/view/UploadDealNoImageForm.js
+ * File: app/view/CreateNewBuzzWithImage.js
  *
  * This file was generated by Sencha Architect version 3.2.0.
  * http://www.sencha.com/products/architect/
@@ -68741,336 +69109,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.UploadDealNoImageForm', Ext.form.Panel, {
-    config: {
-        html: '',
-        id: 'formpanel2',
-        itemId: 'formpanel',
-        style: 'background:white',
-        ui: 'light',
-        autoDestroy: false,
-        modal: true,
-        scrollable: false,
-        multipartDetection: false,
-        layout: {
-            type: 'vbox',
-            align: 'stretchmax'
-        },
-        items: [
-            {
-                xtype: 'textfield',
-                cls: 'customfield',
-                height: '15%',
-                hidden: false,
-                id: 'businessName2',
-                itemId: 'businessName',
-                margin: '5 5 5 5 ',
-                styleHtmlContent: true,
-                label: 'Name',
-                labelWidth: '35%',
-                labelWrap: true,
-                name: 'DealName'
-            },
-            {
-                xtype: 'textfield',
-                cls: 'customfield',
-                height: '15%',
-                hidden: true,
-                id: 'businessName3',
-                itemId: 'businessName1',
-                margin: '30 15 2 15',
-                styleHtmlContent: true,
-                name: 'businessName'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'customerId2',
-                itemId: 'customerId',
-                name: 'customerId'
-            },
-            {
-                xtype: 'selectfield',
-                cls: 'customfield',
-                id: 'DealStatus1',
-                itemId: 'DealStatus',
-                margin: '5 5 5 5 ',
-                maxHeight: '',
-                style: '',
-                styleHtmlContent: true,
-                label: 'Status',
-                labelWidth: '35%',
-                labelWrap: true,
-                name: 'DealStatus',
-                value: 'Active',
-                placeHolder: 'Active',
-                autoSelect: false,
-                options: [
-                    {
-                        text: 'Active',
-                        value: 'Active'
-                    },
-                    {
-                        text: 'Expired',
-                        value: 'Expired'
-                    }
-                ]
-            },
-            {
-                xtype: 'datepickerfield',
-                cls: [
-                    'customfield',
-                    'x-field-select'
-                ],
-                id: 'DealStartDate2',
-                itemId: 'DealStartDate',
-                margin: '5 5 5 5 ',
-                styleHtmlContent: true,
-                width: '97%',
-                label: 'Start Date',
-                labelWidth: '35%',
-                labelWrap: true,
-                name: 'DealStartDate',
-                value: {
-                    day: new Date().getDate(),
-                    month: (new Date().getMonth() + 1),
-                    year: new Date().getFullYear()
-                },
-                placeHolder: 'mm/dd/yyyy',
-                autoSelect: false,
-                options: {
-                    minDate: new Date()
-                },
-                usePicker: true,
-                component: {
-                    useMask: true,
-                    minValue: new Date()
-                },
-                dateFormat: 'm/d/Y',
-                picker: {
-                    itemId: 'mydatepicker3',
-                    style: '',
-                    scrollable: false,
-                    stretchX: false,
-                    stretchY: false,
-                    useTitles: true,
-                    yearFrom: 2016
-                }
-            },
-            {
-                xtype: 'datepickerfield',
-                cls: [
-                    'customfield',
-                    'x-field-select'
-                ],
-                id: 'DealEndDate2',
-                itemId: 'DealEndDate',
-                margin: '5 5 5 5 ',
-                styleHtmlContent: true,
-                width: '97%',
-                label: 'End Date',
-                labelWidth: '35%',
-                name: 'DealEndDate',
-                value: {
-                    day: new Date().getDate() + 1,
-                    month: (new Date().getMonth() + 1),
-                    year: new Date().getFullYear()
-                },
-                placeHolder: 'mm/dd/yyyy',
-                usePicker: true,
-                picker: {
-                    useTitles: true,
-                    yearFrom: 2016
-                }
-            },
-            {
-                xtype: 'textareafield',
-                cls: 'customfield',
-                height: '100%',
-                id: 'DealDescription1',
-                itemId: 'DealDescription',
-                margin: '5 5 5 5 ',
-                style: 'border:1px solid #C0C0C0!important',
-                styleHtmlContent: true,
-                width: '',
-                clearIcon: false,
-                label: 'Description',
-                labelWidth: '35%',
-                name: 'DealDescription'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'DealPictureURL1',
-                itemId: 'DealPictureURL',
-                name: 'DealPictureURL'
-            },
-            {
-                xtype: 'textfield',
-                hidden: true,
-                id: 'DealImageURL2',
-                itemId: 'DealImageURL2',
-                name: 'DealImageURL'
-            },
-            {
-                xtype: 'container',
-                left: '',
-                layout: 'hbox',
-                items: [
-                    {
-                        xtype: 'container',
-                        docked: 'left',
-                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
-                        left: '40%',
-                        margin: '5 5 5 15',
-                        top: '50%'
-                    },
-                    {
-                        xtype: 'container',
-                        docked: 'right',
-                        height: '40px',
-                        html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
-                        itemId: 'mycontainer5',
-                        margin: '5 5 5 10',
-                        padding: '5 30 5 0',
-                        styleHtmlContent: true,
-                        layout: 'hbox',
-                        listeners: [
-                            {
-                                fn: function(element, eOpts) {
-                                    element.addListener('tap', function() {
-                                        //Ext.Viewport.add({xtype:'Terms'}).show();
-                                        var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
-                                        window.open(url, '_system', 'location=yes');
-                                    });
-                                },
-                                event: 'painted'
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                xtype: 'container',
-                height: 140,
-                margin: '10 10 10 10 10',
-                styleHtmlContent: true,
-                layout: 'fit',
-                scrollable: false,
-                items: [
-                    {
-                        xtype: 'spacer',
-                        maxWidth: '',
-                        minWidth: ''
-                    },
-                    {
-                        xtype: 'button',
-                        handler: function(button, e) {
-                            Ext.Viewport.getActiveItem().destroy();
-                        },
-                        height: '7vh',
-                        style: 'font-size:5vw!important',
-                        ui: 'decline',
-                        width: '40%',
-                        text: 'Cancel'
-                    },
-                    {
-                        xtype: 'button',
-                        handler: function(button, e) {
-                            var form = this.up('UploadDealNoImageForm');
-                            var date = new Date();
-                            var dealName = form.getAt(0).getValue();
-                            var startDate = form.getAt(4).getValue();
-                            var endDate = form.getAt(5).getValue();
-                            if (dealName) {
-                                if (endDate >= date) {
-                                    if (document.getElementById('chkbx').checked) {
-                                        form.submit({
-                                            url: 'http://services.appsonmobile.com/createNewDeal',
-                                            success: function(form, action) {
-                                                Ext.getStore('MyDealsStore').load();
-                                                Ext.Msg.alert('Success!', action.msg);
-                                                form.destroy();
-                                            },
-                                            failure: function(form, action) {
-                                                store.load();
-                                                Ext.Msg.alert('Failure', action.msg);
-                                                form.destroy();
-                                            }
-                                        });
-                                    } else {
-                                        Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
-                                    }
-                                } else {
-                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
-                                }
-                            } else {
-                                Ext.Msg.alert('Error!', 'Buzz name field is empty', null, null);
-                            }
-                        },
-                        docked: 'right',
-                        height: '7vh',
-                        itemId: 'submit',
-                        style: 'font-size:5vw!important',
-                        ui: 'confirm',
-                        width: '30%',
-                        text: 'Submit'
-                    }
-                ]
-            }
-        ]
-    },
-    getValidationErrors: function() {
-        var errors = [];
-        var reqFields = this.query('field[required=true]');
-        var i = 0,
-            ln = reqFields.length,
-            field;
-        for (; i < ln; i++) {
-            field = reqFields[i];
-            if (!field.getValue()) {
-                errors.push(field.getLabel() + ' must be completed.');
-            }
-        }
-        console.dir(errors);
-        return errors;
-    }
-}, 0, [
-    "UploadDealNoImageForm"
-], [
-    "component",
-    "container",
-    "panel",
-    "formpanel",
-    "UploadDealNoImageForm"
-], {
-    "component": true,
-    "container": true,
-    "panel": true,
-    "formpanel": true,
-    "UploadDealNoImageForm": true
-}, [
-    "widget.UploadDealNoImageForm"
-], 0, [
-    Contact.view,
-    'UploadDealNoImageForm'
-], 0));
-
-/*
- * File: app/view/UploadDealWithImageForm.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.UploadDealWithImageForm', Ext.form.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.CreateNewBuzzWithImage', Ext.form.Panel, {
     config: {
         html: '',
         id: 'formpanel3',
@@ -69090,10 +69129,12 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'customfield',
+                height: '10vh',
                 hidden: false,
                 id: 'businessName4',
                 itemId: 'businessName',
                 margin: '5 5 5 5 ',
+                padding: '0 5 5 5',
                 styleHtmlContent: true,
                 label: 'Name',
                 labelWidth: '35%',
@@ -69121,10 +69162,12 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'selectfield',
                 cls: 'customfield',
+                height: '10vh',
                 id: 'DealStatus2',
                 itemId: 'DealStatus',
-                margin: '5 5 5 5 ',
+                margin: '0 5 5 5 ',
                 maxHeight: '',
+                padding: '0 0 5 10',
                 style: '',
                 styleHtmlContent: true,
                 label: 'Status',
@@ -69151,9 +69194,11 @@ Ext.define('Ext.picker.Picker', {
                     'customfield',
                     'x-field-select'
                 ],
+                height: '0vh',
                 id: 'DealStartDate3',
                 itemId: 'DealStartDate',
-                margin: '5 5 5 5 ',
+                margin: '0 5 5 5 ',
+                padding: '0 5 5 5',
                 styleHtmlContent: true,
                 width: '97%',
                 label: 'Start Date',
@@ -69196,9 +69241,11 @@ Ext.define('Ext.picker.Picker', {
                     'customfield',
                     'x-field-select'
                 ],
+                height: '10vh',
                 id: 'DealEndDate3',
                 itemId: 'DealEndDate',
-                margin: '5 5 5 5 ',
+                margin: '0 5 5 5 ',
+                padding: '0 5 5 5',
                 styleHtmlContent: true,
                 width: '97%',
                 label: 'End Date',
@@ -69237,7 +69284,7 @@ Ext.define('Ext.picker.Picker', {
                 height: '100%',
                 id: 'DealDescription2',
                 itemId: 'DealDescription',
-                margin: '5 5 5 5 ',
+                margin: '0 5 5 5 ',
                 style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
@@ -69249,12 +69296,14 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'filefield',
                 cls: 'customfield',
+                height: '10vh',
                 itemId: 'myfilefield2',
-                margin: '5 5 0 5',
+                margin: '0 5 5 5 ',
+                padding: '5 5 5 5',
                 styleHtmlContent: true,
                 width: '97%',
                 clearIcon: false,
-                label: 'Add Image',
+                label: ' Image',
                 labelWidth: '29%',
                 labelWrap: true,
                 name: 'fileUpload',
@@ -69264,7 +69313,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
-                margin: '0 0 5 0',
+                margin: '0 5 5 5 ',
                 layout: 'hbox',
                 items: [
                     {
@@ -69281,7 +69330,7 @@ Ext.define('Ext.picker.Picker', {
                         height: '40px',
                         html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
-                        margin: '5 5 5 10',
+                        margin: '5 5 5 0',
                         padding: '5 30 5 0',
                         styleHtmlContent: true,
                         layout: 'hbox',
@@ -69318,6 +69367,13 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
+                            var store = Ext.getStore('MyDealsStore');
+                            store.load();
+                            if (store.getCount() >= 5) {
+                                Ext.getCmp('UploadDeal').disable();
+                            } else {
+                                Ext.getCmp('UploadDeal').enable();
+                            }
                         },
                         height: '7vh',
                         margin: '0 0 5 0',
@@ -69329,35 +69385,54 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         handler: function(button, e) {
-                            var form = this.up('UploadDealWithImageForm');
+                            var form = this.up('CreateNewBuzzWithImage');
                             var date = new Date();
                             //var dealName = form.getAt(0).getValue();
                             var startDate = form.getAt(4).getValue();
                             var endDate = form.getAt(5).getValue();
                             var file = form.getAt(8).getValue();
                             var dealName = form.getAt(0).getValue();
+                            console.log('Picture URL is : ' + form.getAt(6).getValue());
                             if (dealName) {
                                 if (file) {
                                     if (endDate >= date) {
-                                        if (document.getElementById('chkbx').checked) {
-                                            form.submit({
-                                                url: 'http://services.appsonmobile.com/uploadS3/',
-                                                xhr2: true,
-                                                cache: false,
-                                                waitMsg: 'Please Wait...',
-                                                success: function(form, action) {
-                                                    Ext.Msg.alert('Success', action.msg);
-                                                    Ext.getStore('MyDealsStore').load();
-                                                    form.destroy();
-                                                },
-                                                failure: function(form, action) {
-                                                    Ext.Msg.alert('Failure', action.msg);
-                                                    Ext.getStore('MyDealsStore').load();
-                                                    form.destroy();
-                                                }
-                                            });
+                                        if (endDate >= startDate) {
+                                            if (document.getElementById('chkbx').checked) {
+                                                form.submit({
+                                                    url: 'http://services.appsonmobile.com/createNewBuzzWithImage',
+                                                    xhr2: true,
+                                                    cache: false,
+                                                    waitMsg: 'Please Wait...',
+                                                    success: function(form, action) {
+                                                        Ext.Msg.alert('Success', action.msg);
+                                                        var store = Ext.getStore('MyDealsStore');
+                                                        store.load();
+                                                        var count = store.getCount() + 1;
+                                                        console.log('Count is:' + count);
+                                                        if (count > 4) {
+                                                            Ext.getCmp('UploadDeal').disable();
+                                                        } else {
+                                                            Ext.getCmp('UploadDeal').enable();
+                                                        }
+                                                        form.destroy();
+                                                    },
+                                                    failure: function(form, action) {
+                                                        Ext.Msg.alert('Failure', action.msg);
+                                                        var store = Ext.getStore('MyDealsStore');
+                                                        store.load();
+                                                        if (store.getCount() >= 5) {
+                                                            Ext.getCmp('UploadDeal').disable();
+                                                        } else {
+                                                            Ext.getCmp('UploadDeal').enable();
+                                                        }
+                                                        form.destroy();
+                                                    }
+                                                });
+                                            } else {
+                                                Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                            }
                                         } else {
-                                            Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                            Ext.Msg.alert('Error!', 'Buzz start date cannot be after end date', null, null);
                                         }
                                     } else {
                                         Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
@@ -69411,137 +69486,24 @@ Ext.define('Ext.picker.Picker', {
         return errors;
     }
 }, 0, [
-    "UploadDealWithImageForm"
+    "CreateNewBuzzWithImage"
 ], [
     "component",
     "container",
     "panel",
     "formpanel",
-    "UploadDealWithImageForm"
+    "CreateNewBuzzWithImage"
 ], {
     "component": true,
     "container": true,
     "panel": true,
     "formpanel": true,
-    "UploadDealWithImageForm": true
+    "CreateNewBuzzWithImage": true
 }, [
-    "widget.UploadDealWithImageForm"
+    "widget.CreateNewBuzzWithImage"
 ], 0, [
-    Contact.view,
-    'UploadDealWithImageForm'
-], 0));
-
-/*
- * File: app/view/CreateBuzzOption.js
- *
- * This file was generated by Sencha Architect version 3.2.0.
- * http://www.sencha.com/products/architect/
- *
- * This file requires use of the Sencha Touch 2.4.x library, under independent license.
- * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
- * details see http://www.sencha.com/license or contact license@sencha.com.
- *
- * This file will be auto-generated each and everytime you save your project.
- *
- * Do NOT hand edit this file.
- */
-(Ext.cmd.derive('Contact.view.CreateBuzzOption', Ext.ActionSheet, {
-    config: {
-        height: '100%',
-        id: 'CreateBuzzOption',
-        itemId: 'CreateBuzzOption',
-        style: 'background:white',
-        styleHtmlContent: true,
-        scrollable: false,
-        layout: {
-            type: 'vbox',
-            align: 'stretchmax',
-            pack: 'center'
-        },
-        items: [
-            {
-                xtype: 'button',
-                handler: function(button, e) {
-                    var storeUserDetails = Ext.getStore('UserDetails');
-                    storeUserDetails.load();
-                    var customerId;
-                    var businessName;
-                    var DealPictureURL;
-                    Ext.Viewport.getActiveItem().destroy();
-                    var view = Ext.Viewport.add({
-                            xtype: 'UploadDealWithImageForm'
-                        });
-                    storeUserDetails.each(function(record) {
-                        //console.log('StoreUserDetails : ' +record.get('customerId'));
-                        customerId = record.get('customerId');
-                        businessName = record.get('businessName');
-                        DealPictureURL = record.get('DealPictureURL');
-                        view.setRecord(record);
-                    });
-                    //view.showBy(button);
-                    var frame = document.createElement('iframe');
-                    //Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(view);
-                },
-                height: '7vh',
-                margin: '10 10 20 10',
-                style: 'font-size:5vw',
-                ui: 'action',
-                text: 'Create Buzz With Image'
-            },
-            {
-                xtype: 'button',
-                handler: function(button, e) {
-                    var storeUserDetails = Ext.getStore('UserDetails');
-                    storeUserDetails.load();
-                    var customerId;
-                    var businessName;
-                    var DealPictureURL;
-                    Ext.Viewport.getActiveItem().destroy();
-                    var view = Ext.Viewport.add({
-                            xtype: 'UploadDealNoImageForm'
-                        });
-                    storeUserDetails.each(function(record) {
-                        //console.log('StoreUserDetails : ' +record.get('customerId'));
-                        customerId = record.get('customerId');
-                        businessName = record.get('businessName');
-                        DealPictureURL = record.get('DealPictureURL');
-                        view.setRecord(record);
-                    });
-                    //view.showBy(button);
-                    var frame = document.createElement('iframe');
-                    //Ext.Viewport.getActiveItem().destroy();
-                    Ext.Viewport.setActiveItem(view);
-                },
-                height: '7vh',
-                margin: '20 10 10 10',
-                style: 'font-size:5vw',
-                ui: 'action',
-                text: 'Create Buzz No Image'
-            }
-        ]
-    }
-}, 0, [
-    "CreateBuzzOption"
-], [
-    "component",
-    "container",
-    "panel",
-    "sheet",
-    "actionsheet",
-    "CreateBuzzOption"
-], {
-    "component": true,
-    "container": true,
-    "panel": true,
-    "sheet": true,
-    "actionsheet": true,
-    "CreateBuzzOption": true
-}, [
-    "widget.CreateBuzzOption"
-], 0, [
-    Contact.view,
-    'CreateBuzzOption'
+    LocalBuzzMerchant.view,
+    'CreateNewBuzzWithImage'
 ], 0));
 
 /*
@@ -69558,7 +69520,7 @@ Ext.define('Ext.picker.Picker', {
  *
  * Do NOT hand edit this file.
  */
-(Ext.cmd.derive('Contact.view.DealImage', Ext.Panel, {
+(Ext.cmd.derive('LocalBuzzMerchant.view.DealImage', Ext.Panel, {
     config: {
         height: '80%',
         id: 'DealImage',
@@ -69634,8 +69596,1083 @@ Ext.define('Ext.picker.Picker', {
 }, [
     "widget.DealImage"
 ], 0, [
-    Contact.view,
+    LocalBuzzMerchant.view,
     'DealImage'
+], 0));
+
+/*
+ * File: app/view/CreateNewStore.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('LocalBuzzMerchant.view.CreateNewStore', Ext.form.Panel, {
+    config: {
+        html: '',
+        id: 'formpanel4',
+        itemId: 'formpanel',
+        padding: '0 0 35 0',
+        style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
+        modal: true,
+        scrollable: true,
+        multipartDetection: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '2vh',
+                hidden: false,
+                id: 'businessName6',
+                itemId: 'businessName',
+                margin: '5 5 5 5 ',
+                padding: '5 5 5 5',
+                styleHtmlContent: true,
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'businessName',
+                placeHolder: 'Business Name'
+            },
+            {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                height: '10vh',
+                id: 'DealStatus3',
+                itemId: 'DealStatus',
+                margin: '0 5 5 5 ',
+                maxHeight: '',
+                padding: '5 5 5 5',
+                style: '',
+                styleHtmlContent: true,
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'category',
+                value: 'Active',
+                placeHolder: 'Choose Business Category',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Arts',
+                        value: 'Arts'
+                    },
+                    {
+                        text: 'Automotive',
+                        value: 'Automotive'
+                    },
+                    {
+                        text: 'Salon & Spa',
+                        value: 'Salon & Spa'
+                    },
+                    {
+                        text: 'Services',
+                        value: 'Services'
+                    },
+                    {
+                        text: 'Education',
+                        value: 'Education'
+                    },
+                    {
+                        text: 'Shopping',
+                        value: 'Shopping'
+                    },
+                    {
+                        text: 'Food & Dining',
+                        value: 'Food & Dining'
+                    },
+                    {
+                        text: 'Other',
+                        value: 'Other'
+                    }
+                ]
+            },
+            {
+                xtype: 'textfield',
+                cls: [
+                    'customfield',
+                    'icon-phone1'
+                ],
+                height: '10vh',
+                hidden: false,
+                id: 'businessName7',
+                itemId: 'businessName1',
+                margin: '0 5 5 5 ',
+                padding: '0 0 5 5',
+                styleHtmlContent: true,
+                component: {
+                    xtype: 'input',
+                    type: 'tel',
+                    fastFocus: true
+                },
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'phoneNumber',
+                maxLength: 12,
+                placeHolder: '555-555-5555'
+            },
+            {
+                xtype: 'emailfield',
+                cls: [
+                    'customfield',
+                    'icon-key'
+                ],
+                height: '10vh',
+                hidden: false,
+                id: 'businessName8',
+                itemId: 'businessName2',
+                margin: '0 5 5 5 ',
+                padding: '0 0 5 5',
+                styleHtmlContent: true,
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'loginEmail',
+                placeHolder: 'Enter your Facebook Email ID*'
+            },
+            {
+                xtype: 'emailfield',
+                cls: [
+                    'customfield',
+                    'icon-email1'
+                ],
+                height: '10vh',
+                hidden: false,
+                id: 'businessName9',
+                itemId: 'businessName3',
+                margin: '0 5 5 5 ',
+                padding: '0 0 5 5',
+                styleHtmlContent: true,
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'emailAddress',
+                placeHolder: 'Enter Business Email ID**'
+            },
+            {
+                xtype: 'urlfield',
+                cls: [
+                    'customfield',
+                    'icon-globe1'
+                ],
+                height: '10vh',
+                hidden: false,
+                id: 'businessName14',
+                itemId: 'businessName8',
+                margin: '0 5 5 5 ',
+                padding: ' 0 0 5 5',
+                styleHtmlContent: true,
+                component: {
+                    xtype: 'input',
+                    type: 'url',
+                    fastFocus: true
+                },
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'websiteDisplayName',
+                placeHolder: 'http://example.com'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '10vh',
+                hidden: false,
+                id: 'businessName10',
+                itemId: 'businessName4',
+                margin: '0 5 5 5 ',
+                padding: ' 0 0 5 5',
+                styleHtmlContent: true,
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'address',
+                placeHolder: 'Street Name and Number'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '10vh',
+                hidden: false,
+                id: 'businessName11',
+                itemId: 'businessName5',
+                margin: '0 5 5 5 ',
+                padding: '0 0 5 5',
+                styleHtmlContent: true,
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'city',
+                autoCapitalize: true,
+                autoComplete: true,
+                autoCorrect: true,
+                placeHolder: 'City'
+            },
+            {
+                xtype: 'container',
+                margin: '5 5 5 5',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'selectfield',
+                        cls: 'customfield',
+                        height: '10vh',
+                        hidden: false,
+                        id: 'state',
+                        itemId: 'state',
+                        padding: '0 0 5 5',
+                        styleHtmlContent: true,
+                        width: '100%',
+                        labelWidth: '35%',
+                        labelWrap: true,
+                        name: 'state',
+                        placeHolder: 'Choose State',
+                        autoSelect: false,
+                        options: [
+                            {
+                                text: 'AL',
+                                value: 'AL'
+                            },
+                            {
+                                text: 'AK',
+                                value: 'AK'
+                            },
+                            {
+                                text: 'AZ',
+                                value: 'AZ'
+                            },
+                            {
+                                text: 'AR',
+                                value: 'AR'
+                            },
+                            {
+                                text: 'CA',
+                                value: 'CA'
+                            },
+                            {
+                                text: 'CO',
+                                value: 'CO'
+                            },
+                            {
+                                text: 'CT',
+                                value: 'CT'
+                            },
+                            {
+                                text: 'DE',
+                                value: 'DE'
+                            },
+                            {
+                                text: 'FL',
+                                value: 'FL'
+                            },
+                            {
+                                text: 'AL',
+                                value: 'AL'
+                            },
+                            {
+                                text: 'GA',
+                                value: 'GA'
+                            },
+                            {
+                                text: 'HI',
+                                value: 'HI'
+                            },
+                            {
+                                text: 'ID',
+                                value: 'ID'
+                            },
+                            {
+                                text: 'IL',
+                                value: 'IL'
+                            },
+                            {
+                                text: 'IN',
+                                value: 'IN'
+                            },
+                            {
+                                text: 'IA',
+                                value: 'IA'
+                            },
+                            {
+                                text: 'KS',
+                                value: 'KS'
+                            },
+                            {
+                                text: 'KY',
+                                value: 'KY'
+                            },
+                            {
+                                text: 'LA',
+                                value: 'LA'
+                            },
+                            {
+                                text: 'ME',
+                                value: 'ME'
+                            },
+                            {
+                                text: 'MD',
+                                value: 'MD'
+                            },
+                            {
+                                text: 'MA',
+                                value: 'MA'
+                            },
+                            {
+                                text: 'MI',
+                                value: 'MI'
+                            },
+                            {
+                                text: 'MN',
+                                value: 'MN'
+                            },
+                            {
+                                text: 'MS',
+                                value: 'MS'
+                            },
+                            {
+                                text: 'MO',
+                                value: 'MO'
+                            },
+                            {
+                                text: 'MT',
+                                value: 'MT'
+                            },
+                            {
+                                text: 'NE',
+                                value: 'NE'
+                            },
+                            {
+                                text: 'NV',
+                                value: 'NV'
+                            },
+                            {
+                                text: 'NH',
+                                value: 'NH'
+                            },
+                            {
+                                text: 'NM',
+                                value: 'NM'
+                            },
+                            {
+                                text: 'NJ',
+                                value: 'NJ'
+                            },
+                            {
+                                text: 'NY',
+                                value: 'NY'
+                            },
+                            {
+                                text: 'NC',
+                                value: 'NC'
+                            },
+                            {
+                                text: 'ND',
+                                value: 'ND'
+                            },
+                            {
+                                text: 'OH',
+                                value: 'OH'
+                            },
+                            {
+                                text: 'OK',
+                                value: 'OK'
+                            },
+                            {
+                                text: 'OR',
+                                value: 'OR'
+                            },
+                            {
+                                text: 'PA',
+                                value: 'PA'
+                            },
+                            {
+                                text: 'RI',
+                                value: 'RI'
+                            },
+                            {
+                                text: 'SC',
+                                value: 'SC'
+                            },
+                            {
+                                text: 'SD',
+                                value: 'SD'
+                            },
+                            {
+                                text: 'TN',
+                                value: 'TN'
+                            },
+                            {
+                                text: 'TX',
+                                value: 'TX'
+                            },
+                            {
+                                text: 'UT',
+                                value: 'UT'
+                            },
+                            {
+                                text: 'VT',
+                                value: 'VT'
+                            },
+                            {
+                                text: 'VA',
+                                value: 'VA'
+                            },
+                            {
+                                text: 'WA',
+                                value: 'WA'
+                            },
+                            {
+                                text: 'WV',
+                                value: 'WV'
+                            },
+                            {
+                                text: 'WI',
+                                value: 'WI'
+                            },
+                            {
+                                text: 'WY',
+                                value: 'WY'
+                            }
+                        ]
+                    },
+                    {
+                        xtype: 'textfield',
+                        cls: 'customfield',
+                        docked: 'right',
+                        height: '10vh',
+                        hidden: false,
+                        id: 'zipcode',
+                        itemId: 'zipcode',
+                        margin: '0 0 0 5',
+                        padding: '0 0 5 5',
+                        styleHtmlContent: true,
+                        width: '53%',
+                        component: {
+                            xtype: 'input',
+                            type: 'tel',
+                            fastFocus: true
+                        },
+                        labelWidth: '35%',
+                        labelWrap: true,
+                        name: 'zipcode',
+                        placeHolder: '5 digit zipcode'
+                    }
+                ]
+            },
+            {
+                xtype: 'filefield',
+                cls: 'customfield',
+                height: '15vh',
+                id: 'myfilefield2',
+                itemId: 'myfilefield2',
+                margin: '0 5 5 5 ',
+                styleHtmlContent: true,
+                width: '97%',
+                component: {
+                    xtype: 'fileinput',
+                    fastFocus: false,
+                    buttonText: 'Browse'
+                },
+                clearIcon: false,
+                label: 'Set Cover Photo',
+                labelWidth: '20%',
+                labelWrap: true,
+                name: 'fileUpload',
+                accept: 'image',
+                capture: 'camera'
+            },
+            {
+                xtype: 'toolbar',
+                cls: 'toolbarCls',
+                docked: 'top',
+                height: '8vh',
+                html: '<h3 style=" color:#00529D;font-size:5.5vw;text-align:center;padding-top:10px">Local Buzz Merchant Sign-up</h3>'
+            },
+            {
+                xtype: 'container',
+                left: '',
+                margin: '0 5 5 5 ',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 0',
+                        padding: '5 30 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        //Ext.Viewport.add({xtype:'Terms'}).show();
+                                        var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
+                                        window.open(url, '_system', 'location=yes');
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                height: '15vh',
+                html: '<div style="font-size:2.5vw;" >* Facebook Email ID will be used to login to the Local Buzz For Merchants App </div><div style="font-size:2.5vw;" >** Business Email ID will be used by customers to connect with you</div>',
+                itemId: 'mycontainer6',
+                styleHtmlContent: true,
+                layout: 'vbox'
+            },
+            {
+                xtype: 'container',
+                height: '15vh',
+                margin: '0 10 50 10',
+                padding: '5 5 5 5',
+                styleHtmlContent: true,
+                layout: 'fit',
+                scrollable: false,
+                items: [
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getActiveItem().destroy();
+                        },
+                        height: '7vh',
+                        margin: '0 0 5 0',
+                        style: 'font-size:5vw!important',
+                        ui: 'decline',
+                        width: '40%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            console.log('Creating store');
+                            var form = this.up('CreateNewStore');
+                            var values = form.getValues();
+                            var businessName = form.getAt(0).getValue();
+                            var category = form.getAt(1).getValue();
+                            var loginEmail = form.getAt(3).getValue();
+                            var address1 = form.getAt(6).getValue();
+                            var city = form.getAt(7).getValue();
+                            var state = Ext.getCmp('state').getValue();
+                            var zipcode = Ext.getCmp('zipcode').getValue();
+                            if (businessName) {
+                                if (category) {
+                                    if (address1) {
+                                        if (city) {
+                                            if (state) {
+                                                if (zipcode) {
+                                                    if (loginEmail) {
+                                                        if (document.getElementById('chkbx').checked) {
+                                                            form.submit({
+                                                                url: 'http://services.appsonmobile.com/createNewStore',
+                                                                xhr2: true,
+                                                                cache: false,
+                                                                waitMsg: 'Please Wait...',
+                                                                success: function(form, action) {
+                                                                    Ext.Msg.alert('Thank you for registering with us!', 'Please give us 2 business days to verify and validate your business.Your free trial period starts after account activation', function() {
+                                                                        location.reload();
+                                                                    }, null);
+                                                                },
+                                                                //form.destroy();
+                                                                failure: function(form, action) {
+                                                                    Ext.Msg.alert('Failure', action.msg, function() {
+                                                                        location.reload();
+                                                                    }, null);
+                                                                }
+                                                            });
+                                                        } else //form.destroy();
+                                                        {
+                                                            Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                                        }
+                                                    } else {
+                                                        Ext.Msg.alert(null, "Facebook email ID is required to create the merchant account ", null, null);
+                                                    }
+                                                } else {
+                                                    Ext.Msg.alert(null, 'Zipcode field is empty', null, null);
+                                                }
+                                            } else {
+                                                Ext.Msg.alert(null, 'State field is empty', null, null);
+                                            }
+                                        } else {
+                                            Ext.Msg.alert(null, 'City field is empty', null, null);
+                                        }
+                                    } else {
+                                        Ext.Msg.alert(null, 'Street address field is empty', null, null);
+                                    }
+                                } else {
+                                    Ext.Msg.alert(null, "Please choose a category", null, null);
+                                }
+                            } else {
+                                Ext.Msg.alert(null, "Business name field is empty", null, null);
+                            }
+                        },
+                        docked: 'right',
+                        height: '7vh',
+                        itemId: 'submit',
+                        margin: '0 0 5 0',
+                        style: 'font-size:5vw!important',
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Submit'
+                    }
+                ]
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onPhoneNumberKeyup',
+                event: 'keyup',
+                delegate: '#businessName7'
+            }
+        ]
+    },
+    onPhoneNumberKeyup: function(textfield, e, eOpts) {
+        var len = textfield.getValue().length;
+        if (len === 3 || len === 7) {
+            textfield.setValue(textfield.getValue() + '-');
+        }
+        if (len === 4) {
+            textfield.setValue(textfield.getValue().substr(0, 3));
+        }
+        if (len === 8) {
+            textfield.setValue(textfield.getValue().substr(0, 7));
+        }
+    }
+}, 0, [
+    "CreateNewStore"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "CreateNewStore"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "CreateNewStore": true
+}, [
+    "widget.CreateNewStore"
+], 0, [
+    LocalBuzzMerchant.view,
+    'CreateNewStore'
+], 0));
+
+/*
+ * File: app/view/CreateNewBuzzNoImage.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('LocalBuzzMerchant.view.CreateNewBuzzNoImage', Ext.form.Panel, {
+    config: {
+        html: '',
+        id: 'formpanel5',
+        itemId: 'formpanel',
+        padding: '0 0 35 0',
+        style: 'background:white',
+        ui: 'light',
+        autoDestroy: false,
+        modal: true,
+        scrollable: true,
+        multipartDetection: false,
+        layout: {
+            type: 'vbox',
+            align: 'stretchmax'
+        },
+        items: [
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '10vh',
+                hidden: false,
+                id: 'businessName15',
+                itemId: 'businessName',
+                margin: '5 5 5 5 ',
+                padding: '0 0 5 5',
+                styleHtmlContent: true,
+                label: 'Name',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealName'
+            },
+            {
+                xtype: 'textfield',
+                cls: 'customfield',
+                height: '15%',
+                hidden: true,
+                id: 'businessName16',
+                itemId: 'businessName1',
+                margin: '30 15 2 15',
+                styleHtmlContent: true,
+                name: 'businessName'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'customerId4',
+                itemId: 'customerId',
+                name: 'customerId'
+            },
+            {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                height: '10vh',
+                id: 'DealStatus4',
+                itemId: 'DealStatus',
+                margin: '0 5 5 5 ',
+                maxHeight: '',
+                padding: '5 0 0 10',
+                style: '',
+                styleHtmlContent: true,
+                label: 'Status',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStatus',
+                value: 'Active',
+                placeHolder: 'Active',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Active',
+                        value: 'Active'
+                    },
+                    {
+                        text: 'Expired',
+                        value: 'Expired'
+                    }
+                ]
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                height: '10vh',
+                id: 'DealStartDate4',
+                itemId: 'DealStartDate',
+                margin: '0 5 5 5 ',
+                padding: '5 0 5 5',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'Start Date',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealStartDate',
+                value: {
+                    day: new Date().getDate(),
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                autoSelect: false,
+                usePicker: true,
+                component: {
+                    useMask: true,
+                    minValue: new Date()
+                },
+                dateFormat: 'm/d/Y',
+                picker: {
+                    id: 'startDatepicker1',
+                    itemId: 'mydatepicker3',
+                    style: '',
+                    scrollable: false,
+                    stretchX: false,
+                    stretchY: false,
+                    useTitles: true,
+                    value: {
+                        year: 2016,
+                        month: 7,
+                        day: 16
+                    },
+                    yearFrom: 2016,
+                    yearTo: 2017
+                }
+            },
+            {
+                xtype: 'datepickerfield',
+                cls: [
+                    'customfield',
+                    'x-field-select'
+                ],
+                height: '10vh',
+                id: 'DealEndDate4',
+                itemId: 'DealEndDate',
+                margin: '0 5 5 5 ',
+                padding: '5 0 5 5',
+                styleHtmlContent: true,
+                width: '97%',
+                label: 'End Date',
+                labelWidth: '35%',
+                name: 'DealEndDate',
+                value: {
+                    day: new Date().getDate() + 1,
+                    month: (new Date().getMonth() + 1),
+                    year: new Date().getFullYear()
+                },
+                placeHolder: 'mm/dd/yyyy',
+                options: {
+                    minValue: new Date()
+                },
+                usePicker: true,
+                component: {
+                    useMask: true
+                },
+                picker: {
+                    itemId: 'mydatepicker3',
+                    useTitles: true,
+                    yearFrom: 2016,
+                    yearTo: 2017
+                }
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'DealPictureURL3',
+                itemId: 'DealPictureURL',
+                name: 'DealPictureURL'
+            },
+            {
+                xtype: 'textfield',
+                hidden: true,
+                id: 'DealPictureURL4',
+                itemId: 'DealPictureURL1',
+                name: 'DealImageURL'
+            },
+            {
+                xtype: 'textareafield',
+                cls: 'customfield',
+                height: '100%',
+                id: 'DealDescription3',
+                itemId: 'DealDescription',
+                margin: '0 5 5 5 ',
+                style: 'border:1px solid #C0C0C0!important',
+                styleHtmlContent: true,
+                width: '',
+                clearIcon: false,
+                label: 'Description',
+                labelWidth: '35%',
+                name: 'DealDescription'
+            },
+            {
+                xtype: 'container',
+                left: '',
+                margin: '0 5 5 5 ',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '50%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '40px',
+                        html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 0',
+                        padding: '5 30 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        //Ext.Viewport.add({xtype:'Terms'}).show();
+                                        var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
+                                        window.open(url, '_system', 'location=yes');
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: 'container',
+                height: 140,
+                margin: '0 10 50 10',
+                padding: '5 5 5 5',
+                styleHtmlContent: true,
+                layout: 'fit',
+                scrollable: false,
+                items: [
+                    {
+                        xtype: 'spacer',
+                        maxWidth: '',
+                        minWidth: ''
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            Ext.Viewport.getActiveItem().destroy();
+                            var store = Ext.getStore('MyDealsStore');
+                            store.load();
+                            if (store.getCount() >= 5) {
+                                Ext.getCmp('UploadDeal').disable();
+                            } else {
+                                Ext.getCmp('UploadDeal').enable();
+                            }
+                        },
+                        height: '7vh',
+                        margin: '0 0 5 0',
+                        style: 'font-size:5vw!important',
+                        ui: 'decline',
+                        width: '40%',
+                        text: 'Cancel'
+                    },
+                    {
+                        xtype: 'button',
+                        handler: function(button, e) {
+                            var form = this.up('CreateNewBuzzNoImage');
+                            var date = new Date();
+                            //var dealName = form.getAt(0).getValue();
+                            var startDate = form.getAt(4).getValue();
+                            var endDate = form.getAt(5).getValue();
+                            var dealName = form.getAt(0).getValue();
+                            if (dealName) {
+                                if (endDate >= date) {
+                                    if (endDate >= startDate) {
+                                        if (document.getElementById('chkbx').checked) {
+                                            form.submit({
+                                                url: 'http://services.appsonmobile.com/createNewBuzzNoImage',
+                                                cache: false,
+                                                waitMsg: 'Please Wait...',
+                                                success: function(form, action) {
+                                                    Ext.Msg.alert('Success', action.msg);
+                                                    var store = Ext.getStore('MyDealsStore');
+                                                    store.load();
+                                                    var count = store.getCount() + 1;
+                                                    console.log('Count is:' + count);
+                                                    if (count > 4) {
+                                                        console.log('Disabling btn');
+                                                        Ext.getCmp('UploadDeal').disable();
+                                                    } else {
+                                                        Ext.getCmp('UploadDeal').enable();
+                                                    }
+                                                    form.destroy();
+                                                },
+                                                failure: function(form, action) {
+                                                    Ext.Msg.alert('Failure', action.msg);
+                                                    var store = Ext.getStore('MyDealsStore');
+                                                    store.load();
+                                                    console.log('Count is:' + count);
+                                                    if (store.getCount() >= 5) {
+                                                        Ext.getCmp('UploadDeal').disable();
+                                                    } else {
+                                                        Ext.getCmp('UploadDeal').enable();
+                                                    }
+                                                    form.destroy();
+                                                }
+                                            });
+                                        } else {
+                                            Ext.Msg.alert(null, 'You must agree to Terms & Conditions', null, null);
+                                        }
+                                    } else {
+                                        Ext.Msg.alert('Error!', 'Buzz start date cannot be after end date', null, null);
+                                    }
+                                } else {
+                                    Ext.Msg.alert('Error!', 'Buzz end date error ', null, null);
+                                }
+                            } else {
+                                Ext.Msg.alert('Error!', 'Buzz name field is empty', null, null);
+                            }
+                        },
+                        docked: 'right',
+                        height: '7vh',
+                        itemId: 'submit',
+                        margin: '0 0 5 0',
+                        style: 'font-size:5vw!important',
+                        ui: 'confirm',
+                        width: '30%',
+                        text: 'Submit'
+                    }
+                ]
+            }
+        ],
+        listeners: [
+            {
+                fn: 'onMydatepicker3Pick',
+                event: 'pick',
+                delegate: '#mydatepicker3'
+            }
+        ]
+    },
+    onMydatepicker3Pick: function(picker, value, slot, eOpts) {
+        var today = new Date();
+        if (value < today) {
+            picker.setValue(today);
+        }
+    },
+    getValidationErrors: function() {
+        var errors = [];
+        var reqFields = this.query('field[required=true]');
+        var i = 0,
+            ln = reqFields.length,
+            field;
+        for (; i < ln; i++) {
+            field = reqFields[i];
+            if (!field.getValue()) {
+                errors.push(field.getLabel() + ' must be completed.');
+            }
+        }
+        console.dir(errors);
+        return errors;
+    }
+}, 0, [
+    "CreateNewBuzzNoImage"
+], [
+    "component",
+    "container",
+    "panel",
+    "formpanel",
+    "CreateNewBuzzNoImage"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "formpanel": true,
+    "CreateNewBuzzNoImage": true
+}, [
+    "widget.CreateNewBuzzNoImage"
+], 0, [
+    LocalBuzzMerchant.view,
+    'CreateNewBuzzNoImage'
 ], 0));
 
 /*
@@ -69661,10 +70698,10 @@ Ext.application({
         'UserDetails'
     ],
     stores: [
-        'MyJsonPStore',
         'MyDealsStore',
         'UserDetails',
-        'LocalStore'
+        'LocalStore',
+        'MyJsonPStore'
     ],
     views: [
         'contactform',
@@ -69676,16 +70713,17 @@ Ext.application({
         'contactinfo',
         'panel',
         'UpdateDealForm',
-        'UploadDealNoImageForm',
-        'UploadDealWithImageForm',
-        'CreateBuzzOption',
-        'DealImage'
+        'CreateNewBuzzWithImage',
+        'DealImage',
+        'CreateNewStore',
+        'WelcomeScreen',
+        'CreateNewBuzzNoImage'
     ],
     controllers: [
-        'Contacts'
+        'LocalBuzzMerchant'
     ],
     icon: 'icon.png',
-    name: 'Contact',
+    name: 'LocalBuzzMerchant',
     startupImage: 'icon.png',
     launch: function() {
         Ext.util.Format.empty = function(value, defaultValue) {
@@ -69826,12 +70864,110 @@ Ext.application({
 
 
 		    }*/
-        Ext.create('Contact.view.Login', {
+        Ext.create('LocalBuzzMerchant.view.WelcomeScreen', {
             fullscreen: true
         });
     }
 });
 
+/*
+ * File: app/view/CreateNewBuzzOption.js
+ *
+ * This file was generated by Sencha Architect version 3.2.0.
+ * http://www.sencha.com/products/architect/
+ *
+ * This file requires use of the Sencha Touch 2.4.x library, under independent license.
+ * License of Sencha Architect does not include license for Sencha Touch 2.4.x. For more
+ * details see http://www.sencha.com/license or contact license@sencha.com.
+ *
+ * This file will be auto-generated each and everytime you save your project.
+ *
+ * Do NOT hand edit this file.
+ */
+(Ext.cmd.derive('LocalBuzzMerchant.view.CreateNewBuzzOption', Ext.Panel, {
+    config: {
+        id: 'CreateNewBuzzOption',
+        itemId: 'CreateNewBuzzOption',
+        items: [
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.load();
+                    var customerId;
+                    var businessName;
+                    var DealPictureURL;
+                    Ext.Viewport.getActiveItem().destroy();
+                    var view = Ext.Viewport.add({
+                            xtype: 'CreateNewBuzzWithImage'
+                        });
+                    storeUserDetails.each(function(record) {
+                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                        customerId = record.get('customerId');
+                        businessName = record.get('businessName');
+                        DealPictureURL = record.get('DealPictureURL');
+                        view.setRecord(record);
+                    });
+                    Ext.Viewport.setActiveItem(view);
+                },
+                height: '9vh',
+                left: '20%',
+                styleHtmlContent: true,
+                top: '30%',
+                ui: 'action',
+                width: '65%',
+                text: 'Create Buzz With Image'
+            },
+            {
+                xtype: 'button',
+                handler: function(button, e) {
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.load();
+                    var customerId;
+                    var businessName;
+                    var DealPictureURL;
+                    Ext.Viewport.getActiveItem().destroy();
+                    var view = Ext.Viewport.add({
+                            xtype: 'CreateNewBuzzNoImage'
+                        });
+                    storeUserDetails.each(function(record) {
+                        //console.log('StoreUserDetails : ' +record.get('customerId'));
+                        customerId = record.get('customerId');
+                        businessName = record.get('businessName');
+                        DealPictureURL = record.get('DealPictureURL');
+                        view.setRecord(record);
+                    });
+                    Ext.Viewport.setActiveItem(view);
+                },
+                height: '9vh',
+                left: '20%',
+                styleHtmlContent: true,
+                top: '50%',
+                ui: 'action',
+                width: '65%',
+                text: 'Create Buzz No Image'
+            }
+        ]
+    }
+}, 0, [
+    "CreateNewBuzzOption"
+], [
+    "component",
+    "container",
+    "panel",
+    "CreateNewBuzzOption"
+], {
+    "component": true,
+    "container": true,
+    "panel": true,
+    "CreateNewBuzzOption": true
+}, [
+    "widget.CreateNewBuzzOption"
+], 0, [
+    LocalBuzzMerchant.view,
+    'CreateNewBuzzOption'
+], 0));
+
 // @tag full-page
-// @require H:\Apps\Sencha Architect Apps\LocalBuzzBusinessApp\app.js
+// @require H:\Apps\Sencha Architect Apps\LocalBuzzMerchantRelease\app.js
 
