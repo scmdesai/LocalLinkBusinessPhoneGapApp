@@ -69378,7 +69378,7 @@ Ext.define('Ext.picker.Picker', {
             '<div id="wrapper" style="margin:0px 0px 0px 0px;height:100%;width:100%">',
             '\t',
             '\t<tpl if="dealImageURL">',
-            '\t<div id="scroller"><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:100%;width:100%"/></div>',
+            '\t<div id="scroller"><img src="{dealImageURL}" style="margin:0px 0px 0px 0px;height:98%;width:100%"/></div>',
             '                            ',
             '\t\t</tpl>',
             '\t\t',
