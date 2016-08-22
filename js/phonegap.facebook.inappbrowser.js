@@ -146,7 +146,7 @@
                 userDenied = false;
 
             // Open the url command
-            faceView = window.open(authorize_url, '_blank', 'location=no,hidden=yes');
+            faceView = window.open(authorize_url, '_blank', 'location=no,hidden=yes,toolbar=no');
 
             // On timeout
             var timeoutOccurred = false;
@@ -402,7 +402,7 @@
                     }
 
                 };
-            faceView = window.open(request_url, '_blank', 'location=no,clearcache=yes, clearsessioncache=yes');
+            faceView = window.open(request_url, '_blank', 'location=no,clearcache=yes, clearsessioncache=yes,toolbar=no');
             faceView.addEventListener('loadstart', callback);
         },
 
@@ -488,7 +488,7 @@
                         }
                 };
 
-            faceView = window.open(request_url, '_blank', 'location=no,clearcache=yes, clearsessioncache=yes');
+            faceView = window.open(request_url, '_blank', 'location=no,clearcache=yes, clearsessioncache=yes,toolbar=no');
             faceView.addEventListener('loadstart', callback);
             faceView.addEventListener('loadstop', function(){
                 faceView.show();
@@ -504,7 +504,7 @@
         logout: function(afterCallback) {
             var logout_url = encodeURI("https://www.facebook.com/logout.php?next="  + this.settings.redirectUrl + "&access_token=" + window.localStorage.getItem('facebookAccessToken'));
 
-            var faceView = window.open(logout_url, '_blank', 'hidden=yes,location=no,clearcache=yes, clearsessioncache=yes'),
+            var faceView = window.open(logout_url, '_blank', 'hidden=yes,location=no,clearcache=yes, clearsessioncache=yes,toolbar=no'),
                 callback = function(location) {
                     console.log("[FacebookInAppBrowser] Event 'loadstart': " + JSON.stringify(location));
 
