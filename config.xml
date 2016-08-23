@@ -54,7 +54,7 @@
     <plugin name="cordova-plugin-inappbrowser" source="npm"  />
     <plugin name="cordova-plugin-media" source="npm"  />
     <plugin name="cordova-plugin-network-information" source="npm"  />
-    <plugin name="cordova-plugin-splashscreen" source="npm"  />
+    <plugin name="cordova-plugin-splashscreen" source="npm" />
     <plugin name="cordova-plugin-vibration" source="npm"  />
 	<plugin name="cordova-plugin-whitelist" source="npm"  />
 	<plugin name="cordova-plugin-statusbar" source="npm" />
@@ -137,7 +137,7 @@
     <icon platform="android" qualifier="hdpi" src="/res/icon/android/icon-72-hdpi.png" />
     <icon platform="android" qualifier="xhdpi" src="/res/icon/android/icon-96-xhdpi.png" />
     
-	<!-- <gap:splash src="splash.png" /> -->
+	<gap:splash src="splash.png" />
 	<splash src="images/Default-568h@2x.png" platform="ios" width="640" height="1136" />
     <!--<splash platform="android" qualifier="ldpi" src="/res/screen/android/ldpi.png" />
     <splash platform="android" qualifier="mdpi" src="/res/screen/android/mdpi.png" />
