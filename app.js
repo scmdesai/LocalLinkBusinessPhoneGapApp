@@ -68502,6 +68502,9 @@ Ext.define('Ext.picker.Picker', {
                                                 numberOfHits[j] = parseInt(tmp[1], 10);
                                             }
                                             for (j = 0; j < zipcode.length; j++) {
+                                                if (zipcode[j] === '(not set)') {
+                                                    zipcode[j] = "Unknown";
+                                                }
                                                 data.addRow([
                                                     zipcode[j],
                                                     numberOfHits[j]
