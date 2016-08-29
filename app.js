@@ -65771,7 +65771,7 @@ Ext.define('Ext.picker.Picker', {
     config: {
         autoLoad: true,
         autoSync: true,
-        model: 'LocalBuzzMerchant.model.Contact',
+        model: 'LocalBuzzMerchant.model.UserDetails',
         remoteFilter: true,
         storeId: 'UserDetails'
     }
@@ -67594,72 +67594,63 @@ Ext.define('Ext.picker.Picker', {
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    //var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail',email,0,true,false,false);
-                    $.getJSON('http://services.appsonmobile.com/stores/' + email, function(record) {
-                        if (record) {
-                            var endDate = new Date(record['endDate']);
-                            var today = new Date();
-                            var storeUserDetails = Ext.getStore('UserDetails');
-                            //storeUserDetails.removeAt(0);
-                            if (record['signupStatus'] === "Approved") {
-                                if ((record['planType'] === "Free" && endDate >= today) || record['planType'] === "Paid") {
-                                    storeUserDetails.add({
-                                        'customerId': record['customerId'],
-                                        'loginEmail': email,
-                                        'businessName': record['businessName'],
-                                        'DealPictureURL': record['pictureURL'],
-                                        'city': record['city'],
-                                        'state': record['state'],
-                                        'phoneNumber': record['phoneNumber'],
-                                        'address': record['address'],
-                                        'zipcode': record['zipcode'],
-                                        'website': record['website'],
-                                        'websiteDisplayName': record['websiteDisplayName'],
-                                        'signupStatus': record['signupStatus'],
-                                        'emailAddress': record['emailAddress'],
-                                        'startDate': record['startDate'],
-                                        'endDate': record['endDate'],
-                                        'planType': record['planType'],
-                                        'category': record['category']
+                    var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
+                    if (!record) {
+                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
+                            FacebookInAppBrowser.logout(function() {
+                                window.localStorage.setItem('facebookAccessToken', null);
+                                location.reload();
+                            });
+                        }, null);
+                    } else {
+                        var endDate = new Date(record.get('endDate'));
+                        var today = new Date();
+                        var storeUserDetails = Ext.getStore('UserDetails');
+                        storeUserDetails.removeAll();
+                        if (record.get('signupStatus') === "Approved") {
+                            if ((record.get('planType') === "Free" && endDate >= today) || record.get('planType') === "Paid") {
+                                storeUserDetails.add({
+                                    'customerId': record.get('customerId'),
+                                    'email': email,
+                                    'businessName': record.get('businessName'),
+                                    'DealPictureURL': record.get('pictureURL'),
+                                    'city': record.get('city'),
+                                    'state': record.get('state')
+                                });
+                                var view = Ext.Viewport.add({
+                                        xtype: 'panel'
                                     });
-                                    //storeUserDetails.add();
-                                    var view = Ext.Viewport.add({
-                                            xtype: 'panel'
-                                        });
-                                    view.setRecord(record);
-                                    console.log(storeUserDetails.getAllCount());
-                                    Ext.Viewport.getActiveItem().destroy();
-                                    Ext.Viewport.setActiveItem(view);
-                                } else {
-                                    Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
-                                        FacebookInAppBrowser.logout(function() {
-                                            window.localStorage.setItem('facebookAccessToken', null);
-                                            location.reload();
-                                        });
-                                    }, null);
-                                }
-                            } else if (record['signupStatus'] === 'Pending') {
+                                Ext.Viewport.getActiveItem().destroy();
+                                Ext.Viewport.setActiveItem(view);
+                            } else {
                                 Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
-                                    FacebookInAppBrowser.logout(function() {
-                                        window.localStorage.setItem('facebookAccessToken', null);
-                                        location.reload();
-                                    });
-                                }, null);
-                            } else if (record['signupStatus'] === 'Denied') {
-                                Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
-                                    FacebookInAppBrowser.logout(function() {
-                                        window.localStorage.setItem('facebookAccessToken', null);
-                                        location.reload();
-                                    });
-                                }, null);
-                            } else if (record['signupStatus'] === 'Cancelled') {
-                                Ext.Msg.alert('Our records show that your account is not active', "Please contact us at info@appsonmobile.com if you would like to activate your account", function() {
                                     FacebookInAppBrowser.logout(function() {
                                         window.localStorage.setItem('facebookAccessToken', null);
                                         location.reload();
                                     });
                                 }, null);
                             }
+                        } else if (record.get('signupStatus') === 'Pending') {
+                            Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
+                                FacebookInAppBrowser.logout(function() {
+                                    window.localStorage.setItem('facebookAccessToken', null);
+                                    location.reload();
+                                });
+                            }, null);
+                        } else if (record.get('signupStatus') === 'Denied') {
+                            Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
+                                FacebookInAppBrowser.logout(function() {
+                                    window.localStorage.setItem('facebookAccessToken', null);
+                                    location.reload();
+                                });
+                            }, null);
+                        } else if (record.get('signupStatus') === 'Cancelled') {
+                            Ext.Msg.alert('Our records show that your account is not active', "Please contact us at info@appsonmobile.com if you would like to activate your account", function() {
+                                FacebookInAppBrowser.logout(function() {
+                                    window.localStorage.setItem('facebookAccessToken', null);
+                                    location.reload();
+                                });
+                            }, null);
                         } else {
                             Ext.Msg.alert('Cannot find your account', "Please contact us at info@appsonmobile.com", function() {
                                 FacebookInAppBrowser.logout(function() {
@@ -67668,7 +67659,9 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             }, null);
                         }
-                    });
+                    }
+                } else {
+                    console.log('no user info');
                 }
             }
         });
