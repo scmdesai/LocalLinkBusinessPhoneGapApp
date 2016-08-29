@@ -68041,19 +68041,19 @@ Ext.define('Ext.picker.Picker', {
                     //var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail',email,0,true,false,false);
                     $.getJSON('http://services.appsonmobile.com/stores/' + email, function(record) {
                         console.log('Record is ' + record);
-                        var endDate = new Date(record.get('endDate'));
+                        var endDate = new Date(record['endDate']);
                         var today = new Date();
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
-                        if (record.get('signupStatus') === "Approved") {
-                            if ((record.get('planType') === "Free" && endDate >= today) || record.get('planType') === "Paid") {
+                        if (record['signupStatus'] === "Approved") {
+                            if ((record['planType'] === "Free" && endDate >= today) || record['planType'] === "Paid") {
                                 storeUserDetails.add({
-                                    'customerId': record.get('customerId'),
+                                    'customerId': record['customerId'],
                                     'email': email,
-                                    'businessName': record.get('businessName'),
-                                    'DealPictureURL': record.get('pictureURL'),
-                                    'city': record.get('city'),
-                                    'state': record.get('state')
+                                    'businessName': record['businessName'],
+                                    'DealPictureURL': record['pictureURL'],
+                                    'city': record['city'],
+                                    'state': record['state']
                                 });
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
