@@ -67603,27 +67603,26 @@ Ext.define('Ext.picker.Picker', {
                             storeUserDetails.removeAll();
                             if (record['signupStatus'] === "Approved") {
                                 if ((record['planType'] === "Free" && endDate >= today) || record['planType'] === "Paid") {
-                                    /*storeUserDetails.add({'customerId' : record['customerId'],
-													  'loginEmail': email,
-													  'businessName': record['businessName'],
-													  'DealPictureURL': record['pictureURL'],
-													  'city': record['city'],
-													  'state': record['state'],
-													  'phoneNumber': record['phoneNumber'],
-													  'address': record['address'],
-													  'zipcode': record['zipcode'],
-													  'website': record['website'],
-													  'websiteDisplayName': record['websiteDisplayName'],
-													  'signupStatus': record['signupStatus'],
-													  'emailAddress': record['emailAddress'],
-
-													  'startDate': record['startDate'],
-													  'endDate': record['endDate'],
-													  'planType': record['planType'],
-													  'category': record['category']
-
-												  });*/
-                                    storeUserDetails.add(record);
+                                    storeUserDetails.add({
+                                        'customerId': record['customerId'],
+                                        'loginEmail': email,
+                                        'businessName': record['businessName'],
+                                        'DealPictureURL': record['pictureURL'],
+                                        'city': record['city'],
+                                        'state': record['state'],
+                                        'phoneNumber': record['phoneNumber'],
+                                        'address': record['address'],
+                                        'zipcode': record['zipcode'],
+                                        'website': record['website'],
+                                        'websiteDisplayName': record['websiteDisplayName'],
+                                        'signupStatus': record['signupStatus'],
+                                        'emailAddress': record['emailAddress'],
+                                        'startDate': record['startDate'],
+                                        'endDate': record['endDate'],
+                                        'planType': record['planType'],
+                                        'category': record['category']
+                                    });
+                                    //storeUserDetails.add();
                                     var view = Ext.Viewport.add({
                                             xtype: 'panel'
                                         });
