@@ -66220,7 +66220,7 @@ Ext.define('Ext.picker.Picker', {
     config: {
         autoLoad: true,
         autoSync: true,
-        model: 'LocalBuzzMerchant.model.UserDetails',
+        model: 'LocalBuzzMerchant.model.Contact',
         remoteFilter: true,
         storeId: 'UserDetails',
         proxy: {
@@ -66692,16 +66692,19 @@ Ext.define('Ext.picker.Picker', {
     onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
-        var customerId;
-        var businessName;
-        var date = new Date();
-        var today = Ext.Date.format(date, 'n/j/Y');
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-        });
-        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+        /*var customerId;
+		var businessName;
+		var date = new Date();
+
+		var today = Ext.Date.format(date, 'n/j/Y');
+
+		storeUserDetails.each(function(record){
+			//console.log('StoreUserDetails : ' +record.get('customerId'));
+			customerId = record.get('customerId');
+			businessName = record.get('businessName');
+
+		});*/
+        var record = Ext.getStore('storeUserDetails').getAt(0);
         this.setRecord(record);
     },
     setRecord: function(record) {
@@ -66726,17 +66729,20 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.hideMenu('right');
                             var storeUserDetails = Ext.getStore('UserDetails');
                             storeUserDetails.load();
-                            var customerId;
-                            var businessName;
-                            storeUserDetails.each(function(record) {
-                                console.log('StoreUserDetails : ' + record.get('customerId'));
-                                customerId = record.get('customerId');
-                                businessName = record.get('businessName');
-                            });
+                            /*var customerId;
+						var businessName;
+
+						storeUserDetails.each(function(record){
+						console.log('StoreUserDetails : ' +record.get('customerId'));
+						customerId = record.get('customerId');
+						businessName = record.get('businessName');
+
+						});*/
                             var form = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
-                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                            //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
+                            var record = Ext.getStore('storeUserDetails').getAt(0);
                             Ext.Viewport.setActiveItem(form);
                             form.setRecord(record);
                         }
@@ -66903,7 +66909,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var form = this.up('contactform');
-                            var store = Ext.getStore('MyJsonPStore');
+                            //var store = Ext.getStore('UserDetails');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
                             /*record.beginEdit(true, record.getChanges());
@@ -66943,17 +66949,20 @@ Ext.define('Ext.picker.Picker', {
                 handler: function(button, e) {
                     var storeUserDetails = Ext.getStore('UserDetails');
                     storeUserDetails.load();
-                    var customerId;
-                    var businessName;
-                    storeUserDetails.each(function(record) {
-                        console.log('StoreUserDetails : ' + record.get('customerId'));
-                        customerId = record.get('customerId');
-                        businessName = record.get('businessName');
-                    });
+                    /*var customerId;
+					var businessName;
+
+					storeUserDetails.each(function(record){
+					console.log('StoreUserDetails : ' +record.get('customerId'));
+					customerId = record.get('customerId');
+					businessName = record.get('businessName');
+
+					});*/
                     var view = Ext.Viewport.add({
                             xtype: 'ChangeContactPicForm'
                         });
-                    var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                    //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
+                    var record = Ext.getStore('storeUserDetails').getAt(0);
                     view.setRecord(record);
                     view.showBy(button);
                 },
@@ -67461,17 +67470,18 @@ Ext.define('Ext.picker.Picker', {
         form.destroy();
     },
     onBackFromDealsPanelTap: function(button, e, eOpts) {
-        var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter();
+        var ds = Ext.StoreManager.lookup('UserDetails');
+        //ds.clearFilter() ;
         var dealRecord = this.getContactinfo().getRecord();
         //console.log("Deal Record is:") ;
         //console.log(dealRecord) ;
         var customerId = dealRecord.get('customerId');
         //console.log("Customer Id is " + customerId) ;
-        ds.filter('customerId', customerId);
-        var customerData = ds.getData().getAt(0);
+        //ds.filter('customerId', customerId);
+        //var customerData = ds.getData().getAt(0) ;
         //console.log("Customer Data is:") ;
         //console.log(customerData) ;
+        var customerData = Ext.getStore('storeUserDetails').getAt(0);
         var info = this.getContactinfo();
         info.setRecord(customerData);
         ds.clearFilter();
@@ -67814,8 +67824,8 @@ Ext.define('Ext.picker.Picker', {
             var name = record.get('itemName');
             var businessName = record.get('businessName');
             this.down('#nameTxt1').setHtml(record.get('businessName'));
-            var store = Ext.getStore('MyJsonPStore');
-            var rec = store.findRecord('businessName', businessName);
+            var store = Ext.getStore('UserDetails');
+            // var rec = store.findRecord('businessName', businessName);
             Ext.getCmp('phoneNumber1').setValue(rec.get('phoneNumber'));
             Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
             Ext.getCmp('website2').setValue(rec.get('website'));
@@ -68047,14 +68057,14 @@ Ext.define('Ext.picker.Picker', {
                             storeUserDetails.removeAll();
                             if (record['signupStatus'] === "Approved") {
                                 if ((record['planType'] === "Free" && endDate >= today) || record['planType'] === "Paid") {
-                                    storeUserDetails.add({
-                                        'customerId': record['customerId'],
-                                        'email': email,
-                                        'businessName': record['businessName'],
-                                        'DealPictureURL': record['pictureURL'],
-                                        'city': record['city'],
-                                        'state': record['state']
-                                    });
+                                    /*storeUserDetails.add({'customerId' : record['customerId'],
+													  'email': email,
+													  'businessName': record['businessName'],
+													  'DealPictureURL': record['pictureURL'],
+													  'city': record['city'],
+													  'state': record['state']
+												  });*/
+                                    storeUserDetails.add(record);
                                     var view = Ext.Viewport.add({
                                             xtype: 'panel'
                                         });
