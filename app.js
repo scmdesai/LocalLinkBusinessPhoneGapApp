@@ -66692,19 +66692,17 @@ Ext.define('Ext.picker.Picker', {
     onInfoPainted: function(element, eOpts) {
         var storeUserDetails = Ext.getStore('UserDetails');
         storeUserDetails.load();
-        /*var customerId;
-		var businessName;
-		var date = new Date();
-
-		var today = Ext.Date.format(date, 'n/j/Y');
-
-		storeUserDetails.each(function(record){
-			//console.log('StoreUserDetails : ' +record.get('customerId'));
-			customerId = record.get('customerId');
-			businessName = record.get('businessName');
-
-		});*/
-        var record = Ext.getStore('storeUserDetails').getAt(0);
+        var customerId;
+        var businessName;
+        var date = new Date();
+        var today = Ext.Date.format(date, 'n/j/Y');
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+        //var record = Ext.getStore('storeUserDetails').getAt(0);
         console.log('Record is :' + record);
         this.setRecord(record);
     },
@@ -66730,20 +66728,18 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.hideMenu('right');
                             var storeUserDetails = Ext.getStore('UserDetails');
                             storeUserDetails.load();
-                            /*var customerId;
-						var businessName;
-
-						storeUserDetails.each(function(record){
-						console.log('StoreUserDetails : ' +record.get('customerId'));
-						customerId = record.get('customerId');
-						businessName = record.get('businessName');
-
-						});*/
+                            var customerId;
+                            var businessName;
+                            storeUserDetails.each(function(record) {
+                                console.log('StoreUserDetails : ' + record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
                             var form = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
-                            //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-                            var record = Ext.getStore('storeUserDetails').getAt(0);
+                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                            //var record = Ext.getStore('storeUserDetails').getAt(0);
                             Ext.Viewport.setActiveItem(form);
                             form.setRecord(record);
                         }
@@ -68053,11 +68049,6 @@ Ext.define('Ext.picker.Picker', {
                     $.getJSON('http://services.appsonmobile.com/stores/' + email, function(record) {
                         if (record) {
                             var endDate = new Date(record['endDate']);
-                            console.log(record['customerId']);
-                            console.log(record['businessName']);
-                            console.log(record['city']);
-                            console.log(record['state']);
-                            console.log(record['phoneNumber']);
                             var today = new Date();
                             var storeUserDetails = Ext.getStore('UserDetails');
                             storeUserDetails.removeAll();
