@@ -68068,21 +68068,21 @@ Ext.define('Ext.picker.Picker', {
                                     });
                                 }, null);
                             }
-                        } else if (record.get('signupStatus') === 'Pending') {
+                        } else if (record['signupStatus'] === 'Pending') {
                             Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
                                 FacebookInAppBrowser.logout(function() {
                                     window.localStorage.setItem('facebookAccessToken', null);
                                     location.reload();
                                 });
                             }, null);
-                        } else if (record.get('signupStatus') === 'Denied') {
+                        } else if (record['signupStatus'] === 'Denied') {
                             Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
                                 FacebookInAppBrowser.logout(function() {
                                     window.localStorage.setItem('facebookAccessToken', null);
                                     location.reload();
                                 });
                             }, null);
-                        } else if (record.get('signupStatus') === 'Cancelled') {
+                        } else if (record['signupStatus'] === 'Cancelled') {
                             Ext.Msg.alert('Our records show that your account is not active', "Please contact us at info@appsonmobile.com if you would like to activate your account", function() {
                                 FacebookInAppBrowser.logout(function() {
                                     window.localStorage.setItem('facebookAccessToken', null);
@@ -68097,16 +68097,7 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             }, null);
                         }
-                    }, function(record) {
-                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
-                            FacebookInAppBrowser.logout(function() {
-                                window.localStorage.setItem('facebookAccessToken', null);
-                                location.reload();
-                            });
-                        }, null);
                     });
-                } else {
-                    console.log('no user info');
                 }
             }
         });
