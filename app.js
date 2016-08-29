@@ -66701,8 +66701,8 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
-        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
-        //var record = Ext.getStore('storeUserDetails').getAt(0);
+        //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
+        var record = Ext.getStore('storeUserDetails').getAt(0);
         console.log('Record is :' + record);
         this.setRecord(record);
     },
@@ -66739,7 +66739,6 @@ Ext.define('Ext.picker.Picker', {
                                     xtype: 'contactform'
                                 });
                             var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
-                            //var record = Ext.getStore('storeUserDetails').getAt(0);
                             Ext.Viewport.setActiveItem(form);
                             form.setRecord(record);
                         }
