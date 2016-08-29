@@ -68040,6 +68040,7 @@ Ext.define('Ext.picker.Picker', {
                     var userId = tmp[1];
                     //var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail',email,0,true,false,false);
                     $.getJSON('http://services.appsonmobile.com/stores/' + email, function(record) {
+                        console.log('Record is ' + record);
                         var endDate = new Date(record.get('endDate'));
                         var today = new Date();
                         var storeUserDetails = Ext.getStore('UserDetails');
