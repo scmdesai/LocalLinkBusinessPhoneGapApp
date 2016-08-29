@@ -66136,7 +66136,7 @@ Ext.define('Ext.picker.Picker', {
                 name: 'access_token'
             },
             {
-                name: 'DealPictureURL'
+                name: 'pictureURL'
             },
             {
                 name: 'city'
@@ -66928,7 +66928,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var form = this.up('contactform');
-                            var store = Ext.getStore('MyJsonPStore');
+                            //var store = Ext.getStore('MyJsonPStore');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
                             /*record.beginEdit(true, record.getChanges());
@@ -66942,12 +66942,12 @@ Ext.define('Ext.picker.Picker', {
                                 success: function(form, action) {
                                     //Ext.Msg.alert('Success', action.msg,null,null);
                                     Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
-                                    store.sync();
-                                    store.load();
+                                    //store.sync();
+                                    // store.load();
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
-                                    store.load();
+                                    //store.load();
                                     Ext.Msg.alert('Failure', action.msg, null, null);
                                     form.destroy();
                                 }
@@ -66966,20 +66966,22 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 handler: function(button, e) {
-                    var storeUserDetails = Ext.getStore('UserDetails');
-                    storeUserDetails.load();
-                    var customerId;
-                    var businessName;
-                    storeUserDetails.each(function(record) {
-                        console.log('StoreUserDetails : ' + record.get('customerId'));
-                        customerId = record.get('customerId');
-                        businessName = record.get('businessName');
-                    });
+                    /*var storeUserDetails = Ext.getStore('UserDetails');
+					storeUserDetails.load();
+					var customerId;
+					var businessName;
+
+					storeUserDetails.each(function(record){
+					console.log('StoreUserDetails : ' +record.get('customerId'));
+					customerId = record.get('customerId');
+					businessName = record.get('businessName');
+
+					});*/
                     var view = Ext.Viewport.add({
                             xtype: 'ChangeContactPicForm'
                         });
-                    var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
-                    //var record = Ext.getStore('storeUserDetails').getAt(0);
+                    //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
+                    var record = Ext.getStore('UserDetails').getAt(0);
                     view.setRecord(record);
                     view.showBy(button);
                 },
@@ -67332,10 +67334,9 @@ Ext.define('Ext.picker.Picker', {
             currentForm.setRecord(record);
         }
     },
-    onListActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter();
-    },
+    onListActivate: function(newActiveItem, container, oldActiveItem, eOpts) {},
+    //var ds = Ext.StoreManager.lookup('MyJsonPStore');
+    //ds.clearFilter();
     onDealBackBtnTap: function(button, e, eOpts) {
         Ext.getStore('LocalStore').removeAt(0);
         Ext.Viewport.getActiveItem().destroy();
@@ -67487,20 +67488,21 @@ Ext.define('Ext.picker.Picker', {
         form.destroy();
     },
     onBackFromDealsPanelTap: function(button, e, eOpts) {
-        var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter();
+        //var ds = Ext.StoreManager.lookup('MyJsonPStore');
+        //ds.clearFilter() ;
         var dealRecord = this.getContactinfo().getRecord();
         //console.log("Deal Record is:") ;
         //console.log(dealRecord) ;
         var customerId = dealRecord.get('customerId');
         //console.log("Customer Id is " + customerId) ;
-        ds.filter('customerId', customerId);
-        var customerData = ds.getData().getAt(0);
+        //ds.filter('customerId', customerId);
+        //var customerData = ds.getData().getAt(0) ;
         //console.log("Customer Data is:") ;
         //console.log(customerData) ;
+        var record = Ext.getStore('UserDetails').getAt(0);
         var info = this.getContactinfo();
-        info.setRecord(customerData);
-        ds.clearFilter();
+        info.setRecord(record);
+        //ds.clearFilter() ;
         var view = Ext.Viewport.getActiveItem().destroy();
         Ext.Viewport.setActiveItem(info);
     },
@@ -67840,8 +67842,9 @@ Ext.define('Ext.picker.Picker', {
             var name = record.get('itemName');
             var businessName = record.get('businessName');
             this.down('#nameTxt1').setHtml(record.get('businessName'));
-            var store = Ext.getStore('MyJsonPStore');
-            var rec = store.findRecord('businessName', businessName);
+            //var store = Ext.getStore('MyJsonPStore');
+            //  var rec = store.findRecord('businessName', businessName);
+            var rec = Ext.getStore('UserDetails').getAt(0);
             Ext.getCmp('phoneNumber1').setValue(rec.get('phoneNumber'));
             Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
             Ext.getCmp('website2').setValue(rec.get('website'));
@@ -68083,7 +68086,7 @@ Ext.define('Ext.picker.Picker', {
                                     'customerId': record.get('customerId'),
                                     'loginEmail': email,
                                     'businessName': record.get('businessName'),
-                                    'DealPictureURL': record.get('pictureURL'),
+                                    'pictureURL': record.get('pictureURL'),
                                     'city': record.get('city'),
                                     'state': record.get('state'),
                                     'address': record.get('address'),
@@ -68211,7 +68214,7 @@ Ext.define('Ext.picker.Picker', {
                     var form = this.up('ChangeContactPicForm');
                     var record = form.getRecord();
                     var customerId = form.getRecord().get('customerId');
-                    var store = Ext.getStore('MyJsonPStore');
+                    //var store = Ext.getStore('MyJsonPStore');
                     var file = form.getAt(0).getValue();
                     if (file) {
                         form.submit({
@@ -68231,15 +68234,15 @@ Ext.define('Ext.picker.Picker', {
 
 
 								record.commit();*/
-                                store.sync();
-                                store.load();
+                                //store.sync();
+                                //store.load();
                                 Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
                                 Ext.Viewport.getComponent('formpanel').setRecord(record);
                                 form.destroy();
                             },
                             //view.setRecord(record);
                             failure: function(form, action) {
-                                store.load();
+                                //store.load();
                                 //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
                                 Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
                                 form.destroy();
