@@ -66702,7 +66702,7 @@ Ext.define('Ext.picker.Picker', {
             businessName = record.get('businessName');
         });
         var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
-        var record1 = Ext.getStore('storeUserDetails').getAt(0);
+        var record1 = Ext.getStore('storeUserDetails').getAllCount();
         console.log('Record is :' + record1);
         this.setRecord(record);
     },
