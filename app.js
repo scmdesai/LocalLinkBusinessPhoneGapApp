@@ -66696,14 +66696,16 @@ Ext.define('Ext.picker.Picker', {
         var businessName;
         var date = new Date();
         var today = Ext.Date.format(date, 'n/j/Y');
-        var rec = storeUserDetails.each(function(record) {
-                //console.log('StoreUserDetails : ' +record.get('customerId'));
-                //customerId = record.get('customerId');
-                //businessName = record.get('businessName');
-                return record;
-            });
+        /*var rec = storeUserDetails.each(function(record){
+			//console.log('StoreUserDetails : ' +record.get('customerId'));
+			//customerId = record.get('customerId');
+			//businessName = record.get('businessName');
+
+			return record;
+
+		});*/
         //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-        var data = rec.getRecord();
+        var data = storeUserDetails.getRecord();
         this.setRecord(data);
     },
     setRecord: function(record) {
