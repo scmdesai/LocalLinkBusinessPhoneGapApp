@@ -66705,6 +66705,7 @@ Ext.define('Ext.picker.Picker', {
 
 		});*/
         var record = Ext.getStore('storeUserDetails').getAt(0);
+        console.log('Record is :' + record);
         this.setRecord(record);
     },
     setRecord: function(record) {
