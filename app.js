@@ -66244,17 +66244,13 @@ Ext.define('Ext.picker.Picker', {
         var businessName;
         var date = new Date();
         var today = Ext.Date.format(date, 'n/j/Y');
-        /*var rec = storeUserDetails.each(function(record){
-			//console.log('StoreUserDetails : ' +record.get('customerId'));
-			customerId = record.get('customerId');
-			businessName = record.get('businessName');
-
-
-
-		});*/
-        //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-        //this.setRecord(record);
-        console.log('Store count is ' + storeUserDetails.getAllCount());
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+        this.setRecord(record);
     },
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
