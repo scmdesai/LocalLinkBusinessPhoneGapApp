@@ -66915,7 +66915,8 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg, null, null);
+                                    //Ext.Msg.alert('Success', action.msg,null,null);
+                                    Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
                                     store.sync();
                                     store.load();
                                     form.destroy();
@@ -68037,15 +68038,8 @@ Ext.define('Ext.picker.Picker', {
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
-                    if (!record) {
-                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
-                            FacebookInAppBrowser.logout(function() {
-                                window.localStorage.setItem('facebookAccessToken', null);
-                                location.reload();
-                            });
-                        }, null);
-                    } else {
+                    //var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail',email,0,true,false,false);
+                    $.getJSON('http://services.appsonmobile.com/stores' + email, function(record) {
                         var endDate = new Date(record.get('endDate'));
                         var today = new Date();
                         var storeUserDetails = Ext.getStore('UserDetails');
@@ -68102,7 +68096,14 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             }, null);
                         }
-                    }
+                    }, function(record) {
+                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
+                            FacebookInAppBrowser.logout(function() {
+                                window.localStorage.setItem('facebookAccessToken', null);
+                                location.reload();
+                            });
+                        }, null);
+                    });
                 } else {
                     console.log('no user info');
                 }
