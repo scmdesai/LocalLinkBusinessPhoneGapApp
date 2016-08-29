@@ -66121,7 +66121,7 @@ Ext.define('Ext.picker.Picker', {
                 name: 'businessName'
             },
             {
-                name: 'email'
+                name: 'loginEmail'
             },
             {
                 name: 'FBLoginName'
@@ -66143,6 +66143,24 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'state'
+            },
+            {
+                name: 'address'
+            },
+            {
+                name: 'emailAddress'
+            },
+            {
+                name: 'zipcode'
+            },
+            {
+                name: 'phoneNumber'
+            },
+            {
+                name: 'website'
+            },
+            {
+                name: 'websiteDisplayName'
             }
         ]
     }
@@ -66736,7 +66754,8 @@ Ext.define('Ext.picker.Picker', {
                             var form = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
-                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                            //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
+                            var record = Ext.getStore('UserDetails').getAt(0);
                             Ext.Viewport.setActiveItem(form);
                             form.setRecord(record);
                         }
@@ -68056,11 +68075,17 @@ Ext.define('Ext.picker.Picker', {
                             if ((record.get('planType') === "Free" && endDate >= today) || record.get('planType') === "Paid") {
                                 storeUserDetails.add({
                                     'customerId': record.get('customerId'),
-                                    'email': email,
+                                    'loginEmail': email,
                                     'businessName': record.get('businessName'),
                                     'DealPictureURL': record.get('pictureURL'),
                                     'city': record.get('city'),
-                                    'state': record.get('state')
+                                    'state': record.get('state'),
+                                    'address': record.get('address'),
+                                    'zipcode': record.get('zipcode'),
+                                    'emailAddress': record.get('emailAddress'),
+                                    'website': record.get('website'),
+                                    'websiteDisplayName': record.get('websiteDisplayName'),
+                                    'phoneNumber': record.get('phoneNumber')
                                 });
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
