@@ -67600,7 +67600,7 @@ Ext.define('Ext.picker.Picker', {
                             var endDate = new Date(record['endDate']);
                             var today = new Date();
                             var storeUserDetails = Ext.getStore('UserDetails');
-                            storeUserDetails.removeAll();
+                            //storeUserDetails.removeAt(0);
                             if (record['signupStatus'] === "Approved") {
                                 if ((record['planType'] === "Free" && endDate >= today) || record['planType'] === "Paid") {
                                     storeUserDetails.add({
