@@ -67628,6 +67628,7 @@ Ext.define('Ext.picker.Picker', {
                                             xtype: 'panel'
                                         });
                                     view.setRecord(record);
+                                    console.log(storeUserDetails.getAllCount());
                                     Ext.Viewport.getActiveItem().destroy();
                                     Ext.Viewport.setActiveItem(view);
                                 } else {
