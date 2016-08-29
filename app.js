@@ -66696,15 +66696,14 @@ Ext.define('Ext.picker.Picker', {
         var businessName;
         var date = new Date();
         var today = Ext.Date.format(date, 'n/j/Y');
-        /*storeUserDetails.each(function(record){
-			//console.log('StoreUserDetails : ' +record.get('customerId'));
-			customerId = record.get('customerId');
-			businessName = record.get('businessName');
-
-		});*/
-        //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-        var record = Ext.getStore('storeUserDetails').getAt(0);
-        console.log('Record is :' + record);
+        storeUserDetails.each(function(record) {
+            console.log('StoreUserDetails : ' + record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+        var record1 = Ext.getStore('storeUserDetails').getAt(0);
+        console.log('Record is :' + record1);
         this.setRecord(record);
     },
     setRecord: function(record) {
