@@ -50609,455 +50609,6 @@ Ext.define('Ext.direct.Manager', {
 
 /**
  * @author Ed Spencer
- *
- * WebStorageProxy is simply a superclass for the {@link Ext.data.proxy.LocalStorage LocalStorage} proxy. It uses the
- * new HTML5 key/value client-side storage objects to save {@link Ext.data.Model model instances} for offline use.
- * @private
- */
-(Ext.cmd.derive('Ext.data.proxy.WebStorage', Ext.data.proxy.Client, {
-    alternateClassName: 'Ext.data.WebStorageProxy',
-    config: {
-        /**
-         * @cfg {String} id
-         * The unique ID used as the key in which all record data are stored in the local storage object.
-         */
-        id: undefined,
-        // WebStorage proxies dont use readers and writers
-        /**
-         * @cfg
-         * @hide
-         */
-        reader: null,
-        /**
-         * @cfg
-         * @hide
-         */
-        writer: null,
-        /**
-         * @cfg {Boolean} enablePagingParams This can be set to true if you want the webstorage proxy to comply
-         * to the paging params set on the store.
-         */
-        enablePagingParams: false,
-        defaultDateFormat: 'Y-m-d H:i:s.u'
-    },
-    /**
-     * Creates the proxy, throws an error if local storage is not supported in the current browser.
-     * @param {Object} config (optional) Config object.
-     */
-    constructor: function(config) {
-        Ext.data.proxy.Client.prototype.constructor.apply(this, arguments);
-        /**
-         * @property {Object} cache
-         * Cached map of records already retrieved by this Proxy. Ensures that the same instance is always retrieved.
-         */
-        this.cache = {};
-    },
-    updateModel: function(model) {
-        if (!this.getId()) {
-            this.setId(model.modelName);
-        }
-        Ext.data.proxy.Client.prototype.updateModel.apply(this, arguments);
-    },
-    //inherit docs
-    create: function(operation, callback, scope) {
-        var records = operation.getRecords(),
-            length = records.length,
-            ids = this.getIds(),
-            id, record, i;
-        operation.setStarted();
-        for (i = 0; i < length; i++) {
-            record = records[i];
-            id = record.getId();
-            this.setRecord(record);
-            ids.push(id);
-        }
-        this.setIds(ids);
-        operation.setCompleted();
-        operation.setSuccessful();
-        if (typeof callback == 'function') {
-            callback.call(scope || this, operation);
-        }
-    },
-    //inherit docs
-    read: function(operation, callback, scope) {
-        var records = [],
-            ids = this.getIds(),
-            model = this.getModel(),
-            idProperty = model.getIdProperty(),
-            params = operation.getParams() || {},
-            sorters = operation.getSorters(),
-            filters = operation.getFilters(),
-            start = operation.getStart(),
-            limit = operation.getLimit(),
-            length = ids.length,
-            i, record, collection;
-        //read a single record
-        if (params[idProperty] !== undefined) {
-            record = this.getRecord(params[idProperty]);
-            if (record) {
-                records.push(record);
-                operation.setSuccessful();
-            }
-        } else {
-            for (i = 0; i < length; i++) {
-                record = this.getRecord(ids[i]);
-                if (record) {
-                    records.push(record);
-                }
-            }
-            collection = Ext.create('Ext.util.Collection');
-            // First we comply to filters
-            if (filters && filters.length) {
-                collection.setFilters(filters);
-            }
-            // Then we comply to sorters
-            if (sorters && sorters.length) {
-                collection.setSorters(sorters);
-            }
-            collection.addAll(records);
-            if (this.getEnablePagingParams() && start !== undefined && limit !== undefined) {
-                records = collection.items.slice(start, start + limit);
-            } else {
-                records = collection.items.slice();
-            }
-            operation.setSuccessful();
-        }
-        operation.setCompleted();
-        operation.setResultSet(Ext.create('Ext.data.ResultSet', {
-            records: records,
-            total: records.length,
-            loaded: true
-        }));
-        operation.setRecords(records);
-        if (typeof callback == 'function') {
-            callback.call(scope || this, operation);
-        }
-    },
-    //inherit docs
-    update: function(operation, callback, scope) {
-        var records = operation.getRecords(),
-            length = records.length,
-            ids = this.getIds(),
-            record, id, i;
-        operation.setStarted();
-        for (i = 0; i < length; i++) {
-            record = records[i];
-            this.setRecord(record);
-            //we need to update the set of ids here because it's possible that a non-phantom record was added
-            //to this proxy - in which case the record's id would never have been added via the normal 'create' call
-            id = record.getId();
-            if (id !== undefined && Ext.Array.indexOf(ids, id) == -1) {
-                ids.push(id);
-            }
-        }
-        this.setIds(ids);
-        operation.setCompleted();
-        operation.setSuccessful();
-        if (typeof callback == 'function') {
-            callback.call(scope || this, operation);
-        }
-    },
-    //inherit
-    destroy: function(operation, callback, scope) {
-        var records = operation.getRecords(),
-            length = records.length,
-            ids = this.getIds(),
-            //newIds is a copy of ids, from which we remove the destroyed records
-            newIds = [].concat(ids),
-            i;
-        operation.setStarted();
-        for (i = 0; i < length; i++) {
-            Ext.Array.remove(newIds, records[i].getId());
-            this.removeRecord(records[i], false);
-        }
-        this.setIds(newIds);
-        operation.setCompleted();
-        operation.setSuccessful();
-        if (typeof callback == 'function') {
-            callback.call(scope || this, operation);
-        }
-    },
-    /**
-     * @private
-     * Fetches a model instance from the Proxy by ID. Runs each field's decode function (if present) to decode the data.
-     * @param {String} id The record's unique ID
-     * @return {Ext.data.Model} The model instance or undefined if the record did not exist in the storage.
-     */
-    getRecord: function(id) {
-        if (this.cache[id] === undefined) {
-            var recordKey = this.getRecordKey(id),
-                item = this.getStorageObject().getItem(recordKey),
-                data = {},
-                Model = this.getModel(),
-                fields = Model.getFields().items,
-                length = fields.length,
-                i, field, name, record, rawData, rawValue;
-            if (!item) {
-                return undefined;
-            }
-            rawData = Ext.decode(item);
-            for (i = 0; i < length; i++) {
-                field = fields[i];
-                name = field.getName();
-                rawValue = rawData[name];
-                if (typeof field.getDecode() == 'function') {
-                    data[name] = field.getDecode()(rawValue);
-                } else {
-                    if (field.getType().type == 'date') {
-                        data[name] = this.readDate(field, rawValue);
-                    } else {
-                        data[name] = rawValue;
-                    }
-                }
-            }
-            record = new Model(data, id);
-            this.cache[id] = record;
-        }
-        return this.cache[id];
-    },
-    /**
-     * Saves the given record in the Proxy. Runs each field's encode function (if present) to encode the data.
-     * @param {Ext.data.Model} record The model instance
-     * @param {String} [id] The id to save the record under (defaults to the value of the record's getId() function)
-     */
-    setRecord: function(record, id) {
-        if (id) {
-            record.setId(id);
-        } else {
-            id = record.getId();
-        }
-        var me = this,
-            rawData = record.getData(),
-            data = {},
-            Model = me.getModel(),
-            fields = Model.getFields().items,
-            length = fields.length,
-            i = 0,
-            rawValue, field, name, obj, key;
-        for (; i < length; i++) {
-            field = fields[i];
-            name = field.getName();
-            rawValue = rawData[name];
-            if (field.getPersist() === false) {
-                
-                continue;
-            }
-            if (typeof field.getEncode() == 'function') {
-                data[name] = field.getEncode()(rawValue, record);
-            } else {
-                if (field.getType().type == 'date' && Ext.isDate(rawValue)) {
-                    data[name] = this.writeDate(field, rawValue);
-                } else {
-                    data[name] = rawValue;
-                }
-            }
-        }
-        obj = me.getStorageObject();
-        key = me.getRecordKey(id);
-        //keep the cache up to date
-        me.cache[id] = record;
-        //iPad bug requires that we remove the item before setting it
-        obj.removeItem(key);
-        try {
-            obj.setItem(key, Ext.encode(data));
-        } catch (e) {
-            this.fireEvent('exception', this, e);
-        }
-        record.commit();
-    },
-    /**
-     * @private
-     * Physically removes a given record from the local storage. Used internally
-     * by {@link #destroy}, which you should use instead because it updates the
-     * list of currently-stored record ids.
-     * @param {String/Number/Ext.data.Model} id The id of the record to remove,
-     * or an Ext.data.Model instance.
-     * @param {Boolean} [updateIds] False to skip saving the array of ids
-     * representing the set of all records in the Proxy.
-     */
-    removeRecord: function(id, updateIds) {
-        var me = this,
-            ids;
-        if (id.isModel) {
-            id = id.getId();
-        }
-        if (updateIds !== false) {
-            ids = me.getIds();
-            Ext.Array.remove(ids, id);
-            me.setIds(ids);
-        }
-        delete this.cache[id];
-        me.getStorageObject().removeItem(me.getRecordKey(id));
-    },
-    /**
-     * @private
-     * Given the id of a record, returns a unique string based on that id and the id of this proxy. This is used when
-     * storing data in the local storage object and should prevent naming collisions.
-     * @param {String/Number/Ext.data.Model} id The record id, or a Model instance
-     * @return {String} The unique key for this record
-     */
-    getRecordKey: function(id) {
-        if (id.isModel) {
-            id = id.getId();
-        }
-        return Ext.String.format("{0}-{1}", this.getId(), id);
-    },
-    /**
-     * @private
-     * Returns the array of record IDs stored in this Proxy
-     * @return {Number[]} The record IDs. Each is cast as a Number
-     */
-    getIds: function() {
-        var ids = (this.getStorageObject().getItem(this.getId()) || "").split(","),
-            length = ids.length,
-            i;
-        if (length == 1 && ids[0] === "") {
-            ids = [];
-        }
-        return ids;
-    },
-    /**
-     * @private
-     * Saves the array of ids representing the set of all records in the Proxy
-     * @param {Number[]} ids The ids to set
-     */
-    setIds: function(ids) {
-        var obj = this.getStorageObject(),
-            str = ids.join(","),
-            id = this.getId();
-        obj.removeItem(id);
-        if (!Ext.isEmpty(str)) {
-            try {
-                obj.setItem(id, str);
-            } catch (e) {
-                this.fireEvent('exception', this, e);
-            }
-        }
-    },
-    writeDate: function(field, date) {
-        if (Ext.isEmpty(date)) {
-            return null;
-        }
-        var dateFormat = field.getDateFormat() || this.getDefaultDateFormat();
-        switch (dateFormat) {
-            case 'timestamp':
-                return date.getTime() / 1000;
-            case 'time':
-                return date.getTime();
-            default:
-                return Ext.Date.format(date, dateFormat);
-        }
-    },
-    readDate: function(field, date) {
-        if (Ext.isEmpty(date)) {
-            return null;
-        }
-        var dateFormat = field.getDateFormat() || this.getDefaultDateFormat();
-        switch (dateFormat) {
-            case 'timestamp':
-                return new Date(date * 1000);
-            case 'time':
-                return new Date(date);
-            default:
-                return Ext.isDate(date) ? date : Ext.Date.parse(date, dateFormat);
-        }
-    },
-    /**
-     * @private
-     * Sets up the Proxy by claiming the key in the storage object that corresponds to the unique id of this Proxy. Called
-     * automatically by the constructor, this should not need to be called again unless {@link #clear} has been called.
-     */
-    initialize: function() {
-        Ext.data.proxy.Client.prototype.initialize.apply(this, arguments);
-        var storageObject = this.getStorageObject();
-        try {
-            storageObject.setItem(this.getId(), storageObject.getItem(this.getId()) || "");
-        } catch (e) {
-            this.fireEvent('exception', this, e);
-        }
-    },
-    /**
-     * Destroys all records stored in the proxy and removes all keys and values used to support the proxy from the
-     * storage object.
-     */
-    clear: function() {
-        var obj = this.getStorageObject(),
-            ids = this.getIds(),
-            len = ids.length,
-            i;
-        //remove all the records
-        for (i = 0; i < len; i++) {
-            this.removeRecord(ids[i], false);
-        }
-        //remove the supporting objects
-        obj.removeItem(this.getId());
-    },
-    /**
-     * @private
-     * Abstract function which should return the storage object that data will be saved to. This must be implemented
-     * in each subclass.
-     * @return {Object} The storage object
-     */
-    getStorageObject: function() {}
-}, 1, 0, 0, 0, 0, 0, [
-    Ext.data.proxy,
-    'WebStorage',
-    Ext.data,
-    'WebStorageProxy'
-], 0));
-
-/**
- * @author Ed Spencer
- *
- * Proxy which uses HTML5 session storage as its data storage/retrieval mechanism. If this proxy is used in a browser
- * where session storage is not supported, the constructor will throw an error. A session storage proxy requires a
- * unique ID which is used as a key in which all record data are stored in the session storage object.
- *
- * It's important to supply this unique ID as it cannot be reliably determined otherwise. If no id is provided but the
- * attached store has a storeId, the storeId will be used. If neither option is presented the proxy will throw an error.
- *
- * Proxies are almost always used with a {@link Ext.data.Store store}:
- *
- *     new Ext.data.Store({
- *         proxy: {
- *             type: 'sessionstorage',
- *             id  : 'myProxyKey'
- *         }
- *     });
- *
- * Alternatively you can instantiate the Proxy directly:
- *
- *     new Ext.data.proxy.SessionStorage({
- *         id  : 'myOtherProxyKey'
- *     });
- *
- * Note that session storage is different to local storage (see {@link Ext.data.proxy.LocalStorage}) - if a browser
- * session is ended (e.g. by closing the browser) then all data in a SessionStorageProxy are lost. Browser restarts
- * don't affect the {@link Ext.data.proxy.LocalStorage} - the data are preserved.
- *
- * ###Further Reading
- * [Sencha Touch Data Overview](../../../core_concepts/data/data_package_overview.html)
- * [Sencha Touch Store Guide](../../../core_concepts/data/stores.html)
- * [Sencha Touch Models Guide](../../../core_concepts/data/models.html)
- * [Sencha Touch Proxy Guide](../../../core_concepts/data/proxies.html)
- */
-(Ext.cmd.derive('Ext.data.proxy.SessionStorage', Ext.data.proxy.WebStorage, {
-    alternateClassName: 'Ext.data.SessionStorageProxy',
-    //inherit docs
-    getStorageObject: function() {
-        return window.sessionStorage;
-    }
-}, 0, 0, 0, 0, [
-    "proxy.sessionstorage"
-], 0, [
-    Ext.data.proxy,
-    'SessionStorage',
-    Ext.data,
-    'SessionStorageProxy'
-], 0));
-
-/**
- * @author Ed Spencer
  * @class Ext.data.reader.Array
  *
  * Data reader class to create an Array of {@link Ext.data.Model} objects from an Array.
@@ -66222,10 +65773,7 @@ Ext.define('Ext.picker.Picker', {
         autoSync: true,
         model: 'LocalBuzzMerchant.model.UserDetails',
         remoteFilter: true,
-        storeId: 'UserDetails',
-        proxy: {
-            type: 'sessionstorage'
-        }
+        storeId: 'UserDetails'
     }
 }, 0, 0, 0, 0, 0, 0, [
     LocalBuzzMerchant.store,
@@ -66701,7 +66249,7 @@ Ext.define('Ext.picker.Picker', {
             customerId = record.get('customerId');
             businessName = record.get('businessName');
         });
-        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
         this.setRecord(record);
     },
     setRecord: function(record) {
@@ -66903,7 +66451,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var form = this.up('contactform');
-                            var store = Ext.getStore('MyJsonPStore');
+                            //var store = Ext.getStore('UserDetails');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
                             /*record.beginEdit(true, record.getChanges());
@@ -66943,17 +66491,20 @@ Ext.define('Ext.picker.Picker', {
                 handler: function(button, e) {
                     var storeUserDetails = Ext.getStore('UserDetails');
                     storeUserDetails.load();
-                    var customerId;
-                    var businessName;
-                    storeUserDetails.each(function(record) {
-                        console.log('StoreUserDetails : ' + record.get('customerId'));
-                        customerId = record.get('customerId');
-                        businessName = record.get('businessName');
-                    });
+                    /*var customerId;
+					var businessName;
+
+					storeUserDetails.each(function(record){
+					console.log('StoreUserDetails : ' +record.get('customerId'));
+					customerId = record.get('customerId');
+					businessName = record.get('businessName');
+
+					});*/
                     var view = Ext.Viewport.add({
                             xtype: 'ChangeContactPicForm'
                         });
-                    var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
+                    //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
+                    var record = Ext.getStore('storeUserDetails').getAt(0);
                     view.setRecord(record);
                     view.showBy(button);
                 },
@@ -67461,17 +67012,18 @@ Ext.define('Ext.picker.Picker', {
         form.destroy();
     },
     onBackFromDealsPanelTap: function(button, e, eOpts) {
-        var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        ds.clearFilter();
+        var ds = Ext.StoreManager.lookup('UserDetails');
+        //ds.clearFilter() ;
         var dealRecord = this.getContactinfo().getRecord();
         //console.log("Deal Record is:") ;
         //console.log(dealRecord) ;
         var customerId = dealRecord.get('customerId');
         //console.log("Customer Id is " + customerId) ;
-        ds.filter('customerId', customerId);
-        var customerData = ds.getData().getAt(0);
+        //ds.filter('customerId', customerId);
+        //var customerData = ds.getData().getAt(0) ;
         //console.log("Customer Data is:") ;
         //console.log(customerData) ;
+        var customerData = Ext.getStore('storeUserDetails').getAt(0);
         var info = this.getContactinfo();
         info.setRecord(customerData);
         ds.clearFilter();
@@ -67814,8 +67366,8 @@ Ext.define('Ext.picker.Picker', {
             var name = record.get('itemName');
             var businessName = record.get('businessName');
             this.down('#nameTxt1').setHtml(record.get('businessName'));
-            var store = Ext.getStore('MyJsonPStore');
-            var rec = store.findRecord('businessName', businessName);
+            var store = Ext.getStore('UserDetails');
+            // var rec = store.findRecord('businessName', businessName);
             Ext.getCmp('phoneNumber1').setValue(rec.get('phoneNumber'));
             Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
             Ext.getCmp('website2').setValue(rec.get('website'));
