@@ -66700,6 +66700,7 @@ Ext.define('Ext.picker.Picker', {
                 //console.log('StoreUserDetails : ' +record.get('customerId'));
                 //customerId = record.get('customerId');
                 //businessName = record.get('businessName');
+                console.log(record);
                 return record;
             });
         //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
