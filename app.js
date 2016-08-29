@@ -66703,7 +66703,7 @@ Ext.define('Ext.picker.Picker', {
                 return record;
             });
         //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-        var data = rec.getData();
+        var data = rec.getRecord();
         this.setRecord(data);
     },
     setRecord: function(record) {
