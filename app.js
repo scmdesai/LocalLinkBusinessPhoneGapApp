@@ -66696,18 +66696,15 @@ Ext.define('Ext.picker.Picker', {
         var businessName;
         var date = new Date();
         var today = Ext.Date.format(date, 'n/j/Y');
-        /*var rec = storeUserDetails.each(function(record){
-			//console.log('StoreUserDetails : ' +record.get('customerId'));
-			//customerId = record.get('customerId');
-			//businessName = record.get('businessName');
-
-			return record;
-
-		});*/
-        //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-        var data = storeUserDetails.getRecord();
-        this.setRecord(data);
+        var rec = storeUserDetails.each(function(record) {
+                //console.log('StoreUserDetails : ' +record.get('customerId'));
+                customerId = record.get('customerId');
+                businessName = record.get('businessName');
+            });
     },
+    //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
+    //this.setRecord(record);
+    //console.log('Store count is '+storeUserDetails.getAllCount());
     setRecord: function(record) {
         (arguments.callee.$previous || Ext.form.Panel.prototype.setRecord).apply(this, arguments);
         console.log('Set Record of info page');
@@ -68055,25 +68052,27 @@ Ext.define('Ext.picker.Picker', {
                             storeUserDetails.removeAll();
                             if (record['signupStatus'] === "Approved") {
                                 if ((record['planType'] === "Free" && endDate >= today) || record['planType'] === "Paid") {
-                                    storeUserDetails.add({
-                                        'customerId': record['customerId'],
-                                        'loginEmail': email,
-                                        'businessName': record['businessName'],
-                                        'DealPictureURL': record['pictureURL'],
-                                        'city': record['city'],
-                                        'state': record['state'],
-                                        'phoneNumber': record['phoneNumber'],
-                                        'address': record['address'],
-                                        'zipcode': record['zipcode'],
-                                        'website': record['website'],
-                                        'websiteDisplayName': record['websiteDisplayName'],
-                                        'signupStatus': record['signupStatus'],
-                                        'emailAddress': record['emailAddress'],
-                                        'startDate': record['startDate'],
-                                        'endDate': record['endDate'],
-                                        'planType': record['planType'],
-                                        'category': record['category']
-                                    });
+                                    /*storeUserDetails.add({'customerId' : record['customerId'],
+													  'loginEmail': email,
+													  'businessName': record['businessName'],
+													  'DealPictureURL': record['pictureURL'],
+													  'city': record['city'],
+													  'state': record['state'],
+													  'phoneNumber': record['phoneNumber'],
+													  'address': record['address'],
+													  'zipcode': record['zipcode'],
+													  'website': record['website'],
+													  'websiteDisplayName': record['websiteDisplayName'],
+													  'signupStatus': record['signupStatus'],
+													  'emailAddress': record['emailAddress'],
+
+													  'startDate': record['startDate'],
+													  'endDate': record['endDate'],
+													  'planType': record['planType'],
+													  'category': record['category']
+
+												  });*/
+                                    storeUserDetails.add(record);
                                     var view = Ext.Viewport.add({
                                             xtype: 'panel'
                                         });
