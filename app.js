@@ -66744,6 +66744,7 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
                             var record = Ext.getStore('storeUserDetails').getAt(0);
+                            console.log('Record is :' + record);
                             Ext.Viewport.setActiveItem(form);
                             form.setRecord(record);
                         }
