@@ -66714,12 +66714,16 @@ Ext.define('Ext.picker.Picker', {
         var businessName;
         var date = new Date();
         var today = Ext.Date.format(date, 'n/j/Y');
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-        });
-        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
+        /*storeUserDetails.each(function(record){
+			//console.log('StoreUserDetails : ' +record.get('customerId'));
+			customerId = record.get('customerId');
+			businessName = record.get('businessName');
+
+
+
+		});
+		var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId);*/
+        var record = Ext.getStore('UserDetails').getAt(0);
         this.setRecord(record);
     },
     setRecord: function(record) {
@@ -66742,15 +66746,17 @@ Ext.define('Ext.picker.Picker', {
                         iconCls: 'icon-edit',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
-                            var storeUserDetails = Ext.getStore('UserDetails');
-                            storeUserDetails.load();
-                            var customerId;
-                            var businessName;
-                            storeUserDetails.each(function(record) {
-                                console.log('StoreUserDetails : ' + record.get('customerId'));
-                                customerId = record.get('customerId');
-                                businessName = record.get('businessName');
-                            });
+                            /*var storeUserDetails = Ext.getStore('UserDetails');
+						storeUserDetails.load();
+						var customerId;
+						var businessName;
+
+						storeUserDetails.each(function(record){
+						console.log('StoreUserDetails : ' +record.get('customerId'));
+						customerId = record.get('customerId');
+						businessName = record.get('businessName');
+
+						});*/
                             var form = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
