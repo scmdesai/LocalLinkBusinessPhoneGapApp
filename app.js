@@ -68053,6 +68053,11 @@ Ext.define('Ext.picker.Picker', {
                     $.getJSON('http://services.appsonmobile.com/stores/' + email, function(record) {
                         if (record) {
                             var endDate = new Date(record['endDate']);
+                            console.log(record['customerId']);
+                            console.log(record['businessName']);
+                            console.log(record['city']);
+                            console.log(record['state']);
+                            console.log(record['phoneNumber']);
                             var today = new Date();
                             var storeUserDetails = Ext.getStore('UserDetails');
                             storeUserDetails.removeAll();
