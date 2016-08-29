@@ -66173,7 +66173,7 @@ Ext.define('Ext.picker.Picker', {
         proxy: {
             type: 'jsonp',
             timeout: 300000,
-            url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals',
+            url: 'http://services.appsonmobile.com/deals',
             reader: {
                 type: 'json'
             },
@@ -66277,7 +66277,7 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyJsonPStore',
         proxy: {
             type: 'jsonp',
-            url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/stores',
+            url: 'http://services.appsonmobile.com/stores',
             reader: {
                 type: 'json'
             }
@@ -66915,14 +66915,14 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg, null, null);
+                                    Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
                                     store.sync();
                                     store.load();
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
                                     store.load();
-                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                    Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                     form.destroy();
                                 }
                             });
@@ -67342,8 +67342,7 @@ Ext.define('Ext.picker.Picker', {
                                     dealsStore.load();
                                 },
                                 failure: function(form, action) {
-                                    //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                    Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                     //console.log(action.msg);
                                     var store = Ext.getStore('MyDealsStore');
                                     store.load();
@@ -67547,8 +67546,7 @@ Ext.define('Ext.picker.Picker', {
                 console.log('Success');
             },
             failure: function(form, action) {
-                //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                Ext.Msg.alert('Failure', action.msg, null, null);
+                Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
             }
         });
     }
@@ -68207,8 +68205,7 @@ Ext.define('Ext.picker.Picker', {
                             //view.setRecord(record);
                             failure: function(form, action) {
                                 store.load();
-                                //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                                Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
+                                Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                 form.destroy();
                             }
                         });
@@ -68845,7 +68842,7 @@ Ext.define('Ext.picker.Picker', {
                                                 },
                                                 failure: function(form, action) {
                                                     store.load();
-                                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                                    Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                                     form.destroy();
                                                 }
                                             });
@@ -69247,7 +69244,7 @@ Ext.define('Ext.picker.Picker', {
                                                         form.destroy();
                                                     },
                                                     failure: function(form, action) {
-                                                        Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
+                                                        Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                                         var store = Ext.getStore('MyDealsStore');
                                                         store.load();
                                                         if (store.getCount() >= 5) {
@@ -69783,8 +69780,7 @@ Ext.define('Ext.picker.Picker', {
                                                     form.destroy();
                                                 },
                                                 failure: function(form, action) {
-                                                    //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                                    Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                                     var store = Ext.getStore('MyDealsStore');
                                                     store.load();
                                                     console.log('Count is:' + count);
