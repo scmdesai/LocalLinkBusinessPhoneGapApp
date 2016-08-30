@@ -66121,7 +66121,7 @@ Ext.define('Ext.picker.Picker', {
                 name: 'businessName'
             },
             {
-                name: 'loginEmail'
+                name: 'email'
             },
             {
                 name: 'FBLoginName'
@@ -66143,27 +66143,6 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'state'
-            },
-            {
-                name: 'address'
-            },
-            {
-                name: 'emailAddress'
-            },
-            {
-                name: 'zipcode'
-            },
-            {
-                name: 'phoneNumber'
-            },
-            {
-                name: 'website'
-            },
-            {
-                name: 'websiteDisplayName'
-            },
-            {
-                name: 'pictureURL'
             }
         ]
     }
@@ -66194,7 +66173,7 @@ Ext.define('Ext.picker.Picker', {
         proxy: {
             type: 'jsonp',
             timeout: 300000,
-            url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals',
+            url: 'http://services.appsonmobile.com/deals',
             reader: {
                 type: 'json'
             },
@@ -66298,7 +66277,7 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyJsonPStore',
         proxy: {
             type: 'jsonp',
-            url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/stores',
+            url: 'http://services.appsonmobile.com/stores',
             reader: {
                 type: 'json'
             }
@@ -66717,16 +66696,12 @@ Ext.define('Ext.picker.Picker', {
         var businessName;
         var date = new Date();
         var today = Ext.Date.format(date, 'n/j/Y');
-        /*storeUserDetails.each(function(record){
-			//console.log('StoreUserDetails : ' +record.get('customerId'));
-			customerId = record.get('customerId');
-			businessName = record.get('businessName');
-
-
-
-		});
-		var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId);*/
-        var record = Ext.getStore('UserDetails').getAt(0);
+        storeUserDetails.each(function(record) {
+            //console.log('StoreUserDetails : ' +record.get('customerId'));
+            customerId = record.get('customerId');
+            businessName = record.get('businessName');
+        });
+        var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId);
         this.setRecord(record);
     },
     setRecord: function(record) {
@@ -66749,22 +66724,19 @@ Ext.define('Ext.picker.Picker', {
                         iconCls: 'icon-edit',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
-                            /*var storeUserDetails = Ext.getStore('UserDetails');
-						storeUserDetails.load();
-						var customerId;
-						var businessName;
-
-						storeUserDetails.each(function(record){
-						console.log('StoreUserDetails : ' +record.get('customerId'));
-						customerId = record.get('customerId');
-						businessName = record.get('businessName');
-
-						});*/
+                            var storeUserDetails = Ext.getStore('UserDetails');
+                            storeUserDetails.load();
+                            var customerId;
+                            var businessName;
+                            storeUserDetails.each(function(record) {
+                                console.log('StoreUserDetails : ' + record.get('customerId'));
+                                customerId = record.get('customerId');
+                                businessName = record.get('businessName');
+                            });
                             var form = Ext.Viewport.add({
                                     xtype: 'contactform'
                                 });
-                            //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-                            var record = Ext.getStore('UserDetails').getAt(0);
+                            var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                             Ext.Viewport.setActiveItem(form);
                             form.setRecord(record);
                         }
@@ -66931,7 +66903,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var form = this.up('contactform');
-                            //var store = Ext.getStore('MyJsonPStore');
+                            var store = Ext.getStore('MyJsonPStore');
                             var record = form.getRecord();
                             var customerId = form.getRecord().get('customerId');
                             /*record.beginEdit(true, record.getChanges());
@@ -66943,15 +66915,14 @@ Ext.define('Ext.picker.Picker', {
                             form.submit({
                                 url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
-                                    //Ext.Msg.alert('Success', action.msg,null,null);
                                     Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
-                                    //store.sync();
-                                    // store.load();
+                                    store.sync();
+                                    store.load();
                                     form.destroy();
                                 },
                                 failure: function(form, action) {
-                                    //store.load();
-                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                    store.load();
+                                    Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                     form.destroy();
                                 }
                             });
@@ -66969,22 +66940,19 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'button',
                 handler: function(button, e) {
-                    /*var storeUserDetails = Ext.getStore('UserDetails');
-					storeUserDetails.load();
-					var customerId;
-					var businessName;
-
-					storeUserDetails.each(function(record){
-					console.log('StoreUserDetails : ' +record.get('customerId'));
-					customerId = record.get('customerId');
-					businessName = record.get('businessName');
-
-					});*/
+                    var storeUserDetails = Ext.getStore('UserDetails');
+                    storeUserDetails.load();
+                    var customerId;
+                    var businessName;
+                    storeUserDetails.each(function(record) {
+                        console.log('StoreUserDetails : ' + record.get('customerId'));
+                        customerId = record.get('customerId');
+                        businessName = record.get('businessName');
+                    });
                     var view = Ext.Viewport.add({
                             xtype: 'ChangeContactPicForm'
                         });
-                    //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-                    var record = Ext.getStore('UserDetails').getAt(0);
+                    var record = Ext.getStore('MyJsonPStore').findRecord('customerId', customerId, 0, true, false, false);
                     view.setRecord(record);
                     view.showBy(button);
                 },
@@ -67337,9 +67305,10 @@ Ext.define('Ext.picker.Picker', {
             currentForm.setRecord(record);
         }
     },
-    onListActivate: function(newActiveItem, container, oldActiveItem, eOpts) {},
-    //var ds = Ext.StoreManager.lookup('MyJsonPStore');
-    //ds.clearFilter();
+    onListActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        var ds = Ext.StoreManager.lookup('MyJsonPStore');
+        ds.clearFilter();
+    },
     onDealBackBtnTap: function(button, e, eOpts) {
         Ext.getStore('LocalStore').removeAt(0);
         Ext.Viewport.getActiveItem().destroy();
@@ -67373,8 +67342,7 @@ Ext.define('Ext.picker.Picker', {
                                     dealsStore.load();
                                 },
                                 failure: function(form, action) {
-                                    //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                    Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                     //console.log(action.msg);
                                     var store = Ext.getStore('MyDealsStore');
                                     store.load();
@@ -67491,21 +67459,20 @@ Ext.define('Ext.picker.Picker', {
         form.destroy();
     },
     onBackFromDealsPanelTap: function(button, e, eOpts) {
-        //var ds = Ext.StoreManager.lookup('MyJsonPStore');
-        //ds.clearFilter() ;
+        var ds = Ext.StoreManager.lookup('MyJsonPStore');
+        ds.clearFilter();
         var dealRecord = this.getContactinfo().getRecord();
         //console.log("Deal Record is:") ;
         //console.log(dealRecord) ;
         var customerId = dealRecord.get('customerId');
         //console.log("Customer Id is " + customerId) ;
-        //ds.filter('customerId', customerId);
-        //var customerData = ds.getData().getAt(0) ;
+        ds.filter('customerId', customerId);
+        var customerData = ds.getData().getAt(0);
         //console.log("Customer Data is:") ;
         //console.log(customerData) ;
-        var record = Ext.getStore('UserDetails').getAt(0);
         var info = this.getContactinfo();
-        info.setRecord(record);
-        //ds.clearFilter() ;
+        info.setRecord(customerData);
+        ds.clearFilter();
         var view = Ext.Viewport.getActiveItem().destroy();
         Ext.Viewport.setActiveItem(info);
     },
@@ -67579,8 +67546,7 @@ Ext.define('Ext.picker.Picker', {
                 console.log('Success');
             },
             failure: function(form, action) {
-                //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                Ext.Msg.alert('Failure', action.msg, null, null);
+                Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
             }
         });
     }
@@ -67845,9 +67811,8 @@ Ext.define('Ext.picker.Picker', {
             var name = record.get('itemName');
             var businessName = record.get('businessName');
             this.down('#nameTxt1').setHtml(record.get('businessName'));
-            //var store = Ext.getStore('MyJsonPStore');
-            //  var rec = store.findRecord('businessName', businessName);
-            var rec = Ext.getStore('UserDetails').getAt(0);
+            var store = Ext.getStore('MyJsonPStore');
+            var rec = store.findRecord('businessName', businessName);
             Ext.getCmp('phoneNumber1').setValue(rec.get('phoneNumber'));
             Ext.getCmp('website3').setValue(rec.get('websiteDisplayName'));
             Ext.getCmp('website2').setValue(rec.get('website'));
@@ -68070,28 +68035,28 @@ Ext.define('Ext.picker.Picker', {
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    //var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
-                    $.getJSON("http://services.appsonmobile.com/stores/" + email, function(record) {
-                        var endDate = new Date(record.endDate);
+                    var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
+                    if (!record) {
+                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
+                            FacebookInAppBrowser.logout(function() {
+                                window.localStorage.setItem('facebookAccessToken', null);
+                                location.reload();
+                            });
+                        }, null);
+                    } else {
+                        var endDate = new Date(record.get('endDate'));
                         var today = new Date();
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
-                        if (record.signupStatus === "Approved") {
-                            if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
+                        if (record.get('signupStatus') === "Approved") {
+                            if ((record.get('planType') === "Free" && endDate >= today) || record.get('planType') === "Paid") {
                                 storeUserDetails.add({
-                                    'customerId': record.customerId,
-                                    'loginEmail': email,
-                                    'businessName': record.businessName,
-                                    'pictureURL': record.pictureURL,
-                                    'DealPictureURL': record.pictureURL,
-                                    'city': record.city,
-                                    'state': record.state,
-                                    'address': record.address,
-                                    'zipcode': record.zipcode,
-                                    'emailAddress': record.emailAddress,
-                                    'website': record.website,
-                                    'websiteDisplayName': record.websiteDisplayName,
-                                    'phoneNumber': record.phoneNumber
+                                    'customerId': record.get('customerId'),
+                                    'email': email,
+                                    'businessName': record.get('businessName'),
+                                    'DealPictureURL': record.get('pictureURL'),
+                                    'city': record.get('city'),
+                                    'state': record.get('state')
                                 });
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
@@ -68106,21 +68071,21 @@ Ext.define('Ext.picker.Picker', {
                                     });
                                 }, null);
                             }
-                        } else if (record.signupStatus === 'Pending') {
+                        } else if (record.get('signupStatus') === 'Pending') {
                             Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
                                 FacebookInAppBrowser.logout(function() {
                                     window.localStorage.setItem('facebookAccessToken', null);
                                     location.reload();
                                 });
                             }, null);
-                        } else if (record.signupStatus === 'Denied') {
+                        } else if (record.get('signupStatus') === 'Denied') {
                             Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
                                 FacebookInAppBrowser.logout(function() {
                                     window.localStorage.setItem('facebookAccessToken', null);
                                     location.reload();
                                 });
                             }, null);
-                        } else if (record.signupStatus === 'Cancelled') {
+                        } else if (record.get('signupStatus') === 'Cancelled') {
                             Ext.Msg.alert('Our records show that your account is not active', "Please contact us at info@appsonmobile.com if you would like to activate your account", function() {
                                 FacebookInAppBrowser.logout(function() {
                                     window.localStorage.setItem('facebookAccessToken', null);
@@ -68135,18 +68100,8 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             }, null);
                         }
-                    });
-                } else /* if (!record) {
-		                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
-		                            FacebookInAppBrowser.logout(function() {
-		                                window.localStorage.setItem('facebookAccessToken', null);
-		                                location.reload();
-		                            });
-		                        }, null);
-		                    } else {
-
-		                    }*/
-                {
+                    }
+                } else {
                     console.log('no user info');
                 }
             }
@@ -68223,7 +68178,6 @@ Ext.define('Ext.picker.Picker', {
                     var customerId = form.getRecord().get('customerId');
                     var store = Ext.getStore('MyJsonPStore');
                     var file = form.getAt(0).getValue();
-                    console.log('CustomerId: ' + customerId);
                     if (file) {
                         form.submit({
                             url: 'http://services.appsonmobile.com/stores/' + customerId,
@@ -68251,8 +68205,7 @@ Ext.define('Ext.picker.Picker', {
                             //view.setRecord(record);
                             failure: function(form, action) {
                                 store.load();
-                                //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                                Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
+                                Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                 form.destroy();
                             }
                         });
@@ -68889,7 +68842,7 @@ Ext.define('Ext.picker.Picker', {
                                                 },
                                                 failure: function(form, action) {
                                                     store.load();
-                                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                                    Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                                     form.destroy();
                                                 }
                                             });
@@ -69187,7 +69140,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
-                margin: '0 5 15 5 ',
+                margin: '0 5 5 5 ',
                 layout: 'hbox',
                 items: [
                     {
@@ -69291,11 +69244,7 @@ Ext.define('Ext.picker.Picker', {
                                                         form.destroy();
                                                     },
                                                     failure: function(form, action) {
-                                                        if (action.msg) {
-                                                            Ext.Msg.alert('Failure', action.msg);
-                                                        } else {
-                                                            Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
-                                                        }
+                                                        Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                                         var store = Ext.getStore('MyDealsStore');
                                                         store.load();
                                                         if (store.getCount() >= 5) {
@@ -69730,7 +69679,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
-                margin: '0 5 15 5 ',
+                margin: '0 5 5 5 ',
                 layout: 'hbox',
                 items: [
                     {
@@ -69831,8 +69780,7 @@ Ext.define('Ext.picker.Picker', {
                                                     form.destroy();
                                                 },
                                                 failure: function(form, action) {
-                                                    //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                                    Ext.Msg.alert('Oops.....!Something went wrong', 'Please check your internet connection or try again later', null, null);
                                                     var store = Ext.getStore('MyDealsStore');
                                                     store.load();
                                                     console.log('Count is:' + count);
