@@ -68045,8 +68045,8 @@ Ext.define('Ext.picker.Picker', {
                                     'phoneNumber': record.phoneNumber
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
-                                dealStore.load();
                                 dealStore.filter('customerId', customerId);
+                                dealStore.load();
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
