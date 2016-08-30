@@ -66195,8 +66195,7 @@ Ext.define('Ext.picker.Picker', {
             type: 'jsonp',
             url: 'http://services.appsonmobile.com/deals',
             reader: {
-                type: 'json',
-                idProperty: 'customerId'
+                type: 'json'
             }
         }
     }
