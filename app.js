@@ -66188,7 +66188,6 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('LocalBuzzMerchant.store.MyDealsStore', Ext.data.Store, {
     config: {
-        autoLoad: true,
         model: 'LocalBuzzMerchant.model.Deal',
         storeId: 'MyDealsStore',
         proxy: {
@@ -68046,6 +68045,7 @@ Ext.define('Ext.picker.Picker', {
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
                                 dealStore.filter('customerId', customerId);
+                                dealStore.load();
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
