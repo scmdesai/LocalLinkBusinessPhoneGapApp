@@ -68217,7 +68217,7 @@ Ext.define('Ext.picker.Picker', {
                     var form = this.up('ChangeContactPicForm');
                     var record = form.getRecord();
                     var customerId = form.getRecord().get('customerId');
-                    //var store = Ext.getStore('MyJsonPStore');
+                    var store = Ext.getStore('MyJsonPStore');
                     var file = form.getAt(0).getValue();
                     console.log('CustomerId: ' + customerId);
                     if (file) {
@@ -68238,15 +68238,15 @@ Ext.define('Ext.picker.Picker', {
 
 
 								record.commit();*/
-                                //store.sync();
-                                //store.load();
+                                store.sync();
+                                store.load();
                                 Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
                                 Ext.Viewport.getComponent('formpanel').setRecord(record);
                                 form.destroy();
                             },
                             //view.setRecord(record);
                             failure: function(form, action) {
-                                //store.load();
+                                store.load();
                                 //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
                                 Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
                                 form.destroy();
@@ -69183,7 +69183,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
-                margin: '0 5 5 5 ',
+                margin: '0 5 15 5 ',
                 layout: 'hbox',
                 items: [
                     {
@@ -69287,7 +69287,11 @@ Ext.define('Ext.picker.Picker', {
                                                         form.destroy();
                                                     },
                                                     failure: function(form, action) {
-                                                        Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
+                                                        if (action.msg) {
+                                                            Ext.Msg.alert('Failure', action.msg);
+                                                        } else {
+                                                            Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
+                                                        }
                                                         var store = Ext.getStore('MyDealsStore');
                                                         store.load();
                                                         if (store.getCount() >= 5) {
@@ -69722,7 +69726,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
-                margin: '0 5 5 5 ',
+                margin: '0 5 15 5 ',
                 layout: 'hbox',
                 items: [
                     {
