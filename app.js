@@ -66188,6 +66188,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('LocalBuzzMerchant.store.MyDealsStore', Ext.data.Store, {
     config: {
+        autoLoad: true,
         model: 'LocalBuzzMerchant.model.Deal',
         remoteFilter: true,
         storeId: 'MyDealsStore',
