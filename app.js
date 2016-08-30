@@ -66188,9 +66188,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('LocalBuzzMerchant.store.MyDealsStore', Ext.data.Store, {
     config: {
-        autoLoad: true,
         model: 'LocalBuzzMerchant.model.Deal',
-        remoteFilter: true,
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
@@ -68025,6 +68023,7 @@ Ext.define('Ext.picker.Picker', {
                     $.getJSON("http://services.appsonmobile.com/stores/" + email, function(record) {
                         var endDate = new Date(record.endDate);
                         var today = new Date();
+                        var customerId = record.customerId;
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
                         if (record.signupStatus === "Approved") {
@@ -68044,6 +68043,8 @@ Ext.define('Ext.picker.Picker', {
                                     'websiteDisplayName': record.websiteDisplayName,
                                     'phoneNumber': record.phoneNumber
                                 });
+                                var dealStore = Ext.getStore('MyDealsStore');
+                                dealStore.filter('customerId', customerId);
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
