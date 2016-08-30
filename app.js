@@ -66192,30 +66192,8 @@ Ext.define('Ext.picker.Picker', {
         model: 'LocalBuzzMerchant.model.Deal',
         storeId: 'MyDealsStore',
         proxy: {
-            type: 'jsonp',
-            timeout: 300000,
-            reader: {
-                type: 'json'
-            },
-            writer: {
-                type: 'json',
-                encode: true
-            }
-        },
-        listeners: [
-            {
-                fn: 'onJsonstoreAddrecords',
-                event: 'addrecords'
-            },
-            {
-                fn: 'onJsonstoreRemoverecords',
-                event: 'removerecords'
-            }
-        ]
-    },
-    onJsonstoreAddrecords: function(store, records, eOpts) {},
-    onJsonstoreRemoverecords: function(store, records, indices, eOpts) {
-        store.load();
+            type: 'jsonp'
+        }
     }
 }, 0, 0, 0, 0, 0, 0, [
     LocalBuzzMerchant.store,
@@ -68062,8 +68040,9 @@ Ext.define('Ext.picker.Picker', {
                                     'phoneNumber': record.phoneNumber
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
-                                dealStore.getProxy().setUrl('http://services.appsonmobile.com/deals/' + record.customerId);
-                                dealStore.load();
+                                $.getJSON("http://services.appsonmobile.com/deals/" + record.customerId, function(deals) {
+                                    dealStore.add(deals);
+                                });
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
@@ -68857,6 +68836,10 @@ Ext.define('Ext.picker.Picker', {
                                                 url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
                                                 success: function(form, action) {
                                                     Ext.Msg.alert('Success', action.msg);
+                                                    var dealStore = Ext.getStore('MyDealsStore');
+                                                    $.getJSON("http://services.appsonmobile.com/deals/" + record.customerId, function(deals) {
+                                                        dealStore.add(deals);
+                                                    });
                                                     form.destroy();
                                                 },
                                                 failure: function(form, action) {
