@@ -68067,15 +68067,8 @@ Ext.define('Ext.picker.Picker', {
                     var gender = tmp[1];
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
-                    var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
-                    if (!record) {
-                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
-                            FacebookInAppBrowser.logout(function() {
-                                window.localStorage.setItem('facebookAccessToken', null);
-                                location.reload();
-                            });
-                        }, null);
-                    } else {
+                    //var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
+                    $.getJSON("http://services.appsonmobile.com/stores/" + email, function(record) {
                         var endDate = new Date(record.get('endDate'));
                         var today = new Date();
                         var storeUserDetails = Ext.getStore('UserDetails');
@@ -68083,18 +68076,18 @@ Ext.define('Ext.picker.Picker', {
                         if (record.get('signupStatus') === "Approved") {
                             if ((record.get('planType') === "Free" && endDate >= today) || record.get('planType') === "Paid") {
                                 storeUserDetails.add({
-                                    'customerId': record.get('customerId'),
+                                    'customerId': record.customerId,
                                     'loginEmail': email,
-                                    'businessName': record.get('businessName'),
-                                    'pictureURL': record.get('pictureURL'),
-                                    'city': record.get('city'),
-                                    'state': record.get('state'),
-                                    'address': record.get('address'),
-                                    'zipcode': record.get('zipcode'),
-                                    'emailAddress': record.get('emailAddress'),
-                                    'website': record.get('website'),
-                                    'websiteDisplayName': record.get('websiteDisplayName'),
-                                    'phoneNumber': record.get('phoneNumber')
+                                    'businessName': record.businessName,
+                                    'pictureURL': record.pictureURL,
+                                    'city': record.city,
+                                    'state': record.state,
+                                    'address': record.address,
+                                    'zipcode': record.zipcode,
+                                    'emailAddress': record.emailAddress,
+                                    'website': record.website,
+                                    'websiteDisplayName': record.websiteDisplayName,
+                                    'phoneNumber': record.phoneNumber
                                 });
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
@@ -68138,8 +68131,18 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             }, null);
                         }
-                    }
-                } else {
+                    });
+                } else /* if (!record) {
+		                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
+		                            FacebookInAppBrowser.logout(function() {
+		                                window.localStorage.setItem('facebookAccessToken', null);
+		                                location.reload();
+		                            });
+		                        }, null);
+		                    } else {
+
+		                    }*/
+                {
                     console.log('no user info');
                 }
             }
