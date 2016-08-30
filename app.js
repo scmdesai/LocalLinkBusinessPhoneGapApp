@@ -66188,13 +66188,16 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('LocalBuzzMerchant.store.MyDealsStore', Ext.data.Store, {
     config: {
-        autoLoad: true,
         model: 'LocalBuzzMerchant.model.Deal',
+        remoteFilter: true,
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
-            filterParam: 'customerId',
-            url: 'http://services.appsonmobile.com/deals'
+            url: 'http://services.appsonmobile.com/deals',
+            reader: {
+                type: 'json',
+                idProperty: 'customerId'
+            }
         }
     }
 }, 0, 0, 0, 0, 0, 0, [
