@@ -68063,6 +68063,7 @@ Ext.define('Ext.picker.Picker', {
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
                                 dealStore.getProxy().setUrl('http://services.appsonmobile.com/deals/' + record.customerId);
+                                dealStore.load();
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
