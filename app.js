@@ -66196,15 +66196,8 @@ Ext.define('Ext.picker.Picker', {
             reader: {
                 type: 'json'
             }
-        },
-        listeners: [
-            {
-                fn: 'onJsonstoreLoad',
-                event: 'load'
-            }
-        ]
-    },
-    onJsonstoreLoad: function(store, records, successful, operation, eOpts) {}
+        }
+    }
 }, 0, 0, 0, 0, 0, 0, [
     LocalBuzzMerchant.store,
     'MyDealsStore'
@@ -68050,8 +68043,8 @@ Ext.define('Ext.picker.Picker', {
                                     'websiteDisplayName': record.websiteDisplayName,
                                     'phoneNumber': record.phoneNumber
                                 });
-                                var dealStore = Ext.getStore('MyDealsStore');
-                                dealStore.onBefore('load', function(rec) {
+                                var dealStore = Ext.get('MyDealsStore');
+                                dealStore.on('load', function(rec) {
                                     if (rec.get('customerId') === customerId) {
                                         return rec;
                                     }
