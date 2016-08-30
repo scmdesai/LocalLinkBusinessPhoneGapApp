@@ -66193,11 +66193,22 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
-            url: 'http://services.appsonmobile.com/deals/customerId',
+            url: 'http://services.appsonmobile.com/deals/',
             reader: {
                 type: 'json'
             }
-        }
+        },
+        listeners: [
+            {
+                fn: 'onJsonstoreLoad',
+                event: 'load',
+                order: 'before'
+            }
+        ]
+    },
+    onJsonstoreLoad: function(store, records, successful, operation, eOpts) {
+        var customerId = Ext.getStore('UserDetails').getAt(0).customerId;
+        store.filter('customerId', customerId);
     }
 }, 0, 0, 0, 0, 0, 0, [
     LocalBuzzMerchant.store,
@@ -68045,9 +68056,7 @@ Ext.define('Ext.picker.Picker', {
                                     'phoneNumber': record.phoneNumber
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
-                                dealStore.load({
-                                    "customerId": customerId
-                                });
+                                dealStore.load();
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
