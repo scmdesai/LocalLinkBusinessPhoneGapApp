@@ -66197,18 +66197,7 @@ Ext.define('Ext.picker.Picker', {
             reader: {
                 type: 'json'
             }
-        },
-        listeners: [
-            {
-                fn: 'onJsonstoreLoad',
-                event: 'load'
-            }
-        ]
-    },
-    onJsonstoreLoad: function(store, records, successful, operation, eOpts) {
-        var customerId = Ext.getStore('UserDetails').getAt(0).customerId;
-        console.log('Loading store for customerId ' + customerId);
-        store.filter('customerId', customerId);
+        }
     }
 }, 0, 0, 0, 0, 0, 0, [
     LocalBuzzMerchant.store,
@@ -68057,6 +68046,7 @@ Ext.define('Ext.picker.Picker', {
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
                                 dealStore.load();
+                                dealStore.filter('customerId', customerId);
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
