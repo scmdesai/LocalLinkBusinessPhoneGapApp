@@ -66208,6 +66208,7 @@ Ext.define('Ext.picker.Picker', {
     },
     onJsonstoreLoad: function(store, records, successful, operation, eOpts) {
         var customerId = Ext.getStore('UserDetails').getAt(0).customerId;
+        console.log('Loading store for customerId ' + customerId);
         store.filter('customerId', customerId);
     }
 }, 0, 0, 0, 0, 0, 0, [
