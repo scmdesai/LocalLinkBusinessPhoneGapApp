@@ -69248,7 +69248,7 @@ Ext.define('Ext.picker.Picker', {
                                                     },
                                                     failure: function(form, action) {
                                                         if (action.msg) {
-                                                            Ext.Msg.alert('Failure', action.msg);
+                                                            Ext.Msg.alert('Failure', action.msg, null, null);
                                                         } else {
                                                             Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
                                                         }
