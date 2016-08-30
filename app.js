@@ -69249,7 +69249,7 @@ Ext.define('Ext.picker.Picker', {
                                                     failure: function(form, action) {
                                                         //console.log('Action is '+action);
                                                         if (action) {
-                                                            Ext.Msg.alert('Failure', action, null, null);
+                                                            Ext.Msg.alert('Failure', action.msg, null, null);
                                                         } else {
                                                             Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
                                                         }
@@ -69789,7 +69789,7 @@ Ext.define('Ext.picker.Picker', {
                                                 },
                                                 failure: function(form, action) {
                                                     //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                                                    Ext.Msg.alert('Failure', action, null, null);
+                                                    Ext.Msg.alert('Failure', action.msg, null, null);
                                                     var store = Ext.getStore('MyDealsStore');
                                                     store.load();
                                                     console.log('Count is:' + count);
