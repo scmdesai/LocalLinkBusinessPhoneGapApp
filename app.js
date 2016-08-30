@@ -66193,7 +66193,7 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
-            url: 'http://services.appsonmobile.com/deals/',
+            url: 'http://services.appsonmobile.com/deals/customerId',
             reader: {
                 type: 'json'
             }
@@ -68045,10 +68045,9 @@ Ext.define('Ext.picker.Picker', {
                                     'phoneNumber': record.phoneNumber
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
-                                dealStore.getProxy().setParams({
+                                dealStore.load({
                                     "customerId": customerId
                                 });
-                                dealStore.load();
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
