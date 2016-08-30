@@ -68829,6 +68829,7 @@ Ext.define('Ext.picker.Picker', {
                             var startDate = form.getAt(4).getValue();
                             var endDate = form.getAt(5).getValue();
                             var dealName = form.getAt(0).getValue();
+                            var store = Ext.getStore('MyDealsStore');
                             var date = new Date();
                             console.log(startDate);
                             if (dealName) {
@@ -68839,6 +68840,7 @@ Ext.define('Ext.picker.Picker', {
                                                 url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
                                                 success: function(form, action) {
                                                     Ext.Msg.alert('Success', action.msg);
+                                                    store.load();
                                                     form.destroy();
                                                 },
                                                 failure: function(form, action) {
