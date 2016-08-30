@@ -68221,9 +68221,10 @@ Ext.define('Ext.picker.Picker', {
                     var form = this.up('ChangeContactPicForm');
                     var record = form.getRecord();
                     var customerId = form.getRecord().get('customerId');
-                    var store = Ext.getStore('MyJsonPStore');
+                    var email = record.get('loginEmail');
+                    //var store = Ext.getStore('MyJsonPStore');
                     var file = form.getAt(0).getValue();
-                    console.log('CustomerId: ' + customerId);
+                    //console.log('CustomerId: '+customerId);
                     if (file) {
                         form.submit({
                             url: 'http://services.appsonmobile.com/stores/' + customerId,
@@ -68242,8 +68243,8 @@ Ext.define('Ext.picker.Picker', {
 
 
 								record.commit();*/
-                                store.sync();
-                                store.load();
+                                //store.sync();
+                                //store.load();
                                 Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
                                 Ext.Viewport.getComponent('formpanel').setRecord(record);
                                 form.destroy();
