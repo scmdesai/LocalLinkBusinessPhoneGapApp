@@ -68046,7 +68046,7 @@ Ext.define('Ext.picker.Picker', {
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
                                 dealStore.load({
-                                    'customerId': customerId
+                                    'customerId': "'" + customerId + "'"
                                 });
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
