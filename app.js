@@ -66194,7 +66194,6 @@ Ext.define('Ext.picker.Picker', {
         proxy: {
             type: 'jsonp',
             timeout: 300000,
-            url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals',
             reader: {
                 type: 'json'
             },
@@ -67508,18 +67507,25 @@ Ext.define('Ext.picker.Picker', {
         }
     },
     onManageDealsTap: function(button, e, eOpts) {
-        var storeUserDetails = Ext.getStore('UserDetails');
-        storeUserDetails.load();
-        var customerId;
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-        });
-        var store = Ext.getStore('MyDealsStore');
-        store.load();
-        store.clearFilter();
-        //console.log('Fitering for customerId: ' + customerId);
-        store.filter('customerId', customerId);
+        /*var storeUserDetails = Ext.getStore('UserDetails');
+		storeUserDetails.load();
+		var customerId;
+
+
+
+		storeUserDetails.each(function(record){
+			//console.log('StoreUserDetails : ' +record.get('customerId'));
+			customerId = record.get('customerId');
+		});
+
+
+
+		var store = Ext.getStore('MyDealsStore');
+		store.load();
+		store.clearFilter() ;
+
+		//console.log('Fitering for customerId: ' + customerId);
+		store.filter('customerId', customerId);*/
         var view;
         view = Ext.Viewport.add({
             xtype: 'DealsPanel'
@@ -67892,38 +67898,43 @@ Ext.define('Ext.picker.Picker', {
             }
         ]
     },
-    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var storeUserDetails = Ext.getStore('UserDetails');
-        storeUserDetails.load();
-        var customerId;
-        var businessName;
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-        });
-        var store = Ext.getStore('MyDealsStore');
-        store.clearFilter();
-        store.filter('customerId', customerId);
-    },
-    onDealsPanelPainted: function(element, eOpts) {
-        var store = Ext.getStore('MyDealsStore');
-        store.load();
-    },
+    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {},
+    /*var storeUserDetails = Ext.getStore('UserDetails');
+		storeUserDetails.load();
+		var customerId;
+		var businessName;
+
+
+		storeUserDetails.each(function(record){
+			//console.log('StoreUserDetails : ' +record.get('customerId'));
+			customerId = record.get('customerId');
+			businessName = record.get('businessName');
+
+		});
+
+
+		var store = Ext.getStore('MyDealsStore');
+		store.clearFilter();
+		store.filter('customerId',customerId);*/
+    onDealsPanelPainted: function(element, eOpts) {},
+    /*var store = Ext.getStore('MyDealsStore');
+		store.load();*/
     initialize: function() {
         Ext.form.Panel.prototype.initialize.call(this);
-        var storeUserDetails = Ext.getStore('UserDetails');
-        storeUserDetails.load();
-        var customerId;
-        var businessName;
-        storeUserDetails.each(function(record) {
-            //console.log('StoreUserDetails : ' +record.get('customerId'));
-            customerId = record.get('customerId');
-            businessName = record.get('businessName');
-        });
+        /*var storeUserDetails = Ext.getStore('UserDetails');
+		storeUserDetails.load();
+		var customerId;
+		var businessName;*/
+        /*storeUserDetails.each(function(record){
+			//console.log('StoreUserDetails : ' +record.get('customerId'));
+			customerId = record.get('customerId');
+			businessName = record.get('businessName');
+
+
+		});*/
         var store = Ext.getStore('MyDealsStore');
-        store.clearFilter();
-        store.filter('customerId', customerId);
+        //store.clearFilter();
+        //store.filter('customerId',customerId);
         if (store.getCount() >= 5) {
             Ext.getCmp('UploadDeal').disable();
         } else {
@@ -68050,6 +68061,8 @@ Ext.define('Ext.picker.Picker', {
                                     'websiteDisplayName': record.websiteDisplayName,
                                     'phoneNumber': record.phoneNumber
                                 });
+                                var dealStore = Ext.getStore('MyDealsStore');
+                                dealStore.getProxy().setUrl('http://services.appsonmobile.com/deals/' + record.customerId);
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
