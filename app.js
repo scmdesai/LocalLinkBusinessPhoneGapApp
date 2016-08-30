@@ -66136,7 +66136,7 @@ Ext.define('Ext.picker.Picker', {
                 name: 'access_token'
             },
             {
-                name: 'pictureURL'
+                name: 'DealPictureURL'
             },
             {
                 name: 'city'
@@ -66161,6 +66161,9 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'websiteDisplayName'
+            },
+            {
+                name: 'pictureURL'
             }
         ]
     }
@@ -68080,6 +68083,7 @@ Ext.define('Ext.picker.Picker', {
                                     'loginEmail': email,
                                     'businessName': record.businessName,
                                     'pictureURL': record.pictureURL,
+                                    'DealPictureURL': record.pictureURL,
                                     'city': record.city,
                                     'state': record.state,
                                     'address': record.address,
