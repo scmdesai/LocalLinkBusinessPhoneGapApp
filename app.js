@@ -69247,7 +69247,6 @@ Ext.define('Ext.picker.Picker', {
                                                         form.destroy();
                                                     },
                                                     failure: function(form, action) {
-                                                        console.log('Action is ' + action);
                                                         if (action.msg) {
                                                             Ext.Msg.alert('Failure', action.msg, null, null);
                                                         } else {
@@ -69707,7 +69706,19 @@ Ext.define('Ext.picker.Picker', {
                         margin: '5 5 5 0',
                         padding: '5 30 5 0',
                         styleHtmlContent: true,
-                        layout: 'hbox'
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        //Ext.Viewport.add({xtype:'Terms'}).show();
+                                        var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
+                                        window.open(url, '_system', 'location=yes');
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
                     }
                 ]
             },
@@ -69819,10 +69830,6 @@ Ext.define('Ext.picker.Picker', {
                 fn: 'onMydatepicker3Pick',
                 event: 'pick',
                 delegate: '#mydatepicker3'
-            },
-            {
-                fn: 'onMycontainer5Painted111',
-                event: 'painted'
             }
         ]
     },
@@ -69831,13 +69838,6 @@ Ext.define('Ext.picker.Picker', {
         if (value < today) {
             picker.setValue(today);
         }
-    },
-    onMycontainer5Painted111: function(element, eOpts) {
-        element.addListener('tap', function() {
-            //Ext.Viewport.add({xtype:'Terms'}).show();
-            var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
-            window.open(url, '_system', 'location=yes');
-        });
     },
     getValidationErrors: function() {
         var errors = [];
