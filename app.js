@@ -66201,8 +66201,7 @@ Ext.define('Ext.picker.Picker', {
         listeners: [
             {
                 fn: 'onJsonstoreLoad',
-                event: 'load',
-                order: 'before'
+                event: 'load'
             }
         ]
     },
