@@ -66189,6 +66189,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('LocalBuzzMerchant.store.MyDealsStore', Ext.data.Store, {
     config: {
         model: 'LocalBuzzMerchant.model.Deal',
+        remoteFilter: true,
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
@@ -68044,7 +68045,6 @@ Ext.define('Ext.picker.Picker', {
                                     'phoneNumber': record.phoneNumber
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
-                                dealStore.filter('customerId', customerId);
                                 dealStore.load();
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
