@@ -66878,7 +66878,7 @@ Ext.define('Ext.picker.Picker', {
 							store.sync();
 							store.load();*/
                             form.submit({
-                                url: 'http://services.appsonmobile.com/updateStoreInfo/' + customerId,
+                                url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/stores/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     //Ext.Msg.alert('Success', action.msg,null,null);
                                     Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
@@ -69250,12 +69250,10 @@ Ext.define('Ext.picker.Picker', {
                                     if (endDate >= date) {
                                         if (endDate >= startDate) {
                                             if (document.getElementById('chkbx').checked) {
-                                                //Ext.Ajax.useDefaultXhrHeader=false;
                                                 form.submit({
-                                                    url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzWithImage',
+                                                    url: 'http://services.appsonmobile.com/createNewBuzzWithImage',
                                                     xhr2: true,
                                                     cache: false,
-                                                    contentType: false,
                                                     waitMsg: 'Please Wait...',
                                                     success: function(form, action) {
                                                         Ext.Msg.alert('Success', action.msg);
