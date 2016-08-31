@@ -67179,7 +67179,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('LocalBuzzMerchant.controller.LocalBuzzMerchant', Ext.app.Controller, {
     config: {
         stores: [
-            null,
+            'MyJsonPStore',
             'MyDealsStore',
             'UserDetails',
             'LocalStore'
@@ -68020,7 +68020,7 @@ Ext.define('Ext.picker.Picker', {
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
                     //var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
-                    $.getJSON("http://services.appsonmobile.com/stores/" + email, function(record) {
+                    $.getJSON(" https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/stores/" + email, function(record) {
                         var endDate = new Date(record.endDate);
                         var today = new Date();
                         var customerId = record.customerId;
@@ -68044,8 +68044,12 @@ Ext.define('Ext.picker.Picker', {
                                     'phoneNumber': record.phoneNumber
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
-                                dealStore.filter('customerId', customerId);
-                                dealStore.load();
+                                //dealStore.filter('customerId',customerId);
+                                dealStore.load({
+                                    params: {
+                                        customerId: customerId
+                                    }
+                                });
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
