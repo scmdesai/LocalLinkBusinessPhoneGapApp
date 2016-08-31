@@ -68773,6 +68773,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'container',
                 left: '',
+                margin: '0 5 15 5 ',
                 layout: 'hbox',
                 items: [
                     {
