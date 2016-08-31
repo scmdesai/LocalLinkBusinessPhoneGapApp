@@ -67179,7 +67179,6 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('LocalBuzzMerchant.controller.LocalBuzzMerchant', Ext.app.Controller, {
     config: {
         stores: [
-            'MyJsonPStore',
             'MyDealsStore',
             'UserDetails',
             'LocalStore'
@@ -68045,11 +68044,10 @@ Ext.define('Ext.picker.Picker', {
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
                                 //dealStore.filter('customerId',customerId);
-                                dealStore.load({
-                                    params: {
-                                        customerId: customerId
-                                    }
+                                dealStore.getProxy().setExtraParams(function(id) {
+                                    id = customerId;
                                 });
+                                dealStore.load();
                                 var view = Ext.Viewport.add({
                                         xtype: 'panel'
                                     });
