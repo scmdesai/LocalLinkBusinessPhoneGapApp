@@ -67070,7 +67070,7 @@ Ext.define('Ext.picker.Picker', {
                 html: '<p id="terms" style="font-size:2.5vw;" >To change the business name or website info, please <a>Contact Us</a> </p>',
                 itemId: 'mycontainer6',
                 margin: '5 5 5 10',
-                padding: '5 30 5 0',
+                padding: '0 30 0 0',
                 styleHtmlContent: true,
                 layout: 'hbox',
                 listeners: [
@@ -67572,6 +67572,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'toolbarCls',
                 docked: 'top',
                 height: '8vh',
+                margin: '0 0 5 0',
                 ui: 'plain',
                 width: '100%',
                 scrollable: false,
@@ -67587,10 +67588,10 @@ Ext.define('Ext.picker.Picker', {
                         height: '100%',
                         id: 'dealBackBtn',
                         itemId: 'dealBackBtn',
-                        margin: '10 0 0 0',
                         style: 'font-size:8vw',
                         styleHtmlContent: true,
-                        ui: 'plain'
+                        ui: 'plain',
+                        iconAlign: 'top'
                     },
                     {
                         xtype: 'button',
@@ -67601,7 +67602,6 @@ Ext.define('Ext.picker.Picker', {
                         minHeight: '100%',
                         style: 'border:none;font-size:7vw',
                         ui: 'plain',
-                        iconAlign: 'center',
                         text: ''
                     },
                     {
@@ -67626,7 +67626,6 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'dealimage',
                 left: '2%',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0',
-                top: '1%',
                 width: '95%',
                 listeners: [
                     {
@@ -68737,7 +68736,7 @@ Ext.define('Ext.picker.Picker', {
                 id: 'DealDescription',
                 itemId: 'DealDescription',
                 margin: '5 5 5 5 ',
-                padding: '',
+                padding: '0 5 25 5',
                 style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
@@ -69134,14 +69133,16 @@ Ext.define('Ext.picker.Picker', {
                 height: '100%',
                 id: 'DealDescription2',
                 itemId: 'DealDescription',
-                margin: '0 5 5 5 ',
+                margin: '0 5 5 5',
+                padding: '0 0 20 0',
                 style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
                 label: 'Description',
                 labelWidth: '35%',
-                name: 'DealDescription'
+                name: 'DealDescription',
+                autoCapitalize: true
             },
             {
                 xtype: 'filefield',
@@ -69430,6 +69431,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'toolbarCls',
                 docked: 'top',
                 height: '8vh',
+                ui: 'plain',
                 items: [
                     {
                         xtype: 'button',
