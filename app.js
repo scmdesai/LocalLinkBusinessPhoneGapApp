@@ -68971,6 +68971,7 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         modal: true,
         scrollable: true,
+        enctype: 'multipart/form-data',
         layout: {
             type: 'vbox',
             align: 'stretchmax'
