@@ -69254,6 +69254,10 @@ Ext.define('Ext.picker.Picker', {
                                                     url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzWithImage',
                                                     xhr2: true,
                                                     cache: false,
+                                                    contentType: false,
+                                                    headers: {
+                                                        'Content-Type': 'multipart/form-data'
+                                                    },
                                                     waitMsg: 'Please Wait...',
                                                     success: function(form, action) {
                                                         Ext.Msg.alert('Success', action.msg);
