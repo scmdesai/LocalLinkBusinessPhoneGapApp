@@ -69250,13 +69250,14 @@ Ext.define('Ext.picker.Picker', {
                                     if (endDate >= date) {
                                         if (endDate >= startDate) {
                                             if (document.getElementById('chkbx').checked) {
+                                                Ext.Ajax.useDefaultXhrHeader = false;
                                                 form.submit({
                                                     url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzWithImage',
                                                     xhr2: true,
                                                     cache: false,
                                                     contentType: false,
                                                     headers: {
-                                                        'Content-Type': 'multipart/form-data'
+                                                        'Content-Type': 'application/json'
                                                     },
                                                     waitMsg: 'Please Wait...',
                                                     success: function(form, action) {
