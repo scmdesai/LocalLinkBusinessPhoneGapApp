@@ -69256,9 +69256,6 @@ Ext.define('Ext.picker.Picker', {
                                                     xhr2: true,
                                                     cache: false,
                                                     contentType: false,
-                                                    headers: {
-                                                        'Content-Type': 'application/json'
-                                                    },
                                                     waitMsg: 'Please Wait...',
                                                     success: function(form, action) {
                                                         Ext.Msg.alert('Success', action.msg);
