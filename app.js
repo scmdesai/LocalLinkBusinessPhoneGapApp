@@ -68971,7 +68971,6 @@ Ext.define('Ext.picker.Picker', {
         autoDestroy: false,
         modal: true,
         scrollable: true,
-        enctype: 'multipart/form-data',
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -69255,7 +69254,6 @@ Ext.define('Ext.picker.Picker', {
                                                     //'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzWithImage',
                                                     xhr2: true,
                                                     cache: false,
-                                                    contentType: false,
                                                     waitMsg: 'Please Wait...',
                                                     success: function(form, action) {
                                                         Ext.Msg.alert('Success', action.msg);
