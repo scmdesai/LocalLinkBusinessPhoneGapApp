@@ -66192,6 +66192,7 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
+            filterParam: 'customerId',
             url: 'http://services.appsonmobile.com/deals',
             reader: {
                 type: 'json'
@@ -67289,6 +67290,7 @@ Ext.define('Ext.picker.Picker', {
                 var store = Ext.getStore('MyDealsStore');
                 var record = store.getAt(index);
                 var dealName = record.get('dealName');
+                var customerId = record.get('customerId');
                 Ext.Msg.confirm('Delete ' + dealName + '?', null, function(btnText) {
                     if (btnText === 'yes') {
                         var itemName = record.get('itemName');
@@ -67299,21 +67301,28 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Success', action.msg);
                                     //console.log(action.msg);
                                     var store = Ext.getStore('MyDealsStore');
-                                    store.load();
+                                    store.load({
+                                        params: {
+                                            customerId: customerId
+                                        }
+                                    });
                                     var count = store.getCount() - 1;
                                     if (count >= 5) {
                                         Ext.getCmp('UploadDeal').disable();
                                     } else {
                                         Ext.getCmp('UploadDeal').enable();
                                     }
-                                    dealsStore.load();
                                 },
                                 failure: function(form, action) {
                                     //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
                                     Ext.Msg.alert('Failure', action.msg, null, null);
                                     //console.log(action.msg);
                                     var store = Ext.getStore('MyDealsStore');
-                                    store.load();
+                                    store.load({
+                                        params: {
+                                            customerId: customerId
+                                        }
+                                    });
                                     if (store.getCount() >= 5) {
                                         Ext.getCmp('UploadDeal').disable();
                                     } else {
@@ -68833,6 +68842,7 @@ Ext.define('Ext.picker.Picker', {
                             var endDate = form.getAt(5).getValue();
                             var dealName = form.getAt(0).getValue();
                             var store = Ext.getStore('MyDealsStore');
+                            var customerId = Ext.getCmp('customerId1').getValue();
                             var date = new Date();
                             console.log(startDate);
                             if (dealName) {
@@ -68843,11 +68853,19 @@ Ext.define('Ext.picker.Picker', {
                                                 url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
                                                 success: function(form, action) {
                                                     Ext.Msg.alert('Success', action.msg);
-                                                    store.load();
+                                                    store.load({
+                                                        params: {
+                                                            customerId: customerId
+                                                        }
+                                                    });
                                                     form.destroy();
                                                 },
                                                 failure: function(form, action) {
-                                                    store.load();
+                                                    store.load({
+                                                        params: {
+                                                            customerId: customerId
+                                                        }
+                                                    });
                                                     Ext.Msg.alert('Failure', action.msg, null, null);
                                                     form.destroy();
                                                 }
@@ -69225,6 +69243,7 @@ Ext.define('Ext.picker.Picker', {
                             var endDate = form.getAt(5).getValue();
                             var file = form.getAt(8).getValue();
                             var dealName = form.getAt(0).getValue();
+                            var customerId = Ext.getCmp('customerId3').getValue();
                             console.log('Picture URL is : ' + form.getAt(6).getValue());
                             if (dealName) {
                                 if (file) {
@@ -69239,7 +69258,11 @@ Ext.define('Ext.picker.Picker', {
                                                     success: function(form, action) {
                                                         Ext.Msg.alert('Success', action.msg);
                                                         var store = Ext.getStore('MyDealsStore');
-                                                        store.load();
+                                                        store.load({
+                                                            params: {
+                                                                customerId: customerId
+                                                            }
+                                                        });
                                                         var count = store.getCount() + 1;
                                                         console.log('Count is:' + count);
                                                         if (count > 4) {
@@ -69253,7 +69276,11 @@ Ext.define('Ext.picker.Picker', {
                                                         //console.log('Action is '+action);
                                                         Ext.Msg.alert('Failure', action.msg, null, null);
                                                         var store = Ext.getStore('MyDealsStore');
-                                                        store.load();
+                                                        store.load({
+                                                            params: {
+                                                                customerId: customerId
+                                                            }
+                                                        });
                                                         if (store.getCount() >= 5) {
                                                             Ext.getCmp('UploadDeal').disable();
                                                         } else {
@@ -69764,6 +69791,7 @@ Ext.define('Ext.picker.Picker', {
                             var startDate = form.getAt(4).getValue();
                             var endDate = form.getAt(5).getValue();
                             var dealName = form.getAt(0).getValue();
+                            var customerId = Ext.getCmp('customerId4').getValue();
                             if (dealName) {
                                 if (endDate >= date) {
                                     if (endDate >= startDate) {
@@ -69775,7 +69803,11 @@ Ext.define('Ext.picker.Picker', {
                                                 success: function(form, action) {
                                                     Ext.Msg.alert('Success', action.msg);
                                                     var store = Ext.getStore('MyDealsStore');
-                                                    store.load();
+                                                    store.load({
+                                                        params: {
+                                                            customerId: customerId
+                                                        }
+                                                    });
                                                     var count = store.getCount() + 1;
                                                     console.log('Count is:' + count);
                                                     if (count > 4) {
@@ -69790,7 +69822,11 @@ Ext.define('Ext.picker.Picker', {
                                                     //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
                                                     Ext.Msg.alert('Failure', action.msg, null, null);
                                                     var store = Ext.getStore('MyDealsStore');
-                                                    store.load();
+                                                    store.load({
+                                                        params: {
+                                                            customerId: customerId
+                                                        }
+                                                    });
                                                     console.log('Count is:' + count);
                                                     if (store.getCount() >= 5) {
                                                         Ext.getCmp('UploadDeal').disable();
