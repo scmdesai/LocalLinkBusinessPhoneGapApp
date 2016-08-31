@@ -68736,14 +68736,15 @@ Ext.define('Ext.picker.Picker', {
                 id: 'DealDescription',
                 itemId: 'DealDescription',
                 margin: '5 5 5 5 ',
-                padding: '0 5 25 5',
+                padding: '0 0 20 0',
                 style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
                 label: 'Description',
                 labelWidth: '35%',
-                name: 'DealDescription'
+                name: 'DealDescription',
+                autoCapitalize: true
             },
             {
                 xtype: 'textfield',
@@ -69219,7 +69220,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
                             var store = Ext.getStore('MyDealsStore');
-                            store.load();
+                            //store.load();
                             if (store.getCount() >= 5) {
                                 Ext.getCmp('UploadDeal').disable();
                             } else {
@@ -69681,13 +69682,15 @@ Ext.define('Ext.picker.Picker', {
                 id: 'DealDescription3',
                 itemId: 'DealDescription',
                 margin: '0 5 5 5 ',
+                padding: '0 0 20 0',
                 style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
                 label: 'Description',
                 labelWidth: '35%',
-                name: 'DealDescription'
+                name: 'DealDescription',
+                autoCapitalize: true
             },
             {
                 xtype: 'textfield',
@@ -69769,7 +69772,7 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
                             var store = Ext.getStore('MyDealsStore');
-                            store.load();
+                            //store.load();
                             if (store.getCount() >= 5) {
                                 Ext.getCmp('UploadDeal').disable();
                             } else {
