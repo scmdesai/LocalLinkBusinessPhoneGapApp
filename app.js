@@ -69251,7 +69251,7 @@ Ext.define('Ext.picker.Picker', {
                                             if (document.getElementById('chkbx').checked) {
                                                 form.submit({
                                                     url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzWithImage',
-                                                    xhr2: true,
+                                                    //xhr2:true,
                                                     cache: false,
                                                     waitMsg: 'Please Wait...',
                                                     success: function(form, action) {
