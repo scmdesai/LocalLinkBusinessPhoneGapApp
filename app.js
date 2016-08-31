@@ -69251,7 +69251,8 @@ Ext.define('Ext.picker.Picker', {
                                         if (endDate >= startDate) {
                                             if (document.getElementById('chkbx').checked) {
                                                 form.submit({
-                                                    url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzWithImage',
+                                                    url: 'http://services.appsonmobile.com/createNewBuzzWithImage',
+                                                    //'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzWithImage',
                                                     xhr2: true,
                                                     cache: false,
                                                     contentType: false,
