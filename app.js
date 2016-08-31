@@ -67295,7 +67295,7 @@ Ext.define('Ext.picker.Picker', {
                         var itemName = record.get('itemName');
                         var req = Ext.Ajax.request({
                                 method: 'POST',
-                                url: 'http://services.appsonmobile.com/deals/' + itemName,
+                                url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/' + itemName,
                                 success: function(form, action) {
                                     Ext.Msg.alert('Success', action.msg);
                                     //console.log(action.msg);
@@ -68849,7 +68849,7 @@ Ext.define('Ext.picker.Picker', {
                                     if (endDate >= startDate) {
                                         if (document.getElementById('chkbx').checked) {
                                             form.submit({
-                                                url: 'http://services.appsonmobile.com/deals/editDeal/' + itemName,
+                                                url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/editDeal/' + itemName,
                                                 success: function(form, action) {
                                                     Ext.Msg.alert('Success', action.msg);
                                                     store.load({
@@ -69250,7 +69250,7 @@ Ext.define('Ext.picker.Picker', {
                                         if (endDate >= startDate) {
                                             if (document.getElementById('chkbx').checked) {
                                                 form.submit({
-                                                    url: 'http://services.appsonmobile.com/createNewBuzzWithImage',
+                                                    url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzWithImage',
                                                     xhr2: true,
                                                     cache: false,
                                                     waitMsg: 'Please Wait...',
@@ -69796,7 +69796,7 @@ Ext.define('Ext.picker.Picker', {
                                     if (endDate >= startDate) {
                                         if (document.getElementById('chkbx').checked) {
                                             form.submit({
-                                                url: 'http://services.appsonmobile.com/createNewBuzzNoImage',
+                                                url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals/createNewBuzzNoImage',
                                                 cache: false,
                                                 waitMsg: 'Please Wait...',
                                                 success: function(form, action) {
