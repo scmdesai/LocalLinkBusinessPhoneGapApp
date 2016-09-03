@@ -66400,12 +66400,13 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         docked: 'right',
-                        height: '7vh',
+                        height: '6vh',
                         itemId: 'mybutton10',
-                        margin: '10 20 10 10',
+                        margin: '10 10 10 10',
+                        padding: '5 5 5 5',
                         style: 'color:#00529D',
                         ui: 'plain',
-                        width: '8vw',
+                        width: '10vw',
                         iconCls: 'icon-menu'
                     }
                 ]
@@ -66688,7 +66689,7 @@ Ext.define('Ext.picker.Picker', {
         Ext.form.Panel.prototype.initialize.call(this);
         var menu = Ext.create('Ext.Menu', {
                 id: 'menu',
-                width: '12vw',
+                width: '15vw',
                 items: [
                     {
                         iconCls: 'icon-edit',
