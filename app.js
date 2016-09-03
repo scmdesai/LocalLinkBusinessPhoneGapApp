@@ -66690,6 +66690,7 @@ Ext.define('Ext.picker.Picker', {
         var menu = Ext.create('Ext.Menu', {
                 id: 'menu',
                 width: '15vw',
+                margin: '0 5 0 0',
                 items: [
                     {
                         iconCls: 'icon-edit',
