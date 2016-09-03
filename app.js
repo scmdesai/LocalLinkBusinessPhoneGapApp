@@ -66380,6 +66380,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
+                height: '8vh',
                 ui: 'plain',
                 items: [
                     {
@@ -66388,7 +66389,8 @@ Ext.define('Ext.picker.Picker', {
                         disabled: true,
                         html: '<b>First Name</b>',
                         id: 'nameTxt',
-                        itemId: 'nameTxt'
+                        itemId: 'nameTxt',
+                        margin: '0 0 0 10'
                     },
                     {
                         xtype: 'spacer',
@@ -66684,6 +66686,8 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         iconCls: 'icon-edit',
+                        height: '5vw',
+                        width: '5vw',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
                             /*var storeUserDetails = Ext.getStore('UserDetails');
@@ -66708,6 +66712,8 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         iconCls: 'icon-signout',
+                        height: '5vw',
+                        width: '5vw',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
                             Ext.Msg.confirm('Logout', 'Are you sure you want to logout?', function(btn) {
@@ -68149,7 +68155,7 @@ Ext.define('Ext.picker.Picker', {
 (Ext.cmd.derive('LocalBuzzMerchant.view.ChangeContactPicForm', Ext.form.Panel, {
     config: {
         centered: true,
-        height: '40%',
+        height: '30%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
         style: 'background;#fff;border:3px groove #1985d0',
@@ -68160,17 +68166,17 @@ Ext.define('Ext.picker.Picker', {
         scrollable: false,
         layout: {
             type: 'vbox',
-            align: 'stretchmax',
-            pack: 'end'
+            align: 'stretchmax'
         },
         items: [
             {
                 xtype: 'filefield',
                 cls: 'customfield1',
+                height: '8vh',
                 itemId: 'myfilefield1',
                 margin: '5 5 5 5',
                 styleHtmlContent: true,
-                width: 214,
+                width: '50vh',
                 clearIcon: false,
                 label: '',
                 labelWrap: true,
@@ -68227,13 +68233,15 @@ Ext.define('Ext.picker.Picker', {
                 bottom: 30,
                 centered: false,
                 cls: 'button',
-                height: '23%',
-                left: '25%',
+                docked: 'bottom',
+                height: '6vh',
+                left: '15%',
                 margin: '',
                 style: 'font-size:5vw!important',
                 styleHtmlContent: true,
+                top: '65%',
                 ui: 'action',
-                width: 128,
+                width: '50vw',
                 iconAlign: 'center',
                 text: 'Submit'
             },
@@ -68600,7 +68608,7 @@ Ext.define('Ext.picker.Picker', {
         ui: 'light',
         autoDestroy: false,
         modal: true,
-        scrollable: false,
+        scrollable: true,
         multipartDetection: false,
         layout: {
             type: 'vbox',
@@ -68772,6 +68780,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
+                height: '15vh',
                 left: '',
                 margin: '0 5 15 5 ',
                 layout: 'hbox',
@@ -68782,12 +68791,12 @@ Ext.define('Ext.picker.Picker', {
                         html: '<input type="checkbox" name="chkbx" id="chkbx">',
                         left: '40%',
                         margin: '5 5 5 15',
-                        top: '50%'
+                        top: '30%'
                     },
                     {
                         xtype: 'container',
                         docked: 'right',
-                        height: '40px',
+                        height: '11vh',
                         html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
                         margin: '5 5 5 10',
@@ -69165,6 +69174,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
+                height: '10vh',
                 left: '',
                 margin: '0 5 15 5 ',
                 layout: 'hbox',
@@ -69175,13 +69185,13 @@ Ext.define('Ext.picker.Picker', {
                         html: '<input type="checkbox" name="chkbx" id="chkbx">',
                         left: '40%',
                         margin: '5 5 5 15',
-                        top: '50%'
+                        top: '30%'
                     },
                     {
                         xtype: 'container',
                         docked: 'right',
-                        height: '40px',
-                        html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        height: '11vh',
+                        html: '<a id="terms" style="font-size:2.5vw;text-align:top" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
                         margin: '5 5 5 0',
                         padding: '5 30 5 0',
@@ -69717,6 +69727,7 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
+                height: '15vh',
                 left: '',
                 margin: '0 5 15 5 ',
                 layout: 'hbox',
@@ -69724,16 +69735,16 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'container',
                         docked: 'left',
-                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        html: '<input type="checkbox" width=4vw height=4vw name="chkbx" id="chkbx">',
                         left: '40%',
                         margin: '5 5 5 15',
-                        top: '50%'
+                        top: '30%'
                     },
                     {
                         xtype: 'container',
                         docked: 'right',
-                        height: '40px',
-                        html: '<a id="terms" style="font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        height: '11vh',
+                        html: '<a id="terms" style="text-align:top;font-size:2.5vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
                         itemId: 'mycontainer5',
                         margin: '5 5 5 0',
                         padding: '5 30 5 0',
