@@ -69190,7 +69190,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'container',
                         docked: 'left',
-                        html: '<input type="checkbox" name="chkbx" id="chkbx">',
+                        html: '<input type="checkbox" class="checkbox" name="chkbx" id="chkbx">',
                         left: '40%',
                         margin: '5 5 5 15',
                         top: '30%'
@@ -69743,7 +69743,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'container',
                         docked: 'left',
-                        html: '<input type="checkbox" width=4vw height=4vw name="chkbx" id="chkbx">',
+                        html: '<input class="chkbox"  type="checkbox" name="chkbx" id="chkbx">',
                         left: '40%',
                         margin: '5 5 5 15',
                         top: '30%'
