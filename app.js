@@ -66390,7 +66390,7 @@ Ext.define('Ext.picker.Picker', {
                         html: '<b>First Name</b>',
                         id: 'nameTxt',
                         itemId: 'nameTxt',
-                        margin: '0 0 0 10'
+                        margin: '10 0 0 10'
                     },
                     {
                         xtype: 'spacer',
@@ -66400,9 +66400,12 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         docked: 'right',
+                        height: '7vh',
                         itemId: 'mybutton10',
+                        margin: '10 20 10 10',
                         style: 'color:#00529D',
                         ui: 'plain',
+                        width: '8vw',
                         iconCls: 'icon-menu'
                     }
                 ]
@@ -66621,12 +66624,14 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'button',
+                height: '7vh',
                 hidden: true,
                 itemId: 'editButton',
                 margin: '5 5 5 5',
                 style: 'color:#00529D;font-size:6vw;',
                 styleHtmlContent: true,
                 ui: 'plain',
+                width: '7vw',
                 iconCls: 'compose'
             }
         ],
@@ -66686,8 +66691,8 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         iconCls: 'icon-edit',
-                        height: '5vw',
-                        width: '5vw',
+                        height: '7vw',
+                        width: '7vh',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
                             /*var storeUserDetails = Ext.getStore('UserDetails');
@@ -66712,8 +66717,8 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         iconCls: 'icon-signout',
-                        height: '5vw',
-                        width: '5vw',
+                        height: '7vw',
+                        width: '7vh',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
                             Ext.Msg.confirm('Logout', 'Are you sure you want to logout?', function(btn) {
@@ -68556,7 +68561,7 @@ Ext.define('Ext.picker.Picker', {
             docked: 'bottom',
             height: '8%',
             itemId: 'mytabbar1',
-            padding: '35 40 0 40',
+            padding: '37 40 5 40',
             style: 'color:#c0c0c0;background:#FFF;font-size:4vw',
             ui: 'plain',
             layout: {
