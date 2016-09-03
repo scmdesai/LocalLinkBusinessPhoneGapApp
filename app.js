@@ -66688,11 +66688,12 @@ Ext.define('Ext.picker.Picker', {
         Ext.form.Panel.prototype.initialize.call(this);
         var menu = Ext.create('Ext.Menu', {
                 id: 'menu',
+                width: '12vw',
                 items: [
                     {
                         iconCls: 'icon-edit',
-                        height: '50vw',
-                        width: '20vh',
+                        height: '10vw',
+                        width: '7vh',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
                             /*var storeUserDetails = Ext.getStore('UserDetails');
@@ -66717,8 +66718,8 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         iconCls: 'icon-signout',
-                        height: '50vw',
-                        width: '20vh',
+                        height: '10vw',
+                        width: '7vh',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
                             Ext.Msg.confirm('Logout', 'Are you sure you want to logout?', function(btn) {
