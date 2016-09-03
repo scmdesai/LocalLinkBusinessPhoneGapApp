@@ -66691,7 +66691,7 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         iconCls: 'icon-edit',
-                        height: '30vw',
+                        height: '50vw',
                         width: '20vh',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
@@ -66717,7 +66717,7 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         iconCls: 'icon-signout',
-                        height: '30vw',
+                        height: '50vw',
                         width: '20vh',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
@@ -67328,11 +67328,11 @@ Ext.define('Ext.picker.Picker', {
                                     Ext.Msg.alert('Failure', action.msg, null, null);
                                     //console.log(action.msg);
                                     var store = Ext.getStore('MyDealsStore');
-                                    store.load({
-                                        params: {
-                                            customerId: customerId
-                                        }
-                                    });
+                                    /*store.load({
+													params: {
+														customerId: customerId
+													}
+												});*/
                                     if (store.getCount() >= 5) {
                                         Ext.getCmp('UploadDeal').disable();
                                     } else {
@@ -68225,7 +68225,7 @@ Ext.define('Ext.picker.Picker', {
                             },
                             //view.setRecord(record);
                             failure: function(form, action) {
-                                store.load();
+                                //store.load();
                                 //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
                                 Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
                                 form.destroy();
@@ -68875,11 +68875,11 @@ Ext.define('Ext.picker.Picker', {
                                                     form.destroy();
                                                 },
                                                 failure: function(form, action) {
-                                                    store.load({
-                                                        params: {
-                                                            customerId: customerId
-                                                        }
-                                                    });
+                                                    /*store.load({
+													params: {
+													customerId: customerId
+													}
+													});*/
                                                     Ext.Msg.alert('Failure', action.msg, null, null);
                                                     form.destroy();
                                                 }
@@ -69293,11 +69293,11 @@ Ext.define('Ext.picker.Picker', {
                                                         //console.log('Action is '+action);
                                                         Ext.Msg.alert('Failure', action.msg, null, null);
                                                         var store = Ext.getStore('MyDealsStore');
-                                                        store.load({
-                                                            params: {
-                                                                customerId: customerId
-                                                            }
-                                                        });
+                                                        /*store.load({
+														params: {
+														customerId: customerId
+														}
+														});*/
                                                         if (store.getCount() >= 5) {
                                                             Ext.getCmp('UploadDeal').disable();
                                                         } else {
@@ -69843,11 +69843,11 @@ Ext.define('Ext.picker.Picker', {
                                                     //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
                                                     Ext.Msg.alert('Failure', action.msg, null, null);
                                                     var store = Ext.getStore('MyDealsStore');
-                                                    store.load({
-                                                        params: {
-                                                            customerId: customerId
-                                                        }
-                                                    });
+                                                    /*store.load({
+													params: {
+													customerId: customerId
+													}
+													});*/
                                                     console.log('Count is:' + count);
                                                     if (store.getCount() >= 5) {
                                                         Ext.getCmp('UploadDeal').disable();
