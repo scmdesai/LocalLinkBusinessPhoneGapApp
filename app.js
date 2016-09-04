@@ -67488,7 +67488,7 @@ Ext.define('Ext.picker.Picker', {
                 } else {
                     //html = '<img style="width:100%;" src="'+res.URI+'">';
                     //document.body.innerHTML = html;
-                    window.plugins.socialsharing.share(null, 'Hi! Check out this latest buzz from Local Buzz', res.URI, null);
+                    window.plugins.socialsharing.share(null, 'Hi! Check out this latest buzz from Local Buzz!', res.URI, null);
                 }
             }, 50);
             Ext.get('share').show();
@@ -69743,7 +69743,7 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'container',
                         docked: 'left',
-                        html: '<input class="chkbox"  type="checkbox" name="chkbx" id="chkbx">',
+                        html: '<input class="checkbox"  type="checkbox" name="chkbx" id="chkbx">',
                         left: '40%',
                         margin: '5 5 5 15',
                         top: '30%'
