@@ -67917,9 +67917,18 @@ Ext.define('Ext.picker.Picker', {
 		var store = Ext.getStore('MyDealsStore');
 		store.clearFilter();
 		store.filter('customerId',customerId);*/
-    onDealsPanelPainted: function(element, eOpts) {},
-    /*var store = Ext.getStore('MyDealsStore');
+    onDealsPanelPainted: function(element, eOpts) {
+        /*var store = Ext.getStore('MyDealsStore');
 		store.load();*/
+        var dealStore = Ext.getStore('MyDealsStore');
+        var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
+        //dealStore.filter('customerId',customerId);
+        dealStore.load({
+            params: {
+                customerId: customerId
+            }
+        });
+    },
     initialize: function() {
         Ext.form.Panel.prototype.initialize.call(this);
         /*var storeUserDetails = Ext.getStore('UserDetails');
