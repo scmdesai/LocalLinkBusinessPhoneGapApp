@@ -68230,7 +68230,8 @@ Ext.define('Ext.picker.Picker', {
                             failure: function(form, action) {
                                 //store.load();
                                 //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
-                                Ext.Msg.alert('Error uploading image', 'Please try again', null, null);
+                                //Ext.Msg.alert('Error uploading image','Please try again',null,null);
+                                Ext.Msg.alert('Failure', action.msg, null, null);
                                 form.destroy();
                             }
                         });
