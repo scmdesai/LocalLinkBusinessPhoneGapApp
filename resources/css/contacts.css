@@ -27,7 +27,7 @@ $list-header-bg-color: $base-color;
 }
 
 .toolbarCls {
-	background:white !important;
+	background-image:url(resources/img/whitetexture.png);
 	border-bottom:1px solid #C0C0C0 !important;
 }
 
@@ -45,7 +45,7 @@ $list-header-bg-color: $base-color;
 
 .dateValidity {
 	color:grey;
-	font-size:2.5vw;
+	font-size:2.2vw;
 	font-style:italics;
 	font-weight:normal;
 	font-family:'Arial';
@@ -53,7 +53,7 @@ $list-header-bg-color: $base-color;
 }
 .expiringDate {
 	color:grey;
-	font-size:2.5vw;
+	font-size:2.2vw;
 	font-style:italics;
 	font-weight:normal;
 	font-family:'Arial';
@@ -91,6 +91,7 @@ $list-header-bg-color: $base-color;
 	font-size:4vw !important;
 	padding-right:5px!important;
 	overflow: visible;
+	background:url(resources/img/whitetexture.png)!important;
 
 
 
@@ -100,6 +101,9 @@ $list-header-bg-color: $base-color;
 
 }
 
+.inputCls {
+	background:url(resources/img/whitetexture.png);
+}
 
 
 .tabBarCls {
@@ -109,7 +113,7 @@ $list-header-bg-color: $base-color;
 
 
 .x-field {
-	border-bottom:1px groove #C0C0C0!important;
+	
 	height:12vh;
 	font-weight:normal !important;
 	text-align:center !important;
@@ -117,6 +121,7 @@ $list-header-bg-color: $base-color;
 	font-family:Arial !important;
 	font-size:4.5vw;
 	padding-right:5px!important;
+	background:url(resources/img/whitetexture.png);
 
 
 
@@ -135,8 +140,9 @@ $list-header-bg-color: $base-color;
 	font-family:Arial !important;
 	font-size:4.5vw;
 	border-top-left-radius:0 em;
-	background:#FFF !important;
+	background:url(resources/img/whitetexture.png);
 	border-right:1px solid #eee!important;
+	
 
 }
 
@@ -150,6 +156,7 @@ $list-header-bg-color: $base-color;
 	font-family:Arial !important;
 	font-size:4vw;
 	border:none!important;
+	background:url(resources/img/whitetexture.png);
 
 
 
@@ -167,6 +174,7 @@ $list-header-bg-color: $base-color;
 	font-family:Arial !important;
 	font-size:4vw;
 	border-bottom:2px groove #C0C0C0;
+	background:url(resources/img/whitetexture.png);
 
 
 
@@ -200,4 +208,3 @@ $list-header-bg-color: $base-color;
 .dateErrorCls{
 	background:red !important;
 }
-

@@ -66192,34 +66192,10 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'MyDealsStore',
         proxy: {
             type: 'jsonp',
-            url: ' https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals',
+            url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/deals',
             reader: {
                 type: 'json'
             }
-        },
-        listeners: [
-            {
-                fn: 'onJsonstoreLoad',
-                event: 'load'
-            }
-        ]
-    },
-    onJsonstoreLoad: function(store, records, successful, operation, eOpts) {
-        var storeCount = store.getCount();
-        //console.log(Ext.getCmp('UploadDeal').isDisabled());
-        console.log(storeCount);
-        //var btn = Ext.ComponentQuery.query('DealsPanel > UploadDeal' );
-        if (storeCount >= 5) {
-            //btn.disable();
-            //Ext.getCmp('UploadDeal').setDisabled(true);
-            //Ext.getCmp('UploadDeal').disable();
-            //Ext.getCmp('DealsPanelContainer').disable();
-            console.log('disabling');
-        } else {
-            // Ext.getCmp('UploadDeal').setDisabled(false);
-            //btn.enable();
-            //Ext.getCmp('UploadDeal').enable();
-            console.log('enabling');
         }
     }
 }, 0, 0, 0, 0, 0, 0, [
@@ -66301,18 +66277,15 @@ Ext.define('Ext.picker.Picker', {
         hideAnimation: 'flip',
         id: 'WelcomeScreen',
         itemId: 'WelcomeScreen',
-        style: 'background:url(resources/img/whitetexture.png);',
-        styleHtmlContent: true,
         items: [
             {
                 xtype: 'component',
                 hidden: false,
-                html: '<center><img src ="resources/img/localbuzzicon.png"/><br><div style="text-align:center;"><h3 style="color:#00529D;font-family:Arial;font-size:6vw;text-align:center"><b>Welcome to <br><br>Local Buzz For Merchants</h3></div></center>',
+                html: '<center><img src ="resources/img/localbuzzicon.png"/><br><div style="text-align:center;"><h3 style="color:#00529D"><b>Welcome to <br><br>Local Buzz For Merchants</h3></div></center>',
                 id: 'text1',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;background:url(resources/img/whitetexture.png);',
-                styleHtmlContent: true,
-                top: '7%',
-                width: '100%'
+                left: '12%',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '15%'
             },
             {
                 xtype: 'button',
@@ -66394,10 +66367,10 @@ Ext.define('Ext.picker.Picker', {
         border: 5,
         id: 'info',
         itemId: 'info',
-        style: 'background:url(resources/img/whitetexture.png);',
+        style: 'background;#fff',
         styleHtmlContent: true,
         modal: true,
-        scrollable: true,
+        scrollable: false,
         layout: {
             type: 'vbox',
             align: 'stretchmax'
@@ -66408,7 +66381,6 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'toolbarCls',
                 docked: 'top',
                 height: '8vh',
-                style: 'background:url(resources/img/whitetexture.png);',
                 ui: 'plain',
                 items: [
                     {
@@ -66418,8 +66390,7 @@ Ext.define('Ext.picker.Picker', {
                         html: '<b>First Name</b>',
                         id: 'nameTxt',
                         itemId: 'nameTxt',
-                        margin: '10 0 0 10',
-                        style: 'font-family:Arial'
+                        margin: '10 0 0 10'
                     },
                     {
                         xtype: 'spacer',
@@ -66433,7 +66404,7 @@ Ext.define('Ext.picker.Picker', {
                         itemId: 'mybutton10',
                         margin: '10 10 10 10',
                         padding: '5 5 5 5',
-                        style: 'color:#00529D;font-size:5vw',
+                        style: 'color:#00529D',
                         ui: 'plain',
                         width: '10vw',
                         iconCls: 'icon-menu'
@@ -66448,6 +66419,73 @@ Ext.define('Ext.picker.Picker', {
                 height: '40vh',
                 id: 'storeImage',
                 itemId: 'storeImage'
+            },
+            {
+                xtype: 'textareafield',
+                cls: [
+                    'icon-location1',
+                    'customfield1'
+                ],
+                disabled: false,
+                docked: 'bottom',
+                height: '12vh',
+                hidden: false,
+                html: '',
+                itemId: 'address',
+                margin: '0 5 0 5',
+                maxHeight: '',
+                minHeight: '',
+                padding: '10 0 5 10',
+                style: 'font-size:3.5vw;',
+                styleHtmlContent: true,
+                clearIcon: false,
+                name: 'address',
+                placeHolder: 'Not Listed',
+                readOnly: true,
+                maxRows: 2
+            },
+            {
+                xtype: 'textfield',
+                cls: [
+                    'icon-globe1',
+                    'customfield2'
+                ],
+                disabled: false,
+                docked: 'bottom',
+                height: '1vh',
+                hidden: false,
+                itemId: 'websiteDisplayName',
+                margin: '0 5 0 5',
+                padding: '0 0 5 15',
+                style: 'font-size:5vw;font-family: arial',
+                styleHtmlContent: true,
+                width: '95%',
+                clearIcon: false,
+                name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: [
+                    'icon-email1',
+                    'customfield2'
+                ],
+                disabled: false,
+                docked: 'bottom',
+                height: '1vh',
+                hidden: false,
+                itemId: 'email',
+                margin: '0 5 0 5',
+                padding: '0 0 5 5',
+                style: 'font-size:5vw;font-family: arial',
+                styleHtmlContent: true,
+                width: '95%',
+                clearIcon: false,
+                label: '',
+                name: 'emailAddress',
+                placeHolder: 'Not Listed',
+                readOnly: true
             },
             {
                 xtype: 'textfield',
@@ -66468,6 +66506,28 @@ Ext.define('Ext.picker.Picker', {
                 clearIcon: false,
                 label: '',
                 name: 'loginEmail',
+                placeHolder: 'Not Listed',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: [
+                    'icon-phone1',
+                    'customfield2'
+                ],
+                disabled: false,
+                docked: 'bottom',
+                height: '1vh',
+                hidden: false,
+                id: 'phoneNumber2',
+                itemId: 'phoneNumber',
+                margin: '0 5 0 5',
+                padding: '0 0 5 5',
+                style: 'font-size:4.5vw;font-family: arial;',
+                styleHtmlContent: true,
+                width: '95%',
+                clearIcon: false,
+                name: 'phoneNumber',
                 placeHolder: 'Not Listed',
                 readOnly: true
             },
@@ -66574,106 +66634,6 @@ Ext.define('Ext.picker.Picker', {
                 ui: 'plain',
                 width: '7vw',
                 iconCls: 'compose'
-            },
-            {
-                xtype: 'container',
-                style: 'background:url(resources/img/whitetexture.png)!important;',
-                layout: {
-                    type: 'vbox',
-                    pack: 'end'
-                },
-                items: [
-                    {
-                        xtype: 'textfield',
-                        cls: [
-                            'w3-card-4',
-                            'icon-email1'
-                        ],
-                        disabled: false,
-                        height: '8vh',
-                        hidden: false,
-                        itemId: 'email2',
-                        margin: '2 0 2 0',
-                        padding: '10 0 0 15',
-                        style: 'font-size:5vw;font-family:Arial;background:url(resources/img/whitetexture.png);',
-                        styleHtmlContent: true,
-                        width: '100%',
-                        clearIcon: false,
-                        inputCls: 'inputCls',
-                        labelCls: 'icon-email1',
-                        name: 'emailAddress',
-                        placeHolder: 'Not Listed',
-                        readOnly: true
-                    },
-                    {
-                        xtype: 'textfield',
-                        cls: [
-                            'icon-phone1',
-                            'w3-card-4'
-                        ],
-                        disabled: false,
-                        height: '8vh',
-                        hidden: false,
-                        id: 'phoneNumber2',
-                        itemId: 'phoneNumber',
-                        margin: '2 0 2 0',
-                        padding: '10 0 0 15',
-                        style: 'font-size:5vw;font-family:Arial;background:url(resources/img/whitetexture.png);',
-                        styleHtmlContent: true,
-                        width: '100%',
-                        clearIcon: false,
-                        inputCls: 'inputCls',
-                        name: 'phoneNumber',
-                        placeHolder: 'Not Listed',
-                        readOnly: true
-                    },
-                    {
-                        xtype: 'textfield',
-                        cls: [
-                            'icon-globe1',
-                            'w3-card-4'
-                        ],
-                        disabled: false,
-                        height: '8vh',
-                        hidden: false,
-                        itemId: 'websiteDisplayName',
-                        margin: '2 0 2 0',
-                        padding: '10 0 0 20',
-                        style: 'font-size:5vw;font-family: Arial;background:url(resources/img/whitetexture.png);',
-                        styleHtmlContent: true,
-                        width: '100%',
-                        clearIcon: false,
-                        inputCls: 'inputCls',
-                        name: 'websiteDisplayName',
-                        placeHolder: 'Not Listed',
-                        readOnly: true
-                    },
-                    {
-                        xtype: 'textareafield',
-                        cls: [
-                            'icon-location',
-                            'w3-card-4'
-                        ],
-                        disabled: false,
-                        height: '10vh',
-                        hidden: false,
-                        html: '',
-                        itemId: 'address',
-                        margin: '2 0 2 0',
-                        maxHeight: '',
-                        minHeight: '',
-                        padding: '10 0 0 15',
-                        style: 'font-size:3.8vw;font-family: Arial;background:url(resources/img/whitetexture.png);',
-                        styleHtmlContent: true,
-                        width: '100%',
-                        clearIcon: false,
-                        inputCls: 'inputCls',
-                        name: 'address',
-                        placeHolder: 'Not Listed',
-                        readOnly: true,
-                        maxRows: 2
-                    }
-                ]
             }
         ],
         listeners: [
@@ -66720,7 +66680,7 @@ Ext.define('Ext.picker.Picker', {
         if (record) {
             var name = record.get('businessName');
             var customerId = record.get('customerId');
-            this.down('#nameTxt').setHtml('<div style="font-family:Arial">' + name + '</div>');
+            this.down('#nameTxt').setHtml(name);
             //this.down('contactpic').setData(record.data);
             this.down('#storeImage').setHtml('<img src = "' + record.get('pictureURL') + '" style="height:40vh;width:95%;margin-left:5px;margin-top:2px;"/>');
         }
@@ -66734,9 +66694,8 @@ Ext.define('Ext.picker.Picker', {
                 items: [
                     {
                         iconCls: 'icon-edit',
-                        height: '7vh',
-                        width: '12vw',
-                        padding: '0 5 0 0',
+                        height: '10vw',
+                        width: '7vh',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
                             /*var storeUserDetails = Ext.getStore('UserDetails');
@@ -66761,9 +66720,8 @@ Ext.define('Ext.picker.Picker', {
                     },
                     {
                         iconCls: 'icon-signout',
-                        height: '7vh',
-                        padding: '0 5 0 0',
-                        width: '12vw',
+                        height: '10vw',
+                        width: '7vh',
                         handler: function() {
                             Ext.Viewport.hideMenu('right');
                             Ext.Msg.confirm('Logout', 'Are you sure you want to logout?', function(btn) {
@@ -66821,30 +66779,26 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('LocalBuzzMerchant.view.ListOfDeals', Ext.dataview.List, {
     config: {
+        cls: 'customlist',
         height: '100%',
         id: 'ListOfDeals',
         itemId: 'ListOfDeals',
-        style: 'background:url(resources/img/whitetexture.png);',
         autoDestroy: false,
         allowDeselect: true,
         deselectOnContainerClick: false,
         mode: 'MULTI',
         deferEmptyText: false,
         emptyText: 'Create a Buzz!',
+        itemCls: 'list-item',
         store: 'MyDealsStore',
         pinHeaders: false,
         preventSelectionOnDisclose: false,
         refreshHeightOnUpdate: false,
         useSimpleItems: false,
-        cls: [
-            'customlist',
-            'w3-card-4'
-        ],
         itemTpl: [
             '',
             '',
-            '<div style="font-size:4vw;color:black;font-family:Arial;word-wrap:word-break;">{dealName}',
-            '<br><button type="button" id="delete" class="delete_button" style="float:right;margin:0px 15px 0px 15px;">#</button><button type="button" id="edit" class="delete_button" style="float:right">p</button></div>',
+            '<div style="font-size:5vw;color:black;font-weight:normal;font-family:Arial">{dealName}<button type="button" id="delete" class="delete_button" style="float:right;padding:0px 15px 0px 15px;">#<button type="button" id="edit" class="delete_button" style="float:right">p</div>',
             '<tpl if="dealEndDate &lt; todayplusthreedays ">',
             '<div class= expiringDate >Valid {dealStartDate} to {dealEndDate}</div>',
             '<tpl else>\t',
@@ -66892,7 +66846,7 @@ Ext.define('Ext.picker.Picker', {
         html: '',
         id: 'formpanel',
         itemId: 'formpanel',
-        style: 'background:url(resources/img/whitetexture.png);',
+        style: 'background:white',
         ui: 'light',
         autoDestroy: false,
         modal: true,
@@ -66908,7 +66862,7 @@ Ext.define('Ext.picker.Picker', {
                 cls: 'toolbarCls',
                 docked: 'top',
                 height: '12vh',
-                style: 'border-top:none;background:url(resources/img/whitetexture.png);',
+                style: 'border-top:none',
                 ui: 'plain',
                 autoDestroy: false,
                 items: [
@@ -66917,7 +66871,6 @@ Ext.define('Ext.picker.Picker', {
                         height: '8vh',
                         itemId: 'cancelButton',
                         margin: '10 0 10 10',
-                        style: 'font-size:5vw;font-family:Arial',
                         ui: 'decline',
                         width: '30%',
                         text: 'Cancel'
@@ -66939,7 +66892,7 @@ Ext.define('Ext.picker.Picker', {
 							store.sync();
 							store.load();*/
                             form.submit({
-                                url: ' https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/stores/updateStoreInfo/' + customerId,
+                                url: 'https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/stores/updateStoreInfo/' + customerId,
                                 success: function(form, action) {
                                     //Ext.Msg.alert('Success', action.msg,null,null);
                                     Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
@@ -66958,7 +66911,6 @@ Ext.define('Ext.picker.Picker', {
                         height: '8vh',
                         itemId: 'saveContactButton',
                         margin: '10 10 10 0',
-                        style: 'font-size:5vw;font-family:Arial',
                         ui: 'confirm',
                         width: '30%',
                         text: 'Save'
@@ -66988,11 +66940,10 @@ Ext.define('Ext.picker.Picker', {
                     view.showBy(button);
                 },
                 height: '20%',
-                hidden: false,
                 id: 'changePicButton',
                 left: '0px',
                 margin: '5 5 5 5',
-                style: 'opacity:0.5;position:absolute;',
+                style: 'opacity:0.5;position:absolute',
                 top: '-1%',
                 ui: 'plain',
                 width: '20%',
@@ -67156,23 +67107,7 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'top',
                 height: '40vh',
                 id: 'storeImage1',
-                itemId: 'storeImage1',
-                listeners: [
-                    {
-                        fn: function(element, eOpts) {
-                            element.addListener('tap', function() {
-                                var view = Ext.Viewport.add({
-                                        xtype: 'ChangeContactPicForm'
-                                    });
-                                //var record = Ext.getStore('MyJsonPStore').findRecord('customerId',customerId,0,true,false,false);
-                                var record = Ext.getStore('UserDetails').getAt(0);
-                                view.setRecord(record);
-                                view.showBy(element);
-                            });
-                        },
-                        event: 'painted'
-                    }
-                ]
+                itemId: 'storeImage1'
             }
         ],
         listeners: [
@@ -67217,7 +67152,7 @@ Ext.define('Ext.picker.Picker', {
             this.down('#phoneNumber').setValue(record.data.phoneNumber);
             this.down('#address').setValue(record.data.address);
             //this.child('contactpic').setData(record.data);
-            this.down('#storeImage1').setHtml('<div><img src = "' + record.get('pictureURL') + '" style="height:40vh;width:95%;margin-left:5px;margin-top:2px;"/></div>');
+            this.down('#storeImage1').setHtml('<img src = "' + record.get('pictureURL') + '" style="height:40vh;width:95%;margin-left:5px;margin-top:2px;"/>');
         }
     }
 }, 0, [
@@ -67356,14 +67291,6 @@ Ext.define('Ext.picker.Picker', {
     //var ds = Ext.StoreManager.lookup('MyJsonPStore');
     //ds.clearFilter();
     onDealBackBtnTap: function(button, e, eOpts) {
-        //console.log(Ext.getCmp('UploadDeal').isDisabled());
-        var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
-        var store = Ext.getStore('MyDealsStore');
-        store.load({
-            params: {
-                customerId: customerId
-            }
-        });
         Ext.getStore('LocalStore').removeAt(0);
         Ext.Viewport.getActiveItem().destroy();
     },
@@ -67392,22 +67319,32 @@ Ext.define('Ext.picker.Picker', {
                                             customerId: customerId
                                         }
                                     });
-                                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
+                                    var count = store.getCount() - 1;
+                                    if (count >= 5) {
+                                        Ext.getCmp('UploadDeal').disable();
+                                    } else {
+                                        Ext.getCmp('UploadDeal').enable();
+                                    }
                                 },
                                 failure: function(form, action) {
                                     //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
                                     Ext.Msg.alert('Failure', action.msg, null, null);
                                     //console.log(action.msg);
                                     var store = Ext.getStore('MyDealsStore');
-                                }
-                            });
-                    }
-                }, /*store.load({
+                                    /*store.load({
 													params: {
 														customerId: customerId
 													}
 												});*/
-                this);
+                                    if (store.getCount() >= 5) {
+                                        Ext.getCmp('UploadDeal').disable();
+                                    } else {
+                                        Ext.getCmp('UploadDeal').enable();
+                                    }
+                                }
+                            });
+                    }
+                }, this);
             } else {
                 var store = Ext.getStore('MyDealsStore');
                 var record = store.getAt(index);
@@ -67531,22 +67468,10 @@ Ext.define('Ext.picker.Picker', {
         Ext.Viewport.setActiveItem(info);
     },
     onUploadDealTap: function(button, e, eOpts) {
-        var store = Ext.getStore('MyDealsStore');
-        var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
-        //dealStore.filter('customerId',customerId);
-        store.load({
-            params: {
-                customerId: customerId
-            }
-        });
-        if (store.getCount() >= 5) {
-            Ext.Msg.alert('Max Limit reached', 'Only 5 active buzz per account allowed', null, null);
-        } else {
-            var view = Ext.Viewport.add({
-                    xtype: 'CreateNewBuzzOption'
-                });
-            Ext.Viewport.setActiveItem(view);
-        }
+        var view = Ext.Viewport.add({
+                xtype: 'CreateNewBuzzOption'
+            });
+        Ext.Viewport.setActiveItem(view);
     },
     //view.showBy(button);
     onShareTap: function(button, e, eOpts) {
@@ -67555,10 +67480,6 @@ Ext.define('Ext.picker.Picker', {
         //var record = Ext.getStore('MyDealsStore').findRecord('customerId',customerId,0,true,false,false);
         //window.plugins.socialsharing.share(null, null,record.get('dealPictureURL'),null);
         Ext.getCmp('dealBackBtn').hide();
-        //Ext.getCmp('nameTxt3').hide();
-        if (Ext.get('enlargebtn')) {
-            Ext.get('enlargebtn').hide();
-        }
         Ext.get('share').hide();
         if (Ext.os.is('Android')) {
             navigator.screenshot.URI(function(error, res) {
@@ -67568,13 +67489,9 @@ Ext.define('Ext.picker.Picker', {
                     //html = '<img style="width:100%;" src="'+res.URI+'">';
                     //document.body.innerHTML = html;
                     window.plugins.socialsharing.share(null, 'Hi! Check out this latest buzz from Local Buzz!', res.URI, null);
-                    Ext.get('share').show();
-                    if (Ext.get('enlargebtn')) {
-                        Ext.get('enlargebtn').show();
-                    }
                 }
-            }, // Ext.getCmp('nameTxt3').show();
-            50);
+            }, 50);
+            Ext.get('share').show();
             var view = Ext.Viewport.getComponent('dealPicture');
             view.setRecord(record);
             Ext.Viewport.setActiveItem(view);
@@ -67587,12 +67504,8 @@ Ext.define('Ext.picker.Picker', {
                     window.plugins.socialsharing.share(null, 'Hi! Check out this latest Buzz from Local Buzz', res.filePath, null);
                     Ext.getCmp('dealBackBtn').show();
                     Ext.get('share').show();
-                    if (Ext.get('enlargebtn')) {
-                        Ext.get('enlargebtn').show();
-                    }
                 }
-            }, // Ext.getCmp('nameTxt3').show();
-            'jpg', 50, 'myScreenShot');
+            }, 'jpg', 50, 'myScreenShot');
         }
     },
     onManageDealsTap: function(button, e, eOpts) {
@@ -67660,7 +67573,7 @@ Ext.define('Ext.picker.Picker', {
         fullscreen: true,
         id: 'dealPicture',
         itemId: 'dealPicture',
-        style: 'border-top:none;background:url(resources/img/whitetexture.png);',
+        style: 'background:#fff',
         width: '100%',
         autoDestroy: false,
         layout: {
@@ -67674,7 +67587,6 @@ Ext.define('Ext.picker.Picker', {
                 docked: 'top',
                 height: '8vh',
                 margin: '0 0 5 0',
-                style: 'background:url(resources/img/whitetexture.png);',
                 ui: 'plain',
                 width: '100%',
                 scrollable: false,
@@ -67686,15 +67598,14 @@ Ext.define('Ext.picker.Picker', {
                     {
                         xtype: 'button',
                         cls: 'icon-back-button',
+                        docked: 'left',
+                        height: '100%',
                         id: 'dealBackBtn',
                         itemId: 'dealBackBtn',
-                        minHeight: '100%',
+                        style: 'font-size:8vw',
+                        styleHtmlContent: true,
                         ui: 'plain',
                         iconAlign: 'top'
-                    },
-                    {
-                        xtype: 'spacer',
-                        width: 30
                     },
                     {
                         xtype: 'button',
@@ -67715,48 +67626,26 @@ Ext.define('Ext.picker.Picker', {
                         html: '<b>Business Name</b>',
                         id: 'nameTxt1',
                         itemId: 'nameTxt1',
-                        style: 'word-wrap:break-word;font-family:Arial;font-size:5.5vw;text-align:left;\''
+                        style: 'word-wrap:break-word;font-family:Arial;font-size:5vw;text-align:center',
+                        width: '100%'
                     }
                 ]
             },
             {
-                xtype: 'container',
+                xtype: 'component',
                 cls: 'contact-name',
                 disabled: true,
-                docked: 'top',
-                hidden: false,
-                id: 'nameTxt6',
-                itemId: 'nameTxt6',
-                margin: '10 5 5 5',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:4.5vw;background:url(resources/img/whitetexture.png);color:green;',
-                width: '98%',
-                layout: 'fit'
-            },
-            {
-                xtype: 'component',
-                cls: [
-                    'dealimage',
-                    'w3-card-4',
-                    'w3-container',
-                    'w3-theme-l5'
-                ],
-                disabled: true,
-                docked: 'top',
                 height: '40vh',
                 id: 'dealimage',
                 itemId: 'dealimage',
                 left: '2%',
-                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;',
-                width: '96vw',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;border:2px dotted #c0c0c0',
+                width: '95%',
                 listeners: [
                     {
                         fn: function(element, eOpts) {
                             var record = Ext.getStore('LocalStore').getAt(0);
                             if (record.get('dealImageURL')) {
-                                var dealImageURL = record.get('dealImageURL').toString();
-                                //var fileFormatIndex = dealImageURL.lastIndexOf('.');
-                                // var fileFormat = dealImageURL.substring(fileFormatIndex+1,dealImageURL.length);
-                                //if(fileFormat==='jpg') {
                                 element.addListener('tap', function() {
                                     console.log('DealImage Tap');
                                     var view = Ext.Viewport.add({
@@ -67764,111 +67653,6 @@ Ext.define('Ext.picker.Picker', {
                                         });
                                     view.setRecord(record);
                                     view.showBy(Ext.get('dealPicture'));
-                                });
-                            } else //}
-                            /* else {
-								if(Ext.os.is('Android')){
-								window.plugins.html5Video.initialize( { "video1": '"'+record.get('dealImageURL')+'"'} );
-								}
-								}*/
-                            {
-                                element.addListener('tap', function() {
-                                    var record = Ext.getStore('LocalStore').getAt(0);
-                                    var dealDescription = record.get('dealDescription').toString();
-                                    if (dealDescription) {
-                                        console.log('dealDescription is : ' + dealDescription);
-                                        //find if the url is nested(example appsonmobile.com/about-us)
-                                        var content = dealDescription.split('/');
-                                        if (content.length > 1) {
-                                            var index = content.length - 1;
-                                            //Find where url begins
-                                            var temp = dealDescription.split('.');
-                                            //this will have the starting of the string till the first part of the url (eg www. or images.)
-                                            console.log(temp[0]);
-                                            //extract only the first part of the url
-                                            var temp2 = temp[0].split(' ');
-                                            console.log(temp2.length);
-                                            var i = temp2.length;
-                                            var temp3 = temp2[i - 1];
-                                            console.log(temp3);
-                                            //the first part of the url is the firstIndex
-                                            var firstIndex = dealDescription.indexOf(temp3);
-                                            var lastIndex = dealDescription.lastIndexOf('/');
-                                            var tmp = content[index].split(' ');
-                                            var lastPartURLIndex = tmp[0].length;
-                                            var lastPartURLData = content[index];
-                                            var lastPartURL = lastPartURLData.substring(0, lastPartURLIndex);
-                                            //copy the entire url till the last '/' and then add the last part
-                                            var url = dealDescription.substring(firstIndex, lastIndex) + '/' + lastPartURL;
-                                            console.log('url is :' + url);
-                                            //if the url already contains http or https..directly open the link else add http
-                                            if (url) {
-                                                dealDescription.link(url);
-                                                if (url.indexOf("http") < 0) {
-                                                    //window.open("http://"+ url, '_system', 'location=yes');
-                                                    var url_temp = "http://" + url;
-                                                    //window.open("http://"+ url, '_system', 'location=yes');
-                                                    Ext.Ajax.request({
-                                                        method: 'GET',
-                                                        url: url_temp,
-                                                        success: function(response) {
-                                                            //window.open(url, '_system', 'location=yes');
-                                                            console.log('Success');
-                                                            window.open(url_temp, '_system', 'location=yes');
-                                                        },
-                                                        failure: function(response) {
-                                                            //window.open(url, '_system', 'location=yes');
-                                                            console.log('Failure');
-                                                        }
-                                                    });
-                                                } else {
-                                                    window.open(url, '_system', 'location=yes');
-                                                }
-                                            }
-                                        } else //if there is no nesting ( example www.google.com,appsonmobile.com,news.google.com)
-                                        {
-                                            var temp11 = dealDescription.split('.');
-                                            if (temp11.length > 1) {
-                                                console.log(temp11[0]);
-                                                var temp21 = temp11[0].split(' ');
-                                                console.log(temp21.length);
-                                                var i1 = temp21.length;
-                                                var temp31 = temp21[i1 - 1];
-                                                console.log(temp31);
-                                                var firstIndex1 = dealDescription.indexOf(temp31);
-                                                var url1;
-                                                var lastIndex1 = dealDescription.indexOf(' ', firstIndex1);
-                                                if (lastIndex1 < 0) {
-                                                    lastIndex1 = dealDescription.length;
-                                                }
-                                                url1 = dealDescription.substring(firstIndex1, lastIndex1);
-                                                console.log('url is :' + url1);
-                                                if (url1) {
-                                                    dealDescription.link(url1);
-                                                    if (url1.indexOf("http") < 0) {
-                                                        //window.open("http://"+ url1, '_system', 'location=yes');
-                                                        var url_temp1 = "http://" + url1;
-                                                        //window.open("http://"+ url, '_system', 'location=yes');
-                                                        Ext.Ajax.request({
-                                                            method: 'GET',
-                                                            url: url_temp1,
-                                                            success: function(response) {
-                                                                //window.open(url, '_system', 'location=yes');
-                                                                console.log('Success');
-                                                                window.open(url_temp1, '_system', 'location=yes');
-                                                            },
-                                                            failure: function(response) {
-                                                                //window.open(url, '_system', 'location=yes');
-                                                                console.log('Failure');
-                                                            }
-                                                        });
-                                                    } else {
-                                                        window.open(url1, '_system', 'location=yes');
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
                                 });
                             }
                         },
@@ -67878,165 +67662,39 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                top: '41vh',
-                width: '100%',
-                layout: 'fit',
-                items: [
-                    {
-                        xtype: 'container',
-                        cls: 'contact-name',
-                        disabled: true,
-                        docked: 'top',
-                        hidden: false,
-                        id: 'nameTxt4',
-                        itemId: 'nameTxt4',
-                        margin: '10 5 5 5',
-                        style: 'font-family:Arial;font-size:3.8vw;background:url(resources/img/whitetexture.png);color:black;',
-                        width: '98%',
-                        layout: 'fit',
-                        listeners: [
-                            {
-                                fn: function(element, eOpts) {
-                                    element.addListener('tap', function() {
-                                        var record = Ext.getStore('LocalStore').getAt(0);
-                                        var dealDescription = record.get('dealDescription').toString();
-                                        if (dealDescription) {
-                                            console.log('dealDescription is : ' + dealDescription);
-                                            //find if the url is nested(example appsonmobile.com/about-us)
-                                            var content = dealDescription.split('/');
-                                            if (content.length > 1) {
-                                                var index = content.length - 1;
-                                                //Find where url begins
-                                                var temp = dealDescription.split('.');
-                                                //this will have the starting of the string till the first part of the url (eg www. or images.)
-                                                console.log(temp[0]);
-                                                //extract only the first part of the url
-                                                var temp2 = temp[0].split(' ');
-                                                console.log(temp2.length);
-                                                var i = temp2.length;
-                                                var temp3 = temp2[i - 1];
-                                                console.log(temp3);
-                                                //the first part of the url is the firstIndex
-                                                var firstIndex = dealDescription.indexOf(temp3);
-                                                var lastIndex = dealDescription.lastIndexOf('/');
-                                                var tmp = content[index].split(' ');
-                                                var lastPartURLIndex = tmp[0].length;
-                                                var lastPartURLData = content[index];
-                                                var lastPartURL = lastPartURLData.substring(0, lastPartURLIndex);
-                                                //copy the entire url till the last '/' and then add the last part
-                                                var url = dealDescription.substring(firstIndex, lastIndex) + '/' + lastPartURL;
-                                                console.log('url is :' + url);
-                                                //if the url already contains http or https..directly open the link else add http
-                                                if (url) {
-                                                    dealDescription.link(url);
-                                                    if (url.indexOf("http") < 0) {
-                                                        var url_temp = "http://" + url;
-                                                        //window.open("http://"+ url, '_system', 'location=yes');
-                                                        Ext.Ajax.request({
-                                                            method: 'GET',
-                                                            url: url_temp,
-                                                            success: function(response) {
-                                                                //window.open(url, '_system', 'location=yes');
-                                                                console.log('Success');
-                                                                window.open(url_temp, '_system', 'location=yes');
-                                                            },
-                                                            failure: function(response) {
-                                                                //window.open(url, '_system', 'location=yes');
-                                                                console.log('Failure');
-                                                            }
-                                                        });
-                                                    } else {
-                                                        window.open(url, '_system', 'location=yes');
-                                                    }
-                                                }
-                                            } else //if there is no nesting ( example www.google.com,appsonmobile.com,news.google.com)
-                                            {
-                                                var temp111 = dealDescription.split('.');
-                                                if (temp111.length > 1) {
-                                                    console.log(temp111[0]);
-                                                    var temp211 = temp111[0].split(' ');
-                                                    console.log(temp211.length);
-                                                    var i11 = temp211.length;
-                                                    var temp311 = temp211[i11 - 1];
-                                                    console.log(temp311);
-                                                    var firstIndex11 = dealDescription.indexOf(temp311);
-                                                    var url11;
-                                                    var lastIndex11 = dealDescription.indexOf(' ', firstIndex11);
-                                                    if (lastIndex11 < 0) {
-                                                        lastIndex11 = dealDescription.length;
-                                                    }
-                                                    url11 = dealDescription.substring(firstIndex11, lastIndex11);
-                                                    if (url11) {
-                                                        dealDescription.link(url11);
-                                                        if (url11.indexOf("http") < 0) {
-                                                            //window.open("http://"+ url11, '_system', 'location=yes');
-                                                            var url_temp1 = "http://" + url11;
-                                                            //window.open("http://"+ url11, '_system', 'location=yes');
-                                                            Ext.Ajax.request({
-                                                                method: 'GET',
-                                                                url: url_temp1,
-                                                                success: function(response) {
-                                                                    //window.open(url, '_system', 'location=yes');
-                                                                    console.log('Success');
-                                                                    window.open(url_temp1, '_system', 'location=yes');
-                                                                },
-                                                                //Ext.Msg.alert(response.status);
-                                                                failure: function(response) {
-                                                                    //window.open(url, '_system', 'location=yes');
-                                                                    console.log('Failure');
-                                                                }
-                                                            });
-                                                        } else //Ext.Msg.alert(response.status);
-                                                        {
-                                                            window.open(url11, '_system', 'location=yes');
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    });
-                                },
-                                event: 'painted'
-                            }
-                        ]
-                    },
-                    {
-                        xtype: 'container',
-                        cls: 'contact-name',
-                        disabled: true,
-                        docked: 'top',
-                        hidden: false,
-                        id: 'nameTxt5',
-                        itemId: 'nameTxt5',
-                        margin: '10 5 5 5',
-                        style: 'font-family:Arial;font-size:3.5vw;background:url(resources/img/whitetexture.png);color:#00529D',
-                        width: '98%',
-                        layout: 'fit'
-                    },
-                    {
-                        xtype: 'container',
-                        cls: 'contact-name',
-                        disabled: true,
-                        docked: 'top',
-                        hidden: false,
-                        html: '<p style="font-size:3vw;text-align:right">       Published through Local Buzz</p>',
-                        id: 'nameTxt7',
-                        itemId: 'nameTxt6',
-                        margin: '10 5 5 0',
-                        style: 'font-family:Arial;font-size:3vw;background:url(resources/img/whitetexture.png);font-weight:bold;',
-                        width: '98%',
-                        layout: 'fit'
-                    }
-                ]
+                cls: 'contact-name',
+                disabled: true,
+                html: '<p style="font-size:3vw;text-align:center">       Published through Local Buzz',
+                id: 'nameTxt2',
+                itemId: 'nameTxt2',
+                left: '40%',
+                margin: '10 5 5 5',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '51%',
+                width: '65%'
+            },
+            {
+                xtype: 'container',
+                cls: 'contact-name',
+                disabled: true,
+                hidden: false,
+                html: '<p style="font-size:2.3vw;"> Click on picture to enlarge</p>',
+                id: 'nameTxt3',
+                itemId: 'nameTxt3',
+                left: '40%',
+                margin: '10 5 5 5',
+                style: 'word-wrap:break-word;font-family:Arial;font-size:6vw',
+                top: '43%',
+                width: '65%'
             },
             {
                 xtype: 'textfield',
                 cls: 'icon-phone1',
+                docked: 'bottom',
                 height: '8vh',
-                hidden: true,
                 id: 'phoneNumber1',
                 itemId: 'phoneNumber1',
-                margin: '5 0 0 5',
+                margin: '0 0 0 5',
                 padding: '0 0 10 10',
                 style: 'font-size:2vw !important',
                 styleHtmlContent: true,
@@ -68048,14 +67706,33 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'textfield',
-                cls: 'icon-email1',
+                cls: 'icon-globe1',
+                docked: 'bottom',
                 height: '8vh',
-                hidden: true,
+                id: 'website3',
+                itemId: 'website3',
+                margin: '0 0 0 5',
+                padding: '0 0 10 10',
+                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
+                styleHtmlContent: true,
+                top: '76%',
+                width: '90%',
+                clearIcon: false,
+                name: 'websiteDisplayName',
+                placeHolder: 'Not Listed',
+                readOnly: true
+            },
+            {
+                xtype: 'textfield',
+                cls: 'icon-email1',
+                docked: 'bottom',
+                height: '8vh',
+                hidden: false,
                 id: 'email1',
                 itemId: 'email1',
                 margin: '0 0 0 5',
                 padding: '0 0 10 10',
-                style: 'color:#00529D!important;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
+                style: 'color:black;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
                 styleHtmlContent: true,
                 top: '66%',
                 width: '90%',
@@ -68067,6 +67744,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'textfield',
                 cls: 'icon-phone1',
+                docked: 'bottom',
                 hidden: true,
                 id: 'website2',
                 itemId: 'website2',
@@ -68081,31 +67759,12 @@ Ext.define('Ext.picker.Picker', {
                 readOnly: true
             },
             {
-                xtype: 'textfield',
-                cls: 'icon-globe1',
-                height: '8vh',
-                hidden: true,
-                id: 'website3',
-                itemId: 'website3',
-                margin: '0 0 0 5',
-                padding: '0 0 10 20',
-                style: 'color:#00529D!important;text-decoration:underline;font-family:Arial;font-size:4.5vw;',
-                styleHtmlContent: true,
-                top: '76%',
-                width: '90%',
-                clearIcon: false,
-                name: 'websiteDisplayName',
-                placeHolder: 'Not Listed',
-                readOnly: true
-            },
-            {
                 xtype: 'textareafield',
                 cls: [
                     'icon-location1',
                     'customfield1'
                 ],
                 height: '9vh',
-                hidden: true,
                 id: 'address1',
                 itemId: 'address1',
                 margin: '0 0 0 5',
@@ -68137,23 +67796,11 @@ Ext.define('Ext.picker.Picker', {
     onDealPictureShow: function(component, eOpts) {
         var record = Ext.getStore('LocalStore').getAt(0);
         if (record.get('dealImageURL')) {
-            var dealImageURL = record.get('dealImageURL').toString();
-            //var fileFormatIndex = dealImageURL.lastIndexOf('.');
-            // var fileFormat = dealImageURL.substring(fileFormatIndex+1,dealImageURL.length);
-            //if(fileFormat==='jpg') {
-            this.down('#dealimage').setHtml('<div><img src="' + record.get('dealImageURL') + '" style="height:40vh;width:100%;display:inline;border:none;padding:5px 5px 5px 5px"/><p id="enlargebtn" class="icon-enlarge" style="background:none;position:absolute;bottom: 1.5em; right: 1.5em"></p></div>');
-            // }
-            // else {
-            // this.down('#dealimage').setHtml('<div><video style="height:39vh;width:100%;" videoWidth=98% videoHeight= 39vh controls preload="auto" onclick="this.play();" > <source src="'+record.get('dealImageURL')+'" type="video/mp4"><param name="allowFullScreen" value="true"></video></div>');
-            //}
-            //this.down('#nameTxt3').show();
-            this.down('#nameTxt4').show();
+            this.down('#dealimage').setHtml('<img src="' + record.get('dealImageURL') + '" style="margin: 0px 5px 0px 0px;height:39vh;width:98%;border:none;"/>');
+            this.down('#nameTxt3').show();
         } else {
-            // this.down('#dealimage').setHtml('<div style="padding:5px 5px 5px 5px;"" ><img src="resources/img/localbuzzicon.png" align="right" style="border:none;margin: 5px 5px 5px 5px;background:#f6fbfc"/><div style="font-size:5vw;font-family:Arial">' + record.get('dealName') + '</div><br><div style="font-size:3.5vw;font-family:Arial">' + record.get('dealDescription') + '</div><br><div style="font-size:3vw;font-family:Arial">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div></div>');
-            this.down('#dealimage').setHtml('<div style="padding:5px 5px 5px 5px;" ><img src="resources/img/localbuzzicon.png" align="right" style="border:none;margin: 5px 5px 5px 5px;"/><div style="font-size:4.5vw;font-family:Arial;color:green;">' + record.get('dealName') + '</div><br><div style="font-size:3.8vw;font-family:Arial;">' + record.get('dealDescription') + '</div><br><div style="font-size:3.5vw;font-family:Arial;color:#00529D;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '<br></div><br></div>');
-            //this.down('#nameTxt3').hide();
-            this.down('#nameTxt4').hide();
-            this.down('#nameTxt5').hide();
+            this.down('#dealimage').setHtml('<img src="resources/img/localbuzzicon.png" align="right" style="margin: 5px 5px 5px 5px"/><br><div style="font-size:6vw;">' + record.get('dealName') + '</div><br><br><div style="font-size:5vw;">' + record.get('dealDescription') + '</div><br><br><div style="font-size:4vw;">Valid ' + record.get('dealStartDate') + ' - ' + record.get('dealEndDate') + '</div>');
+            this.down('#nameTxt3').hide();
         }
     },
     setRecord: function(record) {
@@ -68161,12 +67808,7 @@ Ext.define('Ext.picker.Picker', {
         if (record) {
             var name = record.get('itemName');
             var businessName = record.get('businessName');
-            this.down('#nameTxt1').setHtml('<div style="font-family:Arial">' + record.get('businessName') + '</div>');
-            this.down('#nameTxt4').setHtml('<div style="font-family:Arial">' + record.get('dealDescription') + '</div>');
-            if (record.get('dealImageURL')) {
-                this.down('#nameTxt5').setHtml('<div style="font-family:Arial">Valid from ' + record.get('dealStartDate') + '-' + record.get('dealEndDate') + '</div>');
-                this.down('#nameTxt6').setHtml('<div style="font-family:Arial;">' + record.get('dealName') + '</div>');
-            }
+            this.down('#nameTxt1').setHtml(record.get('businessName'));
             //var store = Ext.getStore('MyJsonPStore');
             //  var rec = store.findRecord('businessName', businessName);
             var rec = Ext.getStore('UserDetails').getAt(0);
@@ -68231,8 +67873,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'component',
                 docked: 'bottom',
-                html: '<p style="font-size:2.5vw;text-align:center" > As per our Fair Use Policy,only 5 Active Buzz per account are allowed</p>',
-                style: 'font-family:Arial;font-size:2vw;\tbackground:url(resources/img/whitetexture.png)!important;'
+                html: '<p style="font-size:2.5vw;text-align:center" > As per our Fair Use Policy,there cannot be more than 5 Active Buzz per account </p>'
             },
             {
                 xtype: 'button',
@@ -68258,8 +67899,8 @@ Ext.define('Ext.picker.Picker', {
             }
         ]
     },
-    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        /*var storeUserDetails = Ext.getStore('UserDetails');
+    onDealsPanelActivate: function(newActiveItem, container, oldActiveItem, eOpts) {},
+    /*var storeUserDetails = Ext.getStore('UserDetails');
 		storeUserDetails.load();
 		var customerId;
 		var businessName;
@@ -68276,19 +67917,9 @@ Ext.define('Ext.picker.Picker', {
 		var store = Ext.getStore('MyDealsStore');
 		store.clearFilter();
 		store.filter('customerId',customerId);*/
-        var dealStore = Ext.getStore('MyDealsStore');
-        var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
-        //dealStore.filter('customerId',customerId);
-        dealStore.load({
-            params: {
-                customerId: customerId
-            }
-        });
-    },
     onDealsPanelPainted: function(element, eOpts) {
         /*var store = Ext.getStore('MyDealsStore');
 		store.load();*/
-        //Ext.getCmp('UploadDeal').disable();
         var dealStore = Ext.getStore('MyDealsStore');
         var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
         //dealStore.filter('customerId',customerId);
@@ -68312,6 +67943,13 @@ Ext.define('Ext.picker.Picker', {
 
 		});*/
         var store = Ext.getStore('MyDealsStore');
+        //store.clearFilter();
+        //store.filter('customerId',customerId);
+        if (store.getCount() >= 5) {
+            Ext.getCmp('UploadDeal').disable();
+        } else {
+            Ext.getCmp('UploadDeal').enable();
+        }
     }
 }, 0, [
     "DealsPanel"
@@ -68333,8 +67971,6 @@ Ext.define('Ext.picker.Picker', {
     LocalBuzzMerchant.view,
     'DealsPanel'
 ], 0));
-//store.clearFilter();
-//store.filter('customerId',customerId);
 
 /*
  * File: app/view/Login.js
@@ -68413,7 +68049,7 @@ Ext.define('Ext.picker.Picker', {
                     tmp = info[3].split("\":\"");
                     var userId = tmp[1];
                     //var record = Ext.getStore('MyJsonPStore').findRecord('loginEmail', email, 0, true, false, false);
-                    $.getJSON("https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/stores/" + email, function(record) {
+                    $.getJSON(" https://g0k1nw6p8h.execute-api.us-west-2.amazonaws.com/PROD/stores/" + email, function(record) {
                         var endDate = new Date(record.endDate);
                         var today = new Date();
                         var customerId = record.customerId;
@@ -68539,7 +68175,7 @@ Ext.define('Ext.picker.Picker', {
         height: '30%',
         id: 'ChangeContactPicForm',
         itemId: 'ChangeContactPicForm',
-        style: 'background:white',
+        style: 'background;#fff;border:3px groove #1985d0',
         styleHtmlContent: true,
         width: '80%',
         hideOnMaskTap: true,
@@ -68556,7 +68192,6 @@ Ext.define('Ext.picker.Picker', {
                 height: '8vh',
                 itemId: 'myfilefield1',
                 margin: '5 5 5 5',
-                style: '',
                 styleHtmlContent: true,
                 width: '50vh',
                 clearIcon: false,
@@ -68596,7 +68231,7 @@ Ext.define('Ext.picker.Picker', {
 								record.commit();*/
                                 //store.sync();
                                 //store.load();
-                                Ext.Msg.alert('Record updated', "Please login again to see the changes", function() {}, null);
+                                Ext.Msg.alert('Record updated', "Please login again to see the changes", null, null);
                                 Ext.Viewport.getComponent('formpanel').setRecord(record);
                                 form.destroy();
                             },
@@ -68757,7 +68392,6 @@ Ext.define('Ext.picker.Picker', {
                 height: '',
                 id: 'home',
                 itemId: 'home',
-                style: 'background:url(resources/img/whitetexture.png);color:#00529D!important;',
                 items: [
                     {
                         xtype: 'contactinfo',
@@ -68769,7 +68403,6 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'container',
                 title: 'Manage Buzz',
                 iconCls: 'icon-localbuzzicon_latest',
-                style: 'background:url(resources/img/whitetexture.png);',
                 items: [
                     {
                         xtype: 'DealsPanel',
@@ -68783,7 +68416,7 @@ Ext.define('Ext.picker.Picker', {
                 iconCls: 'icon-buzzometer',
                 id: 'buzzometer',
                 itemId: 'buzzometer',
-                style: 'font-size:5vw;color:#00529D!important;background:url(resources/img/whitetexture.png)!important;',
+                style: 'font-size:5vw',
                 styleHtmlContent: true,
                 items: [
                     {
@@ -68871,7 +68504,6 @@ Ext.define('Ext.picker.Picker', {
                         title: 'User Location',
                         height: '100%',
                         html: '<div id="chart2"></div>',
-                        id: 'mypanel1',
                         itemId: 'mypanel1',
                         styleHtmlContent: true,
                         scrollable: true,
@@ -68921,8 +68553,9 @@ Ext.define('Ext.picker.Picker', {
                                                     'pieSliceTextStyle': {
                                                         color: 'black'
                                                     },
-                                                    height: '750',
-                                                    width: '500'
+                                                    height: '550',
+                                                    width: '375',
+                                                    legend: 'top'
                                                 };
                                             // Instantiate and draw our chart, passing in some options.
                                             var chart = new google.visualization.PieChart(document.getElementById('chart2'));
@@ -68934,20 +68567,15 @@ Ext.define('Ext.picker.Picker', {
                             }
                         ]
                     }
-                ],
-                tabBar: {
-                    cls: 'toolbarCls',
-                    docked: 'top',
-                    style: 'background:url(resources/img/whitetexture.png)!important;'
-                }
+                ]
             }
         ],
         tabBar: {
             docked: 'bottom',
-            height: '7%',
+            height: '8%',
             itemId: 'mytabbar1',
-            padding: '0 40 0 40',
-            style: 'color:#c0c0c0;background:url(resources/img/whitetexture.png);;font-size:6vw',
+            padding: '37 40 5 40',
+            style: 'color:#c0c0c0;background:#FFF;font-size:4vw',
             ui: 'plain',
             layout: {
                 type: 'hbox',
@@ -68994,7 +68622,7 @@ Ext.define('Ext.picker.Picker', {
         html: '',
         id: 'formpanel1',
         itemId: 'formpanel',
-        style: 'background:url(resources/img/whitetexture.png);',
+        style: 'background:white',
         ui: 'light',
         autoDestroy: false,
         modal: true,
@@ -69031,7 +68659,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealName',
                 margin: '5 5 5 5 ',
                 padding: '',
-                style: 'border:1px solid #C0C0C0!important:color: #d3d3d3!important;font-family:Arial;color:#c0c0c0;',
+                style: 'border:1px solid #C0C0C0!important:color: #d3d3d3!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
@@ -69047,7 +68675,7 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealStatus',
                 margin: '5 5 5 5 ',
                 maxHeight: '',
-                style: 'font-family:Arial',
+                style: '',
                 styleHtmlContent: true,
                 label: 'Status',
                 labelWidth: '35%',
@@ -69076,8 +68704,6 @@ Ext.define('Ext.picker.Picker', {
                 id: 'DealStartDate1',
                 itemId: 'DealStartDate',
                 margin: '5 5 5 5 ',
-                style: 'font-family:Arial',
-                styleHtmlContent: true,
                 width: '97%',
                 label: 'Start Date',
                 labelWidth: '35%',
@@ -69096,23 +68722,12 @@ Ext.define('Ext.picker.Picker', {
                 usePicker: true,
                 dateFormat: 'm/d/Y',
                 picker: {
-                    id: 'mydatepicker3',
                     itemId: 'mydatepicker3',
                     style: '',
                     scrollable: false,
                     stretchX: false,
                     stretchY: false,
-                    listeners: [
-                        {
-                            fn: function(component, eOpts) {
-                                var dateStart = (new Date().getFullYear()).toString();
-                                var dateEnd = (new Date().getFullYear() + 1).toString();
-                                this.setYearFrom(parseInt(dateStart));
-                                this.setYearTo(parseInt(dateEnd));
-                            },
-                            event: 'initialize'
-                        }
-                    ]
+                    yearFrom: 2016
                 }
             },
             {
@@ -69124,8 +68739,6 @@ Ext.define('Ext.picker.Picker', {
                 id: 'DealEndDate1',
                 itemId: 'DealEndDate',
                 margin: '5 5 5 5 ',
-                style: 'font-family:Arial',
-                styleHtmlContent: true,
                 width: '97%',
                 label: 'End Date',
                 labelWidth: '35%',
@@ -69138,19 +68751,8 @@ Ext.define('Ext.picker.Picker', {
                 placeHolder: 'mm/dd/yyyy',
                 usePicker: true,
                 picker: {
-                    itemId: 'mydatepicker3',
                     styleHtmlContent: true,
-                    listeners: [
-                        {
-                            fn: function(component, eOpts) {
-                                var dateStart = (new Date().getFullYear()).toString();
-                                var dateEnd = (new Date().getFullYear() + 1).toString();
-                                this.setYearFrom(parseInt(dateStart));
-                                this.setYearTo(parseInt(dateEnd));
-                            },
-                            event: 'initialize'
-                        }
-                    ]
+                    yearFrom: 2016
                 }
             },
             {
@@ -69161,16 +68763,14 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealDescription',
                 margin: '5 5 5 5 ',
                 padding: '0 0 20 0',
-                style: 'border:1px solid #C0C0C0!important;font-family:Arial',
+                style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
                 label: 'Description',
                 labelWidth: '35%',
                 name: 'DealDescription',
-                autoCapitalize: true,
-                maxLength: 140,
-                maxRows: 3
+                autoCapitalize: true
             },
             {
                 xtype: 'textfield',
@@ -69198,26 +68798,41 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                height: '11vh',
-                html: '<input id="chkbx" class="chkboxStyle" type="checkbox" name="chkbx"> <label for="chkbx"  id="chkboxLabel" style="font-size:3vw;" onclick=\'window.open("http://www.appsonmobile.com/terms-and-conditions/", "_system", "location=yes");\'>&nbsp; &nbsp;  &nbsp; &nbsp;<u style="color:#00529D;">I agree to Apps On Mobile LLC\'s Terms & Conditions</u></label>',
-                itemId: 'mycontainer15',
+                height: '15vh',
                 left: '',
-                margin: '10 10 10 10',
-                padding: '5 5 5 5',
-                style: 'font-family:Arial',
+                margin: '0 5 15 5 ',
                 layout: 'hbox',
-                listeners: [
+                items: [
                     {
-                        fn: function(element, eOpts) {},
-                        /*element.addListener('tap',function(){
-							//Ext.Viewport.add({xtype:'Terms'}).show();
-
-
-							var url = "http://www.appsonmobile.com/terms-and-conditions/";
-							window.open(url, '_system', 'location=yes');
-
-						});*/
-                        event: 'painted'
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input class="checkbox" type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '30%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '11vh',
+                        html: '<a id="terms" style="font-size:3vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 0',
+                        padding: '5 18 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        //Ext.Viewport.add({xtype:'Terms'}).show();
+                                        var url = "http://www.appsonmobile.com/terms-and-conditions/";
+                                        window.open(url, '_system', 'location=yes');
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
                     }
                 ]
             },
@@ -69240,7 +68855,7 @@ Ext.define('Ext.picker.Picker', {
                             Ext.Viewport.getActiveItem().destroy();
                         },
                         height: '7vh',
-                        style: 'font-size:4vw;font-family:Arial',
+                        style: 'font-size:5vw!important',
                         ui: 'decline',
                         width: '40%',
                         text: 'Cancel'
@@ -69298,7 +68913,7 @@ Ext.define('Ext.picker.Picker', {
                         docked: 'right',
                         height: '7vh',
                         itemId: 'submit',
-                        style: 'font-size:4vw;font-family:Arial',
+                        style: 'font:size:4vw',
                         ui: 'confirm',
                         width: '30%',
                         text: 'Submit'
@@ -69379,6 +68994,7 @@ Ext.define('Ext.picker.Picker', {
         id: 'formpanel3',
         itemId: 'formpanel',
         padding: '0 0 35 0',
+        style: 'background:white',
         ui: 'light',
         autoDestroy: false,
         modal: true,
@@ -69397,13 +69013,11 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'businessName',
                 margin: '5 5 5 5 ',
                 padding: '0 5 5 5',
-                style: 'font-family:Arial',
                 styleHtmlContent: true,
                 label: 'Name',
                 labelWidth: '35%',
                 labelWrap: true,
-                name: 'DealName',
-                maxLength: 80
+                name: 'DealName'
             },
             {
                 xtype: 'textfield',
@@ -69463,7 +69077,6 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealStartDate',
                 margin: '0 5 5 5 ',
                 padding: '0 5 5 5',
-                style: 'font-family:Arial',
                 styleHtmlContent: true,
                 width: '97%',
                 label: 'Start Date',
@@ -69491,18 +69104,13 @@ Ext.define('Ext.picker.Picker', {
                     stretchX: false,
                     stretchY: false,
                     useTitles: true,
+                    value: {
+                        year: 2016,
+                        month: 7,
+                        day: 16
+                    },
                     yearFrom: 2016,
-                    listeners: [
-                        {
-                            fn: function(component, eOpts) {
-                                var dateStart = (new Date().getFullYear()).toString();
-                                var dateEnd = (new Date().getFullYear() + 1).toString();
-                                this.setYearFrom(parseInt(dateStart));
-                                this.setYearTo(parseInt(dateEnd));
-                            },
-                            event: 'initialize'
-                        }
-                    ]
+                    yearTo: 2017
                 }
             },
             {
@@ -69516,7 +69124,6 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealEndDate',
                 margin: '0 5 5 5 ',
                 padding: '0 5 5 5',
-                style: 'font-family:Arial',
                 styleHtmlContent: true,
                 width: '97%',
                 label: 'End Date',
@@ -69538,17 +69145,8 @@ Ext.define('Ext.picker.Picker', {
                 picker: {
                     itemId: 'mydatepicker3',
                     useTitles: true,
-                    listeners: [
-                        {
-                            fn: function(component, eOpts) {
-                                var dateStart = (new Date().getFullYear()).toString();
-                                var dateEnd = (new Date().getFullYear() + 1).toString();
-                                this.setYearFrom(parseInt(dateStart));
-                                this.setYearTo(parseInt(dateEnd));
-                            },
-                            event: 'initialize'
-                        }
-                    ]
+                    yearFrom: 2016,
+                    yearTo: 2017
                 }
             },
             {
@@ -69566,16 +69164,14 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealDescription',
                 margin: '0 5 5 5',
                 padding: '0 0 20 0',
-                style: 'border:1px solid #C0C0C0!important;font-family:Arial',
+                style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
                 label: 'Description',
                 labelWidth: '35%',
                 name: 'DealDescription',
-                autoCapitalize: true,
-                maxLength: 140,
-                maxRows: 3
+                autoCapitalize: true
             },
             {
                 xtype: 'filefield',
@@ -69584,7 +69180,6 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'myfilefield2',
                 margin: '0 5 5 5 ',
                 padding: '5 5 5 5',
-                style: 'font-family:Arial',
                 styleHtmlContent: true,
                 width: '97%',
                 clearIcon: false,
@@ -69597,26 +69192,41 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                height: '11vh',
-                html: '<input id="chkbx" class="chkboxStyle" type="checkbox" name="chkbx"> <label for="chkbx"  id="chkboxLabel" style="font-size:3vw;" onclick=\'window.open("http://www.appsonmobile.com/terms-and-conditions/", "_system", "location=yes");\'>&nbsp; &nbsp;  &nbsp; &nbsp;<u style="color:#00529D;">I agree to Apps On Mobile LLC\'s Terms & Conditions</u></label>',
-                itemId: 'mycontainer14',
+                height: '15vh',
                 left: '',
-                margin: '10 10 10 10',
-                padding: '5 5 5 5',
-                style: 'font-family:Arial',
+                margin: '0 5 15 5 ',
                 layout: 'hbox',
-                listeners: [
+                items: [
                     {
-                        fn: function(element, eOpts) {},
-                        /*element.addListener('tap',function(){
-							//Ext.Viewport.add({xtype:'Terms'}).show();
-
-
-							var url = "http://www.appsonmobile.com/terms-and-conditions/";
-							window.open(url, '_system', 'location=yes');
-
-						});*/
-                        event: 'painted'
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input class="checkbox" type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '30%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '11vh',
+                        html: '<a id="terms" style="font-size:3vw;text-align:top" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 0',
+                        padding: '5 18 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        //Ext.Viewport.add({xtype:'Terms'}).show();
+                                        var url = "http://www.appsonmobile.com/terms-and-conditions/";
+                                        window.open(url, '_system', 'location=yes');
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
                     }
                 ]
             },
@@ -69639,11 +69249,16 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
                             var store = Ext.getStore('MyDealsStore');
+                            //store.load();
+                            if (store.getCount() >= 5) {
+                                Ext.getCmp('UploadDeal').disable();
+                            } else {
+                                Ext.getCmp('UploadDeal').enable();
+                            }
                         },
-                        //store.load();
                         height: '7vh',
                         margin: '0 0 5 0',
-                        style: 'font-size:4vw;font-family:Arial',
+                        style: 'font-size:5vw!important',
                         ui: 'decline',
                         width: '40%',
                         text: 'Cancel'
@@ -69678,8 +69293,14 @@ Ext.define('Ext.picker.Picker', {
                                                                 customerId: customerId
                                                             }
                                                         });
+                                                        var count = store.getCount() + 1;
+                                                        console.log('Count is:' + count);
+                                                        if (count > 4) {
+                                                            Ext.getCmp('UploadDeal').disable();
+                                                        } else {
+                                                            Ext.getCmp('UploadDeal').enable();
+                                                        }
                                                         form.destroy();
-                                                        Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                                                     },
                                                     failure: function(form, action) {
                                                         //console.log('Action is '+action);
@@ -69690,6 +69311,11 @@ Ext.define('Ext.picker.Picker', {
 														customerId: customerId
 														}
 														});*/
+                                                        if (store.getCount() >= 5) {
+                                                            Ext.getCmp('UploadDeal').disable();
+                                                        } else {
+                                                            Ext.getCmp('UploadDeal').enable();
+                                                        }
                                                         form.destroy();
                                                     }
                                                 });
@@ -69713,7 +69339,7 @@ Ext.define('Ext.picker.Picker', {
                         height: '7vh',
                         itemId: 'submit',
                         margin: '0 0 5 0',
-                        style: 'font-size:4vw;font-family:Arial',
+                        style: 'font-size:5vw!important',
                         ui: 'confirm',
                         width: '30%',
                         text: 'Submit'
@@ -69752,7 +69378,6 @@ Ext.define('Ext.picker.Picker', {
         ]
     },
     onMydatepicker3Pick: function(picker, value, slot, eOpts) {
-        console.log(value);
         var today = new Date();
         if (value < today) {
             picker.setValue(today);
@@ -69813,7 +69438,7 @@ Ext.define('Ext.picker.Picker', {
         height: '80%',
         id: 'DealImage',
         itemId: 'DealImage',
-        style: 'background:url(resources/img/whitetexture.png);;border:1px solid #00529D',
+        style: 'background:#FFF;border:1px solid #00529D',
         width: '95%',
         scrollable: true,
         tpl: [
@@ -69835,7 +69460,7 @@ Ext.define('Ext.picker.Picker', {
                 xtype: 'toolbar',
                 cls: 'toolbarCls',
                 docked: 'top',
-                height: '9vh',
+                height: '8vh',
                 ui: 'plain',
                 items: [
                     {
@@ -69843,13 +69468,13 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             Ext.Viewport.getComponent('DealImage').destroy();
                         },
+                        cls: 'icon-close',
                         docked: 'right',
                         id: 'close',
                         itemId: 'close',
                         padding: '10 10 10 10',
                         style: 'color:#00529D;font-size:5vw',
-                        ui: 'plain',
-                        iconCls: 'delete'
+                        ui: 'plain'
                     }
                 ]
             }
@@ -69909,7 +69534,7 @@ Ext.define('Ext.picker.Picker', {
         id: 'formpanel5',
         itemId: 'formpanel',
         padding: '0 0 35 0',
-        style: 'background:url(resources/img/whitetexture.png)!important;',
+        style: 'background:white',
         ui: 'light',
         autoDestroy: false,
         modal: true,
@@ -69929,14 +69554,11 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'businessName',
                 margin: '5 5 5 5 ',
                 padding: '0 0 5 5',
-                style: 'font-family:Arial',
                 styleHtmlContent: true,
                 label: 'Name',
                 labelWidth: '35%',
                 labelWrap: true,
-                name: 'DealName',
-                autoCapitalize: true,
-                maxLength: 80
+                name: 'DealName'
             },
             {
                 xtype: 'textfield',
@@ -69965,6 +69587,7 @@ Ext.define('Ext.picker.Picker', {
                 margin: '0 5 5 5 ',
                 maxHeight: '',
                 padding: '5 0 0 10',
+                style: '',
                 styleHtmlContent: true,
                 label: 'Status',
                 labelWidth: '35%',
@@ -70010,7 +69633,8 @@ Ext.define('Ext.picker.Picker', {
                 autoSelect: false,
                 usePicker: true,
                 component: {
-                    useMask: true
+                    useMask: true,
+                    minValue: new Date()
                 },
                 dateFormat: 'm/d/Y',
                 picker: {
@@ -70021,18 +69645,13 @@ Ext.define('Ext.picker.Picker', {
                     stretchX: false,
                     stretchY: false,
                     useTitles: true,
+                    value: {
+                        year: 2016,
+                        month: 7,
+                        day: 16
+                    },
                     yearFrom: 2016,
-                    listeners: [
-                        {
-                            fn: function(component, eOpts) {
-                                var dateStart = (new Date().getFullYear()).toString();
-                                var dateEnd = (new Date().getFullYear() + 1).toString();
-                                this.setYearFrom(parseInt(dateStart));
-                                this.setYearTo(parseInt(dateEnd));
-                            },
-                            event: 'initialize'
-                        }
-                    ]
+                    yearTo: 2017
                 }
             },
             {
@@ -70068,17 +69687,7 @@ Ext.define('Ext.picker.Picker', {
                     itemId: 'mydatepicker3',
                     useTitles: true,
                     yearFrom: 2016,
-                    listeners: [
-                        {
-                            fn: function(component, eOpts) {
-                                var dateStart = (new Date().getFullYear()).toString();
-                                var dateEnd = (new Date().getFullYear() + 1).toString();
-                                this.setYearFrom(parseInt(dateStart));
-                                this.setYearTo(parseInt(dateEnd));
-                            },
-                            event: 'initialize'
-                        }
-                    ]
+                    yearTo: 2017
                 }
             },
             {
@@ -70103,16 +69712,14 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'DealDescription',
                 margin: '0 5 5 5 ',
                 padding: '0 0 20 0',
-                style: 'border:1px solid #C0C0C0!important;',
+                style: 'border:1px solid #C0C0C0!important',
                 styleHtmlContent: true,
                 width: '',
                 clearIcon: false,
                 label: 'Description',
                 labelWidth: '35%',
                 name: 'DealDescription',
-                autoCapitalize: true,
-                maxLength: 140,
-                maxRows: 3
+                autoCapitalize: true
             },
             {
                 xtype: 'textfield',
@@ -70138,27 +69745,41 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 xtype: 'container',
-                cls: 'inputCls',
-                height: '11vh',
-                html: '<input id="chkbx" class="chkboxStyle" type="checkbox" name="chkbx"> <label for="chkbx"  id="chkboxLabel" style="font-size:3vw;" onclick=\'window.open("http://www.appsonmobile.com/terms-and-conditions/", "_system", "location=yes");\'>&nbsp; &nbsp;  &nbsp; &nbsp;<u style="color:#00529D;">I agree to Apps On Mobile LLC\'s Terms & Conditions</u></label>',
-                itemId: 'mycontainer13',
+                height: '15vh',
                 left: '',
-                margin: '10 10 10 10',
-                padding: '5 5 5 5',
-                style: 'font-family:Arial',
+                margin: '0 5 15 5 ',
                 layout: 'hbox',
-                listeners: [
+                items: [
                     {
-                        fn: function(element, eOpts) {},
-                        /*element.addListener('tap',function(){
-							//Ext.Viewport.add({xtype:'Terms'}).show();
-
-
-							var url = "http://www.appsonmobile.com/terms-and-conditions/";
-							window.open(url, '_system', 'location=yes');
-
-						});*/
-                        event: 'painted'
+                        xtype: 'container',
+                        docked: 'left',
+                        html: '<input class="checkbox"  type="checkbox" name="chkbx" id="chkbx">',
+                        left: '40%',
+                        margin: '5 5 5 15',
+                        top: '30%'
+                    },
+                    {
+                        xtype: 'container',
+                        docked: 'right',
+                        height: '11vh',
+                        html: '<a id="terms" style="text-align:top;font-size:3vw;" > I agree to Apps On Mobile LLC\'s Terms & Conditions</a>',
+                        itemId: 'mycontainer5',
+                        margin: '5 5 5 0',
+                        padding: '5 18 5 0',
+                        styleHtmlContent: true,
+                        layout: 'hbox',
+                        listeners: [
+                            {
+                                fn: function(element, eOpts) {
+                                    element.addListener('tap', function() {
+                                        //Ext.Viewport.add({xtype:'Terms'}).show();
+                                        var url = "http://www.appsonmobile.com/index.php/terms-and-conditions/";
+                                        window.open(url, '_system', 'location=yes');
+                                    });
+                                },
+                                event: 'painted'
+                            }
+                        ]
                     }
                 ]
             },
@@ -70180,12 +69801,17 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             Ext.Viewport.getActiveItem().destroy();
+                            var store = Ext.getStore('MyDealsStore');
+                            //store.load();
+                            if (store.getCount() >= 5) {
+                                Ext.getCmp('UploadDeal').disable();
+                            } else {
+                                Ext.getCmp('UploadDeal').enable();
+                            }
                         },
-                        //var store = Ext.getStore('MyDealsStore');
-                        //store.load();
                         height: '7vh',
                         margin: '0 0 5 0',
-                        style: 'font-size:4vw;font-family:Arial',
+                        style: 'font-size:5vw!important',
                         ui: 'decline',
                         width: '40%',
                         text: 'Cancel'
@@ -70216,8 +69842,15 @@ Ext.define('Ext.picker.Picker', {
                                                             customerId: customerId
                                                         }
                                                     });
+                                                    var count = store.getCount() + 1;
+                                                    console.log('Count is:' + count);
+                                                    if (count > 4) {
+                                                        console.log('Disabling btn');
+                                                        Ext.getCmp('UploadDeal').disable();
+                                                    } else {
+                                                        Ext.getCmp('UploadDeal').enable();
+                                                    }
                                                     form.destroy();
-                                                    Ext.Viewport.setActiveItem(Ext.Viewport.getComponent('DealsPanel'));
                                                 },
                                                 failure: function(form, action) {
                                                     //Ext.Msg.alert('Oops.....!Something went wrong','Please check your internet connection or try again later',null,null);
@@ -70229,6 +69862,11 @@ Ext.define('Ext.picker.Picker', {
 													}
 													});*/
                                                     console.log('Count is:' + count);
+                                                    if (store.getCount() >= 5) {
+                                                        Ext.getCmp('UploadDeal').disable();
+                                                    } else {
+                                                        Ext.getCmp('UploadDeal').enable();
+                                                    }
                                                     form.destroy();
                                                 }
                                             });
@@ -70249,7 +69887,7 @@ Ext.define('Ext.picker.Picker', {
                         height: '7vh',
                         itemId: 'submit',
                         margin: '0 0 5 0',
-                        style: 'font-size:4vw;font-family:Arial',
+                        style: 'font-size:5vw!important',
                         ui: 'confirm',
                         width: '30%',
                         text: 'Submit'
@@ -70325,7 +69963,6 @@ Ext.define('Ext.picker.Picker', {
     config: {
         id: 'CreateNewBuzzOption',
         itemId: 'CreateNewBuzzOption',
-        style: 'background:url(resources/img/whitetexture.png);',
         items: [
             {
                 xtype: 'button',
@@ -70354,7 +69991,6 @@ Ext.define('Ext.picker.Picker', {
                 },
                 height: '9vh',
                 left: '20%',
-                style: 'font-family:Arial;font-size:4vw;',
                 styleHtmlContent: true,
                 top: '30%',
                 ui: 'action',
@@ -70388,7 +70024,6 @@ Ext.define('Ext.picker.Picker', {
                 },
                 height: '9vh',
                 left: '20%',
-                style: 'font-family:Arial;font-size:4vw;',
                 styleHtmlContent: true,
                 top: '50%',
                 ui: 'action',
@@ -70524,15 +70159,6 @@ Ext.application({
                 }
             }
         }
-        Ext.override(Ext.MessageBox, {
-            hide: function() {
-                console.log('Hiding messagebox');
-                if (this.activeAnimation && this.activeAnimation._onEnd) {
-                    this.activeAnimation._onEnd();
-                }
-                return this.callParent(arguments);
-            }
-        });
         document.addEventListener("resume", Ext.bind(onResume, this), false);
         function onResume(e) {}
         //Ext.Msg.alert('Resume',null,null,null);
