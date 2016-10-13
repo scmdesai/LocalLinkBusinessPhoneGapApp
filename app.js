@@ -66662,7 +66662,7 @@ Ext.define('Ext.picker.Picker', {
                         margin: '2 0 2 0',
                         maxHeight: '',
                         minHeight: '',
-                        padding: '10 0 0 5',
+                        padding: '10 0 0 15',
                         style: 'font-size:3.8vw;font-family: Arial;background:url(resources/img/whitetexture.png);',
                         styleHtmlContent: true,
                         width: '100%',
@@ -70620,5 +70620,5 @@ Ext.application({
 });
 
 // @tag full-page
-// @require H:\Apps\Sencha Architect Apps\LocaluzzMerchantRelease\app.js
+// @require H:\Apps\Sencha Architect Apps\LocalBuzzMerchantRelease\app.js
 
