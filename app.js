@@ -66307,7 +66307,7 @@ Ext.define('Ext.picker.Picker', {
             {
                 xtype: 'component',
                 hidden: false,
-                html: '<center><img src ="resources/img/localbuzzicon.png"/><br><div style="text-align:center;"><h3 style="color:#00529D;font-family:Arial;font-size:6vw;text-align:center"><b>Welcome to <br><br>Local Buzz For Merchants</h3></div></center>',
+                html: '<center><img src ="resources/img/localbuzzicon.png"/><br><div style="text-align:center;"><h3 style="color:#00529D;font-family:Arial!important;font-size:6vw;text-align:center"><b>Welcome to <br><br>Local Buzz For Merchants</h3></div></center>',
                 id: 'text1',
                 style: 'word-wrap:break-word;font-family:Arial;font-size:6vw;background:url(resources/img/whitetexture.png);',
                 styleHtmlContent: true,
@@ -68944,9 +68944,8 @@ Ext.define('Ext.picker.Picker', {
         ],
         tabBar: {
             docked: 'bottom',
-            height: '7%',
             itemId: 'mytabbar1',
-            padding: '0 40 0 40',
+            padding: '40 40 0 40',
             style: 'color:#c0c0c0;background:url(resources/img/whitetexture.png);;font-size:6vw',
             ui: 'plain',
             layout: {
