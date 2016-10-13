@@ -37,25 +37,25 @@
 	
 	
 	<!-- New PhoneGap Plugins -->
-	<!--<plugin name="cordova-plugin-battery-status" source="npm"  />-->
+	<plugin name="cordova-plugin-battery-status" source="npm"  />
     <plugin name="cordova-plugin-camera" source="npm"  />
-    <!--<plugin name="cordova-plugin-media-capture" source="npm"  />
+    <plugin name="cordova-plugin-media-capture" source="npm"  />
 	<!-- Comment out the console plugin as it is causing issues on Android -->
     <!-- <gap:plugin name="cordova-plugin-console" source="npm" version="1.0.1" /> -->
-    <!--<plugin name="cordova-plugin-contacts" source="npm"  />
-    <!--<plugin name="cordova-plugin-device" source="npm"  />
-    <!--<plugin name="cordova-plugin-device-motion" source="npm"  />
-    <!--<plugin name="cordova-plugin-device-orientation" source="npm"  />
-    <!--<plugin name="cordova-plugin-dialogs" source="npm"  />
-    <!--<plugin name="cordova-plugin-file" source="npm"  />
-    <!--<plugin name="cordova-plugin-file-transfer" source="npm"  />
-    <!--<plugin name="cordova-plugin-geolocation" source="npm"  />
-    <!--<plugin name="cordova-plugin-globalization" source="npm"  />-->
+    <plugin name="cordova-plugin-contacts" source="npm"  />
+    <plugin name="cordova-plugin-device" source="npm"  />
+    <plugin name="cordova-plugin-device-motion" source="npm"  />
+    <plugin name="cordova-plugin-device-orientation" source="npm"  />
+    <plugin name="cordova-plugin-dialogs" source="npm"  />
+    <plugin name="cordova-plugin-file" source="npm"  />
+    <plugin name="cordova-plugin-file-transfer" source="npm"  />
+    <plugin name="cordova-plugin-geolocation" source="npm"  />
+    <plugin name="cordova-plugin-globalization" source="npm"  />
     <plugin name="cordova-plugin-inappbrowser" source="npm"  />
-    <!--<plugin name="cordova-plugin-media" source="npm"  />
-   <!-- <plugin name="cordova-plugin-network-information" source="npm"  />-->
+    <plugin name="cordova-plugin-media" source="npm"  />
+    <plugin name="cordova-plugin-network-information" source="npm"  />
     <plugin name="cordova-plugin-splashscreen" source="npm" />
-    <!--<plugin name="cordova-plugin-vibration" source="npm"  />-->
+    <plugin name="cordova-plugin-vibration" source="npm"  />
 	<plugin name="cordova-plugin-whitelist" source="npm"  />
 	<plugin name="cordova-plugin-statusbar" source="npm" />
 	
@@ -63,21 +63,21 @@
 	<!-- Plugin Added for Push Notification -->
 	<!--<gap:plugin name="phonegap-plugin-push" source="npm"  /> -->
 	
-	<!--<plugin name="phonegap-plugin-push" source="npm">
+	<plugin name="phonegap-plugin-push" source="npm">
 		<param name="SENDER_ID" value="226322216862"/>
 	</plugin>
 	<!-- Plugin Added for Google Analytics -->
-	<!--<plugin name="cordova-plugin-google-analytics"  source="npm" />
+	<plugin name="cordova-plugin-google-analytics"  source="npm" />
 	<!-- End Google Analytics -->
 	
 	<!-- Plugin Added for Geolocation -->
-	<!--<plugin name="cordova-plugin-geolocation"  source="npm" />
+	<plugin name="cordova-plugin-geolocation"  source="npm" />
 	<!-- End Geolocation -->
 	<!--social sharing -->
 	<plugin name="cordova-plugin-x-socialsharing" source="npm" />
 	
 	<!--email-->
-	<!--<plugin name="cordova-plugin-email-composer"  source="npm" /> 
+	<plugin name="cordova-plugin-email-composer"  source="npm" /> 
 	
 	
 	<!--screenshot-->
