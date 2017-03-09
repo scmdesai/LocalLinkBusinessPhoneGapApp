@@ -68419,34 +68419,46 @@ Ext.define('Ext.picker.Picker', {
                         var customerId = record.customerId;
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
-                        var push = PushNotification.init({
-                                "android": {
-                                    "senderID": "226322216862"
-                                },
-                                "ios": {
-                                    // "senderID": "226322216862",
-                                    // "gcmSandbox": "true"
-                                    "alert": "false",
-                                    "badge": "true"
-                                },
-                                "windows": {}
-                            });
-                        push.on('registration', function(data) {
-                            Ext.Ajax.request({
-                                method: 'POST',
-                                url: 'http://services.appsonmobile.com/merchantDevices',
-                                params: {
-                                    "CustomerId": customerId,
-                                    "registrationID": data.registrationId
-                                },
-                                success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg);
-                                },
-                                failure: function(form, action) {
-                                    Ext.Msg.alert('Failure', action.msg, null, null);
-                                }
-                            });
+                        /*
+		            var push = PushNotification.init({
+		            "android": {
+		                "senderID": "226322216862"
+		            },
+		            "ios": {
+						// "senderID": "226322216862",
+						// "gcmSandbox": "true"
+						"alert": "false",
+						"badge": "true"
+					},
+		            "windows": {}
+		        });*/
+                        var pushNotification = window.plugins.pushNotification;
+                        pushNotification.register({
+                            "senderID": "226322216862",
+                            "ecb": "onNotificationGCM",
+                            //then followed by your othe functions
+                            successHandler: function(id) {
+                                //code here
+                                Ext.Ajax.request({
+                                    method: 'POST',
+                                    url: 'http://services.appsonmobile.com/merchantDevices',
+                                    params: {
+                                        "CustomerId": customerId,
+                                        "registrationID": id.registrationID
+                                    },
+                                    success: function(form, action) {
+                                        Ext.Msg.alert('Success', action.msg);
+                                    },
+                                    failure: function(form, action) {
+                                        Ext.Msg.alert('Failure', action.msg, null, null);
+                                    }
+                                });
+                            },
+                            errorHandler: function(error) {},
+                            //code here
+                            onNotificationGCM: function(e) {}
                         });
+                        //code here
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
                                 storeUserDetails.add({
