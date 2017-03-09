@@ -68420,22 +68420,7 @@ Ext.define('Ext.picker.Picker', {
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
                         var pushNotification = window.plugins.pushNotification;
-                        pushNotification.register(function(data) {
-                            Ext.Ajax.request({
-                                method: 'POST',
-                                url: 'http://services.appsonmobile.com/merchantDevices',
-                                params: {
-                                    "CustomerId": customerId,
-                                    "registrationID": data.registerationID
-                                },
-                                success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg);
-                                },
-                                failure: function(form, action) {
-                                    Ext.Msg.alert('Failure', action.msg, null, null);
-                                }
-                            });
-                        }, this.errorHandler, {
+                        pushNotification.register(this.successHandler, this.errorHandler, {
                             "senderID": "226322216862",
                             "ecb": function(data) {
                                 Ext.Ajax.request({
