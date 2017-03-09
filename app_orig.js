@@ -68419,65 +68419,6 @@ Ext.define('Ext.picker.Picker', {
                         var customerId = record.customerId;
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
-                        /**************************/
-                        /* Initialize push notification*/
-                        var push = PushNotification.init({
-                                "android": {
-                                    "senderID": "226322216862"
-                                },
-                                "ios": {
-                                    // "senderID": "226322216862",
-                                    // "gcmSandbox": "true"
-                                    "alert": "false",
-                                    "badge": "true"
-                                },
-                                "windows": {}
-                            });
-                        push.on('registration', function(data) {
-                            console.log("registration event: " + data.registrationId);
-                            console.log("Device platform is: " + device.platform);
-                            console.log("Device Cordova is: " + device.cordova);
-                            console.log("Device Model is: " + device.model);
-                            console.log("Device UUID is: " + device.uuid);
-                            console.log("Device Version is: " + device.version);
-                            console.log("Device Manufacturer is: " + device.manufacturer);
-                            console.log("Device Serial is: " + device.serial);
-                            console.log("Device isVirtual is: " + device.isVirtual);
-                            // Save the registration ID on the server.
-                            // Sending and receiving data in JSON format using POST mothod
-                            //
-                            var req = Ext.Ajax.request({
-                                    method: 'POST',
-                                    url: 'http://services.appsonmobile.com/merchantDevices',
-                                    params: "customerId: customerId",
-                                    success: function(form, action) {
-                                        Ext.Msg.alert('Success', action.msg);
-                                    },
-                                    failure: function(form, action) {
-                                        Ext.Msg.alert('Failure', action.msg, null, null);
-                                    }
-                                });
-                        });
-                        push.on('notification', function(data) {
-                            console.log("notification event received");
-                            // data.message,
-                            console.log("Notification Message is: " + data.message);
-                            // data.title,
-                            console.log("Notification Title is: " + data.title);
-                            // data.count,
-                            console.log("Notification Count is: " + data.count);
-                            // data.sound,
-                            console.log("Notification Sound is: " + data.sound);
-                            // data.image,
-                            console.log("Notification Image is: " + data.image);
-                            // data.additionalData
-                            console.log("Notification additionalData is: " + data.additionalData);
-                        });
-                        push.on('error', function(e) {
-                            console.log("Error received");
-                            console.log("Error Message is: " + e.message);
-                        });
-                        /*************************/
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
                                 storeUserDetails.add({
@@ -69004,7 +68945,7 @@ Ext.define('Ext.picker.Picker', {
         tabBar: {
             docked: 'bottom',
             itemId: 'mytabbar1',
-            padding: '0 40 0 40',
+            padding: '40 40 0 40',
             style: 'color:#c0c0c0;background:url(resources/img/whitetexture.png);;font-size:6vw',
             ui: 'plain',
             layout: {
