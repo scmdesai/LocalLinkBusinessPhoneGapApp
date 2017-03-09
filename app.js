@@ -68419,18 +68419,33 @@ Ext.define('Ext.picker.Picker', {
                         var customerId = record.customerId;
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
-                        Ext.Ajax.request({
-                            method: 'POST',
-                            url: 'http://services.appsonmobile.com/merchantDevices',
-                            params: {
-                                "CustomerId": customerId
-                            },
-                            success: function(form, action) {
-                                Ext.Msg.alert('Success', action.msg);
-                            },
-                            failure: function(form, action) {
-                                Ext.Msg.alert('Failure', action.msg, null, null);
-                            }
+                        var push = PushNotification.init({
+                                "android": {
+                                    "senderID": "226322216862"
+                                },
+                                "ios": {
+                                    // "senderID": "226322216862",
+                                    // "gcmSandbox": "true"
+                                    "alert": "false",
+                                    "badge": "true"
+                                },
+                                "windows": {}
+                            });
+                        push.on('registration', function(data) {
+                            Ext.Ajax.request({
+                                method: 'POST',
+                                url: 'http://services.appsonmobile.com/merchantDevices',
+                                params: {
+                                    "CustomerId": customerId,
+                                    "registrationID": data.registrationId
+                                },
+                                success: function(form, action) {
+                                    Ext.Msg.alert('Success', action.msg);
+                                },
+                                failure: function(form, action) {
+                                    Ext.Msg.alert('Failure', action.msg, null, null);
+                                }
+                            });
                         });
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
