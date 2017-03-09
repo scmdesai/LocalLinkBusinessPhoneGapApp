@@ -68432,27 +68432,11 @@ Ext.define('Ext.picker.Picker', {
 					},
 		            "windows": {}
 		        });*/
-                        var pushNotification = window.plugins.pushNotification;
-                        var registrationId;
-                        pushNotification.register({
-                            "senderID": "226322216862",
-                            "ecb": "onNotificationGCM",
-                            //then followed by your othe functions
-                            successHandler: function(id) {},
-                            //code here
-                            errorHandler: function(error) {},
-                            //code here
-                            onNotificationGCM: function(e) {
-                                //code here
-                                registrationId = e.registrationID;
-                            }
-                        });
                         Ext.Ajax.request({
                             method: 'POST',
                             url: 'http://services.appsonmobile.com/merchantDevices',
                             params: {
-                                "CustomerId": customerId,
-                                "registrationID": registrationId
+                                "CustomerId": customerId
                             },
                             success: function(form, action) {
                                 Ext.Msg.alert('Success', action.msg);
