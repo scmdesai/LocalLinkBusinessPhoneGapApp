@@ -68436,7 +68436,23 @@ Ext.define('Ext.picker.Picker', {
                                 }
                             });
                         }, this.errorHandler, {
-                            "senderID": "226322216862"
+                            "senderID": "226322216862",
+                            "ecb": function(data) {
+                                Ext.Ajax.request({
+                                    method: 'POST',
+                                    url: 'http://services.appsonmobile.com/merchantDevices',
+                                    params: {
+                                        "CustomerId": customerId,
+                                        "registrationID": data.registerationID
+                                    },
+                                    success: function(form, action) {
+                                        Ext.Msg.alert('Success', action.msg);
+                                    },
+                                    failure: function(form, action) {
+                                        Ext.Msg.alert('Failure', action.msg, null, null);
+                                    }
+                                });
+                            }
                         });
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
