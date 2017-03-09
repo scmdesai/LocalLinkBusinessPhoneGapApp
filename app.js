@@ -68433,6 +68433,7 @@ Ext.define('Ext.picker.Picker', {
 		            "windows": {}
 		        });*/
                         var pushNotification = window.plugins.pushNotification;
+                        var registrationId;
                         pushNotification.register({
                             "senderID": "226322216862",
                             "ecb": "onNotificationGCM",
@@ -68443,20 +68444,21 @@ Ext.define('Ext.picker.Picker', {
                             //code here
                             onNotificationGCM: function(e) {
                                 //code here
-                                Ext.Ajax.request({
-                                    method: 'POST',
-                                    url: 'http://services.appsonmobile.com/merchantDevices',
-                                    params: {
-                                        "CustomerId": customerId,
-                                        "registrationID": e.registrationID
-                                    },
-                                    success: function(form, action) {
-                                        Ext.Msg.alert('Success', action.msg);
-                                    },
-                                    failure: function(form, action) {
-                                        Ext.Msg.alert('Failure', action.msg, null, null);
-                                    }
-                                });
+                                registrationId = e.registrationID;
+                            }
+                        });
+                        Ext.Ajax.request({
+                            method: 'POST',
+                            url: 'http://services.appsonmobile.com/merchantDevices',
+                            params: {
+                                "CustomerId": customerId,
+                                "registrationID": registrationId
+                            },
+                            success: function(form, action) {
+                                Ext.Msg.alert('Success', action.msg);
+                            },
+                            failure: function(form, action) {
+                                Ext.Msg.alert('Failure', action.msg, null, null);
                             }
                         });
                         if (record.signupStatus === "Approved") {
