@@ -68420,24 +68420,31 @@ Ext.define('Ext.picker.Picker', {
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
                         var pushNotification = window.plugins.pushNotification;
-                        pushNotification.register(function(data) {
-                            Ext.Ajax.request({
-                                method: 'POST',
-                                url: 'http://services.appsonmobile.com/merchantDevices',
-                                params: {
-                                    "CustomerId": customerId,
-                                    "registrationID": data.registerationID
-                                },
-                                success: function(form, action) {
-                                    Ext.Msg.alert('Success', action.msg);
-                                },
-                                failure: function(form, action) {
-                                    Ext.Msg.alert('Failure', action.msg, null, null);
-                                }
-                            });
-                        }, this.errorHandler, {
-                            "senderID": "226322216862"
+                        pushNotification.register(app.successHandler, app.errorHandler, {
+                            "senderID": "226322216862",
+                            "ecb": "app.onNotificationGCM"
                         });
+                        onNotificationGCM: function(e) {
+                            switch (e.event) {
+                                case 'registered':
+                                    if (e.regid.length > 0) {
+                                        console.log("Regid " + e.regid);
+                                        alert('registration id = ' + e.regid);
+                                    };
+                                    ;
+                                    break;
+                                case 'message':
+                                    // this is the actual push notification. its format depends on the data model from the push server
+                                    alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
+                                    break;
+                                case 'error':
+                                    alert('GCM error = ' + e.msg);
+                                    break;
+                                default:
+                                    alert('An unknown GCM event has occurred');
+                                    break;
+                            }
+                        }
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
                                 storeUserDetails.add({
