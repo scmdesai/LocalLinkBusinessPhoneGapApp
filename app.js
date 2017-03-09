@@ -68437,14 +68437,18 @@ Ext.define('Ext.picker.Picker', {
                             "senderID": "226322216862",
                             "ecb": "onNotificationGCM",
                             //then followed by your othe functions
-                            successHandler: function(id) {
+                            successHandler: function(id) {},
+                            //code here
+                            errorHandler: function(error) {},
+                            //code here
+                            onNotificationGCM: function(e) {
                                 //code here
                                 Ext.Ajax.request({
                                     method: 'POST',
                                     url: 'http://services.appsonmobile.com/merchantDevices',
                                     params: {
                                         "CustomerId": customerId,
-                                        "registrationID": id.registrationID
+                                        "registrationID": e.registrationID
                                     },
                                     success: function(form, action) {
                                         Ext.Msg.alert('Success', action.msg);
@@ -68453,12 +68457,8 @@ Ext.define('Ext.picker.Picker', {
                                         Ext.Msg.alert('Failure', action.msg, null, null);
                                     }
                                 });
-                            },
-                            errorHandler: function(error) {},
-                            //code here
-                            onNotificationGCM: function(e) {}
+                            }
                         });
-                        //code here
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
                                 storeUserDetails.add({
