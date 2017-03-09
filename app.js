@@ -68423,7 +68423,9 @@ Ext.define('Ext.picker.Picker', {
                         pushNotification.register(Ext.Ajax.request({
                             method: 'POST',
                             url: 'http://services.appsonmobile.com/merchantDevices',
-                            params: "customerId: customerId",
+                            params: {
+                                "customerId": customerId
+                            },
                             success: function(form, action) {
                                 Ext.Msg.alert('Success', action.msg);
                             },
