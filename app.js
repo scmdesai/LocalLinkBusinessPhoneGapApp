@@ -68506,7 +68506,7 @@ Ext.define('Ext.picker.Picker', {
                 }
             }
         });
-        function onNotificationGCM(e) {
+        function successHandler(e) {
             switch (e.event) {
                 case 'registered':
                     if (e.regid.length > 0) {
