@@ -33,6 +33,11 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+	    xhr = new XMLHttpRequest();
+			var url = "http://services.appsonmobile.com/merchantDevices";
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.send();
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
