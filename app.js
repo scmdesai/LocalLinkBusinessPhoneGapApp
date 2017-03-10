@@ -68432,42 +68432,13 @@ Ext.define('Ext.picker.Picker', {
 					},
 		            "windows": {}
 		        });*/
-                        push.on('registration', function(data) {
-                            console.log("registration event: " + data.registrationId);
-                            console.log("Device platform is: " + device.platform);
-                            console.log("Device Cordova is: " + device.cordova);
-                            console.log("Device Model is: " + device.model);
-                            console.log("Device UUID is: " + device.uuid);
-                            console.log("Device Version is: " + device.version);
-                            console.log("Device Manufacturer is: " + device.manufacturer);
-                            console.log("Device Serial is: " + device.serial);
-                            console.log("Device isVirtual is: " + device.isVirtual);
-                            // Save the registration ID on the server.
-                            // Sending and receiving data in JSON format using POST mothod
-                            //
-                            xhr = new XMLHttpRequest();
-                            var url = "http://services.appsonmobile.com/merchantDevices";
-                            xhr.open("POST", url, true);
-                            xhr.setRequestHeader("Content-type", "application/json");
-                            xhr.onreadystatechange = function() {
-                                if (xhr.readyState == 4 && xhr.status == 200) {
-                                    var json = JSON.parse(xhr.responseText);
-                                    console.log(json.success + ", " + json.msg);
-                                }
-                                var data1 = '{"deviceType":"' + device.platform + '","registrationID":"' + data.registrationId + '"}';
-                                xhr.send(data1);
-                            };
+                        var push = window.plugins.pushNotification;
+                        push.subscribe('LocalBuzzMerchant' + customerId, function() {
+                            console.log('success');
+                        }, function(e) {
+                            console.log('error:');
+                            console.log(e);
                         });
-                        /*Ext.Ajax.request({
-							method: 'POST',
-							url: 'http://services.appsonmobile.com/merchantDevices',
-							params: {
-								"CustomerId": customerId,
-								"registrationId" : data.registrationId
-
-							}
-
-						});*/
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
                                 storeUserDetails.add({
