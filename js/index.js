@@ -19,6 +19,7 @@
 var app = {
     // Application Constructor
     initialize: function() {
+	   
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -26,16 +27,14 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-		
-		var push = PushNotification.init({
+         //document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+		 document.addEventListener('deviceready', function() {
+		 try{
+		 
+		 
+		 
+		 
+				var push = PushNotification.init({
             "android": {
                 "senderID": "226322216862"
             },
@@ -62,7 +61,7 @@ var app = {
 			// Sending and receiving data in JSON format using POST mothod
 			//
 			xhr = new XMLHttpRequest();
-			var url = "http://services.appsonmobile.com/merchantDevices";
+			var url = "http://services.appsonmobile.com/devices";
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Content-type", "application/json");
 			xhr.onreadystatechange = function () { 
@@ -97,25 +96,81 @@ var app = {
             console.log("Error received");
 			console.log("Error Message is: " + e.message) ;				
         });
+			
+		 });
+		 });
+		 
+		 
 		
-		var fbLoginSuccess = function (userData) {
-			alert("UserInfo: " + JSON.stringify(userData));
-			facebookConnectPlugin.getAccessToken(function(token) {
-			alert("Token: " + token);
-		}, function(err) {
-			alert("Could not get access token: " + err);
-		});
 		
-		facebookConnectPlugin.login(["public_profile"], fbLoginSuccess, function (error) 
-		{ 
-			alert("" + error);
+        
+        
+    
 		}
-);
+		catch (e){
+		alert(e);
+    }
+}, false);
 		
-}
+    },
+    // deviceready Event Handler
+    //
+    // The scope of 'this' is the event. In order to call the 'receivedEvent'
+    // function, we must explicitly call 'app.receivedEvent(...);'
+    onDeviceReady: function() {
+      /*  app.receivedEvent('deviceready');
+		console.log('Device Ready');
+		StatusBar.overlaysWebView(false);
+		
+        
+        
+        push.on('registration', function(data) {
+            console.log("registration event: " + data.registrationId);
+			console.log("Device platform is: " + device.platform) ;
+			console.log("Device Cordova is: " + device.cordova) ;
+			console.log("Device Model is: " + device.model) ;
+			console.log("Device UUID is: " + device.uuid) ;
+			console.log("Device Version is: " + device.version) ;
+			console.log("Device Manufacturer is: " + device.manufacturer) ;
+			console.log("Device Serial is: " + device.serial) ;
+			console.log("Device isVirtual is: " + device.isVirtual) ;
+			// Save the registration ID on the server. 
+			// Sending and receiving data in JSON format using POST mothod
+			//
+			xhr = new XMLHttpRequest();
+			var url = "http://services.appsonmobile.com/devices";
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.onreadystatechange = function () { 
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var json = JSON.parse(xhr.responseText);
+					console.log(json.success + ", " + json.msg) ;
+				}
+			}
+			var data = '{"deviceType":"'+device.platform+'","registrationID":"'+data.registrationId+'"}';
+			xhr.send(data);
+        });
 
-		
-		
+        push.on('notification', function(data) {
+        	console.log("notification event received");
+			// data.message, 
+			console.log("Notification Message is: " + data.message) ;
+			// data.title, 
+			console.log("Notification Title is: " + data.title) ;
+			// data.count, 
+			console.log("Notification Count is: " + data.count) ;
+			// data.sound, 
+			console.log("Notification Sound is: " + data.sound) ;
+			// data.image, 
+			console.log("Notification Image is: " + data.image) ;
+			// data.additionalData 
+			console.log("Notification additionalData is: " + data.additionalData) ;
+        });
+
+        push.on('error', function(e) {
+            console.log("Error received");
+			console.log("Error Message is: " + e.message) ;				
+        });*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -129,3 +184,4 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+app.initialize();
