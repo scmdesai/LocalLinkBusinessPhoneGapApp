@@ -32,7 +32,7 @@ var app = {
 		 try{
 		 
 		 
-		 app.receivedEvent('deviceready');
+		// app.receivedEvent('deviceready');
 		 		 var userLocation = navigator.geolocation.getCurrentPosition(function(position){
 		 var latitude = position.coords.latitude;
 		 var longitude = position.coords.longitude;
