@@ -9,7 +9,7 @@
     </author>
    <content src="index.html" />
 	<!-- End Amazon Mobile Analytics  -->
-<preference name='phonegap-version' value='cli-6.3.0' />
+    <preference name='phonegap-version' value='cli-6.3.0' />
 	<preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="7000" />
     <preference name="permissions" value="none" />
@@ -49,7 +49,7 @@
     <!--<plugin name="cordova-plugin-dialogs" source="npm"  />-->
     <!--<plugin name="cordova-plugin-file" source="npm"  />-->
     <!--<plugin name="cordova-plugin-file-transfer" source="npm"  />-->
-    <plugin name="cordova-plugin-geolocation" source="npm"  />
+    <!--<plugin name="cordova-plugin-geolocation" source="npm"  />-->
     <!--<plugin name="cordova-plugin-globalization" source="npm"  />-->
     <plugin name="cordova-plugin-inappbrowser" source="npm"  />
     <!--<plugin name="cordova-plugin-media" source="npm"  />-->
@@ -63,7 +63,7 @@
 	
 	
 	<!-- Plugin Added for Push Notification -->
-	<plugin name="phonegap-plugin-push" source="npm">
+	<plugin name="phonegap-plugin-push" source="npm" spec="1.6.0">
 		<param name="SENDER_ID" value="485713166795"/>
 	</plugin>
 	<!--<gap:plugin name="phonegap-plugin-push" source="npm"  /> -->
