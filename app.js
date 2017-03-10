@@ -68432,7 +68432,6 @@ Ext.define('Ext.picker.Picker', {
 					},
 		            "windows": {}
 		        });*/
-                        var push = window.plugins.pushNotification;
                         Ext.Ajax.request({
                             method: 'POST',
                             url: 'http://services.appsonmobile.com/merchantDevices',
