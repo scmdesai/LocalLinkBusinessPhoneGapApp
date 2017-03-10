@@ -29,12 +29,12 @@ var app = {
     bindEvents: function() {
          //document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
 		 document.addEventListener('deviceready', function() {
-		 try{
+		 //try{
 		 
 		 
 		 
 		 
-				var push = PushNotification.init({
+				/*var push = PushNotification.init({
             "android": {
                 "senderID": "226322216862"
             },
@@ -98,7 +98,7 @@ var app = {
         });
 			
 		 });
-		 });
+		 });*/
 		 
 		 
 		
@@ -107,9 +107,9 @@ var app = {
         
     
 		}
-		catch (e){
-		alert(e);
-    }
+		//catch (e){
+		//alert(e);
+   // }
 }, false);
 		
     },
@@ -118,9 +118,9 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-      /*  app.receivedEvent('deviceready');
+        app.receivedEvent('deviceready');
 		console.log('Device Ready');
-		StatusBar.overlaysWebView(false);
+		//StatusBar.overlaysWebView(false);
 		
         
         
@@ -170,7 +170,7 @@ var app = {
         push.on('error', function(e) {
             console.log("Error received");
 			console.log("Error Message is: " + e.message) ;				
-        });*/
+        });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
