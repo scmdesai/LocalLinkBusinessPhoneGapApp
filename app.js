@@ -68432,14 +68432,16 @@ Ext.define('Ext.picker.Picker', {
 					},
 		            "windows": {}
 		        });*/
-                        Ext.Ajax.request({
-                            method: 'POST',
-                            url: 'http://services.appsonmobile.com/merchantDevices',
-                            params: {
-                                "CustomerId": customerId,
-                                "registrationId": data.registrationId
-                            }
-                        });
+                        /*Ext.Ajax.request({
+							method: 'POST',
+							url: 'http://services.appsonmobile.com/merchantDevices',
+							params: {
+								"CustomerId": customerId,
+								"registrationId" : data.registrationId
+
+							}
+
+						});*/
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
                                 storeUserDetails.add({
