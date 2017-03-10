@@ -68432,13 +68432,6 @@ Ext.define('Ext.picker.Picker', {
 					},
 		            "windows": {}
 		        });*/
-                        var push = window.plugins.pushNotification;
-                        push.subscribe('LocalBuzzMerchant' + customerId, function() {
-                            console.log('success');
-                        }, function(e) {
-                            console.log('error:');
-                            console.log(e);
-                        });
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
                                 storeUserDetails.add({
@@ -68505,6 +68498,13 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             }, null);
                         }
+                        var push = window.plugins.pushNotification;
+                        push.subscribe('LocalBuzzMerchant' + customerId, function() {
+                            console.log('success');
+                        }, function(e) {
+                            console.log('error:');
+                            console.log(e);
+                        });
                     });
                 } else /* if (!record) {
 		                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
