@@ -68485,13 +68485,6 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             }, null);
                         }
-                        Ext.Ajax.request({
-                            url: 'http://services.appsonmobile.com/merchantDevices',
-                            method: 'POST',
-                            params: {
-                                'customerId': customerId
-                            }
-                        });
                     });
                 } else /* if (!record) {
 		                        Ext.Msg.alert('Business could not be verified', "Please contact us at info@appsonmobile.com", function() {
