@@ -70481,9 +70481,9 @@ Ext.application({
             baseCls: 'x-box'
         });
         var pushNotification = window.plugins.pushNotification;
-        pushNotification.register(app.successHandler, app.errorHandler, {
+        pushNotification.register(this.successHandler, this.errorHandler, {
             "senderID": "485713166795",
-            "ecb": "app.onNotificationGCM"
+            "ecb": "this.onNotificationGCM"
         });
         onNotificationGCM: function(e) {
             switch (e.event) {
