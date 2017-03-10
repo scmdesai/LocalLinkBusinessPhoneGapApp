@@ -33,9 +33,21 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-	var push = window.PushNotification.init({
+        app.receivedEvent('deviceready');
+    },
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
+        console.log('Received Event: ' + id);
+		var push = PushNotification.init({
             "android": {
-                "senderID": "226322216862"
+                "senderID": "485713166795"
             },
             "ios": {
 				// "senderID": "226322216862",
@@ -60,7 +72,7 @@ var app = {
 			// Sending and receiving data in JSON format using POST mothod
 			//
 			xhr = new XMLHttpRequest();
-			var url = "http://services.appsonmobile.com/devices";
+			var url = "http://services.appsonmobile.com/merchantDevices";
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Content-type", "application/json");
 			xhr.onreadystatechange = function () { 
@@ -72,40 +84,5 @@ var app = {
 			var data = '{"deviceType":"'+device.platform+'","registrationID":"'+data.registrationId+'","userLocation":"'+postalcode+'"}';
 			xhr.send(data);
 			
-			
-        });
-
-        push.on('notification', function(data) {
-        	console.log("notification event received");
-			// data.message, 
-			console.log("Notification Message is: " + data.message) ;
-			// data.title, 
-			console.log("Notification Title is: " + data.title) ;
-			// data.count, 
-			console.log("Notification Count is: " + data.count) ;
-			// data.sound, 
-			console.log("Notification Sound is: " + data.sound) ;
-			// data.image, 
-			console.log("Notification Image is: " + data.image) ;
-			// data.additionalData 
-			console.log("Notification additionalData is: " + data.additionalData) ;
-        });
-
-        push.on('error', function(e) {
-            console.log("Error received");
-			console.log("Error Message is: " + e.message) ;				
-        });
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
     }
 };
