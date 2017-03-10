@@ -70485,7 +70485,7 @@ Ext.application({
             "senderID": "485713166795",
             "ecb": "this.onNotificationGCM"
         });
-        onNotificationGCM: function(e) {
+        successHandler: function(e) {
             switch (e.event) {
                 case 'registered':
                     if (e.regid.length > 0) {
