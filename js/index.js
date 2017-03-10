@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 	    
-	     alert('Phonegap ready');
+	     window.alert('Phonegap ready');
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
