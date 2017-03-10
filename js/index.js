@@ -33,7 +33,13 @@ var app = {
 		 
 		 
 		 
-		 
+		 		 var userLocation = navigator.geolocation.getCurrentPosition(function(position){
+		 var latitude = position.coords.latitude;
+		 var longitude = position.coords.longitude;
+		 var postalcode;
+		 $.getJSON("http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + latitude + "&lng=" + longitude + "&username=1234_5678", function(json) {
+		        postalcode = json.postalCodes[0].postalCode;
+				console.log('User Location is: ' + postalcode);
 				var push = PushNotification.init({
             "android": {
                 "senderID": "485713166795"
@@ -70,7 +76,7 @@ var app = {
 					console.log(json.success + ", " + json.msg) ;
 				}
 			}
-			var data = '{"deviceType":"'+device.platform+'","registrationID":"'+data.registrationId+'"}';
+			var data = '{"deviceType":"'+device.platform+'","registrationID":"'+data.registrationId+'","userLocation":"'+postalcode+'"}';
 			xhr.send(data);
 			
 			
@@ -96,9 +102,17 @@ var app = {
             console.log("Error received");
 			console.log("Error Message is: " + e.message) ;				
         });
-		}	
+			
+		 });
+		 });
+		 
+		 
+		StatusBar.overlaysWebView(false);
 		
-		
+        
+        
+    
+		}
 		catch (e){
 		alert(e);
     }
@@ -110,13 +124,59 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+      /*  app.receivedEvent('deviceready');
 		console.log('Device Ready');
-		//StatusBar.overlaysWebView(false);
+		StatusBar.overlaysWebView(false);
 		
         
         
-       
+        push.on('registration', function(data) {
+            console.log("registration event: " + data.registrationId);
+			console.log("Device platform is: " + device.platform) ;
+			console.log("Device Cordova is: " + device.cordova) ;
+			console.log("Device Model is: " + device.model) ;
+			console.log("Device UUID is: " + device.uuid) ;
+			console.log("Device Version is: " + device.version) ;
+			console.log("Device Manufacturer is: " + device.manufacturer) ;
+			console.log("Device Serial is: " + device.serial) ;
+			console.log("Device isVirtual is: " + device.isVirtual) ;
+			// Save the registration ID on the server. 
+			// Sending and receiving data in JSON format using POST mothod
+			//
+			xhr = new XMLHttpRequest();
+			var url = "http://services.appsonmobile.com/devices";
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.onreadystatechange = function () { 
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var json = JSON.parse(xhr.responseText);
+					console.log(json.success + ", " + json.msg) ;
+				}
+			}
+			var data = '{"deviceType":"'+device.platform+'","registrationID":"'+data.registrationId+'"}';
+			xhr.send(data);
+        });
+
+        push.on('notification', function(data) {
+        	console.log("notification event received");
+			// data.message, 
+			console.log("Notification Message is: " + data.message) ;
+			// data.title, 
+			console.log("Notification Title is: " + data.title) ;
+			// data.count, 
+			console.log("Notification Count is: " + data.count) ;
+			// data.sound, 
+			console.log("Notification Sound is: " + data.sound) ;
+			// data.image, 
+			console.log("Notification Image is: " + data.image) ;
+			// data.additionalData 
+			console.log("Notification additionalData is: " + data.additionalData) ;
+        });
+
+        push.on('error', function(e) {
+            console.log("Error received");
+			console.log("Error Message is: " + e.message) ;				
+        });*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
