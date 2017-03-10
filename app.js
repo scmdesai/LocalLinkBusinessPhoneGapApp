@@ -68419,19 +68419,6 @@ Ext.define('Ext.picker.Picker', {
                         var customerId = record.customerId;
                         var storeUserDetails = Ext.getStore('UserDetails');
                         storeUserDetails.removeAll();
-                        /*
-		            var push = PushNotification.init({
-		            "android": {
-		                "senderID": "226322216862"
-		            },
-		            "ios": {
-						// "senderID": "226322216862",
-						// "gcmSandbox": "true"
-						"alert": "false",
-						"badge": "true"
-					},
-		            "windows": {}
-		        });*/
                         if (record.signupStatus === "Approved") {
                             if ((record.planType === "Free" && endDate >= today) || record.planType === "Paid") {
                                 storeUserDetails.add({
@@ -68498,12 +68485,12 @@ Ext.define('Ext.picker.Picker', {
                                 });
                             }, null);
                         }
-                        var push = window.plugins.pushNotification;
-                        push.subscribe('LocalBuzzMerchant' + customerId, function() {
-                            console.log('success');
-                        }, function(e) {
-                            console.log('error:');
-                            console.log(e);
+                        Ext.Ajax.request({
+                            url: 'http://services.appsonmobile.com/merchantDevices',
+                            method: 'POST',
+                            params: {
+                                'customerId': customerId
+                            }
                         });
                     });
                 } else /* if (!record) {
