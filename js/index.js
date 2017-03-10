@@ -33,8 +33,38 @@ var app = {
 		 
 		
 		 
-		
-				var push = PushNotification.init({
+		    var pushNotification = window.plugins.pushNotification;
+            pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"485713166795","ecb":"app.onNotificationGCM"});
+			
+			
+			onNotificationGCM: function(e) {
+				 switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+                    console.log("Regid " + e.regid);
+                    alert('registration id = '+e.regid);
+                    localStorage.regid = e.regid
+                }
+            break;
+
+            case 'message':
+              // this is the actual push notification. its format depends on the data model from the push server
+              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+            break;
+
+            case 'error':
+              alert('GCM error = '+e.msg);
+            break;
+
+            default:
+              alert('An unknown GCM event has occurred');
+              break;
+        }
+			}
+
+				/*var push = PushNotification.init({
             "android": {
                 "senderID": "226322216862"
             },
@@ -98,7 +128,7 @@ var app = {
         });
 			
 		 });
-		 });
+		 });*/
 		 
 		 
 		StatusBar.overlaysWebView(false);
