@@ -62,7 +62,7 @@
 	
 	<!-- Plugin Added for Push Notification -->
 	<plugin name="phonegap-plugin-push" source="npm">
-		<param name="SENDER_ID" value="162276611611"/>
+		<param name="SENDER_ID" value="485713166795"/>
 	</plugin>
 	<!--<gap:plugin name="phonegap-plugin-push" source="npm"  /> -->
 	
