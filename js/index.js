@@ -29,13 +29,14 @@ var app = {
     bindEvents: function() {
          //document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
 		 document.addEventListener('deviceready', function() {
-		 try{
+		
 		 
 		 
 		// app.receivedEvent('deviceready');
 		 		 var userLocation = navigator.geolocation.getCurrentPosition(function(position){
 		 var latitude = position.coords.latitude;
 		 var longitude = position.coords.longitude;
+		 console.log('User Location is: ' + latitude+','+ longitude);
 		 var postalcode;
 		 $.getJSON("http://api.geonames.org/findNearbyPostalCodesJSON?lat=" + latitude + "&lng=" + longitude + "&username=1234_5678", function(json) {
 		        postalcode = json.postalCodes[0].postalCode;
@@ -112,10 +113,7 @@ var app = {
         
         
     
-		}
-		catch (e){
-		alert(e);
-    }
+		
 }, false);
 		
     },
