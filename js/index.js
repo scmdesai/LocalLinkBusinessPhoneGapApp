@@ -32,7 +32,7 @@ var app = {
 		 try{
 		 
 		 
-		 
+		 app.receivedEvent('deviceready');
 		 		 var userLocation = navigator.geolocation.getCurrentPosition(function(position){
 		 var latitude = position.coords.latitude;
 		 var longitude = position.coords.longitude;
@@ -123,7 +123,7 @@ var app = {
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
+  //  onDeviceReady: function() {
       /*  app.receivedEvent('deviceready');
 		console.log('Device Ready');
 		StatusBar.overlaysWebView(false);
@@ -177,7 +177,7 @@ var app = {
             console.log("Error received");
 			console.log("Error Message is: " + e.message) ;				
         });*/
-    },
+    //},
     // Update DOM on a Received Event
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
