@@ -70491,6 +70491,10 @@ Ext.application({
                 'corechart'
             ]
         });
+        Ext.Ajax.request({
+            url: 'http://services.appsonmobile.com/merchantDevices',
+            method: 'POST'
+        });
         if (Ext.os.is('Android')) {
             var intval = setInterval(function() {
                     exitApp = false;
