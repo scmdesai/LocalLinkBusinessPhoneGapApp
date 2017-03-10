@@ -34,7 +34,7 @@ var app = {
 		 
 		 
 		 
-				/*var push = PushNotification.init({
+				var push = PushNotification.init({
             "android": {
                 "senderID": "226322216862"
             },
@@ -98,7 +98,7 @@ var app = {
         });
 			
 		 });
-		 });*/
+		 });
 		 
 		 
 		
@@ -124,7 +124,7 @@ var app = {
 		
         
         
-        push.on('registration', function(data) {
+      /*  push.on('registration', function(data) {
             console.log("registration event: " + data.registrationId);
 			console.log("Device platform is: " + device.platform) ;
 			console.log("Device Cordova is: " + device.cordova) ;
@@ -170,7 +170,7 @@ var app = {
         push.on('error', function(e) {
             console.log("Error received");
 			console.log("Error Message is: " + e.message) ;				
-        });
+        });*/
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
