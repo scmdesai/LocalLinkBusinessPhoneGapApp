@@ -33,6 +33,7 @@ var app = {
 		 
 		 
 		 
+		 
 				var push = PushNotification.init({
             "android": {
                 "senderID": "226322216862"
@@ -60,7 +61,7 @@ var app = {
 			// Sending and receiving data in JSON format using POST mothod
 			//
 			xhr = new XMLHttpRequest();
-			var url = "http://services.appsonmobile.com/devices";
+			var url = "http://services.appsonmobile.com/merchantDevices";
 			xhr.open("POST", url, true);
 			xhr.setRequestHeader("Content-type", "application/json");
 			xhr.onreadystatechange = function () { 
