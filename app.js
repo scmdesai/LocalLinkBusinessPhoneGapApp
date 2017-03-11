@@ -70480,32 +70480,63 @@ Ext.application({
             itemId: 'BackButtonPanel',
             baseCls: 'x-box'
         });
-        var pushNotification = window.plugins.pushNotification;
-        pushNotification.register(app.successHandler, app.errorHandler, {
-            "senderID": "485713166795",
-            "ecb": "app.onNotificationGCM"
+        var push = PushNotification.init({
+                "android": {
+                    "senderID": "226322216862"
+                },
+                "ios": {
+                    // "senderID": "226322216862",
+                    // "gcmSandbox": "true"
+                    "alert": "false",
+                    "badge": "true"
+                },
+                "windows": {}
+            });
+        push.on('registration', function(data) {
+            console.log("registration event: " + data.registrationId);
+            console.log("Device platform is: " + device.platform);
+            console.log("Device Cordova is: " + device.cordova);
+            console.log("Device Model is: " + device.model);
+            console.log("Device UUID is: " + device.uuid);
+            console.log("Device Version is: " + device.version);
+            console.log("Device Manufacturer is: " + device.manufacturer);
+            console.log("Device Serial is: " + device.serial);
+            console.log("Device isVirtual is: " + device.isVirtual);
+            // Save the registration ID on the server.
+            // Sending and receiving data in JSON format using POST mothod
+            //
+            xhr = new XMLHttpRequest();
+            var url = "http://services.appsonmobile.com/devices";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    console.log(json.success + ", " + json.msg);
+                }
+                var data = '{"deviceType":"' + device.platform + '","registrationID":"' + data.registrationId + '","userLocation":"}';
+                xhr.send(data);
+            };
         });
-        onNotificationGCM: function(e) {
-            switch (e.event) {
-                case 'registered':
-                    if (e.regid.length > 0) {
-                        console.log("Regid " + e.regid);
-                        alert('registration id = ' + e.regid);
-                    };
-                    // localStorage.regid = e.regid
-                    break;
-                case 'message':
-                    // this is the actual push notification. its format depends on the data model from the push server
-                    alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
-                    break;
-                case 'error':
-                    alert('GCM error = ' + e.msg);
-                    break;
-                default:
-                    alert('An unknown GCM event has occurred');
-                    break;
-            }
-        }
+        push.on('notification', function(data) {
+            console.log("notification event received");
+            // data.message,
+            console.log("Notification Message is: " + data.message);
+            // data.title,
+            console.log("Notification Title is: " + data.title);
+            // data.count,
+            console.log("Notification Count is: " + data.count);
+            // data.sound,
+            console.log("Notification Sound is: " + data.sound);
+            // data.image,
+            console.log("Notification Image is: " + data.image);
+            // data.additionalData
+            console.log("Notification additionalData is: " + data.additionalData);
+        });
+        push.on('error', function(e) {
+            console.log("Error received");
+            console.log("Error Message is: " + e.message);
+        });
         BackButtonPanel.setBottom('10%');
         BackButtonPanel.setLeft('35%');
         //BackButtonPanel.setHeight('50px');
