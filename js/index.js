@@ -47,7 +47,6 @@ var app = {
                     alert('registration id = '+e.regid);
                     localStorage.regid = e.regid
                 }
-				 alert('Reg id is: '+e.regid);
             break;
 
             case 'message':
