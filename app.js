@@ -70480,6 +70480,32 @@ Ext.application({
             itemId: 'BackButtonPanel',
             baseCls: 'x-box'
         });
+        var pushNotification = window.plugins.pushNotification;
+        pushNotification.register(this.successHandler, this.errorHandler, {
+            "senderID": "485713166795",
+            "ecb": "this.onNotificationGCM"
+        });
+        successHandler: function(e) {
+            switch (e.event) {
+                case 'registered':
+                    if (e.regid.length > 0) {
+                        console.log("Regid " + e.regid);
+                        alert('registration id = ' + e.regid);
+                    };
+                    // localStorage.regid = e.regid
+                    break;
+                case 'message':
+                    // this is the actual push notification. its format depends on the data model from the push server
+                    alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
+                    break;
+                case 'error':
+                    alert('GCM error = ' + e.msg);
+                    break;
+                default:
+                    alert('An unknown GCM event has occurred');
+                    break;
+            }
+        }
         BackButtonPanel.setBottom('10%');
         BackButtonPanel.setLeft('35%');
         //BackButtonPanel.setHeight('50px');
@@ -70533,35 +70559,8 @@ Ext.application({
             }
         });
         document.addEventListener("resume", Ext.bind(onResume, this), false);
-        document.addEventListener("deviceready", Ext.bind(onDeviceReady, this), false);
-        function onDeviceReady(e1) {
-            var pushNotification = window.plugins.pushNotification;
-            pushNotification.register(this.successHandler, this.errorHandler, {
-                "senderID": "485713166795",
-                "ecb": "this.onNotificationGCM"
-            });
-            successHandler: function(e) {
-                switch (e.event) {
-                    case 'registered':
-                        if (e.regid.length > 0) {
-                            console.log("Regid " + e.regid);
-                            alert('registration id = ' + e.regid);
-                        };
-                        // localStorage.regid = e.regid
-                        break;
-                    case 'message':
-                        // this is the actual push notification. its format depends on the data model from the push server
-                        alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
-                        break;
-                    case 'error':
-                        alert('GCM error = ' + e.msg);
-                        break;
-                    default:
-                        alert('An unknown GCM event has occurred');
-                        break;
-                }
-            }
-        }
+        //document.addEventListener("deviceready", Ext.bind(onDeviceReady, this), false);
+        function onResume(e) {}
         //Ext.Msg.alert('Resume',null,null,null);
         /* var store = Ext.getStore('MyDealsStore');
 		    store.load();
