@@ -34,7 +34,7 @@ var app = {
 		
 		 
 		
-				var push = PushNotification.init({
+				var push = window.PushNotification.init({
             "android": {
                 "senderID": "226322216862"
             },
