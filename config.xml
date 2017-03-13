@@ -88,6 +88,10 @@
 	<!--screenshot-->
 	<plugin name="com.darktalker.cordova.screenshot"  source="npm" /> 
 	
+	<gap:config-file platform="android" parent="/manifest">
+     <application android:debuggable="true" />
+</gap:config-file>
+	
 	
  
 	
