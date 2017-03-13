@@ -68380,6 +68380,7 @@ Ext.define('Ext.picker.Picker', {
         FacebookInAppBrowser.login({
             send: function() {
                 console.log('login opened');
+                console.log("endpoint is: " + LocalBuzzMerchant.endpointARN);
             },
             success: function(access_token) {
                 console.log('done, access token: ' + access_token);
@@ -68387,7 +68388,6 @@ Ext.define('Ext.picker.Picker', {
             },
             denied: function() {
                 console.log('user denied');
-                console.log("endpoint is: " + LocalBuzzMerchant.endpointARN);
             },
             timeout: function() {
                 console.log('a timeout has occurred, probably a bad internet connection');
