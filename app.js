@@ -70532,7 +70532,7 @@ Ext.application({
                 return this.callParent(arguments);
             }
         });
-        document.addEventListener("resume", Ext.bind(onResume, this), false);
+        //document.addEventListener("resume", Ext.bind(onResume, this), false);
         //document.addEventListener("deviceready", Ext.bind(onDeviceReady, this), false);
         //function onDeviceReady(e1) {
         /*
