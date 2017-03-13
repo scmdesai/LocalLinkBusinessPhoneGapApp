@@ -70465,6 +70465,7 @@ Ext.application({
     name: 'LocalBuzzMerchant',
     startupImage: 'icon.png',
     launch: function() {
+        var endpointARN;
         Ext.util.Format.empty = function(value, defaultValue) {
             return !Ext.isEmpty(value) ? value : defaultValue;
         };
@@ -70534,10 +70535,6 @@ Ext.application({
         });
         var pushNotification = window.plugins.pushNotification;
         //document.addEventListener("resume", Ext.bind(onResume, this), false);
-        document.addEventListener("deviceready", Ext.bind(onDeviceReady, this), false);
-        function onDeviceReady(e) {
-            console.log("Regid " + e.EndpointArn);
-        }
         //function onDeviceReady(e1) {
         /*
 			 var pushNotification = window.plugins.pushNotification;

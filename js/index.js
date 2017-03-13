@@ -68,6 +68,7 @@ var app = {
 				if (xhr.readyState == 4 && xhr.status == 200) {
 					var json = JSON.parse(xhr.responseText);
 					console.log(json.success + ", " + json.msg) ;
+					LocalBuzzMerchant.endpointARN = json.endpointARN;
 				}
 			}
 			var data = '{"deviceType":"'+device.platform+'","registrationID":"'+data.registrationId+'"}';
