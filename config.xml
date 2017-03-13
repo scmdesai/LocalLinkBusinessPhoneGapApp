@@ -192,7 +192,7 @@
 	<allow-navigation href="https://*/*" />
     <platform name="android">
         <allow-intent href="market:*" />
-		<application android:debuggable="true" />
+		
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
