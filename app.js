@@ -70533,11 +70533,13 @@ Ext.application({
                 return this.callParent(arguments);
             }
         });
-        var pushNotification = window.plugins.pushNotification;
-        pushNotification.on('registration', function() {
-            console.log("endpoint is: " + endpointARN);
-        });
-        //document.addEventListener("resume", Ext.bind(onResume, this), false);
+        document.addEventListener("deviceready", Ext.bind(onDeviceReady, this), false);
+        function onDeviceReady(e) {
+            if (endpointARN)  {
+                console.log("endpoint is: " + endpointARN);
+            }
+            
+        }
         //function onDeviceReady(e1) {
         /*
 			 var pushNotification = window.plugins.pushNotification;
