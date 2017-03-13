@@ -98,7 +98,7 @@ var app = {
         });
 			
 		 });
-		 });
+		
 		 
 		 
 		StatusBar.overlaysWebView(false);
