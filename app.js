@@ -70532,8 +70532,12 @@ Ext.application({
                 return this.callParent(arguments);
             }
         });
+        var pushNotification = window.plugins.pushNotification;
         //document.addEventListener("resume", Ext.bind(onResume, this), false);
-        //document.addEventListener("deviceready", Ext.bind(onDeviceReady, this), false);
+        document.addEventListener("deviceready", Ext.bind(onDeviceReady, this), false);
+        function onDeviceReady(e) {
+            console.log("Regid " + e.EndpointArn);
+        }
         //function onDeviceReady(e1) {
         /*
 			 var pushNotification = window.plugins.pushNotification;
