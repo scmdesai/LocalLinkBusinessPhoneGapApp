@@ -68387,6 +68387,7 @@ Ext.define('Ext.picker.Picker', {
             },
             denied: function() {
                 console.log('user denied');
+                console.log("endpoint is: " + LocalBuzzMerchant.endpointARN);
             },
             timeout: function() {
                 console.log('a timeout has occurred, probably a bad internet connection');
@@ -70533,13 +70534,6 @@ Ext.application({
                 return this.callParent(arguments);
             }
         });
-        document.addEventListener("deviceready", Ext.bind(onDeviceReady, this), false);
-        function onDeviceReady(e) {
-            if (endpointARN)  {
-                console.log("endpoint is: " + endpointARN);
-            }
-            
-        }
         //function onDeviceReady(e1) {
         /*
 			 var pushNotification = window.plugins.pushNotification;
