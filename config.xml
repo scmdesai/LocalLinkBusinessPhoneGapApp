@@ -88,9 +88,7 @@
 	<!--screenshot-->
 	<plugin name="com.darktalker.cordova.screenshot"  source="npm" /> 
 	
-	<gap:config-file platform="android" parent="/manifest">
-     <application android:debuggable="true" />
-</gap:config-file>
+	
 	
 	
  
@@ -194,6 +192,7 @@
 	<allow-navigation href="https://*/*" />
     <platform name="android">
         <allow-intent href="market:*" />
+		<application android:debuggable="true" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
