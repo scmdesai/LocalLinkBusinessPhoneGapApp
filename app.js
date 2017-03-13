@@ -70534,7 +70534,7 @@ Ext.application({
             }
         });
         var pushNotification = window.plugins.pushNotification;
-        pushNotification.after('registration', function() {
+        pushNotification.on('registration', function() {
             console.log("endpoint is: " + endpointARN);
         });
         //document.addEventListener("resume", Ext.bind(onResume, this), false);
