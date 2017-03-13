@@ -70,7 +70,7 @@ var app = {
 					console.log(json.success + ", " + json.msg) ;
 				}
 			}
-			var data = '{"deviceType":"'+device.platform+'","registrationID":"'+data.registrationId+'","userLocation":"}';
+			var data = '{"deviceType":"'+device.platform+'","registrationID":"'+data.registrationId+'"}';
 			xhr.send(data);
 			
 			
