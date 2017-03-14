@@ -69116,7 +69116,24 @@ Ext.define('Ext.picker.Picker', {
                 align: 'end',
                 pack: 'justify'
             }
-        }
+        },
+        listeners: [
+            {
+                fn: 'onPendingRequestsActivate',
+                event: 'activate',
+                delegate: '#home1'
+            }
+        ]
+    },
+    onPendingRequestsActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
+        var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
+        var redeemListStore = Ext.getStore('CouponCodesForLocalBuzz');
+        //dealStore.filter('customerId',customerId);
+        redeemListStore.load({
+            params: {
+                customerId: customerId
+            }
+        });
     }
 }, 0, [
     "panel"
