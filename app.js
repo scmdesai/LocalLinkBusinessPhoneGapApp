@@ -68380,7 +68380,6 @@ Ext.define('Ext.picker.Picker', {
         FacebookInAppBrowser.login({
             send: function() {
                 console.log('login opened');
-                console.log("endpoint is: " + LocalBuzzMerchant.endpointARN);
             },
             success: function(access_token) {
                 console.log('done, access token: ' + access_token);
@@ -68436,6 +68435,17 @@ Ext.define('Ext.picker.Picker', {
                                     'website': record.website,
                                     'websiteDisplayName': record.websiteDisplayName,
                                     'phoneNumber': record.phoneNumber
+                                });
+                                //subscribe to merchant topic
+                                var topicName = "LocalBuzzMerchant" + record.customerId;
+                                var endpointARN = LocalBuzzMerchant.endpointARN;
+                                Ext.Ajax.request({
+                                    url: 'http://services.appsonmobile.com/subscribeMerchantTopic',
+                                    method: 'POST',
+                                    params: {
+                                        "topicARN": topicName,
+                                        "endpointARN": endpointARN
+                                    }
                                 });
                                 var dealStore = Ext.getStore('MyDealsStore');
                                 //dealStore.filter('customerId',customerId);
