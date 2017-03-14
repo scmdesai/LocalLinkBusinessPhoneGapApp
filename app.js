@@ -68437,13 +68437,13 @@ Ext.define('Ext.picker.Picker', {
                                     'phoneNumber': record.phoneNumber
                                 });
                                 //subscribe to merchant topic
-                                var topicName = "LocalBuzzMerchant" + record.customerId;
+                                var topicARN = "arn:aws:sns:us-west-2:861942316283:LocalBuzzMerchant" + record.customerId;
                                 var endpointARN = LocalBuzzMerchant.endpointARN;
                                 Ext.Ajax.request({
                                     url: 'http://services.appsonmobile.com/subscribeMerchantTopic',
                                     method: 'POST',
                                     params: {
-                                        "topicARN": topicName,
+                                        "topicARN": topicARN,
                                         "endpointARN": endpointARN
                                     }
                                 });
