@@ -68996,9 +68996,6 @@ Ext.define('Ext.picker.Picker', {
                                     cache: false,
                                     waitMsg: 'Please Wait...',
                                     method: 'POST',
-                                    params: {
-                                        "dealItemName": record.get('dealItemName')
-                                    },
                                     success: function(form, action) {
                                         Ext.getStore('CouponCodesForLocalBuzz').load({
                                             "customerId": customerId
