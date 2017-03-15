@@ -68992,11 +68992,15 @@ Ext.define('Ext.picker.Picker', {
                             console.log("LocalRedeemRequestStore count is : " + recordCount);
                             var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
                             store.each(function(record) {
+                                console.log('Record is: ' + record.get('itemName'));
                                 Ext.Ajax.request({
-                                    url: 'http://services.appsonmobile.com/approveRedeemRequest/' + record.get('itemName'),
+                                    url: 'http://services.appsonmobile.com/approveRedeemRequest/' + record.get('couponCode'),
                                     cache: false,
                                     waitMsg: 'Please Wait...',
                                     method: 'POST',
+                                    params: {
+                                        "itemName": record.get('itemName')
+                                    },
                                     success: function(form, action) {
                                         Ext.getStore('CouponCodsForLocalBuzz').load({
                                             "customerId": customerId
