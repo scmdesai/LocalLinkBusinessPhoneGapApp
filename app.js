@@ -69218,7 +69218,7 @@ Ext.define('Ext.picker.Picker', {
                 customerId: customerId
             }
         });
-        if (redeemRequestStore.getCount() !== 0) {
+        if (redeemListStore.getCount() !== 0) {
             console.log("redeemRequestStore code is : " + redeemListStore.getAt(0).get('dealItemName'));
         }
     }
