@@ -68898,6 +68898,7 @@ Ext.define('Ext.picker.Picker', {
             var customerId = Ext.getStore('CouponCodesForLocalBuzz').getAt(selectedRecords).get('customerId');
             store.add(rec);
         });
+        console.log("LocalStoreCount is : " + store.getCount());
     }
 }, 0, [
     "pendingRedeemRequests"
@@ -68988,6 +68989,7 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var store = Ext.getStore('LocalRedeemRequestStore');
+                            console.log("LocalStoreCount is : " + store.getCount());
                             var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
                             store.each(function(record) {
                                 console.log('Record is: ' + record.get('dealItemName'));
