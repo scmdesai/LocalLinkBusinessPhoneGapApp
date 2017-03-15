@@ -66333,11 +66333,12 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('LocalBuzzMerchant.store.CouponCodesForLocalBuzz', Ext.data.Store, {
     config: {
+        autoLoad: true,
         model: 'LocalBuzzMerchant.model.CouponCodesForLocalBuzz',
         storeId: 'CouponCodesForLocalBuzz',
         proxy: {
             type: 'jsonp',
-            url: 'http://services.appsonmobile.com/pendingRedeemRequestList',
+            url: 'http://services.appsonmobile.com/pendingRedeemRequestList?customerId=409e2640-76c5-11e6-a81a-29b04370b411',
             reader: {
                 type: 'json'
             },
@@ -68999,7 +69000,7 @@ Ext.define('Ext.picker.Picker', {
                                     waitMsg: 'Please Wait...',
                                     method: 'POST',
                                     params: {
-                                        "itemName": record.getAt(0).get('itemName')
+                                        "itemName": record.get('itemName')
                                     },
                                     success: function(form, action) {
                                         Ext.getStore('CouponCodesForLocalBuzz').load({
@@ -69221,7 +69222,7 @@ Ext.define('Ext.picker.Picker', {
                 customerId: customerId
             }
         });
-        console.log("redeemRequestStore count is : " + redeemListStore.getCount());
+        console.log("redeemRequestStore code is : " + redeemListStore.getAt(0).get('couponCode'));
     }
 }, 0, [
     "panel"
