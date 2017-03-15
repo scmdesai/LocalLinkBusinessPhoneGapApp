@@ -66333,6 +66333,7 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('LocalBuzzMerchant.store.CouponCodesForLocalBuzz', Ext.data.Store, {
     config: {
+        autoSync: true,
         model: 'LocalBuzzMerchant.model.CouponCodesForLocalBuzz',
         storeId: 'CouponCodesForLocalBuzz',
         proxy: {
