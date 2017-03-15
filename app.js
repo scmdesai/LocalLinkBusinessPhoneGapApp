@@ -66196,7 +66196,7 @@ Ext.define('Ext.picker.Picker', {
                 name: 'itemName'
             },
             {
-                name: 'CouponCode'
+                name: 'couponCode'
             },
             {
                 name: 'TimeStamp'
@@ -66333,13 +66333,15 @@ Ext.define('Ext.picker.Picker', {
  */
 (Ext.cmd.derive('LocalBuzzMerchant.store.CouponCodesForLocalBuzz', Ext.data.Store, {
     config: {
-        autoSync: true,
         model: 'LocalBuzzMerchant.model.CouponCodesForLocalBuzz',
         storeId: 'CouponCodesForLocalBuzz',
         proxy: {
             type: 'jsonp',
             url: 'http://services.appsonmobile.com/pendingRedeemRequestList',
             reader: {
+                type: 'json'
+            },
+            writer: {
                 type: 'json'
             }
         }
@@ -68876,7 +68878,7 @@ Ext.define('Ext.picker.Picker', {
             '',
             '',
             '<div><input  type="checkbox" id="checkbox"  style="float:right;margin:0px 15px 0px 15px;"></div>',
-            '<div style="font-size:4vw;color:black;font-family:Arial;word-wrap:word-break;">{CouponCode}'
+            '<div >{couponCode}</div>'
         ],
         listeners: [
             {
