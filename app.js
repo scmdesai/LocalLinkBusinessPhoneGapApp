@@ -68980,6 +68980,24 @@ Ext.define('Ext.picker.Picker', {
                 itemId: 'home1',
                 style: 'background:url(resources/img/whitetexture.png);color:#00529D!important;',
                 layout: 'hbox',
+                listeners: [
+                    {
+                        fn: function(element, eOpts) {
+                            var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
+                            var redeemListStore = Ext.getStore('CouponCodesForLocalBuzz');
+                            //dealStore.filter('customerId',customerId);
+                            redeemListStore.load({
+                                params: {
+                                    customerId: customerId
+                                }
+                            });
+                            if (redeemListStore.getCount() !== 0) {
+                                console.log("redeemRequestStore code is : " + redeemListStore.getAt(0).get('dealItemName'));
+                            }
+                        },
+                        event: 'painted'
+                    }
+                ],
                 items: [
                     {
                         xtype: 'pendingRedeemRequests',
@@ -69002,11 +69020,6 @@ Ext.define('Ext.picker.Picker', {
                                         Ext.getStore('CouponCodesForLocalBuzz').load({
                                             "customerId": customerId
                                         });
-                                        Ext.Viewport.getActiveItem().destroy();
-                                        var view = Ext.Viewport.add({
-                                                xtype: 'pendingRedeemRequests'
-                                            });
-                                        Ext.Viewport.setActiveItem(view);
                                         Ext.Msg.alert('Success', null, null, null);
                                     }
                                 });
