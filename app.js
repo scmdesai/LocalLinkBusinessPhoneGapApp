@@ -66193,7 +66193,7 @@ Ext.define('Ext.picker.Picker', {
                 name: 'CustomerId'
             },
             {
-                name: 'itemName'
+                name: 'dealItemName'
             },
             {
                 name: 'couponCode'
@@ -68879,7 +68879,8 @@ Ext.define('Ext.picker.Picker', {
             '',
             '',
             '<div><input  type="checkbox" id="checkbox"  style="float:right;margin:0px 15px 0px 15px;"></div>',
-            '<div >{couponCode}</div>'
+            '<div >{couponCode}</div>',
+            '<div>{dealItemName}</div>'
         ],
         listeners: [
             {
@@ -68895,9 +68896,7 @@ Ext.define('Ext.picker.Picker', {
         selected.forEach(function(rec) {
             var selectedRecords = Ext.getStore('CouponCodesForLocalBuzz').indexOf(rec);
             var customerId = Ext.getStore('CouponCodesForLocalBuzz').getAt(selectedRecords).get('customerId');
-            store.add({
-                'customerId': customerId
-            });
+            store.add(rec);
         });
     }
 }, 0, [
@@ -68989,18 +68988,17 @@ Ext.define('Ext.picker.Picker', {
                         xtype: 'button',
                         handler: function(button, e) {
                             var store = Ext.getStore('LocalRedeemRequestStore');
-                            var recordCount = store.getCount();
-                            console.log("LocalRedeemRequestStore count is : " + recordCount);
                             var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
+                            store.filter('customerId', customerId);
                             store.each(function(record) {
-                                console.log('Record is: ' + record.get('itemName'));
+                                console.log('Record is: ' + record.get('dealItemName'));
                                 Ext.Ajax.request({
                                     url: 'http://services.appsonmobile.com/approveRedeemRequest/' + record.get('couponCode'),
                                     cache: false,
                                     waitMsg: 'Please Wait...',
                                     method: 'POST',
                                     params: {
-                                        "itemName": record.get('itemName')
+                                        "itemName": record.get('dealItemName')
                                     },
                                     success: function(form, action) {
                                         Ext.getStore('CouponCodesForLocalBuzz').load({
