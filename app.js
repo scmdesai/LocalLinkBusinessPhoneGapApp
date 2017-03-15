@@ -69220,7 +69220,7 @@ Ext.define('Ext.picker.Picker', {
                 customerId: customerId
             }
         });
-        console.log("redeemRequestStore code is : " + redeemListStore.getAt(0).get('itemName'));
+        console.log("redeemRequestStore code is : " + redeemListStore.getAt(0).get('dealItemName'));
     }
 }, 0, [
     "panel"
