@@ -66338,7 +66338,7 @@ Ext.define('Ext.picker.Picker', {
         storeId: 'CouponCodesForLocalBuzz',
         proxy: {
             type: 'jsonp',
-            url: 'http://services.appsonmobile.com/pendingRedeemRequestList?customerId=409e2640-76c5-11e6-a81a-29b04370b411',
+            url: 'http://services.appsonmobile.com/pendingRedeemRequestList',
             reader: {
                 type: 'json'
             },
