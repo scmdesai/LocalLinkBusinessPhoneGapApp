@@ -68874,8 +68874,7 @@ Ext.define('Ext.picker.Picker', {
         itemTpl: [
             '',
             '',
-            '<div style="font-size:4vw;color:black;font-family:Arial;word-wrap:word-break;">{itemName}',
-            '<br><input  type="checkbox" id="checkbox"  style="float:right;margin:0px 15px 0px 15px;"></div>',
+            '<div><input  type="checkbox" id="checkbox"  style="float:right;margin:0px 15px 0px 15px;"></div>',
             '<div style="font-size:4vw;color:black;font-family:Arial;word-wrap:word-break;">{CouponCode}'
         ],
         listeners: [
@@ -69215,6 +69214,7 @@ Ext.define('Ext.picker.Picker', {
                 customerId: customerId
             }
         });
+        console.log("redeemRequestStore count is : " + redeemListStore.getCount());
     }
 }, 0, [
     "panel"
