@@ -68989,7 +68989,6 @@ Ext.define('Ext.picker.Picker', {
                         handler: function(button, e) {
                             var store = Ext.getStore('LocalRedeemRequestStore');
                             var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
-                            store.filter('customerId', customerId);
                             store.each(function(record) {
                                 console.log('Record is: ' + record.get('dealItemName'));
                                 Ext.Ajax.request({
