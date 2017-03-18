@@ -66200,6 +66200,9 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'TimeStamp'
+            },
+            {
+                name: 'deviceId'
             }
         ]
     }
@@ -69016,6 +69019,9 @@ Ext.define('Ext.picker.Picker', {
                                     cache: false,
                                     waitMsg: 'Please Wait...',
                                     method: 'POST',
+                                    params: {
+                                        "deviceId": record.get('deviceId')
+                                    },
                                     success: function(form, action) {
                                         Ext.getStore('CouponCodesForLocalBuzz').load({
                                             "customerId": customerId
