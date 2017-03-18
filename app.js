@@ -69013,7 +69013,7 @@ Ext.define('Ext.picker.Picker', {
                             console.log("LocalStoreCount is : " + store.getCount());
                             var customerId = Ext.getStore('UserDetails').getAt(0).get('customerId');
                             store.each(function(record) {
-                                console.log('Record is: ' + record.get('dealItemName'));
+                                console.log('Record is: ' + record.get('deviceId'));
                                 Ext.Ajax.request({
                                     url: 'http://services.appsonmobile.com/approveRedeemRequest/' + record.get('couponCode'),
                                     cache: false,
