@@ -69760,12 +69760,16 @@ Ext.define('Ext.picker.Picker', {
                 autoSelect: false,
                 options: [
                     {
-                        text: 'Active',
-                        value: 'Active'
+                        text: 'Deal',
+                        value: 'Deal'
                     },
                     {
-                        text: 'Expired',
-                        value: 'Expired'
+                        text: 'Announcement',
+                        value: 'Announcement'
+                    },
+                    {
+                        text: 'Event',
+                        value: 'Event'
                     }
                 ]
             },
