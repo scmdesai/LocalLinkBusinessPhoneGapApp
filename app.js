@@ -66087,6 +66087,9 @@ Ext.define('Ext.picker.Picker', {
             },
             {
                 name: 'city'
+            },
+            {
+                name: 'dealType'
             }
         ]
     }
@@ -69738,6 +69741,35 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                height: '10vh',
+                id: 'DealType1',
+                itemId: 'DealType1',
+                margin: '0 5 5 5 ',
+                maxHeight: '',
+                padding: '0 0 5 10',
+                style: '',
+                styleHtmlContent: true,
+                label: 'Buzz Type',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealType',
+                value: 'Active',
+                placeHolder: 'Click to choose Buzz type',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Active',
+                        value: 'Active'
+                    },
+                    {
+                        text: 'Expired',
+                        value: 'Expired'
+                    }
+                ]
+            },
+            {
                 xtype: 'datepickerfield',
                 cls: [
                     'customfield',
@@ -69939,12 +69971,12 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('CreateNewBuzzWithImage');
                             var date = new Date();
                             //var dealName = form.getAt(0).getValue();
-                            var startDate = form.getAt(4).getValue();
-                            var endDate = form.getAt(5).getValue();
-                            var file = form.getAt(8).getValue();
+                            var startDate = form.getAt(5).getValue();
+                            var endDate = form.getAt(6).getValue();
+                            var file = form.getAt(9).getValue();
                             var dealName = form.getAt(0).getValue();
                             var customerId = Ext.getCmp('customerId3').getValue();
-                            console.log('Picture URL is : ' + form.getAt(6).getValue());
+                            console.log('Picture URL is : ' + form.getAt(7).getValue());
                             if (dealName) {
                                 if (file) {
                                     if (endDate >= date) {
@@ -70270,6 +70302,38 @@ Ext.define('Ext.picker.Picker', {
                 ]
             },
             {
+                xtype: 'selectfield',
+                cls: 'customfield',
+                height: '10vh',
+                id: 'DealType',
+                itemId: 'DealType',
+                margin: '0 5 5 5 ',
+                maxHeight: '',
+                padding: '5 0 0 10',
+                styleHtmlContent: true,
+                label: 'Buzz Type',
+                labelWidth: '35%',
+                labelWrap: true,
+                name: 'DealType',
+                value: 'Active',
+                placeHolder: 'Cick to choose Buzz type',
+                autoSelect: false,
+                options: [
+                    {
+                        text: 'Deal',
+                        value: 'Deal'
+                    },
+                    {
+                        text: 'Announcement',
+                        value: 'Announcement'
+                    },
+                    {
+                        text: 'Event',
+                        value: 'Event'
+                    }
+                ]
+            },
+            {
                 xtype: 'datepickerfield',
                 cls: [
                     'customfield',
@@ -70481,8 +70545,8 @@ Ext.define('Ext.picker.Picker', {
                             var form = this.up('CreateNewBuzzNoImage');
                             var date = new Date();
                             //var dealName = form.getAt(0).getValue();
-                            var startDate = form.getAt(4).getValue();
-                            var endDate = form.getAt(5).getValue();
+                            var startDate = form.getAt(5).getValue();
+                            var endDate = form.getAt(6).getValue();
                             var dealName = form.getAt(0).getValue();
                             var customerId = Ext.getCmp('customerId4').getValue();
                             if (dealName) {
